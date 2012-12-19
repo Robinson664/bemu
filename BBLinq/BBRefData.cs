@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using BBLinq.Types;
+
 using Bloomberglp.Blpapi;
 
 namespace BBLinq
@@ -127,14 +128,14 @@ namespace BBLinq
                                             for (int k = 0; k < elmArrayItem.NumElements; k++)
                                             {
                                                 Element elmK = elmArrayItem.GetElement(k);
-                                                FieldType ftype = new FieldType(bbkey, elmK.Name.ToString(), elmK.GetValue());
+                                                FieldType ftype = new FieldType(bbkey, elmK.Name.ToString(), BBTypeConverter.GetValue(elmK));
                                                 yield return ftype;
                                             }
                                         }
                                     }
                                     else //most fields return simple data, like "BID" and "ASK"
                                     {
-                                        FieldType ftype = new FieldType(bbkey, field, elmField.GetValue());
+                                        FieldType ftype = new FieldType(bbkey, field, BBTypeConverter.GetValue(elmField));
                                         yield return ftype;
                                     }
                                 }
@@ -143,7 +144,6 @@ namespace BBLinq
                     }
                 }
             }
-
         }
     }
 }

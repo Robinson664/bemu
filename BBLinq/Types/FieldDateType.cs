@@ -5,22 +5,19 @@ using System.Text;
 
 namespace BBLinq.Types
 {
-    public class FieldDateType : FieldType
+    public class FieldDateType : FieldDateTypeParent
     {
-        private readonly DateTime _date;
-
-        public FieldDateType(string bbKey, string fieldName, DateTime date)
-            : base(bbKey, fieldName)
+        internal FieldDateType(string bbKey, string fieldName, DateTime date) : base(bbKey, fieldName, date)
         {
-            this._date = date;
         }
 
-        public FieldDateType(string bbKey, string fieldName, object value, DateTime date)
-            : base(bbKey, fieldName, value)
+        internal FieldDateType(string bbKey, string fieldName, object value, DateTime date) : base(bbKey, fieldName, value, date)
         {
-            this._date = date;
         }
 
-        public DateTime Date { get { return this._date; } }
+        public override string ToString()
+        {
+            return string.Format("{0:yyyy-MM-dd} - {1}", base.Date, base.ToString());
+        }
     }
 }

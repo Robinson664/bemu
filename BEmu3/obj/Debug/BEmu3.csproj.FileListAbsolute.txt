@@ -1,0 +1,5 @@
+C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\BEmu3\bin\Debug\BEmu3.dll
+C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\BEmu3\bin\Debug\BEmu3.pdb
+C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\BEmu3\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\BEmu3\obj\Debug\BEmu3.dll
+C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\BEmu3\obj\Debug\BEmu3.pdb

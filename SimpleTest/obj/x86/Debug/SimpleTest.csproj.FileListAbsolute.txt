@@ -1,8 +1,8 @@
 c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\SimpleTest\bin\Debug\SimpleTest.exe
 c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\SimpleTest\bin\Debug\SimpleTest.pdb
-c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\SimpleTest\bin\Debug\BBLinq.dll
-c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\SimpleTest\bin\Debug\Bloomberglp.Blpapi.dll
-c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\SimpleTest\bin\Debug\BBLinq.pdb
 c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\SimpleTest\obj\x86\Debug\ResolveAssemblyReference.cache
 c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\SimpleTest\obj\x86\Debug\SimpleTest.exe
 c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\SimpleTest\obj\x86\Debug\SimpleTest.pdb
+C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\SimpleTest\bin\Debug\Bloomberglp.Blpapi.dll
+C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\SimpleTest\bin\Debug\BEmu3.dll
+C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\SimpleTest\bin\Debug\BEmu3.pdb

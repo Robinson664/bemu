@@ -5,28 +5,25 @@ using System.Text;
 
 namespace BBLinq.Types
 {
-    public class FieldType
+    public class FieldType : FieldTypeParent
     {
         private readonly object _value;
-        private readonly string _fieldName;
-        private readonly string _bbKey;
 
-        public FieldType(string bbKey, string fieldName)
+        internal FieldType(string bbKey, string fieldName) : base(bbKey, fieldName)
         {
             this._value = null;
-            this._fieldName = fieldName;
-            this._bbKey = bbKey;
         }
 
-        public FieldType(string bbKey, string fieldName, object value)
+        internal FieldType(string bbKey, string fieldName, object value) : base(bbKey, fieldName)
         {
             this._value = value;
-            this._fieldName = fieldName;
-            this._bbKey = bbKey;
         }
 
-        public string FieldName { get { return this._fieldName; } }
-        public string BBKey { get { return this._bbKey; } }
         public object Value { get { return this._value; } }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, {1} = {2}", base.BBKey, base.FieldName, this._value);
+        }
     }
 }

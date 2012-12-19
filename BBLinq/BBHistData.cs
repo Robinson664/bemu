@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 
 using BBLinq.Types;
+
 using Bloomberglp.Blpapi;
 
 namespace BBLinq
@@ -154,11 +155,11 @@ namespace BBLinq
                     if (message.CorrelationID.Value == corr.Value)
                     {
                         Element elmSecDataArr = message.GetElement(Names.SECURITYDATA);
+                        string bbkey = elmSecDataArr.GetElementAsString(Names.SECURITY);
+                        Element elmFieldData = elmSecDataArr.GetElement(Names.FIELDDATA);
+
                         for (int i = 0; i < elmSecDataArr.NumValues; i++) //loop through each security
                         {
-                            string bbkey = elmSecDataArr.GetElementAsString(Names.SECURITY);
-                            Element elmFieldData = elmSecDataArr.GetElement(Names.FIELDDATA);
-
                             for (int j = 0; j < elmFieldData.NumValues; j++)
                             {
                                 Element elmData = elmFieldData.GetValueAsElement(j);
@@ -169,7 +170,8 @@ namespace BBLinq
                                     {
                                         if (!elm.Name.Equals(Names.DATE)) //note that the "!=" operator here doesn't always work
                                         {
-                                            FieldDateType ftype = new FieldDateType(bbkey, elm.Name.ToString(), elm.GetValue(), date);
+                                            object value = BBTypeConverter.GetValue(elm);
+                                            FieldDateType ftype = new FieldDateType(bbkey, elm.Name.ToString(), value, date);
                                             yield return ftype;
                                         }
                                     }

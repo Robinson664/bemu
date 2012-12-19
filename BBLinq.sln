@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBLinq", "BBLinq\BBLinq.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTest", "SimpleTest\SimpleTest.csproj", "{980AB3A8-0F0B-4037-94DC-D29D0BA19C0B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEmu3", "BEmu3\BEmu3.csproj", "{0DD8974E-DA15-4131-8805-B44815053F61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,16 @@ Global
 		{980AB3A8-0F0B-4037-94DC-D29D0BA19C0B}.Release|Mixed Platforms.Build.0 = Release|x86
 		{980AB3A8-0F0B-4037-94DC-D29D0BA19C0B}.Release|x86.ActiveCfg = Release|x86
 		{980AB3A8-0F0B-4037-94DC-D29D0BA19C0B}.Release|x86.Build.0 = Release|x86
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0DD8974E-DA15-4131-8805-B44815053F61}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
