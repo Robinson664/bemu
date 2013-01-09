@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace BEmu.MarketDataRequest
+{
+    internal class MessageMarketServiceStatus : Message
+    {
+        private readonly ElementMarketString _serviceName;
+
+        internal MessageMarketServiceStatus(CorrelationID corr) : base(new Name("ServiceOpened"), corr)
+        {
+            this._serviceName = new ElementMarketString("serviceName", "//blp/mktdata");
+        }
+
+        public override int NumElements { get { return 1; } }
+        public override string TopicName { get { return ""; } }
+        public override IEnumerable<Element> Elements { get { yield return this._serviceName; } }
+        public override Element AsElement { get { return new ElementMarketServiceStatus(this); } }
+        
+        public override object this[string name, int index]
+        {
+            get
+            {
+                if (name.ToUpper() == this._serviceName.Name.ToString().ToUpper())
+                {
+                    if (index == 0)
+                        return this._serviceName.GetValue();
+                }
+                return base[name, index];
+            }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendFormat("{0} = {{{1}", this.MessageType.ToString(), Environment.NewLine);
+            result.Append(this._serviceName.PrettyPrint(1));
+            result.Append("}" + Environment.NewLine);
+            return result.ToString();
+        }
+
+    }
+}

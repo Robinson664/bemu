@@ -29,13 +29,10 @@ namespace BBLinq
         /// <param name="fields">Real-time data fields</param>
         /// <param name="conflationInterval">Sets a defined period in seconds for which updates will be received for the subscription. In range [0.1 seconds, 24 hours]</param>
         /// <param name="callback">A function that will be called when market data is received.  Use the function's list of FieldTimeType objects.  Different keys can have different callbacks.</param>
-        public static void BBMktData(this IEnumerable<string> bbKeys, IEnumerable<string> fields, TimeSpan? conflationInterval = null, Action<IEnumerable<FieldTimeType>> callback = null)
+        public static void BBMktData(this IEnumerable<string> bbKeys, IEnumerable<string> fields, TimeSpan conflationInterval, Action<IEnumerable<FieldTimeType>> callback = null)
         {
-            if (conflationInterval.HasValue)
-            {
-                if (conflationInterval.Value.TotalSeconds < 0.1 || conflationInterval.Value.TotalSeconds > 86400)
-                    throw new ArgumentOutOfRangeException("conflationInterval must be >= 0.1 seconds and <= 86400 seconds (24 hours).  Your conflationInterval is " + conflationInterval.Value.TotalSeconds.ToString());
-            }
+            if (conflationInterval.TotalSeconds < 0.1 || conflationInterval.TotalSeconds > 86400)
+                throw new ArgumentOutOfRangeException("conflationInterval must be >= 0.1 seconds and <= 86400 seconds (24 hours).  Your conflationInterval (in seconds) is " + conflationInterval.TotalSeconds.ToString());
 
             BBMktDataHelpers.Subscribe(bbKeys, fields, conflationInterval, callback);
         }
@@ -228,9 +225,6 @@ namespace BBLinq
                             if (BBMktDataHelpers._key2Callback.TryGetValue(bbKey, out callback))
                                 callback(fields);
                         }
-                        break;
-
-                    default:
                         break;
                 }
             }

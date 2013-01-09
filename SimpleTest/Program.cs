@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-//using BBLinq;
+using BBLinq;
 using System.Threading;
 using System.Threading.Tasks;
 
-using BEmu3;
+using BEmu;
 //using Bloomberglp.Blpapi;
 
 namespace SimpleTest
@@ -16,43 +16,34 @@ namespace SimpleTest
     {
         static void Main(string[] args)
         {
-            #region bblinq
-            //string[] portA = { "AAPL US EQUITY", "AMZN US EQUITY", "SPY US K1712C145000 Equity" };
-            //string[] fields = { "BID", "ASK" };
-            
-            //foreach (var gKey in portA.BBHistData(fields, DateTime.Today.AddMonths(-1)).GroupBy(g => g.BBKey))
-            //{
-            //    Console.WriteLine(gKey.Key);
-            //    foreach (var field in gKey)
-            //    {
-            //        Console.WriteLine(string.Format("{3}: {0}: {1} = {2}", field.Date, field.FieldName, field.Value, field.BBKey));
-            //    }
-            //    Console.WriteLine();
-            //}
+            Program.DoHist();
 
-            //foreach (var gKey in portA.BBRefData(fields).GroupBy(g => g.BBKey))
-            //{
-            //    foreach (var item in gKey)
-            //    {
-            //        Console.WriteLine(item);
-            //    }
-            //    Console.WriteLine();
-            //}
-
-            //portA.BBMktData(fields, TimeSpan.FromSeconds(2), ftypes =>
-            //{
-            //    foreach (var item in ftypes.Where(w => fields.Contains(w.FieldName)))
-            //    {
-            //        Console.WriteLine(item);
-            //    }
-            //});
-            #endregion
-
-            DoRef();
             Console.ReadLine();
             //BBMktDataType.Dispose();
         }
-        
+
+        #region BBLINQ
+        private static void DoLinq()
+        {
+            string[] keys = { "AAPL US 01/19/13 C500 EQUITY", "AAPL US EQUITY", "C H3 COMDTY" };
+            string[] fields = { "LAST_TRADE", "PX_LAST" };
+
+            foreach (var field in keys.BBRefData(fields))
+            {
+                Console.WriteLine(field.ToString());
+            }
+
+            //keys.BBMktData(fields, (items) =>
+            //    {
+            //        foreach (var item in items)
+            //        {
+            //            if (fields.Contains(item.FieldName))
+            //                Console.WriteLine(item.ToString());
+            //        }
+            //    });
+        }
+        #endregion
+
         #region static
         private static void DoRef()
         {
@@ -84,8 +75,8 @@ namespace SimpleTest
             Element elmOverrides = request["overrides"];
 
             Element elm1 = elmOverrides.AppendElement();
-            elm1.SetElement("fieldId", "CHAIN_STRIKE_PX_OVRD");
-            elm1.SetElement("value", 75);
+            elm1.SetElement("fieldId", "CHAIN_PUT_CALL_TYPE_OVRD");
+            elm1.SetElement("value", "P");
 
             Element elm2 = elmOverrides.AppendElement();
             elm2.SetElement("fieldId", "CHAIN_POINTS_OVRD");
@@ -238,6 +229,8 @@ namespace SimpleTest
                                 string fieldName = elm.Name.ToString();
                                 object fieldValue = elm.GetValue();
                                 Console.WriteLine(string.Format("{2}: {0} = {1}", fieldName, fieldValue, bbkey));
+
+                                string str = message.AsElement.ToString();
                             }
                             Console.WriteLine();
                         }

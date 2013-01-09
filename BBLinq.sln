@@ -5,7 +5,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BBLinq", "BBLinq\BBLinq.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleTest", "SimpleTest\SimpleTest.csproj", "{980AB3A8-0F0B-4037-94DC-D29D0BA19C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEmu3", "BEmu3\BEmu3.csproj", "{0DD8974E-DA15-4131-8805-B44815053F61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEmu", "BEmu3\BEmu.csproj", "{0DD8974E-DA15-4131-8805-B44815053F61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
