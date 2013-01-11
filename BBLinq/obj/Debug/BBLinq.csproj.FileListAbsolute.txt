@@ -1,6 +1,0 @@
-c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\BBLinq\obj\Debug\ResolveAssemblyReference.cache
-c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\BBLinq\bin\Debug\BBLinq.dll
-c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\BBLinq\bin\Debug\BBLinq.pdb
-c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\BBLinq\obj\Debug\BBLinq.dll
-c:\users\jrobinson\documents\visual studio 2010\Projects\BBLinq\BBLinq\obj\Debug\BBLinq.pdb
-C:\Users\JRobinson\Documents\Visual Studio 2010\Projects\BBLinq\BBLinq\bin\Debug\Bloomberglp.Blpapi.dll
