@@ -55,7 +55,7 @@
       <Project>{916FDEFA-83EE-43FA-9A08-711A706BF477}</Project>
       <Name>BBLinq</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BEmu3\BEmu.csproj">
+    <ProjectReference Include="..\BEmu\BEmu.csproj">
       <Project>{0DD8974E-DA15-4131-8805-B44815053F61}</Project>
       <Name>BEmu</Name>
     </ProjectReference>
