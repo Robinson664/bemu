@@ -13,7 +13,7 @@ namespace BEmu.ReferenceDataRequest
         internal ElementReferenceDateTime(string name, DateTime value)
         {
             this._name = name;
-            this._value = new Datetime(value, Datetime.DateTimeTypeEnum.both);
+            this._value = new Datetime(value, Datetime.DateTimeTypeEnum.date);
         }
 
         public override Name Name { get { return new Name(this._name); } }

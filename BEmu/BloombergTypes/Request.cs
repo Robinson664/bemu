@@ -19,6 +19,21 @@ namespace BEmu
             this.Append(name.ToString(), elementValue);
         }
 
+        public virtual void Set(string name, string elementValue)
+        {
+            this.Set(new Name(name), elementValue);
+        }
+
+        public virtual void Set(string name, bool elementValue)
+        {
+            this.Set(new Name(name), elementValue);
+        }
+
+        public virtual void Set(string name, int elementValue)
+        {
+            this.Set(new Name(name), elementValue);
+        }
+
         public virtual void Set(Name name, string elementValue)
         {
             throw new NotImplementedException("BEmu.Request.Set: string is not implemented");

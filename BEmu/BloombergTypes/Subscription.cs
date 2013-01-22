@@ -23,6 +23,14 @@ namespace BEmu
             this._corr = new CorrelationID();
         }
 
+        public Subscription(string security, string field, CorrelationID correlationID)
+        {
+            this._security = security.ToUpper();
+            this._fields = new List<string>();
+            this._fields.Add(field);
+            this._corr = correlationID;
+        }
+
         public Subscription(string security, IList<string> fields, IList<string> options, CorrelationID correlationID)
         {
             this._security = security.ToUpper();
