@@ -16,11 +16,23 @@ namespace BEmu
         private readonly CorrelationID _corr;
         public CorrelationID CorrelationID { get { return this._corr; } }
 
+        private readonly int? _conflationInterval;
+        internal int? ConflationInterval { get { return this._conflationInterval; } }
+
         public Subscription(string security, IList<string> fields)
         {
             this._security = security.ToUpper();
             this._fields = fields.Select(s => s.ToUpper()).ToList();
             this._corr = new CorrelationID();
+            this._conflationInterval = null;
+        }
+
+        public Subscription(string security, IList<string> fields, IList<string> options)
+        {
+            this._security = security.ToUpper();
+            this._fields = fields.Select(s => s.ToUpper()).ToList();
+            this._corr = new CorrelationID();
+            this._conflationInterval = this.ReadConflationInterval(options);
         }
 
         public Subscription(string security, string field, CorrelationID correlationID)
@@ -29,6 +41,7 @@ namespace BEmu
             this._fields = new List<string>();
             this._fields.Add(field);
             this._corr = correlationID;
+            this._conflationInterval = null;
         }
 
         public Subscription(string security, IList<string> fields, IList<string> options, CorrelationID correlationID)
@@ -36,6 +49,24 @@ namespace BEmu
             this._security = security.ToUpper();
             this._fields = fields.Select(s => s.ToUpper()).ToList();
             this._corr = correlationID;
+            this._conflationInterval = this.ReadConflationInterval(options);
+        }
+
+        private int? ReadConflationInterval(IList<string> options)
+        {
+            int? result = null;
+            foreach (var item in options)
+            {
+                string str = item.ToLower();
+                if (str.StartsWith("interval="))
+                {
+                    int temp;
+                    string strInterval = str.Substring(str.IndexOf('=') + 1);
+                    if (int.TryParse(strInterval, out temp))
+                        result = temp;
+                }
+            }
+            return result;
         }
 
     }

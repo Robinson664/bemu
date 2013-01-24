@@ -50,10 +50,15 @@ namespace Examples
                     List<Subscription> slist = new List<Subscription>();
 
                     List<string> fields = new string[] { "BID", "ASK", "LAST" }.ToList();
+                    
+                    //Conflate the data to show every two seconds.
+                    //  Please note that the Bloomberg API Emulator code does not treat this exactly correct: individual subscriptions should each have their own interval setting.
+                    //  I have not coded that in the emulator.
+                    List<string> options = new string[] { "interval=2" }.ToList(); //2 seconds.  //Comment this line to receive a subscription data event whenever it happens in the market.
 
-                    slist.Add(new Subscription("IBM US EQUITY", fields));
-                    slist.Add(new Subscription("SPY US EQUITY", fields));
-                    slist.Add(new Subscription("AAPL 150117C00600000 EQUITY", fields));
+                    slist.Add(new Subscription("IBM US EQUITY", fields, options));
+                    slist.Add(new Subscription("SPY US EQUITY", fields, options));
+                    slist.Add(new Subscription("AAPL 150117C00600000 EQUITY", fields, options));
 
                     session.Subscribe(slist);
                     break;

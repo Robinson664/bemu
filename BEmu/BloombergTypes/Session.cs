@@ -162,13 +162,19 @@ namespace BEmu
 
         private void MarketSimulatorTimerStep(object arg)
         {
+            int? conflationIntervalInMilleseconds = null;
+
             lock (this._syncroot) //protect _subscriptions
             {
-                List<Subscription> subsToUse = new List<Subscription>();
+                List<Subscription> subsToUse = new List<Subscription>();                
+
                 foreach (var item in this._subscriptions)
                 {
                     if (Session._rand.NextDouble() < 0.7) //70% chance that I'll send a new quote for the current subscription (after the first response which contains all tickers)
                         subsToUse.Add(item);
+
+                    if (item.ConflationInterval.HasValue)
+                        conflationIntervalInMilleseconds = item.ConflationInterval.Value * 1000;
                 }
 
                 MarketDataRequest.EventMarket evt = new MarketDataRequest.EventMarket(Event.EventType.SUBSCRIPTION_DATA, null, subsToUse);
@@ -177,9 +183,9 @@ namespace BEmu
                     this._asyncHandler(evt, this);
             }
 
-
             double randMilleseconds = Session._rand.NextDouble() * 2000d + 100d; //wait between 0.1 sec and 2.1 sec (there's nothing special about these numbers)
-            this._marketSimulatorTimer.Change((int)randMilleseconds, Timeout.Infinite);
+            
+            this._marketSimulatorTimer.Change(conflationIntervalInMilleseconds.GetValueOrDefault((int)randMilleseconds), Timeout.Infinite);
         }
         #endregion
 

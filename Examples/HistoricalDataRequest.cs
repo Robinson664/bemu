@@ -48,17 +48,67 @@ namespace Examples
             request.Set("pricingOption", "PRICING_OPTION_PRICE"); //Optional string.  Valid values are PRICING_OPTION_PRICE (default) and PRICING_OPTION_YIELD
 
             //Adjust for "change on day"
-            request.Set("adjustmentNormal", true); //Optional bool. Valid values are true and false (default)
+            request.Set("adjustmentNormal", true); //Optional bool. Valid values are true and false (default = false)
 
             //Adjusts for Anormal Cash Dividends
-            request.Set("adjustmentAbnormal", false); //Optional bool. Valid values are true and false (default)
+            request.Set("adjustmentAbnormal", false); //Optional bool. Valid values are true and false (default = false)
 
             //Capital Changes Defaults
-            request.Set("adjustmentSplit", true); //Optional bool. Valid values are true and false (default)
+            request.Set("adjustmentSplit", true); //Optional bool. Valid values are true and false (default = false)
 
-            //the maximum number of data points to return.
-            request.Set(Names.MAXDATAPOINTS, maxPoints.Value);
+            //The maximum number of data points to return, starting from the startDate
+            request.Set("maxDataPoints", 5); //Optional integer.  Valid values are positive integers.  The default is unspecified in which case the response will have all data points between startDate and endDate
 
+            //Indicates whether to use the average or the closing price in quote calculation.
+            request.Set("overrideOption", "OVERRIDE_OPTION_CLOSE"); //Optional string.  Valid values are OVERRIDE_OPTION_GPA for an average and OVERRIDE_OPTION_CLOSE (default) for the closing price
+
+            CorrelationID requestID = new CorrelationID(1);
+            session.SendRequest(request, requestID);
+
+            bool continueToLoop = true;
+            while (continueToLoop)
+            {
+                Event eventObj = session.NextEvent();
+                switch (eventObj.Type)
+                {
+                    case Event.EventType.RESPONSE: // final event
+                        continueToLoop = false;
+                        handleResponseEvent(eventObj);
+                        break;
+                    case Event.EventType.PARTIAL_RESPONSE:
+                        handleResponseEvent(eventObj);
+                        break;
+                    default:
+                        handleOtherEvent(eventObj);
+                        break;
+                }
+            }
+        }
+
+        private static void handleResponseEvent(Event eventObj)
+        {
+            System.Console.WriteLine("EventType =" + eventObj.Type);
+            foreach (Message message in eventObj.GetMessages())
+            {
+                System.Console.WriteLine("correlationID=" + message.CorrelationID);
+                System.Console.WriteLine("messageType =" + message.MessageType);
+                Console.WriteLine(message.ToString());
+            }
+        }
+
+        private static void handleOtherEvent(Event eventObj)
+        {
+            System.Console.WriteLine("EventType=" + eventObj.Type);
+            foreach (Message message in eventObj.GetMessages())
+            {
+                System.Console.WriteLine("correlationID=" + message.CorrelationID);
+                System.Console.WriteLine("messageType=" + message.MessageType);
+                Console.WriteLine(message.ToString());
+                if (Event.EventType.SESSION_STATUS == eventObj.Type && message.MessageType.Equals("SessionTerminated"))
+                {
+                    System.Console.WriteLine("Terminating: " + message.MessageType);
+                }
+            }
         }
     }
 }
