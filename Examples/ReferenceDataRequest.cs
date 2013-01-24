@@ -45,6 +45,7 @@ namespace Examples
             request.Append("fields", "PX_LAST");
             request.Append("fields", "BID");
             request.Append("fields", "ASK");
+            request.Append("fields", "TICKER");
             request.Append("fields", "OPT_EXPIRE_DT");
 
             //request a field that can be overriden and returns bulk data
