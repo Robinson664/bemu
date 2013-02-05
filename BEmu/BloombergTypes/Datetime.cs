@@ -58,7 +58,9 @@ namespace BEmu
         }
         #endregion
 
-        #region FIELDS
+        #region PROPERTIES
+        internal DateTimeTypeEnum DateTimeType { get { return this._dateTimeType; } }
+
         public int DayOfMonth
         {
             get { return this._instance.Day; }
@@ -179,11 +181,11 @@ namespace BEmu
                 case DateTimeTypeEnum.neither:
                     throw new NotImplementedException();
                 case DateTimeTypeEnum.date:
-                    return this._instance.ToString("yyyy-MM-dd");
+                    return this._instance.ToString("yyyy-MM-dd%K");
                 case DateTimeTypeEnum.time:
-                    return this._instance.ToString("hh:mm:ss.fff+%K");
+                    return this._instance.ToString("hh:mm:ss.fff%K");
                 case DateTimeTypeEnum.both:
-                    return this._instance.ToString("yyyy-MM-dd hh:mm:ss.fff+%K");
+                    return this._instance.ToString("yyyy-MM-dd hh:mm:ss.fff%K");
                 default:
                     throw new NotImplementedException();
             }

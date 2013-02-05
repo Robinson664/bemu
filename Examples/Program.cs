@@ -42,7 +42,7 @@ namespace Examples
             {
                 Console.WriteLine();
                 Console.WriteLine("Please note that the data in this request is completely random: it is not real data.");
-                Console.WriteLine("Do not make any trading or investment decisions using the data shown above.");
+                Console.WriteLine("Do not make any trading or investment decisions using the data shown here.");
             }
             Console.WriteLine();
             Console.WriteLine("Push enter to quit the application.");

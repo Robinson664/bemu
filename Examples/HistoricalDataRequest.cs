@@ -27,6 +27,7 @@ namespace Examples
             //request information for the following securities
             request.Append("securities", "IBM US EQUITY");
             request.Append("securities", "SPY US EQUITY");
+            request.Append("securities", "C A COMDTY");
             request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
 
             //include the following simple fields in the result
@@ -35,8 +36,8 @@ namespace Examples
 
             //Historical requests allow a few overrides.  See the developer's guide A.2.4 for more information.
 
-            request.Set("startDate", DateTime.Today.AddMonths(3).ToString("yyyyMMdd")); //Request that the information start three months ago from today.  This override is required.
-            request.Set("endDate", DateTime.Today.AddDays(-3).ToString("yyyyMMdd")); //Request that the information end three days before today.  This is an optional override.  The default is today.
+            request.Set("startDate", DateTime.Today.AddMonths(-1).ToString("yyyyMMdd")); //Request that the information start three months ago from today.  This override is required.
+            request.Set("endDate", DateTime.Today.AddDays(10).ToString("yyyyMMdd")); //Request that the information end three days before today.  This is an optional override.  The default is today.
             
             //Determine the frequency and calendar type of the output. To be used in conjunction with Period Selection.
             request.Set("periodicityAdjustment", "CALENDAR"); //Optional string.  Valid values are ACTUAL (default), CALENDAR, and FISCAL.
@@ -57,7 +58,7 @@ namespace Examples
             request.Set("adjustmentSplit", true); //Optional bool. Valid values are true and false (default = false)
 
             //The maximum number of data points to return, starting from the startDate
-            request.Set("maxDataPoints", 5); //Optional integer.  Valid values are positive integers.  The default is unspecified in which case the response will have all data points between startDate and endDate
+            //request.Set("maxDataPoints", 5); //Optional integer.  Valid values are positive integers.  The default is unspecified in which case the response will have all data points between startDate and endDate
 
             //Indicates whether to use the average or the closing price in quote calculation.
             request.Set("overrideOption", "OVERRIDE_OPTION_CLOSE"); //Optional string.  Valid values are OVERRIDE_OPTION_GPA for an average and OVERRIDE_OPTION_CLOSE (default) for the closing price

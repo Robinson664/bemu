@@ -87,6 +87,12 @@ namespace BEmu
             throw new NotImplementedException("Element doesn't support getting elements as Float64");
         }
 
+        public bool GetElementAsBoolean(Name name) { return this.GetElementAsBool(name.ToString()); }
+        public virtual bool GetElementAsBool(string name)
+        {
+            throw new NotImplementedException("Element doesn't support getting elements as bool");
+        }
+
         public float GetElementAsFloat32(Name name) { return this.GetElementAsFloat32(name.ToString()); }
         public virtual float GetElementAsFloat32(string name)
         {

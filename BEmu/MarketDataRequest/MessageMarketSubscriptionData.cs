@@ -18,10 +18,30 @@ namespace BEmu.MarketDataRequest
                 Element elm = null;
                 if (item.Value is double)
                     elm = new ElementMarketDouble(item.Key, (double)item.Value);
-                else if (item.Value is Types.TimeType)
-                    elm = new ElementMarketTime(item.Key, ((Types.TimeType)item.Value).Time);
-                else if (item.Value is Types.DateType)
-                    elm = new ElementMarketDate(item.Key, ((Types.DateType)item.Value).Date);
+
+                else if (item.Value is Datetime)
+                {
+                    Datetime temp = (Datetime)item.Value;
+                    switch (temp.DateTimeType)
+                    {
+                        case Datetime.DateTimeTypeEnum.date:
+                            elm = new ElementMarketDate(item.Key, temp.ToSystemDateTime());
+                            break;
+                        case Datetime.DateTimeTypeEnum.time:
+                            elm = new ElementMarketTime(item.Key, temp.ToSystemDateTime());
+                            break;
+                        case Datetime.DateTimeTypeEnum.both:
+                            elm = new ElementMarketDatetime(item.Key, temp.ToSystemDateTime());
+                            break;
+                    }
+                }
+
+                else if (item.Value is int)
+                    elm = new ElementMarketInt(item.Key, (int)item.Value);
+                else if (item.Value is string)
+                    elm = new ElementMarketString(item.Key, (string)item.Value);
+                else if (item.Value is bool)
+                    elm = new ElementMarketBool(item.Key, (bool)item.Value);
 
                 if (elm != null)
                     this._fields.Add(item.Key.ToUpper(), elm);

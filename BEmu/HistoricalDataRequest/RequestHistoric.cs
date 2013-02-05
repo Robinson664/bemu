@@ -131,7 +131,7 @@ namespace BEmu.HistoricalDataRequest
                 else if (dtCurrent.DayOfWeek == DayOfWeek.Sunday)
                     dtCurrent = dtCurrent.AddDays(1);
 
-            } while (dtCurrent <= dtEnd);
+            } while (dtCurrent <= dtEnd && dtCurrent <= DateTime.Today);
 
             return result;
         }
