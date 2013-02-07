@@ -15,7 +15,7 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_5F45CF45ECAE69A35B501CCCF31C41E4"
+        "MsmKey" = "8:_7383565D5E17AAAF36EF0B73C2CC6746"
         "OwnerKey" = "8:_DB814CFAE06048D8B081DB1D26A20647"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -46,7 +46,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5F45CF45ECAE69A35B501CCCF31C41E4"
+        "OwnerKey" = "8:_7383565D5E17AAAF36EF0B73C2CC6746"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -67,6 +67,27 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.0,Profile=Client"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4 Client Profile (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.0,Profile=Client"
+                    }
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:Microsoft.Windows.Installer.3.1"
+                    {
+                    "Name" = "8:Windows Installer 3.1"
+                    "ProductCode" = "8:Microsoft.Windows.Installer.3.1"
+                    }
+                }
+            }
         }
         "Release"
         {
@@ -83,6 +104,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -112,14 +141,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5F45CF45ECAE69A35B501CCCF31C41E4"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7383565D5E17AAAF36EF0B73C2CC6746"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:BEmu, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5F45CF45ECAE69A35B501CCCF31C41E4"
+                    "_7383565D5E17AAAF36EF0B73C2CC6746"
                     {
                     "Name" = "8:BEmu.dll"
                     "Attributes" = "3:512"
@@ -210,15 +239,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BEmuInstaller"
-        "ProductCode" = "8:{81667A0E-0FBD-4A24-BF0C-2FE7DABC8772}"
-        "PackageCode" = "8:{5F6E5189-0CF1-4059-BA83-DD8B1C8FFAA5}"
+        "ProductCode" = "8:{CEA65A5E-1BC2-4FB7-8F30-F1E3D613FA39}"
+        "PackageCode" = "8:{BEB2ADCE-2808-41A9-9591-51FA82235594}"
         "UpgradeCode" = "8:{828A53E8-0B63-4969-8540-9E1FF79CF627}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
+        "ProductVersion" = "8:1.0.1"
         "Manufacturer" = "8:Robinson664"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
