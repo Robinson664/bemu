@@ -30,7 +30,7 @@ namespace BEmu.ReferenceDataRequest
             else
                 throw new NotImplementedException("BEmu.ReferenceDataRequest.ElementReferenceArrayChainTickers: unable to determine the dtExp");
 
-            int strike = ElementReferenceArrayChainTickers._random.Next(1, 20) * 5; // [5, 100)
+            int strike = Types.RandomDataGenerator.Strike();
             for (int count = 0; count < numPoints; count++, strike += 5)
             {
                 string optionTicker = string.Format("{0} US {1:MM/dd/yy} {2}{3}", ticker, dtExp, (char)optionality, strike);

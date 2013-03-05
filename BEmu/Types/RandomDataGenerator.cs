@@ -101,6 +101,11 @@ namespace BEmu.Types
             return result;
         }
 
+        public static TimeSpan IntradayTickInterval()
+        {
+            return TimeSpan.FromMinutes(RandomDataGenerator._random.Next(1, 30)); //between 1 and 30 minutes
+        }
+
         public static Dictionary<string, object> GetMarketDataFields(List<string> requestedFields)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
@@ -174,7 +179,30 @@ namespace BEmu.Types
             return resultShuffled;
         }
 
-        private static double RandomDouble()
+        /// <summary>
+        /// I made it so that there is a 70% chance that a market data event will include a specific security
+        /// </summary>
+        public static bool ShouldIncludeQuote()
+        {
+            return RandomDataGenerator._random.NextDouble() < 0.7;
+        }
+
+        public static TimeSpan TimeBetweenMarketDataEvents()
+        {
+            return TimeSpan.FromMilliseconds(RandomDataGenerator._random.NextDouble() * 2000d + 100d);
+        }
+
+        public static int IntradayTickTradeSize()
+        {
+            return RandomDataGenerator.RandomInt(5) * 100;
+        }
+
+        public static int Strike()
+        {
+            return RandomDataGenerator.RandomInt(20) * 5;
+        }
+
+        public static double RandomDouble()
         {
             return Math.Round(RandomDataGenerator._random.NextDouble() * 100d, 2);
         }

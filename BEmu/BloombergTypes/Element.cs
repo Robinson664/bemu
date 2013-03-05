@@ -120,12 +120,27 @@ namespace BEmu
             throw new NotImplementedException("Element doesn't support GetValueAsFloat64");
         }
 
+        public virtual double GetValueAsFloat64(int index)
+        {
+            throw new NotImplementedException("Element doesn't support GetValueAsFloat64");
+        }
+
         public virtual int GetValueAsInt32()
         {
             throw new NotImplementedException("Element doesn't support GetValueAsInt32");
         }
 
+        public virtual int GetValueAsInt32(int index)
+        {
+            throw new NotImplementedException("Element doesn't support GetValueAsInt32");
+        }
+
         public virtual long GetValueAsInt64()
+        {
+            throw new NotImplementedException("Element doesn't support GetValueAsInt64");
+        }
+
+        public virtual long GetValueAsInt64(int index)
         {
             throw new NotImplementedException("Element doesn't support GetValueAsInt64");
         }
@@ -140,12 +155,27 @@ namespace BEmu
             throw new NotImplementedException("Element doesn't support GetValueAsDatetime");
         }
 
+        public virtual Datetime GetValueAsDatetime(int index)
+        {
+            throw new NotImplementedException("Element doesn't support GetValueAsDatetime");
+        }
+
         public virtual Datetime GetValueAsDate()
         {
             throw new NotImplementedException("Element doesn't support GetValueAsDate");
         }
 
+        public virtual Datetime GetValueAsDate(int index)
+        {
+            throw new NotImplementedException("Element doesn't support GetValueAsDate");
+        }
+
         public virtual Datetime GetValueAsTime()
+        {
+            throw new NotImplementedException("Element doesn't support GetValueAsTime");
+        }
+
+        public virtual Datetime GetValueAsTime(int index)
         {
             throw new NotImplementedException("Element doesn't support GetValueAsTime");
         }

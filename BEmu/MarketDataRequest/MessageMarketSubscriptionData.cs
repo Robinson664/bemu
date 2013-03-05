@@ -10,7 +10,7 @@ namespace BEmu.MarketDataRequest
         private readonly Dictionary<string, Element> _fields;
         private readonly string _security;
 
-        internal MessageMarketSubscriptionData(Subscription sub, Dictionary<string, object> fields) : base(new Name("MarketDataEvents"), sub.CorrelationID)
+        internal MessageMarketSubscriptionData(Subscription sub, Dictionary<string, object> fields) : base(new Name("MarketDataEvents"), sub.CorrelationID, null)
         {
             this._fields = new Dictionary<string, Element>();
             foreach (var item in fields)

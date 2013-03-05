@@ -9,7 +9,7 @@ namespace BEmu.ReferenceDataRequest
     {
         private readonly ElementReferenceSecurityDataArray _securities;
 
-        internal MessageReference(CorrelationID corr, Dictionary<string, Dictionary<string, object>> fieldData) : base(new Name("ReferenceDataResponse"), corr)
+        internal MessageReference(CorrelationID corr, Dictionary<string, Dictionary<string, object>> fieldData) : base(new Name("ReferenceDataResponse"), corr, null)
         {
             this._securities = new ElementReferenceSecurityDataArray(fieldData);
         }

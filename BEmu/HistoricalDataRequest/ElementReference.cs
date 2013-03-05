@@ -20,7 +20,7 @@ namespace BEmu.HistoricalDataRequest
         }
         public override int NumValues { get { return 1; } }
         public override int NumElements { get { return 1; } }
-        public override bool IsComplexType { get { return false; } }
+        public override bool IsComplexType { get { return true; } }
         public override bool IsArray { get { return false; } }
         public override bool IsNull { get { return false; } }
 

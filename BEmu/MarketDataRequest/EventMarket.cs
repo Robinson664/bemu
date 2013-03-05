@@ -66,23 +66,8 @@ namespace BEmu.MarketDataRequest
             }
         }
 
-        private static readonly Random _random = new Random(100);
         private static Dictionary<string, object> GenerateFakeMessageData(Subscription sub)
         {
-            //var result = new Dictionary<string, object>();
-            //foreach (var item in sub.Fields)
-            //{
-            //    string upper = item.ToUpper();
-
-            //    if (upper.Contains("TIME"))
-            //        result.Add(item, new Types.TimeType(DateTime.Now.AddMinutes(-1d * EventMarket._random.NextDouble() * 100d)));
-            //    else if (upper.Contains("DATE"))
-            //        result.Add(item, new Types.DateType(DateTime.Now.AddDays(-1d * EventMarket._random.NextDouble() * 100d)));
-            //    else
-            //        result.Add(item, Math.Round(EventMarket._random.NextDouble() * 100d, 2));
-            //}
-            //return result;
-
             return Types.RandomDataGenerator.GetMarketDataFields(sub.Fields);
         }
 

@@ -21,32 +21,42 @@ namespace BEmu
 
         public virtual void Set(string name, string elementValue)
         {
-            this.Set(new Name(name), elementValue);
+            throw new NotImplementedException("BEmu.Request.Set: string is not implemented");
         }
 
         public virtual void Set(string name, bool elementValue)
         {
-            this.Set(new Name(name), elementValue);
+            throw new NotImplementedException("BEmu.Request.Set: bool is not implemented");
         }
 
         public virtual void Set(string name, int elementValue)
         {
-            this.Set(new Name(name), elementValue);
-        }
-
-        public virtual void Set(Name name, string elementValue)
-        {
-            throw new NotImplementedException("BEmu.Request.Set: string is not implemented");
-        }
-
-        public virtual void Set(Name name, bool elementValue)
-        {
-            throw new NotImplementedException("BEmu.Request.Set: bool is not implemented");
-        }
-
-        public virtual void Set(Name name, int elementValue)
-        {
             throw new NotImplementedException("BEmu.Request.Set: int is not implemented");
+        }
+
+        public virtual void Set(string name, Datetime elementValue)
+        {
+            throw new NotImplementedException("BEmu.Request.Set: Datetime is not implemented");
+        }
+
+        public void Set(Name name, string elementValue)
+        {
+            this.Set(name.ToString(), elementValue);
+        }
+
+        public void Set(Name name, bool elementValue)
+        {
+            this.Set(name.ToString(), elementValue);
+        }
+
+        public void Set(Name name, int elementValue)
+        {
+            this.Set(name.ToString(), elementValue);
+        }
+
+        public void Set(Name name, Datetime elementValue)
+        {
+            this.Set(name.ToString(), elementValue);
         }
 
         public Element GetElement(Name name)

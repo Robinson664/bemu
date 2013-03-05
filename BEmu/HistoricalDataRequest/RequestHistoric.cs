@@ -30,7 +30,7 @@ namespace BEmu.HistoricalDataRequest
         private OverrideOptions _overrideOptions = OverrideOptions.closingPrice;
         #pragma warning restore 0414
 
-        public RequestHistoric()
+        internal RequestHistoric()
         {
             this._dtStart = new RequestHistoricElementDate("startDate");
             this._dtEnd = new RequestHistoricElementDate("endDate");
@@ -196,10 +196,10 @@ namespace BEmu.HistoricalDataRequest
             }
         }
 
-        public override void Set(Name name, string elementValue)
+        public override void Set(string name, string elementValue)
         {
             DateTime dtTemp;
-            switch (name.ToString().ToLower())
+            switch (name.ToLower())
             {
                 case "startdate":
                     if (DateTime.TryParseExact(elementValue, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtTemp))
@@ -301,9 +301,9 @@ namespace BEmu.HistoricalDataRequest
             }
         }
 
-        public override void Set(Name name, bool elementValue)
+        public override void Set(string name, bool elementValue)
         {
-            switch (name.ToString().ToLower())
+            switch (name.ToLower())
             {
                 case "adjustmentnormal":
                     this._adjustmentNormalElement = new RequestHistoricElementBool("adjustmentNormal", elementValue);
@@ -319,9 +319,9 @@ namespace BEmu.HistoricalDataRequest
             }
         }
 
-        public override void Set(Name name, int elementValue)
+        public override void Set(string name, int elementValue)
         {
-            switch (name.ToString().ToLower())
+            switch (name.ToLower())
             {
                 case "maxdatapoints":
                     this._maxDataPointElement = new RequestHistoricElementInt("maxDataPoints", elementValue);

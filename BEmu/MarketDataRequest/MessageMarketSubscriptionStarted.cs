@@ -11,7 +11,7 @@ namespace BEmu.MarketDataRequest
         private readonly string _topicName;
         private readonly ElementMarketNull _exceptions;
 
-        internal MessageMarketSubscriptionStarted(Subscription sub) : base(new Name("SubscriptionStarted"), sub.CorrelationID)
+        internal MessageMarketSubscriptionStarted(Subscription sub) : base(new Name("SubscriptionStarted"), sub.CorrelationID, null)
         {
             this._correlationId = sub.CorrelationID;
             this._topicName = sub.Security;

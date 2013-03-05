@@ -9,7 +9,7 @@ namespace BEmu.MarketDataRequest
     {
         private readonly ElementMarketString _serviceName;
 
-        internal MessageMarketServiceStatus(CorrelationID corr) : base(new Name("ServiceOpened"), corr)
+        internal MessageMarketServiceStatus(CorrelationID corr) : base(new Name("ServiceOpened"), corr, null)
         {
             this._serviceName = new ElementMarketString("serviceName", "//blp/mktdata");
         }

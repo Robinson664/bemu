@@ -7,7 +7,7 @@ namespace BEmu.MarketDataRequest
 {
     internal class MessageMarketSessionOpened : Message
     {
-        internal MessageMarketSessionOpened() : base(new Name("SessionStarted"), null)
+        internal MessageMarketSessionOpened() : base(new Name("SessionStarted"), null, null)
         {
         }
 

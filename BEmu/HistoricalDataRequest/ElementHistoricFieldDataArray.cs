@@ -23,7 +23,7 @@ namespace BEmu.HistoricalDataRequest
         public override Element GetValueAsElement(int index) { return this._fieldData[index]; }
         public override object this[int index] { get { return this._fieldData[index]; } }
 
-        public override Name Name { get { return new Name("fieldData[]"); } }
+        public override Name Name { get { return new Name("fieldData"); } }
         public override int NumElements { get { return 0; } }
         public override int NumValues { get { return this._fieldData.Count; } }
         public override bool IsComplexType { get { return false; } }
@@ -34,7 +34,7 @@ namespace BEmu.HistoricalDataRequest
             string tabs = Types.IndentType.Indent(tabIndent);
             StringBuilder result = new StringBuilder();
 
-            result.AppendFormat("{0}{1} = {{{2}", tabs, this.Name, Environment.NewLine);
+            result.AppendFormat("{0}{1}[] = {{{2}", tabs, this.Name, Environment.NewLine);
             foreach (var item in this._fieldData)
             {
                 result.Append(item.PrettyPrint(tabIndent + 1));

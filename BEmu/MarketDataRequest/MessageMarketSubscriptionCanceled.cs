@@ -10,7 +10,7 @@ namespace BEmu.MarketDataRequest
         private readonly string _topicName;
         private readonly ElementMarketSubscriptionCancelReason _reason;
 
-        internal MessageMarketSubscriptionCanceled(Subscription sub) : base(new Name("SubscriptionTerminated"), sub.CorrelationID)
+        internal MessageMarketSubscriptionCanceled(Subscription sub) : base(new Name("SubscriptionTerminated"), sub.CorrelationID, null)
         {
             this._topicName = sub.Security;
             this._reason = new ElementMarketSubscriptionCancelReason();

@@ -9,7 +9,8 @@ namespace BEmu.HistoricalDataRequest
     {
         private readonly ElementHistoricSecurityData _security;
 
-        internal MessageHistoric(CorrelationID corr, string securityName, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber) : base(new Name("TBD"), corr)
+        internal MessageHistoric(CorrelationID corr, string securityName, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
+            : base(new Name("TBD"), corr, null)
         {
             this._security = new ElementHistoricSecurityData(securityName, fieldData, sequenceNumber);
         }

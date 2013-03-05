@@ -24,7 +24,6 @@ namespace BEmu.HistoricalDataRequest
         {
             List<Message> result = new List<Message>();
             var hreq = (RequestHistoric)base._request;
-            Random rand = new Random(64);
             
             foreach (var security in hreq.Securities)
             {
@@ -41,7 +40,7 @@ namespace BEmu.HistoricalDataRequest
 
                             foreach (var field in hreq.Fields)
                             {
-                                fields.Add(field, Math.Round(rand.NextDouble() * 100d, 2));
+                                fields.Add(field, Types.RandomDataGenerator.RandomDouble());
                             }
                         }
                     }

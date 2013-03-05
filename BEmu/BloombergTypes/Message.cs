@@ -13,10 +13,14 @@ namespace BEmu
         private readonly Name _messageType;
         public Name MessageType { get { return this._messageType; } }
 
-        protected Message(Name messageType, CorrelationID corr)
+        private readonly Service _service;
+        public Service Service { get { return this._service; } }
+
+        protected Message(Name messageType, CorrelationID corr, Service service)
         {
             this._correlationId = corr;
             this._messageType = messageType;
+            this._service = service;
         }
 
         public Element GetElement(Name name)
