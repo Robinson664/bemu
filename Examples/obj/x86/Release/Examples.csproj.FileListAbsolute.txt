@@ -5,3 +5,4 @@ C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\obj\x86\Release\Examples.pdb
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\BEmu.dll
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\BEmu.pdb
+C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\Examples.exe.config
