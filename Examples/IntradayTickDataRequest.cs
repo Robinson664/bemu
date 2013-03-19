@@ -27,11 +27,16 @@ namespace Examples
             Service refDataService = session.GetService("//blp/refdata");
             Request request = refDataService.CreateRequest("IntradayTickRequest");
 
-            request.Set("security", "SPY US Equity");
+            string security = "SPY US Equity";
+            request.Set("security", security);
+
             request.Append("eventTypes", "TRADE"); //One of TRADE (default), BID, ASK, BID_BEST, ASK_BEST, MID_PRICE, AT_TRADE, BEST_BID, BEST_ASK (see documentation A.2.6 for explanations)
-            request.Set("startDateTime", new Datetime(DateTime.Today.AddHours(9.5)));
-            request.Set("endDateTime", new Datetime(DateTime.Today.AddHours(9.8))); //goes back at most 140 days (documentation section 7.2.3)
-            
+            request.Append("eventTypes", "BID"); //A request can have multiple eventTypes
+            //refDataService.ToString() using the Bloomberg API indicates an additional eventType called "SETTLE".  This doesn't seem to produce any results.
+
+            request.Set("startDateTime", new Datetime(DateTime.Today.AddHours(9.5).ToUniversalTime()));
+            request.Set("endDateTime", new Datetime(DateTime.Today.AddHours(11).ToUniversalTime())); //goes back at most 140 days (documentation section 7.2.3)
+
             //A comma delimited list of exchange condition codes associated with the event. Review QR<GO> for more information on each code returned.
             request.Set("includeConditionCodes", false); //Optional bool. Valid values are true and false (default = false)
 
@@ -59,10 +64,24 @@ namespace Examples
             //  The MIC is the Market Identifier Code, and this indicates the venue on which the trade was executed.
             request.Set("includeBicMicCodes", false); //Optional bool. Valid values are true and false (default = false)
 
+            {
+                //refDataService.ToString() using the Bloomberg API specifies several boolean overrides that the API documentation doesn't (doc version 2.40).  These are:
+                //   forcedDelay, includeSpreadPrice, includeYield, includeActionCodes, includeIndicatorCodes, includeTradeTime, and includeUpfrontPrice
+                //These overrides are optional.  Their meanings may be obvious given their names, but I can't be sure.
+
+                request.Set("forcedDelay", false); //Optional bool. Undocumented. default = ???
+                request.Set("includeSpreadPrice", false); //Optional bool. Undocumented. default = ???
+                request.Set("includeYield", false); //Optional bool. Undocumented. default = ???
+                request.Set("includeActionCodes", false); //Optional bool. Undocumented. default = ???
+                request.Set("includeIndicatorCodes", false); //Optional bool. Undocumented. default = ???
+                request.Set("includeTradeTime", false); //Optional bool. Undocumented. default = ???
+                request.Set("includeUpfrontPrice", true); //Optional bool. Undocumented. default = ???
+            }
+
             CorrelationID corr = new CorrelationID(17);
 
             session.SendRequest(request, corr);
-            
+
             bool continueToLoop = true;
             while (continueToLoop)
             {
@@ -71,20 +90,39 @@ namespace Examples
                 switch (evt.Type)
                 {
                     case Event.EventType.RESPONSE:
-                        foreach (var msg in evt.GetMessages())
-                        {
-                            Console.WriteLine(msg);
-                        }
+                        IntradayTickDataRequest.ProcessResponse(evt, security);
                         continueToLoop = false;
                         break;
                     case Event.EventType.PARTIAL_RESPONSE:
-                        foreach (var msg in evt.GetMessages())
-                        {
-                            Console.WriteLine(msg);
-                        }
+                        IntradayTickDataRequest.ProcessResponse(evt, security);
                         break;
                 }
             }
         }
+
+        private static void ProcessResponse(Event evt, string security)
+        {
+            //Note that the IntradayTickResponse does not include the name of the requested security anywhere
+            Console.WriteLine(security);
+
+            foreach (var msg in evt.GetMessages())
+            {
+                Element elmTickDataArr = msg["tickData"];
+                Element elmTickData = elmTickDataArr["tickData"];
+
+                for (int valueCount = 0; valueCount < elmTickData.NumValues; valueCount++)
+                {
+                    Element elmTickDataValue = elmTickData.GetValueAsElement(valueCount);
+
+                    DateTime time = elmTickDataValue.GetElementAsTime("time").ToSystemDateTime();
+                    string type = elmTickDataValue.GetElementAsString("type");
+                    double value = elmTickDataValue.GetElementAsFloat64("value");
+                    int size = elmTickDataValue.GetElementAsInt32("size");
+
+                    Console.WriteLine(string.Format("{0:HH:mm:ss}: {1}, {2} @ {3}", time, type, size, value));
+                }
+            }
+        }
+
     }
 }

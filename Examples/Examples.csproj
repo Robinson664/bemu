@@ -52,13 +52,13 @@
     <Compile Include="ReferenceDataRequest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\BEmu\BEmu.csproj">
       <Project>{0DD8974E-DA15-4131-8805-B44815053F61}</Project>
       <Name>BEmu</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

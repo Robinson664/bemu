@@ -95,23 +95,63 @@ namespace Examples
             System.Console.WriteLine("EventType =" + eventObj.Type);
             foreach (Message message in eventObj.GetMessages())
             {
-                System.Console.WriteLine("correlationID=" + message.CorrelationID);
-                System.Console.WriteLine("messageType =" + message.MessageType);
-                Console.WriteLine(message.ToString());
+                Console.WriteLine("correlationID=" + message.CorrelationID);
+                Console.WriteLine("messageType =" + message.MessageType);
+
+                Element elmSecurityDataArray = message["securityData"];
+
+                for (int valueIndex = 0; valueIndex < elmSecurityDataArray.NumValues; valueIndex++)
+                {
+                    Element elmSecurityData = elmSecurityDataArray.GetValueAsElement(valueIndex);
+
+                    string security = elmSecurityData.GetElementAsString("security");
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine(security);
+
+                    Element elmFieldData = elmSecurityData["fieldData"];
+
+                    double pxLast = elmFieldData.GetElementAsFloat64("PX_LAST");
+                    double bid = elmFieldData.GetElementAsFloat64("BID");
+                    double ask = elmFieldData.GetElementAsFloat64("ASK");
+                    string ticker = elmFieldData.GetElementAsString("TICKER");
+
+                    Console.WriteLine("PX_LAST = " + pxLast.ToString());
+                    Console.WriteLine("BID = " + bid.ToString());
+                    Console.WriteLine("ASK = " + ask.ToString());
+                    Console.WriteLine("TICKER = " + ticker.ToString());
+
+                    bool excludeNullElements = true;
+                    if (elmFieldData.HasElement("CHAIN_TICKERS", excludeNullElements)) //be careful, excludeNullElements is false by default
+                    {
+                        Element chainTickers = elmFieldData["CHAIN_TICKERS"];
+                        for (int chainTickerValueIndex = 0; chainTickerValueIndex < chainTickers.NumValues; chainTickerValueIndex++)
+                        {
+                            Element chainTicker = chainTickers.GetValueAsElement(chainTickerValueIndex);
+                            string strChainTicker = chainTicker.GetElementAsString("Ticker");
+
+                            Console.WriteLine("CHAIN_TICKER = " + strChainTicker.ToString());
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No CHAIN_TICKER information");
+                    }
+                }
             }
         }
 
         private static void handleOtherEvent(Event eventObj)
         {
-            System.Console.WriteLine("EventType=" + eventObj.Type);
+            Console.WriteLine("EventType=" + eventObj.Type);
             foreach (Message message in eventObj.GetMessages())
             {
-                System.Console.WriteLine("correlationID=" + message.CorrelationID);
-                System.Console.WriteLine("messageType=" + message.MessageType);
+                Console.WriteLine("correlationID=" + message.CorrelationID);
+                Console.WriteLine("messageType=" + message.MessageType);
                 Console.WriteLine(message.ToString());
                 if (Event.EventType.SESSION_STATUS == eventObj.Type && message.MessageType.Equals("SessionTerminated"))
                 {
-                    System.Console.WriteLine("Terminating: " + message.MessageType);
+                    Console.WriteLine("Terminating: " + message.MessageType);
                 }
             }
         }

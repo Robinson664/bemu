@@ -98,14 +98,12 @@ namespace BEmu
         {
             this._sessionState = SessionStateType.started;
             MarketDataRequest.EventMarket evtSessionStatus = new MarketDataRequest.EventMarket(Event.EventType.SESSION_STATUS, null, null);
-            MarketDataRequest.EventMarket evtServiceStatus1 = new MarketDataRequest.EventMarket(Event.EventType.SERVICE_STATUS, new CorrelationID(), null);
-            MarketDataRequest.EventMarket evtServiceStatus2 = new MarketDataRequest.EventMarket(Event.EventType.SERVICE_STATUS, new CorrelationID(), null);
+            MarketDataRequest.EventMarket evtServiceStatus = new MarketDataRequest.EventMarket(Event.EventType.SERVICE_STATUS, new CorrelationID(), null);
 
             if (this._asyncHandler != null)
             {
                 this._asyncHandler(evtSessionStatus, this);
-                this._asyncHandler(evtServiceStatus1, this);
-                this._asyncHandler(evtServiceStatus2, this);
+                this._asyncHandler(evtServiceStatus, this);
             }
             
             return true;

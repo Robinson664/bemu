@@ -16,10 +16,27 @@ namespace BEmu.ReferenceDataRequest
         }
 
         public override Name Name { get { return new Name("TICKER"); } }
-        public override int NumValues { get { return 1; } }
-        public override int NumElements { get { return 0; } }
+        public override int NumValues { get { return 0; } }
+        public override int NumElements { get { return 1; } }
         public override bool IsArray { get { return false; } }
         public override bool IsComplexType { get { return false; } }
+        public override IEnumerable<Element> Elements { get { yield return this._element; } }
+        public override string GetElementAsString(string name) { return this[name].GetValueAsString(); }
+
+        //public override string GetElementAsString(string name)
+        public override Element this[string name]
+        {
+            get
+            {
+                foreach (var item in this.Elements)
+                {
+                    if (item.Name.ToString().ToLower() == name.ToLower())
+                        return item;
+                }
+                return base[name];
+            }
+        }
+
 
         internal override StringBuilder PrettyPrint(int tabIndent)
         {

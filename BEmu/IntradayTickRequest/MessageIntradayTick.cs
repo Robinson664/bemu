@@ -10,7 +10,7 @@ namespace BEmu.IntradayTickRequest
         private readonly ElementIntradayTickDataParent _parent;
 
         internal MessageIntradayTick(CorrelationID corr, Dictionary<DateTime, Tuple<string, double, int>> ticks, bool includeConditionCodes, Service service) :
-            base(new Name("TBD"), corr, service)
+            base(new Name("IntradayTickResponse"), corr, service)
         {
             this._parent = new ElementIntradayTickDataParent(ticks, includeConditionCodes);
         }

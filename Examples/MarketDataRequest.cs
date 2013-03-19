@@ -25,12 +25,14 @@ namespace Examples
             session.StartAsync();
         }
 
-        private static void ProcessEvent(Event eventObj, Session session)
+        private static List<string> _fields = new string[] { "BID", "ASK", "LAST" }.ToList();
+
+        private static void ProcessEvent(Event evt, Session session)
         {
-            switch (eventObj.Type)
+            switch (evt.Type)
             {
                 case Event.EventType.SESSION_STATUS: //use this to open the service
-                    foreach (Message message in eventObj.GetMessages())
+                    foreach (Message message in evt.GetMessages())
                     {
                         if (message.MessageType.Equals("SessionStarted"))
                         {
@@ -48,17 +50,15 @@ namespace Examples
 
                 case Event.EventType.SERVICE_STATUS: //use this to subscribe to ticker feeds
                     List<Subscription> slist = new List<Subscription>();
-
-                    List<string> fields = new string[] { "BID", "ASK", "LAST" }.ToList();
                     
                     //Conflate the data to show every two seconds.
                     //  Please note that the Bloomberg API Emulator code does not treat this exactly correct: individual subscriptions should each have their own interval setting.
                     //  I have not coded that in the emulator.
                     List<string> options = new string[] { "interval=2" }.ToList(); //2 seconds.  //Comment this line to receive a subscription data event whenever it happens in the market.
 
-                    slist.Add(new Subscription("IBM US EQUITY", fields, options));
-                    slist.Add(new Subscription("SPY US EQUITY", fields, options));
-                    slist.Add(new Subscription("AAPL 150117C00600000 EQUITY", fields, options));
+                    slist.Add(new Subscription("IBM US EQUITY", MarketDataRequest._fields, options));
+                    slist.Add(new Subscription("SPY US EQUITY", MarketDataRequest._fields, options));
+                    slist.Add(new Subscription("AAPL 150117C00600000 EQUITY", MarketDataRequest._fields, options));
 
                     session.Subscribe(slist);
                     break;
@@ -66,14 +66,33 @@ namespace Examples
                 case Event.EventType.SUBSCRIPTION_DATA:
                 case Event.EventType.RESPONSE:
                 case Event.EventType.PARTIAL_RESPONSE:
-                    foreach (Message message in eventObj.GetMessages())
-                    {
-                        Console.WriteLine(message);
-                    }
+                    MarketDataRequest.ProcessEvent(evt);
                     break;
             }
         }
 
+        private static void ProcessEvent(Event evt)
+        {
+            const bool excludeNullElements = true;
+            foreach (Message message in evt.GetMessages())
+            {
+                string security = message.TopicName;
+                foreach (var field in MarketDataRequest._fields)
+                {
+                    //This ignores the extraneous fields in the response
+                    if (message.HasElement(field, excludeNullElements)) //be careful, excludeNullElements is false by default
+                    {
+                        Element elmField = message[field];
+
+                        Console.WriteLine(string.Format("{0:HH:mm:ss}: {1}, {2}", 
+                            DateTime.Now,
+                            security, 
+                            elmField.ToString().Trim()));
+                    }
+                }
+            }
+            Console.WriteLine();
+        }
 
     }
 }

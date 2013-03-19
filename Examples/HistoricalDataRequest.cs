@@ -88,26 +88,43 @@ namespace Examples
 
         private static void handleResponseEvent(Event eventObj)
         {
-            System.Console.WriteLine("EventType =" + eventObj.Type);
+            Console.WriteLine("EventType = " + eventObj.Type);
             foreach (Message message in eventObj.GetMessages())
             {
-                System.Console.WriteLine("correlationID=" + message.CorrelationID);
-                System.Console.WriteLine("messageType =" + message.MessageType);
-                Console.WriteLine(message.ToString());
+                Console.WriteLine();
+                Console.WriteLine("correlationID= " + message.CorrelationID);
+                Console.WriteLine("messageType = " + message.MessageType);
+                
+                Element elmSecurityData = message["securityData"];
+
+                Element elmSecurity = elmSecurityData["security"];
+                string security = elmSecurity.GetValueAsString();
+                Console.WriteLine(elmSecurity.GetValueAsString());
+
+                Element elmFieldData = elmSecurityData["fieldData"];
+                for (int valueIndex = 0; valueIndex < elmFieldData.NumValues; valueIndex++)
+                {
+                    Element elmValues = elmFieldData.GetValueAsElement(valueIndex);
+                    DateTime date = elmValues.GetElementAsDate("date").ToSystemDateTime();
+                    double bid = elmValues.GetElementAsFloat64("BID");
+                    double ask = elmValues.GetElementAsFloat64("ASK");
+
+                    Console.WriteLine(string.Format("{0:yyyy-MM-dd}: BID = {1}, ASK = {2}", date, bid, ask));
+                }
             }
         }
 
         private static void handleOtherEvent(Event eventObj)
         {
-            System.Console.WriteLine("EventType=" + eventObj.Type);
+            Console.WriteLine("EventType=" + eventObj.Type);
             foreach (Message message in eventObj.GetMessages())
             {
-                System.Console.WriteLine("correlationID=" + message.CorrelationID);
-                System.Console.WriteLine("messageType=" + message.MessageType);
+                Console.WriteLine("correlationID=" + message.CorrelationID);
+                Console.WriteLine("messageType=" + message.MessageType);
                 Console.WriteLine(message.ToString());
                 if (Event.EventType.SESSION_STATUS == eventObj.Type && message.MessageType.Equals("SessionTerminated"))
                 {
-                    System.Console.WriteLine("Terminating: " + message.MessageType);
+                    Console.WriteLine("Terminating: " + message.MessageType);
                 }
             }
         }
