@@ -106,6 +106,30 @@ namespace BEmu.Types
             return TimeSpan.FromMinutes(RandomDataGenerator._random.Next(1, 30)); //between 1 and 30 minutes
         }
 
+        public static IntradayBarRequest.BarTickDataType GenerateBarData(DateTime date)
+        {
+            double first = RandomDataGenerator.RandomDouble();
+            double second = RandomDataGenerator.RandomDouble();
+
+            double high = Math.Max(first, second);
+            double low = Math.Min(first, second);
+            double open = RandomDataGenerator.RandomDouble(low, high);
+            double close = RandomDataGenerator.RandomDouble(low, high);
+
+            IntradayBarRequest.BarTickDataType result = new IntradayBarRequest.BarTickDataType()
+            {
+                DtTime = date,
+                Volume = RandomDataGenerator.RandomInt(1000000),
+                Value = RandomDataGenerator.RandomInt(1000000000),
+                NumEvents = RandomDataGenerator.RandomInt(10000),
+                High = high,
+                Low = low,
+                Open = open,
+                Close = close
+            };
+            return result;
+        }
+
         public static Dictionary<string, object> GetMarketDataFields(List<string> requestedFields)
         {
             Dictionary<string, object> result = new Dictionary<string, object>();
@@ -205,6 +229,11 @@ namespace BEmu.Types
         public static double RandomDouble()
         {
             return Math.Round(RandomDataGenerator._random.NextDouble() * 100d, 2);
+        }
+
+        public static double RandomDouble(double low, double high)
+        {
+            return Math.Round(RandomDataGenerator._random.NextDouble() * (high - low) + low, 2);
         }
 
         private static int RandomInt(uint max)

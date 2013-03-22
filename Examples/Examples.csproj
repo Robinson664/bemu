@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HistoricalDataRequest.cs" />
+    <Compile Include="IntradayBarDataRequest.cs" />
     <Compile Include="IntradayTickDataRequest.cs" />
     <Compile Include="MarketDataRequest.cs" />
     <Compile Include="Program.cs" />

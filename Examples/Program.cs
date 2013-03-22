@@ -17,6 +17,7 @@ namespace Examples
             Console.WriteLine("To send a market data request, push 2");
             Console.WriteLine("To send a historical data request, push 3");
             Console.WriteLine("To send a intraday tick data request, push 4");
+            Console.WriteLine("To send a intraday bar data request, push 5");
 
             string input = Console.ReadLine();
             Console.WriteLine();
@@ -36,6 +37,9 @@ namespace Examples
                     break;
                 case "4":
                     IntradayTickDataRequest.RunExample();
+                    break;
+                case "5":
+                    IntradayBarDataRequest.RunExample();
                     break;
                 default:
                     informationReturned = false;

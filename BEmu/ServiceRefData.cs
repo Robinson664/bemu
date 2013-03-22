@@ -19,6 +19,8 @@ namespace BEmu
                     return new ReferenceDataRequest.RequestReference();
                 case "IntradayTickRequest":
                     return new IntradayTickRequest.RequestIntradayTick(this);
+                case "IntradayBarRequest":
+                    return new IntradayBarRequest.RequestIntradayBar(this);
                 default:
                     throw new NotImplementedException(string.Format("BEmu.ServiceRefData.CreateRequest: Operation {0} not supported", operationName));
             }

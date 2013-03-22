@@ -33,6 +33,12 @@ namespace BEmu
                 result._type = isLastRequest ? EventType.RESPONSE : EventType.PARTIAL_RESPONSE;
                 return result;
             }
+            else if (request is IntradayBarRequest.RequestIntradayBar)
+            {
+                result = new IntradayBarRequest.EventIntradayBar((IntradayBarRequest.RequestIntradayBar)request);
+                result._type = isLastRequest ? EventType.RESPONSE : EventType.PARTIAL_RESPONSE;
+                return result;
+            }
             else
             {
                 throw new NotImplementedException(string.Format("Request type {0} is not implemented", request.GetType()));
