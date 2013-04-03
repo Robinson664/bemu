@@ -1,18 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-//un-comment the following two lines to use the Bloomberg API Emulator
-using BEmu;
-using EventHandler = BEmu.EventHandler; //this declaration specifies that EventHandler refers to BEmu.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
-
-//un-comment the following two lines to use the actual Bloomberg API
-//using Bloomberglp.Blpapi;
-//using EventHandler = Bloomberglp.Blpapi.EventHandler; //this declaration specifies that EventHandler refers to Bloomberglp.Blpapi.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+﻿//------------------------------------------------------------------------------
+// <copyright project="Examples" file="MarketDataRequest.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace Examples
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    //un-comment the following two lines to use the Bloomberg API Emulator
+    using BEmu;
+    using EventHandler = BEmu.EventHandler; //this declaration specifies that EventHandler refers to BEmu.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+
+    //un-comment the following two lines to use the actual Bloomberg API
+    //using Bloomberglp.Blpapi;
+    //using EventHandler = Bloomberglp.Blpapi.EventHandler; //this declaration specifies that EventHandler refers to Bloomberglp.Blpapi.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+
     public static class MarketDataRequest
     {
         public static void RunExample()

@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//------------------------------------------------------------------------------
+// <copyright project="BEmu" file="IntradayTickRequest/ElementIntradayTickDataParent.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace BEmu.IntradayTickRequest
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     internal class ElementIntradayTickDataParent : Element
     {
         private readonly ElementIntradayTickDataArray _array;

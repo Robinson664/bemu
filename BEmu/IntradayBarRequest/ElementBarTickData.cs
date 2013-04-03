@@ -1,10 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//------------------------------------------------------------------------------
+// <copyright project="BEmu" file="IntradayBarRequest/ElementBarTickData.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace BEmu.IntradayBarRequest
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     internal class ElementBarTickData : Element
     {
         internal ElementBarTickData(BarTickDataType arg)
@@ -14,13 +23,15 @@ namespace BEmu.IntradayBarRequest
             this._high = new ElementIntradayBarDouble("high", arg.High);
             this._low = new ElementIntradayBarDouble("low", arg.Low);
             this._close = new ElementIntradayBarDouble("close", arg.Close);
-            this._volume = new ElementIntradayBarDouble("volume", arg.Volume);
-            this._numEvents = new ElementIntradayBarDouble("numEvents", arg.NumEvents);
+            this._volume = new ElementIntradayBarLong("volume", arg.Volume);
+            this._numEvents = new ElementIntradayBarInt("numEvents", arg.NumEvents);
             this._value = new ElementIntradayBarDouble("value", arg.Value);
         }
 
         private readonly ElementIntradayBarDateTime _time;
-        private readonly ElementIntradayBarDouble _open, _high, _low, _close, _volume, _numEvents, _value;
+        private readonly ElementIntradayBarDouble _open, _high, _low, _close, _value;
+        private readonly ElementIntradayBarLong _volume;
+        private readonly ElementIntradayBarInt _numEvents;
 
         public override Name Name { get { return new Name("barTickData"); } }
         public override int NumValues { get { return 0; } }
@@ -92,6 +103,16 @@ namespace BEmu.IntradayBarRequest
         public override Datetime GetElementAsTime(string name)
         {
             return this[name].GetValueAsTime();
+        }
+
+        public override double GetElementAsFloat64(string name)
+        {
+            return this[name].GetValueAsFloat64();
+        }
+
+        public override long GetElementAsInt64(string name)
+        {
+            return this[name].GetValueAsInt64();
         }
 
         internal override StringBuilder PrettyPrint(int tabIndent)

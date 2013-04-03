@@ -1,15 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//------------------------------------------------------------------------------
+// <copyright project="BEmu" file="HistoricalDataRequest/ElementHistoricFieldData.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace BEmu.HistoricalDataRequest
 {
-    internal class ElementHistoricalFieldData : Element
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    internal class ElementHistoricFieldData : Element
     {
         private readonly Dictionary<string, Element> _fields; //make a dic
 
-        public ElementHistoricalFieldData(DateTime date, Dictionary<string, object> values)
+        public ElementHistoricFieldData(DateTime date, Dictionary<string, object> values)
         {
             this._fields = new Dictionary<string, Element>();
 

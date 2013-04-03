@@ -1,13 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using BEmu; //un-comment this line to use the Bloomberg API Emulator
-//using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+﻿//------------------------------------------------------------------------------
+// <copyright project="Examples" file="HistoricalDataRequest.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace Examples
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using BEmu; //un-comment this line to use the Bloomberg API Emulator
+    //using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+
     public static class HistoricalDataRequest
     {
         public static void RunExample()

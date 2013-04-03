@@ -1,16 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//------------------------------------------------------------------------------
+// <copyright project="BEmu" file="HistoricalDataRequest/ElementReferenceInt.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace BEmu.HistoricalDataRequest
 {
-    internal class ElementReferenceInt : Element
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    internal class ElementHistoricInt : Element
     {
         private readonly int _value;
         private readonly string _name;
 
-        internal ElementReferenceInt(string name, int value)
+        internal ElementHistoricInt(string name, int value)
         {
             this._name = name;
             this._value = value;

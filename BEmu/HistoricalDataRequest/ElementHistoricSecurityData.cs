@@ -1,21 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//------------------------------------------------------------------------------
+// <copyright project="BEmu" file="HistoricalDataRequest/ElementHistoricSecurityData.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace BEmu.HistoricalDataRequest
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     internal class ElementHistoricSecurityData : Element
     {
         private readonly ElementHistoricString _elmSecurityName;
         private readonly ElementHistoricFieldDataArray _elmFieldDataArray;
-        private readonly ElementReferenceInt _elmSequenceNumber;
+        private readonly ElementHistoricInt _elmSequenceNumber;
 
         internal ElementHistoricSecurityData(string securityName, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
         {
             this._elmSecurityName = new ElementHistoricString("security", securityName);
             this._elmFieldDataArray = new ElementHistoricFieldDataArray(fieldData);
-            this._elmSequenceNumber = new ElementReferenceInt("sequenceNumber", sequenceNumber);
+            this._elmSequenceNumber = new ElementHistoricInt("sequenceNumber", sequenceNumber);
         }
 
         public override Name Name { get { return new Name("securityData"); } }

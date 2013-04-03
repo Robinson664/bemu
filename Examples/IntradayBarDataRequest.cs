@@ -1,13 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using BEmu; //un-comment this line to use the Bloomberg API Emulator
-//using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+﻿//------------------------------------------------------------------------------
+// <copyright project="Examples" file="IntradayBarDataRequest.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace Examples
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    using BEmu; //un-comment this line to use the Bloomberg API Emulator
+    //using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+
     public static class IntradayBarDataRequest
     {
         public static void RunExample()
@@ -58,10 +67,37 @@ namespace Examples
 
         private static void ProcessResponse(Event evt, string security)
         {
+            Console.WriteLine(security);
             foreach (var msg in evt.GetMessages())
             {
-                //The TIME in the response appears to be the *start* of the time interval
-                Console.WriteLine(msg);
+                Element elmBarTickDataArray = msg["barData"]["barTickData"];
+                for (int valueIndex = 0; valueIndex < elmBarTickDataArray.NumValues; valueIndex++)
+                {
+                    Element elmBarTickData = elmBarTickDataArray.GetValueAsElement(valueIndex);
+
+                    DateTime dtTick = elmBarTickData.GetElementAsDatetime("time").ToSystemDateTime();
+
+                    double open = elmBarTickData.GetElementAsFloat64("open");
+                    double high = elmBarTickData.GetElementAsFloat64("high");
+                    double low = elmBarTickData.GetElementAsFloat64("low");
+                    double close = elmBarTickData.GetElementAsFloat64("close");
+
+                    int numEvents = elmBarTickData.GetElementAsInt32("numEvents");
+                    long volume = elmBarTickData.GetElementAsInt64("volume");
+                    double value = elmBarTickData.GetElementAsFloat64("value");
+
+                    Console.WriteLine(dtTick.ToString("HH:mm:ss"));
+                    Console.WriteLine(string.Format("\t open = {0:c2}", open));
+                    Console.WriteLine(string.Format("\t high = {0:c2}", high));
+                    Console.WriteLine(string.Format("\t low = {0:c2}", low));
+                    Console.WriteLine(string.Format("\t close = {0:c2}", close));
+
+                    Console.WriteLine(string.Format("\t numEvents = {0:n0}", numEvents));
+                    Console.WriteLine(string.Format("\t volume = {0:n0}", volume));
+                    Console.WriteLine(string.Format("\t value = {0:n0}", value));
+
+                    Console.WriteLine();
+                }
             }
         }
 

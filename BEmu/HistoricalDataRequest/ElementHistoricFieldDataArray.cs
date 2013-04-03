@@ -1,21 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿//------------------------------------------------------------------------------
+// <copyright project="BEmu" file="HistoricalDataRequest/ElementHistoricFieldDataArray.cs" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
 
 namespace BEmu.HistoricalDataRequest
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
     internal class ElementHistoricFieldDataArray : Element
     {
-        private readonly List<ElementHistoricalFieldData> _fieldData;
+        private readonly List<ElementHistoricFieldData> _fieldData;
 
         internal ElementHistoricFieldDataArray(Dictionary<DateTime, Dictionary<string, object>> fieldData)
         {
-            this._fieldData = new List<ElementHistoricalFieldData>();
+            this._fieldData = new List<ElementHistoricFieldData>();
 
             foreach (var dtDate in fieldData)
 	        {
-                ElementHistoricalFieldData elmFieldData = new ElementHistoricalFieldData(dtDate.Key, dtDate.Value);
+                ElementHistoricFieldData elmFieldData = new ElementHistoricFieldData(dtDate.Key, dtDate.Value);
                 this._fieldData.Add(elmFieldData);
 	        }
         }

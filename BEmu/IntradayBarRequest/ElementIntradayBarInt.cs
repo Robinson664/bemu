@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="IntradayTickRequest/ElementIntradayTickString.cs" company="Jordan Robinson">
+// <copyright project="BEmu" file="IntradayBarRequest/ElementIntradayBarInt.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,19 +7,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace BEmu.IntradayTickRequest
+namespace BEmu.IntradayBarRequest
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    internal class ElementIntradayTickString : Element
+    internal class ElementIntradayBarInt : Element
     {
-        private readonly string _value;
+        private readonly int _value;
         private readonly string _name;
 
-        internal ElementIntradayTickString(string name, string value)
+        internal ElementIntradayBarInt(string name, int value)
         {
             this._name = name;
             this._value = value;
@@ -63,17 +63,17 @@ namespace BEmu.IntradayTickRequest
                 return base.GetValue(index);
         }
 
-        public override string GetValueAsString()
+        public override int GetValueAsInt32()
         {
             return this._value;
         }
 
-        public override string GetValueAsString(int i)
+        public override int GetValueAsInt32(int index)
         {
-            if (i == 0)
-                return this.GetValueAsString();
+            if (index == 0)
+                return this.GetValueAsInt32();
             else
-                return base.GetValueAsString(i);
+                return base.GetValueAsInt32(index);
         }
     }
 }

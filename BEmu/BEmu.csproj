@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>true</RegisterForComInterop>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -68,6 +70,8 @@
     <Compile Include="IntradayBarRequest\ElementBarTickDataArray.cs" />
     <Compile Include="IntradayBarRequest\ElementIntradayBarDateTime.cs" />
     <Compile Include="IntradayBarRequest\ElementIntradayBarDouble.cs" />
+    <Compile Include="IntradayBarRequest\ElementIntradayBarInt.cs" />
+    <Compile Include="IntradayBarRequest\ElementIntradayBarLong.cs" />
     <Compile Include="IntradayBarRequest\EventIntradayBar.cs" />
     <Compile Include="IntradayBarRequest\MessageIntradayBar.cs" />
     <Compile Include="IntradayBarRequest\RequestIntradayBar.cs" />
@@ -145,6 +149,10 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
