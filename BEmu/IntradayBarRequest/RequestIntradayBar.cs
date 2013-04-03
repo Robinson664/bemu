@@ -36,15 +36,21 @@ namespace BEmu.IntradayBarRequest
 
         internal IEnumerable<DateTime> GetDateTimes()
         {
-            if (this._dtStart.GetDate.HasValue && this._dtEnd.GetDate.HasValue)
+            if (!this._dtStart.GetDate.HasValue)
+                throw new ArgumentException("Invalid startDate.  None specified.");
+
+            else if (!this._dtEnd.GetDate.HasValue)
+                throw new ArgumentException("Invalid endDate.  None specified.");
+
+            else if (this._intervalInMinutes == null)
+                throw new ArgumentException("Invalid interval.  None specified (despite A.2.8 in the documentation, interval is required).");
+
+            int interval = this._intervalInMinutes.GetInt;
+            if (interval < 1 || interval > 1440) //if less than one, the loop below will never terminate
+                throw new ArgumentException("The interval must be an integer between 1 and 1440.  You entered " + interval.ToString());
+            for (DateTime dtCurrent = this._dtStart.GetDate.Value; dtCurrent <= this._dtEnd.GetDate.Value; dtCurrent = dtCurrent.AddMinutes(interval))
             {
-                int interval = this._intervalInMinutes.GetInt;
-                if (interval < 1) //if less than one, the loop below will never terminate
-                    interval = 1; //default = 1 (A.2.8)
-                for (DateTime dtCurrent = this._dtStart.GetDate.Value; dtCurrent <= this._dtEnd.GetDate.Value; dtCurrent = dtCurrent.AddMinutes(interval))
-                {
-                    yield return dtCurrent;
-                }
+                yield return dtCurrent;
             }
         }
 

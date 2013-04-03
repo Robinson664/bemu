@@ -3,3 +3,4 @@ C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\BEmu\bin
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\BEmu\obj\Release\BEmu.dll
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\BEmu\obj\Release\BEmu.pdb
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\BEmu\bin\Release\BEmu.tlb
+C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\BEmu\obj\Release\BEmu.csprojResolveAssemblyReference.cache

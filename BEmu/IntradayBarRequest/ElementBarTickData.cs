@@ -43,7 +43,17 @@ namespace BEmu.IntradayBarRequest
         public override object this[int index] { get { return null; } }
         public override Element GetElement(int index) { return this.Elements.Skip(index).First(); }
         public override Element GetElement(string name) { return this[name]; }
-        //public override Element this[string name] { get { return this._fields[name.ToUpper()]; } }
+
+        public override object this[string name, int index]
+        {
+            get
+            {
+                if (index == 0)
+                    return this[name].GetValue();
+                else
+                    return base[name, index];
+            }
+        }
 
         public override Element this[string name]
         {
