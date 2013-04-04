@@ -15,38 +15,50 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_5915008F4D6654989C1D8CFED572D239"
-        "OwnerKey" = "8:_DB814CFAE06048D8B081DB1D26A20647"
+        "MsmKey" = "8:_7383565D5E17AAAF36EF0B73C2CC6746"
+        "OwnerKey" = "8:_A733731D4320491480BE7F90E1C26B14"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DB814CFAE06048D8B081DB1D26A20647"
+        "MsmKey" = "8:_8BD4FFCC254D5283C8ED1AFD1BBA965D"
+        "OwnerKey" = "8:_A11D1821BD58464BA7416F9D9268991D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_8BD4FFCC254D5283C8ED1AFD1BBA965D"
+        "OwnerKey" = "8:_7383565D5E17AAAF36EF0B73C2CC6746"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A11D1821BD58464BA7416F9D9268991D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_DFF7336902344BB38ABE4F7D8BE7E8E5"
+        "MsmKey" = "8:_A733731D4320491480BE7F90E1C26B14"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DFF7336902344BB38ABE4F7D8BE7E8E5"
+        "OwnerKey" = "8:_A11D1821BD58464BA7416F9D9268991D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_DB814CFAE06048D8B081DB1D26A20647"
+        "OwnerKey" = "8:_A733731D4320491480BE7F90E1C26B14"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5915008F4D6654989C1D8CFED572D239"
+        "OwnerKey" = "8:_7383565D5E17AAAF36EF0B73C2CC6746"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -154,14 +166,14 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5915008F4D6654989C1D8CFED572D239"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7383565D5E17AAAF36EF0B73C2CC6746"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:BEmu, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:BEmu, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5915008F4D6654989C1D8CFED572D239"
+                    "_7383565D5E17AAAF36EF0B73C2CC6746"
                     {
                     "Name" = "8:BEmu.dll"
                     "Attributes" = "3:512"
@@ -181,6 +193,26 @@
             "SharedLegacy" = "11:FALSE"
             "PackageAs" = "3:1"
             "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8BD4FFCC254D5283C8ED1AFD1BBA965D"
+            {
+            "SourcePath" = "8:BEmu.tlb"
+            "TargetName" = "8:BEmu.tlb"
+            "Tag" = "8:"
+            "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:2"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
@@ -206,7 +238,7 @@
             {
             "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
-            "AlwaysCreate" = "11:FALSE"
+            "AlwaysCreate" = "11:TRUE"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:TARGETDIR"
@@ -252,15 +284,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BEmuInstaller"
-        "ProductCode" = "8:{3C2FCE9C-1C98-4E04-A5FD-CBA46BB81D25}"
-        "PackageCode" = "8:{5F138F3F-9DC7-4845-9747-42B38629411E}"
+        "ProductCode" = "8:{B36F01DF-D842-4D4A-8DC0-5E1BB510FA98}"
+        "PackageCode" = "8:{C22D3D3F-A14B-4042-B716-6C2CF6EBECAE}"
         "UpgradeCode" = "8:{828A53E8-0B63-4969-8540-9E1FF79CF627}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.2"
+        "ProductVersion" = "8:1.0.3"
         "Manufacturer" = "8:Robinson664"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -373,7 +405,21 @@
         }
         "Shortcut"
         {
-            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B0B07BC2FF89463CB581F2AA709382F4"
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_65E3ACA7F6454CAEA55997AA42536DDD"
+            {
+            "Name" = "8:DLL Folder"
+            "Arguments" = "8:"
+            "Description" = "8:"
+            "ShowCmd" = "3:1"
+            "IconIndex" = "3:0"
+            "Transitive" = "11:FALSE"
+            "Target" = "8:_546602977C334AF8B8A99C8BD453BA18"
+            "Folder" = "8:_B72CA49B437A459CB7EC46C6325E1A68"
+            "WorkingFolder" = "8:_546602977C334AF8B8A99C8BD453BA18"
+            "Icon" = "8:"
+            "Feature" = "8:"
+            }
+            "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_DEA7AA866C824A35B9719C872430B0B0"
             {
             "Name" = "8:Examples"
             "Arguments" = "8:"
@@ -381,7 +427,7 @@
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
-            "Target" = "8:_DB814CFAE06048D8B081DB1D26A20647"
+            "Target" = "8:_A733731D4320491480BE7F90E1C26B14"
             "Folder" = "8:_B72CA49B437A459CB7EC46C6325E1A68"
             "WorkingFolder" = "8:_546602977C334AF8B8A99C8BD453BA18"
             "Icon" = "8:"
@@ -786,9 +832,37 @@
         }
         "ProjectOutput"
         {
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DB814CFAE06048D8B081DB1D26A20647"
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A11D1821BD58464BA7416F9D9268991D"
             {
-            "SourcePath" = "8:..\\Examples\\obj\\x86\\Release\\Examples.exe"
+            "SourcePath" = "8:..\\BEmu\\obj\\Debug\\BEmu.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            "ProjectOutputGroupRegister" = "3:2"
+            "OutputConfiguration" = "8:"
+            "OutputGroupCanonicalName" = "8:Built"
+            "OutputProjectGuid" = "8:{0DD8974E-DA15-4131-8805-B44815053F61}"
+            "ShowKeyOutput" = "11:TRUE"
+                "ExcludeFilters"
+                {
+                }
+            }
+            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A733731D4320491480BE7F90E1C26B14"
+            {
+            "SourcePath" = "8:..\\Examples\\obj\\x86\\Debug\\Examples.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
@@ -809,34 +883,6 @@
             "OutputConfiguration" = "8:"
             "OutputGroupCanonicalName" = "8:Built"
             "OutputProjectGuid" = "8:{1EE7593D-D8BE-4777-90E4-E8104ACA5F3C}"
-            "ShowKeyOutput" = "11:TRUE"
-                "ExcludeFilters"
-                {
-                }
-            }
-            "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DFF7336902344BB38ABE4F7D8BE7E8E5"
-            {
-            "SourcePath" = "8:..\\BEmu\\obj\\Release\\BEmu.dll"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            "ProjectOutputGroupRegister" = "3:1"
-            "OutputConfiguration" = "8:"
-            "OutputGroupCanonicalName" = "8:Built"
-            "OutputProjectGuid" = "8:{0DD8974E-DA15-4131-8805-B44815053F61}"
             "ShowKeyOutput" = "11:TRUE"
                 "ExcludeFilters"
                 {

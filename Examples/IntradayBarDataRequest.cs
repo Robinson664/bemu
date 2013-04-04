@@ -36,7 +36,7 @@ namespace Examples
 
                 request.Set("eventType", "TRADE"); //optional: TRADE(default), BID, ASK, BID_BEST, ASK_BEST, BEST_BID, BEST_ASK, BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, SETTLE
                 //note that BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, and SETTLE don't appear in the API documentation, but you will see them if you call "service.ToString() using the actual Bloomberg API"
-                request.Append("eventTypes", "BID"); //A request can have multiple eventTypes
+                request.Set("eventTypes", "BID"); //A request can have multiple eventTypes
 
                 //data goes back no farther than 140 days (7.2.4)
                 DateTime dtStart = DateTime.Today.AddDays(-1); //yesterday
