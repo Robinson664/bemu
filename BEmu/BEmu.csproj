@@ -143,9 +143,7 @@
     <Compile Include="BloombergTypes\Session.cs" />
     <Compile Include="BloombergTypes\SessionOptions.cs" />
     <Compile Include="BloombergTypes\Subscription.cs" />
-    <Compile Include="Types\DateType.cs" />
     <Compile Include="Types\RandomDataGenerator.cs" />
-    <Compile Include="Types\TimeType.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

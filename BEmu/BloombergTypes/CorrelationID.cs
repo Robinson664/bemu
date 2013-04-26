@@ -22,7 +22,7 @@ namespace BEmu
         private readonly long _value;
         public long Value { get { return this._value; } }
 
-        private static long _nextInternalCorrelationId = 0; //initial correlation ID
+        private static long _nextInternalCorrelationId = 1; //initial correlation ID
 
         public CorrelationID(long value)
         {

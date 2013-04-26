@@ -101,9 +101,9 @@ namespace BEmu.Types
             string upper = fieldName.ToUpper();
 
             if (upper.Contains("TIME"))
-                result = DateTime.Now.AddMinutes(-1d * RandomDataGenerator._random.NextDouble() * 100d);
+                result = new Datetime(DateTime.Now.AddMinutes(-1d * RandomDataGenerator._random.NextDouble() * 100d), Datetime.DateTimeTypeEnum.time);
             else if (upper.Contains("DATE"))
-                result = DateTime.Now.AddDays(-1d * RandomDataGenerator._random.NextDouble() * 100d);
+                result = new Datetime(DateTime.Now.AddDays(-1d * RandomDataGenerator._random.NextDouble() * 100d), Datetime.DateTimeTypeEnum.date);
             else
                 result = RandomDataGenerator.RandomDouble();
 
@@ -200,7 +200,7 @@ namespace BEmu.Types
                     result.Add(item, RandomDataGenerator.RandomString());
             }
 
-            foreach (var item in extraBoolFields) //random string fields
+            foreach (var item in extraBoolFields) //random bool fields
             {
                 if (!result.ContainsKey(item))
                     result.Add(item, RandomDataGenerator.RandomBool());
