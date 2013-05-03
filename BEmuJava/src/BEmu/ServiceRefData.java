@@ -20,6 +20,9 @@ public class ServiceRefData extends Service
 		if(lower.equals("intradaybarrequest"))
 			return new BEmu.IntradayBarRequest.RequestIntradayBar(this);
 		
+		else if(lower.equals("intradaytickrequest"))
+			return new BEmu.IntradayTickRequest.RequestIntradayTick(this);
+		
 		else
 			throw new Exception("not implemented");
 	}

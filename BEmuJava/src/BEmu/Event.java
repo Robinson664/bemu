@@ -26,6 +26,12 @@ public abstract class Event {
 			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
 			return result;
 		}
+		else if(request.getClass() == BEmu.IntradayTickRequest.RequestIntradayTick.class)
+		{
+			result = new BEmu.IntradayTickRequest.EventIntradayTick((BEmu.IntradayTickRequest.RequestIntradayTick)request);
+			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
+			return result;
+		}
 		throw new Exception("Todo: return appropriate events from requests");
 	}
 	

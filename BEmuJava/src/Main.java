@@ -7,15 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-import java.text.SimpleDateFormat;
-
-import BEmu.*;
+import java.util.Scanner;
 
 public class Main {
-
-
-	private static SimpleDateFormat timeFmt = new SimpleDateFormat("HH:mm:ss");
-	
 
 	/**
 	 * @param args
@@ -23,89 +17,55 @@ public class Main {
 	 */
 	public static void main(String[] args) throws Exception //I don't know how to fix or suppress this warning
 	{
-		Main.CallIntBar();
-		
-		System.in.read();
+        System.out.println("Bloomberg API Emulator Examples");
+        System.out.println("http://bemu.codeplex.com/");
+        System.out.println("By: Robinson664");
+        System.out.println();
+        //System.out.println("To send a reference data request, push 1");
+        //System.out.println("To send a market data request, push 2");
+        //System.out.println("To send a historical data request, push 3");
+        System.out.println("To send a intraday tick data request, push 4");
+        System.out.println("To send a intraday bar data request, push 5");
+        
+        Scanner in = new Scanner(System.in);
+        int input = in.nextInt();
+        
+        System.out.println();
+        System.out.println();
+        boolean informationReturned = true;
+        
+        switch(input)
+        {
+        	case 1:
+        		//TODO: Reference Data Request
+        		break;
+        	case 2:
+        		//TODO: Market Data Request
+        		break;
+        	case 3:
+        		//TODO: Historical Data Request
+        		break;
+        	case 4:
+        		//Main.CallIntTick();
+        		IntradayBarDataRequest.RunExample();
+        		break;
+        	case 5:
+        		IntradayTickDataRequest.RunExample();
+        		break;
+        	default:
+        		informationReturned = false;
+        		break;
+        }
+        
+        if (informationReturned)
+        {
+        	System.out.println();
+        	System.out.println("Please note that the data in this request is completely random: it is not real data.");
+        	System.out.println("Do not make any trading or investment decisions using the data shown here.");
+        }
+
+        System.out.println();
+        System.out.println("Push enter to quit the application.");
 	}
 	
-	private static void CallIntBar() throws Exception
-	{
-		SessionOptions soptions = new SessionOptions();
-		soptions.setServerHost("127.0.0.1");
-		soptions.setServerPort(8194);
-		
-		Session session = new Session(soptions);
-		if(session.start() && session.openService("//blp/refdata"))
-		{
-			Service service = session.getService("//blp/refdata");
-			Request request = service.createRequest("IntradayBarRequest");
-			
-			String security = "SPY US EQUITY";
-			request.set("security", security);
-			
-			Datetime dtStart = new Datetime(2013, 4, 23);
-			Datetime dtEnd = new Datetime(2013, 4, 25);
-			request.set("startDateTime", dtStart);
-			request.set("endDateTime", dtEnd);
-			
-			request.set("interval", 60);
-			
-			session.sendRequest(request, new CorrelationID(-999));
-			boolean continueLoop = true;
-			while(continueLoop)
-			{
-				Event evt = session.nextEvent();
-				switch(evt.eventType().intValue())
-				{
-					case Event.EventType.Constants.RESPONSE:
-						Main.processResponse(evt, security);
-						continueLoop = false;
-						break;
-					case Event.EventType.Constants.PARTIAL_RESPONSE:
-						Main.processResponse(evt, security);
-						break;
-				}
-			}
-		}
-	}
-	
-	private static void processResponse(Event evt, String security) throws Exception
-	{
-		MessageIterator miter = evt.messageIterator();
-		while(miter.hasNext())
-		{
-			Message msg = miter.next();
-			
-			Element elmBarData = msg.getElement("barData");
-			Element elmBarTickDataArray = elmBarData.getElement("barTickData");
-			for(int valueIndex = 0; valueIndex < elmBarTickDataArray.numValues(); valueIndex++)
-			{
-				Element elmBarTickData = elmBarTickDataArray.getValueAsElement(valueIndex);
-				
-				Datetime dtTick = elmBarTickData.getElementAsDatetime("time");
-
-                double open = elmBarTickData.getElementAsFloat64("open");
-                double high = elmBarTickData.getElementAsFloat64("high");
-                double low = elmBarTickData.getElementAsFloat64("low");
-                double close = elmBarTickData.getElementAsFloat64("close");
-
-                int numEvents = elmBarTickData.getElementAsInt32("numEvents");
-                long volume = elmBarTickData.getElementAsInt64("volume");
-                double value = elmBarTickData.getElementAsFloat64("value");
-                
-                System.out.println(Main.timeFmt.format(dtTick.calendar().getTime()));
-                System.out.println(String.format("\t open = $%,.2f", open));
-                System.out.println(String.format("\t high = $%,.2f", high));
-                System.out.println(String.format("\t low = $%,.2f", low));
-                System.out.println(String.format("\t close = $%,.2f", close));
-                
-                System.out.println(String.format("\t numEvents = %,d", numEvents));
-                System.out.println(String.format("\t volume = %,d", volume));
-                System.out.println(String.format("\t value = %,.0f", value));
-                System.out.println();
-			}
-		}
-	}
-
-
 }
