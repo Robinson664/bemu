@@ -1,7 +1,7 @@
+import java.text.SimpleDateFormat;
+
 import BEmu.*; //un-comment this line to use the Bloomberg API Emulator
 //import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
-
-import java.text.SimpleDateFormat;
 
 public class IntradayBarDataRequest
 {

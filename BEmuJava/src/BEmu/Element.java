@@ -123,6 +123,10 @@ public abstract class Element {
     {
         throw new Exception("Element doesn't support getValueAsFloat32");
     }
+    public float getValueAsFloat32(int index) throws Exception
+    {
+        throw new Exception("Element doesn't support getValueAsFloat32");
+    }
 
     public double getValueAsFloat64() throws Exception
     {

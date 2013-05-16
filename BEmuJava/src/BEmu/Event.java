@@ -32,6 +32,12 @@ public abstract class Event {
 			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
 			return result;
 		}
+		else if(request.getClass() == BEmu.HistoricalDataRequest.RequestHistoric.class)
+		{
+			result = new BEmu.HistoricalDataRequest.EventHistoric((BEmu.HistoricalDataRequest.RequestHistoric)request);
+			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
+			return result;			
+		}
 		throw new Exception("Todo: return appropriate events from requests");
 	}
 	
@@ -52,6 +58,29 @@ public abstract class Event {
 		public EventType(int value)
 		{
 			this._value = value;
+		}
+		
+		public String toString()
+		{
+			switch (this._value)
+			{
+				case Constants.ADMIN: return "ADMIN";
+				case Constants.SESSION_STATUS: return "SESSION_STATUS";
+				case Constants.SUBSCRIPTION_STATUS: return "SUBSCRIPTION_STATUS";
+				case Constants.REQUEST_STATUS: return "REQUEST_STATUS";
+				case Constants.RESPONSE: return "RESPONSE";
+				case Constants.PARTIAL_RESPONSE: return "PARTIAL_RESPONSE";
+				case Constants.SUBSCRIPTION_DATA: return "SUBSCRIPTION_DATA";
+				case Constants.SERVICE_STATUS: return "SERVICE_STATUS";
+				case Constants.TIMEOUT: return "TIMEOUT";
+				case Constants.AUTHORIZATION_STATUS: return "AUTHORIZATION_STATUS";
+				case Constants.RESOLUTION_STATUS: return "RESOLUTION_STATUS";
+				case Constants.TOPIC_STATUS: return "TOPIC_STATUS";
+				case Constants.TOKEN_STATUS: return "TOKEN_STATUS";
+				case Constants.REQUEST: return "REQUEST";
+			}
+
+			return "not implemented";
 		}
 		
 		public int intValue()

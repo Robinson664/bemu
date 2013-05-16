@@ -67,7 +67,6 @@ public class ElementIntradayBarInt extends Element
     protected StringBuilder prettyPrint(int tabIndent)
     {
     	return super.prettyPrintHelper(tabIndent, String.valueOf(this._value));
-    	//return super.prettyPrintHelper(tabIndent, String.format(ElementIntradayBarInt.VALUE_FORMAT, this._value));
     }
     
     public Object getValue()

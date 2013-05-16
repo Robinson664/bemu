@@ -41,7 +41,10 @@ public abstract class Message {
 		return this.getElement(name.toString());
 	}
 	
-	public abstract Element getElement(String name) throws Exception;
+	public Element getElement(String name) throws Exception
+	{
+		throw new Exception("not implemented");
+	}
 	
 	public boolean hasElement(String name, boolean excludeNullElements) throws Exception
 	{

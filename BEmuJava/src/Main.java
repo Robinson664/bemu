@@ -7,7 +7,6 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-import java.util.Scanner;
 
 public class Main {
 
@@ -23,12 +22,16 @@ public class Main {
         System.out.println();
         //System.out.println("To send a reference data request, push 1");
         //System.out.println("To send a market data request, push 2");
-        //System.out.println("To send a historical data request, push 3");
+        System.out.println("To send a historical data request, push 3");
         System.out.println("To send a intraday tick data request, push 4");
         System.out.println("To send a intraday bar data request, push 5");
         
+        int input = System.in.read();
+        
+        /*
         Scanner in = new Scanner(System.in);
         int input = in.nextInt();
+        */
         
         System.out.println();
         System.out.println();
@@ -36,20 +39,19 @@ public class Main {
         
         switch(input)
         {
-        	case 1:
+        	case '1':
         		//TODO: Reference Data Request
         		break;
-        	case 2:
+        	case '2':
         		//TODO: Market Data Request
         		break;
-        	case 3:
-        		//TODO: Historical Data Request
+        	case '3':
+        		HistoricalDataRequest.RunExample();
         		break;
-        	case 4:
-        		//Main.CallIntTick();
+        	case '4':
         		IntradayBarDataRequest.RunExample();
         		break;
-        	case 5:
+        	case '5':
         		IntradayTickDataRequest.RunExample();
         		break;
         	default:
@@ -66,6 +68,7 @@ public class Main {
 
         System.out.println();
         System.out.println("Push enter to quit the application.");
+        System.in.read();
 	}
 	
 }

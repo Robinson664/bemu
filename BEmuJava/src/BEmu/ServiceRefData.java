@@ -17,7 +17,10 @@ public class ServiceRefData extends Service
 	{
 		String lower = operationName.toLowerCase();
 		
-		if(lower.equals("intradaybarrequest"))
+		if(lower.equals("historicaldatarequest"))
+			return new BEmu.HistoricalDataRequest.RequestHistoric();
+		
+		else if(lower.equals("intradaybarrequest"))
 			return new BEmu.IntradayBarRequest.RequestIntradayBar(this);
 		
 		else if(lower.equals("intradaytickrequest"))
