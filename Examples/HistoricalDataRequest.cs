@@ -108,7 +108,7 @@ namespace Examples
 
                 Element elmSecurity = elmSecurityData["security"];
                 string security = elmSecurity.GetValueAsString();
-                Console.WriteLine(elmSecurity.GetValueAsString());
+                Console.WriteLine(security);
 
                 Element elmFieldData = elmSecurityData["fieldData"];
                 for (int valueIndex = 0; valueIndex < elmFieldData.NumValues; valueIndex++)
