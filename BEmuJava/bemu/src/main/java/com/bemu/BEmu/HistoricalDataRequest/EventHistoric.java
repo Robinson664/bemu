@@ -41,7 +41,7 @@ public class EventHistoric extends Event
     					List<String> hfields = hreq.fields();
     					for(int k = 0; k < hfields.size(); k++)
     					{
-    						fields.put(hfields.get(k), com.bemu.types.RandomDataGenerator.randomDouble());
+    						fields.put(hfields.get(k), com.bemu.BEmu.types.RandomDataGenerator.randomDouble());
     					}
 
     					fieldData.put(current, fields);

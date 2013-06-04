@@ -16,7 +16,7 @@ namespace BEmu.ReferenceDataRequest
 
     internal class ElementReferenceArrayChainTickersItem : Element
     {
-        private ElementReferenceString _element;
+        private readonly ElementReferenceString _element;
 
         internal ElementReferenceArrayChainTickersItem(string ticker, DateTime dtExp, ElementReferenceArrayChainTickers.OptionalityEnum optionality, int strike)
         {

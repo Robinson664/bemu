@@ -2,9 +2,10 @@ package com.examples;
 
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-//import com.bemu.*; //un-comment this line to use the Bloomberg API Emulator
-import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
+import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
+//import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
 
 public class RunIntradayBarDataRequest
 {
@@ -25,11 +26,17 @@ public class RunIntradayBarDataRequest
 			String security = "SPY US EQUITY";
 			request.set("security", security);
 			
-			Datetime dtStart = new Datetime(2013, 4, 23);
-			Datetime dtEnd = new Datetime(2013, 4, 25);
+			Calendar cStart = Calendar.getInstance();
+			cStart.add(Calendar.DAY_OF_YEAR, -5);			
+			Datetime dtStart = new Datetime(cStart);
 			request.set("startDateTime", dtStart);
+
+			Calendar cEnd = Calendar.getInstance();
+			Datetime dtEnd = new Datetime(cEnd);
 			request.set("endDateTime", dtEnd);
-			
+
+            //(Required) Sets the length of each time bar in the response. Entered as a whole number, between 1 and 1440 in minutes.
+            //  One minute is the lowest possible granularity. (despite A.2.8, the interval setting cannot be omitted)
 			request.set("interval", 60);
 			
 			session.sendRequest(request, new CorrelationID(-999));

@@ -66,7 +66,7 @@ public class ElementIntradayTickDouble extends ElementParent
     
     protected StringBuilder prettyPrint(int tabIndent)
     {
-    	return super.prettyPrintHelper(tabIndent, com.bemu.types.Formats.formatDouble2NoCommas(this._value));
+    	return super.prettyPrintHelper(tabIndent, com.bemu.BEmu.types.Formats.formatDouble2NoCommas(this._value));
     }
     
     public Object getValue()

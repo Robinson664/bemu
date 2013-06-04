@@ -1,9 +1,7 @@
 package com.examples;
 
-/**
- * Hello world!
- *
- */
+import java.util.Scanner;
+
 public class App 
 {
     public static void main( String[] args ) throws Exception
@@ -12,18 +10,14 @@ public class App
         System.out.println("http://bemu.codeplex.com/");
         System.out.println("By: Robinson664");
         System.out.println();
-        //System.out.println("To send a reference data request, push 1");
+        System.out.println("To send a reference data request, push 1");
         //System.out.println("To send a market data request, push 2");
         System.out.println("To send a historical data request, push 3");
         System.out.println("To send a intraday tick data request, push 4");
         System.out.println("To send a intraday bar data request, push 5");
         
-        int input = System.in.read();
-        
-        /*
-        Scanner in = new Scanner(System.in);
-        int input = in.nextInt();
-        */
+        Scanner scan = new Scanner(System.in);
+        int input = scan.nextInt();
         
         System.out.println();
         System.out.println();
@@ -31,19 +25,19 @@ public class App
         
         switch(input)
         {
-        	case '1':
-        		//TODO: Reference Data Request
+        	case 1:
+        		RunReferenceDataRequest.RunExample();
         		break;
-        	case '2':
+        	case 2:
         		//TODO: Market Data Request
         		break;
-        	case '3':
+        	case 3:
         		RunHistoricalDataRequest.RunExample();
         		break;
-        	case '4':
+        	case 4:
         		RunIntradayBarDataRequest.RunExample();
         		break;
-        	case '5':
+        	case 5:
         		RunIntradayTickDataRequest.RunExample();
         		break;
         	default:
@@ -57,5 +51,11 @@ public class App
         	System.out.println("Please note that the data in this request is completely random: it is not real data.");
         	System.out.println("Do not make any trading or investment decisions using the data shown here.");
         }
+
+    	System.out.println();
+    	System.out.println("Press any key to exit");
+    	System.in.skip(System.in.available());
+    	System.in.read();
+        
     }
 }

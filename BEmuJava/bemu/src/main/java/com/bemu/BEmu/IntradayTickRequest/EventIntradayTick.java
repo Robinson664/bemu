@@ -43,8 +43,8 @@ public class EventIntradayTick extends Event
 				if(dtCurrent.calendar().get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && dtCurrent.calendar().get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
 				{
 					String t1 = "TRADE";
-					Double t2 = com.bemu.types.RandomDataGenerator.randomDouble();
-					Integer t3 = com.bemu.types.RandomDataGenerator.intradayTickTradeSize();
+					Double t2 = com.bemu.BEmu.types.RandomDataGenerator.randomDouble();
+					Integer t3 = com.bemu.BEmu.types.RandomDataGenerator.intradayTickTradeSize();
 					
 					Tuple3<String, Double, Integer> value = new Tuple3<String, Double, Integer>(t1, t2, t3);
 					

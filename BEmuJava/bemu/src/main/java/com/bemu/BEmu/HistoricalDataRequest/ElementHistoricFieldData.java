@@ -109,7 +109,7 @@ public class ElementHistoricFieldData extends ElementParent
 	
     protected StringBuilder prettyPrint(int tabIndent)
     {
-        String tabs = com.bemu.types.IndentType.Indent(tabIndent);
+        String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();
 
         result.append(String.format("%sfieldData = {%s", tabs, System.getProperty("line.separator")));

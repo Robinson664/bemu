@@ -45,7 +45,7 @@ public class RequestIntradayBarElementString extends Element
     
     protected StringBuilder prettyPrint(int tabIndent)
     {
-        String tabs = com.bemu.types.IndentType.Indent(tabIndent);
+        String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();
 
         result.append(String.format("%s%s = %s%s", tabs, this._elementName, this._value, System.getProperty("line.separator")));

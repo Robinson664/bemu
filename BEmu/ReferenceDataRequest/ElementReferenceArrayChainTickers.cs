@@ -16,7 +16,6 @@ namespace BEmu.ReferenceDataRequest
 
     internal class ElementReferenceArrayChainTickers : ElementReferenceArray
     {
-        private static readonly Random _random = new Random(100);
         internal enum OptionalityEnum { put = 'P', call = 'C' }
 
         internal ElementReferenceArrayChainTickers(string underlier, uint numPoints, string strDtExp, OptionalityEnum optionality) : base("CHAIN_TICKERS", new List<Element>())
@@ -42,7 +41,7 @@ namespace BEmu.ReferenceDataRequest
             int strike = Types.RandomDataGenerator.Strike();
             for (int count = 0; count < numPoints; count++, strike += 5)
             {
-                string optionTicker = string.Format("{0} US {1:MM/dd/yy} {2}{3}", ticker, dtExp, (char)optionality, strike);
+                //string optionTicker = string.Format("{0} US {1:MM/dd/yy} {2}{3}", ticker, dtExp, (char)optionality, strike);
 
                 Element elm = new ElementReferenceArrayChainTickersItem(ticker, dtExp, optionality, strike);
 

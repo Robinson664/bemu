@@ -38,6 +38,12 @@ public abstract class Event {
 			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
 			return result;			
 		}
+		else if(request.getClass() == com.bemu.BEmu.ReferenceDataRequest.RequestReference.class)
+		{
+			result = new com.bemu.BEmu.ReferenceDataRequest.EventReference((com.bemu.BEmu.ReferenceDataRequest.RequestReference)request);
+			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
+			return result;
+		}
 		throw new Exception("Todo: return appropriate events from requests");
 	}
 	

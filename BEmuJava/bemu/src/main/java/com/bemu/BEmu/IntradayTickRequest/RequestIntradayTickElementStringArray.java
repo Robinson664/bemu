@@ -68,7 +68,7 @@ public class RequestIntradayTickElementStringArray extends Element
     
     protected StringBuilder prettyPrint(int tabIndent)
     {
-        String tabs = com.bemu.types.IndentType.Indent(tabIndent);
+        String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();
 
         result.append(String.format("%s%s[] = {%s", tabs, this._elementName, System.getProperty("line.separator")));
@@ -80,7 +80,7 @@ public class RequestIntradayTickElementStringArray extends Element
         	if(i < this._values.size() - 1)
         		secs.append(",");
         }
-        result.append(String.format("%s%s%s%s", tabs, com.bemu.types.IndentType.TAB, secs.toString(), System.getProperty("line.separator")));
+        result.append(String.format("%s%s%s%s", tabs, com.bemu.BEmu.types.IndentType.TAB, secs.toString(), System.getProperty("line.separator")));
         
         result.append(String.format("%s}%s", tabs, System.getProperty("line.separator")));
 

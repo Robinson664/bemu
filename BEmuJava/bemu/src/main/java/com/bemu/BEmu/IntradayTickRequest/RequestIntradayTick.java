@@ -78,7 +78,7 @@ public class RequestIntradayTick extends Request
         while(dtStart.calendar().getTimeInMillis() < dtEnd.calendar().getTimeInMillis())
         {
         	result.add(new Datetime(dtStart));
-        	int minutes = com.bemu.types.RandomDataGenerator.intradayTickIntervalInMinutes();
+        	int minutes = com.bemu.BEmu.types.RandomDataGenerator.intradayTickIntervalInMinutes();
         	
         	dtStart.calendar().add(Calendar.MINUTE, minutes);
         }

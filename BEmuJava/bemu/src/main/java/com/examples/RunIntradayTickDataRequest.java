@@ -1,10 +1,10 @@
 package com.examples;
 
-
-//import com.bemu.*;
-import com.bloomberglp.blpapi.*;
+import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
+//import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class RunIntradayTickDataRequest
 {
@@ -27,8 +27,19 @@ public class RunIntradayTickDataRequest
             
             request.append("eventTypes", "TRADE");
 
-			Datetime dtStart = new Datetime(2013, 5, 1);
-			Datetime dtEnd = new Datetime(2013, 5, 2);
+            Calendar cStart = Calendar.getInstance();
+            cStart.add(Calendar.DAY_OF_MONTH, -1);
+            cStart.set(Calendar.HOUR, 2);
+            cStart.set(Calendar.MINUTE, 50);
+			Datetime dtStart = new Datetime(cStart);
+			
+
+            Calendar cEnd = Calendar.getInstance();
+            cEnd.add(Calendar.DAY_OF_MONTH, -1);
+            cEnd.set(Calendar.HOUR, 3);
+            cEnd.set(Calendar.MINUTE, 0);
+			Datetime dtEnd = new Datetime(cEnd);
+			
 			request.set("startDateTime", dtStart);
 			request.set("endDateTime", dtEnd);
 

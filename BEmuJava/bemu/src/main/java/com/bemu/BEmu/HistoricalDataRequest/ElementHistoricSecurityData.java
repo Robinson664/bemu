@@ -80,7 +80,7 @@ public class ElementHistoricSecurityData extends ElementParent
     
     protected StringBuilder prettyPrint(int tabIndent)
     {
-        String tabs = com.bemu.types.IndentType.Indent(tabIndent);
+        String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();
         
         result.append(String.format("%s%s = {%s", tabs, this.name().toString(), System.getProperty("line.separator")));

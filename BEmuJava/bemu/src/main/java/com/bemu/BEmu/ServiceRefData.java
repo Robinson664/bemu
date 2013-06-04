@@ -20,6 +20,9 @@ public class ServiceRefData extends Service
 		if(lower.equals("historicaldatarequest"))
 			return new com.bemu.BEmu.HistoricalDataRequest.RequestHistoric();
 		
+		else if(lower.equals("referencedatarequest"))
+			return new com.bemu.BEmu.ReferenceDataRequest.RequestReference();
+		
 		else if(lower.equals("intradaybarrequest"))
 			return new com.bemu.BEmu.IntradayBarRequest.RequestIntradayBar(this);
 		

@@ -7,7 +7,23 @@
   <version>1.0-SNAPSHOT</version>
   <name>bemu</name>
   <url>http://maven.apache.org</url>
+
+  <repositories>
+    <repository>
+      <!-- DO NOT set id to "local" because it is reserved by Maven -->
+      <id>lib</id>
+      <url>file://${project.basedir}/lib</url>
+    </repository>
+  </repositories>
+
   <dependencies>
+
+    <!--<dependency>
+      <groupId>com.bloomberglp.blpapi</groupId>
+      <artifactId>blpapi</artifactId>
+      <version>3.6.1</version>
+    </dependency>-->
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
@@ -15,4 +31,5 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
 </project>

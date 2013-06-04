@@ -14,14 +14,105 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 
 import com.bemu.BEmu.DateTimeTypeEnum;
 import com.bemu.BEmu.Datetime;
+import com.bemu.BEmu.Element;
+import com.bemu.BEmu.ReferenceDataRequest.OptionalityEnum;
+import com.bemu.BEmu.ReferenceDataRequest.ElementReferenceArrayChainTickers;
 
-public class RandomDataGenerator {
+public class RandomDataGenerator
+{
 	private static Random _rand = new Random(100);
 	
-	
+	public static Object referenceDataFromFieldName(String fieldName, String security, boolean isOption, com.bemu.BEmu.ReferenceDataRequest.RequestReference rreq) throws Exception
+	{
+        String upper = fieldName.toUpperCase();
+        Object result;
+        
+        if(upper.equals("CHAIN_TICKERS"))
+        {
+        	if(isOption)
+        	{
+        		result = null;
+        	}
+        	else
+        	{
+                int numPoints = 1;
+                String dtExp = null;
+                OptionalityEnum optionality = OptionalityEnum.call;
+        		
+                if(rreq.hasElement("overrides"))
+                {
+                	Element overrides = rreq.getElement("overrides");
+                	for (int i = 0; i < overrides.numValues(); i++)
+                	{
+                        Element element = overrides.getValueAsElement(i);
+
+                        String fieldId = element.getElement("fieldId").getValueAsString();
+                        String value = element.getElement("value").getValueAsString();
+
+                        String fieldUpper = fieldId.toUpperCase();
+                        if(fieldUpper.equals("CHAIN_POINTS_OVRD"))
+                        {
+                        	numPoints = Integer.parseInt(value);
+                        }
+                        else if(fieldUpper.equals("CHAIN_EXP_DT_OVRD"))
+                        {
+                        	dtExp = value;
+                        }
+                        else if(fieldUpper.equals("CHAIN_PUT_CALL_TYPE_OVRD"))
+                        {
+                            if (value.toUpperCase() == "P")
+                                optionality = OptionalityEnum.put;
+                        }
+                	}
+                }
+                
+                ElementReferenceArrayChainTickers chain = new ElementReferenceArrayChainTickers(security, numPoints, dtExp, optionality);
+                result = chain;
+        	}
+        }
+        else if(upper.equals("TICKER"))
+        {
+        	int space = security.indexOf(' ');
+        	result = security.substring(0, space);
+        }
+        else if(upper.equals("OPT_EXPIRE_DT"))
+        {
+        	if(security.endsWith("COMDTY") || security.endsWith("INDEX"))
+        	{
+        		Datetime dtResult = new Datetime();
+        		dtResult.calendar().add(Calendar.MONTH, 3);
+        		result = dtResult;
+        	}
+        	else if(isOption)
+        	{
+            	int space = security.lastIndexOf(' ');
+        		String strDate = security.substring(space - 15);
+        		strDate = strDate.substring(0, 6);
+        		
+        		DateFormat formatter = new SimpleDateFormat("yyMMdd");
+                result = formatter.parse(strDate);
+        	}
+        	else
+        		result = null;
+        }
+        else if(upper.contains("TRADEABLE_DT"))
+        {
+    		Datetime dtResult = new Datetime();
+    		dtResult.calendar().add(Calendar.MONTH, 3);
+    		result = dtResult;
+        }
+        else
+        {
+        	result = RandomDataGenerator.randomDouble();
+        }
+        
+        return result;
+	}
 	
 	public static Object marketDataFromFieldName(String fieldName)
 	{

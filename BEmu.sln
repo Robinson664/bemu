@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BEmu", "BEmu\BEmu.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{1EE7593D-D8BE-4777-90E4-E8104ACA5F3C}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "BEmuInstaller", "BEmuInstaller\BEmuInstaller.vdproj", "{BA3DC5DE-307B-4654-A133-0D0918A73A14}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,18 +35,6 @@ Global
 		{1EE7593D-D8BE-4777-90E4-E8104ACA5F3C}.Release|Mixed Platforms.Build.0 = Release|x86
 		{1EE7593D-D8BE-4777-90E4-E8104ACA5F3C}.Release|x86.ActiveCfg = Release|x86
 		{1EE7593D-D8BE-4777-90E4-E8104ACA5F3C}.Release|x86.Build.0 = Release|x86
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Debug|Any CPU.ActiveCfg = Debug
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Debug|Any CPU.Build.0 = Debug
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Debug|Mixed Platforms.Build.0 = Debug
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Debug|x86.ActiveCfg = Debug
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Debug|x86.Build.0 = Debug
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Release|Any CPU.ActiveCfg = Release
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Release|Any CPU.Build.0 = Release
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Release|Mixed Platforms.ActiveCfg = Release
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Release|Mixed Platforms.Build.0 = Release
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Release|x86.ActiveCfg = Release
-		{BA3DC5DE-307B-4654-A133-0D0918A73A14}.Release|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
