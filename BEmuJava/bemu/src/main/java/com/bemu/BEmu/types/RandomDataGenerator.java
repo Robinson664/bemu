@@ -172,7 +172,7 @@ public class RandomDataGenerator
 		{
 			for(int i = 0; i < requestedFields.size(); i++)
 			{				
-				if(RandomDataGenerator.randomDouble() < 0.25)
+				if(RandomDataGenerator.randomDouble(0, 1) < 0.25)
 					result.put(requestedFields.get(i), RandomDataGenerator.marketDataFromFieldName(requestedFields.get(i)));
 			}
 		}
@@ -235,12 +235,12 @@ public class RandomDataGenerator
 	//I made it so that there is a 70% chance that a market data event will include a specific security
     public static boolean shouldIncludeQuote()
     {
-        return RandomDataGenerator.randomDouble() < 0.7;
+        return RandomDataGenerator.randomDouble(0, 1) < 0.7;
     }
 	
-	public static double millisecondsBetweenMarketDataEvents()
+	public static long millisecondsBetweenMarketDataEvents()
 	{
-		return RandomDataGenerator.randomDouble() * 2000 + 1000;
+		return (long)(RandomDataGenerator.randomDouble(0, 1) * 2000 + 1000);
 	}
 	
     public static int intradayTickTradeSize()

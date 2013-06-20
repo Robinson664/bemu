@@ -4,8 +4,8 @@ package com.examples;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
-//import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
+//import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
+import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
 
 public class RunHistoricalDataRequest
 {

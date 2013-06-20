@@ -9,13 +9,14 @@
 
 package com.bemu.BEmu;
 
+import java.util.List;
 import java.util.Iterator;
 
 public class MessageIterator implements Iterator<Message> {
 
 	private Iterator<Message> _iter;
 	
-	MessageIterator(java.util.List<Message> list)
+	public MessageIterator(List<Message> list)
 	{
 		this._iter = list.iterator();
 	}

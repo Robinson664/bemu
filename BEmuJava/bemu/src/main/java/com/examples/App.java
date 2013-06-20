@@ -11,7 +11,7 @@ public class App
         System.out.println("By: Robinson664");
         System.out.println();
         System.out.println("To send a reference data request, push 1");
-        //System.out.println("To send a market data request, push 2");
+        System.out.println("To send a market data request, push 2");
         System.out.println("To send a historical data request, push 3");
         System.out.println("To send a intraday tick data request, push 4");
         System.out.println("To send a intraday bar data request, push 5");
@@ -29,7 +29,7 @@ public class App
         		RunReferenceDataRequest.RunExample();
         		break;
         	case 2:
-        		//TODO: Market Data Request
+        		RunMarketDataSubscription.RunExample();
         		break;
         	case 3:
         		RunHistoricalDataRequest.RunExample();

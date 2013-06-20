@@ -22,10 +22,12 @@ public class Name {
 		return this._name;
 	}
 	
-	public boolean Equals(Object obj)
+	public boolean equals(Object obj)
 	{
 		if(obj.getClass() == this.getClass())
 			return ((Name)obj)._name.equals(this._name);
+		else if(obj.getClass() == String.class)
+			return this._name.equals((String)obj);
 		else
 			return false;
 	}

@@ -55,7 +55,7 @@ namespace BEmu.MarketDataRequest
                     break;
 
                 default:
-                    throw new NotImplementedException(string.Format("BEmu.MarketDataRequest.EventMarket.EventMarket: doesn't expect EventType {1}", evtType.ToString()));
+                    throw new NotImplementedException(string.Format("BEmu.MarketDataRequest.EventMarket.EventMarket: doesn't expect EventType {0}", evtType.ToString()));
             }
         }
 

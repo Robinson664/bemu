@@ -17,7 +17,7 @@ public class CorrelationID {
 	}
 	
 	private long _value;
-	public long Value()
+	public long value()
 	{
 		return this._value;
 	}

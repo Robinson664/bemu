@@ -50,6 +50,12 @@ public class Datetime {
 		this._dateTimeType = dt;
 	}
 	
+	public Datetime(Datetime arg, DateTimeTypeEnum dt)
+	{
+		this(arg._instance); //call Datetime(Calendar arg)	
+		this._dateTimeType = dt;
+	}
+	
 	public Datetime(int year, int month, int dayOfMonth)
 	{
 		this.setDate(year, month, dayOfMonth);
@@ -63,6 +69,12 @@ public class Datetime {
 	public Datetime(int year, int month, int dayOfMonth, int hour, int minute, int second, int milliSecond)
 	{
 		this.setDatetime(year, month, dayOfMonth, hour, minute, second, milliSecond);
+	}
+	
+	//Don't use this.  It's not in the actual Bloomberg code.
+	public DateTimeTypeEnum DateTimeType()
+	{
+		return this._dateTimeType;
 	}
 	
 	public int dayOfMonth()

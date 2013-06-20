@@ -1,3 +1,12 @@
+//------------------------------------------------------------------------------
+// <copyright project="BEmuJava" file="BEmu.HistoricalDataRequest.RequestHistoricElementBool.java" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------
+
 package com.bemu.BEmu.HistoricalDataRequest;
 
 public class RequestHistoricElementBool extends RequestHistoricElementString
