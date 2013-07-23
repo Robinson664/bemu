@@ -36,6 +36,8 @@ namespace Examples
             Request request = refDataSvc.CreateRequest("ReferenceDataRequest");
 
             //request information for the following securities
+            request.Append("securities", "ZYZZ US EQUITY");
+            request.Append("securities", "ZYZ US EQUITY");
             request.Append("securities", "IBM US EQUITY");
             request.Append("securities", "SPY US EQUITY");
             request.Append("securities", "MSFT US EQUITY");
@@ -109,34 +111,55 @@ namespace Examples
                     Console.WriteLine();
                     Console.WriteLine(security);
 
-                    Element elmFieldData = elmSecurityData["fieldData"];
-
-                    double pxLast = elmFieldData.GetElementAsFloat64("PX_LAST");
-                    double bid = elmFieldData.GetElementAsFloat64("BID");
-                    double ask = elmFieldData.GetElementAsFloat64("ASK");
-                    string ticker = elmFieldData.GetElementAsString("TICKER");
-
-                    Console.WriteLine("PX_LAST = " + pxLast.ToString());
-                    Console.WriteLine("BID = " + bid.ToString());
-                    Console.WriteLine("ASK = " + ask.ToString());
-                    Console.WriteLine("TICKER = " + ticker.ToString());
-
-                    bool excludeNullElements = true;
-                    if (elmFieldData.HasElement("CHAIN_TICKERS", excludeNullElements)) //be careful, excludeNullElements is false by default
+                    bool isSecurityError = elmSecurityData.HasElement("securityError", true);
+                    if (isSecurityError)
                     {
-                        Element chainTickers = elmFieldData["CHAIN_TICKERS"];
-                        for (int chainTickerValueIndex = 0; chainTickerValueIndex < chainTickers.NumValues; chainTickerValueIndex++)
-                        {
-                            Element chainTicker = chainTickers.GetValueAsElement(chainTickerValueIndex);
-                            string strChainTicker = chainTicker.GetElementAsString("Ticker");
+                        Element secError = elmSecurityData["securityError"];
+                        string source = secError.GetElementAsString("source");
+                        int code = secError.GetElementAsInt32("code");
+                        string category = secError.GetElementAsString("category");
+                        string errorMessage = secError.GetElementAsString("message");
+                        string subCategory = secError.GetElementAsString("subcategory");
 
-                            Console.WriteLine("CHAIN_TICKER = " + strChainTicker.ToString());
-                        }
+                        Console.WriteLine("security error");
+                        Console.WriteLine(string.Format("source = {0}", source));
+                        Console.WriteLine(string.Format("code = {0}", code));
+                        Console.WriteLine(string.Format("category = {0}", category));
+                        Console.WriteLine(string.Format("errorMessage = {0}", errorMessage));
+                        Console.WriteLine(string.Format("subCategory = {0}", subCategory));
                     }
                     else
                     {
-                        Console.WriteLine("No CHAIN_TICKER information");
+                        Element elmFieldData = elmSecurityData["fieldData"];
+
+                        double pxLast = elmFieldData.GetElementAsFloat64("PX_LAST");
+                        double bid = elmFieldData.GetElementAsFloat64("BID");
+                        double ask = elmFieldData.GetElementAsFloat64("ASK");
+                        string ticker = elmFieldData.GetElementAsString("TICKER");
+
+                        Console.WriteLine("PX_LAST = " + pxLast.ToString());
+                        Console.WriteLine("BID = " + bid.ToString());
+                        Console.WriteLine("ASK = " + ask.ToString());
+                        Console.WriteLine("TICKER = " + ticker.ToString());
+
+                        bool excludeNullElements = true;
+                        if (elmFieldData.HasElement("CHAIN_TICKERS", excludeNullElements)) //be careful, excludeNullElements is false by default
+                        {
+                            Element chainTickers = elmFieldData["CHAIN_TICKERS"];
+                            for (int chainTickerValueIndex = 0; chainTickerValueIndex < chainTickers.NumValues; chainTickerValueIndex++)
+                            {
+                                Element chainTicker = chainTickers.GetValueAsElement(chainTickerValueIndex);
+                                string strChainTicker = chainTicker.GetElementAsString("Ticker");
+
+                                Console.WriteLine("CHAIN_TICKER = " + strChainTicker.ToString());
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("No CHAIN_TICKER information");
+                        }
                     }
+
                 }
             }
         }

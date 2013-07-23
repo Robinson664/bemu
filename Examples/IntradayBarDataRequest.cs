@@ -14,8 +14,8 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    using BEmu; //un-comment this line to use the Bloomberg API Emulator
-    //using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+    //using BEmu; //un-comment this line to use the Bloomberg API Emulator
+    using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
 
     public static class IntradayBarDataRequest
     {
@@ -36,7 +36,7 @@ namespace Examples
 
                 request.Set("eventType", "TRADE"); //optional: TRADE(default), BID, ASK, BID_BEST, ASK_BEST, BEST_BID, BEST_ASK, BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, SETTLE
                 //note that BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, and SETTLE don't appear in the API documentation, but you will see them if you call "service.ToString() using the actual Bloomberg API"
-                request.Set("eventTypes", "BID"); //A request can have multiple eventTypes
+                request.Set("eventType", "BID"); //A request can have multiple eventTypes
 
                 //data goes back no farther than 140 days (7.2.4)
                 DateTime dtStart = DateTime.Today.AddDays(-1); //yesterday
@@ -53,8 +53,8 @@ namespace Examples
                 //Option on whether to return EIDs for the security.
                 request.Set("returnEids", false); //Optional bool. Valid values are true and false (default = false)
 
-                //Setting this to true will populate fieldData with an extra element containing a name and value for the relative date. For example RELATIVE_DATE = 2002 Q2
-                request.Set("returnRelativeDate", false); //Optional bool. Valid values are true and false (default = false)
+                ////Setting this to true will populate fieldData with an extra element containing a name and value for the relative date. For example RELATIVE_DATE = 2002 Q2
+                //request.Set("returnRelativeDate", false); //Optional bool. Valid values are true and false (default = false)
 
                 //Adjust historical pricing to reflect: Regular Cash, Interim, 1st Interim, 2nd Interim, 3rd Interim, 4th Interim, 5th Interim, Income,
                 //  Estimated, Partnership Distribution, Final, Interest on Capital, Distribution, Prorated.

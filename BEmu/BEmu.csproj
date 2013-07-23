@@ -114,6 +114,7 @@
     <Compile Include="ReferenceDataRequest\ElementReferenceArrayChainTickersItem.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceDateTime.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceObject.cs" />
+    <Compile Include="ReferenceDataRequest\ElementReferenceSecurityError.cs" />
     <Compile Include="ReferenceDataRequest\RequestReferenceElementOverride.cs" />
     <Compile Include="ReferenceDataRequest\RequestReferenceElementOverrideArray.cs" />
     <Compile Include="ReferenceDataRequest\RequestReferenceElementString.cs" />

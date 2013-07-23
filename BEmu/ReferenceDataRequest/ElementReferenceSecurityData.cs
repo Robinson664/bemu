@@ -19,17 +19,43 @@ namespace BEmu.ReferenceDataRequest
         private readonly ElementReferenceString _elmSecurityName;
         private readonly ElementReferenceInt _elmSequenceNumber;
         private readonly ElementReferenceFieldData _elmFieldData;
+        private readonly ElementReferenceSecurityError _elmSecError;
+        private bool _isSecurityError;
 
         internal ElementReferenceSecurityData(string securityName, Dictionary<string, object> fieldData, int sequenceNumber)
         {
+            this._isSecurityError = securityName.StartsWith("Z", StringComparison.OrdinalIgnoreCase);
+
             this._elmSecurityName = new ElementReferenceString("security", securityName);
-            this._elmSequenceNumber = new ElementReferenceInt("sequenceNumber", sequenceNumber);
-            this._elmFieldData = new ElementReferenceFieldData(fieldData);
+            if (this._isSecurityError)
+            {
+                this._elmSequenceNumber = new ElementReferenceInt("sequenceNumber", sequenceNumber);
+                this._elmSecError = new ElementReferenceSecurityError(securityName);
+                this._elmFieldData = new ElementReferenceFieldData(new Dictionary<string, object>());
+            }
+            else
+            {
+                this._elmSequenceNumber = new ElementReferenceInt("sequenceNumber", sequenceNumber);
+                this._elmSecError = null;
+                this._elmFieldData = new ElementReferenceFieldData(fieldData);
+            }
         }
 
         public override int NumElements { get { return 3; } }
         public override int NumValues { get { return 0; } }
         public override Name Name { get { return new Name("securityData"); } }
+
+        public override IEnumerable<Element> Elements
+        {
+            get
+            {
+                yield return this._elmSecurityName;
+                if (this._isSecurityError)
+                    yield return this._elmSecError;
+                yield return this._elmSequenceNumber;
+                yield return this._elmFieldData; 
+            }
+        }
 
         public override string GetElementAsString(string name)
         {
@@ -58,9 +84,24 @@ namespace BEmu.ReferenceDataRequest
                         return this._elmSecurityName;
                     case "SEQUENCENUMBER":
                         return this._elmSequenceNumber;
+                    case "SECURITYERROR":
+                        if (this._isSecurityError) //this element doesn't exist if the security exists
+                            return this._elmSecError;
+                        else
+                            break;
                 }
                 return base[name];
             }
+        }
+
+        public override bool HasElement(string name, bool excludeNullElements = false)
+        {
+            foreach (var item in this.Elements)
+            {
+                if (item.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
         }
 
         public override object this[string name, int index]

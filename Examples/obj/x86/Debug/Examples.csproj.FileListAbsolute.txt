@@ -13,3 +13,4 @@ C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\obj\x86\Debug\Examples.csprojResolveAssemblyReference.cache
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Debug\BEmu.dll
 C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Debug\BEmu.pdb
+C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Debug\Bloomberglp.Blpapi.dll

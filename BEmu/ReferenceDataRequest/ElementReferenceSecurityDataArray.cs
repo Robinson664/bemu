@@ -16,11 +16,11 @@ namespace BEmu.ReferenceDataRequest
 
     internal class ElementReferenceSecurityDataArray : Element
     {
-        private readonly List<ElementReferenceSecurityData> _securities;
+        private readonly List<Element> _securities;
 
         internal ElementReferenceSecurityDataArray(Dictionary<string, Dictionary<string, object>> securities)
         {
-            this._securities = new List<ElementReferenceSecurityData>();
+            this._securities = new List<Element>();
 
             foreach (var item in securities)
             {
@@ -31,13 +31,23 @@ namespace BEmu.ReferenceDataRequest
 
         internal ElementReferenceSecurityDataArray(ElementReferenceSecurityDataArray arg) //copy constructor
         {
-            this._securities = new List<ElementReferenceSecurityData>(arg._securities);
+            this._securities = new List<Element>(arg._securities);
         }
 
         public override int NumElements { get { return 0; } }
         public override int NumValues { get { return this._securities.Count; } }
         public override Name Name { get { return new Name("securityData"); } }
         public override IEnumerable<Element> Elements { get { return this._securities; } }
+
+        public override bool HasElement(string name, bool excludeNullElements = false)
+        {
+            foreach (var item in this._securities)
+            {
+                if (item.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
+        }
 
         public override Element GetValueAsElement(int index)
         {

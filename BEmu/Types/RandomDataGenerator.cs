@@ -245,7 +245,7 @@ namespace BEmu.Types
             return Math.Round(RandomDataGenerator._random.NextDouble() * (high - low) + low, 2);
         }
 
-        private static int RandomInt(uint max)
+        public static int RandomInt(uint max)
         {
             return RandomDataGenerator._random.Next(1, (int)max);
         }
@@ -275,9 +275,14 @@ namespace BEmu.Types
             return (char)('A' + RandomDataGenerator.RandomInt(25) - 1);
         }
 
-        private static string RandomString()
+        public static string RandomString()
         {
             int length = RandomDataGenerator.RandomInt(10);
+            return RandomDataGenerator.RandomString(length);
+        }
+
+        public static string RandomString(int length)
+        {
             StringBuilder result = new StringBuilder(length);
             for (int i = 0; i < length; i++)
             {
