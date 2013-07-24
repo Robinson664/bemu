@@ -14,8 +14,8 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    //using BEmu; //un-comment this line to use the Bloomberg API Emulator
-    using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+    using BEmu; //un-comment this line to use the Bloomberg API Emulator
+    //using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
 
     public static class HistoricalDataRequest
     {
@@ -34,7 +34,7 @@ namespace Examples
             Request request = service.CreateRequest("HistoricalDataRequest");
 
             //request information for the following securities
-            request.Append("securities", "IBM US EQUITY");
+            request.Append("securities", "ZYZZ US EQUITY");
             request.Append("securities", "SPY US EQUITY");
             request.Append("securities", "C A COMDTY");
             request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
@@ -110,15 +110,34 @@ namespace Examples
                 string security = elmSecurity.GetValueAsString();
                 Console.WriteLine(security);
 
-                Element elmFieldData = elmSecurityData["fieldData"];
-                for (int valueIndex = 0; valueIndex < elmFieldData.NumValues; valueIndex++)
+                if (elmSecurityData.HasElement("securityError", true))
                 {
-                    Element elmValues = elmFieldData.GetValueAsElement(valueIndex);
-                    DateTime date = elmValues.GetElementAsDate("date").ToSystemDateTime();
-                    double bid = elmValues.GetElementAsFloat64("BID");
-                    double ask = elmValues.GetElementAsFloat64("ASK");
+                    Element elmSecError = elmSecurityData["securityError"];
+                    string source = elmSecError.GetElementAsString("source");
+                    int code = elmSecError.GetElementAsInt32("code");
+                    string category = elmSecError.GetElementAsString("category");
+                    string errorMessage = elmSecError.GetElementAsString("message");
+                    string subCategory = elmSecError.GetElementAsString("subcategory");
 
-                    Console.WriteLine(string.Format("{0:yyyy-MM-dd}: BID = {1}, ASK = {2}", date, bid, ask));
+                    Console.WriteLine("security error");
+                    Console.WriteLine(string.Format("source = {0}", source));
+                    Console.WriteLine(string.Format("code = {0}", code));
+                    Console.WriteLine(string.Format("category = {0}", category));
+                    Console.WriteLine(string.Format("errorMessage = {0}", errorMessage));
+                    Console.WriteLine(string.Format("subCategory = {0}", subCategory));
+                }
+                else
+                {
+                    Element elmFieldData = elmSecurityData["fieldData"];
+                    for (int valueIndex = 0; valueIndex < elmFieldData.NumValues; valueIndex++)
+                    {
+                        Element elmValues = elmFieldData.GetValueAsElement(valueIndex);
+                        DateTime date = elmValues.GetElementAsDate("date").ToSystemDateTime();
+                        double bid = elmValues.GetElementAsFloat64("BID");
+                        double ask = elmValues.GetElementAsFloat64("ASK");
+
+                        Console.WriteLine(string.Format("{0:yyyy-MM-dd}: BID = {1}, ASK = {2}", date, bid, ask));
+                    }
                 }
             }
         }

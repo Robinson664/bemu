@@ -19,20 +19,49 @@ namespace BEmu.HistoricalDataRequest
         private readonly ElementHistoricString _elmSecurityName;
         private readonly ElementHistoricFieldDataArray _elmFieldDataArray;
         private readonly ElementHistoricInt _elmSequenceNumber;
+        private readonly ElementHistoricSecurityError _elmSecError;
+        private bool _isSecurityError;
 
         internal ElementHistoricSecurityData(string securityName, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
         {
+            this._isSecurityError = securityName.StartsWith("Z", StringComparison.OrdinalIgnoreCase);
+
             this._elmSecurityName = new ElementHistoricString("security", securityName);
-            this._elmFieldDataArray = new ElementHistoricFieldDataArray(fieldData);
             this._elmSequenceNumber = new ElementHistoricInt("sequenceNumber", sequenceNumber);
+            if (this._isSecurityError)
+            {
+                this._elmSecError = new ElementHistoricSecurityError(securityName);
+                this._elmFieldDataArray = null;
+            }
+            else
+            {
+                this._elmSecError = null;
+                this._elmFieldDataArray = new ElementHistoricFieldDataArray(fieldData);
+            }
         }
 
         public override Name Name { get { return new Name("securityData"); } }
         public override int NumValues { get { return 1; } }
-        public override int NumElements { get { return 3; } }
+        public override int NumElements { get { return this.Elements.Count(); } }
         public override bool IsComplexType { get { return true; } }
         public override bool IsArray { get { return false; } }
         public override object this[int index] { get { return null; } }
+
+        public override IEnumerable<Element> Elements
+        {
+            get
+            {
+                yield return this._elmSecurityName;
+
+                yield return this._elmSequenceNumber;
+
+                if (this._isSecurityError)
+                    yield return this._elmSecError;
+
+                else
+                    yield return this._elmFieldDataArray;
+            }
+        }
 
         public override object this[string name, int index]
         {
@@ -52,16 +81,37 @@ namespace BEmu.HistoricalDataRequest
             }
         }
 
+        public override bool HasElement(string name, bool excludeNullElements = false)
+        {
+            foreach (var item in this.Elements)
+            {
+                if (item.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase))
+                    return true;
+            }
+            return false;
+        }
+
         public override Element GetElement(string name)
         {
             switch (name.ToUpper())
             {
                 case "FIELDDATA":
-                    return this._elmFieldDataArray;
+                    if (!this._isSecurityError)
+                        return this._elmFieldDataArray;
+                    else
+                        break;
+
                 case "SECURITY":
                     return this._elmSecurityName;
+
                 case "SEQUENCENUMBER":
                     return this._elmSequenceNumber;
+
+                case "SECURITYERROR":
+                    if (this._isSecurityError) //this element doesn't exist if the security exists
+                        return this._elmSecError;
+                    else
+                        break;
             }
             return base.GetElement(name);
         }
@@ -92,7 +142,12 @@ namespace BEmu.HistoricalDataRequest
             result.AppendFormat("{0}{1} = {{{2}", tabs, this.Name, Environment.NewLine);
             result.Append(this._elmSecurityName.PrettyPrint(tabIndent + 1));
             result.Append(this._elmSequenceNumber.PrettyPrint(tabIndent + 1));
-            result.Append(this._elmFieldDataArray.PrettyPrint(tabIndent + 1));
+
+            if (this._isSecurityError)
+                result.Append(this._elmSecError.PrettyPrint(tabIndent + 1));
+            else
+                result.Append(this._elmFieldDataArray.PrettyPrint(tabIndent + 1));
+
             result.AppendFormat("{0}}}{1}", tabs, Environment.NewLine);
 
             return result;

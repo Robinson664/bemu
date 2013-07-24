@@ -54,6 +54,7 @@
     <Compile Include="HistoricalDataRequest\ElementHistoricFieldDataArray.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricInt.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricSecurityData.cs" />
+    <Compile Include="HistoricalDataRequest\ElementHistoricSecurityError.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricString.cs" />
     <Compile Include="HistoricalDataRequest\ElementReference.cs" />
     <Compile Include="HistoricalDataRequest\EventHistoric.cs" />

@@ -41,7 +41,7 @@ namespace BEmu.ReferenceDataRequest
             }
         }
 
-        public override int NumElements { get { return 3; } }
+        public override int NumElements { get { return this.Elements.Count(); } }
         public override int NumValues { get { return 0; } }
         public override Name Name { get { return new Name("securityData"); } }
 
@@ -126,7 +126,12 @@ namespace BEmu.ReferenceDataRequest
             result.AppendFormat("{0}{1} = {{{2}", tabs, this.Name, Environment.NewLine);
             result.Append(this._elmSecurityName.PrettyPrint(tabIndent + 1));
             result.Append(this._elmSequenceNumber.PrettyPrint(tabIndent + 1));
-            result.Append(this._elmFieldData.PrettyPrint(tabIndent + 1));
+
+            if (this._isSecurityError)
+                result.Append(this._elmSecError.PrettyPrint(tabIndent + 1));
+            else
+                result.Append(this._elmFieldData.PrettyPrint(tabIndent + 1));
+
             result.AppendFormat("{0}}}{1}", tabs, Environment.NewLine);
 
             return result;
