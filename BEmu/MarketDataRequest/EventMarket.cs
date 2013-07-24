@@ -40,8 +40,17 @@ namespace BEmu.MarketDataRequest
                     base._type = evtType;
                     foreach (var item in subscriptions)
                     {
-                        MessageMarketSubscriptionStarted msgSubStatus = new MessageMarketSubscriptionStarted(item);
-                        this._messages.Add(msgSubStatus);
+                        bool securityError = Types.Rules.IsSecurityError(item.Security);
+                        if (securityError)
+                        {
+                            MessageMarketSubscriptionFailure msgError = new MessageMarketSubscriptionFailure(item);
+                            this._messages.Add(msgError);
+                        }
+                        else
+                        {
+                            MessageMarketSubscriptionStarted msgSubStatus = new MessageMarketSubscriptionStarted(item);
+                            this._messages.Add(msgSubStatus);
+                        }
                     }
                     break;
 
@@ -49,8 +58,12 @@ namespace BEmu.MarketDataRequest
                     base._type = evtType;
                     foreach (var item in subscriptions)
                     {
-                        MessageMarketSubscriptionData msgSubData = new MessageMarketSubscriptionData(item, EventMarket.GenerateFakeMessageData(item));
-                        this._messages.Add(msgSubData);
+                        bool securityError = Types.Rules.IsSecurityError(item.Security);
+                        if (!securityError)
+                        {
+                            MessageMarketSubscriptionData msgSubData = new MessageMarketSubscriptionData(item, EventMarket.GenerateFakeMessageData(item));
+                            this._messages.Add(msgSubData);
+                        }
                     }
                     break;
 

@@ -104,6 +104,7 @@
     <Compile Include="MarketDataRequest\ElementMarketDatetime.cs" />
     <Compile Include="MarketDataRequest\ElementMarketInt.cs" />
     <Compile Include="MarketDataRequest\ElementMarketNull.cs" />
+    <Compile Include="MarketDataRequest\ElementMarketReason.cs" />
     <Compile Include="MarketDataRequest\ElementMarketServiceStatus.cs" />
     <Compile Include="MarketDataRequest\ElementMarketString.cs" />
     <Compile Include="MarketDataRequest\ElementMarketSubscriptionCanceled.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="MarketDataRequest\ElementMarketSubscriptionStarted.cs" />
     <Compile Include="MarketDataRequest\MessageMarketServiceStatus.cs" />
     <Compile Include="MarketDataRequest\MessageMarketSubscriptionCanceled.cs" />
+    <Compile Include="MarketDataRequest\MessageMarketSubscriptionFailure.cs" />
     <Compile Include="MarketDataRequest\MessageMarketSubscriptionStarted.cs" />
     <Compile Include="ReferenceDataRequest\ElementReference.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceArray.cs" />

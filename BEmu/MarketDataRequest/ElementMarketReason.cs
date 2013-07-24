@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="IntradayTickRequest/ElementIntradayTickSecurityError.cs" company="Jordan Robinson">
+// <copyright project="BEmu" file="MarketDataRequest/ElementMarketReason.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,50 +7,46 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace BEmu.IntradayTickRequest
+namespace BEmu.MarketDataRequest
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    internal class ElementIntradayTickResponseError : Element
+    internal class ElementMarketReason : Element
     {
-        private readonly ElementIntradayTickString _source, _category, _message, _subCategory;
-        private readonly ElementIntradayTickInt _code;
+        private readonly ElementMarketString _source, _category, _description;
+        private readonly ElementMarketInt _errorCode;
 
-        internal ElementIntradayTickResponseError()
+        public ElementMarketReason()
         {
             int code = Types.RandomDataGenerator.RandomInt(99);
             string sourceGibberish = Types.RandomDataGenerator.RandomString(5).ToLower();
 
-            this._source = new ElementIntradayTickString("source", string.Format("{0}::{1}{2}", code, sourceGibberish, Types.RandomDataGenerator.RandomInt(99)));
-            this._code = new ElementIntradayTickInt("code", code);
-            this._category = new ElementIntradayTickString("category", "BAD_SEC");
-            this._message = new ElementIntradayTickString("message", string.Format("Unknown/Invalid security [nid:{0}]", code));
-            this._subCategory = new ElementIntradayTickString("subcategory", "INVALID_SECURITY");
+            this._source = new ElementMarketString("source", string.Format("{0}{1}@{2}", Types.RandomDataGenerator.RandomString(5).ToLower(), Types.RandomDataGenerator.RandomInt(9), Types.RandomDataGenerator.RandomInt(99)));
+            this._errorCode = new ElementMarketInt("code", Types.RandomDataGenerator.RandomInt(99));
+            this._category = new ElementMarketString("category", "BAD_SEC");
+            this._description = new ElementMarketString("description", "Invalid security, rcode = -1");
         }
+
+        public override int NumElements { get { return 4; } }
+        public override int NumValues { get { return 1; } }
+        public override Name Name { get { return new Name("reason"); } }
+        public override bool IsArray { get { return false; } }
+        public override bool IsComplexType { get { return true; } }
+        public override bool IsNull { get { return false; } }
 
         public override IEnumerable<Element> Elements
         {
             get
             {
                 yield return this._source;
-                yield return this._code;
+                yield return this._errorCode;
                 yield return this._category;
-                yield return this._message;
-                yield return this._subCategory;
+                yield return this._description;
             }
         }
-
-        public override Name Name { get { return new Name("responseError"); } }
-        public override int NumValues { get { return 1; } }
-        public override int NumElements { get { return 5; } }
 
         public override string GetElementAsString(string name)
         {
@@ -75,30 +71,6 @@ namespace BEmu.IntradayTickRequest
         public override object GetValue(int index)
         {
             return null;
-        }
-
-        public override bool IsArray
-        {
-            get
-            {
-                return false;
-            }
-        }
-
-        public override bool IsComplexType
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public override bool IsNull
-        {
-            get
-            {
-                return false;
-            }
         }
 
         public override object this[int index]
@@ -149,7 +121,7 @@ namespace BEmu.IntradayTickRequest
             string tabs = Types.IndentType.Indent(tabIndent);
             StringBuilder result = new StringBuilder();
 
-            result.AppendFormat("{0}responseError = {{{1}", tabs, Environment.NewLine);
+            result.AppendFormat("{0}reason = {{{1}", tabs, Environment.NewLine);
             foreach (var item in this.Elements)
             {
                 result.Append(item.PrettyPrint(tabIndent + 1));

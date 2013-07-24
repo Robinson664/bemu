@@ -14,13 +14,13 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    ////un-comment the following two lines to use the Bloomberg API Emulator
-    //using BEmu;
-    //using EventHandler = BEmu.EventHandler; //this declaration specifies that EventHandler refers to BEmu.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+    //un-comment the following two lines to use the Bloomberg API Emulator
+    using BEmu;
+    using EventHandler = BEmu.EventHandler; //this declaration specifies that EventHandler refers to BEmu.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
 
-    //un-comment the following two lines to use the actual Bloomberg API
-    using Bloomberglp.Blpapi;
-    using EventHandler = Bloomberglp.Blpapi.EventHandler; //this declaration specifies that EventHandler refers to Bloomberglp.Blpapi.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+    ////un-comment the following two lines to use the actual Bloomberg API
+    //using Bloomberglp.Blpapi;
+    //using EventHandler = Bloomberglp.Blpapi.EventHandler; //this declaration specifies that EventHandler refers to Bloomberglp.Blpapi.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
 
     public static class MarketDataRequest
     {
@@ -65,7 +65,7 @@ namespace Examples
                     //  I have not coded that in the emulator.
                     List<string> options = new string[] { "interval=2" }.ToList(); //2 seconds.  //Comment this line to receive a subscription data event whenever it happens in the market.
 
-                    slist.Add(new Subscription("IBM US EQUITY", MarketDataRequest._fields, options));
+                    slist.Add(new Subscription("ZYZZ US EQUITY", MarketDataRequest._fields, options));
                     slist.Add(new Subscription("SPY US EQUITY", MarketDataRequest._fields, options));
                     slist.Add(new Subscription("AAPL 150117C00600000 EQUITY", MarketDataRequest._fields, options));
 
@@ -76,6 +76,13 @@ namespace Examples
                 case Event.EventType.RESPONSE:
                 case Event.EventType.PARTIAL_RESPONSE:
                     MarketDataRequest.ProcessEvent(evt);
+                    break;
+
+                case Event.EventType.SUBSCRIPTION_STATUS:
+                    foreach (var msg in evt.GetMessages())
+                    {
+                        string s = msg.ToString();
+                    }
                     break;
             }
         }

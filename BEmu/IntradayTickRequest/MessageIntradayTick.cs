@@ -28,11 +28,11 @@ namespace BEmu.IntradayTickRequest
             this._isResponseError = false;
         }
 
-        internal MessageIntradayTick(CorrelationID corr, Service service, string security) :
+        internal MessageIntradayTick(CorrelationID corr, Service service) :
             base(new Name("IntradayTickResponse"), corr, service)
         {
             this._parent = null;
-            this._responseError = new ElementIntradayTickResponseError(security);
+            this._responseError = new ElementIntradayTickResponseError();
             this._isResponseError = true;
         }
 

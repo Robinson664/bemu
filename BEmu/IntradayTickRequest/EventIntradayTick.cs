@@ -39,7 +39,7 @@ namespace BEmu.IntradayTickRequest
 
             if (isResponseError)
             {
-                MessageIntradayTick msg = new MessageIntradayTick(base._request.correlationId, ireq.Service, security);
+                MessageIntradayTick msg = new MessageIntradayTick(base._request.correlationId, ireq.Service);
                 result.Add(msg);
             }
             else
