@@ -17,19 +17,53 @@ namespace BEmu.IntradayBarRequest
     internal class MessageIntradayBar : Message
     {
         private readonly ElementBarData _parent;
+        private readonly ElementIntradayBarResponseError _responseError;
+        private readonly bool _isResponseError;
 
-        internal MessageIntradayBar(CorrelationID corr, IEnumerable<BarTickDataType> bars, Service service) :
+        /// <summary>
+        /// Use this for security errors
+        /// </summary>
+        /// <param name="corr"></param>
+        /// <param name="service"></param>
+        internal MessageIntradayBar(CorrelationID corr, Service service, string security) :
+            base(new Name("IntradayBarResponse"), corr, service)
+        {
+            this._responseError = new ElementIntradayBarResponseError(security);
+            this._parent = null;
+            this._isResponseError = true;
+        }
+
+        /// <summary>
+        /// Use this for regular securities (no security error)
+        /// </summary>
+        /// <param name="corr"></param>
+        /// <param name="bars"></param>
+        /// <param name="service"></param>
+        internal MessageIntradayBar(CorrelationID corr, Service service, IEnumerable<BarTickDataType> bars) :
             base(new Name("IntradayBarResponse"), corr, service)
         {
             this._parent = new ElementBarData(bars);
+            this._responseError = null;
+            this._isResponseError = false;
         }
 
-        public override IEnumerable<Element> Elements { get { yield return this._parent; } }
         public override object this[string name, int index] { get { return null; } }
         public override string TopicName { get { return ""; } }
         public override int NumElements { get { return 1; } }
 
         //public override Element AsElement { get { return new ElementReference(this); } }
+
+        public override IEnumerable<Element> Elements
+        {
+            get
+            {
+                if (this._isResponseError)
+                    yield return this._responseError;
+                else
+                    yield return this._parent;
+            }
+        }
+        
         
 
         public override string ToString()

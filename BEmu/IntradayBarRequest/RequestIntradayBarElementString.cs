@@ -27,17 +27,33 @@ namespace BEmu.IntradayBarRequest
         public override int NumElements { get { return 0; } }
         public override int NumValues { get { return 1; } }
         public override Name Name { get { return new Name(this._elementName); } }
+        public override bool IsArray { get { return false; } }
+        public override bool IsComplexType { get { return false; } }
 
         internal string Security { get { return this._value; } }
 
         internal override StringBuilder PrettyPrint(int tabIndent)
         {
-            string tabs = Types.IndentType.Indent(tabIndent);
-            StringBuilder result = new StringBuilder();
-
-            result.AppendFormat("{0}{1} = {2}{3}", tabs, this._elementName, this._value, Environment.NewLine);
-
-            return result;
+            return base.PrettyPrintHelper(tabIndent, this._value.ToString());
         }
+
+        public override object GetValue()
+        {
+            return this._value;
+        }
+
+        public override string GetValueAsString()
+        {
+            return this._value;
+        }
+
+        public override string GetValueAsString(int index)
+        {
+            if (index == 0)
+                return this._value;
+            else
+                return base.GetValueAsString(index);
+        }
+
     }
 }

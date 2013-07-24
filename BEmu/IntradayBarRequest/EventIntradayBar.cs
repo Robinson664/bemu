@@ -29,18 +29,28 @@ namespace BEmu.IntradayBarRequest
             List<Message> result = new List<Message>();
             var ireq = (RequestIntradayBar)base._request;
 
-            var barData = new List<BarTickDataType>();
-            if (ireq.DtStart.HasValue)
-            {
-                foreach (var dtCurrent in ireq.GetDateTimes())
-                {
-                    var value = Types.RandomDataGenerator.GenerateBarData(dtCurrent);
-                    barData.Add(value);
-                }
-            }
+            string security = ireq.Security;
+            bool securityError = security.StartsWith("Z", StringComparison.OrdinalIgnoreCase);
 
-            MessageIntradayBar msg = new MessageIntradayBar(base._request.correlationId, barData, ireq.Service);
-            result.Add(msg);
+            if (securityError)
+            {
+                MessageIntradayBar msg = new MessageIntradayBar(base._request.correlationId, ireq.Service, security);
+                result.Add(msg);
+            }
+            else
+            {
+                var barData = new List<BarTickDataType>();
+                if (ireq.DtStart.HasValue)
+                {
+                    foreach (var dtCurrent in ireq.GetDateTimes())
+                    {
+                        var value = Types.RandomDataGenerator.GenerateBarData(dtCurrent);
+                        barData.Add(value);
+                    }
+                }
+                MessageIntradayBar msg = new MessageIntradayBar(base._request.correlationId, ireq.Service, barData);
+                result.Add(msg);
+            }
 
             return result;
         }

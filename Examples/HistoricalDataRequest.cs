@@ -34,8 +34,8 @@ namespace Examples
             Request request = service.CreateRequest("HistoricalDataRequest");
 
             //request information for the following securities
+            request.Append("securities", "MSFT US EQUITY");
             request.Append("securities", "ZYZZ US EQUITY");
-            request.Append("securities", "SPY US EQUITY");
             request.Append("securities", "C A COMDTY");
             request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
 

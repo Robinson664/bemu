@@ -73,6 +73,8 @@
     <Compile Include="IntradayBarRequest\ElementIntradayBarDouble.cs" />
     <Compile Include="IntradayBarRequest\ElementIntradayBarInt.cs" />
     <Compile Include="IntradayBarRequest\ElementIntradayBarLong.cs" />
+    <Compile Include="IntradayBarRequest\ElementIntradayBarResponseError.cs" />
+    <Compile Include="IntradayBarRequest\ElementIntradayBarString.cs" />
     <Compile Include="IntradayBarRequest\EventIntradayBar.cs" />
     <Compile Include="IntradayBarRequest\MessageIntradayBar.cs" />
     <Compile Include="IntradayBarRequest\RequestIntradayBar.cs" />

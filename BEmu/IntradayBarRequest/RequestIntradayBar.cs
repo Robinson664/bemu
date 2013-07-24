@@ -33,6 +33,7 @@ namespace BEmu.IntradayBarRequest
 
         internal DateTime? DtStart { get { return this._dtStart.GetDate; } }
         internal DateTime? DtEnd { get { return this._dtEnd.GetDate; } }
+        internal string Security { get { return this._security.GetValueAsString(); } }
 
         internal IEnumerable<DateTime> GetDateTimes()
         {

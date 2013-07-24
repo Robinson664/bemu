@@ -14,8 +14,8 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    //using BEmu; //un-comment this line to use the Bloomberg API Emulator
-    using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+    using BEmu; //un-comment this line to use the Bloomberg API Emulator
+    //using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
 
     public static class IntradayBarDataRequest
     {
@@ -31,7 +31,7 @@ namespace Examples
                 Service service = session.GetService("//blp/refdata");
                 Request request = service.CreateRequest("IntradayBarRequest");
 
-                string security = "SPY US EQUITY";
+                string security = "ZYZZ US EQUITY";
                 request.Set("security", security); //required
 
                 request.Set("eventType", "TRADE"); //optional: TRADE(default), BID, ASK, BID_BEST, ASK_BEST, BEST_BID, BEST_ASK, BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, SETTLE
@@ -99,33 +99,54 @@ namespace Examples
 
             foreach (var msg in evt.GetMessages())
             {
-                Element elmBarTickDataArray = msg["barData"]["barTickData"];
-                for (int valueIndex = 0; valueIndex < elmBarTickDataArray.NumValues; valueIndex++)
+                bool isSecurityError = msg.HasElement("responseError", true);
+
+                if (isSecurityError)
                 {
-                    Element elmBarTickData = elmBarTickDataArray.GetValueAsElement(valueIndex);
+                    Element secError = msg["responseError"];
+                    string source = secError.GetElementAsString("source");
+                    int code = secError.GetElementAsInt32("code");
+                    string category = secError.GetElementAsString("category");
+                    string errorMessage = secError.GetElementAsString("message");
+                    string subCategory = secError.GetElementAsString("subcategory");
 
-                    DateTime dtTick = elmBarTickData.GetElementAsDatetime("time").ToSystemDateTime();
+                    Console.WriteLine("response error");
+                    Console.WriteLine(string.Format("source = {0}", source));
+                    Console.WriteLine(string.Format("code = {0}", code));
+                    Console.WriteLine(string.Format("category = {0}", category));
+                    Console.WriteLine(string.Format("errorMessage = {0}", errorMessage));
+                    Console.WriteLine(string.Format("subCategory = {0}", subCategory));
+                }
+                else
+                {
+                    Element elmBarTickDataArray = msg["barData"]["barTickData"];
+                    for (int valueIndex = 0; valueIndex < elmBarTickDataArray.NumValues; valueIndex++)
+                    {
+                        Element elmBarTickData = elmBarTickDataArray.GetValueAsElement(valueIndex);
 
-                    double open = elmBarTickData.GetElementAsFloat64("open");
-                    double high = elmBarTickData.GetElementAsFloat64("high");
-                    double low = elmBarTickData.GetElementAsFloat64("low");
-                    double close = elmBarTickData.GetElementAsFloat64("close");
+                        DateTime dtTick = elmBarTickData.GetElementAsDatetime("time").ToSystemDateTime();
 
-                    int numEvents = elmBarTickData.GetElementAsInt32("numEvents");
-                    long volume = elmBarTickData.GetElementAsInt64("volume");
-                    double value = elmBarTickData.GetElementAsFloat64("value");
+                        double open = elmBarTickData.GetElementAsFloat64("open");
+                        double high = elmBarTickData.GetElementAsFloat64("high");
+                        double low = elmBarTickData.GetElementAsFloat64("low");
+                        double close = elmBarTickData.GetElementAsFloat64("close");
 
-                    Console.WriteLine(dtTick.ToString("HH:mm:ss"));
-                    Console.WriteLine(string.Format("\t open = {0:c2}", open));
-                    Console.WriteLine(string.Format("\t high = {0:c2}", high));
-                    Console.WriteLine(string.Format("\t low = {0:c2}", low));
-                    Console.WriteLine(string.Format("\t close = {0:c2}", close));
+                        int numEvents = elmBarTickData.GetElementAsInt32("numEvents");
+                        long volume = elmBarTickData.GetElementAsInt64("volume");
+                        double value = elmBarTickData.GetElementAsFloat64("value");
 
-                    Console.WriteLine(string.Format("\t numEvents = {0:n0}", numEvents));
-                    Console.WriteLine(string.Format("\t volume = {0:n0}", volume));
-                    Console.WriteLine(string.Format("\t value = {0:n0}", value));
+                        Console.WriteLine(dtTick.ToString("HH:mm:ss"));
+                        Console.WriteLine(string.Format("\t open = {0:c2}", open));
+                        Console.WriteLine(string.Format("\t high = {0:c2}", high));
+                        Console.WriteLine(string.Format("\t low = {0:c2}", low));
+                        Console.WriteLine(string.Format("\t close = {0:c2}", close));
 
-                    Console.WriteLine();
+                        Console.WriteLine(string.Format("\t numEvents = {0:n0}", numEvents));
+                        Console.WriteLine(string.Format("\t volume = {0:n0}", volume));
+                        Console.WriteLine(string.Format("\t value = {0:n0}", value));
+
+                        Console.WriteLine();
+                    }
                 }
             }
         }
