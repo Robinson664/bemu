@@ -17,26 +17,51 @@ namespace BEmu.IntradayTickRequest
     internal class MessageIntradayTick : Message
     {
         private readonly ElementIntradayTickDataParent _parent;
+        private readonly ElementIntradayTickResponseError _responseError;
+        private readonly bool _isResponseError;
 
-        internal MessageIntradayTick(CorrelationID corr, Dictionary<DateTime, Tuple<string, double, int>> ticks, bool includeConditionCodes, Service service) :
+        internal MessageIntradayTick(CorrelationID corr, Service service, Dictionary<DateTime, Tuple<string, double, int>> ticks, bool includeConditionCodes) :
             base(new Name("IntradayTickResponse"), corr, service)
         {
             this._parent = new ElementIntradayTickDataParent(ticks, includeConditionCodes);
+            this._responseError = null;
+            this._isResponseError = false;
         }
 
-        public override IEnumerable<Element> Elements { get { yield return this._parent; } }
+        internal MessageIntradayTick(CorrelationID corr, Service service, string security) :
+            base(new Name("IntradayTickResponse"), corr, service)
+        {
+            this._parent = null;
+            this._responseError = new ElementIntradayTickResponseError(security);
+            this._isResponseError = true;
+        }
+
         public override object this[string name, int index] { get { return null; } }
         public override string TopicName { get { return ""; } }
         public override int NumElements { get { return 1; } }
-
         public override Element AsElement { get { return new ElementReference(this); } }
-        
+
+        public override IEnumerable<Element> Elements
+        {
+            get
+            {
+                if (this._isResponseError)
+                    yield return this._responseError;
+                else
+                    yield return this._parent;
+            }
+        }
 
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();
             result.Append("IntradayTickResponse (choice) = {" + Environment.NewLine);
-            result.Append(this._parent.PrettyPrint(1));
+
+            foreach (var item in this.Elements)
+            {
+                result.Append(item.PrettyPrint(1));
+            }
+
             result.Append("}");
 
             return result.ToString();

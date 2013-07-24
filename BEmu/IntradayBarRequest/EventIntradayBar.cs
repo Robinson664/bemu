@@ -30,7 +30,7 @@ namespace BEmu.IntradayBarRequest
             var ireq = (RequestIntradayBar)base._request;
 
             string security = ireq.Security;
-            bool securityError = security.StartsWith("Z", StringComparison.OrdinalIgnoreCase);
+            bool securityError = Types.Rules.IsSecurityError(security);
 
             if (securityError)
             {

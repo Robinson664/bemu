@@ -34,22 +34,33 @@ namespace BEmu.IntradayTickRequest
             List<Message> result = new List<Message>();
             var ireq = (RequestIntradayTick)base._request;
 
-            var tickData = new Dictionary<DateTime, Tuple<string, double, int>>();
+            string security = ireq.Security;
+            bool isResponseError = Types.Rules.IsSecurityError(security);
 
-            if (ireq.DtStart.HasValue)
+            if (isResponseError)
             {
-                foreach (var dtCurrent in ireq.GetDates())
+                MessageIntradayTick msg = new MessageIntradayTick(base._request.correlationId, ireq.Service, security);
+                result.Add(msg);
+            }
+            else
+            {
+                var tickData = new Dictionary<DateTime, Tuple<string, double, int>>();
+
+                if (ireq.DtStart.HasValue)
                 {
-                    if ((dtCurrent.DayOfWeek != DayOfWeek.Sunday) && (dtCurrent.DayOfWeek != DayOfWeek.Saturday))
+                    foreach (var dtCurrent in ireq.GetDates())
                     {
-                        var value = new Tuple<string, double, int>("TRADE", Types.RandomDataGenerator.RandomDouble(), Types.RandomDataGenerator.IntradayTickTradeSize());
-                        tickData.Add(dtCurrent, value);
+                        if ((dtCurrent.DayOfWeek != DayOfWeek.Sunday) && (dtCurrent.DayOfWeek != DayOfWeek.Saturday))
+                        {
+                            var value = new Tuple<string, double, int>("TRADE", Types.RandomDataGenerator.RandomDouble(), Types.RandomDataGenerator.IntradayTickTradeSize());
+                            tickData.Add(dtCurrent, value);
+                        }
                     }
                 }
-            }
 
-            MessageIntradayTick msg = new MessageIntradayTick(base._request.correlationId, tickData, ireq.IncludeConditionCodes, ireq.Service);
-            result.Add(msg);
+                MessageIntradayTick msg = new MessageIntradayTick(base._request.correlationId, ireq.Service, tickData, ireq.IncludeConditionCodes);
+                result.Add(msg);
+            }
 
             return result;
         }

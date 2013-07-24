@@ -24,7 +24,7 @@ namespace BEmu.ReferenceDataRequest
 
         internal ElementReferenceSecurityData(string securityName, Dictionary<string, object> fieldData, int sequenceNumber)
         {
-            this._isSecurityError = securityName.StartsWith("Z", StringComparison.OrdinalIgnoreCase);
+            this._isSecurityError = Types.Rules.IsSecurityError(securityName);
 
             this._elmSecurityName = new ElementReferenceString("security", securityName);
             if (this._isSecurityError)

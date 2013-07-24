@@ -63,14 +63,17 @@ namespace BEmu.IntradayBarRequest
                     yield return this._parent;
             }
         }
-        
-        
 
         public override string ToString()
         {
             StringBuilder result = new StringBuilder();
             result.Append("IntradayBarResponse (choice) = {" + Environment.NewLine);
-            result.Append(this._parent.PrettyPrint(1));
+
+            foreach (var item in this.Elements)
+            {
+                result.Append(item.PrettyPrint(1));
+            }
+
             result.Append("}");
 
             return result.ToString();

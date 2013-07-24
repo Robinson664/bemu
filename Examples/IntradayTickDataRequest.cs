@@ -116,20 +116,42 @@ namespace Examples
 
             foreach (var msg in evt.GetMessages())
             {
-                Element elmTickDataArr = msg["tickData"];
-                Element elmTickData = elmTickDataArr["tickData"];
+                bool isSecurityError = msg.HasElement("responseError", true);
 
-                for (int valueCount = 0; valueCount < elmTickData.NumValues; valueCount++)
+                if (isSecurityError)
                 {
-                    Element elmTickDataValue = elmTickData.GetValueAsElement(valueCount);
+                    Element secError = msg["responseError"];
+                    string source = secError.GetElementAsString("source");
+                    int code = secError.GetElementAsInt32("code");
+                    string category = secError.GetElementAsString("category");
+                    string errorMessage = secError.GetElementAsString("message");
+                    string subCategory = secError.GetElementAsString("subcategory");
 
-                    DateTime time = elmTickDataValue.GetElementAsTime("time").ToSystemDateTime();
-                    string type = elmTickDataValue.GetElementAsString("type");
-                    double value = elmTickDataValue.GetElementAsFloat64("value");
-                    int size = elmTickDataValue.GetElementAsInt32("size");
-
-                    Console.WriteLine(string.Format("{0:HH:mm:ss}: {1}, {2} @ {3}", time, type, size, value));
+                    Console.WriteLine("response error");
+                    Console.WriteLine(string.Format("source = {0}", source));
+                    Console.WriteLine(string.Format("code = {0}", code));
+                    Console.WriteLine(string.Format("category = {0}", category));
+                    Console.WriteLine(string.Format("errorMessage = {0}", errorMessage));
+                    Console.WriteLine(string.Format("subCategory = {0}", subCategory));
                 }
+                else
+                {
+                    Element elmTickDataArr = msg["tickData"];
+                    Element elmTickData = elmTickDataArr["tickData"];
+
+                    for (int valueCount = 0; valueCount < elmTickData.NumValues; valueCount++)
+                    {
+                        Element elmTickDataValue = elmTickData.GetValueAsElement(valueCount);
+
+                        DateTime time = elmTickDataValue.GetElementAsTime("time").ToSystemDateTime();
+                        string type = elmTickDataValue.GetElementAsString("type");
+                        double value = elmTickDataValue.GetElementAsFloat64("value");
+                        int size = elmTickDataValue.GetElementAsInt32("size");
+
+                        Console.WriteLine(string.Format("{0:HH:mm:ss}: {1}, {2} @ {3}", time, type, size, value));
+                    }
+                }
+
             }
         }
 

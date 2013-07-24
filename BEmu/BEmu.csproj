@@ -89,6 +89,7 @@
     <Compile Include="IntradayTickRequest\ElementIntradayTickData.cs" />
     <Compile Include="IntradayTickRequest\ElementIntradayTickDataArray.cs" />
     <Compile Include="IntradayTickRequest\ElementIntradayTickInt.cs" />
+    <Compile Include="IntradayTickRequest\ElementIntradayTickResponseError.cs" />
     <Compile Include="IntradayTickRequest\ElementIntradayTickString.cs" />
     <Compile Include="IntradayTickRequest\ElementReference.cs" />
     <Compile Include="IntradayTickRequest\EventIntradayTick.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="BloombergTypes\SessionOptions.cs" />
     <Compile Include="BloombergTypes\Subscription.cs" />
     <Compile Include="Types\RandomDataGenerator.cs" />
+    <Compile Include="Types\Rules.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

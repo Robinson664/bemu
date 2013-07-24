@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="IntradayBarRequest/ElementIntradayBarSecurityError.cs" company="Jordan Robinson">
+// <copyright project="BEmu" file="IntradayTickRequest/ElementIntradayTickSecurityError.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,28 +7,33 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace BEmu.IntradayBarRequest
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace BEmu.IntradayTickRequest
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
 
-    internal class ElementIntradayBarResponseError : Element
+    internal class ElementIntradayTickResponseError : Element
     {
-        private readonly ElementIntradayBarString _source, _category, _message, _subCategory;
-        private readonly ElementIntradayBarInt _code;
+        private readonly ElementIntradayTickString _source, _category, _message, _subCategory;
+        private readonly ElementIntradayTickInt _code;
 
-        internal ElementIntradayBarResponseError(string security)
+        internal ElementIntradayTickResponseError(string security)
         {
             int code = Types.RandomDataGenerator.RandomInt(99);
             string sourceGibberish = Types.RandomDataGenerator.RandomString(5).ToLower();
 
-            this._source = new ElementIntradayBarString("source", string.Format("{0}::{1}{2}", code, sourceGibberish, Types.RandomDataGenerator.RandomInt(99)));
-            this._code = new ElementIntradayBarInt("code", code);
-            this._category = new ElementIntradayBarString("category", "BAD_SEC");
-            this._message = new ElementIntradayBarString("message", string.Format("Unknown/Invalid security [nid:{0}]", code));
-            this._subCategory = new ElementIntradayBarString("subcategory", "INVALID_SECURITY");
+            this._source = new ElementIntradayTickString("source", string.Format("{0}::{1}{2}", code, sourceGibberish, Types.RandomDataGenerator.RandomInt(99)));
+            this._code = new ElementIntradayTickInt("code", code);
+            this._category = new ElementIntradayTickString("category", "BAD_SEC");
+            this._message = new ElementIntradayTickString("message", string.Format("Unknown/Invalid security [nid:{0}]", code));
+            this._subCategory = new ElementIntradayTickString("subcategory", "INVALID_SECURITY");
         }
 
         public override IEnumerable<Element> Elements
@@ -152,7 +157,6 @@ namespace BEmu.IntradayBarRequest
             result.AppendFormat("{0}}}{1}", tabs, Environment.NewLine);
             return result;
         }
-
 
     }
 }

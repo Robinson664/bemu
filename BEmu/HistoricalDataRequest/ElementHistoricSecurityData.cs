@@ -24,7 +24,7 @@ namespace BEmu.HistoricalDataRequest
 
         internal ElementHistoricSecurityData(string securityName, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
         {
-            this._isSecurityError = securityName.StartsWith("Z", StringComparison.OrdinalIgnoreCase);
+            this._isSecurityError = Types.Rules.IsSecurityError(securityName);
 
             this._elmSecurityName = new ElementHistoricString("security", securityName);
             this._elmSequenceNumber = new ElementHistoricInt("sequenceNumber", sequenceNumber);
