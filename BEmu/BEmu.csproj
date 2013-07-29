@@ -114,11 +114,14 @@
     <Compile Include="MarketDataRequest\MessageMarketSubscriptionCanceled.cs" />
     <Compile Include="MarketDataRequest\MessageMarketSubscriptionFailure.cs" />
     <Compile Include="MarketDataRequest\MessageMarketSubscriptionStarted.cs" />
+    <Compile Include="ReferenceDataRequest\ElementReferenceErrorInfo.cs" />
+    <Compile Include="ReferenceDataRequest\ElementReferenceFieldExceptions.cs" />
     <Compile Include="ReferenceDataRequest\ElementReference.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceArray.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceArrayChainTickers.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceArrayChainTickersItem.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceDateTime.cs" />
+    <Compile Include="ReferenceDataRequest\ElementReferenceFieldExceptionsArray.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceObject.cs" />
     <Compile Include="ReferenceDataRequest\ElementReferenceSecurityError.cs" />
     <Compile Include="ReferenceDataRequest\RequestReferenceElementOverride.cs" />

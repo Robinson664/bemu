@@ -11,5 +11,10 @@ namespace BEmu.Types
         {
             return security == null || security.StartsWith("Z", StringComparison.OrdinalIgnoreCase);
         }
+
+        public static bool IsBadField(string field)
+        {
+            return field == null || field.StartsWith("Z", StringComparison.OrdinalIgnoreCase);
+        }
     }
 }

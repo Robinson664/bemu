@@ -19,12 +19,33 @@ namespace BEmu.ReferenceDataRequest
         private readonly ElementReferenceString _elmSecurityName;
         private readonly ElementReferenceInt _elmSequenceNumber;
         private readonly ElementReferenceFieldData _elmFieldData;
+        private readonly ElementReferenceFieldExceptionsArray _elmFieldExceptions;
         private readonly ElementReferenceSecurityError _elmSecError;
         private bool _isSecurityError;
 
         internal ElementReferenceSecurityData(string securityName, Dictionary<string, object> fieldData, int sequenceNumber)
         {
             this._isSecurityError = Types.Rules.IsSecurityError(securityName);
+
+            { //find bad field names
+                List<string> badFields = new List<string>();
+                foreach (var item in fieldData)
+                {
+                    if (Types.Rules.IsBadField(item.Key))
+                        badFields.Add(item.Key);
+                }
+
+                //remove bad field names from the dictionary
+                foreach (var item in badFields)
+                {
+                    fieldData.Remove(item);
+                }
+
+                if (badFields.Count == 0)
+                    this._elmFieldExceptions = null;
+                else
+                    this._elmFieldExceptions = new ElementReferenceFieldExceptionsArray(badFields);
+            }
 
             this._elmSecurityName = new ElementReferenceString("security", securityName);
             if (this._isSecurityError)
@@ -50,8 +71,13 @@ namespace BEmu.ReferenceDataRequest
             get
             {
                 yield return this._elmSecurityName;
+
+                if (this._elmFieldExceptions != null)
+                    yield return this._elmFieldExceptions;
+
                 if (this._isSecurityError)
                     yield return this._elmSecError;
+
                 yield return this._elmSequenceNumber;
                 yield return this._elmFieldData; 
             }
@@ -84,6 +110,8 @@ namespace BEmu.ReferenceDataRequest
                         return this._elmSecurityName;
                     case "SEQUENCENUMBER":
                         return this._elmSequenceNumber;
+                    case "FIELDEXCEPTIONS":
+                        return this._elmFieldExceptions;
                     case "SECURITYERROR":
                         if (this._isSecurityError) //this element doesn't exist if the security exists
                             return this._elmSecError;
@@ -125,6 +153,10 @@ namespace BEmu.ReferenceDataRequest
 
             result.AppendFormat("{0}{1} = {{{2}", tabs, this.Name, Environment.NewLine);
             result.Append(this._elmSecurityName.PrettyPrint(tabIndent + 1));
+
+            if(this._elmFieldExceptions != null)
+                result.Append(this._elmFieldExceptions.PrettyPrint(tabIndent + 1));
+
             result.Append(this._elmSequenceNumber.PrettyPrint(tabIndent + 1));
 
             if (this._isSecurityError)

@@ -38,10 +38,10 @@ namespace Examples
             //request information for the following securities
             request.Append("securities", "SPY US EQUITY");
             request.Append("securities", "MSFT US EQUITY");
-            request.Append("securities", "ZYZZ US EQUITY");
             request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
 
             //include the following simple fields in the result
+            request.Append("fields", "ZPX_LAST");
             request.Append("fields", "PX_LAST");
             request.Append("fields", "BID");
             request.Append("fields", "ASK");
@@ -92,9 +92,13 @@ namespace Examples
 
         private static void handleResponseEvent(Event eventObj)
         {
-            System.Console.WriteLine("EventType =" + eventObj.Type);
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("EventType =" + eventObj.Type);
             foreach (Message message in eventObj.GetMessages())
             {
+                Console.WriteLine();
+                Console.WriteLine();
                 Console.WriteLine("correlationID=" + message.CorrelationID);
                 Console.WriteLine("messageType =" + message.MessageType);
 
@@ -105,9 +109,35 @@ namespace Examples
                     Element elmSecurityData = elmSecurityDataArray.GetValueAsElement(valueIndex);
 
                     string security = elmSecurityData.GetElementAsString("security");
-                    Console.WriteLine();
-                    Console.WriteLine();
                     Console.WriteLine(security);
+
+                    bool hasFieldErrors = elmSecurityData.HasElement("fieldExceptions", true);
+                    if (hasFieldErrors)
+                    {
+                        Element elmFieldErrors = elmSecurityData["fieldExceptions"];
+                        for (int errorIndex = 0; errorIndex < elmFieldErrors.NumValues; errorIndex++)
+                        {
+                            Element fieldError = elmFieldErrors.GetValueAsElement(errorIndex);
+                            string fieldId = fieldError.GetElementAsString("fieldId");
+
+                            Element errorInfo = fieldError["errorInfo"];
+                            string source = errorInfo.GetElementAsString("source");
+                            int code = errorInfo.GetElementAsInt32("code");
+                            string category = errorInfo.GetElementAsString("category");
+                            string strMessage = errorInfo.GetElementAsString("message");
+                            string subCategory = errorInfo.GetElementAsString("subcategory");
+
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine("\tfield error");
+                            Console.WriteLine(string.Format("\tfieldId = {0}", fieldId));
+                            Console.WriteLine(string.Format("\tsource = {0}", source));
+                            Console.WriteLine(string.Format("\tcode = {0}", code));
+                            Console.WriteLine(string.Format("\tcategory = {0}", category));
+                            Console.WriteLine(string.Format("\terrorMessage = {0}", strMessage));
+                            Console.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
+                        }
+                    }
 
                     bool isSecurityError = elmSecurityData.HasElement("securityError", true);
                     if (isSecurityError)
@@ -119,12 +149,14 @@ namespace Examples
                         string errorMessage = secError.GetElementAsString("message");
                         string subCategory = secError.GetElementAsString("subcategory");
 
-                        Console.WriteLine("security error");
-                        Console.WriteLine(string.Format("source = {0}", source));
-                        Console.WriteLine(string.Format("code = {0}", code));
-                        Console.WriteLine(string.Format("category = {0}", category));
-                        Console.WriteLine(string.Format("errorMessage = {0}", errorMessage));
-                        Console.WriteLine(string.Format("subCategory = {0}", subCategory));
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("\tsecurity error");
+                        Console.WriteLine(string.Format("\tsource = {0}", source));
+                        Console.WriteLine(string.Format("\tcode = {0}", code));
+                        Console.WriteLine(string.Format("\tcategory = {0}", category));
+                        Console.WriteLine(string.Format("\terrorMessage = {0}", errorMessage));
+                        Console.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
                     }
                     else
                     {
@@ -135,10 +167,12 @@ namespace Examples
                         double ask = elmFieldData.GetElementAsFloat64("ASK");
                         string ticker = elmFieldData.GetElementAsString("TICKER");
 
-                        Console.WriteLine("PX_LAST = " + pxLast.ToString());
-                        Console.WriteLine("BID = " + bid.ToString());
-                        Console.WriteLine("ASK = " + ask.ToString());
-                        Console.WriteLine("TICKER = " + ticker.ToString());
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("\tPX_LAST = " + pxLast.ToString());
+                        Console.WriteLine("\tBID = " + bid.ToString());
+                        Console.WriteLine("\tASK = " + ask.ToString());
+                        Console.WriteLine("\tTICKER = " + ticker.ToString());
 
                         bool excludeNullElements = true;
                         if (elmFieldData.HasElement("CHAIN_TICKERS", excludeNullElements)) //be careful, excludeNullElements is false by default
@@ -149,12 +183,12 @@ namespace Examples
                                 Element chainTicker = chainTickers.GetValueAsElement(chainTickerValueIndex);
                                 string strChainTicker = chainTicker.GetElementAsString("Ticker");
 
-                                Console.WriteLine("CHAIN_TICKER = " + strChainTicker.ToString());
+                                Console.WriteLine("\tCHAIN_TICKER = " + strChainTicker.ToString());
                             }
                         }
                         else
                         {
-                            Console.WriteLine("No CHAIN_TICKER information");
+                            Console.WriteLine("\tNo CHAIN_TICKER information");
                         }
                     }
 

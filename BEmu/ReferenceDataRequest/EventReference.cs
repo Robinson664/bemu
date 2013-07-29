@@ -45,6 +45,7 @@ namespace BEmu.ReferenceDataRequest
                     var fieldData = new Dictionary<string, object>();
                     securities.Add(security, fieldData);
 
+                    List<string> badFields = new List<string>();
                     foreach (var field in rreq.Fields)
                     {
                         object value = Types.RandomDataGenerator.ReferenceDataFromFieldName(field, security, isOption, rreq);
