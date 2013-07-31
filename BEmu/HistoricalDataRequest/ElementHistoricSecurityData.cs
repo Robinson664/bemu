@@ -19,12 +19,19 @@ namespace BEmu.HistoricalDataRequest
         private readonly ElementHistoricString _elmSecurityName;
         private readonly ElementHistoricFieldDataArray _elmFieldDataArray;
         private readonly ElementHistoricInt _elmSequenceNumber;
+        private readonly ElementHistoricFieldExceptionsArray _elmFieldExceptions;
         private readonly ElementHistoricSecurityError _elmSecError;
         private bool _isSecurityError;
 
-        internal ElementHistoricSecurityData(string securityName, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
+        internal ElementHistoricSecurityData(string securityName, List<string> badFields, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
         {
             this._isSecurityError = Types.Rules.IsSecurityError(securityName);
+
+            //remove bad field names from the dictionary
+            if (badFields.Count == 0)
+                this._elmFieldExceptions = null;
+            else
+                this._elmFieldExceptions = new ElementHistoricFieldExceptionsArray(badFields);
 
             this._elmSecurityName = new ElementHistoricString("security", securityName);
             this._elmSequenceNumber = new ElementHistoricInt("sequenceNumber", sequenceNumber);
@@ -52,12 +59,13 @@ namespace BEmu.HistoricalDataRequest
             get
             {
                 yield return this._elmSecurityName;
-
                 yield return this._elmSequenceNumber;
+
+                if (this._elmFieldExceptions != null)
+                    yield return this._elmFieldExceptions;
 
                 if (this._isSecurityError)
                     yield return this._elmSecError;
-
                 else
                     yield return this._elmFieldDataArray;
             }
@@ -107,6 +115,9 @@ namespace BEmu.HistoricalDataRequest
                 case "SEQUENCENUMBER":
                     return this._elmSequenceNumber;
 
+                case "FIELDEXCEPTIONS":
+                    return this._elmFieldExceptions;
+
                 case "SECURITYERROR":
                     if (this._isSecurityError) //this element doesn't exist if the security exists
                         return this._elmSecError;
@@ -140,8 +151,12 @@ namespace BEmu.HistoricalDataRequest
             StringBuilder result = new StringBuilder();
 
             result.AppendFormat("{0}{1} = {{{2}", tabs, this.Name, Environment.NewLine);
+
             result.Append(this._elmSecurityName.PrettyPrint(tabIndent + 1));
             result.Append(this._elmSequenceNumber.PrettyPrint(tabIndent + 1));
+
+            if (this._elmFieldExceptions != null)
+                result.Append(this._elmFieldExceptions.PrettyPrint(tabIndent + 1));
 
             if (this._isSecurityError)
                 result.Append(this._elmSecError.PrettyPrint(tabIndent + 1));

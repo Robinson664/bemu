@@ -33,11 +33,20 @@ namespace BEmu.HistoricalDataRequest
         {
             List<Message> result = new List<Message>();
             var hreq = (RequestHistoric)base._request;
-            
+
+            var badFields = new List<string>();
+            for (int i = hreq.Fields.Count - 1; i >= 0; i--)
+            {
+                if (Types.Rules.IsBadField(hreq.Fields[i]))
+                {
+                    badFields.Add(hreq.Fields[i]);
+                    hreq.Fields.RemoveAt(i);
+                }
+            }
+
             foreach (var security in hreq.Securities)
             {
                 var fieldData = new Dictionary<DateTime, Dictionary<string, object>>();
-
                 if (hreq.DtStart.HasValue)
                 {
                     foreach (var dtCurrent in hreq.GetDates())
@@ -55,7 +64,7 @@ namespace BEmu.HistoricalDataRequest
                     }
                 }
 
-                MessageHistoric msg = new MessageHistoric(base._request.correlationId, security, fieldData, result.Count);
+                MessageHistoric msg = new MessageHistoric(base._request.correlationId, security, badFields, fieldData, result.Count);
                 result.Add(msg);
             }
 

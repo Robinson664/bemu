@@ -35,11 +35,12 @@ namespace Examples
 
             //request information for the following securities
             request.Append("securities", "MSFT US EQUITY");
-            request.Append("securities", "ZYZZ US EQUITY");
+            //request.Append("securities", "ZYZZ US EQUITY");
             request.Append("securities", "C A COMDTY");
             request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
 
             //include the following simple fields in the result
+            request.Append("fields", "ZBID");
             request.Append("fields", "BID");
             request.Append("fields", "ASK");
 
@@ -128,6 +129,34 @@ namespace Examples
                 }
                 else
                 {
+                    bool hasFieldErrors = elmSecurityData.HasElement("fieldExceptions", true);
+                    if (hasFieldErrors)
+                    {
+                        Element elmFieldErrors = elmSecurityData["fieldExceptions"];
+                        for (int errorIndex = 0; errorIndex < elmFieldErrors.NumValues; errorIndex++)
+                        {
+                            Element fieldError = elmFieldErrors.GetValueAsElement(errorIndex);
+                            string fieldId = fieldError.GetElementAsString("fieldId");
+
+                            Element errorInfo = fieldError["errorInfo"];
+                            string source = errorInfo.GetElementAsString("source");
+                            int code = errorInfo.GetElementAsInt32("code");
+                            string category = errorInfo.GetElementAsString("category");
+                            string strMessage = errorInfo.GetElementAsString("message");
+                            string subCategory = errorInfo.GetElementAsString("subcategory");
+
+                            Console.WriteLine();
+                            Console.WriteLine();
+                            Console.WriteLine("field error: ");
+                            Console.WriteLine(string.Format("\tfieldId = {0}", fieldId));
+                            Console.WriteLine(string.Format("\tsource = {0}", source));
+                            Console.WriteLine(string.Format("\tcode = {0}", code));
+                            Console.WriteLine(string.Format("\tcategory = {0}", category));
+                            Console.WriteLine(string.Format("\terrorMessage = {0}", strMessage));
+                            Console.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
+                        }
+                    }
+
                     Element elmFieldData = elmSecurityData["fieldData"];
                     for (int valueIndex = 0; valueIndex < elmFieldData.NumValues; valueIndex++)
                     {

@@ -18,10 +18,10 @@ namespace BEmu.HistoricalDataRequest
     {
         private readonly ElementHistoricSecurityData _security;
 
-        internal MessageHistoric(CorrelationID corr, string securityName, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
+        internal MessageHistoric(CorrelationID corr, string securityName, List<string> badFields, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
             : base(new Name("HistoricalDataResponse"), corr, null)
         {
-            this._security = new ElementHistoricSecurityData(securityName, fieldData, sequenceNumber);
+            this._security = new ElementHistoricSecurityData(securityName, badFields, fieldData, sequenceNumber);
         }
 
         public override IEnumerable<Element> Elements { get { yield return this._security; } }

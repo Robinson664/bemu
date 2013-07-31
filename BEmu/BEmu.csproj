@@ -50,8 +50,11 @@
     <Compile Include="BloombergTypes\EventHandler.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricDateTime.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricDouble.cs" />
+    <Compile Include="HistoricalDataRequest\ElementHistoricErrorInfo.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricFieldData.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricFieldDataArray.cs" />
+    <Compile Include="HistoricalDataRequest\ElementHistoricFieldExceptions.cs" />
+    <Compile Include="HistoricalDataRequest\ElementHistoricFieldExceptionsArray.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricInt.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricSecurityData.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricSecurityError.cs" />
