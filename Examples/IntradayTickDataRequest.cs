@@ -37,6 +37,7 @@ namespace Examples
             Request request = refDataService.CreateRequest("IntradayTickRequest");
 
             string security = "SPY US Equity";
+            //security = "ZYZZ US EQUITY";  //the code treats securities that start with a "Z" as non-existent
             request.Set("security", security);
 
             request.Append("eventTypes", "TRADE"); //One of TRADE (default), BID, ASK, BID_BEST, ASK_BEST, MID_PRICE, AT_TRADE, BEST_BID, BEST_ASK (see documentation A.2.6 for explanations)

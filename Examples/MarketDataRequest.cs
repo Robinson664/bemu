@@ -34,7 +34,7 @@ namespace Examples
             session.StartAsync();
         }
 
-        private static List<string> _fields = new string[] { "BID", "ZASK", "LAST" }.ToList();
+        private static List<string> _fields = new string[] { "BID", "ASK"/*, "ZBID"*/ }.ToList(); //the code treats a field that starts with a "Z" as a bad field
 
         private static void ProcessEvent(Event evt, Session session)
         {
@@ -65,7 +65,7 @@ namespace Examples
                     //  I have not coded that in the emulator.
                     List<string> options = new string[] { "interval=2" }.ToList(); //2 seconds.  //Comment this line to receive a subscription data event whenever it happens in the market.
 
-                    //slist.Add(new Subscription("ZYZZ US EQUITY", MarketDataRequest._fields, options));
+                    //slist.Add(new Subscription("ZYZZ US EQUITY", MarketDataRequest._fields, options)); //the code treats securities that start with a "Z" as non-existent
                     slist.Add(new Subscription("SPY US EQUITY", MarketDataRequest._fields, options));
                     slist.Add(new Subscription("AAPL 150117C00600000 EQUITY", MarketDataRequest._fields, options));
 

@@ -32,6 +32,7 @@ namespace Examples
                 Request request = service.CreateRequest("IntradayBarRequest");
 
                 string security = "SPY US EQUITY";
+                //security = "ZYZZ US EQUITY";  //the code treats securities that start with a "Z" as non-existent
                 request.Set("security", security); //required
 
                 request.Set("eventType", "TRADE"); //optional: TRADE(default), BID, ASK, BID_BEST, ASK_BEST, BEST_BID, BEST_ASK, BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, SETTLE

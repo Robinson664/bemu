@@ -35,12 +35,12 @@ namespace Examples
 
             //request information for the following securities
             request.Append("securities", "MSFT US EQUITY");
-            //request.Append("securities", "ZYZZ US EQUITY");
+            //request.Append("securities", "ZYZZ US EQUITY"); //the code treats securities that start with a "Z" as non-existent
             request.Append("securities", "C A COMDTY");
             request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
 
             //include the following simple fields in the result
-            request.Append("fields", "ZBID");
+            //request.Append("fields", "ZBID"); //the code treats a field that starts with a "Z" as a bad field
             request.Append("fields", "BID");
             request.Append("fields", "ASK");
 
