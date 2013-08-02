@@ -19,15 +19,24 @@ namespace BEmu.MarketDataRequest
         private readonly ElementMarketString _source, _category, _description;
         private readonly ElementMarketInt _errorCode;
 
-        public ElementMarketReason()
-        {
-            int code = Types.RandomDataGenerator.RandomInt(99);
-            string sourceGibberish = Types.RandomDataGenerator.RandomString(5).ToLower();
+        public enum ReasonTypeEnum { badSecurity, badField }
 
-            this._source = new ElementMarketString("source", string.Format("{0}{1}@{2}", Types.RandomDataGenerator.RandomString(5).ToLower(), Types.RandomDataGenerator.RandomInt(9), Types.RandomDataGenerator.RandomInt(99)));
-            this._errorCode = new ElementMarketInt("code", Types.RandomDataGenerator.RandomInt(99));
-            this._category = new ElementMarketString("category", "BAD_SEC");
-            this._description = new ElementMarketString("description", "Invalid security, rcode = -1");
+        public ElementMarketReason(ReasonTypeEnum reasonType)
+        {
+            if (reasonType == ReasonTypeEnum.badSecurity)
+            {
+                this._source = new ElementMarketString("source", string.Format("{0}{1}@{2}", Types.RandomDataGenerator.RandomString(5).ToLower(), Types.RandomDataGenerator.RandomInt(9), Types.RandomDataGenerator.RandomInt(99)));
+                this._errorCode = new ElementMarketInt("code", Types.RandomDataGenerator.RandomInt(99));
+                this._category = new ElementMarketString("category", "BAD_SEC");
+                this._description = new ElementMarketString("description", "Invalid security, rcode = -1");
+            }
+            else if (reasonType == ReasonTypeEnum.badField)
+            {
+                this._source = new ElementMarketString("source", string.Format("{0}@{1}", Types.RandomDataGenerator.RandomString(7).ToLower(), Types.RandomDataGenerator.RandomInt(999)));
+                this._errorCode = new ElementMarketInt("errorCode", Types.RandomDataGenerator.RandomInt(99));
+                this._category = new ElementMarketString("category", "BAD_FLD");
+                this._description = new ElementMarketString("description", "Unknown Field");
+            }
         }
 
         public override int NumElements { get { return 4; } }

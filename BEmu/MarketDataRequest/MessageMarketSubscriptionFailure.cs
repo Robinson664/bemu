@@ -25,7 +25,7 @@ namespace BEmu.MarketDataRequest
         {
             this._correlationId = sub.CorrelationID;
             this._topicName = sub.Security;
-            this._reason = new ElementMarketReason();
+            this._reason = new ElementMarketReason(ElementMarketReason.ReasonTypeEnum.badSecurity);
         }
 
         public override int NumElements { get { return 1; } }

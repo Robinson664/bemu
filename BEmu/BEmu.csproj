@@ -105,6 +105,8 @@
     <Compile Include="IntradayTickRequest\RequestIntradayTickElementTime.cs" />
     <Compile Include="MarketDataRequest\ElementMarketBool.cs" />
     <Compile Include="MarketDataRequest\ElementMarketDatetime.cs" />
+    <Compile Include="MarketDataRequest\ElementMarketExceptions.cs" />
+    <Compile Include="MarketDataRequest\ElementMarketExceptionsArray.cs" />
     <Compile Include="MarketDataRequest\ElementMarketInt.cs" />
     <Compile Include="MarketDataRequest\ElementMarketNull.cs" />
     <Compile Include="MarketDataRequest\ElementMarketReason.cs" />

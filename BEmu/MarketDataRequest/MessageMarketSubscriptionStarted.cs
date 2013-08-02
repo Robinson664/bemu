@@ -18,24 +18,69 @@ namespace BEmu.MarketDataRequest
     {
         private readonly CorrelationID _correlationId;
         private readonly string _topicName;
-        private readonly ElementMarketNull _exceptions;
+        private readonly ElementMarketNull _exceptionsNull;
+        private readonly ElementMarketExceptionsArray _exceptionsBadFields;
 
         internal MessageMarketSubscriptionStarted(Subscription sub) : base(new Name("SubscriptionStarted"), sub.CorrelationID, null)
         {
             this._correlationId = sub.CorrelationID;
             this._topicName = sub.Security;
-            this._exceptions = new ElementMarketNull("exceptions");
+
+            { //deal with bad fields
+                List<string> badFields = new List<string>(sub.Fields.Count);
+                for (int i = sub.Fields.Count - 1; i >= 0; i--)
+                {
+                    if (Types.Rules.IsBadField(sub.Fields[i]))
+                    {
+                        badFields.Add(sub.Fields[i]);
+                        sub.Fields.RemoveAt(i);
+                    }
+                }
+
+                if (badFields.Count == 0)
+                    this._exceptionsNull = new ElementMarketNull("exceptions");
+                else
+                    this._exceptionsBadFields = new ElementMarketExceptionsArray(badFields);
+            }
         }
 
         public override int NumElements { get { return 1; } }
-        public override IEnumerable<Element> Elements { get { yield return this._exceptions; } }
         public override Element AsElement { get { return new ElementMarketSubscriptionStarted(this); } }
+
+        public override IEnumerable<Element> Elements
+        {
+            get
+            {
+                if (this._exceptionsNull != null)
+                    yield return this._exceptionsNull;
+
+                if (this._exceptionsBadFields != null)
+                    yield return this._exceptionsBadFields;
+            }
+        }
+
 
         public override string TopicName { get { return this._topicName; } }
 
         public override string ToString()
         {
-            return string.Format("SubscriptionStarted = {{{0}}}{0}", Environment.NewLine);
+            string result;
+
+            if (this._exceptionsNull != null)
+                result = string.Format("SubscriptionStarted = {{{0}}}{0}", Environment.NewLine);
+
+            else if (this._exceptionsBadFields != null)
+            {
+                StringBuilder strb = new StringBuilder();
+                strb.AppendFormat("SubscriptionStarted = {{{0}", Environment.NewLine);
+                strb.Append(this._exceptionsBadFields.PrettyPrint(1));
+                strb.Append("}");
+                result = strb.ToString();
+            }
+            else
+                result = "";
+
+            return result;
         }
     }
 }

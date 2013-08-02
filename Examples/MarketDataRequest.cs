@@ -34,7 +34,7 @@ namespace Examples
             session.StartAsync();
         }
 
-        private static List<string> _fields = new string[] { "BID", "ASK", "LAST" }.ToList();
+        private static List<string> _fields = new string[] { "BID", "ZASK", "LAST" }.ToList();
 
         private static void ProcessEvent(Event evt, Session session)
         {
@@ -65,7 +65,7 @@ namespace Examples
                     //  I have not coded that in the emulator.
                     List<string> options = new string[] { "interval=2" }.ToList(); //2 seconds.  //Comment this line to receive a subscription data event whenever it happens in the market.
 
-                    slist.Add(new Subscription("ZYZZ US EQUITY", MarketDataRequest._fields, options));
+                    //slist.Add(new Subscription("ZYZZ US EQUITY", MarketDataRequest._fields, options));
                     slist.Add(new Subscription("SPY US EQUITY", MarketDataRequest._fields, options));
                     slist.Add(new Subscription("AAPL 150117C00600000 EQUITY", MarketDataRequest._fields, options));
 
@@ -81,7 +81,30 @@ namespace Examples
                 case Event.EventType.SUBSCRIPTION_STATUS:
                     foreach (var msg in evt.GetMessages())
                     {
-                        string s = msg.ToString();
+                        bool fieldExceptionsExist = msg.HasElement("exceptions", true);
+                        if (fieldExceptionsExist)
+                        {
+                            Element elmExceptions = msg["exceptions"];
+                            for (int i = 0; i < elmExceptions.NumValues; i++)
+                            {
+                                Element elmException = elmExceptions.GetValueAsElement(i);
+                                string fieldId = elmException.GetElementAsString("fieldId");
+
+                                Element elmReason = elmException["reason"];
+                                string source = elmReason.GetElementAsString("source");
+                                int errorCode = elmReason.GetElementAsInt32("errorCode");
+                                string category = elmReason.GetElementAsString("category");
+                                string description = elmReason.GetElementAsString("description");
+
+                                Console.WriteLine("field error: ");
+                                Console.WriteLine(string.Format("\tfieldId = {0}", fieldId));
+                                Console.WriteLine(string.Format("\tsource = {0}", source));
+                                Console.WriteLine(string.Format("\terrorCode = {0}", errorCode));
+                                Console.WriteLine(string.Format("\tcategory = {0}", category));
+                                Console.WriteLine(string.Format("\tdescription = {0}", description));
+                            }
+                        }
+
                     }
                     break;
             }
