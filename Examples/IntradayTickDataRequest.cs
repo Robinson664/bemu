@@ -14,8 +14,8 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    using BEmu; //un-comment this line to use the Bloomberg API Emulator
-    //using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+    //using BEmu; //un-comment this line to use the Bloomberg API Emulator
+    using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
 
     public static class IntradayTickDataRequest
     {
@@ -41,10 +41,12 @@ namespace Examples
 
             request.Append("eventTypes", "TRADE"); //One of TRADE (default), BID, ASK, BID_BEST, ASK_BEST, MID_PRICE, AT_TRADE, BEST_BID, BEST_ASK (see documentation A.2.6 for explanations)
             request.Append("eventTypes", "BID"); //A request can have multiple eventTypes
-            //refDataService.ToString() using the Bloomberg API indicates an additional eventType called "SETTLE".  This doesn't seem to produce any results.
+            //Note 1) refDataService.ToString() using the Bloomberg API indicates an additional eventType called "SETTLE".  "SETTLE" doesn't seem to produce any results.
+            //Note 2) If you request an eventType that isn't supported, the API will throw a KeyNotSupportedException at the "request.Append("eventType", "XXX")" line
+            //Note 3) eventType values are case-sensitive.  Requesting "bid" instead of "BID" will throw a KeyNotSupportedException at the "request.Append("eventType", "bid")" line
 
-            request.Set("startDateTime", new Datetime(DateTime.Today.AddHours(9.5).ToUniversalTime()));
-            request.Set("endDateTime", new Datetime(DateTime.Today.AddHours(11).ToUniversalTime())); //goes back at most 140 days (documentation section 7.2.3)
+            request.Set("startDateTime", new Datetime(DateTime.Today.AddHours(9.5999).ToUniversalTime()));
+            request.Set("endDateTime", new Datetime(DateTime.Today.AddHours(9.6).ToUniversalTime())); //goes back at most 140 days (documentation section 7.2.3)
 
             //A comma delimited list of exchange condition codes associated with the event. Review QR<GO> for more information on each code returned.
             request.Set("includeConditionCodes", false); //Optional bool. Valid values are true and false (default = false)

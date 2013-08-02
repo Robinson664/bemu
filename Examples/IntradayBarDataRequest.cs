@@ -14,8 +14,8 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    using BEmu; //un-comment this line to use the Bloomberg API Emulator
-    //using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+    //using BEmu; //un-comment this line to use the Bloomberg API Emulator
+    using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
 
     public static class IntradayBarDataRequest
     {
@@ -31,12 +31,14 @@ namespace Examples
                 Service service = session.GetService("//blp/refdata");
                 Request request = service.CreateRequest("IntradayBarRequest");
 
-                string security = "ZYZZ US EQUITY";
+                string security = "SPY US EQUITY";
                 request.Set("security", security); //required
 
                 request.Set("eventType", "TRADE"); //optional: TRADE(default), BID, ASK, BID_BEST, ASK_BEST, BEST_BID, BEST_ASK, BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, SETTLE
-                //note that BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, and SETTLE don't appear in the API documentation, but you will see them if you call "service.ToString() using the actual Bloomberg API"
                 request.Set("eventType", "BID"); //A request can have multiple eventTypes
+                //Note 1) BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, and SETTLE don't appear in the API documentation, but you will see them if you call "service.ToString()" using the actual Bloomberg API
+                //Note 2) If you request an eventType that isn't supported, the API will throw a KeyNotSupportedException at the "request.Set("eventType", "XXX")" line
+                //Note 3) eventType values are case-sensitive.  Requesting "bid" instead of "BID" will throw a KeyNotSupportedException at the "request.Set("eventType", "bid")" line
 
                 //data goes back no farther than 140 days (7.2.4)
                 DateTime dtStart = DateTime.Today.AddDays(-1); //yesterday

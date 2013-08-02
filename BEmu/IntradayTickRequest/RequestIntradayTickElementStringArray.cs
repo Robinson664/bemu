@@ -32,9 +32,13 @@ namespace BEmu.IntradayTickRequest
         public override bool IsComplexType { get { return false; } }
         public override bool IsNull { get { return false; } }
 
+        private static readonly string[] _allowedEventTypes = { "TRADE", "BID", "ASK", "BID_BEST", "ASK_BEST", "MID_PRICE", "AT_TRADE", "BEST_BID", "BEST_ASK" };
         internal void AddValue(string value)
         {
-            this._values.Add(value);
+            if (RequestIntradayTickElementStringArray._allowedEventTypes.Contains(value, StringComparer.Ordinal))
+                this._values.Add(value);
+            else
+                throw new KeyNotFoundException(); //yes, the BloombergAPI actaully throws a KeyNotFoundException if the user requests a field that isn't supported.
         }
 
         internal List<string> Values { get { return this._values; } }
