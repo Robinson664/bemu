@@ -48,8 +48,8 @@ public abstract class Element {
         throw new Exception("Element doesn't support IsComplexType");
     }
 
-    public Object getValue() throws Exception { return this.GetValue(0); }
-    public Object GetValue(int index) throws Exception
+    public Object getValue() throws Exception { return this.getValue(0); }
+    public Object getValue(int index) throws Exception
     {
         throw new Exception("Element is not a simple object (index)");
     }

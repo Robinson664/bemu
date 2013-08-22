@@ -4,8 +4,8 @@ package com.examples;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-//import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
-import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
+import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
+//import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
 
 public class RunHistoricalDataRequest
 {
@@ -24,15 +24,25 @@ public class RunHistoricalDataRequest
 			Service service = session.getService("//blp/refdata");
 			Request request = service.createRequest("HistoricalDataRequest");
 
-            //request information for the following securities
-            request.append("securities", "IBM US EQUITY");
+            //Request information for the following securities			
             request.append("securities", "SPY US EQUITY");
             request.append("securities", "C A COMDTY");
             request.append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
             
-            //include the following simple fields in the result
+            //uncomment the following line to see what a request for a nonexistent security looks like
+			//request.append("securities", "ZIBM US EQUITY");
+			//  My code treats all securities that start with a 'Z' as a nonexistent security
+            
+            
+            
+            
+            //Include the following simple fields in the result
             request.append("fields", "BID");
             request.append("fields", "ASK");
+            
+            //uncomment the following line to see what a request for an invalid field looks like
+            //request.append("fields", "ZBID");
+			//  My code treats all fields that start with a 'Z' as an invalid field
 
             //Historical requests allow a few overrides.  See the developer's guide A.2.4 for more information.
             Calendar calStart = Calendar.getInstance();
@@ -110,16 +120,63 @@ public class RunHistoricalDataRequest
 			String security = elmSecurity.getValueAsString();
 			System.out.println(security);
 			
-			Element elmFieldData = elmSecurityData.getElement("fieldData");
-			for (int valueIndex = 0; valueIndex < elmFieldData.numValues(); valueIndex++)
+			if(elmSecurityData.hasElement("securityError", true))
 			{
-                Element elmValues = elmFieldData.getValueAsElement(valueIndex);                
-				Datetime date = elmValues.getElementAsDate("date");
-                double bid = elmValues.getElementAsFloat64("BID");
-                double ask = elmValues.getElementAsFloat64("ASK");
-                
-                System.out.print(RunHistoricalDataRequest.dateFmtOut.format(date.calendar().getTime()));
-                System.out.println(String.format(": BID = $%,.2f, ASK = $%,.2f", bid, ask));
+                Element elmSecError = elmSecurityData.getElement("securityError");
+                String source = elmSecError.getElementAsString("source");
+                int code = elmSecError.getElementAsInt32("code");
+                String category = elmSecError.getElementAsString("category");
+                String errorMessage = elmSecError.getElementAsString("message");
+                String subCategory = elmSecError.getElementAsString("subcategory");
+
+                System.out.println("security error");
+                System.out.println(String.format("source = %s", source));
+                System.out.println(String.format("code = %s", code));
+                System.out.println(String.format("category = %s", category));
+                System.out.println(String.format("errorMessage = %s", errorMessage));
+                System.out.println(String.format("subCategory = %s", subCategory));
+			}
+			else
+			{
+                boolean hasFieldErrors = elmSecurityData.hasElement("fieldExceptions", true);
+				if(hasFieldErrors)
+				{
+                    Element elmFieldErrors = elmSecurityData.getElement("fieldExceptions");
+                    for (int errorIndex = 0; errorIndex < elmFieldErrors.numValues(); errorIndex++)
+                    {
+                        Element fieldError = elmFieldErrors.getValueAsElement(errorIndex);
+                        String fieldId = fieldError.getElementAsString("fieldId");
+
+                        Element errorInfo = fieldError.getElement("errorInfo");
+                        String source = errorInfo.getElementAsString("source");
+                        int code = errorInfo.getElementAsInt32("code");
+                        String category = errorInfo.getElementAsString("category");
+                        String strMessage = errorInfo.getElementAsString("message");
+                        String subCategory = errorInfo.getElementAsString("subcategory");
+
+                        System.out.println();
+                        System.out.println();
+                        System.out.println("field error: ");
+                        System.out.println(String.format("\tfieldId = %s", fieldId));
+                        System.out.println(String.format("\tsource = %s", source));
+                        System.out.println(String.format("\tcode = %s", code));
+                        System.out.println(String.format("\tcategory = %s", category));
+                        System.out.println(String.format("\terrorMessage = %s", strMessage));
+                        System.out.println(String.format("\tsubCategory = %s", subCategory));
+                    }
+				}
+				
+				Element elmFieldData = elmSecurityData.getElement("fieldData");
+				for (int valueIndex = 0; valueIndex < elmFieldData.numValues(); valueIndex++)
+				{
+	                Element elmValues = elmFieldData.getValueAsElement(valueIndex);                
+					Datetime date = elmValues.getElementAsDate("date");
+	                double bid = elmValues.getElementAsFloat64("BID");
+	                double ask = elmValues.getElementAsFloat64("ASK");
+	                
+	                System.out.print(RunHistoricalDataRequest.dateFmtOut.format(date.calendar().getTime()));
+	                System.out.println(String.format(": BID = $%,.2f, ASK = $%,.2f", bid, ask));
+				}
 			}
 		}
 	}

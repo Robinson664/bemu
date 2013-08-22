@@ -4,8 +4,8 @@ package com.examples;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
-//import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
+//import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
+import com.bloomberglp.blpapi.*; //un-comment this line to use the actual Bloomberg API
 
 public class RunIntradayBarDataRequest
 {
@@ -38,6 +38,8 @@ public class RunIntradayBarDataRequest
             //(Required) Sets the length of each time bar in the response. Entered as a whole number, between 1 and 1440 in minutes.
             //  One minute is the lowest possible granularity. (despite A.2.8, the interval setting cannot be omitted)
 			request.set("interval", 60);
+			
+			request.set("eventType", "TRADE");
 			
 			session.sendRequest(request, new CorrelationID(-999));
 			boolean continueLoop = true;

@@ -56,9 +56,23 @@ public class RequestIntradayTickElementStringArray extends Element
     	return false;
     }
     
-    void addValue(String value)
+    private final static String[] _allowedEventTypes = { "TRADE", "BID", "ASK", "BID_BEST", "ASK_BEST", "MID_PRICE", "AT_TRADE", "BEST_BID", "BEST_ASK" };
+    void addValue(String value) throws Exception
     {
-    	this._values.add(value);
+    	boolean found = false;
+    	for(int i = 0; i < RequestIntradayTickElementStringArray._allowedEventTypes.length; i++)
+    	{
+    		if(RequestIntradayTickElementStringArray._allowedEventTypes[i].equalsIgnoreCase(value))
+    		{
+    			found = true;
+    			break;
+    		}
+    	}
+    	
+    	if(found)    	
+    		this._values.add(value);
+    	else
+    		throw new Exception("Cannot convert String  to Enumeration");
     }
     
     List<String> values()

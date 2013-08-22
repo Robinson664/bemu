@@ -35,10 +35,10 @@ public class App
         		RunHistoricalDataRequest.RunExample();
         		break;
         	case 4:
-        		RunIntradayBarDataRequest.RunExample();
+        		RunIntradayTickDataRequest.RunExample();
         		break;
         	case 5:
-        		RunIntradayTickDataRequest.RunExample();
+        		RunIntradayBarDataRequest.RunExample();
         		break;
         	default:
         		informationReturned = false;

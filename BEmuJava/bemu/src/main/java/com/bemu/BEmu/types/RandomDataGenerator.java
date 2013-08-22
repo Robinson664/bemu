@@ -265,7 +265,7 @@ public class RandomDataGenerator
 		return Double.valueOf(twoDForm.format(result));
 	}
 	
-	private static int randomInt(int max)
+	public static int randomInt(int max)
 	{
 		return RandomDataGenerator._rand.nextInt(max);
 	}
@@ -305,11 +305,16 @@ public class RandomDataGenerator
         return (char)('A' + RandomDataGenerator._rand.nextInt(24) - 1);
     }
     
-    private static String randomString()
+    public static String randomString()
     {
-        int length = RandomDataGenerator._rand.nextInt(10);
-        StringBuilder result = new StringBuilder(length);
-        for (int i = 0; i < length; i++)
+    	int length = RandomDataGenerator._rand.nextInt(10);
+    	return RandomDataGenerator.randomString(length);
+    }
+    
+    public static String randomString(int len)
+    {
+        StringBuilder result = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
         {
             result.append(RandomDataGenerator.randomChar());
         }

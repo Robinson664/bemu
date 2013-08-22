@@ -15,15 +15,16 @@ import com.bemu.BEmu.Message;
 import com.bemu.BEmu.CorrelationID;
 import com.bemu.BEmu.Datetime;
 import java.util.Map;
+import java.util.List;
 
 public class MessageHistoric extends Message
 {
     private final ElementHistoricSecurityData _security;
     
-    MessageHistoric(CorrelationID corr, String securityName, Map<Datetime, Map<String, Object>> fieldData, int sequenceNumber)
+    MessageHistoric(CorrelationID corr, String securityName, List<String> badFields, Map<Datetime, Map<String, Object>> fieldData, int sequenceNumber)
     {
     	super(new Name("HistoricalDataResponse"), corr, null);
-    	this._security = new ElementHistoricSecurityData(securityName, fieldData, sequenceNumber);
+    	this._security = new ElementHistoricSecurityData(securityName, badFields, fieldData, sequenceNumber);
     }
     
     ElementHistoricSecurityData security()

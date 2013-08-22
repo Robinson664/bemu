@@ -82,7 +82,7 @@ public class RequestIntradayBar extends Request
         return result;
     }
     
-    public void set(String name, String elementValue)
+    public void set(String name, String elementValue) throws Exception
     {
         String upper = name.toUpperCase();
         

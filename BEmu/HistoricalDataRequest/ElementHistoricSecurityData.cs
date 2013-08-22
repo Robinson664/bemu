@@ -21,7 +21,7 @@ namespace BEmu.HistoricalDataRequest
         private readonly ElementHistoricInt _elmSequenceNumber;
         private readonly ElementHistoricFieldExceptionsArray _elmFieldExceptions;
         private readonly ElementHistoricSecurityError _elmSecError;
-        private bool _isSecurityError;
+        private readonly bool _isSecurityError;
 
         internal ElementHistoricSecurityData(string securityName, List<string> badFields, Dictionary<DateTime, Dictionary<string, object>> fieldData, int sequenceNumber)
         {

@@ -17,6 +17,7 @@ import java.util.LinkedHashMap; //preserves insertion order
 import com.bemu.BEmu.Event;
 import com.bemu.BEmu.Message;
 import com.bemu.BEmu.Datetime;
+import com.bemu.BEmu.types.Rules;
 
 public class EventHistoric extends Event
 {
@@ -30,6 +31,16 @@ public class EventHistoric extends Event
     {
     	List<Message> result = new ArrayList<Message>();
     	RequestHistoric hreq = (RequestHistoric)super._request;
+    	
+    	List<String> badFields = new ArrayList<String>();
+    	for(int i = hreq.fields().size() - 1; i >= 0; i--)
+    	{
+    		if(Rules.isBadField(hreq.fields().get(i)))
+    		{
+    			badFields.add(hreq.fields().get(i));
+    			hreq.fields().remove(i);
+    		}
+    	}    	
     	
     	List<String> securities = hreq.securities();
     	for(int i = 0; i < securities.size(); i++)
@@ -58,7 +69,7 @@ public class EventHistoric extends Event
     			}
     		}    		
 
-            MessageHistoric msg = new MessageHistoric(super._request.correlationId(), security, fieldData, result.size());
+            MessageHistoric msg = new MessageHistoric(super._request.correlationId(), security, badFields, fieldData, result.size());
             result.add(msg);    		
     	}
     	
