@@ -22,7 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <RegisterForComInterop>true</RegisterForComInterop>
+    <RegisterForComInterop>false</RegisterForComInterop>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,6 +48,7 @@
     <Compile Include="BloombergTypes\Element.cs" />
     <Compile Include="BloombergTypes\Event.cs" />
     <Compile Include="BloombergTypes\EventHandler.cs" />
+    <Compile Include="BloombergTypes\Schema.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricDateTime.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricDouble.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricErrorInfo.cs" />

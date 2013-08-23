@@ -23,13 +23,13 @@ namespace BEmu.HistoricalDataRequest
             this._fields = new Dictionary<string, Element>();
 
             Element elmDate = new ElementHistoricDateTime(date);
-            this._fields.Add(elmDate.Name.ToString().ToUpper(), elmDate);
+            this._fields.Add(elmDate.Name.ToString(), elmDate);
 
             foreach (var item in values)
             {
                 if (item.Value is double)
                 {
-                    Element elmDouble = new ElementHistoricDouble(item.Key.ToUpper(), (double)item.Value);
+                    Element elmDouble = new ElementHistoricDouble(item.Key, (double)item.Value);
                     this._fields.Add(elmDouble.Name.ToString(), elmDouble);
                 }
             }
@@ -49,7 +49,7 @@ namespace BEmu.HistoricalDataRequest
         {
             get
             {
-                return this._fields[name.ToUpper()];
+                return this._fields[name];
             }
         }
 

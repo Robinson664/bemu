@@ -192,7 +192,7 @@ namespace BEmu.HistoricalDataRequest
         #region OVERRIDES
         public override void Append(string name, string elementValue)
         {
-            switch (name.ToLower())
+            switch (name)
             {
                 case "securities":
                     this._securities.AddValue(elementValue);
@@ -201,31 +201,29 @@ namespace BEmu.HistoricalDataRequest
                     this._fields.AddValue(elementValue);
                     break;
                 default:
-                    throw new ArgumentException(string.Format("BEmu.RequestHistoric.Append: Element name {0} not supported", name));
+                    throw new ArgumentException(string.Format("BEmu.RequestHistoric.Append: Element name {0} not supported.  Case-sensitive.", name));
             }
         }
 
         public override void Set(string name, string elementValue)
         {
             DateTime dtTemp;
-            switch (name.ToLower())
+            switch (name)
             {
-                case "startdate":
+                case "startDate":
                     if (DateTime.TryParseExact(elementValue, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtTemp))
                         this._dtStart = new RequestHistoricElementDate("startDate", dtTemp);
                     else
                         throw new ArgumentException(string.Format("BEmu.Request.Set: Bad startDate format {0}, yyyyMMdd expected", elementValue));
                     break;
-                case "enddate":
+                case "endDate":
                     if (DateTime.TryParseExact(elementValue, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtTemp))
                         this._dtEnd = new RequestHistoricElementDate("endDate", dtTemp);
                     else
                         throw new ArgumentException(string.Format("BEmu.Request.Set: Bad endDate format {0}, yyyyMMdd expected", elementValue));
                     break;
-                case "periodicityadjustment":
-                    string pAdjUpper = elementValue.ToUpper();
-
-                    switch (pAdjUpper)
+                case "periodicityAdjustment":
+                    switch (elementValue)
                     {
                         case "CALENDAR":
                             this._periodicityAdjustment = HistDataPeriodicityAdjustment.calendar;
@@ -237,15 +235,13 @@ namespace BEmu.HistoricalDataRequest
                             this._periodicityAdjustment = HistDataPeriodicityAdjustment.actual;
                             break;
                         default:
-                            throw new ArgumentException(string.Format("BEmu.Request.Set: unknown value ({0}) for periodicityadjustment", elementValue));
+                            throw new ArgumentException(string.Format("BEmu.Request.Set: unknown value ({0}) for periodicityadjustment. These are case-sensitive.", elementValue));
                     }
-                    this._periodicityAdjustmentElement = new RequestHistoricElementString("periodicityAdjustment", pAdjUpper);
+                    this._periodicityAdjustmentElement = new RequestHistoricElementString("periodicityAdjustment", elementValue);
                     break;
 
-                case "periodicityselection":
-                    string pUpper = elementValue.ToUpper();
-
-                    switch (pUpper)
+                case "periodicitySelection":
+                    switch (elementValue)
                     {
                         case "WEEKLY":
                             this._periodicity = HistDataPeriodicity.weekly;
@@ -266,15 +262,13 @@ namespace BEmu.HistoricalDataRequest
                             this._periodicity = HistDataPeriodicity.daily;
                             break;
                         default:
-                            throw new ArgumentException(string.Format("BEmu.Request.Set: unknown value ({0}) for periodicityselection", elementValue));
+                            throw new ArgumentException(string.Format("BEmu.Request.Set: unknown value ({0}) for periodicityselection. These are case-sensitive.", elementValue));
                     }
-                    this._periodicityElement = new RequestHistoricElementString("periodicitySelection", pUpper);
+                    this._periodicityElement = new RequestHistoricElementString("periodicitySelection", elementValue);
                     break;
 
-                case "pricingoption":
-                    string prUpper = elementValue.ToUpper();
-
-                    switch (prUpper)
+                case "pricingOption":
+                    switch (elementValue)
                     {
                         case "PRICING_OPTION_YIELD":
                             this._pricingOption = PricingOption.yield;
@@ -283,15 +277,13 @@ namespace BEmu.HistoricalDataRequest
                             this._pricingOption = PricingOption.price;
                             break;
                         default:
-                            throw new ArgumentException(string.Format("BEmu.Request.Set: unknown value ({0}) for pricingOption", elementValue));
+                            throw new ArgumentException(string.Format("BEmu.Request.Set: unknown value ({0}) for pricingOption. These are case-sensitive.", elementValue));
                     }
-                    this._pricingOptionElement = new RequestHistoricElementString("pricingOption", prUpper);
+                    this._pricingOptionElement = new RequestHistoricElementString("pricingOption", elementValue);
                     break;
 
-                case "overrideoption":
-                    string strOpt = elementValue.ToUpper();
-
-                    switch (strOpt)
+                case "overrideOption":
+                    switch (elementValue)
                     {
                         case "OVERRIDE_OPTION_GPA":
                             this._overrideOptions = OverrideOptions.averagePrice;
@@ -300,27 +292,27 @@ namespace BEmu.HistoricalDataRequest
                             this._overrideOptions = OverrideOptions.closingPrice;
                             break;
                         default:
-                            throw new ArgumentException(string.Format("BEmu.Request.Set: unknown value ({0}) for overrideoption", elementValue));
+                            throw new ArgumentException(string.Format("BEmu.Request.Set: unknown value ({0}) for overrideoption. These are case-sensitive.", elementValue));
                     }
-                    this._overrideOptionsElement = new RequestHistoricElementString("overrideOption", strOpt);
+                    this._overrideOptionsElement = new RequestHistoricElementString("overrideOption", elementValue);
                     break;
 
                 default:
-                    throw new ArgumentException(string.Format("BEmu.Request.Set: Element name {0} not supported", name));
+                    throw new ArgumentException(string.Format("BEmu.Request.Set: Element name {0} not supported. These are case-sensitive.", name));
             }
         }
 
         public override void Set(string name, bool elementValue)
         {
-            switch (name.ToLower())
+            switch (name)
             {
-                case "adjustmentnormal":
+                case "adjustmentNormal":
                     this._adjustmentNormalElement = new RequestHistoricElementBool("adjustmentNormal", elementValue);
                     break;
-                case "adjustmentabnormal":
+                case "adjustmentAbnormal":
                     this._adjustmentAbnormalElement = new RequestHistoricElementBool("adjustmentAbnormal", elementValue);
                     break;
-                case "adjustmentsplit":
+                case "adjustmentSplit":
                     this._adjustmentSplitElement = new RequestHistoricElementBool("adjustmentSplit", elementValue);
                     break;
                 default:
@@ -330,9 +322,9 @@ namespace BEmu.HistoricalDataRequest
 
         public override void Set(string name, int elementValue)
         {
-            switch (name.ToLower())
+            switch (name)
             {
-                case "maxdatapoints":
+                case "maxDataPoints":
                     this._maxDataPointElement = new RequestHistoricElementInt("maxDataPoints", elementValue);
                     break;
                 default:

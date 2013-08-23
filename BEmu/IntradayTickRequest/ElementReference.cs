@@ -34,6 +34,7 @@ namespace BEmu.IntradayTickRequest
         public override bool IsNull { get { return false; } }
         public override IEnumerable<Element> Elements { get { yield return this._parent; } }
         public override object this[int index] { get { return null; } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.CHOICE; } }
 
         public override Element this[string name]
         {

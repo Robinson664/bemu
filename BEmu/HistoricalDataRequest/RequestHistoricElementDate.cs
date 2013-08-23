@@ -34,6 +34,7 @@ namespace BEmu.HistoricalDataRequest
         }
 
         //I can't override GetElementAsDatetime here because the Bloomberg Request object stores dates as strings, not Datetimes.  You can't convert the string to a Datetime
-        internal DateTime? GetDate { get { return this._instance; } }        
+        internal DateTime? GetDate { get { return this._instance; } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.DATE; } }  
     }
 }

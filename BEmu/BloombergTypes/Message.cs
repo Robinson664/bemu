@@ -51,13 +51,12 @@ namespace BEmu
         {
             get
             {
-                string strName = name.ToUpper();
                 foreach (var item in this.Elements)
                 {
-                    if (item.Name.ToString().ToUpper() == strName)
+                    if (item.Name.ToString() == name)
                         return item;
                 }
-                throw new IndexOutOfRangeException();
+                throw new IndexOutOfRangeException("name is case-sensitive");
             }
         }
 

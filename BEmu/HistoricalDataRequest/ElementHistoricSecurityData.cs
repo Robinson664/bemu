@@ -101,24 +101,24 @@ namespace BEmu.HistoricalDataRequest
 
         public override Element GetElement(string name)
         {
-            switch (name.ToUpper())
+            switch (name) //case-sensitive
             {
-                case "FIELDDATA":
+                case "fieldData":
                     if (!this._isSecurityError)
                         return this._elmFieldDataArray;
                     else
                         break;
 
-                case "SECURITY":
+                case "security":
                     return this._elmSecurityName;
 
-                case "SEQUENCENUMBER":
+                case "sequenceNumber":
                     return this._elmSequenceNumber;
 
-                case "FIELDEXCEPTIONS":
+                case "fieldExceptions":
                     return this._elmFieldExceptions;
 
-                case "SECURITYERROR":
+                case "securityError":
                     if (this._isSecurityError) //this element doesn't exist if the security exists
                         return this._elmSecError;
                     else

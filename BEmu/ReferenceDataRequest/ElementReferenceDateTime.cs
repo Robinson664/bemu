@@ -29,7 +29,8 @@ namespace BEmu.ReferenceDataRequest
         public override int NumValues { get { return 1; } }
         public override int NumElements { get { return 0; } }
         public override bool IsArray { get { return false; } }
-        public override bool IsComplexType { get { return base.IsComplexType; } }
+        public override bool IsComplexType { get { return false; } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.DATE; } }
 
         internal override StringBuilder PrettyPrint(int tabIndent)
         {

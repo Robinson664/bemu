@@ -20,6 +20,7 @@ namespace BEmu
         public abstract Name Name { get; }
         public abstract int NumValues { get; }
         public abstract int NumElements { get; }
+        public virtual Schema.Datatype Datatype { get { return Schema.Datatype.SEQUENCE; } }
 
         public override string ToString()
         {
@@ -218,7 +219,7 @@ namespace BEmu
 
         public virtual Element this[string name]
         {
-            get { throw new NotImplementedException("Element doesn't support this[string name]"); }
+            get { throw new NotImplementedException("Element doesn't support this[string name] or 'name' didn't match.  'name' is case-sensitive."); }
         }
 
         public Element this[Name name]
@@ -228,7 +229,7 @@ namespace BEmu
 
         public virtual object this[string name, int index]
         {
-            get { throw new NotImplementedException("Element doesn't support this[string name, int index]"); }
+            get { throw new NotImplementedException("Element doesn't support this[string name, int index] or 'name' didn't match.  'name' is case-sensitive."); }
         }
 
         public bool HasElement(Name name, bool excludeNullElements = false)

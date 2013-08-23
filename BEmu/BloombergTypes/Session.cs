@@ -69,7 +69,7 @@ namespace BEmu
                 return new ServiceRefData();
             }
             else
-                throw new NotImplementedException(string.Format("BEmu.Session.GetService: Service {0} not supported", uri));
+                return null;
         }
 
         public CorrelationID SendRequest(Request request, CorrelationID correlationId)
@@ -128,6 +128,13 @@ namespace BEmu
             this._marketSimulatorTimer.Dispose();
         }
 
+        public void OpenServiceAsync(string uri)
+        {
+            this._sessionUri = SessionUriType.mktData;
+            this._sessionState = SessionStateType.serviceOpened;
+            this._asyncOpenCorrelation = new CorrelationID();
+        }
+
         public void OpenServiceAsync(string uri, CorrelationID correlationId)
         {
             this._sessionUri = SessionUriType.mktData;
@@ -144,6 +151,14 @@ namespace BEmu
             if (this._asyncHandler != null)
             {
                 this._asyncHandler(evtSubStatus, this);
+            }
+        }
+
+        public void Cancel(IList<CorrelationID> correlators)
+        {
+            foreach (var item in correlators)
+            {
+                this.Cancel(item);
             }
         }
 

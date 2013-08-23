@@ -31,7 +31,7 @@ namespace BEmu
                 case "IntradayBarRequest":
                     return new IntradayBarRequest.RequestIntradayBar(this);
                 default:
-                    throw new NotImplementedException(string.Format("BEmu.ServiceRefData.CreateRequest: Operation {0} not supported", operationName));
+                    throw new NotImplementedException(string.Format("BEmu.ServiceRefData.CreateRequest: Operation {0} not supported. Case-sensitive.", operationName));
             }
         }
     }

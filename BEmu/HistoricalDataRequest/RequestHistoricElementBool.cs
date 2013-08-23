@@ -24,6 +24,7 @@ namespace BEmu.HistoricalDataRequest
         }
 
         //I can't override GetElementAsBool here because the Bloomberg Request object stores bools as strings, not bools.  You can't convert the string to a bool
-        internal bool GetBool { get { return this._value; } } 
+        internal bool GetBool { get { return this._value; } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.BOOL; } }
     }
 }

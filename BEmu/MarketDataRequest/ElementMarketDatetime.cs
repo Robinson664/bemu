@@ -29,6 +29,7 @@ namespace BEmu.MarketDataRequest
         public override int NumValues { get { return 1; } }
         public override int NumElements { get { return 0; } }
         public override bool IsNull { get { return false; } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.DATETIME; } }
 
         public override object this[int index]
         {

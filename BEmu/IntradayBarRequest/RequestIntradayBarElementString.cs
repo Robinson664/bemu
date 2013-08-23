@@ -29,6 +29,7 @@ namespace BEmu.IntradayBarRequest
         public override Name Name { get { return new Name(this._elementName); } }
         public override bool IsArray { get { return false; } }
         public override bool IsComplexType { get { return false; } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.STRING; } }
 
         internal string Security { get { return this._value; } }
 

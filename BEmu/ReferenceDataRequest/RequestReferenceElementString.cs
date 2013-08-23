@@ -27,6 +27,7 @@ namespace BEmu.ReferenceDataRequest
         public override int NumElements { get { return 0; } }
         public override int NumValues { get { return 1; } }
         public override Name Name { get { return new Name(this._elementName); } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.STRING; } }
 
         internal override StringBuilder PrettyPrint(int tabIndent)
         {

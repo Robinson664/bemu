@@ -31,6 +31,7 @@ namespace BEmu.IntradayBarRequest
         public override bool IsNull { get { return false; } }
         public override IEnumerable<Element> Elements { get { if (this.NumValues < -1) yield return null; } } //This is the only way I can think to have the compiler output "Enumeration yielded no results"
         public override bool HasElement(string name, bool excludeNullElements = false) { return false; }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.DATETIME; } }
 
         public override object this[int index]
         {

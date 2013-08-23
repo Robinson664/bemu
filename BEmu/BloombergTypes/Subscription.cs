@@ -61,6 +61,14 @@ namespace BEmu
             this._conflationInterval = this.ReadConflationInterval(options);
         }
 
+        public Subscription(string security, IList<string> fields, CorrelationID correlationID)
+        {
+            this._security = security.ToUpper();
+            this._fields = fields.Select(s => s.ToUpper()).ToList();
+            this._corr = correlationID;
+            this._conflationInterval = null;
+        }
+
         private int? ReadConflationInterval(IList<string> options)
         {
             int? result = null;

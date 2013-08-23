@@ -25,6 +25,7 @@ namespace BEmu.IntradayBarRequest
         }
 
         //I can't override GetElementAsInt32 here because the Bloomberg Request object stores ints as strings, not ints.  You can't convert the string to an int
-        internal int GetInt { get { return this._value; } } 
+        internal int GetInt { get { return this._value; } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.INT32; } }
     }
 }

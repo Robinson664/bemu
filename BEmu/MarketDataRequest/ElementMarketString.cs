@@ -30,6 +30,7 @@ namespace BEmu.MarketDataRequest
         public override bool IsNull { get { return false; } }
         public override bool IsArray { get { return false; } }
         public override bool IsComplexType { get { return false; } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.STRING; } }
 
         public override object this[int index]
         {

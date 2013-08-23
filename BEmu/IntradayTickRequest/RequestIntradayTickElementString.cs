@@ -27,6 +27,7 @@ namespace BEmu.IntradayTickRequest
         public override int NumElements { get { return 0; } }
         public override int NumValues { get { return 1; } }
         public override Name Name { get { return new Name(this._elementName); } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.STRING; } }
 
         internal string Security { get { return this._value; } }
 
