@@ -36,7 +36,7 @@ namespace BEmu.MarketDataRequest
         {
             get
             {
-                if (name.ToUpper() == this._exceptions.Name.ToString().ToUpper())
+                if (name == this._exceptions.Name.ToString())
                     return this._exceptions;
                 else
                     return base[name];

@@ -46,7 +46,7 @@ namespace BEmu.MarketDataRequest
 
         internal override StringBuilder PrettyPrint(int tabIndent)
         {
-            return base.PrettyPrintHelper(tabIndent, this._value.ToString().ToUpper());
+            return base.PrettyPrintHelper(tabIndent, this._value.ToString());
         }
 
         public override object GetValue()

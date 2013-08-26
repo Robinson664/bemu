@@ -31,7 +31,7 @@ namespace BEmu
         public Subscription(string security, IList<string> fields)
         {
             this._security = security.ToUpper();
-            this._fields = fields.Select(s => s.ToUpper()).ToList();
+            this._fields = new List<string>(fields);
             this._corr = new CorrelationID();
             this._conflationInterval = null;
         }
@@ -39,14 +39,14 @@ namespace BEmu
         public Subscription(string security, IList<string> fields, IList<string> options)
         {
             this._security = security.ToUpper();
-            this._fields = fields.Select(s => s.ToUpper()).ToList();
+            this._fields = new List<string>(fields);
             this._corr = new CorrelationID();
             this._conflationInterval = this.ReadConflationInterval(options);
         }
 
         public Subscription(string security, string field, CorrelationID correlationID)
         {
-            this._security = security.ToUpper();
+            this._security = security;
             this._fields = new List<string>();
             this._fields.Add(field);
             this._corr = correlationID;
@@ -74,11 +74,10 @@ namespace BEmu
             int? result = null;
             foreach (var item in options)
             {
-                string str = item.ToLower();
-                if (str.StartsWith("interval="))
+                if (item.StartsWith("interval="))
                 {
                     int temp;
-                    string strInterval = str.Substring(str.IndexOf('=') + 1);
+                    string strInterval = item.Substring(item.IndexOf('=') + 1);
                     if (int.TryParse(strInterval, out temp))
                         result = temp;
                 }

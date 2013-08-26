@@ -43,7 +43,7 @@ namespace BEmu.MarketDataRequest
             {
                 foreach (var item in this.Elements)
                 {
-                    if (item.Name.ToString().ToUpper() == name.ToUpper())
+                    if (item.Name.ToString() == name)
                         return item;
                 }
                 return base[name];

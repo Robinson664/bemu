@@ -53,7 +53,7 @@ namespace BEmu.MarketDataRequest
                     elm = new ElementMarketBool(item.Key, (bool)item.Value);
 
                 if (elm != null)
-                    this._fields.Add(item.Key.ToUpper(), elm);
+                    this._fields.Add(item.Key, elm);
             }
             this._security = sub.Security;
         }

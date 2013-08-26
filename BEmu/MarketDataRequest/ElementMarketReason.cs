@@ -94,10 +94,10 @@ namespace BEmu.MarketDataRequest
         {
             get
             {
-                string strName = name.ToUpper();
+                string strName = name;
                 foreach (var item in this.Elements)
                 {
-                    if (item.Name.ToString().ToUpper() == strName)
+                    if (item.Name.ToString() == strName)
                         return item;
                 }
                 return base[name];
@@ -119,7 +119,7 @@ namespace BEmu.MarketDataRequest
         {
             foreach (var item in this.Elements)
             {
-                if (item.Name.ToString().ToUpper() == name.ToUpper())
+                if (item.Name.ToString() == name)
                     return true;
             }
             return false;

@@ -32,7 +32,7 @@ namespace BEmu.MarketDataRequest
         {
             get
             {
-                if (name.ToUpper() == this._serviceName.Name.ToString().ToUpper())
+                if (name == this._serviceName.Name.ToString())
                 {
                     if (index == 0)
                         return this._serviceName.GetValue();

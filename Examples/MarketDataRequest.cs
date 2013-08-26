@@ -14,13 +14,13 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    ////un-comment the following two lines to use the Bloomberg API Emulator
-    //using BEmu;
-    //using EventHandler = BEmu.EventHandler; //this declaration specifies that EventHandler refers to BEmu.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+    //un-comment the following two lines to use the Bloomberg API Emulator
+    using BEmu;
+    using EventHandler = BEmu.EventHandler; //this declaration specifies that EventHandler refers to BEmu.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
 
-    //un-comment the following two lines to use the actual Bloomberg API
-    using Bloomberglp.Blpapi;
-    using EventHandler = Bloomberglp.Blpapi.EventHandler; //this declaration specifies that EventHandler refers to Bloomberglp.Blpapi.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+    ////un-comment the following two lines to use the actual Bloomberg API
+    //using Bloomberglp.Blpapi;
+    //using EventHandler = Bloomberglp.Blpapi.EventHandler; //this declaration specifies that EventHandler refers to Bloomberglp.Blpapi.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
 
     public static class MarketDataRequest
     {
