@@ -57,8 +57,13 @@ namespace BEmu
 
         public bool OpenService(string uri)
         {
-            this._sessionState = SessionStateType.serviceOpened;
-            return true;
+            if (uri == "//blp/refdata")
+            {
+                this._sessionState = SessionStateType.serviceOpened;
+                return true;
+            }
+            else
+                return false;
         }
 
         public Service GetService(string uri)

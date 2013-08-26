@@ -57,66 +57,70 @@ namespace BEmu.IntradayBarRequest
 
         public override void Set(string name, string elementValue)
         {
-            var upper = name.ToUpper();
-            switch (upper)
+            switch (name)
             {
-                case "SECURITY":
+                case "security":
                     this._security = new RequestIntradayBarElementString(name, elementValue);
                     break;
-                case "EVENTTYPE":
+                case "eventType":
                     this._eventTypes.AddValue(elementValue);
                     break;
+                default:
+                    throw new ArgumentException("name not recognized.  case-sensitive.");
             }
         }
 
         public override void Set(string name, Datetime elementValue)
         {
-            var upper = name.ToUpper();
-            switch (upper)
+            switch (name)
             {
-                case "STARTDATETIME":
+                case "startDateTime":
                     this._dtStart = new RequestIntradayBarElementTime(name, elementValue);
                     break;
-                case "ENDDATETIME":
+                case "endDateTime":
                     this._dtEnd = new RequestIntradayBarElementTime(name, elementValue);
                     break;
+                default:
+                    throw new ArgumentException("name not recognized.  case-sensitive.");
             }
         }
 
         public override void Set(string name, int elementValue)
         {
-            var upper = name.ToUpper();
-            switch (upper)
+            switch (name)
             {
-                case "INTERVAL":
+                case "interval":
                     this._intervalInMinutes = new RequestIntradayBarElementInt(name, elementValue);
                     break;
+                default:
+                    throw new ArgumentException("name not recognized.  case-sensitive.");
             }
         }
 
         public override void Set(string name, bool elementValue)
         {
-            var upper = name.ToUpper();
-            switch (upper)
+            switch (name)
             {
-                case "GAPFILLINITIALBAR":
+                case "gapFillInitialBar":
                     this._gapFillInitialBar = new RequestIntradayBarElementBool(name, elementValue);
                     break;
-                case "RETURNEIDS":
+                case "returnEids":
                     this._returnEids = new RequestIntradayBarElementBool(name, elementValue);
                     break;
-                case "ADJUSTMENTNORMAL":
+                case "adjustmentNormal":
                     this._adjustmentNormalElement = new RequestIntradayBarElementBool(name, elementValue);
                     break;
-                case "ADJUSTMENTABNORMAL":
+                case "adjustmentAbnormal":
                     this._adjustmentAbnormalElement = new RequestIntradayBarElementBool(name, elementValue);
                     break;
-                case "ADJUSTMENTSPLIT":
+                case "adjustmentSplit":
                     this._adjustmentSplitElement = new RequestIntradayBarElementBool(name, elementValue);
                     break;
-                case "ADJUSTMENTFOLLOWDPDF":
+                case "adjustmentFollowDPDF":
                     this._adjustmentFollowDPDF = new RequestIntradayBarElementBool(name, elementValue);
                     break;
+                default:
+                    throw new ArgumentException("name not recognized.  case-sensitive.");
             }
         }
 

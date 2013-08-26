@@ -72,10 +72,9 @@ namespace BEmu
 
         public bool HasElement(string name, bool excludeNullElements = false)
         {
-            string strName = name.ToUpper();
             foreach (var item in this.Elements)
             {
-                if (item.Name.ToString().ToUpper() == strName)
+                if (item.Name.ToString() == name)
                     return true;
             }
             return false;

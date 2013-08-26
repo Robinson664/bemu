@@ -59,10 +59,9 @@ namespace BEmu.IntradayBarRequest
         {
             get
             {
-                var upper = name.ToUpper();
                 foreach (var item in this.Elements)
                 {
-                    if (item.Name.ToString().ToUpper() == upper)
+                    if (item.Name.ToString() == name)
                         return item;
                 }
                 return base[name];

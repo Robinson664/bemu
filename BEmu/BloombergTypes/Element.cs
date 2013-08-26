@@ -199,7 +199,7 @@ namespace BEmu
 
         public virtual Element GetElement(string name)
         {
-            throw new NotImplementedException("Element doesn't support getting elements by name");
+            throw new NotImplementedException("Element doesn't support getting elements by name.  name is case-sensitive.");
         }
 
         public virtual Element GetElement(int index)

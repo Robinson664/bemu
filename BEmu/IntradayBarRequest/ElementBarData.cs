@@ -36,7 +36,7 @@ namespace BEmu.IntradayBarRequest
         {
             foreach (var item in this.Elements)
             {
-                if (item.Name.ToString().ToUpper() == name.ToUpper())
+                if (item.Name.ToString() == name)
                     return item;
             }
             return base.GetElement(name);
