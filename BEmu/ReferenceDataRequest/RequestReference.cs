@@ -43,13 +43,11 @@ namespace BEmu.ReferenceDataRequest
 
         public override bool HasElement(string name)
         {
-            string strName = name.ToUpper();
-
-            if (this._securities.Name.ToString().ToUpper() == strName)
+            if (this._securities.Name.ToString() == name)
                 return this._securities.Values.Any();
-            else if (this._fields.Name.ToString().ToUpper() == strName)
+            else if (this._fields.Name.ToString() == name)
                 return this._fields.Values.Any();
-            else if (this._overrides.Name.ToString().ToUpper() == strName)
+            else if (this._overrides.Name.ToString() == name)
                 return this._overrides.NumValues > 0;
             else
                 return false;
@@ -59,22 +57,20 @@ namespace BEmu.ReferenceDataRequest
         {
             get
             {
-                string strName = elementName.ToUpper();
-
-                if (this._securities.Name.ToString().ToUpper() == strName)
+                if (this._securities.Name.ToString() == elementName)
                     return this._securities;
-                else if (this._fields.Name.ToString().ToUpper() == strName)
+                else if (this._fields.Name.ToString() == elementName)
                     return this._fields;
-                else if (this._overrides.Name.ToString().ToUpper() == strName)
+                else if (this._overrides.Name.ToString() == elementName)
                     return this._overrides;
                 else
-                    throw new NotImplementedException("BEmu.ReferenceDataRequest.RequestReference: public Element this[string elementName] not supported");
+                    throw new NotImplementedException("BEmu.ReferenceDataRequest.RequestReference: public Element this[string elementName] not supported.  ElementName is case-sensitive");
             }
         }
 
         public override void Append(string name, string elementValue)
         {
-            switch (name.ToLower())
+            switch (name)
             {
                 case "securities":
                     this._securities.AddValue(elementValue);
@@ -83,7 +79,7 @@ namespace BEmu.ReferenceDataRequest
                     this._fields.AddValue(elementValue);
                     break;
                 default:
-                    throw new ArgumentException(string.Format("BEmu.RequestReference.Append: Element name {0} not supported", name));
+                    throw new ArgumentException(string.Format("BEmu.RequestReference.Append: Element name {0} not supported. Names are case-sensitive", name));
             }
         }
 

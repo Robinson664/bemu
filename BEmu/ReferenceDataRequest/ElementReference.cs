@@ -36,7 +36,7 @@ namespace BEmu.ReferenceDataRequest
         {
             get
             {
-                if (name.ToUpper() == this._securities.Name.ToString().ToUpper())
+                if (name == this._securities.Name.ToString())
                     return this._securities;
                 else
                     return base[name];

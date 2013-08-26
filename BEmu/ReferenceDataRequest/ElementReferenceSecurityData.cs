@@ -85,7 +85,7 @@ namespace BEmu.ReferenceDataRequest
 
         public override string GetElementAsString(string name)
         {
-            if (name.ToUpper() == this._elmSecurityName.Name.ToString().ToUpper())
+            if (name == this._elmSecurityName.Name.ToString())
                 return (string)this._elmSecurityName.GetValue();
             else
                 return base.GetElementAsString(name);
@@ -102,17 +102,17 @@ namespace BEmu.ReferenceDataRequest
         {
             get
             {
-                switch (name.ToUpper())
+                switch (name)
                 {
-                    case "FIELDDATA":
+                    case "fieldData":
                         return this._elmFieldData;
-                    case "SECURITY":
+                    case "security":
                         return this._elmSecurityName;
-                    case "SEQUENCENUMBER":
+                    case "sequenceNumber":
                         return this._elmSequenceNumber;
-                    case "FIELDEXCEPTIONS":
+                    case "fieldExceptions":
                         return this._elmFieldExceptions;
-                    case "SECURITYERROR":
+                    case "securityError":
                         if (this._isSecurityError) //this element doesn't exist if the security exists
                             return this._elmSecError;
                         else
@@ -136,8 +136,7 @@ namespace BEmu.ReferenceDataRequest
         {
             get
             {
-                string strName = name.ToUpper();
-                if (name == this._elmFieldData.Name.ToString().ToUpper())
+                if (name == this._elmFieldData.Name.ToString())
                     return base[name, index];
                 else if (index == 0)
                     return this[name].GetValue();

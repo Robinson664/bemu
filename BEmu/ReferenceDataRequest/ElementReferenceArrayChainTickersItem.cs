@@ -21,10 +21,10 @@ namespace BEmu.ReferenceDataRequest
         internal ElementReferenceArrayChainTickersItem(string ticker, DateTime dtExp, ElementReferenceArrayChainTickers.OptionalityEnum optionality, int strike)
         {
             string optionTicker = string.Format("{0} US {1:MM/dd/yy} {2}{3}", ticker, dtExp, (char)optionality, strike);
-            this._element = new ElementReferenceString("TICKER", optionTicker);
+            this._element = new ElementReferenceString("Ticker", optionTicker);
         }
 
-        public override Name Name { get { return new Name("TICKER"); } }
+        public override Name Name { get { return new Name("Ticker"); } }
         public override int NumValues { get { return 0; } }
         public override int NumElements { get { return 1; } }
         public override bool IsArray { get { return false; } }
@@ -39,7 +39,7 @@ namespace BEmu.ReferenceDataRequest
             {
                 foreach (var item in this.Elements)
                 {
-                    if (item.Name.ToString().ToLower() == name.ToLower())
+                    if (item.Name.ToString() == name)
                         return item;
                 }
                 return base[name];

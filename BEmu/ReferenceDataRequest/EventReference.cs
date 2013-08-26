@@ -51,7 +51,7 @@ namespace BEmu.ReferenceDataRequest
                         object value = Types.RandomDataGenerator.ReferenceDataFromFieldName(field, security, isOption, rreq);
                         if (value != null)
                         {
-                            fieldData.Add(field.ToUpper(), value);
+                            fieldData.Add(field, value);
                         }
                     }
                 }

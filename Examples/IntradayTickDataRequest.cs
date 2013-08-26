@@ -30,7 +30,7 @@ namespace Examples
             sessionOptions.ServerPort = 8194;
 
             Session session = new Session(sessionOptions);
-            if (session.Start() && session.OpenService("//blp/refdata")) //case sens
+            if (session.Start() && session.OpenService("//blp/refdata"))
             {
                 Service refDataService = session.GetService("//blp/refdata");
                 if (refDataService == null)

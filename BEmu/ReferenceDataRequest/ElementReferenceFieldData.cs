@@ -26,22 +26,22 @@ namespace BEmu.ReferenceDataRequest
             {
                 if (item.Value is double)
                 {
-                    Element elmDouble = new ElementReferenceDouble(item.Key.ToUpper(), (double)item.Value);
+                    Element elmDouble = new ElementReferenceDouble(item.Key, (double)item.Value);
                     this._fields.Add(elmDouble);
                 }
                 else if (item.Value is int)
                 {
-                    Element elmInt = new ElementReferenceInt(item.Key.ToUpper(), (int)item.Value);
+                    Element elmInt = new ElementReferenceInt(item.Key, (int)item.Value);
                     this._fields.Add(elmInt);
                 }
                 else if (item.Value is DateTime)
                 {
-                    Element elmDateTime = new ElementReferenceDateTime(item.Key.ToUpper(), (DateTime)item.Value);
+                    Element elmDateTime = new ElementReferenceDateTime(item.Key, (DateTime)item.Value);
                     this._fields.Add(elmDateTime);
                 }
                 else if (item.Value is string)
                 {
-                    Element elmString = new ElementReferenceString(item.Key.ToUpper(), (string)item.Value);
+                    Element elmString = new ElementReferenceString(item.Key, (string)item.Value);
                     this._fields.Add(elmString);
                 }
                 else if (item.Value is ElementReferenceArrayChainTickers)
@@ -83,7 +83,7 @@ namespace BEmu.ReferenceDataRequest
         {
             foreach (var item in this._fields)
             {
-                if (item.Name.ToString().ToUpper() == name.ToUpper())
+                if (item.Name.ToString() == name)
                     return true;
             }
             return false;
@@ -93,10 +93,9 @@ namespace BEmu.ReferenceDataRequest
         {
             get
             {
-                string strName = name.ToUpper();
                 foreach (var item in this._fields)
                 {
-                    if (item.Name.ToString().ToUpper() == strName)
+                    if (item.Name.ToString() == name)
                         return item;
                 }
                 return base[name];

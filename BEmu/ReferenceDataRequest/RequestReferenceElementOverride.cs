@@ -27,14 +27,13 @@ namespace BEmu.ReferenceDataRequest
 
         public override void SetElement(string name, object value)
         {
-            var toUse = name.ToUpper();
-            switch (toUse)
+            switch (name)
             {
-                case "FIELDID":
-                    this._fieldId = new ElementReferenceString(toUse, value.ToString());
+                case "fieldId":
+                    this._fieldId = new ElementReferenceString(name, value.ToString());
                     break;
-                case "VALUE":
-                    this._value = new ElementReferenceObject(toUse, value);
+                case "value":
+                    this._value = new ElementReferenceObject(name, value);
                     break;
                 default:
                     throw new ArgumentException();
@@ -72,11 +71,11 @@ namespace BEmu.ReferenceDataRequest
         {
             get
             {
-                switch (name.ToUpper())
+                switch (name)
                 {
-                    case "FIELDID":
+                    case "fieldId":
                         return this._fieldId;
-                    case "VALUE":
+                    case "value":
                         return this._value;
                 }
                 return base[name];

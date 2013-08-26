@@ -99,10 +99,9 @@ namespace BEmu.ReferenceDataRequest
         {
             get
             {
-                string strName = name.ToUpper();
                 foreach (var item in this.Elements)
                 {
-                    if (item.Name.ToString().ToUpper() == strName)
+                    if (item.Name.ToString() == name)
                         return item;
                 }
                 return base[name];
@@ -124,7 +123,7 @@ namespace BEmu.ReferenceDataRequest
         {
             foreach (var item in this.Elements)
             {
-                if (item.Name.ToString().ToUpper() == name.ToUpper())
+                if (item.Name.ToString() == name)
                     return true;
             }
             return false;

@@ -30,74 +30,77 @@ namespace Examples
             sessionOptions.ServerPort = 8194;
 
             Session session = new Session(sessionOptions);
-            if (!session.Start())
+            if (session.Start() && session.OpenService("//blp/refdata"))
             {
-                System.Console.WriteLine("Could not start session.");
-                System.Environment.Exit(1);
-            }
-            if (!session.OpenService("//blp/refdata"))
-            {
-                System.Console.WriteLine("Could not open service //blp/refdata");
-                System.Environment.Exit(1);
-            }
-            CorrelationID requestID = new CorrelationID(1);
-            Service refDataSvc = session.GetService("//blp/refdata");
-            Request request = refDataSvc.CreateRequest("ReferenceDataRequest");
-
-            //request information for the following securities
-            request.Append("securities", "SPY US EQUITY");
-            //request.Append("securities", "ZYZZ US EQUITY"); //the code treats securities that start with a "Z" as non-existent
-            request.Append("securities", "MSFT US EQUITY");
-            request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
-
-            //include the following simple fields in the result
-            //request.Append("fields", "ZPX_LAST"); //the code treats a field that starts with a "Z" as a bad field
-            request.Append("fields", "PX_LAST");
-            request.Append("fields", "BID");
-            request.Append("fields", "ASK");
-            request.Append("fields", "TICKER");
-            request.Append("fields", "OPT_EXPIRE_DT");
-
-            //request a field that can be overriden and returns bulk data
-            request.Append("fields", "CHAIN_TICKERS");
-            Element overrides = request["overrides"];
-
-            //request only puts
-            Element ovrdPutCall = overrides.AppendElement();
-            ovrdPutCall.SetElement("fieldId", "CHAIN_PUT_CALL_TYPE_OVRD");
-            ovrdPutCall.SetElement("value", "P"); //accepts either "C" for calls or "P" for puts
-
-            //request 5 options in the result
-            Element ovrdNumStrikes = overrides.AppendElement();
-            ovrdNumStrikes.SetElement("fieldId", "CHAIN_POINTS_OVRD");
-            ovrdNumStrikes.SetElement("value", 5); //accepts a positive integer
-
-            //request options that expire on Dec. 20, 2014
-            Element ovrdDtExps = overrides.AppendElement();
-            ovrdDtExps.SetElement("fieldId", "CHAIN_EXP_DT_OVRD");
-            ovrdDtExps.SetElement("value", "20141220"); //accepts dates in the format yyyyMMdd
-
-            session.SendRequest(request, requestID);
-
-            bool continueToLoop = true;
-            while (continueToLoop)
-            {
-                Event eventObj = session.NextEvent();
-                switch (eventObj.Type)
+                Service refDataSvc = session.GetService("//blp/refdata");
+                if (refDataSvc == null)
                 {
-                    case Event.EventType.RESPONSE: // final event
-                        continueToLoop = false;
-                        handleResponseEvent(eventObj);
-                        break;
-                    case Event.EventType.PARTIAL_RESPONSE:
-                        handleResponseEvent(eventObj);
-                        break;
-                    default:
-                        handleOtherEvent(eventObj);
-                        break;
+                    Console.WriteLine("Cannot get service");
+                }
+                else
+                {
+                    CorrelationID requestID = new CorrelationID(1);
+                    Request request = refDataSvc.CreateRequest("ReferenceDataRequest");
+
+                    //request information for the following securities
+                    request.Append("securities", "SPY US EQUITY");
+                    //request.Append("securities", "ZYZZ US EQUITY"); //the code treats securities that start with a "Z" as non-existent
+                    request.Append("securities", "MSFT US EQUITY");
+                    request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
+
+                    //include the following simple fields in the result
+                    //request.Append("fields", "ZPX_LAST"); //the code treats a field that starts with a "Z" as a bad field
+                    request.Append("fields", "PX_LAST");
+                    request.Append("fields", "BID");
+                    request.Append("fields", "ASK");
+                    request.Append("fields", "TICKER");
+                    request.Append("fields", "OPT_EXPIRE_DT");
+
+                    //request a field that can be overriden and returns bulk data
+                    request.Append("fields", "CHAIN_TICKERS");
+                    Element overrides = request["overrides"];
+
+                    //request only puts
+                    Element ovrdPutCall = overrides.AppendElement();
+                    ovrdPutCall.SetElement("fieldId", "CHAIN_PUT_CALL_TYPE_OVRD");
+                    ovrdPutCall.SetElement("value", "P"); //accepts either "C" for calls or "P" for puts
+
+                    //request 5 options in the result
+                    Element ovrdNumStrikes = overrides.AppendElement();
+                    ovrdNumStrikes.SetElement("fieldId", "CHAIN_POINTS_OVRD");
+                    ovrdNumStrikes.SetElement("value", 5); //accepts a positive integer
+
+                    //request options that expire on Dec. 20, 2014
+                    Element ovrdDtExps = overrides.AppendElement();
+                    ovrdDtExps.SetElement("fieldId", "CHAIN_EXP_DT_OVRD");
+                    ovrdDtExps.SetElement("value", "20141220"); //accepts dates in the format yyyyMMdd
+
+                    session.SendRequest(request, requestID);
+
+                    bool continueToLoop = true;
+                    while (continueToLoop)
+                    {
+                        Event eventObj = session.NextEvent();
+                        switch (eventObj.Type)
+                        {
+                            case Event.EventType.RESPONSE: // final event
+                                continueToLoop = false;
+                                handleResponseEvent(eventObj);
+                                break;
+                            case Event.EventType.PARTIAL_RESPONSE:
+                                handleResponseEvent(eventObj);
+                                break;
+                            default:
+                                handleOtherEvent(eventObj);
+                                break;
+                        }
+                    }
                 }
             }
-
+            else
+            {
+                Console.WriteLine("Cannot connect to server");
+            }
         }
 
         private static void handleResponseEvent(Event eventObj)
