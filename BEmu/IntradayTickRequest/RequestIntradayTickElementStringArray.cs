@@ -38,7 +38,7 @@ namespace BEmu.IntradayTickRequest
             if (RequestIntradayTickElementStringArray._allowedEventTypes.Contains(value, StringComparer.Ordinal))
                 this._values.Add(value);
             else
-                throw new KeyNotFoundException(); //yes, the BloombergAPI actaully throws a KeyNotFoundException if the user requests a field that isn't supported.
+                throw new KeyNotFoundException("Keys are case-sensitive.  Capital letters only."); //yes, the BloombergAPI actaully throws a KeyNotFoundException if the user requests a field that isn't supported.
         }
 
         internal List<string> Values { get { return this._values; } }

@@ -23,22 +23,22 @@ namespace BEmu.IntradayTickRequest
             this._fields = new Dictionary<string, Element>();
 
             Element elmTime = new ElementIntradayTickDateTime(datetime);
-            this._fields.Add(elmTime.Name.ToString().ToUpper(), elmTime);
+            this._fields.Add(elmTime.Name.ToString(), elmTime);
 
             //TODO: This should actually be an enumeration, not a string
             Element elmType = new ElementIntradayTickString("type", values.Item1);
-            this._fields.Add(elmType.Name.ToString().ToUpper(), elmType);
+            this._fields.Add(elmType.Name.ToString(), elmType);
 
             Element elmValue = new ElementIntradayTickDouble("value", values.Item2);
-            this._fields.Add(elmValue.Name.ToString().ToUpper(), elmValue);
+            this._fields.Add(elmValue.Name.ToString(), elmValue);
 
             Element elmSize = new ElementIntradayTickInt("size", values.Item3);
-            this._fields.Add(elmSize.Name.ToString().ToUpper(), elmSize);
+            this._fields.Add(elmSize.Name.ToString(), elmSize);
 
             if (includeConditionCodes)
             {
                 Element elmConditionCodes = new ElementIntradayTickString("conditionCodes", "R6,IS");
-                this._fields.Add(elmConditionCodes.Name.ToString().ToUpper(), elmConditionCodes);
+                this._fields.Add(elmConditionCodes.Name.ToString(), elmConditionCodes);
             }
         }
 
@@ -54,7 +54,7 @@ namespace BEmu.IntradayTickRequest
         public override object this[int index] { get { return null; } }
         public override Element GetElement(int index) { return this.Elements.Skip(index).First(); }
         public override Element GetElement(string name) { return this[name]; }
-        public override Element this[string name] { get { return this._fields[name.ToUpper()]; } }
+        public override Element this[string name] { get { return this._fields[name]; } }
 
         public override object this[string name, int index]
         {
@@ -109,7 +109,7 @@ namespace BEmu.IntradayTickRequest
 
         public override bool HasElement(string name, bool excludeNullElements = false)
         {
-            return this._fields.ContainsKey(name.ToUpper());
+            return this._fields.ContainsKey(name);
         }
 
         internal override StringBuilder PrettyPrint(int tabIndent)

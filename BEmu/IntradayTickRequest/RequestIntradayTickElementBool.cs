@@ -19,7 +19,7 @@ namespace BEmu.IntradayTickRequest
         private readonly bool _value;
 
         internal RequestIntradayTickElementBool(string elementName, bool value)
-            : base(elementName, value.ToString().ToLower())
+            : base(elementName, value.ToString())
         {
             this._value = value;
         }

@@ -75,7 +75,7 @@ namespace BEmu.IntradayTickRequest
         {
             get
             {
-                if (this._security.Name.ToString().ToLower() == elementName.ToLower())
+                if (this._security.Name.ToString() == elementName)
                     return this._security;
                 else
                     throw new NotImplementedException("BEmu.IntradayTickDataRequest.RequestReference: public Element this[string elementName] not supported");
@@ -128,67 +128,70 @@ namespace BEmu.IntradayTickRequest
         #region OVERRIDES
         public override void Append(string name, string elementValue)
         {
-            switch (name.ToLower())
+            switch (name)
             {
-                case "eventtypes":
+                case "eventTypes":
                     this._eventTypes.AddValue(elementValue);
                     break;
                 default:
-                    throw new ArgumentException(string.Format("BEmu.RequestIntradayTick.Append: Element name {0} not supported", name));
+                    throw new ArgumentException(string.Format("BEmu.RequestIntradayTick.Append: Element name {0} not supported. Names are case-sensitive.", name));
             }
         }
 
         public override void Set(string name, string elementValue)
         {
-            var upper = name.ToUpper();
-            switch (upper)
+            switch (name)
             {
-                case "SECURITY":
+                case "security":
                     this._security = new RequestIntradayTickElementString(name, elementValue);
                     break;
+                default:
+                    throw new ArgumentException("Names are case-sensitive");
             }
         }
 
         public override void Set(string name, Datetime elementValue)
         {
-            var upper = name.ToUpper();
-            switch (upper)
+            switch (name)
             {
-                case "STARTDATETIME":
+                case "startDateTime":
                     this._timeStart = new RequestIntradayTickElementTime(name, elementValue);
                     break;
-                case "ENDDATETIME":
+                case "endDateTime":
                     this._timeEnd = new RequestIntradayTickElementTime(name, elementValue);
                     break;
+                default:
+                    throw new ArgumentException("Names are case-sensitive");
             }
         }
 
         public override void Set(string name, bool elementValue)
         {
-            var upper = name.ToUpper();
-            switch (upper)
+            switch (name)
             {
-                case "INCLUDECONDITIONCODES":
+                case "includeConditionCodes":
                     this._includeConditionCodes = new RequestIntradayTickElementBool(name, elementValue);
                     break;
-                case "INCLUDENONPLOTTABLEEVENTS":
+                case "includeNonPlottableEvents":
                     this._includeNonPlottableEvents = new RequestIntradayTickElementBool(name, elementValue);
                     break;
-                case "INCLUDEEXCHANGECODES":
+                case "includeExchangeCodes":
                     this._includeExchangeCodes = new RequestIntradayTickElementBool(name, elementValue);
                     break;
-                case "RETURNEIDS":
+                case "returnEids":
                     this._returnEids = new RequestIntradayTickElementBool(name, elementValue);
                     break;
-                case "INCLUDEBROKERCODES":
+                case "includeBrokerCodes":
                     this._includeBrokerCodes = new RequestIntradayTickElementBool(name, elementValue);
                     break;
-                case "INCLUDERPSCODES":
+                case "includeRpsCodes":
                     this._includeRpsCodes = new RequestIntradayTickElementBool(name, elementValue);
                     break;
-                case "INCLUDEBICMICCODES":
+                case "includeBicMicCodes":
                     this._includeBicMicCodes = new RequestIntradayTickElementBool(name, elementValue);
                     break;
+                default:
+                    throw new ArgumentException("Names are case-sensitive");
             }
         }
         #endregion

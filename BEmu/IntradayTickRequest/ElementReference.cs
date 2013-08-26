@@ -42,7 +42,7 @@ namespace BEmu.IntradayTickRequest
             {
                 foreach (var item in this.Elements)
                 {
-                    if (item.Name.ToString().ToLower() == name.ToLower())
+                    if (item.Name.ToString() == name)
                         return item;
                 }
                 return base[name];
