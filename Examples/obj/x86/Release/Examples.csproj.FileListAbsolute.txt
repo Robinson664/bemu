@@ -1,9 +1,0 @@
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\Examples.exe.config
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\Examples.exe
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\Examples.pdb
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\BEmu.dll
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\BEmu.pdb
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\obj\x86\Release\Examples.csprojResolveAssemblyReference.cache
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\obj\x86\Release\Examples.exe
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\obj\x86\Release\Examples.pdb
-C:\Users\jrobinson.FOREFRONT\Documents\Visual Studio 2010\Projects\BEmu\Examples\bin\Release\Bloomberglp.Blpapi.dll
