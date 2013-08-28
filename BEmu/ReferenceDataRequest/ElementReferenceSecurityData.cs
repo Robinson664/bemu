@@ -21,7 +21,7 @@ namespace BEmu.ReferenceDataRequest
         private readonly ElementReferenceFieldData _elmFieldData;
         private readonly ElementReferenceFieldExceptionsArray _elmFieldExceptions;
         private readonly ElementReferenceSecurityError _elmSecError;
-        private bool _isSecurityError;
+        private readonly bool _isSecurityError;
 
         internal ElementReferenceSecurityData(string securityName, Dictionary<string, object> fieldData, int sequenceNumber)
         {
@@ -105,13 +105,23 @@ namespace BEmu.ReferenceDataRequest
                 switch (name)
                 {
                     case "fieldData":
-                        return this._elmFieldData;
+                        if (!this._isSecurityError)
+                            return this._elmFieldData;
+                        else
+                            break;
+
                     case "security":
                         return this._elmSecurityName;
+
                     case "sequenceNumber":
                         return this._elmSequenceNumber;
+
                     case "fieldExceptions":
-                        return this._elmFieldExceptions;
+                        if (this._elmFieldExceptions == null)
+                            break;
+                        else
+                            return this._elmFieldExceptions;
+
                     case "securityError":
                         if (this._isSecurityError) //this element doesn't exist if the security exists
                             return this._elmSecError;
@@ -126,7 +136,7 @@ namespace BEmu.ReferenceDataRequest
         {
             foreach (var item in this.Elements)
             {
-                if (item.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase))
+                if (item.Name.ToString().Equals(name))
                     return true;
             }
             return false;

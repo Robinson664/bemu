@@ -24,13 +24,13 @@ public class ElementHistoricFieldData extends ElementParent
 		this._fields = new HashMap<String, ElementParent>();
 		
 		ElementParent elmDate = new ElementHistoricDateTime(date);
-		this._fields.put(elmDate.name().toString().toUpperCase(), elmDate);
+		this._fields.put(elmDate.name().toString(), elmDate);
 		
 		for (Map.Entry<String, Object> item : values.entrySet())
 		{
 			if(item.getValue().getClass() == Double.class)
 			{
-				ElementParent elmDouble = new ElementHistoricDouble(item.getKey().toUpperCase(), (Double)item.getValue());
+				ElementParent elmDouble = new ElementHistoricDouble(item.getKey(), (Double)item.getValue());
                 this._fields.put(elmDouble.name().toString(), elmDouble);
 			}
 		}
@@ -68,42 +68,42 @@ public class ElementHistoricFieldData extends ElementParent
 	
 	public int getElementAsInt32(String name) throws Exception
 	{
-		return this._fields.get(name.toUpperCase()).getValueAsInt32();
+		return this._fields.get(name).getValueAsInt32();
 	}
     
     public Datetime getElementAsDatetime(String name) throws Exception
     {
-    	return this._fields.get(name.toUpperCase()).getValueAsDatetime();
+    	return this._fields.get(name).getValueAsDatetime();
     }
     
     public Datetime getElementAsDate(String name) throws Exception
     {
-    	return this._fields.get(name.toUpperCase()).getValueAsDate();
+    	return this._fields.get(name).getValueAsDate();
     }
     
     public Datetime getElementAsTime(String name) throws Exception
     {
-    	return this._fields.get(name.toUpperCase()).getValueAsTime();
+    	return this._fields.get(name).getValueAsTime();
     }
     
     public String getElementAsString(String name) throws Exception
     {
-    	return this._fields.get(name.toUpperCase()).getValueAsString();
+    	return this._fields.get(name).getValueAsString();
     }
 	
 	public float getElementAsFloat32(String name) throws Exception
 	{
-		return this._fields.get(name.toUpperCase()).getValueAsFloat32();
+		return this._fields.get(name).getValueAsFloat32();
 	}
 	
 	public double getElementAsFloat64(String name) throws Exception
 	{
-		return this._fields.get(name.toUpperCase()).getValueAsFloat64();
+		return this._fields.get(name).getValueAsFloat64();
 	}
 	
 	public long getElementAsInt64(String name) throws Exception
 	{
-		return this._fields.get(name.toUpperCase()).getValueAsInt64();
+		return this._fields.get(name).getValueAsInt64();
 	}
 	
 	public boolean hasElement(String name)

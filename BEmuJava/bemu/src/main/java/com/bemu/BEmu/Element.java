@@ -13,12 +13,14 @@ import java.lang.StringBuilder;
 import com.bemu.BEmu.Name;
 import com.bemu.BEmu.types.IndentType;
 import com.bemu.BEmu.Datetime;
+import com.bemu.BEmu.Schema;
 
 public abstract class Element {
 	protected abstract StringBuilder prettyPrint(int tabIndent);
 	public abstract Name name();
 	public abstract int numValues();
 	public abstract int numElements();
+	public Schema.Datatype datatype() { return Schema.Datatype.SEQUENCE; }
 	
 	public String toString()
 	{
@@ -201,7 +203,7 @@ public abstract class Element {
 
     public Element getElement(String name) throws Exception
     {
-        throw new Exception("Element doesn't support getting elements by name");
+        throw new Exception("Element doesn't support getting elements by name. 'name' is case-sensitive.");
     }
 
     public Element getElement(int index) throws Exception

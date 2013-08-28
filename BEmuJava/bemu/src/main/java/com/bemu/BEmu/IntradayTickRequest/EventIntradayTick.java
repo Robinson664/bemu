@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import com.bemu.BEmu.types.Rules;
 
 public class EventIntradayTick extends Event
 {	
@@ -31,30 +32,42 @@ public class EventIntradayTick extends Event
 	{
 		List<Message> result = new ArrayList<Message>();
 		RequestIntradayTick ireq = (RequestIntradayTick)super._request;
-		
-		Map<Datetime, Tuple3<String, Double, Integer>> tickData = new HashMap<Datetime, Tuple3<String, Double, Integer>>();
-		
-		if(ireq.dtStart() != null)
-		{
-			List<Datetime> dates = ireq.GetDates();
-			for(int i = 0; i < dates.size(); i++)
+
+        String security = ireq.security();
+        boolean isResponseError = Rules.isSecurityError(security);
+
+        if (isResponseError)
+        {
+            MessageIntradayTick msg = new MessageIntradayTick(super._request.correlationId(), ireq.getService());
+            result.add(msg);
+        }
+        else
+        {		
+			Map<Datetime, Tuple3<String, Double, Integer>> tickData = new HashMap<Datetime, Tuple3<String, Double, Integer>>();
+			
+			if(ireq.dtStart() != null)
 			{
-				Datetime dtCurrent = dates.get(i);
-				if(dtCurrent.calendar().get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && dtCurrent.calendar().get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
+				List<Datetime> dates = ireq.getDates();
+				for(int i = 0; i < dates.size(); i++)
 				{
-					String t1 = "TRADE";
-					Double t2 = com.bemu.BEmu.types.RandomDataGenerator.randomDouble();
-					Integer t3 = com.bemu.BEmu.types.RandomDataGenerator.intradayTickTradeSize();
-					
-					Tuple3<String, Double, Integer> value = new Tuple3<String, Double, Integer>(t1, t2, t3);
-					
-					tickData.put(dtCurrent, value);
+					Datetime dtCurrent = dates.get(i);
+					if(dtCurrent.calendar().get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && dtCurrent.calendar().get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
+					{
+						String t1 = "TRADE";
+						Double t2 = com.bemu.BEmu.types.RandomDataGenerator.randomDouble();
+						Integer t3 = com.bemu.BEmu.types.RandomDataGenerator.intradayTickTradeSize();
+						
+						Tuple3<String, Double, Integer> value = new Tuple3<String, Double, Integer>(t1, t2, t3);
+						
+						tickData.put(dtCurrent, value);
+					}
 				}
 			}
-		}
+
+			MessageIntradayTick msg = new MessageIntradayTick(super._request.correlationId(), tickData, ireq.includeConditionCodes(), ireq.getService());
+			result.add(msg);
+        }
 		
-		MessageIntradayTick msg = new MessageIntradayTick(super._request.correlationId(), tickData, ireq.includeConditionCodes(), ireq.getService());
-		result.add(msg);
 		
 		return result;		
 	}

@@ -1,6 +1,7 @@
 package com.bemu.BEmu.ReferenceDataRequest;
 
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementReferenceString extends ElementParent
 {
@@ -40,6 +41,11 @@ public class ElementReferenceString extends ElementParent
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.STRING;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

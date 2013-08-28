@@ -62,7 +62,7 @@ public class RequestIntradayTickElementStringArray extends Element
     	boolean found = false;
     	for(int i = 0; i < RequestIntradayTickElementStringArray._allowedEventTypes.length; i++)
     	{
-    		if(RequestIntradayTickElementStringArray._allowedEventTypes[i].equalsIgnoreCase(value))
+    		if(RequestIntradayTickElementStringArray._allowedEventTypes[i].equals(value))
     		{
     			found = true;
     			break;
@@ -72,7 +72,7 @@ public class RequestIntradayTickElementStringArray extends Element
     	if(found)    	
     		this._values.add(value);
     	else
-    		throw new Exception("Cannot convert String  to Enumeration");
+    		throw new Exception("Cannot convert String to Enumeration. value is case-sensitive.");
     }
     
     List<String> values()

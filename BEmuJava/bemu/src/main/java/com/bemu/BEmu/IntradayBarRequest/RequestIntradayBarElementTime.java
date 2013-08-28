@@ -10,6 +10,7 @@
 package com.bemu.BEmu.IntradayBarRequest;
 
 import com.bemu.BEmu.Datetime;
+import com.bemu.BEmu.Schema;
 
 public class RequestIntradayBarElementTime extends RequestIntradayBarElementString
 {
@@ -31,5 +32,10 @@ public class RequestIntradayBarElementTime extends RequestIntradayBarElementStri
     protected Datetime getDate()
     {
     	return this._instance;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.STRING;
     }
 }

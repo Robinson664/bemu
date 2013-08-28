@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementIntradayTickDateTime extends ElementParent
 {
@@ -51,6 +52,11 @@ public class ElementIntradayTickDateTime extends ElementParent
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.DATETIME;
     }
     
     public boolean hasElement(String name)

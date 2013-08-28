@@ -20,19 +20,52 @@ import java.util.List;
 public class MessageIntradayBar extends Message
 {
 	private final ElementBarData _parent;
+    private final ElementIntradayBarResponseError _responseError;
+    private final boolean _isResponseError;
 	
+    public MessageIntradayBar(CorrelationID corr, Service service, String security)
+    {
+    	super(new Name("IntradayBarResponse"), corr, service);
+        this._responseError = new ElementIntradayBarResponseError(security);
+        this._parent = null;
+        this._isResponseError = true;
+    }
+    
+    
 	public MessageIntradayBar(CorrelationID corr, List<BarTickDataType> bars, Service service)
 	{
 		super(new Name("IntradayBarResponse"), corr, service);
 		this._parent = new ElementBarData(bars);
+        this._responseError = null;
+        this._isResponseError = false;
+	}
+	
+	public boolean hasElement(String name)
+	{
+		return this.hasElement(name, false);
+	}
+	
+	public boolean hasElement(String name, boolean excludeNullElements)
+	{
+		return 
+				(this._isResponseError && name.equals(this._responseError.name().toString())) ||
+				(!this._isResponseError && name.equals(this._parent.name().toString()));
 	}
 	
 	public Element getElement(String name) throws Exception
 	{
-		if(name.toLowerCase().equals(this._parent.name().toString().toLowerCase()))
-			return this._parent;
+		if(this._isResponseError)
+		{
+			if(name.equals(this._responseError.name().toString()))
+				return this._responseError;
+		}
 		else
-			throw new Exception("not implemented");
+		{
+			if(name.equals(this._parent.name().toString()))
+				return this._parent;
+		}
+		
+		throw new Exception("not implemented. names are case-sensitive.");
 	}
 	
 	public String topicName()
@@ -49,7 +82,12 @@ public class MessageIntradayBar extends Message
     {
         StringBuilder result = new StringBuilder();
         result.append("IntradayBarResponse (choice) = {" + System.getProperty("line.separator"));
-        result.append(this._parent.prettyPrint(1));
+        
+        if(this._isResponseError)
+        	result.append(this._responseError.prettyPrint(1));
+        else        
+        	result.append(this._parent.prettyPrint(1));
+        
         result.append("}");
 
         return result.toString();

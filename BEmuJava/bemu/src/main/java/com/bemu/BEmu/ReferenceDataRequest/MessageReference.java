@@ -33,7 +33,7 @@ public class MessageReference extends Message
     
     public Element getElement(String name) throws Exception
     {
-    	if(name.toUpperCase().equals(this._securities.name().toString().toUpperCase()))
+    	if(name.equals(this._securities.name().toString()))
     		return this._securities;
     	
     	else

@@ -10,6 +10,7 @@
 package com.bemu.BEmu.IntradayTickRequest;
 
 import com.bemu.BEmu.Datetime;
+import com.bemu.BEmu.Schema;
 
 public class RequestIntradayTickElementTime extends RequestIntradayTickElementString
 {
@@ -31,5 +32,10 @@ public class RequestIntradayTickElementTime extends RequestIntradayTickElementSt
     Datetime getDate()
     {
     	return this._instance;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.STRING;
     }
 }

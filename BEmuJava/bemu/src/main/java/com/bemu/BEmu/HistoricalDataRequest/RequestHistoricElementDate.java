@@ -10,6 +10,7 @@
 package com.bemu.BEmu.HistoricalDataRequest;
 
 import com.bemu.BEmu.Datetime;
+import com.bemu.BEmu.Schema;
 
 public class RequestHistoricElementDate extends RequestHistoricElementString
 {
@@ -31,5 +32,10 @@ public class RequestHistoricElementDate extends RequestHistoricElementString
     Datetime getDate()
     {
     	return this._instance;
+    }
+    
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.DATE;
     }
 }

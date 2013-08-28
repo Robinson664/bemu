@@ -11,6 +11,8 @@ package com.bemu.BEmu.IntradayTickRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
+
 import java.lang.StringBuilder;
 
 public class RequestIntradayTickElementString extends Element
@@ -41,6 +43,11 @@ public class RequestIntradayTickElementString extends Element
     String security()
     {
     	return this._value;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.STRING;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

@@ -11,6 +11,7 @@ package com.bemu.BEmu.IntradayTickRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementReference extends Element
 {
@@ -49,6 +50,11 @@ public class ElementReference extends Element
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.CHOICE;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

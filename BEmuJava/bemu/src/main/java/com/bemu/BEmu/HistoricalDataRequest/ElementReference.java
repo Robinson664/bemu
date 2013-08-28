@@ -10,6 +10,7 @@
 package com.bemu.BEmu.HistoricalDataRequest;
 
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementReference extends ElementParent
 {
@@ -48,6 +49,11 @@ public class ElementReference extends ElementParent
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.CHOICE;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

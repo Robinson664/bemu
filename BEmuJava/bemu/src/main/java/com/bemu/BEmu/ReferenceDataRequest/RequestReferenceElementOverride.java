@@ -16,13 +16,11 @@ public class RequestReferenceElementOverride extends ElementParent
     
     public void setElement(String name, Object value) throws Exception
     {
-    	String upper = name.toUpperCase();
+    	if(name.equals("fieldId"))
+            this._fieldId = new ElementReferenceString(name, value.toString());
     	
-    	if(upper.equals("FIELDID"))
-            this._fieldId = new ElementReferenceString(upper, value.toString());
-    	
-    	else if(upper.equals("VALUE"))
-    		this._value = new ElementReferenceObject(upper, value);
+    	else if(name.equals("value"))
+    		this._value = new ElementReferenceObject(name, value);
     	
     	else
     		super.setElement(name, value);
@@ -30,12 +28,10 @@ public class RequestReferenceElementOverride extends ElementParent
     
     public Element getElement(String name) throws Exception
     {
-    	String upper = name.toUpperCase();
-    	
-    	if(upper.equals("FIELDID"))
+    	if(name.equals("fieldId"))
             return this._fieldId;
     	
-    	else if(upper.equals("VALUE"))
+    	else if(name.equals("value"))
     		return this._value;
     	
     	else

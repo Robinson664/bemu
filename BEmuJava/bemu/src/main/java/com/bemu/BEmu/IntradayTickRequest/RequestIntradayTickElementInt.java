@@ -9,13 +9,15 @@
 
 package com.bemu.BEmu.IntradayTickRequest;
 
+import com.bemu.BEmu.Schema;
+
 public class RequestIntradayTickElementInt extends RequestIntradayTickElementString
 {
     private final int _value;
 
     RequestIntradayTickElementInt(String elementName, int value)
     {
-    	super(elementName, String.valueOf(value).toLowerCase());
+    	super(elementName, String.valueOf(value));
         this._value = value;
     }
 
@@ -24,4 +26,9 @@ public class RequestIntradayTickElementInt extends RequestIntradayTickElementStr
     {
 		return this._value; 
     } 
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.INT32;
+    }
 }

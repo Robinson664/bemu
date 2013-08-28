@@ -34,10 +34,10 @@ public class MessageHistoric extends Message
     
 	public Element getElement(String name) throws Exception
 	{
-		if(name.toLowerCase().equals(this._security.name().toString().toLowerCase()))
+		if(name.equals(this._security.name().toString()))
 			return this._security;
 		else
-			throw new Exception("not implemented");
+			throw new Exception("not implemented. case-sensitive.");
 	}
     
     public String toString()

@@ -62,7 +62,7 @@ public class RequestIntradayBarElementStringArray extends Element
     	boolean found = false;
     	for(int i = 0; i < RequestIntradayBarElementStringArray._allowedEventTypes.length; i++)
     	{
-    		if(RequestIntradayBarElementStringArray._allowedEventTypes[i].equalsIgnoreCase(value))
+    		if(RequestIntradayBarElementStringArray._allowedEventTypes[i].equals(value))
     		{
     			found = true;
     			break;
@@ -72,7 +72,7 @@ public class RequestIntradayBarElementStringArray extends Element
     	if(found)    	
     		this._values.add(value);
     	else
-    		throw new Exception("Cannot convert String  to Enumeration");
+    		throw new Exception("Value not recognized.  case-sensitive.");
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

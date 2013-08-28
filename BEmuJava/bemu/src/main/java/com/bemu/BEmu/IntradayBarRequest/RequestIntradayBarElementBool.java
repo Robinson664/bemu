@@ -9,6 +9,8 @@
 
 package com.bemu.BEmu.IntradayBarRequest;
 
+import com.bemu.BEmu.Schema;
+
 public class RequestIntradayBarElementBool extends RequestIntradayBarElementString
 {
     private final boolean _value;
@@ -23,5 +25,10 @@ public class RequestIntradayBarElementBool extends RequestIntradayBarElementStri
     boolean getBoolean()
     {
     	return this._value;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.BOOL;
     }
 }

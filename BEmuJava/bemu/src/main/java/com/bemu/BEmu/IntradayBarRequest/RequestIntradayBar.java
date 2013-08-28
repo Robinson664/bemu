@@ -25,7 +25,6 @@ public class RequestIntradayBar extends Request
         this._eventTypes = new RequestIntradayBarElementStringArray("TBD");
 	}
 	
-    @SuppressWarnings("unused")
 	private RequestIntradayBarElementString _security;
     private final RequestIntradayBarElementStringArray _eventTypes;
     private RequestIntradayBarElementTime _dtStart, _dtEnd;
@@ -48,6 +47,12 @@ public class RequestIntradayBar extends Request
     {
     	return this._dtEnd.getDate();
     }
+	
+	//Don't use this.  It's only used internally.
+	public String security() throws Exception
+	{
+		return this._security.getValueAsString();
+	}
     
 	protected List<Datetime> getDateTimes() throws Exception
     {
@@ -84,55 +89,61 @@ public class RequestIntradayBar extends Request
     
     public void set(String name, String elementValue) throws Exception
     {
-        String upper = name.toUpperCase();
-        
-        if(upper.equals("SECURITY"))
+        if(name.equals("security"))
         	this._security = new RequestIntradayBarElementString(name, elementValue);
-        else if (upper.equals("EVENTTYPE"))
+        
+        else if (name.equals("eventType"))
         	this._eventTypes.addValue(elementValue);
+        
+        else
+        	throw new Exception("name not recognized.  case-sensitive.");
     }
     
-    public void set(String name, Datetime elementValue)
+    public void set(String name, Datetime elementValue) throws Exception
     {
-        String upper = name.toUpperCase();
-
-        if(upper.equals("STARTDATETIME"))
+        if(name.equals("startDateTime"))
         {
         	elementValue.setSecond(0);
             this._dtStart = new RequestIntradayBarElementTime(name, elementValue);
         }
-        else if(upper.equals("ENDDATETIME"))
+        else if(name.equals("endDateTime"))
         	this._dtEnd = new RequestIntradayBarElementTime(name, elementValue);
+        
+        else
+        	throw new Exception("name not recognized.  case-sensitive.");
     }
     
-    public void set(String name, int elementValue)
+    public void set(String name, int elementValue) throws Exception
     {
-        String upper = name.toUpperCase();
-        if(upper.equals("INTERVAL"))
+        if(name.equals("interval"))
         	this._intervalInMinutes = new RequestIntradayBarElementInt(name, elementValue);
+        
+        else
+        	throw new Exception("name not recognized.  case-sensitive.");
     }
 
-    public void set(String name, boolean elementValue)
+    public void set(String name, boolean elementValue) throws Exception
     {
-        String upper = name.toUpperCase();
-        
-        if(upper.equals("GAPFILLINITIALBAR"))
+        if(name.equals("gapFillInitialBar"))
         	this._gapFillInitialBar = new RequestIntradayBarElementBool(name, elementValue);
         
-        else if(upper.equals("RETURNEIDS"))
+        else if(name.equals("returnEids"))
             this._returnEids = new RequestIntradayBarElementBool(name, elementValue);
         
-        else if(upper.equals("ADJUSTMENTNORMAL"))
+        else if(name.equals("adjustmentNormal"))
             this._adjustmentNormalElement = new RequestIntradayBarElementBool(name, elementValue);
         
-        else if(upper.equals("ADJUSTMENTABNORMAL"))
+        else if(name.equals("adjustmentAbnormal"))
             this._adjustmentAbnormalElement = new RequestIntradayBarElementBool(name, elementValue);
         
-        else if(upper.equals("ADJUSTMENTSPLIT"))
+        else if(name.equals("adjustmentSplit"))
             this._adjustmentSplitElement = new RequestIntradayBarElementBool(name, elementValue);
         
-        else if(upper.equals("ADJUSTMENTFOLLOWDPDF"))
+        else if(name.equals("adjustmentFollowDPDF"))
             this._adjustmentFollowDPDF = new RequestIntradayBarElementBool(name, elementValue);
+        
+        else
+        	throw new Exception("name not recognized.  case-sensitive.");
     }
     
     

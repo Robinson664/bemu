@@ -49,6 +49,17 @@ public class ElementReferenceSecurityDataArray extends ElementParent
     	return 0;
     }
     
+    public boolean hasElement(String name)
+    {
+    	for(int i = 0; i < this._securities.size(); i++)
+    	{
+    		ElementReferenceSecurityData item = this._securities.get(i);
+            if (item.name().toString().equals(name))
+                return true;
+    	}
+        return false;
+    }
+    
     public Element getValueAsElement(int index)
     {
         return this._securities.get(index);

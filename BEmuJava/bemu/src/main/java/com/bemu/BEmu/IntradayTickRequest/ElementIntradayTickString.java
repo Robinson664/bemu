@@ -10,6 +10,8 @@
 package com.bemu.BEmu.IntradayTickRequest;
 
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
+
 import java.lang.StringBuilder;
 
 public class ElementIntradayTickString extends ElementParent
@@ -51,6 +53,11 @@ public class ElementIntradayTickString extends ElementParent
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.STRING;
     }
     
     public boolean hasElement(String name)

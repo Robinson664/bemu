@@ -30,6 +30,12 @@ public class CorrelationID {
 		this._isInternal = false;
 	}
 	
+    public CorrelationID(CorrelationID value)
+    {
+        this._value = value._value;
+        this._isInternal = value._isInternal;
+    }
+	
 	public CorrelationID()
 	{
 		this._value = CorrelationID._nextInternalCorrelationId++;

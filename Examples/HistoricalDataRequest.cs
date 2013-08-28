@@ -40,14 +40,21 @@ namespace Examples
 
                 //request information for the following securities
                 request.Append("securities", "MSFT US EQUITY");
-                //request.Append("securities", "ZYZZ US EQUITY"); //the code treats securities that start with a "Z" as non-existent
                 request.Append("securities", "C A COMDTY");
                 request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
 
+                //uncomment the following line to see what a request for a nonexistent security looks like
+                //request.Append("securities", "ZIBM US EQUITY");
+                //  My code treats all securities that start with a 'Z' as a nonexistent security
+
+
                 //include the following simple fields in the result
-                //request.Append("fields", "ZBID"); //the code treats a field that starts with a "Z" as a bad field
                 request.Append("fields", "BID");
                 request.Append("fields", "ASK");
+
+                //uncomment the following line to see what a request for an invalid field looks like
+                //request.append("fields", "ZBID");
+                //  My code treats all fields that start with a 'Z' as an invalid field
 
                 //Historical requests allow a few overrides.  See the developer's guide A.2.4 for more information.
 
@@ -89,13 +96,13 @@ namespace Examples
                     {
                         case Event.EventType.RESPONSE: // final event
                             continueToLoop = false;
-                            handleResponseEvent(eventObj);
+                            HistoricalDataRequest.handleResponseEvent(eventObj);
                             break;
                         case Event.EventType.PARTIAL_RESPONSE:
-                            handleResponseEvent(eventObj);
+                            HistoricalDataRequest.handleResponseEvent(eventObj);
                             break;
                         default:
-                            handleOtherEvent(eventObj);
+                            HistoricalDataRequest.handleOtherEvent(eventObj);
                             break;
                     }
                 }
@@ -126,12 +133,12 @@ namespace Examples
                     string errorMessage = elmSecError.GetElementAsString("message");
                     string subCategory = elmSecError.GetElementAsString("subcategory");
 
-                    Console.WriteLine("security error");
-                    Console.WriteLine(string.Format("source = {0}", source));
-                    Console.WriteLine(string.Format("code = {0}", code));
-                    Console.WriteLine(string.Format("category = {0}", category));
-                    Console.WriteLine(string.Format("errorMessage = {0}", errorMessage));
-                    Console.WriteLine(string.Format("subCategory = {0}", subCategory));
+                    Console.Error.WriteLine("security error");
+                    Console.Error.WriteLine(string.Format("source = {0}", source));
+                    Console.Error.WriteLine(string.Format("code = {0}", code));
+                    Console.Error.WriteLine(string.Format("category = {0}", category));
+                    Console.Error.WriteLine(string.Format("errorMessage = {0}", errorMessage));
+                    Console.Error.WriteLine(string.Format("subcategory = {0}", subCategory));
                 }
                 else
                 {
@@ -151,15 +158,15 @@ namespace Examples
                             string strMessage = errorInfo.GetElementAsString("message");
                             string subCategory = errorInfo.GetElementAsString("subcategory");
 
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine("field error: ");
-                            Console.WriteLine(string.Format("\tfieldId = {0}", fieldId));
-                            Console.WriteLine(string.Format("\tsource = {0}", source));
-                            Console.WriteLine(string.Format("\tcode = {0}", code));
-                            Console.WriteLine(string.Format("\tcategory = {0}", category));
-                            Console.WriteLine(string.Format("\terrorMessage = {0}", strMessage));
-                            Console.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
+                            Console.Error.WriteLine();
+                            Console.Error.WriteLine();
+                            Console.Error.WriteLine("field error: ");
+                            Console.Error.WriteLine(string.Format("\tfieldId = {0}", fieldId));
+                            Console.Error.WriteLine(string.Format("\tsource = {0}", source));
+                            Console.Error.WriteLine(string.Format("\tcode = {0}", code));
+                            Console.Error.WriteLine(string.Format("\tcategory = {0}", category));
+                            Console.Error.WriteLine(string.Format("\terrorMessage = {0}", strMessage));
+                            Console.Error.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
                         }
                     }
 

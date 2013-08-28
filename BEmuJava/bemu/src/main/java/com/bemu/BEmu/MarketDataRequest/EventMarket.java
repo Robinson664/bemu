@@ -18,6 +18,7 @@ import com.bemu.BEmu.Message;
 import com.bemu.BEmu.MessageIterator;
 import com.bemu.BEmu.Subscription;
 import com.bemu.BEmu.CorrelationID;
+import com.bemu.BEmu.types.Rules;
 
 public class EventMarket extends Event
 {
@@ -47,10 +48,18 @@ public class EventMarket extends Event
                 
                 for(int i = 0; i < subscriptions.size(); i++)
                 {
-                	Subscription item = subscriptions.get(i);
-                	
-                    MessageMarketSubscriptionStarted msgSubStatus = new MessageMarketSubscriptionStarted(item);
-                    this._messages.add(msgSubStatus); 
+                	Subscription item = subscriptions.get(i); 
+                	boolean securityError = Rules.isSecurityError(item.security());
+                	if(securityError)
+                	{
+                        MessageMarketSubscriptionFailure msgError = new MessageMarketSubscriptionFailure(item);
+                        this._messages.add(msgError);
+                	}
+                	else
+                	{
+                        MessageMarketSubscriptionStarted msgSubStatus = new MessageMarketSubscriptionStarted(item);
+                        this._messages.add(msgSubStatus);
+                	}
                 }
                 break;
 
@@ -59,10 +68,13 @@ public class EventMarket extends Event
                 
                 for(int i = 0; i < subscriptions.size(); i++)
                 {
-                	Subscription item = subscriptions.get(i);
-                	
-                    MessageMarketSubscriptionData msgSubData = new MessageMarketSubscriptionData(item, EventMarket.GenerateFakeMessageData(item));
-                    this._messages.add(msgSubData);
+                	Subscription item = subscriptions.get(i); 
+                	boolean securityError = Rules.isSecurityError(item.security());
+                	if(!securityError)
+                	{
+	                    MessageMarketSubscriptionData msgSubData = new MessageMarketSubscriptionData(item, EventMarket.GenerateFakeMessageData(item));
+	                    this._messages.add(msgSubData);
+                	}
                 }
                 break;
 

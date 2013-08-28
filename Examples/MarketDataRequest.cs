@@ -14,18 +14,26 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    //un-comment the following two lines to use the Bloomberg API Emulator
-    using BEmu;
-    using EventHandler = BEmu.EventHandler; //this declaration specifies that EventHandler refers to BEmu.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+    ////un-comment the following two lines to use the Bloomberg API Emulator
+    //using BEmu;
+    //using EventHandler = BEmu.EventHandler; //this declaration specifies that EventHandler refers to BEmu.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
 
-    ////un-comment the following two lines to use the actual Bloomberg API
-    //using Bloomberglp.Blpapi;
-    //using EventHandler = Bloomberglp.Blpapi.EventHandler; //this declaration specifies that EventHandler refers to Bloomberglp.Blpapi.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
+    //un-comment the following two lines to use the actual Bloomberg API
+    using Bloomberglp.Blpapi;
+    using EventHandler = Bloomberglp.Blpapi.EventHandler; //this declaration specifies that EventHandler refers to Bloomberglp.Blpapi.EventHandler and not System.EventHandler.  The Bloomberg API named this ambiguously.
 
     public static class MarketDataRequest
     {
         public static void RunExample()
         {
+            MarketDataRequest._fields = new List<String>();
+            MarketDataRequest._fields.Add("BID");
+            MarketDataRequest._fields.Add("ASK");
+
+            //uncomment the following line to see what a request for a nonexistent security looks like
+            //MarketDataRequest._fields.Add("ZASK");
+            //  My code treats all securities that start with a 'Z' as a nonexistent security
+
             SessionOptions sessionOptions = new SessionOptions();
             sessionOptions.ServerHost = "localhost";
             sessionOptions.ServerPort = 8194;
@@ -34,7 +42,7 @@ namespace Examples
             session.StartAsync();
         }
 
-        private static List<string> _fields = new string[] { "BID", "ASK"/*, "ZBID"*/ }.ToList(); //the code treats a field that starts with a "Z" as a bad field
+        private static List<string> _fields;
 
         private static void ProcessEvent(Event evt, Session session)
         {
@@ -81,7 +89,9 @@ namespace Examples
                 case Event.EventType.SUBSCRIPTION_STATUS:
                     foreach (var msg in evt.GetMessages())
                     {
-                        bool fieldExceptionsExist = msg.HasElement("exceptions", true);
+                        bool fieldExceptionsExist = msg.MessageType.ToString() == "SubscriptionStarted" && msg.HasElement("exceptions", true);
+                        bool securityError = msg.MessageType.ToString() == "SubscriptionFailure" && msg.HasElement("reason", true);
+
                         if (fieldExceptionsExist)
                         {
                             Element elmExceptions = msg["exceptions"];
@@ -96,15 +106,31 @@ namespace Examples
                                 string category = elmReason.GetElementAsString("category");
                                 string description = elmReason.GetElementAsString("description");
 
-                                Console.WriteLine("field error: ");
-                                Console.WriteLine(string.Format("\tfieldId = {0}", fieldId));
-                                Console.WriteLine(string.Format("\tsource = {0}", source));
-                                Console.WriteLine(string.Format("\terrorCode = {0}", errorCode));
-                                Console.WriteLine(string.Format("\tcategory = {0}", category));
-                                Console.WriteLine(string.Format("\tdescription = {0}", description));
+                                Console.Error.WriteLine("field error: ");
+                                Console.Error.WriteLine(string.Format("\tfieldId = {0}", fieldId));
+                                Console.Error.WriteLine(string.Format("\tsource = {0}", source));
+                                Console.Error.WriteLine(string.Format("\terrorCode = {0}", errorCode));
+                                Console.Error.WriteLine(string.Format("\tcategory = {0}", category));
+                                Console.Error.WriteLine(string.Format("\tdescription = {0}", description));
                             }
                         }
+                        else if (securityError)
+                        {
+                            string security = msg.TopicName;
 
+                            Element elmReason = msg["reason"];
+                            string source = elmReason.GetElementAsString("source");
+                            int errorCode = elmReason.GetElementAsInt32("errorCode");
+                            string category = elmReason.GetElementAsString("category");
+                            string description = elmReason.GetElementAsString("description");
+
+                            Console.Error.WriteLine("security not found: ");
+                            Console.Error.WriteLine(string.Format("\tsecurity = {0}", security));
+                            Console.Error.WriteLine(string.Format("\tsource = {0}", source));
+                            Console.Error.WriteLine(string.Format("\terrorCode = {0}", errorCode));
+                            Console.Error.WriteLine(string.Format("\tcategory = {0}", category));
+                            Console.Error.WriteLine(string.Format("\tdescription = {0}", description));
+                        }
                     }
                     break;
             }

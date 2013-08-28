@@ -2,6 +2,7 @@ package com.bemu.BEmu.ReferenceDataRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementReference extends Element
 {
@@ -42,9 +43,14 @@ public class ElementReference extends Element
     	return false;
     }
 
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.CHOICE;
+    }
+
     public Element getElement(String name) throws Exception
     {
-        if (name.toUpperCase().equals(this._securities.name().toString().toUpperCase()))
+        if (name.equals(this._securities.name().toString()))
             return this._securities;
         
         else

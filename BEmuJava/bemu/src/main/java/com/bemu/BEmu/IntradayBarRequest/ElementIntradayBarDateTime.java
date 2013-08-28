@@ -10,6 +10,7 @@
 package com.bemu.BEmu.IntradayBarRequest;
 
 import com.bemu.BEmu.Element;
+import com.bemu.BEmu.Schema;
 import com.bemu.BEmu.Name;
 import com.bemu.BEmu.Datetime;
 import java.text.SimpleDateFormat;
@@ -52,6 +53,11 @@ public class ElementIntradayBarDateTime extends Element
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.DATETIME;
     }
     
     public boolean hasElement(String name)

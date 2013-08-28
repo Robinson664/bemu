@@ -75,9 +75,9 @@ namespace BEmu.HistoricalDataRequest
         {
             get
             {
-                switch (name.ToUpper())
+                switch (name)
                 {
-                    case "FIELDDATA":
+                    case "fieldData":
                         return this._elmFieldDataArray[index];
                     default:
                         if (index == 0)
@@ -93,7 +93,7 @@ namespace BEmu.HistoricalDataRequest
         {
             foreach (var item in this.Elements)
             {
-                if (item.Name.ToString().Equals(name, StringComparison.OrdinalIgnoreCase))
+                if (item.Name.ToString().Equals(name))
                     return true;
             }
             return false;
@@ -116,7 +116,10 @@ namespace BEmu.HistoricalDataRequest
                     return this._elmSequenceNumber;
 
                 case "fieldExceptions":
-                    return this._elmFieldExceptions;
+                    if (this._elmFieldExceptions == null)
+                        break;
+                    else
+                        return this._elmFieldExceptions;
 
                 case "securityError":
                     if (this._isSecurityError) //this element doesn't exist if the security exists

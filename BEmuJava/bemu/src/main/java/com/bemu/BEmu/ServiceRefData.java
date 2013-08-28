@@ -15,21 +15,19 @@ public class ServiceRefData extends Service
 	
 	public Request createRequest(String operationName) throws Exception
 	{
-		String lower = operationName.toLowerCase();
-		
-		if(lower.equals("historicaldatarequest"))
+		if(operationName.equals("HistoricalDataRequest"))
 			return new com.bemu.BEmu.HistoricalDataRequest.RequestHistoric();
 		
-		else if(lower.equals("referencedatarequest"))
+		else if(operationName.equals("ReferenceDataRequest"))
 			return new com.bemu.BEmu.ReferenceDataRequest.RequestReference();
 		
-		else if(lower.equals("intradaybarrequest"))
+		else if(operationName.equals("IntradayBarRequest"))
 			return new com.bemu.BEmu.IntradayBarRequest.RequestIntradayBar(this);
 		
-		else if(lower.equals("intradaytickrequest"))
+		else if(operationName.equals("IntradayTickRequest"))
 			return new com.bemu.BEmu.IntradayTickRequest.RequestIntradayTick(this);
 		
 		else
-			throw new Exception("not implemented");
+			throw new Exception("not implemented. names are case-sensitive.");
 	}
 }

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Subscription;
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Message;
@@ -64,7 +65,7 @@ public class MessageMarketSubscriptionData extends Message
             else if (item.getValue().getClass() == boolean.class || item.getValue().getClass() == Boolean.class)
                 elm = new ElementMarketBool(item.getKey(), (Boolean)item.getValue());
 
-            String key = item.getKey().toUpperCase();
+            String key = item.getKey();
             
             if (elm != null)
                 this._fields.put(key, elm);
@@ -81,6 +82,26 @@ public class MessageMarketSubscriptionData extends Message
     {
     	return this._fields.size();
     }
+	
+	public boolean hasElement(String name, boolean excludeNullElements)
+	{
+		for(Entry<String, ElementParent> item : this._fields.entrySet())
+		{
+			if(item.getValue().name().toString().equals(name))
+				return true;
+		}
+		return false;
+	}
+	
+	public Element getElement(String name) throws Exception
+	{
+		for(Entry<String, ElementParent> item : this._fields.entrySet())
+		{
+			if(item.getValue().name().toString().equals(name))
+				return item.getValue();
+		}
+		return super.getElement(name);
+	}
     
 	public String toString()
 	{

@@ -96,6 +96,9 @@ public class RunHistoricalDataRequest
 					case Event.EventType.Constants.PARTIAL_RESPONSE:
 						RunHistoricalDataRequest.processResponseHist(evt);
 						break;
+					default:
+						RunHistoricalDataRequest.handleOtherEvent(evt);
+						break;
 				}
 			}
 		}
@@ -129,12 +132,12 @@ public class RunHistoricalDataRequest
                 String errorMessage = elmSecError.getElementAsString("message");
                 String subCategory = elmSecError.getElementAsString("subcategory");
 
-                System.out.println("security error");
-                System.out.println(String.format("source = %s", source));
-                System.out.println(String.format("code = %s", code));
-                System.out.println(String.format("category = %s", category));
-                System.out.println(String.format("errorMessage = %s", errorMessage));
-                System.out.println(String.format("subCategory = %s", subCategory));
+                System.err.println("security error");
+                System.err.println(String.format("source = %s", source));
+                System.err.println(String.format("code = %s", code));
+                System.err.println(String.format("category = %s", category));
+                System.err.println(String.format("errorMessage = %s", errorMessage));
+                System.err.println(String.format("subCategory = %s", subCategory));
 			}
 			else
 			{
@@ -154,15 +157,15 @@ public class RunHistoricalDataRequest
                         String strMessage = errorInfo.getElementAsString("message");
                         String subCategory = errorInfo.getElementAsString("subcategory");
 
-                        System.out.println();
-                        System.out.println();
-                        System.out.println("field error: ");
-                        System.out.println(String.format("\tfieldId = %s", fieldId));
-                        System.out.println(String.format("\tsource = %s", source));
-                        System.out.println(String.format("\tcode = %s", code));
-                        System.out.println(String.format("\tcategory = %s", category));
-                        System.out.println(String.format("\terrorMessage = %s", strMessage));
-                        System.out.println(String.format("\tsubCategory = %s", subCategory));
+                        System.err.println();
+                        System.err.println();
+                        System.err.println("field error: ");
+                        System.err.println(String.format("\tfieldId = %s", fieldId));
+                        System.err.println(String.format("\tsource = %s", source));
+                        System.err.println(String.format("\tcode = %s", code));
+                        System.err.println(String.format("\tcategory = %s", category));
+                        System.err.println(String.format("\terrorMessage = %s", strMessage));
+                        System.err.println(String.format("\tsubCategory = %s", subCategory));
                     }
 				}
 				
@@ -180,4 +183,23 @@ public class RunHistoricalDataRequest
 			}
 		}
 	}
+
+    private static void handleOtherEvent(Event evt)
+    {
+        System.out.println("EventType = " + evt.eventType());
+    	MessageIterator miter = evt.messageIterator();
+		while(miter.hasNext())
+		{
+			Message message = miter.next();
+
+        	System.out.println("correlationID=" + message.correlationID());
+        	System.out.println("messageType=" + message.messageType());
+        	System.out.println(message.toString());
+        	
+            if (Event.EventType.Constants.SESSION_STATUS == evt.eventType().intValue() && message.messageType().equals("SessionTerminated"))
+            {
+            	System.out.println("Terminating: " + message.messageType());
+            }
+		}
+    }
 }

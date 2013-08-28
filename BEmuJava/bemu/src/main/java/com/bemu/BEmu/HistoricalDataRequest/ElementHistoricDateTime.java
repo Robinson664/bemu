@@ -11,6 +11,7 @@ package com.bemu.BEmu.HistoricalDataRequest;
 
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementHistoricDateTime extends ElementParent
 {
@@ -49,6 +50,11 @@ public class ElementHistoricDateTime extends ElementParent
     public boolean isNull()
     {
     	return false;
+    }
+    
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.DATE;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

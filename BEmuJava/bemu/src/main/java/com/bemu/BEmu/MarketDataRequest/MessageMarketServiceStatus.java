@@ -35,9 +35,14 @@ public class MessageMarketServiceStatus extends Message
 		return "";
 	}
 	
+	public boolean hasElement(String name, boolean excludeNullElements)
+	{
+		return this._serviceName.name().toString().equals(name);
+	}
+	
 	public Element getElement(String name) throws Exception
 	{
-		if(name.toUpperCase().equals(this._serviceName.name().toString().toUpperCase()))
+		if(name.equals(this._serviceName.name().toString()))
 			return this._serviceName;
 		
 		else
@@ -47,7 +52,7 @@ public class MessageMarketServiceStatus extends Message
     public String toString()
     {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("{0} = {{{1}", this.messageType().toString(), System.getProperty("line.separator")));
+        result.append(String.format("%s = {%s", this.messageType().toString(), System.getProperty("line.separator")));
         result.append(this._serviceName.prettyPrint(1));
         result.append("}" + System.getProperty("line.separator"));
 

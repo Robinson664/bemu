@@ -57,7 +57,7 @@ public class ElementIntradayTickDataParent extends ElementParent
     
     public Element getElement(String name) throws Exception
     {
-    	if(this._array.name().toString().toUpperCase().equals(name.toUpperCase()))
+    	if(this._array.name().toString().equals(name))
     		return this._array;
     	else
     		return super.getElement(name);

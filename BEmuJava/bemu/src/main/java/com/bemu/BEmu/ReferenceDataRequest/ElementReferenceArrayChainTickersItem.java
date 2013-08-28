@@ -19,12 +19,12 @@ public class ElementReferenceArrayChainTickersItem extends ElementParent
     			optionality.toString().toUpperCase(), 
     			String.valueOf(strike));
         
-        this._element = new ElementReferenceString("TICKER", optionTicker);
+        this._element = new ElementReferenceString("Ticker", optionTicker);
     }
     
     public Name name()
     {
-    	return new Name("TICKER");
+    	return new Name("Ticker");
     }
     
     public int numValues()
@@ -54,7 +54,7 @@ public class ElementReferenceArrayChainTickersItem extends ElementParent
     
     public String getElementAsString(String name) throws Exception
     {
-    	if(this._element.name().toString().toUpperCase().equals(name.toUpperCase()))
+    	if(this._element.name().toString().equals(name))
     		return this._element.getValueAsString();
     	
     	else

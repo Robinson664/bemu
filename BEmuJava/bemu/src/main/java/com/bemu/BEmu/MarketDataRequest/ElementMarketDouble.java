@@ -10,6 +10,7 @@
 package com.bemu.BEmu.MarketDataRequest;
 
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementMarketDouble extends ElementParent
 {
@@ -50,6 +51,11 @@ public class ElementMarketDouble extends ElementParent
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.FLOAT64;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

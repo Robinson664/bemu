@@ -63,8 +63,13 @@ public class Session {
     
     public boolean openService(String uri)
     {
-        this._sessionState = SessionStateType.serviceOpened;
-        return true;
+    	if(uri.equals("//blp/refdata"))
+    	{
+            this._sessionState = SessionStateType.serviceOpened;
+            return true;
+    	}
+    	else
+    		return false;
     }
     
     public Service getService(String uri) throws Exception
@@ -75,7 +80,7 @@ public class Session {
             return new ServiceRefData();
         }
         else
-            throw new Exception(String.format("BEmu.Session.GetService: Service %s not supported", uri));
+            return null;
     }
     
     public CorrelationID sendRequest(Request request, CorrelationID correlationId)
@@ -127,6 +132,13 @@ public class Session {
     	this._sessionUri = SessionUriType.mktData;
     	this._sessionState = SessionStateType.serviceOpened;
         this._asyncOpenCorrelation = correlationId;
+    }
+    
+    public void openServiceAsync(String url)
+    {
+    	this._sessionUri = SessionUriType.mktData;
+    	this._sessionState = SessionStateType.serviceOpened;
+        this._asyncOpenCorrelation = new CorrelationID();
     }
     
     public void subscribe(SubscriptionList subscriptionList) throws Exception

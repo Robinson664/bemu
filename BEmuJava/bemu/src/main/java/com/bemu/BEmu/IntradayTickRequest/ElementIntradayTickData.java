@@ -32,26 +32,26 @@ public class ElementIntradayTickData extends ElementParent
 			this._fieldsArr = new ElementParent[4];
 
 		ElementParent elmTime = new ElementIntradayTickDateTime(datetime);
-		this._fields.put(elmTime.name().toString().toUpperCase(), elmTime);
+		this._fields.put(elmTime.name().toString(), elmTime);
 		this._fieldsArr[0] = elmTime;
 
         //TODO: This should actually be an enumeration, not a string
 		ElementParent elmType = new ElementIntradayTickString("type", type);
-        this._fields.put(elmType.name().toString().toUpperCase(), elmType);
+        this._fields.put(elmType.name().toString(), elmType);
 		this._fieldsArr[1] = elmType;
 
 		ElementParent elmValue = new ElementIntradayTickDouble("value", value);
-        this._fields.put(elmValue.name().toString().toUpperCase(), elmValue);
+        this._fields.put(elmValue.name().toString(), elmValue);
 		this._fieldsArr[2] = elmValue;
 
 		ElementParent elmSize = new ElementIntradayTickInt("size", size);
-        this._fields.put(elmSize.name().toString().toUpperCase(), elmSize);
+        this._fields.put(elmSize.name().toString(), elmSize);
 		this._fieldsArr[3] = elmSize;
 		
         if (includeConditionCodes)
         {
         	ElementParent elmConditionCodes = new ElementIntradayTickString("conditionCodes", "R6,IS");
-            this._fields.put(elmConditionCodes.name().toString().toUpperCase(), elmConditionCodes);
+            this._fields.put(elmConditionCodes.name().toString(), elmConditionCodes);
     		this._fieldsArr[4] = elmConditionCodes;
         }
 	}
@@ -96,9 +96,8 @@ public class ElementIntradayTickData extends ElementParent
     
     public Element getElement(String name) throws Exception
     {
-    	String key = name.toUpperCase();
-    	if(this._fields.containsKey(key))
-    		return this._fields.get(key);
+    	if(this._fields.containsKey(name))
+    		return this._fields.get(name);
     	else
     		return super.getElement(name);
     }
@@ -145,12 +144,12 @@ public class ElementIntradayTickData extends ElementParent
     
     public boolean hasElement(String name)
     {
-    	return this._fields.containsKey(name.toUpperCase());
+    	return this._fields.containsKey(name);
     }
     
     public boolean hasElement(String name, boolean excludeNullElements)
     {
-    	return this._fields.containsKey(name.toUpperCase());
+    	return this._fields.containsKey(name);
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

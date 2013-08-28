@@ -37,9 +37,14 @@ public class MessageMarketSubscriptionCanceled extends Message
 		return this._topicName;
 	}
 	
+	public boolean hasElement(String name, boolean excludeNullElements)
+	{
+		return this._reason.name().toString().equals(name);
+	}
+	
 	public Element getElement(String name) throws Exception
 	{
-		if(name.toUpperCase().equals(this._reason.name().toString().toUpperCase()))
+		if(name.equals(this._reason.name().toString()))
 			return this._reason;
 			
 		else
@@ -49,7 +54,7 @@ public class MessageMarketSubscriptionCanceled extends Message
     public String toString()
     {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("{0} = {{{1}", this.messageType().toString(), System.getProperty("line.separator")));
+        result.append(String.format("%s = {%s", this.messageType().toString(), System.getProperty("line.separator")));
         result.append(this._reason.prettyPrint(1));
         result.append("}" + System.getProperty("line.separator"));
 

@@ -10,6 +10,7 @@
 package com.bemu.BEmu.HistoricalDataRequest;
 
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementHistoricDouble extends ElementParent
 {
@@ -50,6 +51,11 @@ public class ElementHistoricDouble extends ElementParent
     public boolean isNull()
     {
     	return false;
+    }
+    
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.FLOAT64;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

@@ -77,7 +77,7 @@ namespace Examples
                     request.Set("adjustmentSplit", false); //Optional bool. Valid values are true and false (default = false)
 
                     //Setting to true will follow the DPDF<GO> BLOOMBERG PROFESSIONAL service function. True is the default setting for this option..
-                    request.Set("adjustmentFollowDPDF", false); //Optional bool. Valid values are true and false (default = false)
+                    request.Set("adjustmentFollowDPDF", false); //Optional bool. Valid values are true and false (default = true)
 
 
                     session.SendRequest(request, new CorrelationID(-999));
@@ -123,12 +123,12 @@ namespace Examples
                     string errorMessage = secError.GetElementAsString("message");
                     string subCategory = secError.GetElementAsString("subcategory");
 
-                    Console.WriteLine("response error");
-                    Console.WriteLine(string.Format("source = {0}", source));
-                    Console.WriteLine(string.Format("code = {0}", code));
-                    Console.WriteLine(string.Format("category = {0}", category));
-                    Console.WriteLine(string.Format("errorMessage = {0}", errorMessage));
-                    Console.WriteLine(string.Format("subCategory = {0}", subCategory));
+                    Console.Error.WriteLine("response error");
+                    Console.Error.WriteLine(string.Format("source = {0}", source));
+                    Console.Error.WriteLine(string.Format("code = {0}", code));
+                    Console.Error.WriteLine(string.Format("category = {0}", category));
+                    Console.Error.WriteLine(string.Format("errorMessage = {0}", errorMessage));
+                    Console.Error.WriteLine(string.Format("subCategory = {0}", subCategory));
                 }
                 else
                 {

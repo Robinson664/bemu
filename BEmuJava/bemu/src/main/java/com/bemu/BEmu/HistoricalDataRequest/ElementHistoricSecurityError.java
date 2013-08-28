@@ -57,20 +57,19 @@ public class ElementHistoricSecurityError extends ElementParent
     
     public Element getElement(String name) throws Exception
     {
-    	String upper = name.toUpperCase();
-    	if(upper.equals("SOURCE"))
+    	if(name.equals("source"))
     		return this._source;
     	
-    	else if(upper.equals("CODE"))
+    	else if(name.equals("code"))
     		return this._code;
     	
-    	else if(upper.equals("CATEGORY"))
+    	else if(name.equals("category"))
     		return this._category;
     	
-    	else if(upper.equals("MESSAGE"))
+    	else if(name.equals("message"))
     		return this._message;
     	
-    	else if(upper.equals("SUBCATEGORY"))
+    	else if(name.equals("subcategory"))
     		return this._subCategory;
     	
     	else
@@ -79,12 +78,11 @@ public class ElementHistoricSecurityError extends ElementParent
     
     public boolean hasElement(String name)
     {
-    	String upper = name.toUpperCase();
-    	return upper.equals("SOURCE") ||
-    			upper.equals("CODE") ||
-    			upper.equals("CATEGORY") ||
-    			upper.equals("MESSAGE") ||
-    			upper.equals("SUBCATEGORY");
+    	return name.equals("source") ||
+    			name.equals("code") ||
+    			name.equals("category") ||
+    			name.equals("message") ||
+    			name.equals("subcategory");
     }  
     
     protected StringBuilder prettyPrint(int tabIndent)

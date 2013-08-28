@@ -14,6 +14,7 @@ import com.bemu.BEmu.Message;
 import com.bemu.BEmu.Datetime;
 import java.util.List;
 import java.util.ArrayList;
+import com.bemu.BEmu.types.Rules;
 
 public class EventIntradayBar extends Event
 {
@@ -28,23 +29,37 @@ public class EventIntradayBar extends Event
         List<Message> result = new ArrayList<Message>();
         RequestIntradayBar ireq = (RequestIntradayBar)super._request;
 
-        List<BarTickDataType> barData = new ArrayList<BarTickDataType>();
-        
-        if(ireq.getDtStart() != null)
+        String security = ireq.security();
+        boolean securityError = Rules.isSecurityError(security);
+        if(securityError)
         {
-        	List<Datetime> dates = ireq.getDateTimes();
-        	for(int i = 0; i < dates.size(); i++)
-        	{
-        		Datetime dtCurrent = dates.get(i);
-        		BarTickDataType value = com.bemu.BEmu.types.RandomDataGenerator.generateBarData(dtCurrent);
-        		barData.add(value);
-        	}
+            MessageIntradayBar msg = new MessageIntradayBar(super._request.correlationId(), ireq.getService(), security);
+            result.add(msg);
+        }
+        else
+        {
+	        List<BarTickDataType> barData = new ArrayList<BarTickDataType>();	        
+	        if(ireq.getDtStart() != null)
+	        {
+	        	List<Datetime> dates = ireq.getDateTimes();
+	        	for(int i = 0; i < dates.size(); i++)
+	        	{
+	        		Datetime dtCurrent = dates.get(i);
+	        		BarTickDataType value = com.bemu.BEmu.types.RandomDataGenerator.generateBarData(dtCurrent);
+	        		barData.add(value);
+	        	}
+	        }
+	        
+	        MessageIntradayBar msg = new MessageIntradayBar(super._request.correlationId(), barData, ireq.getService());
+	        result.add(msg);
         }
 
-        MessageIntradayBar msg = new MessageIntradayBar(super._request.correlationId(), barData, ireq.getService());
-        result.add(msg);
-
         return result;
+    }
+
+    public List<Message> GetMessages()
+    {
+        return this._messages;
     }
 	
 }

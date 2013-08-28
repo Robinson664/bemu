@@ -10,6 +10,7 @@
 package com.bemu.BEmu.HistoricalDataRequest;
 
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class RequestHistoricElementString extends ElementParent
 {
@@ -44,5 +45,10 @@ public class RequestHistoricElementString extends ElementParent
         result.append(String.format("%s%s = %s%s", tabs, this._elementName, this._value, System.getProperty("line.separator")));
 
         return result;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.STRING;
     }
 }

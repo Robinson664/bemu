@@ -207,23 +207,21 @@ public class RequestHistoric extends Request
 
     public void append(String name, String elementValue) throws Exception
     {
-    	String lower = name.toLowerCase();
-    	if(lower.equals("securities"))
+    	if(name.equals("securities"))
     		this._securities.addValue(elementValue);
     	
-    	else if(lower.equals("fields"))
+    	else if(name.equals("fields"))
     		this._fields.addValue(elementValue);
     	
     	else
-    		throw new Exception("not implemented");
+    		throw new Exception("not implemented. names are case-sensitive");
     }
     
     public void set(String name, String elementValue) throws Exception
     {
     	SimpleDateFormat dateParse = new SimpleDateFormat("yyyyMMdd");
-    	String lower = name.toLowerCase();
 
-    	if(lower.equals("startdate"))
+    	if(name.equals("startDate"))
     	{
     		Datetime dtStart = RequestHistoric.TryParse(elementValue, dateParse);
     		if(dtStart == null)
@@ -231,7 +229,7 @@ public class RequestHistoric extends Request
     		else
     			this._dtStart = new RequestHistoricElementDate("startDate", dtStart);
     	}
-    	else if(lower.equals("enddate"))
+    	else if(name.equals("endDate"))
     	{
     		Datetime dtEnd = RequestHistoric.TryParse(elementValue, dateParse);
     		if(dtEnd == null)
@@ -239,109 +237,97 @@ public class RequestHistoric extends Request
     		else
     			this._dtEnd = new RequestHistoricElementDate("endDate", dtEnd);
     	}
-    	else if(lower.equals("periodicityadjustment"))
+    	else if(name.equals("periodicityAdjustment"))
     	{
-    		String upper = elementValue.toUpperCase();
-    		
-    		if(upper.equals("CALENDAR"))
+    		if(elementValue.equals("CALENDAR"))
     			this._periodicityAdjustment = HistDataPeriodicityAdjustment.calendar;
     		
-    		else if(upper.equals("FISCAL"))
+    		else if(elementValue.equals("FISCAL"))
     			this._periodicityAdjustment = HistDataPeriodicityAdjustment.fiscal;
     		
-    		else if(upper.equals("ACTUAL"))
+    		else if(elementValue.equals("ACTUAL"))
     			this._periodicityAdjustment = HistDataPeriodicityAdjustment.actual;
     		
     		else
-    			throw new Exception("periodicityadjustment must be CALENDAR, FISCAL, or ACTUAL");
+    			throw new Exception("periodicityadjustment must be CALENDAR, FISCAL, or ACTUAL. Values are case-sensitive.");
 
-            this._periodicityAdjustmentElement = new RequestHistoricElementString("periodicityAdjustment", upper);
+            this._periodicityAdjustmentElement = new RequestHistoricElementString("periodicityAdjustment", elementValue);
     	}
-    	else if(lower.equals("periodicityselection"))
+    	else if(name.equals("periodicitySelection"))
     	{
-    		String upper = elementValue.toUpperCase();
-    		
-    		if(upper.equals("WEEKLY"))
+    		if(elementValue.equals("WEEKLY"))
     			this._periodicity = HistDataPeriodicity.weekly;
     		
-    		else if(upper.equals("MONTHLY"))
+    		else if(elementValue.equals("MONTHLY"))
     			this._periodicity = HistDataPeriodicity.monthly;
     		
-    		else if(upper.equals("QUARTERLY"))
+    		else if(elementValue.equals("QUARTERLY"))
     			this._periodicity = HistDataPeriodicity.quarterly;
     		
-    		else if(upper.equals("SEMI_ANNUALLY"))
+    		else if(elementValue.equals("SEMI_ANNUALLY"))
     			this._periodicity = HistDataPeriodicity.semi_annually;
     		
-    		else if(upper.equals("YEARLY"))
+    		else if(elementValue.equals("YEARLY"))
     			this._periodicity = HistDataPeriodicity.yearly;
     		
-    		else if(upper.equals("DAILY"))
+    		else if(elementValue.equals("DAILY"))
     			this._periodicity = HistDataPeriodicity.daily;
     		
     		else
-    			throw new Exception("periodicityselection must be DAILY, WEEKLY, MONTHLY, QUARTERLY, SEMI_ANNUALLY, or YEARLY");
+    			throw new Exception("periodicityselection must be DAILY, WEEKLY, MONTHLY, QUARTERLY, SEMI_ANNUALLY, or YEARLY. Values are case-sensitive.");
 
-            this._periodicityElement = new RequestHistoricElementString("periodicitySelection", upper);
+            this._periodicityElement = new RequestHistoricElementString("periodicitySelection", elementValue);
     	}
-    	else if(lower.equals("pricingoption"))
+    	else if(name.equals("pricingOption"))
     	{
-    		String upper = elementValue.toUpperCase();
-
-    		if(upper.equals("PRICING_OPTION_YIELD"))
+    		if(elementValue.equals("PRICING_OPTION_YIELD"))
     			this._pricingOption = PricingOption.yield;
 
-    		else if(upper.equals("PRICING_OPTION_PRICE"))
+    		else if(elementValue.equals("PRICING_OPTION_PRICE"))
     			this._pricingOption = PricingOption.price;
     		
     		else
-    			throw new Exception("pricingoption must be either PRICING_OPTION_YIELD or PRICING_OPTION_PRICE");
+    			throw new Exception("pricingoption must be either PRICING_OPTION_YIELD or PRICING_OPTION_PRICE. Values are case-sensitive.");
 
-            this._pricingOptionElement = new RequestHistoricElementString("pricingOption", upper);
+            this._pricingOptionElement = new RequestHistoricElementString("pricingOption", elementValue);
     	}
-    	else if(lower.equals("overrideoption"))
+    	else if(name.equals("overrideOption"))
     	{
-    		String upper = elementValue.toUpperCase();
-    		
-    		if(upper.equals("OVERRIDE_OPTION_GPA"))
+    		if(elementValue.equals("OVERRIDE_OPTION_GPA"))
                 this._overrideOptions = OverrideOptions.averagePrice;
     		
-    		else if(upper.equals("OVERRIDE_OPTION_CLOSE"))
+    		else if(elementValue.equals("OVERRIDE_OPTION_CLOSE"))
                 this._overrideOptions = OverrideOptions.closingPrice;
     		
     		else
-    			throw new Exception("overrideoption must be either OVERRIDE_OPTION_GPA or OVERRIDE_OPTION_CLOSE");
+    			throw new Exception("overrideoption must be either OVERRIDE_OPTION_GPA or OVERRIDE_OPTION_CLOSE. Values are case-sensitive.");
 
-            this._overrideOptionsElement = new RequestHistoricElementString("overrideOption", upper);
+            this._overrideOptionsElement = new RequestHistoricElementString("overrideOption", elementValue);
     	}    	
     }
     
     public void set(String name, boolean elementValue) throws Exception
     {
-    	String lower = name.toLowerCase();
-
-    	if(lower.equals("adjustmentnormal"))
+    	if(name.equals("adjustmentNormal"))
             this._adjustmentNormalElement = new RequestHistoricElementBool("adjustmentNormal", elementValue);
     	
-    	else if(lower.equals("adjustmentabnormal"))
+    	else if(name.equals("adjustmentAbnormal"))
             this._adjustmentAbnormalElement = new RequestHistoricElementBool("adjustmentAbnormal", elementValue);
 
-    	else if(lower.equals("adjustmentsplit"))
+    	else if(name.equals("adjustmentSplit"))
             this._adjustmentSplitElement = new RequestHistoricElementBool("adjustmentSplit", elementValue);
 		
 		else
-			throw new Exception("not implemented");    	
+			throw new Exception("not implemented. Names are case-sensitive.");    	
     }
     
     public void set(String name, int elementValue) throws Exception
     {
-    	String lower = name.toLowerCase();
-
-    	if(lower.equals("maxdatapoints"))
+    	if(name.equals("maxDataPoints"))
             this._maxDataPointElement = new RequestHistoricElementInt("maxDataPoints", elementValue);
 
 		else
-			throw new Exception("not implemented");
+			throw new Exception("not implemented. names are case-sensitive");
     }
     
     

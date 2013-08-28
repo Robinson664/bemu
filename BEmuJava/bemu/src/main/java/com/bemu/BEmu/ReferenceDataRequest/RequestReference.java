@@ -28,15 +28,13 @@ public class RequestReference extends Request
     
     public Element getElement(String name) throws Exception
     {
-        String strName = name.toUpperCase();
-
-        if (this._securities.name().toString().toUpperCase().equals(strName))
+        if (this._securities.name().toString().equals(name))
             return this._securities;
         
-        else if (this._fields.name().toString().toUpperCase().equals(strName))
+        else if (this._fields.name().toString().equals(name))
             return this._fields;
         
-        else if (this._overrides.name().toString().toUpperCase().equals(strName))
+        else if (this._overrides.name().toString().equals(name))
             return this._overrides;
             
         else
@@ -45,15 +43,13 @@ public class RequestReference extends Request
     
     public boolean hasElement(String name)
     {
-        String strName = name.toUpperCase();
-
-        if (this._securities.name().toString().toUpperCase().equals(strName))
+        if (this._securities.name().toString().equals(name))
             return this._securities.values().size() > 0;
         
-        else if (this._fields.name().toString().toUpperCase().equals(strName))
+        else if (this._fields.name().toString().equals(name))
             return this._fields.values().size() > 0;
         
-        else if (this._overrides.name().toString().toUpperCase().equals(strName))
+        else if (this._overrides.name().toString().equals(name))
             return this._overrides.numValues() > 0;
             
         else
@@ -62,16 +58,14 @@ public class RequestReference extends Request
     
     public void append(String name, String elementValue) throws Exception
     {
-    	String lower = name.toLowerCase();
-    	
-    	if(lower.equals("securities"))
+    	if(name.equals("securities"))
     		this._securities.addValue(elementValue);
     	
-    	else if(lower.equals("fields"))
+    	else if(name.equals("fields"))
     		this._fields.addValue(elementValue);
     	
     	else
-    		throw new Exception(String.format("BEmu.RequestReference.Append: Element name %s not supported", name));
+    		throw new Exception(String.format("BEmu.RequestReference.Append: Element name %s not supported. names are case-sensitive.", name));
     }
     
     public String toString()

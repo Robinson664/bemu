@@ -44,7 +44,7 @@ public class EventReference extends Event
                     
                     if(value != null)
                     {
-                    	fieldData.put(field.toUpperCase(), value);
+                    	fieldData.put(field, value);
                     }
         		}
         		

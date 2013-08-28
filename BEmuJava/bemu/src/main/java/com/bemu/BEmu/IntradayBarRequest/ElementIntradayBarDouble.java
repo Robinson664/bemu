@@ -11,6 +11,8 @@ package com.bemu.BEmu.IntradayBarRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
+
 import java.lang.StringBuilder;
 
 public class ElementIntradayBarDouble extends Element
@@ -53,6 +55,11 @@ public class ElementIntradayBarDouble extends Element
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.FLOAT64;
     }
     
     public boolean hasElement(String name)

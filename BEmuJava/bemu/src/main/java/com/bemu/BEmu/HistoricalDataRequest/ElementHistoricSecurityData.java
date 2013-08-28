@@ -49,11 +49,8 @@ public class ElementHistoricSecurityData extends ElementParent
             this._elmSecError = null;
             this._elmFieldDataArray = new ElementHistoricFieldDataArray(fieldData);
         }
-
-        if (this._elmFieldExceptions == null)
-        	this._numElements = 3;
-        else
-        	this._numElements = 4;
+        
+        this._numElements = this._elmFieldExceptions == null ? 3 : 4;
     }
     
     public Name name()
@@ -88,21 +85,19 @@ public class ElementHistoricSecurityData extends ElementParent
     
     public Element getElement(String name) throws Exception
     {
-    	String upper = name.toUpperCase();
-    	
-    	if(upper.equals("FIELDDATA") && !this._isSecurityError)
+    	if(name.equals("fieldData") && !this._isSecurityError)
     		return this._elmFieldDataArray;
     	
-    	else if(upper.equals("SECURITY"))
+    	else if(name.equals("security"))
     		return this._elmSecurityName;
     	
-    	else if(upper.equals("SEQUENCENUMBER"))
+    	else if(name.equals("sequenceNumber"))
     		return this._elmSequenceNumber;
     	
-    	else if(upper.equals("FIELDEXCEPTIONS"))
+    	else if(name.equals("fieldExceptions") && this._elmFieldExceptions != null)
     		return this._elmFieldExceptions;
     	
-    	else if(upper.equals("SECURITYERROR") && this._isSecurityError) //this element doesn't exist if the security exists
+    	else if(name.equals("securityError") && this._isSecurityError) //this element doesn't exist if the security exists
     		return this._elmSecError;
     	
     	else
@@ -116,18 +111,17 @@ public class ElementHistoricSecurityData extends ElementParent
     
     public boolean hasElement(String name, boolean excludeNullElements)
     {
-    	String upper = name.toUpperCase();
     	return 
-    			(upper.equals("FIELDDATA") && !this._isSecurityError) ||
-    			upper.equals("SECURITY") ||
-    			upper.equals("SEQUENCENUMBER") ||
-    			upper.equals("FIELDEXCEPTIONS") ||
-    			(upper.equals("SECURITYERROR") && this._isSecurityError);
+    			(name.equals("fieldData") && !this._isSecurityError) ||
+    			name.equals("security") ||
+    			name.equals("sequenceNumber") ||
+    			(name.equals("fieldExceptions") && this._elmFieldExceptions != null) ||
+    			(name.equals("securityError") && this._isSecurityError);
     }
     
     public String getElementAsString(String name) throws Exception
     {
-    	if(name.toUpperCase() == this._elmSecurityName.name().toString().toUpperCase())
+    	if(name == this._elmSecurityName.name().toString())
     		return this._elmSecurityName.getValueAsString();
     	else
     		return super.getElementAsString(name);
@@ -135,7 +129,7 @@ public class ElementHistoricSecurityData extends ElementParent
     
     public int getElementAsInt32(String name) throws Exception
     {
-    	if(name.toUpperCase() == this._elmSequenceNumber.name().toString().toUpperCase())
+    	if(name == this._elmSequenceNumber.name().toString())
     		return this._elmSecurityName.getValueAsInt32();
     	else
     		return super.getElementAsInt32(name);

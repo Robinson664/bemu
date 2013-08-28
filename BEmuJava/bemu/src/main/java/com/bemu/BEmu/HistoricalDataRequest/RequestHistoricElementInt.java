@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 
 package com.bemu.BEmu.HistoricalDataRequest;
+import com.bemu.BEmu.Schema;
 
 public class RequestHistoricElementInt extends RequestHistoricElementString
 {
@@ -15,7 +16,7 @@ public class RequestHistoricElementInt extends RequestHistoricElementString
 
     RequestHistoricElementInt(String elementName, int value)
     {
-    	super(elementName, String.valueOf(value).toLowerCase());
+    	super(elementName, String.valueOf(value));
         this._value = value;
     }
 
@@ -24,4 +25,9 @@ public class RequestHistoricElementInt extends RequestHistoricElementString
     {
 		return this._value; 
     } 
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.INT32;
+    }
 }

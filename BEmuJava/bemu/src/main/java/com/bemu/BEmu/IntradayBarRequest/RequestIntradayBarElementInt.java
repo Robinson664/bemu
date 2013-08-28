@@ -9,6 +9,8 @@
 
 package com.bemu.BEmu.IntradayBarRequest;
 
+import com.bemu.BEmu.Schema;
+
 public class RequestIntradayBarElementInt extends RequestIntradayBarElementString
 {
     private final int _value;
@@ -23,5 +25,10 @@ public class RequestIntradayBarElementInt extends RequestIntradayBarElementStrin
     protected int getInt()
     {
     	return this._value;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.INT32;
     }
 }

@@ -26,7 +26,7 @@ namespace BEmu.MarketDataRequest
             if (reasonType == ReasonTypeEnum.badSecurity)
             {
                 this._source = new ElementMarketString("source", string.Format("{0}{1}@{2}", Types.RandomDataGenerator.RandomString(5).ToLower(), Types.RandomDataGenerator.RandomInt(9), Types.RandomDataGenerator.RandomInt(99)));
-                this._errorCode = new ElementMarketInt("code", Types.RandomDataGenerator.RandomInt(99));
+                this._errorCode = new ElementMarketInt("errorCode", Types.RandomDataGenerator.RandomInt(99));
                 this._category = new ElementMarketString("category", "BAD_SEC");
                 this._description = new ElementMarketString("description", "Invalid security, rcode = -1");
             }

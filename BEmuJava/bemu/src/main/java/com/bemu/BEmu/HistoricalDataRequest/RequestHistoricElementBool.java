@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 
 package com.bemu.BEmu.HistoricalDataRequest;
+import com.bemu.BEmu.Schema;
 
 public class RequestHistoricElementBool extends RequestHistoricElementString
 {
@@ -15,7 +16,7 @@ public class RequestHistoricElementBool extends RequestHistoricElementString
     
     RequestHistoricElementBool(String elementName, boolean value)
     {
-    	super(elementName, String.valueOf(value).toLowerCase());
+    	super(elementName, String.valueOf(value));
         this._value = value;
     }
 
@@ -23,6 +24,11 @@ public class RequestHistoricElementBool extends RequestHistoricElementString
     boolean getBoolean()
     {
     	return this._value;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.BOOL;
     }
 
 }

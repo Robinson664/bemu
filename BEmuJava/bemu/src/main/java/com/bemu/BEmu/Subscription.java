@@ -13,7 +13,7 @@ public class Subscription
     }
 
     private final List<String> _fields;
-    //Don't use this.  I doesn't exist in the actual Bloomberg API
+    //Don't use this.  It doesn't exist in the actual Bloomberg API
     public List<String> fields()
     {
     	return this._fields;
@@ -33,47 +33,61 @@ public class Subscription
     
     public Subscription(String security, List<String> fields)
     {
-        this._security = security.toUpperCase();
+        this._security = security;
         this._corr = new CorrelationID();
         this._conflationInterval = null;
 
         this._fields = new LinkedList<String>();
         for(int i = 0; i < fields.size(); i++)
         {
-        	this._fields.add(fields.get(i).toUpperCase());
+        	this._fields.add(fields.get(i));
         }
     }
     
     public Subscription(String security, List<String> fields, List<String> options)
     {
-        this._security = security.toUpperCase();
+        this._security = security;
         this._corr = new CorrelationID();
         this._conflationInterval = this.ReadConflationInterval(options);
 
         this._fields = new LinkedList<String>();
         for(int i = 0; i < fields.size(); i++)
         {
-        	this._fields.add(fields.get(i).toUpperCase());
+        	this._fields.add(fields.get(i));
         }
     }
     
     public Subscription(String security, String field, CorrelationID correlationID)
     {
-        this._security = security.toUpperCase();
+        this._security = security;
         this._fields = new LinkedList<String>();
         this._fields.add(field);
         this._corr = correlationID;
         this._conflationInterval = null;
     }
     
+    public Subscription(String security, List<String> fields, CorrelationID correlationID)
+    {
+        this._security = security;
+        
+        this._fields = new LinkedList<String>();
+        for(int i = 0; i < fields.size(); i++)
+        {
+        	this._fields.add(fields.get(i));
+        }
+        
+        this._corr = correlationID;
+        this._conflationInterval = null;
+    }
+    
     public Subscription(String security, List<String> fields, List<String> options, CorrelationID correlationID)
     {
-        this._security = security.toUpperCase();
+        this._security = security;
 
         this._fields = new LinkedList<String>();
         for(int i = 0; i < fields.size(); i++)
         {
-        	this._fields.add(fields.get(i).toUpperCase());
+        	this._fields.add(fields.get(i));
         }
         
         this._corr = correlationID;
@@ -89,7 +103,7 @@ public class Subscription
         Integer result = null;
         for(int i = 0; i < options.size(); i++)
         {
-        	String str = options.get(i).toLowerCase();
+        	String str = options.get(i);
         	
             if (str.startsWith("interval="))
             {

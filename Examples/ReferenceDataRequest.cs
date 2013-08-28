@@ -44,9 +44,9 @@ namespace Examples
 
                     //request information for the following securities
                     request.Append("securities", "SPY US EQUITY");
-                    //request.Append("securities", "ZYZZ US EQUITY"); //the code treats securities that start with a "Z" as non-existent
                     request.Append("securities", "MSFT US EQUITY");
                     request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
+                    //request.Append("securities", "ZYZZ US EQUITY"); //the code treats securities that start with a "Z" as non-existent
 
                     //include the following simple fields in the result
                     //request.Append("fields", "ZPX_LAST"); //the code treats a field that starts with a "Z" as a bad field
@@ -54,10 +54,10 @@ namespace Examples
                     request.Append("fields", "BID");
                     request.Append("fields", "ASK");
                     request.Append("fields", "TICKER");
-                    request.Append("fields", "OPT_EXPIRE_DT");
+                    request.Append("fields", "OPT_EXPIRE_DT"); //only stock options have this field
 
                     //request a field that can be overriden and returns bulk data
-                    request.Append("fields", "CHAIN_TICKERS");
+                    request.Append("fields", "CHAIN_TICKERS"); //only stocks have this field 
                     Element overrides = request["overrides"];
 
                     //request only puts
@@ -73,7 +73,7 @@ namespace Examples
                     //request options that expire on Dec. 20, 2014
                     Element ovrdDtExps = overrides.AppendElement();
                     ovrdDtExps.SetElement("fieldId", "CHAIN_EXP_DT_OVRD");
-                    ovrdDtExps.SetElement("value", "20141220"); //accepts dates in the format yyyyMMdd
+                    ovrdDtExps.SetElement("value", "20141220"); //accepts dates in the format yyyyMMdd (this is Dec. 20, 2014)
 
                     session.SendRequest(request, requestID);
 
@@ -85,13 +85,13 @@ namespace Examples
                         {
                             case Event.EventType.RESPONSE: // final event
                                 continueToLoop = false;
-                                handleResponseEvent(eventObj);
+                                ReferenceDataRequest.handleResponseEvent(eventObj);
                                 break;
                             case Event.EventType.PARTIAL_RESPONSE:
-                                handleResponseEvent(eventObj);
+                                ReferenceDataRequest.handleResponseEvent(eventObj);
                                 break;
                             default:
-                                handleOtherEvent(eventObj);
+                                ReferenceDataRequest.handleOtherEvent(eventObj);
                                 break;
                         }
                     }
@@ -140,15 +140,15 @@ namespace Examples
                             string strMessage = errorInfo.GetElementAsString("message");
                             string subCategory = errorInfo.GetElementAsString("subcategory");
 
-                            Console.WriteLine();
-                            Console.WriteLine();
-                            Console.WriteLine("\tfield error");
-                            Console.WriteLine(string.Format("\tfieldId = {0}", fieldId));
-                            Console.WriteLine(string.Format("\tsource = {0}", source));
-                            Console.WriteLine(string.Format("\tcode = {0}", code));
-                            Console.WriteLine(string.Format("\tcategory = {0}", category));
-                            Console.WriteLine(string.Format("\terrorMessage = {0}", strMessage));
-                            Console.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
+                            Console.Error.WriteLine();
+                            Console.Error.WriteLine();
+                            Console.Error.WriteLine("\tfield error: " + security);
+                            Console.Error.WriteLine(string.Format("\tfieldId = {0}", fieldId));
+                            Console.Error.WriteLine(string.Format("\tsource = {0}", source));
+                            Console.Error.WriteLine(string.Format("\tcode = {0}", code));
+                            Console.Error.WriteLine(string.Format("\tcategory = {0}", category));
+                            Console.Error.WriteLine(string.Format("\terrorMessage = {0}", strMessage));
+                            Console.Error.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
                         }
                     }
 
@@ -162,14 +162,14 @@ namespace Examples
                         string errorMessage = secError.GetElementAsString("message");
                         string subCategory = secError.GetElementAsString("subcategory");
 
-                        Console.WriteLine();
-                        Console.WriteLine();
-                        Console.WriteLine("\tsecurity error");
-                        Console.WriteLine(string.Format("\tsource = {0}", source));
-                        Console.WriteLine(string.Format("\tcode = {0}", code));
-                        Console.WriteLine(string.Format("\tcategory = {0}", category));
-                        Console.WriteLine(string.Format("\terrorMessage = {0}", errorMessage));
-                        Console.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
+                        Console.Error.WriteLine();
+                        Console.Error.WriteLine();
+                        Console.Error.WriteLine("\tsecurity error");
+                        Console.Error.WriteLine(string.Format("\tsource = {0}", source));
+                        Console.Error.WriteLine(string.Format("\tcode = {0}", code));
+                        Console.Error.WriteLine(string.Format("\tcategory = {0}", category));
+                        Console.Error.WriteLine(string.Format("\terrorMessage = {0}", errorMessage));
+                        Console.Error.WriteLine(string.Format("\tsubCategory = {0}", subCategory));
                     }
                     else
                     {

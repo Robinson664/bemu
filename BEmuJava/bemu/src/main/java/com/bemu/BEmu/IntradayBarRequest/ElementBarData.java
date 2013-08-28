@@ -55,7 +55,7 @@ public class ElementBarData extends Element
     
     public Element getElement(String name) throws Exception
     {
-    	if(this._array.name().toString().toLowerCase().equals(name.toLowerCase()))
+    	if(this._array.name().toString().equals(name))
     		return this._array;
     	else
     		return super.getElement(name);

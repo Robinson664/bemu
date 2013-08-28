@@ -39,7 +39,7 @@ public class RequestIntradayTick extends Request
         this._service = service;
     }
     
-    List<Datetime> GetDates()
+    List<Datetime> getDates()
     {
     	List<Datetime> result = new ArrayList<Datetime>();
     	
@@ -151,51 +151,54 @@ public class RequestIntradayTick extends Request
     
     public void append(String name, String elementValue) throws Exception
     {
-    	String lower = name.toLowerCase();
-    	if(lower.equals("eventtypes"))
+    	if(name.equals("eventTypes"))
     		this._eventTypes.addValue(elementValue);
     	else
-    		throw new Exception("com.bemu.RequestIntradayTick.Append: Element name not supported " + name);
+    		throw new Exception("com.bemu.RequestIntradayTick.Append: Element name not supported (case-sensitive): " + name);
     }
     
-    public void set(String name, String elementValue)
+    public void set(String name, String elementValue) throws Exception
     {
-    	String upper = name.toUpperCase();
-    	if(upper.equals("SECURITY"))
+    	if(name.equals("security"))
     		this._security = new RequestIntradayTickElementString(name, elementValue);
+    	else
+    		throw new Exception("name not recognized.  names are case-sensitive.");
     }
     
-    public void set(String name, Datetime elementValue)
+    public void set(String name, Datetime elementValue) throws Exception
     {
-    	String upper = name.toUpperCase();
-    	if(upper.equals("STARTDATETIME"))
+    	if(name.equals("startDateTime"))
     		this._timeStart = new RequestIntradayTickElementTime(name, elementValue);
-    	else if(upper.equals("ENDDATETIME"))
+    	else if(name.equals("endDateTime"))
     		this._timeEnd = new RequestIntradayTickElementTime(name, elementValue);
+    	else
+    		throw new Exception("name not recognized.  names are case-sensitive.");
     }
     
-    public void set(String name, boolean elementValue)
+    public void set(String name, boolean elementValue) throws Exception
     {
-    	String upper = name.toUpperCase();
-    	if(upper.equals("INCLUDECONDITIONCODES"))
+    	if(name.equals("includeConditionCodes"))
     		this._includeConditionCodes = new RequestIntradayTickElementBool(name, elementValue);
     	
-    	else if(upper.equals("INCLUDENONPLOTTABLEEVENTS"))
+    	else if(name.equals("includeNonPlottableEvents"))
     		this._includeNonPlottableEvents = new RequestIntradayTickElementBool(name, elementValue);
     	
-    	else if(upper.equals("INCLUDEEXCHANGECODES"))
+    	else if(name.equals("includeExchangeCodes"))
     		this._includeExchangeCodes = new RequestIntradayTickElementBool(name, elementValue);
     	
-    	else if(upper.equals("RETURNEIDS"))
+    	else if(name.equals("returnEids"))
     		this._returnEids = new RequestIntradayTickElementBool(name, elementValue);
     	
-    	else if(upper.equals("INCLUDEBROKERCODES"))
+    	else if(name.equals("includeBrokerCodes"))
     		this._includeBrokerCodes = new RequestIntradayTickElementBool(name, elementValue);
     	
-    	else if(upper.equals("INCLUDERPSCODES"))
+    	else if(name.equals("includeRpsCodes"))
     		this._includeRpsCodes = new RequestIntradayTickElementBool(name, elementValue);
     	
-    	else if(upper.equals("INCLUDEBICMICCODES"))
+    	else if(name.equals("includeBicMicCodes"))
     		this._includeBicMicCodes = new RequestIntradayTickElementBool(name, elementValue);
+    	
+    	else
+    		throw new Exception("name not recognized.  names are case-sensitive.");
     }
 }

@@ -11,6 +11,7 @@ package com.bemu.BEmu.MarketDataRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementMarketServiceStatus extends Element
 {
@@ -49,6 +50,11 @@ public class ElementMarketServiceStatus extends Element
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.SEQUENCE;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)

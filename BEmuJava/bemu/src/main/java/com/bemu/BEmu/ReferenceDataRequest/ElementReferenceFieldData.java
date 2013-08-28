@@ -22,22 +22,22 @@ public class ElementReferenceFieldData extends ElementParent
         	
         	if(itemValue instanceof Double)
         	{
-        		ElementParent elmDouble = new ElementReferenceDouble(itemKey.toUpperCase(), (Double)itemValue);
+        		ElementParent elmDouble = new ElementReferenceDouble(itemKey, (Double)itemValue);
         		this._fields.add(elmDouble);
         	}
         	else if(itemValue instanceof Integer)
         	{
-        		ElementParent elmInt = new ElementReferenceInt(itemKey.toUpperCase(), (Integer)itemValue);
+        		ElementParent elmInt = new ElementReferenceInt(itemKey, (Integer)itemValue);
                 this._fields.add(elmInt);
         	}
         	else if(itemValue instanceof Datetime)
         	{
-        		ElementParent elmDatetime = new ElementReferenceDateTime(itemKey.toUpperCase(), (Datetime)itemValue);
+        		ElementParent elmDatetime = new ElementReferenceDateTime(itemKey, (Datetime)itemValue);
                 this._fields.add(elmDatetime);
         	}
         	else if(itemValue instanceof String)
         	{
-        		ElementParent elmString = new ElementReferenceString(itemKey.toUpperCase(), (String)itemValue);
+        		ElementParent elmString = new ElementReferenceString(itemKey, (String)itemValue);
                 this._fields.add(elmString);
         	}
         	else if(itemValue instanceof ElementReferenceArrayChainTickers)
@@ -68,11 +68,10 @@ public class ElementReferenceFieldData extends ElementParent
     
     public Element getElement(String name) throws Exception
     {
-    	String upper = name.toUpperCase();
     	for(int i = 0; i < this._fields.size(); i++)
     	{
     		Element item = this._fields.get(i);
-    		if(item.name().toString().toUpperCase().equals(upper))
+    		if(item.name().toString().equals(name))
     		{
     			return item;
     		}
@@ -96,12 +95,16 @@ public class ElementReferenceFieldData extends ElementParent
         return result;
     }
     
+    public boolean hasElement(String name)
+    {
+    	return this.hasElement(name, false);
+    }
+    
     public boolean hasElement(String name, boolean excludeNullElements)
     {
-    	String upper = name.toUpperCase();
     	for(int i = 0; i < this._fields.size(); i++)
     	{
-    		if(this._fields.get(i).name().toString().toUpperCase().equals(upper))
+    		if(this._fields.get(i).name().toString().equals(name))
     			return true;
     	}
     	return false;

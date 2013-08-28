@@ -50,11 +50,10 @@ public class ElementHistoricFieldExceptions extends ElementParent
     
     public Element getElement(String name) throws Exception
     {
-    	String upper = name.toUpperCase();
-    	if(upper.equals("FIELDID"))
+    	if(name.equals("fieldId"))
     		return this._fieldId;
     	
-    	else if(upper.equals("ERRORINFO"))
+    	else if(name.equals("errorInfo"))
     		return this._errorInfo;
     	
     	else
@@ -63,8 +62,7 @@ public class ElementHistoricFieldExceptions extends ElementParent
     
     public boolean hasElement(String name)
     {
-    	String upper = name.toUpperCase();
-    	return upper.equals("FIELDID") || upper.equals("ERRORINFO");
+    	return name.equals("fieldId") || name.equals("errorInfo");
     }
 
     protected StringBuilder prettyPrint(int tabIndent)

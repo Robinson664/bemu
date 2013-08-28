@@ -80,22 +80,21 @@ public class ElementBarTickData extends Element
     
     public Element getElement(String name) throws Exception
     {
-    	String lower = name.toLowerCase();
-    	if(lower.equals("time"))
+    	if(name.equals("time"))
     		return this._time;
-    	else if(lower.equals("open"))
+    	else if(name.equals("open"))
     		return this._open;
-    	else if(lower.equals("high"))
+    	else if(name.equals("high"))
     		return this._high;
-    	else if(lower.equals("low"))
+    	else if(name.equals("low"))
     		return this._low;
-    	else if(lower.equals("close"))
+    	else if(name.equals("close"))
     		return this._close;
-    	else if(lower.equals("volume"))
+    	else if(name.equals("volume"))
     		return this._volume;
-    	else if(lower.equals("numevents"))
+    	else if(name.equals("numEvents"))
     		return this._numEvents;
-    	else if(lower.equals("value"))
+    	else if(name.equals("value"))
     		return this._value;
     	else
     		return super.getElement(name);
@@ -103,15 +102,14 @@ public class ElementBarTickData extends Element
     
     public boolean hasElement(String name)
     {
-    	String lower = name.toLowerCase();
-    	return lower.equals("time") ||
-    			lower.equals("open") ||
-    			lower.equals("high") ||
-    			lower.equals("low") ||
-    			lower.equals("close") ||
-    			lower.equals("volume") ||
-    			lower.equals("numevents") ||
-    			lower.equals("value");
+    	return name.equals("time") ||
+    			name.equals("open") ||
+    			name.equals("high") ||
+    			name.equals("low") ||
+    			name.equals("close") ||
+    			name.equals("volume") ||
+    			name.equals("numEvents") ||
+    			name.equals("value");
     }
     
     public boolean hasElement(String name, boolean excludeNullElements)

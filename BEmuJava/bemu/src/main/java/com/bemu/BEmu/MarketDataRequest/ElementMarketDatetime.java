@@ -12,6 +12,7 @@ package com.bemu.BEmu.MarketDataRequest;
 import com.bemu.BEmu.DateTimeTypeEnum;
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.Schema;
 
 public class ElementMarketDatetime extends ElementParent
 {
@@ -52,6 +53,11 @@ public class ElementMarketDatetime extends ElementParent
     public boolean isNull()
     {
     	return false;
+    }
+
+    public Schema.Datatype datatype()
+    {
+    	return Schema.Datatype.DATETIME;
     }
     
     protected StringBuilder prettyPrint(int tabIndent)
