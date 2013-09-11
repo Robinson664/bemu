@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>BEmu</RootNamespace>
     <AssemblyName>BEmu</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -38,7 +38,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -69,24 +68,24 @@
     <Compile Include="HistoricalDataRequest\RequestHistoricElementInt.cs" />
     <Compile Include="HistoricalDataRequest\RequestHistoricElementString.cs" />
     <Compile Include="HistoricalDataRequest\RequestHistoricElementStringArray.cs" />
-    <Compile Include="IntradayBarRequest\ElementBarData.cs" />
-    <Compile Include="IntradayBarRequest\BarTickDataType.cs" />
-    <Compile Include="IntradayBarRequest\ElementBarTickData.cs" />
-    <Compile Include="IntradayBarRequest\ElementBarTickDataArray.cs" />
-    <Compile Include="IntradayBarRequest\ElementIntradayBarDateTime.cs" />
-    <Compile Include="IntradayBarRequest\ElementIntradayBarDouble.cs" />
-    <Compile Include="IntradayBarRequest\ElementIntradayBarInt.cs" />
-    <Compile Include="IntradayBarRequest\ElementIntradayBarLong.cs" />
-    <Compile Include="IntradayBarRequest\ElementIntradayBarResponseError.cs" />
-    <Compile Include="IntradayBarRequest\ElementIntradayBarString.cs" />
-    <Compile Include="IntradayBarRequest\EventIntradayBar.cs" />
-    <Compile Include="IntradayBarRequest\MessageIntradayBar.cs" />
-    <Compile Include="IntradayBarRequest\RequestIntradayBar.cs" />
-    <Compile Include="IntradayBarRequest\RequestIntradayBarElementBool.cs" />
-    <Compile Include="IntradayBarRequest\RequestIntradayBarElementInt.cs" />
-    <Compile Include="IntradayBarRequest\RequestIntradayBarElementString.cs" />
-    <Compile Include="IntradayBarRequest\RequestIntradayBarElementStringArray.cs" />
-    <Compile Include="IntradayBarRequest\RequestIntradayBarElementTime.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementBarData.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\BarTickDataType.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementBarTickData.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementBarTickDataArray.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementIntradayBarDateTime.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementIntradayBarDouble.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementIntradayBarInt.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementIntradayBarLong.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementIntradayBarResponseError.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\ElementIntradayBarString.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\EventIntradayBar.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\MessageIntradayBar.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\RequestIntradayBar.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\RequestIntradayBarElementBool.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\RequestIntradayBarElementInt.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\RequestIntradayBarElementString.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\RequestIntradayBarElementStringArray.cs" />
+    <Compile Include="HistoricalDataRequest\IntradayBarRequest\RequestIntradayBarElementTime.cs" />
     <Compile Include="IntradayTickRequest\ElementIntradayTickDataParent.cs" />
     <Compile Include="IntradayTickRequest\ElementIntradayTickDateTime.cs" />
     <Compile Include="IntradayTickRequest\ElementIntradayTickDouble.cs" />
@@ -134,6 +133,7 @@
     <Compile Include="ReferenceDataRequest\RequestReferenceElementOverrideArray.cs" />
     <Compile Include="ReferenceDataRequest\RequestReferenceElementString.cs" />
     <Compile Include="ReferenceDataRequest\RequestReferenceElementStringArray.cs" />
+    <Compile Include="Types\Extensions.cs" />
     <Compile Include="Types\IndentType.cs" />
     <Compile Include="MarketDataRequest\ElementMarketDate.cs" />
     <Compile Include="MarketDataRequest\ElementMarketDouble.cs" />
@@ -161,6 +161,7 @@
     <Compile Include="BloombergTypes\Subscription.cs" />
     <Compile Include="Types\RandomDataGenerator.cs" />
     <Compile Include="Types\Rules.cs" />
+    <Compile Include="Types\Tuple3.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

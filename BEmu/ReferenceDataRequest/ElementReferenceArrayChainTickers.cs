@@ -22,9 +22,9 @@ namespace BEmu.ReferenceDataRequest
         {
             //assume that the underlier takes the form "ABC US EQUITY"
             string ticker = underlier.Substring(0, underlier.IndexOf(' '));
-
+            
             DateTime dtExp;
-            if (string.IsNullOrWhiteSpace(strDtExp))
+            if(BEmu.Types.Extensions.IsNullOrWhiteSpace(strDtExp))
                 dtExp = DateTime.Today.AddMonths(1).AddDays(-DateTime.Today.Day).AddDays(20); //assume the 20th of the month
             else if (strDtExp.Length == 8)
                 dtExp = DateTime.ParseExact(strDtExp, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);

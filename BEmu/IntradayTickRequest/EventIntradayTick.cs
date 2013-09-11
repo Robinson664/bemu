@@ -44,7 +44,7 @@ namespace BEmu.IntradayTickRequest
             }
             else
             {
-                var tickData = new Dictionary<DateTime, Tuple<string, double, int>>();
+                var tickData = new Dictionary<DateTime, BEmu.Types.Tuple3<string, double, int>>();
 
                 if (ireq.DtStart.HasValue)
                 {
@@ -52,7 +52,7 @@ namespace BEmu.IntradayTickRequest
                     {
                         if ((dtCurrent.DayOfWeek != DayOfWeek.Sunday) && (dtCurrent.DayOfWeek != DayOfWeek.Saturday))
                         {
-                            var value = new Tuple<string, double, int>("TRADE", Types.RandomDataGenerator.RandomDouble(), Types.RandomDataGenerator.IntradayTickTradeSize());
+                            var value = new BEmu.Types.Tuple3<string, double, int>("TRADE", Types.RandomDataGenerator.RandomDouble(), Types.RandomDataGenerator.IntradayTickTradeSize());
                             tickData.Add(dtCurrent, value);
                         }
                     }

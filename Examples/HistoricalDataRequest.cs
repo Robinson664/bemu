@@ -36,7 +36,7 @@ namespace Examples
             }
             else
             {
-                Request request = service.CreateRequest("historicalDataRequest");
+                Request request = service.CreateRequest("HistoricalDataRequest");
 
                 //request information for the following securities
                 request.Append("securities", "MSFT US EQUITY");

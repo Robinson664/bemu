@@ -20,7 +20,7 @@ namespace BEmu.IntradayTickRequest
         private readonly ElementIntradayTickResponseError _responseError;
         private readonly bool _isResponseError;
 
-        internal MessageIntradayTick(CorrelationID corr, Service service, Dictionary<DateTime, Tuple<string, double, int>> ticks, bool includeConditionCodes) :
+        internal MessageIntradayTick(CorrelationID corr, Service service, Dictionary<DateTime, BEmu.Types.Tuple3<string, double, int>> ticks, bool includeConditionCodes) :
             base(new Name("IntradayTickResponse"), corr, service)
         {
             this._parent = new ElementIntradayTickDataParent(ticks, includeConditionCodes);

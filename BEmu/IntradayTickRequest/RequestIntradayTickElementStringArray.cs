@@ -50,7 +50,7 @@ namespace BEmu.IntradayTickRequest
 
             result.AppendFormat("{0}{1}[] = {{{2}", tabs, this.Name, Environment.NewLine);
 
-            string secs = string.Join(", ", this._values);
+            string secs = string.Join(", ", this._values.ToArray());
             result.AppendFormat("{0}{1}{2}{3}", tabs, Types.IndentType.TAB, secs, Environment.NewLine);
 
             result.AppendFormat("{0}}}{1}", tabs, Environment.NewLine);
