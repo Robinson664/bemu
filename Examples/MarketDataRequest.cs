@@ -59,7 +59,7 @@ namespace Examples
                             }
                             catch (Exception)
                             {
-                                System.Console.Error.WriteLine("Could not open //blp/mktdata for async");
+                                Console.Error.WriteLine("Could not open //blp/mktdata for async");
                             }
                         }
                     }

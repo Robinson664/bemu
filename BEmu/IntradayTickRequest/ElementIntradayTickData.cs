@@ -16,7 +16,7 @@ namespace BEmu.IntradayTickRequest
 
     internal class ElementIntradayTickData : Element
     {
-        private readonly Dictionary<string, Element> _fields; //make a dict
+        private readonly Dictionary<string, Element> _fields;
 
         public ElementIntradayTickData(DateTime datetime, BEmu.Types.Tuple3<string, double, int> values, bool includeConditionCodes)
         {

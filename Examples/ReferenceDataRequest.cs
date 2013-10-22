@@ -99,7 +99,7 @@ namespace Examples
             }
             else
             {
-                Console.WriteLine("Cannot connect to server");
+                Console.WriteLine("Cannot connect to server.  Check that the server host is \"localhost\" or \"127.0.0.1\" and that the server port is 8194.");
             }
         }
 

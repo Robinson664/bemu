@@ -27,7 +27,7 @@ namespace BEmu
         private enum SessionUriType { undefined, refData, mktData }
         private SessionUriType _sessionUri = SessionUriType.undefined;
 
-        private enum SessionStateType { initialized, started, serviceOpened }
+        private enum SessionStateType { initialized, started, serviceOpened, connectionError }
         private SessionStateType _sessionState = SessionStateType.initialized;
         #pragma warning restore 0414
 
@@ -51,8 +51,16 @@ namespace BEmu
 
         public bool Start()
         {
-            this._sessionState = SessionStateType.started;
-            return true;
+            if (this._sessionOptions.ServerPort == 8194 && (this._sessionOptions.ServerHost == "localhost" || this._sessionOptions.ServerHost == "127.0.0.1"))
+            {
+                this._sessionState = SessionStateType.started;
+                return true;
+            }
+            else
+            {
+                this._sessionState = SessionStateType.connectionError;
+                return false;
+            }
         }
 
         public bool OpenService(string uri)

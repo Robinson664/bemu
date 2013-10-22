@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\IntradayTickRequest">
+      <UniqueIdentifier>{4277de55-ff16-4e59-afe2-44245be81865}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Types">
+      <UniqueIdentifier>{93c673aa-6daf-4c97-b059-7f7fa9b25954}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BloombergTypes">
+      <UniqueIdentifier>{60c45d0b-4e5b-4cde-8168-ef4ebefc463f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BloombergTypes">
+      <UniqueIdentifier>{27e1ce1c-a702-4409-9717-681d725c1259}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Types">
+      <UniqueIdentifier>{a63aacf0-c15d-4473-a634-11107d11cdfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IntradayTickRequests">
+      <UniqueIdentifier>{f0a9f3b4-71e3-42f9-94c4-29dbefd01c5d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\BloombergTypes\EventPtr.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Message.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\MessageIterator.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\MessagePtr.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Name.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Request.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\RequestPtr.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Service.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\ServiceRefData.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Session.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\SessionOptions.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\CorrelationId.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Datetime.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Element.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\ElementPtr.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Event.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Types\ObjectType.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Types\RandomDataGenerator.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Types\Rules.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Types\IndentType.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\bemu_headers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickData.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementTime.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataArray.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataParent.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataTuple3.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDateTime.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDouble.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickInt.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickResponseError.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickString.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\ElementReference.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\EventIntradayTick.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\MessageIntradayTick.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTick.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementBool.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementInt.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementString.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementStringArray.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickString.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementReference.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\EventIntradayTick.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\MessageIntradayTick.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTick.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementBool.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementInt.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementString.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementStringArray.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementTime.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickData.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataArray.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataParent.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataTuple3.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDateTime.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDouble.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickInt.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\RandomDataGenerator.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\Rules.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\IndentType.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\ObjectType.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\CorrelationId.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\SessionOptions.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Datetime.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Element.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\ElementPtr.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Event.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\EventPtr.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Message.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\MessageIterator.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\MessagePtr.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Name.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Request.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\RequestPtr.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Service.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\ServiceRefData.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Session.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

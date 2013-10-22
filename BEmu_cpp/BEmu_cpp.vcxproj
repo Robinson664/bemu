@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{11FF296F-F1FF-4837-84A3-73B4C733433F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>BEmu_cpp</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v90</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v90</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(ProgramFiles)\boost\boost_1_54_0\stage\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(ProjectDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(ProjectDir)intermediate\</IntDir>
+    <LibraryPath>$(ProgramFiles)\boost\boost_1_54_0\stage\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;BEMU_CPP_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProgramFiles)\boost\boost_1_54_0\;$(ProjectDir)headers\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)bin\$(Configuration)\BEmu_cpp.dll" "$(SolutionDir)Examples_cpp\bin\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy the DLL</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;BEMU_CPP_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProgramFiles)\boost\boost_1_54_0\;$(ProjectDir)headers\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy "$(ProjectDir)bin\$(Configuration)\BEmu_cpp.dll" "$(SolutionDir)Examples_cpp\bin\$(Configuration)\"</Command>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message>Copy the DLL</Message>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\bemu_headers.h" />
+    <ClInclude Include="headers\BloombergTypes\CorrelationId.h" />
+    <ClInclude Include="headers\BloombergTypes\Datetime.h" />
+    <ClInclude Include="headers\BloombergTypes\Element.h" />
+    <ClInclude Include="headers\BloombergTypes\ElementPtr.h" />
+    <ClInclude Include="headers\BloombergTypes\Event.h" />
+    <ClInclude Include="headers\BloombergTypes\EventPtr.h" />
+    <ClInclude Include="headers\BloombergTypes\Message.h" />
+    <ClInclude Include="headers\BloombergTypes\MessageIterator.h" />
+    <ClInclude Include="headers\BloombergTypes\MessagePtr.h" />
+    <ClInclude Include="headers\BloombergTypes\Name.h" />
+    <ClInclude Include="headers\BloombergTypes\Request.h" />
+    <ClInclude Include="headers\BloombergTypes\RequestPtr.h" />
+    <ClInclude Include="headers\BloombergTypes\Service.h" />
+    <ClInclude Include="headers\BloombergTypes\ServiceRefData.h" />
+    <ClInclude Include="headers\BloombergTypes\Session.h" />
+    <ClInclude Include="headers\BloombergTypes\SessionOptions.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickData.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataArray.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataParent.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataTuple3.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDateTime.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDouble.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickInt.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickResponseError.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickString.h" />
+    <ClInclude Include="headers\IntradayTickRequest\ElementReference.h" />
+    <ClInclude Include="headers\IntradayTickRequest\EventIntradayTick.h" />
+    <ClInclude Include="headers\IntradayTickRequest\MessageIntradayTick.h" />
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTick.h" />
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementBool.h" />
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementInt.h" />
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementString.h" />
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementStringArray.h" />
+    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementTime.h" />
+    <ClInclude Include="headers\Types\IndentType.h" />
+    <ClInclude Include="headers\Types\ObjectType.h" />
+    <ClInclude Include="headers\Types\RandomDataGenerator.h" />
+    <ClInclude Include="headers\Types\Rules.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BloombergTypes\CorrelationId.cpp" />
+    <ClCompile Include="src\BloombergTypes\Datetime.cpp" />
+    <ClCompile Include="src\BloombergTypes\Element.cpp" />
+    <ClCompile Include="src\BloombergTypes\ElementPtr.cpp" />
+    <ClCompile Include="src\BloombergTypes\Event.cpp" />
+    <ClCompile Include="src\BloombergTypes\EventPtr.cpp" />
+    <ClCompile Include="src\BloombergTypes\Message.cpp" />
+    <ClCompile Include="src\BloombergTypes\MessageIterator.cpp" />
+    <ClCompile Include="src\BloombergTypes\MessagePtr.cpp" />
+    <ClCompile Include="src\BloombergTypes\Name.cpp" />
+    <ClCompile Include="src\BloombergTypes\Request.cpp" />
+    <ClCompile Include="src\BloombergTypes\RequestPtr.cpp" />
+    <ClCompile Include="src\BloombergTypes\Service.cpp" />
+    <ClCompile Include="src\BloombergTypes\ServiceRefData.cpp" />
+    <ClCompile Include="src\BloombergTypes\Session.cpp" />
+    <ClCompile Include="src\BloombergTypes\SessionOptions.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickData.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataArray.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataParent.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataTuple3.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDateTime.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDouble.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickInt.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickString.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\ElementReference.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\EventIntradayTick.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\MessageIntradayTick.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTick.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementBool.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementInt.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementString.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementStringArray.cpp" />
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementTime.cpp" />
+    <ClCompile Include="src\Types\IndentType.cpp" />
+    <ClCompile Include="src\Types\ObjectType.cpp" />
+    <ClCompile Include="src\Types\RandomDataGenerator.cpp" />
+    <ClCompile Include="src\Types\Rules.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
