@@ -7,28 +7,22 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\ElementPtr.h"
-#include "IntradayTickRequest/RequestIntradayTickElementString.h"
-
 #pragma once
+
+#include "IntradayTickRequest/RequestIntradayTickElementString.h"
 
 namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		class RequestIntradayTick;
-
-		class RequestIntradayTickElementBool : private RequestIntradayTickElementString
+		class RequestIntradayTickElementBool : public RequestIntradayTickElementString
 		{
 			private:
 				bool _bvalue;
-				RequestIntradayTickElementBool(std::string& elementName, bool bvalue);
-				bool getBool();
 
 			public:
-				friend class RequestIntradayTick; //RequestIntradayTick::includeConditionCodes() needs access to getBool()
+				RequestIntradayTickElementBool(std::string& elementName, bool bvalue);
+				bool getBool();
 		};
 	}
 }

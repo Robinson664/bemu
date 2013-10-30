@@ -7,13 +7,11 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "IntradayTickRequest/MessageIntradayTick.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
-
-#include "BloombergTypes\CorrelationId.h"
-#include "BloombergTypes\Service.h"
+#include "BloombergTypes/CorrelationId.h"
+#include "BloombergTypes/Service.h"
 #include "IntradayTickRequest/ElementIntradayTickDataParent.h"
 #include "IntradayTickRequest/ElementIntradayTickResponseError.h"
 #include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"

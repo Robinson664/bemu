@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
+#include <iostream>
 #include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
 
 namespace BEmu

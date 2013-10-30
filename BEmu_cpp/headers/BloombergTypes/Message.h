@@ -7,28 +7,27 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes/CorrelationId.h"
-#include "BloombergTypes/Name.h"
-#include "BloombergTypes/Element.h"
-#include "BloombergTypes/Datetime.h"
-#include <exception>
-
 #pragma once
+
+#include "bemu_headers.h"
+#include <exception>
 
 namespace BEmu
 {
+	class Name;
 	class MessagePtr;
-	class MessageIterator;
+	class CorrelationId;
+	class Element;
+	class Datetime;
 
 	class Message
 	{
 		private:
-			Message();
-			Message(MessagePtr* ptr);
 			MessagePtr * _ptr;
 
 		public:
+			Message();
+			Message(MessagePtr* ptr);
 
 			class MessageException: public std::exception
 			{
@@ -76,8 +75,6 @@ namespace BEmu
 			DLL_EXPORT const char* getElementAsString(const char* name) const;
 
 			DLL_EXPORT virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
-
-			friend class MessageIterator;
 	};
 
 	std::ostream& operator<<(std::ostream& stream, const Message &message);

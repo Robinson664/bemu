@@ -7,6 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
+#include "BloombergTypes/Name.h"
 #include "BloombergTypes/Element.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/Datetime.h"

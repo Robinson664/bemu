@@ -7,13 +7,14 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
+#pragma once
+
 #include <random>
 #include <map>
 #include <list>
-#include "Types\ObjectType.h"
-
-#pragma once
+#include "Types/ObjectType.h"
+#include "IntradayBarRequest/BarTickDataType.h"
+#include "BloombergTypes/Datetime.h"
 
 namespace BEmu
 {
@@ -38,6 +39,8 @@ namespace BEmu
 			static bool RandomBool();
 			static std::map<std::string, ObjectType*>* GetMarketDataFields(std::list<std::string> arg);
 			static ObjectType* MarketDataFromFieldName(std::string* arg);
+
+			static IntradayBarRequest::BarTickDataType * GenerateBarData(Datetime * date);
 
 			static boost::posix_time::ptime::time_duration_type IntradayTickInterval();
 	};

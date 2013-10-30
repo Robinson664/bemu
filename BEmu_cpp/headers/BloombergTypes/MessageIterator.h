@@ -7,16 +7,16 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
+#pragma once
+
 #include "bemu_headers.h"
-#include "BloombergTypes/Message.h"
-#include "BloombergTypes/Event.h"
 #include <exception>
 #include <vector>
 
-#pragma once
-
 namespace BEmu
 {
+	class Event;
+	class Message;
 	class MessagePtr;
 
 	//This class mirrors the BloombergLP.blpapi.MessageIterator as declared in blpapi_event.h (there's no blpapi_message_iterator.h file)
@@ -31,6 +31,6 @@ namespace BEmu
 			DLL_EXPORT bool isValid() const;
 			DLL_EXPORT Message message(bool createClonable = false) const;
 			DLL_EXPORT MessageIterator(Event evt);
-			DLL_EXPORT ~MessageIterator();
+			DLL_EXPORT ~MessageIterator(); //when the messageIterator goes out of scope in the actual BB API, its elements are deleted.  Ii don't do that here.
 	};
 }

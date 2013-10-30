@@ -7,31 +7,26 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\ElementPtr.h"
-#include "BloombergTypes\Datetime.h"
-#include "IntradayTickRequest/RequestIntradayTickElementString.h"
-
 #pragma once
+
+#include "IntradayTickRequest/RequestIntradayTickElementString.h"
 
 namespace BEmu
 {
+	class Datetime;
+
 	namespace IntradayTickRequest
 	{
-		class RequestIntradayTick;
-
-		class RequestIntradayTickElementTime : private RequestIntradayTickElementString
+		class RequestIntradayTickElementTime : public RequestIntradayTickElementString
 		{
 			private:
 				Datetime* _instance;
+
+			public:
 				RequestIntradayTickElementTime(const std::string& elementName);
 				RequestIntradayTickElementTime(const std::string& elementName, const Datetime& date);
 				~RequestIntradayTickElementTime();
 				Datetime* getDate();
-
-			public:
-				friend class RequestIntradayTick; //RequestIntradayTick::getDates needs access to getDate()
 		};
 	}
 }

@@ -8,8 +8,6 @@
 //------------------------------------------------------------------------------------------------
 
 #include "BloombergTypes/Service.h"
-#include "BloombergTypes/Request.h"
-#include "BloombergTypes/RequestPtr.h"
 #include "BloombergTypes/ServiceRefData.h"
 
 namespace BEmu

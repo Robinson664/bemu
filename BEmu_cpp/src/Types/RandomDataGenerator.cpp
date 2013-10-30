@@ -14,6 +14,24 @@
 
 namespace BEmu
 {
+	IntradayBarRequest::BarTickDataType * RandomDataGenerator::GenerateBarData(Datetime * date)
+	{
+        double first = RandomDataGenerator::RandomDouble();
+        double second = RandomDataGenerator::RandomDouble();
+
+        double high = first > second ? first : second;
+        double low = first > second ? second : first;
+        double open = RandomDataGenerator::RandomDouble(low, high);
+        double close = RandomDataGenerator::RandomDouble(low, high);
+
+        long volume = RandomDataGenerator::RandomInt(1000000);
+		double value = RandomDataGenerator::RandomDouble(1, 10000);
+		int numEvents = RandomDataGenerator::RandomInt(10000);
+
+		IntradayBarRequest::BarTickDataType * result = new IntradayBarRequest::BarTickDataType(*date, open, high, low, close, value, volume, numEvents);
+		return result;
+	}
+
 	std::map<std::string, ObjectType*>* RandomDataGenerator::GetMarketDataFields(std::list<std::string> arg)
 	{
 		std::map<std::string, ObjectType*> *result = new std::map<std::string, ObjectType*>();
@@ -22,7 +40,7 @@ namespace BEmu
 		//  The response contains the requested fields that changed.
 		while(result->size() == 0)
 		{
-			for(std::list<std::string>::iterator ii = arg.begin(); ii != arg.end(); ii++)
+			for(std::list<std::string>::const_iterator ii = arg.begin(); ii != arg.end(); ii++)
 			{
 				if(RandomDataGenerator::RandomDouble(1, 10) < 3)
 				{

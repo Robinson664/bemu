@@ -7,7 +7,6 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "IntradayTickRequest/RequestIntradayTickElementString.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/Element.h"
@@ -25,8 +24,6 @@ namespace BEmu
 
 		RequestIntradayTickElementString::~RequestIntradayTickElementString()
 		{
-			//delete this->_elementName;
-			//delete this->_value;
 		}
 
 		const std::string& RequestIntradayTickElementString::security()

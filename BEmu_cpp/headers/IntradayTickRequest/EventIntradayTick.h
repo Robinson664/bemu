@@ -7,34 +7,31 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\MessagePtr.h"
-#include "BloombergTypes\EventPtr.h"
+#pragma once
 
 #include <vector>
-
-#pragma once
+#include "BloombergTypes/EventPtr.h"
 
 namespace BEmu
 {
+	class MessagePtr;
+
 	namespace IntradayTickRequest
 	{
 		class RequestIntradayTick;
 
-		class EventIntradayTick : private EventPtr
+		class EventIntradayTick : public EventPtr
 		{
 			private:
-				EventIntradayTick(RequestIntradayTick *request);
-				~EventIntradayTick();
-
 				std::vector<MessagePtr*> *_messages;
 				std::vector<MessagePtr*>* GenerateMessages();
 				RequestIntradayTick *_internal;
-				std::vector<MessagePtr*> *getMessages() const;
 
 			public:
-				friend class EventPtr;
+				EventIntradayTick(RequestIntradayTick *request);
+				~EventIntradayTick();
+
+				virtual std::vector<MessagePtr*> *getMessages() const;
 		};
 	}
 }

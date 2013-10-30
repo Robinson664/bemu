@@ -7,9 +7,6 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-
 #pragma once
 
 namespace BEmu
@@ -23,15 +20,12 @@ namespace BEmu
 				double _item2;
 				int _item3;
 
+			public:
 				ElementIntradayTickDataTuple3(std::string item1, double item2, int item3);
 
-			public:
 				std::string item1() const;
 				double item2() const;
 				int item3() const;
-
-				friend class EventIntradayTick;
-				friend class ElementIntradayTickDataArray;
 		};
 	}
 }

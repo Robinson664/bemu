@@ -7,17 +7,16 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\Datetime.h"
-#include "BloombergTypes\CorrelationId.h"
-#include "BloombergTypes\ElementPtr.h"
-
 #pragma once
+
+#include "BloombergTypes/Name.h"
+#include "BloombergTypes/CorrelationId.h"
 
 namespace BEmu
 {
+	class Datetime;
 	class Message;
+	class ElementPtr;
 
 	//See my explanation of the RequetPtr class for an explanation of this class
 	class MessagePtr
@@ -60,8 +59,6 @@ namespace BEmu
 			const char* getElementAsString(const char* name) const;
 
 			virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
-
-			friend class Message;
 	};
 
 	inline std::ostream& operator<< (std::ostream& out, const MessagePtr& msg)

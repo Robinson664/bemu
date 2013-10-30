@@ -7,25 +7,24 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\ElementPtr.h"
-#include "BloombergTypes\Datetime.h"
-#include "IntradayTickRequest\ElementIntradayTickDataTuple3.h"
-#include "IntradayTickRequest\ElementIntradayTickDateTime.h"
-#include "IntradayTickRequest\ElementIntradayTickString.h"
-#include "IntradayTickRequest\ElementIntradayTickDouble.h"
-#include "IntradayTickRequest\ElementIntradayTickInt.h"
-
 #pragma once
+
+#include "BloombergTypes/ElementPtr.h"
 
 namespace BEmu
 {
+	class Name;
+	class Datetime;
+
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickDataArray;
+		class ElementIntradayTickDateTime;
+		class ElementIntradayTickDouble;
+		class ElementIntradayTickInt;
+		class ElementIntradayTickString;
+		class ElementIntradayTickDataTuple3;
 
-		class ElementIntradayTickData : private ElementPtr
+		class ElementIntradayTickData : public ElementPtr
 		{
 			private:
 				bool _includeConditionCodes;
@@ -34,11 +33,11 @@ namespace BEmu
 				ElementIntradayTickDouble * _value;
 				ElementIntradayTickInt * _size;
 				ElementIntradayTickString * _type, * _conditionCodes;
-
+				
+			public:
 				ElementIntradayTickData(const Datetime& datetime, const ElementIntradayTickDataTuple3& arg, bool includeConditionCodes);
 				~ElementIntradayTickData();
 
-			public:
 				virtual Name name() const;
 				virtual int numValues() const { return 1; }
 				virtual int numElements() const { return 0; }
@@ -55,8 +54,6 @@ namespace BEmu
 				virtual const char* getElementAsString(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
-
-				friend class ElementIntradayTickDataArray; //ElementIntradayTickDataArray constructor needs access to the ElementIntradayTickData constructor
 		};
 	}
 }

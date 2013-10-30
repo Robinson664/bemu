@@ -28,6 +28,15 @@ namespace BEmu
 		this->_ptr = arg._ptr;
 	}
 
+	Event::~Event()
+	{
+	}
+
+	EventPtr * Event::getEventPtr() const
+	{
+		return this->_ptr;
+	}
+
 	Event& Event::operator=(const Event &rhs)
 	{
 		if (this != &rhs)
@@ -39,7 +48,7 @@ namespace BEmu
 
 	Event::EventType Event::eventType()
 	{
-		return this->_ptr->eventType();
+		return this->_ptr->getEventType();
 	}
 
 }

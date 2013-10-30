@@ -7,14 +7,11 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "IntradayTickRequest/RequestIntradayTickElementStringArray.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/Element.h"
 #include "Types/IndentType.h"
-
 #include <vector>
-
 
 namespace BEmu
 {
@@ -27,7 +24,7 @@ namespace BEmu
 
 		RequestIntradayTickElementStringArray::~RequestIntradayTickElementStringArray()
 		{
-			for(std::vector<std::string*>::iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
+			for(std::vector<std::string*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
 			{
 				std::string* value = *iter;
 				delete value;

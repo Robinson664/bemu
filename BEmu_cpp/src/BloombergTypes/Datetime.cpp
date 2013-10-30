@@ -9,6 +9,8 @@
 
 #include "BloombergTypes/Datetime.h"
 #include <boost/date_time/posix_time/posix_time_io.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/date_duration.hpp>
 
 namespace BEmu
 {
@@ -58,28 +60,49 @@ namespace BEmu
 		return *this;
 	}
 
-	//Datetime::Datetime(boost::posix_time::ptime arg)
-	//{
-	//	this->_instance = new boost::posix_time::ptime(arg);
-
-	//	bool isDate = arg.date().year() != 0;
-	//	bool isTime = arg.time_of_day().hours() != 0 || arg.time_of_day().minutes() != 0 || arg.time_of_day().seconds() != 0;
-
-	//	if(isDate)
-	//	{
-	//		if(isTime)
-	//			this->_dateTimeType = both;
-	//		else
-	//			this->_dateTimeType = date;
-	//	}
-	//	else if(isTime)
-	//		this->_dateTimeType = time;
-	//}
-
 	Datetime::~Datetime()
 	{
 		delete this->_instance;
 		this->_instance = 0;
+	}
+
+	Datetime::WeekDayEnum Datetime::getWeekDay() const
+	{
+		boost::gregorian::greg_weekday wd = this->_instance->date().day_of_week();
+		Datetime::WeekDayEnum result = (Datetime::WeekDayEnum)(int)wd;
+		return result;
+	}
+
+	void Datetime::addDays(long days)
+	{
+		if(this->_dateTimeType == Datetime::time)
+			this->_dateTimeType = Datetime::both; //if the user is adjusting days, assume that the dateTime is both date and time
+
+		(*this->_instance) += boost::gregorian::date_duration(days);
+	}
+
+	void Datetime::addHours(long hours)
+	{
+		if(this->_dateTimeType == Datetime::date)
+			this->_dateTimeType = Datetime::both; //if the user is adjusting hours, assume that the dateTime is both date and time
+
+		(*this->_instance) += boost::posix_time::hours(hours);
+	}
+
+	void Datetime::addMinutes(long minutes)
+	{
+		if(this->_dateTimeType == Datetime::date)
+			this->_dateTimeType = Datetime::both; //if the user is adjusting minutes, assume that the dateTime is both date and time
+
+		(*this->_instance) += boost::posix_time::minutes(minutes);
+	}
+
+	void Datetime::addSeconds(long seconds)
+	{
+		if(this->_dateTimeType == Datetime::date)
+			this->_dateTimeType = Datetime::both; //if the user is adjusting seconds, assume that the dateTime is both date and time
+
+		(*this->_instance) += boost::posix_time::seconds(seconds);
 	}
 
 	unsigned Datetime::year() const

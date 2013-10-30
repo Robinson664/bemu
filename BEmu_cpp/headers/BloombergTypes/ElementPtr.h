@@ -7,16 +7,16 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\Datetime.h"
+#pragma once
+
+#include "BloombergTypes/Datetime.h"
 #include <exception>
 #include <sstream>
 
-#pragma once
-
 namespace BEmu
 {
+	class Name;
+
 	class ElementPtr
 	{
 		protected:

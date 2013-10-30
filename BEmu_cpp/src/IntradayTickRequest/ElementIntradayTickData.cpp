@@ -7,18 +7,16 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "IntradayTickRequest\ElementIntradayTickData.h"
-#include "IntradayTickRequest\ElementIntradayTickDataTuple3.h"
+#include "IntradayTickRequest/ElementIntradayTickData.h"
+#include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/Datetime.h"
 #include "Types/IndentType.h"
-
-#include "IntradayTickRequest\ElementIntradayTickDateTime.h"
-#include "IntradayTickRequest\ElementIntradayTickString.h"
-#include "IntradayTickRequest\ElementIntradayTickDouble.h"
-#include "IntradayTickRequest\ElementIntradayTickInt.h"
+#include "IntradayTickRequest/ElementIntradayTickDateTime.h"
+#include "IntradayTickRequest/ElementIntradayTickString.h"
+#include "IntradayTickRequest/ElementIntradayTickDouble.h"
+#include "IntradayTickRequest/ElementIntradayTickInt.h"
 
 namespace BEmu
 {

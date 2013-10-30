@@ -31,6 +31,12 @@
     <Filter Include="Source Files\IntradayTickRequests">
       <UniqueIdentifier>{f0a9f3b4-71e3-42f9-94c4-29dbefd01c5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\IntradayBarRequest">
+      <UniqueIdentifier>{d13d5b9d-420e-4423-9fac-3ca6c4cff689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\IntradayBarRequest">
+      <UniqueIdentifier>{45785744-4c34-422a-aa16-a7a3d8ff8f52}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\BloombergTypes\EventPtr.h">
@@ -95,6 +101,60 @@
     </ClInclude>
     <ClInclude Include="headers\bemu_headers.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarDouble.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarInt.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarLong.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarResponseError.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarString.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\EventIntradayBar.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\MessageIntradayBar.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBar.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementBool.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementInt.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementString.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementStringArray.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementTime.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\BarTickDataType.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementBarData.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementBarTickData.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementBarTickDataArray.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarDateTime.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
     </ClInclude>
     <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickData.h">
       <Filter>Header Files\IntradayTickRequest</Filter>
@@ -265,6 +325,60 @@
     </ClCompile>
     <ClCompile Include="src\BloombergTypes\Session.cpp">
       <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarDouble.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarInt.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarLong.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarResponseError.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarString.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\EventIntradayBar.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\MessageIntradayBar.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBar.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementBool.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementInt.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementString.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementStringArray.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementTime.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\BarTickDataType.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementBarData.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementBarTickData.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementBarTickDataArray.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarDateTime.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

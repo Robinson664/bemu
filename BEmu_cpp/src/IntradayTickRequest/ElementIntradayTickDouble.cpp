@@ -7,7 +7,6 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "IntradayTickRequest/ElementIntradayTickDouble.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"

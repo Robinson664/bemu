@@ -7,38 +7,26 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\Datetime.h"
-#include <exception>
-
 #pragma once
+
+#include "bemu_headers.h"
+#include <exception>
 
 namespace BEmu
 {
-	class Message;
+	class Name;
 	class ElementPtr;
-
-	namespace IntradayTickRequest
-	{
-		class MessageIntradayTick;
-		class RequestIntradayTick;
-		class ElementIntradayTickResponseError;
-	}
+	class Datetime;
 
 	class Element
 	{
 		private:
-			Element();
-			Element(const ElementPtr* arg);
 			const ElementPtr * _ptr;
 
 		public:
-			friend class IntradayTickRequest::MessageIntradayTick;
-			friend class IntradayTickRequest::RequestIntradayTick;
-			friend class IntradayTickRequest::ElementIntradayTickResponseError;
-			friend class Message;
+			Element(const ElementPtr* arg);
 
+			DLL_EXPORT Element();
 			DLL_EXPORT Element(const Element& arg);
 			DLL_EXPORT Element& operator=(const Element &rhs);
 

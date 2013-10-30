@@ -7,36 +7,38 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\Event.h"
-#include "BloombergTypes\Datetime.h"
-#include "BloombergTypes\RequestPtr.h"
-#include "BloombergTypes\MessagePtr.h"
+#pragma once
+
+#include "BloombergTypes/Event.h"
 #include <exception>
 #include <vector>
 
-#pragma once
-
 namespace BEmu
 {
+	class Name;
 	class Session;
 	class MessageIterator;
+	class Datetime;
+	class RequestPtr;
+	class MessagePtr;
 
 	//See my explanation of the RequetPtr class for an explanation of this class
 	class EventPtr
 	{
-		private:
-			virtual std::vector<MessagePtr*> *getMessages() const;
-			static EventPtr* EventFactory(RequestPtr *request, bool isLastRequest);
-
 		protected:
 			RequestPtr *_request;
-			EventPtr(RequestPtr * request);
-			EventPtr(const EventPtr &src);
 			Event::EventType _type;
 
 		public:
+			EventPtr(RequestPtr * request);
+			EventPtr(const EventPtr &src);
+			~EventPtr();
+			
+			Event::EventType getEventType() const;
+			void setEventType(Event::EventType evtType);
+
+			virtual std::vector<MessagePtr*> *getMessages() const;
+			static EventPtr* EventFactory(RequestPtr *request, bool isLastRequest);
 
 			class EventPtrException: public std::exception
 			{
@@ -45,10 +47,5 @@ namespace BEmu
 					return "My exception happened";
 				}
 			} eventPtrEx;
-
-			Event::EventType eventType();
-
-			friend class Session;
-			friend class MessageIterator;
 	};
 }

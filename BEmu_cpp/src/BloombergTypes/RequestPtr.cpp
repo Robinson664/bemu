@@ -27,6 +27,22 @@ namespace BEmu
 		this->_requestType = src._requestType;
 	}
 
+	CorrelationId * RequestPtr::getCorrelationId() const
+	{
+		return this->_correlationId;
+	}
+
+	void RequestPtr::setCorrelationId(CorrelationId * arg)
+	{
+		delete this->_correlationId;
+		this->_correlationId = arg;
+	}
+
+	RequestPtr::RequestTypeEnum RequestPtr::getRequestType() const
+	{
+		return this->_requestType;
+	}
+
 	void RequestPtr::append(const char* name, const char* value)
 	{
 		throw requestEx;

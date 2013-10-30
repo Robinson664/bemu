@@ -16,6 +16,9 @@
 #include "IntradayTickRequest/RequestIntradayTick.h"
 #include "IntradayTickRequest/EventIntradayTick.h"
 
+#include "IntradayBarRequest/RequestIntradayBar.h"
+#include "IntradayBarRequest/EventIntradayBar.h"
+
 namespace BEmu
 {
 	EventPtr::EventPtr(RequestPtr * request)
@@ -28,36 +31,46 @@ namespace BEmu
 		this->_request = src._request;
 	}
 
+	EventPtr::~EventPtr()
+	{
+
+	}
+
 	std::vector<MessagePtr*>* EventPtr::getMessages() const
 	{
 		throw eventPtrEx;
 	}
 
-	Event::EventType EventPtr::eventType()
+	Event::EventType EventPtr::getEventType() const
 	{
 		return this->_type;
 	}
 
+	void EventPtr::setEventType(Event::EventType evtType)
+	{
+		this->_type = evtType;
+	}
+
 	EventPtr* EventPtr::EventFactory(RequestPtr *request, bool isLastRequest)
 	{
-		if(request->_requestType == RequestPtr::historic)
+		if(request->getRequestType() == RequestPtr::historic)
 		{
 			throw request->requestEx;
 		}
-		else if(request->_requestType == RequestPtr::intradayBar)
+		else if(request->getRequestType() == RequestPtr::intradayBar)
 		{
-			throw request->requestEx;
+			IntradayBarRequest::RequestIntradayBar *req = (IntradayBarRequest::RequestIntradayBar *)request;
+			IntradayBarRequest::EventIntradayBar *evt = new IntradayBarRequest::EventIntradayBar(req);
+			
+			return evt;
 		}
-		else if(request->_requestType == RequestPtr::intradayTick)
+		else if(request->getRequestType() == RequestPtr::intradayTick)
 		{
 			IntradayTickRequest::RequestIntradayTick *req = (IntradayTickRequest::RequestIntradayTick *)request;
 			IntradayTickRequest::EventIntradayTick *evt = new IntradayTickRequest::EventIntradayTick(req);
-
-			EventPtr * evt2 = evt;
-
 			return evt;
 		}
-		else if(request->_requestType == RequestPtr::reference)
+		else if(request->getRequestType() == RequestPtr::reference)
 		{
 			throw request->requestEx;
 		}

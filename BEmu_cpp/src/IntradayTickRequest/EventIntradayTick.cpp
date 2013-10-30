@@ -7,10 +7,8 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
-
 #include "IntradayTickRequest/EventIntradayTick.h"
 #include "IntradayTickRequest/RequestIntradayTick.h"
 #include "IntradayTickRequest/MessageIntradayTick.h"
@@ -21,7 +19,7 @@
 #include "Types/Rules.h"
 #include "Types/RandomDataGenerator.h"
 #include <map>
-#include <boost\date_time\posix_time\posix_time.hpp>
+//#include <boost/date_time/posix_time/posix_time.hpp>
 
 namespace BEmu
 {
@@ -59,7 +57,7 @@ namespace BEmu
 
 			if (isResponseError)
             {
-				MessageIntradayTick *msg = new MessageIntradayTick(this->_request->_correlationId, this->_internal->_service);
+				MessageIntradayTick *msg = new MessageIntradayTick(this->_internal->getCorrelationId(), this->_internal->getService());
 				result->push_back( (MessagePtr*)msg );
             }
 			else
@@ -73,10 +71,8 @@ namespace BEmu
 					{
 						Datetime* dt = dates->at(i);
 
-						boost::posix_time::ptime *pdt = dt->_instance;
-						boost::gregorian::greg_weekday wd = pdt->date().day_of_week();
-
-						if((wd != boost::date_time::Sunday) && (wd != boost::date_time::Saturday))
+						Datetime::WeekDayEnum wd = dt->getWeekDay();
+						if( (wd != Datetime::Sunday) && (wd != Datetime::Saturday) )
 						{
 							ElementIntradayTickDataTuple3 *t3 = new ElementIntradayTickDataTuple3("TRADE", RandomDataGenerator::RandomDouble(), RandomDataGenerator::IntradayTickTradeSize());
 							(*tickData)[dt] = t3;
@@ -84,7 +80,7 @@ namespace BEmu
 					}
 
 					//the constructor makes copies of the arguments, so I can delete the inputs
-					MessageIntradayTick *msg = new MessageIntradayTick(this->_request->_correlationId, this->_internal->_service, tickData, this->_internal->includeConditionCodes());
+					MessageIntradayTick *msg = new MessageIntradayTick(this->_internal->getCorrelationId(), this->_internal->getService(), tickData, this->_internal->includeConditionCodes());
 					result->push_back(msg);
 
 					//delete date vector
@@ -99,7 +95,7 @@ namespace BEmu
 				}
 
 				//delete the tickData map (the MessageIntradayTick constructor made copies of the data, so nothing will be lost)
-				for(std::map<Datetime*, ElementIntradayTickDataTuple3*>::iterator iter = tickData->begin(); iter != tickData->end(); ++iter)
+				for(std::map<Datetime*, ElementIntradayTickDataTuple3*>::const_iterator iter = tickData->begin(); iter != tickData->end(); ++iter)
 				{
 					//note that I don't have to delete the Datetime* because it is deleted in the "delete date vector" code block above
 					ElementIntradayTickDataTuple3* tp = iter->second;

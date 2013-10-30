@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "../bemu_headers.h"
-
 #pragma once
+
+#include "bemu_headers.h"
 
 namespace BEmu
 {

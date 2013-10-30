@@ -22,6 +22,9 @@
 	#include "BloombergTypes\SessionOptions.h"
 	#include "BloombergTypes\Request.h"
 	#include "BloombergTypes\Datetime.h"
+	#include "BloombergTypes\Element.h"
+	#include "BloombergTypes\Message.h"
+	#include "BloombergTypes\Service.h"
 
 	using namespace BEmu;
 
@@ -35,6 +38,8 @@
 	#include "blpapi_request.h"
 	#include "blpapi_datetime.h"
 	#include "blpapi_service.h"
+	#include "blpapi_element.h"
+	#include "blpapi_message.h"
 
 	using namespace BloombergLP::blpapi;
 

@@ -12,6 +12,7 @@ int readInteger();
 
 namespace Examples
 {
+	void RunIntradayBarExample();
 	void RunIntradayTickExample();
 }
 

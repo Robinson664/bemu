@@ -37,8 +37,7 @@ void main()
 			Examples::RunIntradayTickExample();
 			break;
 		case 5:
-			cout << "Intraday bar data not yet implemented." << endl;
-			informationReturned = false;
+			Examples::RunIntradayBarExample();
 			break;
 		default:
 			informationReturned = false;

@@ -25,6 +25,15 @@ namespace BEmu
 		this->_name = original._name;
 	}
 
+	Name& Name::operator=(const Name &rhs)
+	{
+		if (this != &rhs)
+		{
+			this->_name = rhs._name;
+		}
+		return *this;
+	}
+
 	const char* Name::string() const
 	{
 		return this->_name.c_str();

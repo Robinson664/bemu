@@ -7,14 +7,12 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "IntradayTickRequest/RequestIntradayTick.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/Element.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/RequestPtr.h"
 #include "BloombergTypes/Datetime.h"
-
 #include "Types/RandomDataGenerator.h"
 #include "IntradayTickRequest/RequestIntradayTickElementStringArray.h"
 #include <vector>
@@ -171,6 +169,8 @@ namespace BEmu
 					pt.time_of_day().hours(), pt.time_of_day().minutes(), pt.time_of_day().seconds());
 
 			}
+
+			delete dtLoop; //after the last iteration, dtLoop doesn't get added to the result
 
 			return result;
 		}

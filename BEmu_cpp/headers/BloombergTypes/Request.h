@@ -7,15 +7,13 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
+#pragma once
+
 #include "bemu_headers.h"
 #include "BloombergTypes/RequestPtr.h"
 
-#pragma once
-
 namespace BEmu
 {
-	class Session;
-
 	class Request
 	{
 		private:
@@ -31,6 +29,8 @@ namespace BEmu
 			RequestPtr *_ptr;
 
 		public:
+			RequestPtr * getRequestPtr() const;
+
 			DLL_EXPORT Request();
 			DLL_EXPORT Request(RequestPtr *ptr);
 			DLL_EXPORT Request(const Request& arg);
@@ -50,7 +50,5 @@ namespace BEmu
 
 			DLL_EXPORT void set(const char* name, int value);
 			DLL_EXPORT void set(const Name& name, int value);
-	
-			friend class Session;
 	};
 }

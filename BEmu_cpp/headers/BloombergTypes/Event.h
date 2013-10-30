@@ -7,27 +7,26 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
+#pragma once
+
 #include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\Datetime.h"
-#include "BloombergTypes\RequestPtr.h"
-#include "BloombergTypes\Message.h"
 #include <exception>
 #include <vector>
 
-#pragma once
-
 namespace BEmu
 {
+	class Name;
 	class EventPtr;
 	class MessageIterator;
 	class Session;
+	class Datetime;
+	class RequestPtr;
+	class Message;
 
 	class Event
 	{
 		private:
 			EventPtr * _ptr;
-			Event(EventPtr *ptr);
 
 		public:
 			enum EventType {
@@ -65,15 +64,15 @@ namespace BEmu
 				// Request event
 			  UNKNOWN               = -1
 			};
+			
+			Event(EventPtr *ptr);
+			EventPtr * getEventPtr() const;
 
-		public:
 			DLL_EXPORT Event();			
 			DLL_EXPORT Event(const Event& arg);
 			DLL_EXPORT Event& operator=(const Event &rhs);
+			DLL_EXPORT ~Event();
 
 			DLL_EXPORT EventType eventType();
-
-			friend class MessageIterator;
-			friend class Session;
 	};
 }

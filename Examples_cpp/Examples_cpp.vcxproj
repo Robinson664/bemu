@@ -140,6 +140,7 @@
     <ClInclude Include="headers\examples.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\IntradayBarRequest.cpp" />
     <ClCompile Include="src\IntradayTickRequest.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>

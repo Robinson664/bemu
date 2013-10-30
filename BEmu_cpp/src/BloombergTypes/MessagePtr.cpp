@@ -10,6 +10,8 @@
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/MessagePtr.h"
 #include "BloombergTypes/Datetime.h"
+#include "BloombergTypes/Name.h"
+#include "BloombergTypes/CorrelationId.h"
 #include "Types/IndentType.h"
 
 namespace BEmu

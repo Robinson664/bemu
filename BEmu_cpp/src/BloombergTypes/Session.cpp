@@ -20,7 +20,7 @@ namespace BEmu
 {
 	Session::Session(const Session& session)
 	{
-		srand(time(0));
+		srand((unsigned int)time(0));
 		this->_sessionState = session._sessionState;
 
 		this->_sessionOptions.setServerHost(session._sessionOptions.serverHost());
@@ -49,7 +49,7 @@ namespace BEmu
 	bool Session::start()
 	{
 		if(this->_sessionOptions.serverPort() == 8194 && 
-			( strncmp(this->_sessionOptions.serverHost(), "localhost", 9) == 0 || strncmp(this->_sessionOptions.serverHost(), "127.0.0.1", 9) ))
+			( strncmp(this->_sessionOptions.serverHost(), "localhost", 9) == 0 || strncmp(this->_sessionOptions.serverHost(), "127.0.0.1", 9) == 0 ))
 		{
 			this->_sessionState = started;
 			return true;
@@ -92,8 +92,8 @@ namespace BEmu
 
 	CorrelationId Session::sendRequest(const Request& request, const CorrelationId& correlationId)
 	{
-		request._ptr->_correlationId = new CorrelationId(correlationId);
-		this->_sentRequests.push(request._ptr);
+		request.getRequestPtr()->setCorrelationId(new CorrelationId(correlationId));
+		this->_sentRequests.push(request.getRequestPtr());
 		return correlationId;
 	}
 
@@ -106,9 +106,9 @@ namespace BEmu
 		EventPtr * evt = EventPtr::EventFactory(reqP, isLastRequest);
 
 		if(isLastRequest)
-			evt->_type = Event::RESPONSE;
+			evt->setEventType(Event::RESPONSE);
 		else
-			evt->_type = Event::PARTIAL_RESPONSE;
+			evt->setEventType(Event::PARTIAL_RESPONSE);
 
 		Event result(evt);
 		return result;

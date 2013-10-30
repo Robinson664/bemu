@@ -7,15 +7,13 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "IntradayTickRequest/ElementIntradayTickDataParent.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "Types/IndentType.h"
-
 #include <map>
-#include "IntradayTickRequest\ElementIntradayTickDataTuple3.h"
-#include "IntradayTickRequest\ElementIntradayTickDataArray.h"
+#include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
+#include "IntradayTickRequest/ElementIntradayTickDataArray.h"
 
 namespace BEmu
 {

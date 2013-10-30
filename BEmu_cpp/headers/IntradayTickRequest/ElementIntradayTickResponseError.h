@@ -7,32 +7,29 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\Element.h"
-#include "BloombergTypes\ElementPtr.h"
-#include "BloombergTypes\Datetime.h"
-
-#include "IntradayTickRequest\ElementIntradayTickString.h"
-#include "IntradayTickRequest\ElementIntradayTickInt.h"
-
 #pragma once
+
+#include "BloombergTypes/ElementPtr.h"
 
 namespace BEmu
 {
+	class Name;
+
 	namespace IntradayTickRequest
 	{
-		class MessageIntradayTick;
+		class ElementIntradayTickString;
+		class ElementIntradayTickInt;
 
-		class ElementIntradayTickResponseError : private ElementPtr
+		class ElementIntradayTickResponseError : public ElementPtr
 		{
 			private:
 				ElementIntradayTickString *_source, *_category, *_message, *_subCategory;
 				ElementIntradayTickInt *_code;
+
+			public:
 				ElementIntradayTickResponseError();
 				~ElementIntradayTickResponseError();
 
-			public:
 				virtual Name name() const;
 				virtual int numValues() const { return 1; }
 				virtual int numElements() const { return 5; }		
@@ -45,8 +42,6 @@ namespace BEmu
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
-
-				friend class MessageIntradayTick; //The MessageIntradayTick constructor needs access to the ElementIntradayTickResponseError constructor
 		};
 	}
 }

@@ -15,7 +15,7 @@ using namespace std;
 
 namespace Examples
 {
-	void ProcessEvent(Event evt, const char* security);
+	void ProcessIntradayTickEvent(Event evt, const char* security);
 
 	void RunIntradayTickExample()
 	{
@@ -92,7 +92,7 @@ namespace Examples
 					case Event::RESPONSE:
 						continueToLoop = false; //fall through
 					case Event::PARTIAL_RESPONSE:
-						ProcessEvent(evt, security);
+						ProcessIntradayTickEvent(evt, security);
 						break;
 				}
 			}
@@ -101,11 +101,11 @@ namespace Examples
 		}
 		else
 		{
-			cout << "Cannot connect to server";
+			cerr << "Cannot connect to server";
 		}
 	}
 
-	void ProcessEvent(Event evt, const char* security)
+	void ProcessIntradayTickEvent(Event evt, const char* security)
 	{
 		cout << security << endl;
 

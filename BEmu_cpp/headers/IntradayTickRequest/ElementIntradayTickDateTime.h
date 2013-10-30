@@ -7,29 +7,27 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\ElementPtr.h"
-#include "BloombergTypes\Datetime.h"
-
 #pragma once
+
+#include "BloombergTypes/ElementPtr.h"
 
 namespace BEmu
 {
+	class Datetime;
+	class Name;
+
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickData;
-
-		class ElementIntradayTickDateTime : private ElementPtr
+		class ElementIntradayTickDateTime : public ElementPtr
 		{
 			private:
 				Datetime* _value;
 				std::string _name;
 
+			public:
 				ElementIntradayTickDateTime(const std::string& name, const Datetime& value);
 				~ElementIntradayTickDateTime();
 
-			public:
 				virtual Name name() const;
 				virtual int numValues() const { return 1; }
 				virtual int numElements() const { return 0; }
@@ -43,8 +41,6 @@ namespace BEmu
 				virtual char* getValueAsString(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
-
-				friend class ElementIntradayTickData; //ElementIntradayTickData constructor needs access to the ElementIntradayTickDateTime constructor
 		};
 	}
 }

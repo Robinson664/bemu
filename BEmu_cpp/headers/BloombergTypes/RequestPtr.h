@@ -7,28 +7,25 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\Datetime.h"
-#include "BloombergTypes\Element.h"
-#include "BloombergTypes\CorrelationId.h"
-#include <exception>
-
 #pragma once
+
+#include "BloombergTypes/Element.h"
+#include <exception>
 
 namespace BEmu
 {
+	class Name;
 	class Service;
 	class Session;
 	class EventPtr;
-
-	namespace IntradayTickRequest
-	{
-		class EventIntradayTick;
-	}
+	class CorrelationId;
+	class Datetime;
 
 	class RequestPtr
 	{
+		public:
+			enum RequestTypeEnum { historic, reference, intradayTick, intradayBar };
+
 		private:
 			//Session::sendRequest needs to set the correlationId of a given request.  The API marks the Request parameter as a const, so the mutable here overrides that.
 			mutable CorrelationId *_correlationId;
@@ -36,10 +33,7 @@ namespace BEmu
 		protected:	
 			RequestPtr();
 			RequestPtr(const RequestPtr &src);
-
-			enum RequestTypeEnum { historic, reference, intradayTick, intradayBar };
 			RequestTypeEnum _requestType;
-
 	
 		public:
 
@@ -51,9 +45,9 @@ namespace BEmu
 				}
 			} requestEx;
 
-			friend class Service; //Service::createRequest() needs access to the private Request() constructor
-			friend class Session;
-			friend class EventPtr; //EventPtr::EventFactory() needs access to the private Request() constructor and _requestType 
+			CorrelationId * getCorrelationId() const;
+			void setCorrelationId(CorrelationId * arg);
+			RequestTypeEnum getRequestType() const;
 			
 			virtual void append(const char* name, const char* value);
 			void append(const Name& name, const char* value);
@@ -72,8 +66,6 @@ namespace BEmu
 
 			virtual Element getElement(const char* name);
 			Element getElement(const Name& name);
-
-			friend class IntradayTickRequest::EventIntradayTick;
 
 			// The C# version of the code has a "HasElement(string)" method in the Request class.  The C++ version of the code doesn't.
 			//    In the C++ version, an equivalent call would be "request.asElement().hasElement(string)".

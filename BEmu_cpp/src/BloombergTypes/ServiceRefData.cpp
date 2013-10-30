@@ -12,6 +12,7 @@
 #include "BloombergTypes/Service.h"
 
 #include "IntradayTickRequest/RequestIntradayTick.h"
+#include "IntradayBarRequest/RequestIntradayBar.h"
 
 namespace BEmu
 {
@@ -39,13 +40,14 @@ namespace BEmu
 		}
 		else if(strncmp(operation, "IntradayTickRequest", 19) == 0)
 		{
-			const Service *svc = this;
 			IntradayTickRequest::RequestIntradayTick *result = new IntradayTickRequest::RequestIntradayTick(this);
 			return result;
 		}
 		else if(strncmp(operation, "IntradayBarRequest", 18) == 0)
 		{
-			throw serviceRefDataEx;
+			const Service* svc = this;
+			IntradayBarRequest::RequestIntradayBar *result = new IntradayBarRequest::RequestIntradayBar(svc);
+			return result;
 		}
 		else
 		{

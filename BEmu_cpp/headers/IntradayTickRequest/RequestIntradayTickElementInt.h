@@ -7,21 +7,20 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\ElementPtr.h"
-#include "IntradayTickRequest/RequestIntradayTickElementString.h"
-
 #pragma once
+
+#include "IntradayTickRequest/RequestIntradayTickElementString.h"
 
 namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		class RequestIntradayTickElementInt : private RequestIntradayTickElementString
+		class RequestIntradayTickElementInt : public RequestIntradayTickElementString
 		{
 			private:
 				int _ivalue;
+
+			public:
 				RequestIntradayTickElementInt(std::string& elementName, int ivalue);
 				int getInt();
 		};

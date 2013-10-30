@@ -43,12 +43,12 @@ namespace BEmu
 
 	CorrelationId Message::correlationId() const
 	{
-		return this->_ptr->_correlationId;
+		return this->_ptr->correlationId();
 	}
 
 	Name Message::messageType() const
 	{
-		return this->_ptr->_messageType;
+		return this->_ptr->messageType();
 	}
 
 	const char* Message::topicName() const

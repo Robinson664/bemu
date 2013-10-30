@@ -7,29 +7,26 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\ElementPtr.h"
-
 #pragma once
+
+#include "BloombergTypes/ElementPtr.h"
 
 namespace BEmu
 {
+	class Name;
+
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickData;
-		class ElementIntradayTickResponseError;
-
-		class ElementIntradayTickInt : private ElementPtr
+		class ElementIntradayTickInt : public ElementPtr
 		{
 			private:
 				int _value;
 				std::string _name;
 
+			public:
 				ElementIntradayTickInt(const std::string& name, int value);
 				~ElementIntradayTickInt();
 
-			public:
 				virtual Name name() const;
 				virtual int numValues() const;
 				virtual int numElements() const;
@@ -46,9 +43,6 @@ namespace BEmu
 				virtual char* getValueAsString(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
-
-				friend class ElementIntradayTickData; //ElementIntradayTickData constructor needs access to the ElementIntradayTickInt constructor
-				friend class ElementIntradayTickResponseError; //ElementIntradayTickResponseError constructor needs access to the ElementIntradayTickInt constructor
 		};
 	}
 }

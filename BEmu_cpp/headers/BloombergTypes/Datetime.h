@@ -7,19 +7,15 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include <boost\date_time\posix_time\posix_time.hpp>
-#include <boost\date_time\gregorian\gregorian.hpp>
-
 #pragma once
 
+#include "bemu_headers.h"
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time.hpp>
+
 namespace BEmu
-{
-	namespace IntradayTickRequest
-	{
-		class EventIntradayTick;
-	}
-	
+{	
 	class Datetime
 	{
 		private:
@@ -28,6 +24,19 @@ namespace BEmu
 			DateTimeTypeEnum _dateTimeType;
 
 		public:
+			enum WeekDayEnum
+			{
+				Sunday = boost::date_time::Sunday,
+				Monday = boost::date_time::Monday, 
+				Tuesday = boost::date_time::Tuesday, 
+				Wednesday = boost::date_time::Wednesday, 
+				Thursday = boost::date_time::Thursday, 
+				Friday = boost::date_time::Friday, 
+				Saturday = boost::date_time::Saturday
+			};
+
+			WeekDayEnum getWeekDay() const;
+
 			DLL_EXPORT Datetime::Datetime(int year, int month, int day);
 			DLL_EXPORT Datetime::Datetime(int year, int month, int day, int hours, int minutes, int seconds);
 			DLL_EXPORT Datetime::Datetime(int hours, int minutes, int seconds, int milleseconds);
@@ -45,6 +54,12 @@ namespace BEmu
 			DLL_EXPORT unsigned minutes() const;
 			DLL_EXPORT unsigned seconds() const;
 
+			//These are not exported to the DLL.  The actual Bloomberg API doesn't have these functions.
+			void addDays(long days);
+			void addHours(long hours);
+			void addMinutes(long minutes);
+			void addSeconds(long seconds);
+
 			friend DLL_EXPORT bool operator<(const Datetime& lhs, const Datetime& rhs);
 			friend DLL_EXPORT bool operator<=(const Datetime& lhs, const Datetime& rhs);
 			friend DLL_EXPORT bool operator>(const Datetime& lhs, const Datetime& rhs);
@@ -53,8 +68,6 @@ namespace BEmu
 			friend DLL_EXPORT bool operator!=(const Datetime& lhs, const Datetime& rhs);
 			
 			friend DLL_EXPORT std::ostream& operator<<(std::ostream& os, const Datetime& datetime);
-
-			friend class IntradayTickRequest::EventIntradayTick;
 	};
 
 	DLL_EXPORT bool operator<(const Datetime& lhs, const Datetime& rhs);

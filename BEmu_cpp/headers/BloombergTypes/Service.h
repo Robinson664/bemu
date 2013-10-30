@@ -7,11 +7,11 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Request.h"
-#include "BloombergTypes\RequestPtr.h"
-
 #pragma once
+
+#include "bemu_headers.h"
+#include "BloombergTypes/Request.h"
+#include "BloombergTypes/RequestPtr.h"
 
 namespace BEmu
 {

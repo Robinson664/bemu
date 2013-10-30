@@ -9,13 +9,13 @@
 
 #pragma once
 
-#include <boost\cstdint.hpp>
+#include <boost/cstdint.hpp>
 #include <string>
 #include <iostream>
 
-#include <boost\date_time\gregorian\gregorian.hpp>
-#include <boost\date_time\posix_time\posix_time.hpp>
-#include <boost\date_time\time_duration.hpp>
-#include <boost\date_time\posix_time\posix_time_duration.hpp>
+#include <boost/date_time/gregorian/gregorian.hpp>
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/date_time/time_duration.hpp>
+#include <boost/date_time/posix_time/posix_time_duration.hpp>
 
 #define DLL_EXPORT __declspec(dllexport)

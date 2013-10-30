@@ -7,7 +7,6 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "BloombergTypes/Message.h"
 #include "BloombergTypes/MessagePtr.h"
 #include "BloombergTypes/MessageIterator.h"
@@ -20,9 +19,10 @@ namespace BEmu
 	{
 		this->_position = -1;
 
-		std::vector<MessagePtr*>* list = evt._ptr->getMessages();
+		EventPtr * evtPtr = evt.getEventPtr();
+		std::vector<MessagePtr*>* list = evtPtr->getMessages();
 		
-		for(std::vector<MessagePtr*>::iterator iter = list->begin(); iter != list->end(); ++iter)
+		for(std::vector<MessagePtr*>::const_iterator iter = list->begin(); iter != list->end(); ++iter)
 		{
 			MessagePtr* msg = *iter;
 			this->_list.push_back(msg);
@@ -31,7 +31,7 @@ namespace BEmu
 
 	MessageIterator::~MessageIterator()
 	{
-		for(std::vector<MessagePtr*>::iterator iter = this->_list.begin(); iter != this->_list.end(); ++iter)
+		for(std::vector<MessagePtr*>::const_iterator iter = this->_list.begin(); iter != this->_list.end(); ++iter)
 		{
 			MessagePtr* msg = *iter;
 			delete msg;

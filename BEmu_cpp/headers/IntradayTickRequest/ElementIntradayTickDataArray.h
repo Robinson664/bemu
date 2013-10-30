@@ -7,31 +7,31 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\ElementPtr.h"
-#include "BloombergTypes\Datetime.h"
-#include "IntradayTickRequest\ElementIntradayTickData.h"
-#include "IntradayTickRequest\ElementIntradayTickDataTuple3.h"
+#pragma once
+
 #include <map>
 #include <vector>
-
-#pragma once
+#include "BloombergTypes/ElementPtr.h"
 
 namespace BEmu
 {
+	class Name;
+	class Datetime;
+
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickDataParent;
+		class ElementIntradayTickData;
+		class ElementIntradayTickDataTuple3;
 
-		class ElementIntradayTickDataArray : private ElementPtr
+		class ElementIntradayTickDataArray : public ElementPtr
 		{
 			private:
 				std::vector<ElementIntradayTickData*> _tickData;
+
+			public:
 				ElementIntradayTickDataArray(std::map<Datetime*, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes);
 				~ElementIntradayTickDataArray();
 
-			public:
 				virtual ElementPtr * getValueAsElement(int index) const;
 				virtual Name name() const;
 
@@ -42,8 +42,6 @@ namespace BEmu
 				virtual bool isComplexType() const { return false; }
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
-
-				friend class ElementIntradayTickDataParent; //ElementIntradayTickDataParent constructor needs access to the ElementIntradayTickDataArray constructor
 		};
 	}
 }

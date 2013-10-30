@@ -7,14 +7,12 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "IntradayTickRequest/ElementIntradayTickDataArray.h"
-#include "IntradayTickRequest\ElementIntradayTickData.h"
-#include "IntradayTickRequest\ElementIntradayTickDataTuple3.h"
+#include "IntradayTickRequest/ElementIntradayTickData.h"
+#include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "Types/IndentType.h"
-
 #include <map>
 #include <vector>
 
@@ -25,7 +23,7 @@ namespace BEmu
 		//makes copies of the arguments
 		ElementIntradayTickDataArray::ElementIntradayTickDataArray(std::map<Datetime*, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes)
 		{
-			for(std::map<Datetime*, ElementIntradayTickDataTuple3*>::iterator iter = ticks->begin(); iter != ticks->end(); ++iter)
+			for(std::map<Datetime*, ElementIntradayTickDataTuple3*>::const_iterator iter = ticks->begin(); iter != ticks->end(); ++iter)
 			{
 				Datetime date(*(iter->first));
 				ElementIntradayTickDataTuple3 tuple(iter->second->item1(), iter->second->item2(), iter->second->item3());
@@ -37,7 +35,7 @@ namespace BEmu
 
 		ElementIntradayTickDataArray::~ElementIntradayTickDataArray()
 		{
-			for(std::vector<ElementIntradayTickData*>::iterator iter = this->_tickData.begin(); iter != this->_tickData.end(); ++iter)
+			for(std::vector<ElementIntradayTickData*>::const_iterator iter = this->_tickData.begin(); iter != this->_tickData.end(); ++iter)
 			{
 				ElementIntradayTickData* elmFieldData = *iter;
 				delete elmFieldData;

@@ -7,22 +7,21 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes/Name.h"
-#include "BloombergTypes/Event.h"
+#pragma once
+
 #include "BloombergTypes/SessionOptions.h"
 #include "BloombergTypes/CorrelationId.h"
-#include "BloombergTypes/Service.h"
-#include "BloombergTypes/Request.h"
-
 #include <queue>
 #include <vector>
 #include <exception>
 
-#pragma once
-
 namespace BEmu
 {
+	class RequestPtr;
+	class Service;
+	class Request;
+	class Event;
+
 	class Session
 	{
 		private:

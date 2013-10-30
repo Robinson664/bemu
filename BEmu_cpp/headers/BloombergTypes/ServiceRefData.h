@@ -7,16 +7,16 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Service.h"
-#include "BloombergTypes\Request.h"
-#include "BloombergTypes\RequestPtr.h"
-#include <exception>
-
 #pragma once
+
+#include "BloombergTypes/Service.h"
+#include <exception>
 
 namespace BEmu
 {
+	class RequestPtr;
+	class Request;
+
 	class ServiceRefData : Service
 	{
 		public:

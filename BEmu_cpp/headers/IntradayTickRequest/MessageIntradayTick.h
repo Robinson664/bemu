@@ -7,43 +7,37 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\MessagePtr.h"
-#include "BloombergTypes\Datetime.h"
-
-#include "BloombergTypes\Element.h"
-#include "BloombergTypes\ElementPtr.h"
-#include "BloombergTypes\CorrelationId.h"
-#include "BloombergTypes\Service.h"
-#include "IntradayTickRequest/ElementIntradayTickDataParent.h"
-#include "IntradayTickRequest/ElementIntradayTickResponseError.h"
-#include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
+#pragma once
 
 #include <map>
-
-#pragma once
+#include "BloombergTypes/MessagePtr.h"
 
 namespace BEmu
 {
+	class CorrelationId;
+	class Service;
+	class Datetime;
+	class ElementPtr;
+
 	namespace IntradayTickRequest
 	{
-		class ElementReference;
-		class EventIntradayTick;
+		class ElementIntradayTickDataParent;
+		class ElementIntradayTickResponseError;
+		class ElementIntradayTickDataTuple3;
 
-		class MessageIntradayTick : private MessagePtr
+		class MessageIntradayTick : public MessagePtr
 		{
 			private:		
 				ElementIntradayTickDataParent *_parent;
 				ElementIntradayTickResponseError *_responseError;
 				bool _isResponseError;
 
+			public:
 				MessageIntradayTick(CorrelationId *corr, const Service *service, std::map<Datetime*, ElementIntradayTickDataTuple3*> *ticks, bool includeConditionCodes);
 				MessageIntradayTick(CorrelationId *corr, const Service *service);
 				~MessageIntradayTick();
 				ElementPtr* firstElement() const;
 
-			public:
 				virtual const char* topicName() const;
 				virtual int numElements() const;
 				virtual const ElementPtr * asElement() const;
@@ -51,9 +45,6 @@ namespace BEmu
 				virtual bool hasElement(const char* name, bool excludeNullElements=false) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
-
-				friend class ElementReference; //The ElementReference constructor needs access to the firstElement method
-				friend class EventIntradayTick;
 		};
 	}
 }

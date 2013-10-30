@@ -7,43 +7,31 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\ElementPtr.h"
-
 #pragma once
+
+#include "BloombergTypes/ElementPtr.h"
 
 namespace BEmu
 {
+	class Name;
+
 	namespace IntradayTickRequest
 	{
-		class RequestIntradayTickElementInt;
-		class RequestIntradayTickElementBool;
-		class RequestIntradayTickElementTime;
-		class RequestIntradayTick;
-
-		class RequestIntradayTickElementString : private ElementPtr
+		class RequestIntradayTickElementString : public ElementPtr
 		{
 			private:
 				std::string _elementName, _value;
+				
+			public:
 				RequestIntradayTickElementString(const std::string& elementName, const std::string& value);
 				~RequestIntradayTickElementString();
 				const std::string& security();
-				
-			public:
+
 				virtual Name name() const;
 				virtual int numValues() const { return 1; }
 				virtual int numElements() const { return 0; }
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
-
-				//I don't understand this. RequestIntradayTickElementInt inherits from RequestIntradayTickElementString, 
-				//  but I still need to declare it a friend so that the RequestIntradayTickElementInt constructor can call the RequestIntradayTickElementString constructor
-				friend class RequestIntradayTickElementInt;
-				friend class RequestIntradayTickElementBool; //ditto
-				friend class RequestIntradayTickElementTime; //ditto ditto
-
-				friend class RequestIntradayTick; //RequestIntradayTick::security needs access to security()
 		};
 	}
 }

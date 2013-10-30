@@ -7,10 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes/Datetime.h"
-
 #pragma once
+
+#include "BloombergTypes/Datetime.h"
 
 namespace BEmu
 {

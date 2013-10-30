@@ -39,6 +39,11 @@ namespace BEmu
 		return *this;
 	}
 	
+	RequestPtr * Request::getRequestPtr() const
+	{
+		return this->_ptr;
+	}
+
 	void Request::append(const char* name, const char* value)
 	{
 		this->_ptr->append(name, value);

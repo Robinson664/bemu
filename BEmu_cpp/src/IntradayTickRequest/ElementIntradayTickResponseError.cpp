@@ -7,11 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
 #include "IntradayTickRequest/ElementIntradayTickResponseError.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
-
 #include "Types/RandomDataGenerator.h"
 #include "IntradayTickRequest/ElementIntradayTickString.h"
 #include "IntradayTickRequest/ElementIntradayTickInt.h"

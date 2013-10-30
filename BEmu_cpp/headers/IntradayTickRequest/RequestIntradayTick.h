@@ -7,24 +7,21 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "bemu_headers.h"
-#include "BloombergTypes\Name.h"
-#include "BloombergTypes\Service.h"
-#include "BloombergTypes\RequestPtr.h"
-#include "BloombergTypes\Datetime.h"
+#pragma once
+
+#include <vector>
+#include "BloombergTypes/RequestPtr.h"
 
 #include "IntradayTickRequest/RequestIntradayTickElementString.h"
 #include "IntradayTickRequest/RequestIntradayTickElementStringArray.h"
 #include "IntradayTickRequest/RequestIntradayTickElementTime.h"
 #include "IntradayTickRequest/RequestIntradayTickElementBool.h"
-#include "IntradayTickRequest/EventIntradayTick.h"
-#include <vector>
-
-#pragma once
 
 namespace BEmu
 {
-	class ServiceRefData;
+	class Service;
+	class Datetime;
+	class Element;
 
 	namespace IntradayTickRequest
 	{
@@ -39,20 +36,20 @@ namespace BEmu
 					*_includeBrokerCodes, *_includeRpsCodes, *_includeBicMicCodes;
 
 				const Service *_service;
+				
+				const Datetime getStartDate() const; //used only as a helper for getDates()
+				const Datetime getEndDate() const; //used only as a helper for getDates()
 
+			public:
 				RequestIntradayTick(const Service *svc);
 				~RequestIntradayTick();
 				const Service* getService();
 				std::vector<Datetime*>* getDates();
-				const Datetime getStartDate() const; //used only as a helper for getDates()
-				const Datetime getEndDate() const; //used only as a helper for getDates()
 				bool includeConditionCodes();
 				const std::string& security();
 
 				Datetime* dtStart();
 				Datetime* dtEnd();
-
-			public:
 
 				virtual Element getElement(const char* name);
 				virtual void append(const char* name, const char* value);
@@ -61,10 +58,6 @@ namespace BEmu
 				virtual void set(const char* name, bool value);
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
-
-				friend class RequestIntradayTickElementStringArray;
-				friend class EventIntradayTick;
-				friend class ServiceRefData;
 		};
 	}
 }
