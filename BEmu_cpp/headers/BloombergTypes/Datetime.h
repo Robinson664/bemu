@@ -13,13 +13,14 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time.hpp>
+#include <exception>
 
 namespace BEmu
 {	
 	class Datetime
 	{
 		private:
-			boost::posix_time::ptime *_instance;
+			boost::posix_time::ptime _instance;
 			enum DateTimeTypeEnum { neither = 0, date = 1, time = 2, both = 3 };
 			DateTimeTypeEnum _dateTimeType;
 
@@ -35,15 +36,24 @@ namespace BEmu
 				Saturday = boost::date_time::Saturday
 			};
 
+			class DatetimeException: public std::exception
+			{
+				virtual const char* what() const throw()
+				{
+					return "My exception happened";
+				}
+			} datetimeEx;
+
 			WeekDayEnum getWeekDay() const;
 
-			DLL_EXPORT Datetime::Datetime(int year, int month, int day);
-			DLL_EXPORT Datetime::Datetime(int year, int month, int day, int hours, int minutes, int seconds);
-			DLL_EXPORT Datetime::Datetime(int hours, int minutes, int seconds, int milleseconds);
-			DLL_EXPORT Datetime::Datetime(int year, int month, int day, int hours, int minutes, int seconds, int milleseconds);
-			DLL_EXPORT Datetime::Datetime(const Datetime& arg);
-			//DLL_EXPORT Datetime::Datetime(boost::posix_time::ptime arg);
+			DLL_EXPORT Datetime();
+			DLL_EXPORT Datetime(int year, int month, int day);
+			DLL_EXPORT Datetime(int year, int month, int day, int hours, int minutes, int seconds);
+			DLL_EXPORT Datetime(int hours, int minutes, int seconds, int milleseconds);
+			DLL_EXPORT Datetime(int year, int month, int day, int hours, int minutes, int seconds, int milleseconds);
+			
 			DLL_EXPORT Datetime& operator=(const Datetime &rhs);
+			DLL_EXPORT Datetime(const Datetime& arg);
 
 			DLL_EXPORT Datetime::~Datetime();
 		
@@ -55,10 +65,17 @@ namespace BEmu
 			DLL_EXPORT unsigned seconds() const;
 
 			//These are not exported to the DLL.  The actual Bloomberg API doesn't have these functions.
+			void addYears(int years);
+			void addMonths(int months);
 			void addDays(long days);
 			void addHours(long hours);
 			void addMinutes(long minutes);
 			void addSeconds(long seconds);
+			
+			static Datetime Today();
+			static Datetime Now();
+			static Datetime FromYYYYMMDD(const std::string& str);
+			std::string ToYYYYMMDD() const;
 
 			friend DLL_EXPORT bool operator<(const Datetime& lhs, const Datetime& rhs);
 			friend DLL_EXPORT bool operator<=(const Datetime& lhs, const Datetime& rhs);

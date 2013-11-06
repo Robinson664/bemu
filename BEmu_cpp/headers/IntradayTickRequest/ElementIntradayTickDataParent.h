@@ -29,12 +29,12 @@ namespace BEmu
 				ElementIntradayTickDataArray *_array;
 
 			public:
-				ElementIntradayTickDataParent(std::map<Datetime*, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes);
+				ElementIntradayTickDataParent(std::map<Datetime, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes);
 				~ElementIntradayTickDataParent();
 
 				virtual Name name() const;
-				virtual int numValues() const { return 1; }
-				virtual int numElements() const { return 1; }		
+				virtual size_t numValues() const { return 1; }
+				virtual size_t numElements() const { return 1; }		
 				virtual bool isArray() const { return false; }
 				virtual bool isComplexType() const { return true; }
 

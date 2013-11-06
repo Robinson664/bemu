@@ -17,6 +17,8 @@ namespace BEmu
 	{
 		private:
 			std::string _name;
+			const char * _cname;
+			int _length;
 
 		public:
 			DLL_EXPORT Name();

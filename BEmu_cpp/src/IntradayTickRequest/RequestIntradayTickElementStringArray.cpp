@@ -65,7 +65,7 @@ namespace BEmu
 			return result;
 		}
 
-		int RequestIntradayTickElementStringArray::numElements() const
+		size_t RequestIntradayTickElementStringArray::numElements() const
 		{
 			return this->_values.size();
 		}

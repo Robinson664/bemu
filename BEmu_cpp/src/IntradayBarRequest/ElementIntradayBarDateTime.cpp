@@ -18,27 +18,24 @@ namespace BEmu
 		ElementIntradayBarDateTime::ElementIntradayBarDateTime(const std::string& name, const Datetime& value)
 		{
 			this->_name = name;
-			this->_value = new Datetime(value);
+			this->_value = value;
 		}
 
 		ElementIntradayBarDateTime::~ElementIntradayBarDateTime()
 		{
-			delete this->_value;
-			this->_value = 0;
 		}
 
 		Name ElementIntradayBarDateTime::name() const
 		{
-			Name result(this->_name.c_str());
-			return result;
+			return Name(this->_name.c_str());
 		}
 
-		int ElementIntradayBarDateTime::numValues() const
+		size_t ElementIntradayBarDateTime::numValues() const
 		{
 			return 1;
 		}
 
-		int ElementIntradayBarDateTime::numElements() const
+		size_t ElementIntradayBarDateTime::numElements() const
 		{
 			return 0;
 		}
@@ -56,12 +53,12 @@ namespace BEmu
 		Datetime ElementIntradayBarDateTime::getValueAsDatetime(int index) const
 		{
 			if(index == 0)
-				return *(this->_value);
+				return this->_value;
 			else
 				throw elementPtrEx;
 		}
 
-		char* ElementIntradayBarDateTime::getValueAsString(int index) const
+		const char * ElementIntradayBarDateTime::getValueAsString(int index) const
 		{
 			if(index == 0)
 				return ElementPtr::toCharPointer(this->_value);

@@ -22,15 +22,13 @@ namespace BEmu
 		ElementIntradayTickResponseError::ElementIntradayTickResponseError()
 		{
 			int code = RandomDataGenerator::RandomInt(99);
-			std::string* sourceGibberish = RandomDataGenerator::RandomString(5);
-			std::transform(sourceGibberish->begin(), sourceGibberish->end(), sourceGibberish->begin(), ::tolower);
+			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
+			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
 			//source
 			std::stringstream sourceValue;
 			sourceValue << code << "::" << sourceGibberish << RandomDataGenerator::RandomInt(99);
 			this->_source = new ElementIntradayTickString("source", sourceValue.str());
-			delete sourceGibberish;
-			sourceGibberish = 0;
 
 			//code
 			this->_code = new ElementIntradayTickInt("code", code);
@@ -83,19 +81,19 @@ namespace BEmu
 
 		ElementPtr * ElementIntradayTickResponseError::getElement(const char* name) const
 		{
-			if(strncmp("source", name, 6) == 0)
+			if(strncmp("source", name, 7) == 0)
 				return this->_source;
 
-			else if(strncmp("code", name, 4) == 0)
+			else if(strncmp("code", name, 5) == 0)
 				return this->_code;
 
-			else if(strncmp("category", name, 8) == 0)
+			else if(strncmp("category", name, 9) == 0)
 				return this->_category;
 
-			else if(strncmp("message", name, 7) == 0)
+			else if(strncmp("message", name, 8) == 0)
 				return this->_message;
 
-			else if(strncmp("subcategory", name, 11) == 0)
+			else if(strncmp("subcategory", name, 12) == 0)
 				return this->_subCategory;
 
 			else
@@ -105,11 +103,11 @@ namespace BEmu
 		bool ElementIntradayTickResponseError::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
-				(strncmp("source", name, 6) == 0) ||
-				(strncmp("code", name, 4) == 0) ||
-				(strncmp("category", name, 8) == 0) ||
-				(strncmp("message", name, 7) == 0) ||
-				(strncmp("subcategory", name, 11) == 0);
+				(strncmp("source", name, 7) == 0) ||
+				(strncmp("code", name, 5) == 0) ||
+				(strncmp("category", name, 9) == 0) ||
+				(strncmp("message", name, 8) == 0) ||
+				(strncmp("subcategory", name, 12) == 0);
 		}
 
 		std::ostream& ElementIntradayTickResponseError::print(std::ostream& stream, int level, int spacesPerLevel) const

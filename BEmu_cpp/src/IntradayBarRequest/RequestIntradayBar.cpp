@@ -15,15 +15,16 @@
 #include "IntradayBarRequest/RequestIntradayBarElementString.h"
 #include "IntradayBarRequest/RequestIntradayBarElementStringArray.h"
 
+#include "BloombergTypes/Service.h"
+
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		RequestIntradayBar::RequestIntradayBar(const Service *svc)
+		RequestIntradayBar::RequestIntradayBar(const Service& svc)
 		{
 			this->_eventTypes = 0;
-			this->_service = 0;
 			this->_security = 0;
 			this->_dtStart = 0;
 			this->_dtEnd = 0;
@@ -44,9 +45,6 @@ namespace BEmu
 		{
 			delete this->_eventTypes;
 			this->_eventTypes = 0;
-
-			delete this->_service;
-			this->_service = 0;
 
 			delete this->_security;
 			this->_security = 0;
@@ -79,7 +77,7 @@ namespace BEmu
 			this->_adjustmentFollowDPDF = 0;
 		}
 
-		std::vector<Datetime*>* RequestIntradayBar::getDateTimes() const
+		std::vector<Datetime>* RequestIntradayBar::getDateTimes() const
 		{
 			//dtStart, dtEnd, and interval are required
 			if(this->_dtStart == 0 || this->_dtEnd == 0 || this->_intervalInMinutes == 0)
@@ -89,36 +87,45 @@ namespace BEmu
 			if (intervalInMinutes < 1 || intervalInMinutes > 1440) //if less than one, the loop below will never terminate
 				throw requestEx;
 			
-			Datetime * dtStart = this->_dtStart->getDatetime();
-			Datetime * dtEnd = this->_dtEnd->getDatetime();
+			Datetime dtStart = this->_dtStart->getDatetime();
+			Datetime dtEnd = this->_dtEnd->getDatetime();
 
-			if((*dtStart) >= (*dtEnd)) //dtStart must be before dtEnd
+			if(dtStart >= dtEnd) //dtStart must be before dtEnd
 				throw requestEx;
 
-			std::vector<Datetime*>* result = new std::vector<Datetime*>();
+			std::vector<Datetime>* result = new std::vector<Datetime>();
 
-			Datetime * dtLoop = new Datetime(dtStart->year(), dtStart->month(), dtStart->day(), dtStart->hours(), dtStart->minutes(), dtStart->seconds());
-			while( (*dtLoop) < (*dtEnd) )
+			Datetime dtLoop(dtStart.year(), dtStart.month(), dtStart.day(), dtStart.hours(), dtStart.minutes(), dtStart.seconds());
+			while(dtLoop < dtEnd)
 			{
-				result->push_back(new Datetime(*dtLoop));
-				dtLoop->addMinutes(this->_intervalInMinutes->getInt());
+				result->push_back(Datetime(dtLoop));
+				dtLoop.addMinutes(this->_intervalInMinutes->getInt());
 			}
-			delete dtLoop; //after the last iteration, dtLoop doesn't get added to the result
 
 			return result;
 		}
 
-		Datetime * RequestIntradayBar::getDtStart() const
+		bool RequestIntradayBar::hasStartDate() const
+		{
+			return this->_dtStart != 0;
+		}
+
+		bool RequestIntradayBar::hasEndDate() const
+		{
+			return this->_dtEnd != 0;
+		}
+
+		Datetime RequestIntradayBar::getDtStart() const
 		{
 			return this->_dtStart->getDatetime();
 		}
 
-		Datetime * RequestIntradayBar::getDtEnd() const
+		Datetime RequestIntradayBar::getDtEnd() const
 		{
 			return this->_dtEnd->getDatetime();
 		}
 
-		const Service * RequestIntradayBar::getService() const
+		const Service RequestIntradayBar::getService() const
 		{
 			return this->_service;
 		}
@@ -130,11 +137,11 @@ namespace BEmu
 
 		void RequestIntradayBar::set(const char* name, const char* value)
 		{
-			if(strncmp(name, "security", 8) == 0)
+			if(strncmp(name, "security", 9) == 0)
 			{
 				this->_security = new RequestIntradayBarElementString(name, value);
 			}
-			else if(strncmp(name, "eventType", 9) == 0)
+			else if(strncmp(name, "eventType", 10) == 0)
 			{
 				this->_eventTypes->addValue(value);
 			}
@@ -144,11 +151,11 @@ namespace BEmu
 
 		void RequestIntradayBar::set(const char* name, const Datetime& elementValue)
 		{
-			if(strncmp(name, "startDateTime", 13) == 0)
+			if(strncmp(name, "startDateTime", 14) == 0)
 			{
 				this->_dtStart = new RequestIntradayBarElementTime(name, elementValue);
 			}
-			else if(strncmp(name, "endDateTime", 11) == 0)
+			else if(strncmp(name, "endDateTime", 12) == 0)
 			{
 				this->_dtEnd = new RequestIntradayBarElementTime(name, elementValue);
 			}
@@ -158,7 +165,7 @@ namespace BEmu
 
 		void RequestIntradayBar::set(const char* name, int elementValue)
 		{
-			if(strncmp(name, "interval", 8) == 0)
+			if(strncmp(name, "interval", 9) == 0)
 			{
 				this->_intervalInMinutes = new RequestIntradayBarElementInt(name, elementValue);
 			}
@@ -168,27 +175,27 @@ namespace BEmu
 
 		void RequestIntradayBar::set(const char* name, bool elementValue)
 		{
-			if(strncmp(name, "gapFillInitialBar", 8) == 0)
+			if(strncmp(name, "gapFillInitialBar", 18) == 0)
 			{
 				this->_gapFillInitialBar = new RequestIntradayBarElementBool(name, elementValue);
 			}
-			else if(strncmp(name, "returnEids", 8) == 0)
+			else if(strncmp(name, "returnEids", 11) == 0)
 			{
 				this->_returnEids = new RequestIntradayBarElementBool(name, elementValue);
 			}
-			else if(strncmp(name, "adjustmentNormal", 8) == 0)
+			else if(strncmp(name, "adjustmentNormal", 17) == 0)
 			{
 				this->_adjustmentNormalElement = new RequestIntradayBarElementBool(name, elementValue);
 			}
-			else if(strncmp(name, "adjustmentAbnormal", 8) == 0)
+			else if(strncmp(name, "adjustmentAbnormal", 19) == 0)
 			{
 				this->_adjustmentAbnormalElement = new RequestIntradayBarElementBool(name, elementValue);
 			}
-			else if(strncmp(name, "adjustmentSplit", 8) == 0)
+			else if(strncmp(name, "adjustmentSplit", 16) == 0)
 			{
 				this->_adjustmentSplitElement = new RequestIntradayBarElementBool(name, elementValue);
 			}
-			else if(strncmp(name, "adjustmentFollowDPDF", 8) == 0)
+			else if(strncmp(name, "adjustmentFollowDPDF", 21) == 0)
 			{
 				this->_adjustmentFollowDPDF = new RequestIntradayBarElementBool(name, elementValue);
 			}

@@ -20,13 +20,13 @@ namespace BEmu
 		class RequestIntradayTickElementTime : public RequestIntradayTickElementString
 		{
 			private:
-				Datetime* _instance;
+				Datetime _instance;
 
 			public:
 				RequestIntradayTickElementTime(const std::string& elementName);
 				RequestIntradayTickElementTime(const std::string& elementName, const Datetime& date);
 				~RequestIntradayTickElementTime();
-				Datetime* getDate();
+				Datetime getDate();
 		};
 	}
 }

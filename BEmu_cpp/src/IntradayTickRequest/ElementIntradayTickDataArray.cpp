@@ -21,13 +21,12 @@ namespace BEmu
 	namespace IntradayTickRequest
 	{
 		//makes copies of the arguments
-		ElementIntradayTickDataArray::ElementIntradayTickDataArray(std::map<Datetime*, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes)
+		ElementIntradayTickDataArray::ElementIntradayTickDataArray(std::map<Datetime, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes)
 		{
-			for(std::map<Datetime*, ElementIntradayTickDataTuple3*>::const_iterator iter = ticks->begin(); iter != ticks->end(); ++iter)
+			for(std::map<Datetime, ElementIntradayTickDataTuple3*>::const_iterator iter = ticks->begin(); iter != ticks->end(); ++iter)
 			{
-				Datetime date(*(iter->first));
 				ElementIntradayTickDataTuple3 tuple(iter->second->item1(), iter->second->item2(), iter->second->item3());
-				ElementIntradayTickData* elmFieldData = new ElementIntradayTickData(date, tuple, includeConditionCodes);
+				ElementIntradayTickData* elmFieldData = new ElementIntradayTickData(iter->first, tuple, includeConditionCodes);
 
 				this->_tickData.push_back(elmFieldData);
 			}
@@ -55,7 +54,7 @@ namespace BEmu
 			return result;
 		}
 
-		int ElementIntradayTickDataArray::numValues() const
+		size_t ElementIntradayTickDataArray::numValues() const
 		{
 			return this->_tickData.size();
 		}

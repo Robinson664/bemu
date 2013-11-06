@@ -13,6 +13,7 @@
 
 #include "IntradayTickRequest/RequestIntradayTick.h"
 #include "IntradayBarRequest/RequestIntradayBar.h"
+#include "HistoricalDataRequest/RequestHistoric.h"
 
 namespace BEmu
 {
@@ -32,21 +33,21 @@ namespace BEmu
 	{
 		if(strncmp(operation, "HistoricalDataRequest", 21) == 0)
 		{
-			throw serviceRefDataEx;
-		}
-		else if(strncmp(operation, "ReferenceDataRequest", 20) == 0)
-		{
-			throw serviceRefDataEx;
-		}
-		else if(strncmp(operation, "IntradayTickRequest", 19) == 0)
-		{
-			IntradayTickRequest::RequestIntradayTick *result = new IntradayTickRequest::RequestIntradayTick(this);
+			HistoricalDataRequest::RequestHistoric * result = new HistoricalDataRequest::RequestHistoric();
 			return result;
 		}
-		else if(strncmp(operation, "IntradayBarRequest", 18) == 0)
+		else if(strncmp(operation, "ReferenceDataRequest", 21) == 0)
 		{
-			const Service* svc = this;
-			IntradayBarRequest::RequestIntradayBar *result = new IntradayBarRequest::RequestIntradayBar(svc);
+			throw serviceRefDataEx;
+		}
+		else if(strncmp(operation, "IntradayTickRequest", 20) == 0)
+		{
+			IntradayTickRequest::RequestIntradayTick * result = new IntradayTickRequest::RequestIntradayTick(*this);
+			return result;
+		}
+		else if(strncmp(operation, "IntradayBarRequest", 19) == 0)
+		{
+			IntradayBarRequest::RequestIntradayBar * result = new IntradayBarRequest::RequestIntradayBar(*this);
 			return result;
 		}
 		else

@@ -62,16 +62,17 @@ namespace BEmu
             }
 			else
 			{
-				std::map<Datetime*, ElementIntradayTickDataTuple3*> *tickData = new std::map<Datetime*, ElementIntradayTickDataTuple3*>();
+				std::map<Datetime, ElementIntradayTickDataTuple3*> *tickData = new std::map<Datetime, ElementIntradayTickDataTuple3*>();
 
-				if(this->_internal->dtStart() != 0)
+				if(this->_internal->hasStartDate())
 				{
-					std::vector<Datetime*>* dates = this->_internal->getDates(); //i have to delete each of these dates and the vector
+					std::vector<Datetime>* dates = this->_internal->getDates(); //i have to delete the vector
+
 					for(unsigned i = 0; i < dates->size(); i++)
 					{
-						Datetime* dt = dates->at(i);
+						Datetime dt = dates->at(i);
+						Datetime::WeekDayEnum wd = dt.getWeekDay();
 
-						Datetime::WeekDayEnum wd = dt->getWeekDay();
 						if( (wd != Datetime::Sunday) && (wd != Datetime::Saturday) )
 						{
 							ElementIntradayTickDataTuple3 *t3 = new ElementIntradayTickDataTuple3("TRADE", RandomDataGenerator::RandomDouble(), RandomDataGenerator::IntradayTickTradeSize());
@@ -83,21 +84,14 @@ namespace BEmu
 					MessageIntradayTick *msg = new MessageIntradayTick(this->_internal->getCorrelationId(), this->_internal->getService(), tickData, this->_internal->includeConditionCodes());
 					result->push_back(msg);
 
-					//delete date vector
-					for(unsigned i = 0; i < dates->size(); i++)
-					{
-						Datetime* dt = dates->at(i);
-						delete dt;
-						dt = 0;
-					}
 					delete dates;
 					dates = 0;
 				}
 
 				//delete the tickData map (the MessageIntradayTick constructor made copies of the data, so nothing will be lost)
-				for(std::map<Datetime*, ElementIntradayTickDataTuple3*>::const_iterator iter = tickData->begin(); iter != tickData->end(); ++iter)
+				for(std::map<Datetime, ElementIntradayTickDataTuple3*>::const_iterator iter = tickData->begin(); iter != tickData->end(); ++iter)
 				{
-					//note that I don't have to delete the Datetime* because it is deleted in the "delete date vector" code block above
+					//note that I don't have to delete the Datetime because it is deleted in the "delete date vector" code block above
 					ElementIntradayTickDataTuple3* tp = iter->second;
 					delete tp;
 				}

@@ -49,18 +49,18 @@ namespace BEmu
 	bool Element::isArray() const { return this->_ptr->isArray(); }
 	bool Element::isComplexType() const { return this->_ptr->isComplexType(); }
 	
-	int Element::numValues() const { return this->_ptr->numValues(); }
-	int Element::numElements() const { return this->_ptr->numElements(); }
+	size_t Element::numValues() const { return this->_ptr->numValues(); }
+	size_t Element::numElements() const { return this->_ptr->numElements(); }
 	Name Element::name() const { return this->_ptr->name(); }
 
-	bool Element::getValueAsBool(int index = 0) const { return this->_ptr->getValueAsBool(index); }
-	int Element::getValueAsInt32(int index = 0) const { return this->_ptr->getValueAsInt32(index); }
-	long Element::getValueAsInt64(int index = 0) const { return this->_ptr->getValueAsInt64(index); }
-	float Element::getValueAsFloat32(int index = 0) const { return this->_ptr->getValueAsFloat32(index); }
-	double Element::getValueAsFloat64(int index = 0) const { return this->_ptr->getValueAsFloat64(index); }
-	Datetime Element::getValueAsDatetime(int index = 0) const { return this->_ptr->getValueAsDatetime(index); }
-	char* Element::getValueAsString(int index = 0) const { return this->_ptr->getValueAsString(index); }
-	Element Element::getValueAsElement(int index = 0) const { return this->_ptr->getValueAsElement(index); }
+	bool Element::getValueAsBool(int index) const { return this->_ptr->getValueAsBool(index); }
+	int Element::getValueAsInt32(int index) const { return this->_ptr->getValueAsInt32(index); }
+	long Element::getValueAsInt64(int index) const { return this->_ptr->getValueAsInt64(index); }
+	float Element::getValueAsFloat32(int index) const { return this->_ptr->getValueAsFloat32(index); }
+	double Element::getValueAsFloat64(int index) const { return this->_ptr->getValueAsFloat64(index); }
+	Datetime Element::getValueAsDatetime(int index) const { return this->_ptr->getValueAsDatetime(index); }
+	const char * Element::getValueAsString(int index) const { return this->_ptr->getValueAsString(index); }
+	Element Element::getValueAsElement(int index) const { return this->_ptr->getValueAsElement(index); }
 
 	Element Element::getElement(int position) const
 	{

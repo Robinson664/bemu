@@ -16,6 +16,17 @@ namespace BEmu
 	{
 	}
 
+	Service::Service(const Service& arg)
+	{
+		//doesn't do anything
+	}
+
+	Service& Service::operator=(const Service &rhs)
+	{
+		//doesn't do anything
+		return *this;
+	}
+
 	Request Service::createRequest(const char* operation) const
 	{
 		ServiceRefData sref;

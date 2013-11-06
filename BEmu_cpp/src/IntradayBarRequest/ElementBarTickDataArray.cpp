@@ -44,12 +44,12 @@ namespace BEmu
 			return result;
 		}
 
-		int ElementBarTickDataArray::numValues() const
+		size_t ElementBarTickDataArray::numValues() const
 		{
 			return this->_elements.size();
 		}
 
-		int ElementBarTickDataArray::numElements() const
+		size_t ElementBarTickDataArray::numElements() const
 		{
 			return 0;
 		}

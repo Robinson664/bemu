@@ -19,21 +19,18 @@ namespace BEmu
 	{
 		RequestIntradayTickElementTime::RequestIntradayTickElementTime(const std::string& elementName) : RequestIntradayTickElementString(elementName, "")
 		{
-			this->_instance = 0;
 		}
 
 		RequestIntradayTickElementTime::RequestIntradayTickElementTime(const std::string& elementName, const Datetime& date) : RequestIntradayTickElementString(elementName, ElementPtr::toCharPointer(date))
 		{	
-			this->_instance = new Datetime(date);
+			this->_instance = date;
 		}
 
 		RequestIntradayTickElementTime::~RequestIntradayTickElementTime()
 		{
-			delete this->_instance;
-			this->_instance = 0;
 		}
 
-		Datetime* RequestIntradayTickElementTime::getDate()
+		Datetime RequestIntradayTickElementTime::getDate()
 		{
 			return this->_instance;
 		}

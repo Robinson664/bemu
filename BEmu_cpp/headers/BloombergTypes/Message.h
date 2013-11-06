@@ -43,7 +43,7 @@ namespace BEmu
 			DLL_EXPORT CorrelationId correlationId() const;
 			DLL_EXPORT Name messageType() const;
 			DLL_EXPORT virtual const char* topicName() const;
-			DLL_EXPORT virtual int numElements() const;
+			DLL_EXPORT virtual size_t numElements() const;
 			//DLL_EXPORT Service service() const;
 			DLL_EXPORT virtual const Element asElement() const;
 

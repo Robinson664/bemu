@@ -15,14 +15,14 @@
 #include "IntradayTickRequest/ElementIntradayTickDataParent.h"
 #include "IntradayTickRequest/ElementIntradayTickResponseError.h"
 #include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
-#include "IntradayTickRequest/ElementReference.h"
+#include "IntradayTickRequest/ElementIntradayTick.h"
 
 namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
 		//makes copies of the arguments
-		MessageIntradayTick::MessageIntradayTick(CorrelationId *corr, const Service *service, std::map<Datetime*, ElementIntradayTickDataTuple3*> *ticks, bool includeConditionCodes)
+		MessageIntradayTick::MessageIntradayTick(const CorrelationId& corr, const Service& service, std::map<Datetime, ElementIntradayTickDataTuple3*> *ticks, bool includeConditionCodes)
 			: MessagePtr(Name("IntradayTickResponse"), corr)
 		{
 			this->_parent = new ElementIntradayTickDataParent(ticks, includeConditionCodes);
@@ -30,7 +30,7 @@ namespace BEmu
 			this->_isResponseError = false;
 		}
 
-		MessageIntradayTick::MessageIntradayTick(CorrelationId *corr, const Service *service)
+		MessageIntradayTick::MessageIntradayTick(const CorrelationId& corr, const Service& service)
 			: MessagePtr(Name("IntradayTickResponse"), corr)
 		{
 			this->_parent = 0;
@@ -49,10 +49,10 @@ namespace BEmu
 
 		const ElementPtr * MessageIntradayTick::getElement(const char* name) const
 		{
-			if(this->_isResponseError && strncmp(name, "responseError", 13) == 0)
+			if(this->_isResponseError && strncmp(name, "responseError", 14) == 0)
 				return this->_responseError;
 
-			else if(!this->_isResponseError && strncmp(name, "tickData", 8) == 0)
+			else if(!this->_isResponseError && strncmp(name, "tickData", 9) == 0)
 				return this->_parent;
 
 			else
@@ -62,8 +62,8 @@ namespace BEmu
 		bool MessageIntradayTick::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
-				(this->_isResponseError && strncmp(name, "responseError", 13) == 0) ||
-				(!this->_isResponseError && strncmp(name, "tickData", 8) == 0);
+				(this->_isResponseError && strncmp(name, "responseError", 14) == 0) ||
+				(!this->_isResponseError && strncmp(name, "tickData", 9) == 0);
 		}
 
 		ElementPtr* MessageIntradayTick::firstElement() const
@@ -79,7 +79,7 @@ namespace BEmu
 			return "";
 		}
 
-		int MessageIntradayTick::numElements() const
+		size_t MessageIntradayTick::numElements() const
 		{
 			return 1;
 		}
@@ -87,7 +87,7 @@ namespace BEmu
 		const ElementPtr * MessageIntradayTick::asElement() const
 		{
 			const MessageIntradayTick msg = *this;
-			ElementPtr * resultP = new ElementReference(msg);
+			ElementPtr * resultP = new ElementIntradayTick(msg);
 			return resultP;
 		}
 

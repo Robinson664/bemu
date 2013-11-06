@@ -19,6 +19,9 @@
 #include "IntradayBarRequest/RequestIntradayBar.h"
 #include "IntradayBarRequest/EventIntradayBar.h"
 
+#include "HistoricalDataRequest/RequestHistoric.h"
+#include "HistoricalDataRequest/EventHistoric.h"
+
 namespace BEmu
 {
 	EventPtr::EventPtr(RequestPtr * request)
@@ -55,19 +58,22 @@ namespace BEmu
 	{
 		if(request->getRequestType() == RequestPtr::historic)
 		{
-			throw request->requestEx;
+			HistoricalDataRequest::RequestHistoric * req = (HistoricalDataRequest::RequestHistoric *)request;
+			HistoricalDataRequest::EventHistoric * evt = new HistoricalDataRequest::EventHistoric(req);
+
+			return evt;
 		}
 		else if(request->getRequestType() == RequestPtr::intradayBar)
 		{
-			IntradayBarRequest::RequestIntradayBar *req = (IntradayBarRequest::RequestIntradayBar *)request;
-			IntradayBarRequest::EventIntradayBar *evt = new IntradayBarRequest::EventIntradayBar(req);
+			IntradayBarRequest::RequestIntradayBar * req = (IntradayBarRequest::RequestIntradayBar *)request;
+			IntradayBarRequest::EventIntradayBar * evt = new IntradayBarRequest::EventIntradayBar(req);
 			
 			return evt;
 		}
 		else if(request->getRequestType() == RequestPtr::intradayTick)
 		{
-			IntradayTickRequest::RequestIntradayTick *req = (IntradayTickRequest::RequestIntradayTick *)request;
-			IntradayTickRequest::EventIntradayTick *evt = new IntradayTickRequest::EventIntradayTick(req);
+			IntradayTickRequest::RequestIntradayTick * req = (IntradayTickRequest::RequestIntradayTick *)request;
+			IntradayTickRequest::EventIntradayTick * evt = new IntradayTickRequest::EventIntradayTick(req);
 			return evt;
 		}
 		else if(request->getRequestType() == RequestPtr::reference)

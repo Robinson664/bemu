@@ -21,7 +21,7 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		RequestIntradayTick::RequestIntradayTick(const Service *svc)
+		RequestIntradayTick::RequestIntradayTick(const Service& svc)
 		{
 			this->_eventTypes = 0;
 			this->_security = 0;
@@ -79,98 +79,69 @@ namespace BEmu
 			this->_includeBicMicCodes = 0;
 		}
 
-		const Service* RequestIntradayTick::getService()
+		const Service RequestIntradayTick::getService()
 		{
 			return this->_service;
 		}
 
+		bool RequestIntradayTick::hasStartDate() const
+		{
+			return this->_timeStart != 0;
+		}
+
+		bool RequestIntradayTick::hasEndDate() const
+		{
+			return this->_timeEnd != 0;
+		}
+
 		const Datetime RequestIntradayTick::getStartDate() const
 		{
-			Datetime *dtStart = this->_timeStart->getDate();
-			Datetime *dtStartOrYesterday;
-
-			if(dtStart == 0)
-			{ //yesterday
-				boost::posix_time::ptime ptStart(boost::posix_time::second_clock::local_time().date());
-				ptStart -= boost::gregorian::days(1);
-				
-				dtStartOrYesterday = new Datetime(
-					ptStart.date().year(), ptStart.date().month(), ptStart.date().day(),
-					ptStart.time_of_day().hours(), ptStart.time_of_day().minutes(), ptStart.time_of_day().seconds());
+			Datetime dtStartOrYesterday;
+			if(this->_timeStart == 0)
+			{
+				dtStartOrYesterday = Datetime::Today();
+				dtStartOrYesterday.addDays(-1); //yesterday
 			}
 			else
 			{
-				dtStartOrYesterday = new Datetime(*dtStart);
+				dtStartOrYesterday = this->_timeStart->getDate();
 			}
 
 			//if dtStart is older than 140 days, cap it at 140 days
-			boost::posix_time::ptime ptOldest(boost::posix_time::second_clock::local_time().date());
-			ptOldest -= boost::gregorian::days(140);
+			Datetime dtOldest = Datetime::Today();
+			dtOldest.addDays(-140);
 
-			Datetime dtOldest(
-				ptOldest.date().year(), ptOldest.date().month(), ptOldest.date().day(),
-				ptOldest.time_of_day().hours(), ptOldest.time_of_day().minutes(), ptOldest.time_of_day().seconds());
+			//cap start day at 140 days ago
+			if(dtStartOrYesterday < dtOldest)
+				dtStartOrYesterday = dtOldest;
 
-			if ((*dtStart) < dtOldest) //cap at 140
-			{
-				delete dtStartOrYesterday;
-				dtStartOrYesterday = 0;
-				return dtOldest;
-			}
-			else //no need to cap
-			{
-				Datetime result(*dtStartOrYesterday);
-				delete dtStartOrYesterday;
-				dtStartOrYesterday = 0;
-				return result;
-			}
+			return dtStartOrYesterday;
 		}
 
 		const Datetime RequestIntradayTick::getEndDate() const
 		{
-			Datetime *dtEnd = this->_timeEnd->getDate();
-
-			if(dtEnd == 0)
-			{ //right now
-				boost::posix_time::ptime ptEnd(boost::posix_time::second_clock::local_time());
-
-				Datetime result(ptEnd.date().year(), ptEnd.date().month(), ptEnd.date().day(),
-					ptEnd.time_of_day().hours(), ptEnd.time_of_day().minutes(), ptEnd.time_of_day().seconds());
-
-				return result;
-			}
+			Datetime dtEnd;
+			if(this->_timeEnd == 0)
+				dtEnd = Datetime::Now(); //right now
 			else
-			{
-				Datetime result(*dtEnd);
-				return result;
-			}
+				dtEnd = this->_timeEnd->getDate();
+
+			return dtEnd;
 		}
 
-		std::vector<Datetime*>* RequestIntradayTick::getDates() //the caller will need to delete these dates
+		std::vector<Datetime>* RequestIntradayTick::getDates() //the caller will need to delete the vector
 		{
-			const Datetime dtStart = this->getStartDate();
-			const Datetime dtEnd = this->getEndDate();
-			Datetime* dtLoop = new Datetime(dtStart);
+			std::vector<Datetime>* result = new std::vector<Datetime>();
 
-			std::vector<Datetime*>* result = new std::vector<Datetime*>();
-			while(*dtLoop < dtEnd)
+			Datetime dtStart = this->getStartDate();
+			Datetime dtEnd = this->getEndDate();
+			Datetime dtLoop = dtStart;
+
+			while(dtLoop < dtEnd)
 			{
 				result->push_back(dtLoop);
-
-				//add a tick interval duration
-				boost::gregorian::date dt(dtLoop->year(), dtLoop->month(), dtLoop->day());
-				boost::posix_time::time_duration tm(dtLoop->hours(), dtLoop->minutes(), dtLoop->seconds());
-				boost::posix_time::ptime pt(dt, tm);
-				pt += RandomDataGenerator::IntradayTickInterval();
-
-				//increment the loop counter
-				dtLoop = new Datetime(
-					pt.date().year(), pt.date().month(), pt.date().day(),
-					pt.time_of_day().hours(), pt.time_of_day().minutes(), pt.time_of_day().seconds());
-
+				dtLoop.addMinutes(RandomDataGenerator::IntradayTickIntervalInMinutes());
 			}
-
-			delete dtLoop; //after the last iteration, dtLoop doesn't get added to the result
 
 			return result;
 		}
@@ -185,79 +156,79 @@ namespace BEmu
 			return this->_security->security();
 		}
 
-		Datetime* RequestIntradayTick::dtStart()
+		Datetime RequestIntradayTick::dtStart()
 		{
 			return this->_timeStart->getDate();
 		}
 
-		Datetime* RequestIntradayTick::dtEnd()
+		Datetime RequestIntradayTick::dtEnd()
 		{
 			return this->_timeEnd->getDate();
 		}
 
 		Element RequestIntradayTick::getElement(const char* name)
 		{
-			if(strncmp(name, "eventTypes", 10) == 0)
+			if(strncmp(name, "eventTypes", 11) == 0)
 			{
 				Element result(this->_eventTypes);
 				return result;
 			}
 
-			else if(strncmp(name, "security", 8) == 0)
+			else if(strncmp(name, "security", 9) == 0)
 			{
 				Element result(this->_security);
 				return result;
 			}
 
-			else if(strncmp(name, "startDateTime", 13) == 0)
+			else if(strncmp(name, "startDateTime", 14) == 0)
 			{
 				Element result(this->_timeStart);
 				return result;
 			}
 
-			else if(strncmp(name, "endDateTime", 11) == 0)
+			else if(strncmp(name, "endDateTime", 12) == 0)
 			{
 				Element result(this->_timeEnd);
 				return result;
 			}
 			
-			else if(strncmp(name, "includeConditionCodes", 21) == 0)
+			else if(strncmp(name, "includeConditionCodes", 22) == 0)
 			{
 				Element result(this->_includeConditionCodes);
 				return result;
 			}
 			
-			else if(strncmp(name, "includeNonPlottableEvents", 25) == 0)
+			else if(strncmp(name, "includeNonPlottableEvents", 26) == 0)
 			{
 				Element result(this->_includeNonPlottableEvents);
 				return result;
 			}
 
-			else if(strncmp(name, "includeExchangeCodes", 20) == 0)
+			else if(strncmp(name, "includeExchangeCodes", 21) == 0)
 			{
 				Element result(this->_includeExchangeCodes);
 				return result;
 			}
 
-			else if(strncmp(name, "returnEids", 10) == 0)
+			else if(strncmp(name, "returnEids", 11) == 0)
 			{
 				Element result(this->_returnEids);
 				return result;
 			}
 
-			else if(strncmp(name, "includeBrokerCodes", 18) == 0)
+			else if(strncmp(name, "includeBrokerCodes", 19) == 0)
 			{
 				Element result(this->_includeBrokerCodes);
 				return result;
 			}
 
-			else if(strncmp(name, "includeRpsCodes", 15) == 0)
+			else if(strncmp(name, "includeRpsCodes", 16) == 0)
 			{
 				Element result(this->_includeRpsCodes);
 				return result;
 			}
 
-			else if(strncmp(name, "includeBicMicCodes", 18) == 0)
+			else if(strncmp(name, "includeBicMicCodes", 19) == 0)
 			{
 				Element result(this->_includeBicMicCodes);
 				return result;
@@ -269,7 +240,7 @@ namespace BEmu
 
 		void RequestIntradayTick::append(const char* name, const char* value)
 		{
-			if(strncmp(name, "eventTypes", 10) == 0)
+			if(strncmp(name, "eventTypes", 11) == 0)
 				this->_eventTypes->addValue(value);
 
 			else
@@ -278,7 +249,7 @@ namespace BEmu
 
 		void RequestIntradayTick::set(const char* name, const char* value)
 		{
-			if(strncmp(name, "security", 8) == 0)
+			if(strncmp(name, "security", 9) == 0)
 				this->_security = new RequestIntradayTickElementString(std::string(name), value);
 
 			else
@@ -287,10 +258,10 @@ namespace BEmu
 
 		void RequestIntradayTick::set(const char* name, const Datetime& value)
 		{
-			if(strncmp(name, "startDateTime", 13) == 0)
+			if(strncmp(name, "startDateTime", 14) == 0)
 				this->_timeStart = new RequestIntradayTickElementTime(std::string(name), value);
 
-			else if(strncmp(name, "endDateTime", 11) == 0)
+			else if(strncmp(name, "endDateTime", 12) == 0)
 				this->_timeEnd = new RequestIntradayTickElementTime(std::string(name), value);
 
 			else
@@ -299,25 +270,25 @@ namespace BEmu
 
 		void RequestIntradayTick::set(const char* name, bool value)
 		{
-			if(strncmp(name, "includeConditionCodes", 21) == 0)
+			if(strncmp(name, "includeConditionCodes", 22) == 0)
 				this->_includeConditionCodes = new RequestIntradayTickElementBool(std::string(name), value);
 			
-			else if(strncmp(name, "includeNonPlottableEvents", 25) == 0)
+			else if(strncmp(name, "includeNonPlottableEvents", 26) == 0)
 				this->_includeNonPlottableEvents = new RequestIntradayTickElementBool(std::string(name), value);
 
-			else if(strncmp(name, "includeExchangeCodes", 20) == 0)
+			else if(strncmp(name, "includeExchangeCodes", 21) == 0)
 				this->_includeExchangeCodes = new RequestIntradayTickElementBool(std::string(name), value);
 
-			else if(strncmp(name, "returnEids", 10) == 0)
+			else if(strncmp(name, "returnEids", 11) == 0)
 				this->_returnEids = new RequestIntradayTickElementBool(std::string(name), value);
 
-			else if(strncmp(name, "includeBrokerCodes", 18) == 0)
+			else if(strncmp(name, "includeBrokerCodes", 19) == 0)
 				this->_includeBrokerCodes = new RequestIntradayTickElementBool(std::string(name), value);
 
-			else if(strncmp(name, "includeRpsCodes", 15) == 0)
+			else if(strncmp(name, "includeRpsCodes", 16) == 0)
 				this->_includeRpsCodes = new RequestIntradayTickElementBool(std::string(name), value);
 
-			else if(strncmp(name, "includeBicMicCodes", 18) == 0)
+			else if(strncmp(name, "includeBicMicCodes", 19) == 0)
 				this->_includeBicMicCodes = new RequestIntradayTickElementBool(std::string(name), value);
 
 			else

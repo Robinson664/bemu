@@ -36,12 +36,12 @@ namespace BEmu
 			return this->_value;
 		}
 
-		int RequestIntradayBarElementString::numValues() const
+		size_t RequestIntradayBarElementString::numValues() const
 		{
 			return 1;
 		}
 
-		int RequestIntradayBarElementString::numElements() const
+		size_t RequestIntradayBarElementString::numElements() const
 		{
 			return 0;
 		}
@@ -56,10 +56,10 @@ namespace BEmu
 			return false;
 		}
 
-		char * RequestIntradayBarElementString::getValueAsString(int index) const
+		const char * RequestIntradayBarElementString::getValueAsString(int index) const
 		{
 			if(index == 0)
-				return ElementPtr::toCharPointer(this->_value);
+				return this->_value.c_str();
 			else
 				throw elementPtrEx;
 		}

@@ -19,13 +19,11 @@ namespace BEmu
 		ElementIntradayTickDateTime::ElementIntradayTickDateTime(const std::string& name, const Datetime& value)
 		{
 			this->_name = name;
-			this->_value = new Datetime(value);
+			this->_value = value;
 		}
 
 		ElementIntradayTickDateTime::~ElementIntradayTickDateTime()
 		{
-			delete this->_value;
-			this->_value = 0;
 		}
 
 		std::ostream& ElementIntradayTickDateTime::print(std::ostream& stream, int level, int spacesPerLevel) const
@@ -36,8 +34,7 @@ namespace BEmu
 
 		Name ElementIntradayTickDateTime::name() const
 		{
-			Name result("time");
-			return result;
+			return Name("time");
 		}
 
 		bool ElementIntradayTickDateTime::hasElement(const char* name, bool excludeNullElements) const
@@ -47,14 +44,14 @@ namespace BEmu
 
 		Datetime ElementIntradayTickDateTime::getValueAsDatetime(int index) const
 		{
-			return *(this->_value);
+			return this->_value;
 		}
 
-		char* ElementIntradayTickDateTime::getValueAsString(int index) const
+		const char * ElementIntradayTickDateTime::getValueAsString(int index) const
 		{
 			if(index == 0)
 			{
-				char* result = ElementPtr::toCharPointer(this->_value);
+				const char * result = ElementPtr::toCharPointer(this->_value);
 				return result;
 			}
 			else

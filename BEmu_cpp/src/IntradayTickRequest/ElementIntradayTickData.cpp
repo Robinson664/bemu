@@ -57,11 +57,11 @@ namespace BEmu
 		bool ElementIntradayTickData::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return 
-				strncmp("time", name, 4) == 0 ||
-				strncmp("type", name, 4) == 0 ||
-				strncmp("value", name, 5) == 0 ||
-				strncmp("size", name, 4) == 0 ||
-				(this->_includeConditionCodes && strncmp("conditionCodes", name, 14) == 0);
+				strncmp("time", name, 5) == 0 ||
+				strncmp("type", name, 5) == 0 ||
+				strncmp("value", name, 6) == 0 ||
+				strncmp("size", name, 5) == 0 ||
+				(this->_includeConditionCodes && strncmp("conditionCodes", name, 15) == 0);
 		}
 
 		ElementPtr * ElementIntradayTickData::getElement(int position) const
@@ -93,19 +93,19 @@ namespace BEmu
 		{
 			ElementPtr *result = 0;
 
-			if(strncmp("time", name, 4) == 0)
+			if(strncmp("time", name, 5) == 0)
 				result = this->_time;
 
-			else if(strncmp("type", name, 4) == 0)
+			else if(strncmp("type", name, 5) == 0)
 				result = this->_type;
 
-			else if(strncmp("value", name, 5) == 0)
+			else if(strncmp("value", name, 6) == 0)
 				result = this->_value;
 
-			else if(strncmp("size", name, 4) == 0)
+			else if(strncmp("size", name, 5) == 0)
 				result = this->_size;
 
-			else if(this->_includeConditionCodes && strncmp("conditionCodes", name, 14) == 0)
+			else if(this->_includeConditionCodes && strncmp("conditionCodes", name, 15) == 0)
 				result = this->_conditionCodes;
 
 			if(result == 0)

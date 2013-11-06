@@ -36,62 +36,76 @@ namespace BEmu
 		this->_otype = eBool;
 	}
 
-	ObjectType::ObjectType(std::string* arg)
+	ObjectType::ObjectType(const std::string& arg)
 	{
 		this->_str = arg;
 		this->_otype = eString;
 	}
 
-	ObjectType::ObjectType(Datetime* arg)
+	ObjectType::ObjectType(const Datetime& arg)
 	{
-		this->_datetime = new Datetime(*arg);
+		this->_datetime = arg;
 		this->_otype = eDatetime;
 	}
 
 	ObjectType::~ObjectType()
 	{
-		if(this->_otype == eString)
-		{
-			delete this->_str;
-			this->_str = 0;
-		}
-		else if(this->_otype == eDatetime)
-		{
-			delete this->_datetime;
-			this->_datetime = 0;
-		}
 	}
 
-	ObjectType::ObjectTypeEnum ObjectType::GetType()
+	ObjectType& ObjectType::operator=(const ObjectType &rhs)
+	{
+		if (this != &rhs)
+		{
+			this->_bool = rhs._bool;
+			this->_datetime = rhs._datetime;
+			this->_dbl = rhs._dbl;
+			this->_int = rhs._int;
+			this->_otype = rhs._otype;
+			this->_str = rhs._str;
+		}
+		return *this;
+	}
+
+	ObjectType::ObjectType(const ObjectType& arg)
+	{
+		this->_bool = arg._bool;
+		this->_datetime = arg._datetime;
+		this->_dbl = arg._dbl;
+		this->_int = arg._int;
+		this->_otype = arg._otype;
+		this->_str = arg._str;
+	}
+
+	ObjectType::ObjectTypeEnum ObjectType::GetType() const
 	{
 		return this->_otype;
 	}
 
-	bool ObjectType::TryGetDouble(double &arg)
+	bool ObjectType::TryGetDouble(double &arg) const
 	{
 		arg = this->_dbl;
 		return this->_otype == eDouble;
 	}
 
-	bool ObjectType::TryGetInt(int &arg)
+	bool ObjectType::TryGetInt(int &arg) const
 	{
 		arg = this->_int;
 		return this->_otype == eInt;
 	}
 
-	bool ObjectType::TryGetBool(bool &arg)
+	bool ObjectType::TryGetBool(bool &arg) const
 	{
 		arg = this->_bool;
 		return this->_otype == eBool;
 	}
 
-	bool ObjectType::TryGetString(std::string* arg)
+	bool ObjectType::TryGetString(std::string& arg) const
 	{
 		arg = this->_str;
 		return this->_otype == eString;
 	}
 
-	bool ObjectType::TryGetDatetime(Datetime* arg)
+	bool ObjectType::TryGetDatetime(Datetime& arg) const
 	{
 		arg = this->_datetime;
 		return this->_otype == eDatetime;

@@ -39,8 +39,8 @@ namespace BEmu
 			} elementEx;
 
 			DLL_EXPORT Name name() const;
-			DLL_EXPORT int numValues() const;
-			DLL_EXPORT int numElements() const;
+			DLL_EXPORT size_t numValues() const;
+			DLL_EXPORT size_t numElements() const;
 		
 			DLL_EXPORT bool isNull() const;
 			DLL_EXPORT bool isArray() const;
@@ -48,14 +48,14 @@ namespace BEmu
 
 			//The C++ version of the code doesn't have a getValue() function (Java and C# do)
 
-			DLL_EXPORT bool getValueAsBool(int index) const;
-			DLL_EXPORT int getValueAsInt32(int index) const;
-			DLL_EXPORT long getValueAsInt64(int index) const;
-			DLL_EXPORT float getValueAsFloat32(int index) const;
-			DLL_EXPORT double getValueAsFloat64(int index) const;
-			DLL_EXPORT Datetime getValueAsDatetime(int index) const;
-			DLL_EXPORT char* getValueAsString(int index) const;
-			DLL_EXPORT Element getValueAsElement(int index) const;
+			DLL_EXPORT bool getValueAsBool(int index = 0) const;
+			DLL_EXPORT int getValueAsInt32(int index = 0) const;
+			DLL_EXPORT long getValueAsInt64(int index = 0) const;
+			DLL_EXPORT float getValueAsFloat32(int index = 0) const;
+			DLL_EXPORT double getValueAsFloat64(int index = 0) const;
+			DLL_EXPORT Datetime getValueAsDatetime(int index = 0) const;
+			DLL_EXPORT const char* getValueAsString(int index = 0) const;
+			DLL_EXPORT Element getValueAsElement(int index = 0) const;
 		
 			DLL_EXPORT Element getElement(int position) const;
 			DLL_EXPORT bool hasElement(const char* name, bool excludeNullElements = false) const;

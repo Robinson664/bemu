@@ -136,7 +136,7 @@ namespace Examples
 				Element elmTickDataArr = msg.getElement("tickData");
 				Element elmTickData = elmTickDataArr.getElement("tickData");
 
-                for (int valueCount = 0; valueCount < (int)elmTickData.numValues(); valueCount++)
+                for (size_t valueCount = 0; valueCount < elmTickData.numValues(); valueCount++)
                 {
                     Element elmTickDataValue = elmTickData.getValueAsElement(valueCount);
 

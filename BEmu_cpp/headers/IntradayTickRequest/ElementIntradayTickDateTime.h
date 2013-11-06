@@ -21,7 +21,7 @@ namespace BEmu
 		class ElementIntradayTickDateTime : public ElementPtr
 		{
 			private:
-				Datetime* _value;
+				Datetime _value;
 				std::string _name;
 
 			public:
@@ -29,8 +29,8 @@ namespace BEmu
 				~ElementIntradayTickDateTime();
 
 				virtual Name name() const;
-				virtual int numValues() const { return 1; }
-				virtual int numElements() const { return 0; }
+				virtual size_t numValues() const { return 1; }
+				virtual size_t numElements() const { return 0; }
 		
 				virtual bool isArray() const { return false; }
 				virtual bool isComplexType() const { return false; }
@@ -38,7 +38,7 @@ namespace BEmu
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 				
 				virtual Datetime getValueAsDatetime(int index) const;
-				virtual char* getValueAsString(int index) const;
+				virtual const char * getValueAsString(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
 		};

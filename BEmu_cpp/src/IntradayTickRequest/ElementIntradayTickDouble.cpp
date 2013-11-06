@@ -74,11 +74,11 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		char* ElementIntradayTickDouble::getValueAsString(int index = 0) const
+		const char * ElementIntradayTickDouble::getValueAsString(int index) const
 		{
 			if(index == 0)
 			{
-				char* result = ElementPtr::toCharPointer(this->_value);
+				const char * result = ElementPtr::toCharPointer(this->_value);
 				return result;
 			}
 			else

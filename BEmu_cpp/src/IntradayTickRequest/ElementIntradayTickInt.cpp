@@ -31,12 +31,12 @@ namespace BEmu
 			return result;
 		}
 
-		int ElementIntradayTickInt::numValues() const
+		size_t ElementIntradayTickInt::numValues() const
 		{
 			return 1;
 		}
 
-		int ElementIntradayTickInt::numElements() const
+		size_t ElementIntradayTickInt::numElements() const
 		{
 			return 0;
 		}
@@ -94,11 +94,11 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		char* ElementIntradayTickInt::getValueAsString(int index = 0) const
+		const char * ElementIntradayTickInt::getValueAsString(int index) const
 		{
 			if(index == 0)
 			{
-				char* result = ElementPtr::toCharPointer(this->_value);
+				const char * result = ElementPtr::toCharPointer(this->_value);
 				return result;
 			}
 			else

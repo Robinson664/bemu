@@ -49,7 +49,7 @@ namespace BEmu
 	bool Session::start()
 	{
 		if(this->_sessionOptions.serverPort() == 8194 && 
-			( strncmp(this->_sessionOptions.serverHost(), "localhost", 9) == 0 || strncmp(this->_sessionOptions.serverHost(), "127.0.0.1", 9) == 0 ))
+			( strncmp(this->_sessionOptions.serverHost(), "localhost", 10) == 0 || strncmp(this->_sessionOptions.serverHost(), "127.0.0.1", 10) == 0 ))
 		{
 			this->_sessionState = started;
 			return true;
@@ -68,7 +68,7 @@ namespace BEmu
 
 	bool Session::openService(const char* uri)
 	{
-		if(strncmp("//blp/refdata", uri, 13) == 0)
+		if(strncmp("//blp/refdata", uri, 14) == 0)
 		{
 			this->_sessionState = serviceOpened;
 			return true;
@@ -79,7 +79,7 @@ namespace BEmu
 
 	Service Session::getService(const char* uri) const
 	{
-		if(strncmp("//blp/refdata", uri, 13) == 0)
+		if(strncmp("//blp/refdata", uri, 14) == 0)
 		{
 			Service result;
 			return result;
@@ -92,7 +92,7 @@ namespace BEmu
 
 	CorrelationId Session::sendRequest(const Request& request, const CorrelationId& correlationId)
 	{
-		request.getRequestPtr()->setCorrelationId(new CorrelationId(correlationId));
+		request.getRequestPtr()->setCorrelationId(correlationId);
 		this->_sentRequests.push(request.getRequestPtr());
 		return correlationId;
 	}

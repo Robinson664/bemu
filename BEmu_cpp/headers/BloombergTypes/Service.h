@@ -19,6 +19,9 @@ namespace BEmu
 	{
 		public:
 			DLL_EXPORT Service();
+			DLL_EXPORT Service(const Service& arg);
+			DLL_EXPORT Service& operator=(const Service &rhs);
+
 			DLL_EXPORT virtual Request createRequest(const char* operation) const;			
 			DLL_EXPORT virtual const char* name() const;
 	};

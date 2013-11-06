@@ -16,15 +16,13 @@
 
 namespace BEmu
 {
-	MessagePtr::MessagePtr(const Name& messageType, CorrelationId* corr)
+	MessagePtr::MessagePtr(const Name& messageType, const CorrelationId& corr)
 	{
-		Name n1(messageType.string());
+		Name n1(messageType);
 		this->_messageType = n1;
 
-		CorrelationId c1(*corr);
-		this->_correlationId = c1;
-
-		//this->_service = service;
+		CorrelationId c1(corr);
+		this->_correlationId = corr;
 	}
 
 	CorrelationId MessagePtr::correlationId() const
@@ -57,7 +55,7 @@ namespace BEmu
 		throw messageEx;
 	}
 
-	int MessagePtr::numElements() const
+	size_t MessagePtr::numElements() const
 	{
 		throw messageEx;
 	}

@@ -31,12 +31,12 @@ namespace BEmu
 			return result;
 		}
 
-		int ElementIntradayBarString::numValues() const
+		size_t ElementIntradayBarString::numValues() const
 		{
 			return 1;
 		}
 
-		int ElementIntradayBarString::numElements() const
+		size_t ElementIntradayBarString::numElements() const
 		{
 			return 0;
 		}
@@ -51,10 +51,10 @@ namespace BEmu
 			return false;
 		}
 
-		char* ElementIntradayBarString::getValueAsString(int index) const
+		const char * ElementIntradayBarString::getValueAsString(int index) const
 		{
 			if(index == 0)
-				return ElementPtr::toCharPointer(this->_value);
+				return this->_value.c_str();
 			else
 				throw elementPtrEx;
 		}

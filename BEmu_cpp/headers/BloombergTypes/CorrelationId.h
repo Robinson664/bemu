@@ -26,6 +26,7 @@ namespace BEmu
 			DLL_EXPORT CorrelationId();
 			DLL_EXPORT CorrelationId(long value);
 			DLL_EXPORT CorrelationId(const CorrelationId& other);
+			DLL_EXPORT CorrelationId& operator=(const CorrelationId &rhs);
 
 			friend DLL_EXPORT std::ostream& operator<<(std::ostream& os, const CorrelationId& correlator); //needs access to _isInternal
 	};

@@ -20,7 +20,7 @@ namespace BEmu
 	namespace IntradayTickRequest
 	{
 		//makes copies of the arguments
-		ElementIntradayTickDataParent::ElementIntradayTickDataParent(std::map<Datetime*, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes)
+		ElementIntradayTickDataParent::ElementIntradayTickDataParent(std::map<Datetime, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes)
 		{
 			this->_array = new ElementIntradayTickDataArray(ticks, includeConditionCodes);
 		}

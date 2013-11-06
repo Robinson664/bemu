@@ -28,20 +28,20 @@ namespace BEmu
 			static boost::posix_time::ptime::time_duration_type TimeBetweenMarketDataEvents();
 			static int IntradayTickTradeSize();
 			static int Strike();
-			static Datetime* RandomDate();
-			static Datetime* RandomTime();
-			static Datetime* RandomDatetime();
+			static Datetime RandomDate();
+			static Datetime RandomTime();
+			static Datetime RandomDatetime();
 			static double RandomDouble();
 			static double RandomDouble(double min, double max);
 			static char RandomChar();
-			static std::string* RandomString();
-			static std::string* RandomString(int length);
+			static std::string RandomString();
+			static std::string RandomString(int length);
 			static bool RandomBool();
-			static std::map<std::string, ObjectType*>* GetMarketDataFields(std::list<std::string> arg);
-			static ObjectType* MarketDataFromFieldName(std::string* arg);
+			static std::map<std::string, ObjectType> GetMarketDataFields(const std::list<std::string>& arg);
+			static ObjectType MarketDataFromFieldName(std::string* arg);
 
-			static IntradayBarRequest::BarTickDataType * GenerateBarData(Datetime * date);
+			static IntradayBarRequest::BarTickDataType * GenerateBarData(const Datetime& date);
 
-			static boost::posix_time::ptime::time_duration_type IntradayTickInterval();
+			static int IntradayTickIntervalInMinutes();
 	};
 }

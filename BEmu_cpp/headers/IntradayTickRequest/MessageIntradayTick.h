@@ -33,13 +33,13 @@ namespace BEmu
 				bool _isResponseError;
 
 			public:
-				MessageIntradayTick(CorrelationId *corr, const Service *service, std::map<Datetime*, ElementIntradayTickDataTuple3*> *ticks, bool includeConditionCodes);
-				MessageIntradayTick(CorrelationId *corr, const Service *service);
+				MessageIntradayTick(const CorrelationId& corr, const Service& service, std::map<Datetime, ElementIntradayTickDataTuple3*> *ticks, bool includeConditionCodes);
+				MessageIntradayTick(const CorrelationId& corr, const Service& service);
 				~MessageIntradayTick();
 				ElementPtr* firstElement() const;
 
 				virtual const char* topicName() const;
-				virtual int numElements() const;
+				virtual size_t numElements() const;
 				virtual const ElementPtr * asElement() const;
 				virtual const ElementPtr * getElement(const char* name) const;
 				virtual bool hasElement(const char* name, bool excludeNullElements=false) const;

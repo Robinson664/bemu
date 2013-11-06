@@ -34,12 +34,12 @@ namespace BEmu
 			return result;
 		}
 
-		int ElementBarData::numValues() const
+		size_t ElementBarData::numValues() const
 		{
 			return 1;
 		}
 
-		int ElementBarData::numElements() const
+		size_t ElementBarData::numElements() const
 		{
 			return 1;
 		}
@@ -58,7 +58,7 @@ namespace BEmu
 		{
 			int length = strlen(name);
 			
-			if(strncmp(this->_array->name().string(), name, length) == 0)
+			if(strncmp(this->_array->name().string(), name, length + 1) == 0)
 				return this->_array;
 			else
 				throw elementPtrEx;

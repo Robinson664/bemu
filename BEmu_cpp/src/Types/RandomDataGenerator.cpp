@@ -14,7 +14,7 @@
 
 namespace BEmu
 {
-	IntradayBarRequest::BarTickDataType * RandomDataGenerator::GenerateBarData(Datetime * date)
+	IntradayBarRequest::BarTickDataType * RandomDataGenerator::GenerateBarData(const Datetime& date)
 	{
         double first = RandomDataGenerator::RandomDouble();
         double second = RandomDataGenerator::RandomDouble();
@@ -28,25 +28,25 @@ namespace BEmu
 		double value = RandomDataGenerator::RandomDouble(1, 10000);
 		int numEvents = RandomDataGenerator::RandomInt(10000);
 
-		IntradayBarRequest::BarTickDataType * result = new IntradayBarRequest::BarTickDataType(*date, open, high, low, close, value, volume, numEvents);
+		IntradayBarRequest::BarTickDataType * result = new IntradayBarRequest::BarTickDataType(date, open, high, low, close, value, volume, numEvents);
 		return result;
 	}
 
-	std::map<std::string, ObjectType*>* RandomDataGenerator::GetMarketDataFields(std::list<std::string> arg)
+	std::map<std::string, ObjectType> RandomDataGenerator::GetMarketDataFields(const std::list<std::string>& arg)
 	{
-		std::map<std::string, ObjectType*> *result = new std::map<std::string, ObjectType*>();
+		std::map<std::string, ObjectType> result;
 	
 		//A market data response contains at least one of the requested fields, but not necessarilly all of them.
 		//  The response contains the requested fields that changed.
-		while(result->size() == 0)
+		while(result.size() == 0)
 		{
 			for(std::list<std::string>::const_iterator ii = arg.begin(); ii != arg.end(); ii++)
 			{
 				if(RandomDataGenerator::RandomDouble(1, 10) < 3)
 				{
 					std::string str = *ii;
-					ObjectType* obj = RandomDataGenerator::MarketDataFromFieldName(&str);
-					(*result)[str] = obj;
+					ObjectType obj = RandomDataGenerator::MarketDataFromFieldName(&str);
+					result[str] = obj;
 				}
 			}
 		}
@@ -59,8 +59,8 @@ namespace BEmu
 			const int length = 6;
 			for(int i = 0; i < length; i++)
 			{
-				if(!result->count(extraDoubleFields[i]))
-					(*result)[extraDoubleFields[i]] = new ObjectType(RandomDataGenerator::RandomDouble());
+				if(!result.count(extraDoubleFields[i]))
+					result[extraDoubleFields[i]] = ObjectType(RandomDataGenerator::RandomDouble());
 			}
 		}
 	
@@ -69,8 +69,8 @@ namespace BEmu
 			const int length = 6;
 			for(int i = 0; i < length; i++)
 			{
-				if(!result->count(extraIntFields[i]))
-					(*result)[extraIntFields[i]] = new ObjectType(RandomDataGenerator::RandomInt(100));
+				if(!result.count(extraIntFields[i]))
+					result[extraIntFields[i]] = ObjectType(RandomDataGenerator::RandomInt(100));
 			}
 		}
 	
@@ -79,8 +79,8 @@ namespace BEmu
 			const int length = 5;
 			for(int i = 0; i < length; i++)
 			{
-				if(!result->count(extraTimeFields[i]))
-					(*result)[extraTimeFields[i]] = new ObjectType(RandomDataGenerator::RandomTime());
+				if(!result.count(extraTimeFields[i]))
+					result[extraTimeFields[i]] = ObjectType(RandomDataGenerator::RandomTime());
 			}
 		}
 	
@@ -89,8 +89,8 @@ namespace BEmu
 			const int length = 4;
 			for(int i = 0; i < length; i++)
 			{
-				if(!result->count(extraDateFields[i]))
-					(*result)[extraDateFields[i]] = new ObjectType(RandomDataGenerator::RandomDate());
+				if(!result.count(extraDateFields[i]))
+					result[extraDateFields[i]] = ObjectType(RandomDataGenerator::RandomDate());
 			}
 		}
 	
@@ -99,8 +99,8 @@ namespace BEmu
 			const int length = 1;
 			for(int i = 0; i < length; i++)
 			{
-				if(!result->count(extraDateTimeFields[i]))
-					(*result)[extraDateTimeFields[i]] = new ObjectType(RandomDataGenerator::RandomDate());
+				if(!result.count(extraDateTimeFields[i]))
+					result[extraDateTimeFields[i]] = ObjectType(RandomDataGenerator::RandomDate());
 			}
 		}
 	
@@ -109,8 +109,8 @@ namespace BEmu
 			const int length = 5;
 			for(int i = 0; i < length; i++)
 			{
-				if(!result->count(extraStringFields[i]))
-					(*result)[extraStringFields[i]] = new ObjectType(RandomDataGenerator::RandomDate());
+				if(!result.count(extraStringFields[i]))
+					result[extraStringFields[i]] = ObjectType(RandomDataGenerator::RandomDate());
 			}
 		}
 	
@@ -119,15 +119,15 @@ namespace BEmu
 			const int length = 5;
 			for(int i = 0; i < length; i++)
 			{
-				if(!result->count(extraBoolFields[i]))
-					(*result)[extraBoolFields[i]] = new ObjectType(RandomDataGenerator::RandomDate());
+				if(!result.count(extraBoolFields[i]))
+					result[extraBoolFields[i]] = ObjectType(RandomDataGenerator::RandomDate());
 			}
 		}
 
 		return result;
 	}
 
-	ObjectType* RandomDataGenerator::MarketDataFromFieldName(std::string* arg)
+	ObjectType RandomDataGenerator::MarketDataFromFieldName(std::string* arg)
 	{
 		std::string arg_lower(*arg);
 		for(unsigned int i = 0; i < arg_lower.size(); i++)
@@ -138,15 +138,15 @@ namespace BEmu
 		std::size_t searchDate = arg_lower.find("date");
 		std::size_t searchTime = arg_lower.find("time");
 
-		ObjectType* oresult;
+		ObjectType oresult;
 		if(searchDate != std::string::npos)
 		{
 			boost::posix_time::ptime localTime = boost::posix_time::second_clock::local_time();
 			long days = RandomDataGenerator::RandomInt(1, 100);
 			boost::posix_time::ptime subtract = localTime - boost::posix_time::minutes(days * 24);
 			
-			Datetime* dtResult = new Datetime(subtract.date().year(), subtract.date().month(), subtract.date().day());
-			oresult = new ObjectType(dtResult);
+			Datetime dtResult(subtract.date().year(), subtract.date().month(), subtract.date().day());
+			oresult = ObjectType(dtResult);
 		}
 		else if(searchTime != std::string::npos)
 		{
@@ -155,12 +155,12 @@ namespace BEmu
 			long minutes = RandomDataGenerator::RandomInt(1, 100);
 			boost::posix_time::ptime subtract = localTime - boost::posix_time::minutes(minutes);
 
-			Datetime* dtResult = new Datetime(subtract.time_of_day().hours(), subtract.time_of_day().minutes(), subtract.time_of_day().seconds(), 0);
-			oresult = new ObjectType(dtResult);
+			Datetime dtResult(subtract.time_of_day().hours(), subtract.time_of_day().minutes(), subtract.time_of_day().seconds(), 0);
+			oresult = ObjectType(dtResult);
 		}
 		else
 		{
-			oresult = new ObjectType(RandomDataGenerator::RandomDouble());
+			oresult = ObjectType(RandomDataGenerator::RandomDouble());
 		}
 
 		return oresult;
@@ -178,11 +178,10 @@ namespace BEmu
 		return result;
 	}
 
-	boost::posix_time::ptime::time_duration_type RandomDataGenerator::IntradayTickInterval()
+	int RandomDataGenerator::IntradayTickIntervalInMinutes()
 	{
 		int minutes = RandomDataGenerator::RandomInt(1, 30);
-		boost::posix_time::ptime::time_duration_type result(0, minutes, 0, 0);
-		return result;
+		return minutes;
 	}
 
 	int RandomDataGenerator::IntradayTickTradeSize()
@@ -195,29 +194,29 @@ namespace BEmu
 		return RandomDataGenerator::RandomInt(20) * 5;
 	}
 
-	Datetime* RandomDataGenerator::RandomDatetime()
+	Datetime RandomDataGenerator::RandomDatetime()
 	{
 		boost::posix_time::ptime localTime = boost::posix_time::second_clock::local_time();
 		localTime += boost::posix_time::hours(24 * RandomDataGenerator::RandomInt(100));
 		localTime += boost::posix_time::seconds(RandomDataGenerator::RandomInt(1000));
-		Datetime* result = new Datetime(localTime.date().year(), localTime.date().month(), localTime.date().day(), localTime.time_of_day().hours(), localTime.time_of_day().minutes(), localTime.time_of_day().seconds());
+		Datetime result(localTime.date().year(), localTime.date().month(), localTime.date().day(), localTime.time_of_day().hours(), localTime.time_of_day().minutes(), localTime.time_of_day().seconds());
 		return result;
 	}
 
-	Datetime* RandomDataGenerator::RandomDate()
+	Datetime RandomDataGenerator::RandomDate()
 	{
 		boost::posix_time::ptime localTime = boost::posix_time::second_clock::local_time();
 		localTime += boost::posix_time::hours(24 * RandomDataGenerator::RandomInt(100));
 		localTime += boost::posix_time::seconds(RandomDataGenerator::RandomInt(1000));
-		Datetime* result = new Datetime(localTime.date().year(), localTime.date().month(), localTime.date().day());
+		Datetime result(localTime.date().year(), localTime.date().month(), localTime.date().day());
 		return result;
 	}
 
-	Datetime* RandomDataGenerator::RandomTime()
+	Datetime RandomDataGenerator::RandomTime()
 	{
 		boost::posix_time::ptime localTime = boost::posix_time::second_clock::local_time();
 		localTime += boost::posix_time::seconds(RandomDataGenerator::RandomInt(1000));
-		Datetime* result = new Datetime(localTime.time_of_day().hours(), localTime.time_of_day().minutes(), localTime.time_of_day().seconds(), 0);
+		Datetime result(localTime.time_of_day().hours(), localTime.time_of_day().minutes(), localTime.time_of_day().seconds(), 0);
 		return result;
 	}
 
@@ -248,22 +247,20 @@ namespace BEmu
 		return (char)('A' + RandomDataGenerator::RandomInt(0, 25));
 	}
 
-	std::string* RandomDataGenerator::RandomString(int length)
+	std::string RandomDataGenerator::RandomString(int length)
 	{
-		char* result = new char[length];
+		std::stringstream ss;
+
 		for(int i = 0; i < length - 1; i++)
 		{
-			result[i] = RandomDataGenerator::RandomChar();
+			ss << RandomDataGenerator::RandomChar();
 		}
-		result[length - 1] = '\0';
-	
-		std::string *strResult = new std::string(result);
-		delete result;
-		result = 0;
-		return strResult;
+		ss << '\0';
+
+		return ss.str();
 	}
 
-	std::string* RandomDataGenerator::RandomString()
+	std::string RandomDataGenerator::RandomString()
 	{
 		int length = RandomDataGenerator::RandomInt(2, 11);
 		return RandomDataGenerator::RandomString(length);

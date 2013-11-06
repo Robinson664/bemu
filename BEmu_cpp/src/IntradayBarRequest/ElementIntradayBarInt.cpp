@@ -31,12 +31,12 @@ namespace BEmu
 			return result;
 		}
 
-		int ElementIntradayBarInt::numValues() const
+		size_t ElementIntradayBarInt::numValues() const
 		{
 			return 1;
 		}
 
-		int ElementIntradayBarInt::numElements() const
+		size_t ElementIntradayBarInt::numElements() const
 		{
 			return 0;
 		}

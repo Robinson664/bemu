@@ -20,13 +20,13 @@ namespace BEmu
 		class RequestIntradayBarElementTime : public RequestIntradayBarElementString
 		{
 			private:
-				Datetime * _dtvalue;
+				Datetime _dtvalue;
 
 			public:
 				RequestIntradayBarElementTime(const std::string& elementName);
 				RequestIntradayBarElementTime(const std::string& elementName, const Datetime& dtvalue);
 				~RequestIntradayBarElementTime();
-				Datetime * getDatetime() const;
+				Datetime getDatetime() const;
 		};
 	}
 }

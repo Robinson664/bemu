@@ -28,13 +28,13 @@ namespace BEmu
 				const std::string& security() const;
 
 				virtual Name name() const;
-				virtual int numValues() const;
-				virtual int numElements() const;
+				virtual size_t numValues() const;
+				virtual size_t numElements() const;
 		
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				virtual char* getValueAsString(int index) const;
+				virtual const char * getValueAsString(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
 		};

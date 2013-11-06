@@ -31,10 +31,8 @@ namespace BEmu
 		{
 			std::vector<MessagePtr*>* result = new std::vector<MessagePtr*>();
 			RequestIntradayBar * ireq = this->_internal;
-				//(RequestIntradayBar *)this->_request;
-			
-			bool isSecurityError = Rules::IsSecurityError(ireq->security());
 
+			bool isSecurityError = Rules::IsSecurityError(ireq->security());
 			if(isSecurityError)
 			{
 				MessagePtr * msg = new MessageIntradayBar(this->_internal->getCorrelationId(), this->_internal->getService(), this->_internal->security());
@@ -43,15 +41,16 @@ namespace BEmu
 			else
 			{
 				std::vector<BarTickDataType*> barData;
-				if(ireq->getDtStart() != 0)
+				if(ireq->hasStartDate())
 				{
-					std::vector<Datetime*>* datetimes = ireq->getDateTimes();
-					for(std::vector<Datetime*>::const_iterator iter = datetimes->begin(); iter != datetimes->end(); ++iter)
+					std::vector<Datetime>* datetimes = ireq->getDateTimes();
+					for(std::vector<Datetime>::const_iterator iter = datetimes->begin(); iter != datetimes->end(); ++iter)
 					{
-						Datetime * date = *iter;
+						Datetime date = *iter;
 						BarTickDataType * bar = RandomDataGenerator::GenerateBarData(date);
 						barData.push_back(bar);
 					}
+					
 					delete datetimes;
 					datetimes = 0;
 				}

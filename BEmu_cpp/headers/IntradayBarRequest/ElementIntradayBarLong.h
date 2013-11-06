@@ -28,8 +28,8 @@ namespace BEmu
 				~ElementIntradayBarLong();
 
 				virtual Name name() const;
-				virtual int numValues() const;
-				virtual int numElements() const;
+				virtual size_t numValues() const;
+				virtual size_t numElements() const;
 		
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;

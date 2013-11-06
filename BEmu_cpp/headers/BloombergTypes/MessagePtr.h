@@ -27,7 +27,7 @@ namespace BEmu
 			//Service _service;
 
 		protected:
-			MessagePtr(const Name& messageType, CorrelationId* corr);
+			MessagePtr(const Name& messageType, const CorrelationId& corr);
 
 		public:
 
@@ -48,7 +48,7 @@ namespace BEmu
 			virtual const ElementPtr * asElement() const;
 			bool hasElement(const Name& name, bool excludeNullElements=false) const;
 			virtual bool hasElement(const char* name, bool excludeNullElements=false) const;
-			virtual int numElements() const;
+			virtual size_t numElements() const;
 			
 			bool getElementAsBool(const char* name) const;
 			int getElementAsInt32(const char* name) const;

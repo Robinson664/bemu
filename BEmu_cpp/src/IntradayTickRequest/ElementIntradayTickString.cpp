@@ -42,12 +42,11 @@ namespace BEmu
 			return stream;
 		}
 
-		char* ElementIntradayTickString::getValueAsString(int index = 0) const
+		const char * ElementIntradayTickString::getValueAsString(int index) const
 		{
 			if(index == 0)
 			{
-				char* result = ElementPtr::toCharPointer(this->_value);
-				return result;
+				return this->_value.c_str();
 			}
 			else
 				throw elementPtrEx;

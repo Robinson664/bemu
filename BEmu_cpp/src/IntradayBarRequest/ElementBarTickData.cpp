@@ -24,8 +24,8 @@ namespace BEmu
 	{
 		ElementBarTickData::ElementBarTickData(const BarTickDataType& arg)
 		{
-			Datetime * dtTime = arg.getDatetime();
-			this->_time = new ElementIntradayBarDateTime("time", *dtTime);
+			Datetime dtTime = arg.getDatetime();
+			this->_time = new ElementIntradayBarDateTime("time", dtTime);
 			
 			this->_open = new ElementIntradayBarDouble("open", arg.getOpen());
 			this->_high = new ElementIntradayBarDouble("high", arg.getHigh());
@@ -69,12 +69,12 @@ namespace BEmu
 			return result;
 		}
 
-		int ElementBarTickData::numValues() const
+		size_t ElementBarTickData::numValues() const
 		{
 			return 0;
 		}
 
-		int ElementBarTickData::numElements() const
+		size_t ElementBarTickData::numElements() const
 		{
 			return 8;
 		}
@@ -91,28 +91,28 @@ namespace BEmu
 
 		ElementPtr * ElementBarTickData::getElement(const char* name) const
 		{
-			if(strncmp(name, "time", 4) == 0)
+			if(strncmp(name, "time", 5) == 0)
 				return this->_time;
 
-			else if(strncmp(name, "open", 4) == 0)
+			else if(strncmp(name, "open", 5) == 0)
 				return this->_open;
 
-			else if(strncmp(name, "high", 4) == 0)
+			else if(strncmp(name, "high", 5) == 0)
 				return this->_high;
 
-			else if(strncmp(name, "low", 3) == 0)
+			else if(strncmp(name, "low", 4) == 0)
 				return this->_low;
 
-			else if(strncmp(name, "close", 5) == 0)
+			else if(strncmp(name, "close", 6) == 0)
 				return this->_close;
 
-			else if(strncmp(name, "value", 5) == 0)
+			else if(strncmp(name, "value", 6) == 0)
 				return this->_value;
 
-			else if(strncmp(name, "volume", 6) == 0)
+			else if(strncmp(name, "volume", 7) == 0)
 				return this->_volume;
 
-			else if(strncmp(name, "numEvents", 6) == 0)
+			else if(strncmp(name, "numEvents", 10) == 0)
 				return this->_numEvents;
 
 			else
@@ -122,14 +122,14 @@ namespace BEmu
 		bool ElementBarTickData::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
-				(strncmp(name, "time", 4) == 0) ||
-				(strncmp(name, "open", 4) == 0) ||
-				(strncmp(name, "high", 4) == 0) ||
-				(strncmp(name, "low", 3) == 0) ||
-				(strncmp(name, "close", 5) == 0) ||
-				(strncmp(name, "value", 5) == 0) ||
-				(strncmp(name, "volume", 6) == 0) ||
-				(strncmp(name, "numEvents", 6) == 0);
+				(strncmp(name, "time", 5) == 0) ||
+				(strncmp(name, "open", 5) == 0) ||
+				(strncmp(name, "high", 5) == 0) ||
+				(strncmp(name, "low", 4) == 0) ||
+				(strncmp(name, "close", 6) == 0) ||
+				(strncmp(name, "value", 6) == 0) ||
+				(strncmp(name, "volume", 7) == 0) ||
+				(strncmp(name, "numEvents", 10) == 0);
 		}
 
 		int ElementBarTickData::getElementAsInt32(const char* name) const

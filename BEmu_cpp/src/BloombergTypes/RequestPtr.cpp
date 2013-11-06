@@ -18,23 +18,22 @@ namespace BEmu
 {
 	RequestPtr::RequestPtr()
 	{
-		this->_correlationId = new CorrelationId();
+		this->_correlationId = CorrelationId();
 	}
 
 	RequestPtr::RequestPtr(const RequestPtr &src)
 	{
-		this->_correlationId = new CorrelationId(src._correlationId->asInteger());
+		this->_correlationId = src._correlationId;
 		this->_requestType = src._requestType;
 	}
 
-	CorrelationId * RequestPtr::getCorrelationId() const
+	CorrelationId RequestPtr::getCorrelationId() const
 	{
 		return this->_correlationId;
 	}
 
-	void RequestPtr::setCorrelationId(CorrelationId * arg)
+	void RequestPtr::setCorrelationId(const CorrelationId& arg)
 	{
-		delete this->_correlationId;
 		this->_correlationId = arg;
 	}
 

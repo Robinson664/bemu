@@ -30,8 +30,7 @@ void main()
 			informationReturned = false;
 			break;
 		case 3:
-			cout << "Historical data request not yet implemented." << endl;
-			informationReturned = false;
+			Examples::RunHistoricalDataExample();
 			break;
 		case 4:
 			Examples::RunIntradayTickExample();

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/ElementReference.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/ElementIntradayTick.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -19,17 +19,17 @@ namespace BEmu
 	{
 		class MessageIntradayTick;
 
-		class ElementReference : public ElementPtr
+		class ElementIntradayTick : public ElementPtr
 		{
 			private:
 				ElementPtr *_parent;
 
 			public:
-				ElementReference(const MessageIntradayTick& msg);
+				ElementIntradayTick(const MessageIntradayTick& msg);
 
 				virtual Name name() const;
-				virtual int numValues() const { return 1; }
-				virtual int numElements() const { return 1; }				
+				virtual size_t numValues() const { return 1; }
+				virtual size_t numElements() const { return 1; }				
 		
 				virtual bool isArray() const { return false; }
 				virtual bool isComplexType() const { return false; }

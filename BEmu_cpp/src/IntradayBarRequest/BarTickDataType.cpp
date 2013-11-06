@@ -24,13 +24,11 @@ namespace BEmu
 			this->_volume = volume;
 			this->_numEvents = numEvents;
 
-			this->_dtTime = new Datetime(dtTime);
+			this->_dtTime = dtTime;
 		}
 
 		BarTickDataType::~BarTickDataType()
 		{
-			delete this->_dtTime;
-			this->_dtTime = 0;
 		}
 
 		BarTickDataType::BarTickDataType(const BarTickDataType& arg)
@@ -43,7 +41,7 @@ namespace BEmu
 			this->_volume = arg._volume;
 			this->_numEvents = arg._numEvents;
 			
-			this->_dtTime = new Datetime(*(arg._dtTime));
+			this->_dtTime = arg._dtTime;
 		}
 
 		BarTickDataType& BarTickDataType::operator=(const BarTickDataType &rhs)
@@ -58,12 +56,12 @@ namespace BEmu
 				this->_volume = rhs._volume;
 				this->_numEvents = rhs._numEvents;
 			
-				this->_dtTime = new Datetime(*(rhs._dtTime));
+				this->_dtTime = rhs._dtTime;
 			}
 			return *this;
 		}
 
-		Datetime * BarTickDataType::getDatetime() const
+		Datetime BarTickDataType::getDatetime() const
 		{
 			return this->_dtTime;
 		}

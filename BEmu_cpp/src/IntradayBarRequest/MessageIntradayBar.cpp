@@ -18,14 +18,14 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		MessageIntradayBar::MessageIntradayBar(CorrelationId * corr, const Service * service, const std::string& security) : MessagePtr(Name("IntradayBarResponse"), corr)
+		MessageIntradayBar::MessageIntradayBar(const CorrelationId& corr, const Service& service, const std::string& security) : MessagePtr(Name("IntradayBarResponse"), corr)
 		{
             this->_responseError = new ElementIntradayBarResponseError(security);
             this->_parent = 0;
             this->_isResponseError = true;
 		}
 
-		MessageIntradayBar::MessageIntradayBar(CorrelationId * corr, const Service * service, const std::vector<BarTickDataType*>& bars) : MessagePtr(Name("IntradayBarResponse"), corr)
+		MessageIntradayBar::MessageIntradayBar(const CorrelationId& corr, const Service& service, const std::vector<BarTickDataType*>& bars) : MessagePtr(Name("IntradayBarResponse"), corr)
 		{
             this->_parent = new ElementBarData(bars);
             this->_responseError = 0;
@@ -46,7 +46,7 @@ namespace BEmu
 			return "";
 		}
 
-		int MessageIntradayBar::numElements() const
+		size_t MessageIntradayBar::numElements() const
 		{
 			return 1;
 		}
@@ -55,14 +55,14 @@ namespace BEmu
 		{
             if (this->_isResponseError)
 			{
-				if(strncmp(name, "responseError", 13) == 0)
+				if(strncmp(name, "responseError", 14) == 0)
 					return this->_responseError;
 				else
 					throw messageEx;
 			}
 			else
 			{
-				if(strncmp(name, "barData", 7) == 0)
+				if(strncmp(name, "barData", 8) == 0)
 					return this->_parent;
 				else
 					throw messageEx;
@@ -72,8 +72,8 @@ namespace BEmu
 		bool MessageIntradayBar::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
-				(strncmp(name, "responseError", 13) == 0 && this->_isResponseError) ||
-				(strncmp(name, "barData", 7) == 0 && !this->_isResponseError);
+				(strncmp(name, "responseError", 14) == 0 && this->_isResponseError) ||
+				(strncmp(name, "barData", 8) == 0 && !this->_isResponseError);
 		}
 
 		std::ostream& MessageIntradayBar::print(std::ostream& stream, int level, int spacesPerLevel) const

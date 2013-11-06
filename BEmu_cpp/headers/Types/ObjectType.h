@@ -22,16 +22,19 @@ namespace BEmu
 			ObjectType(double arg);
 			ObjectType(int arg);
 			ObjectType(bool arg);
-			ObjectType(std::string* arg);
-			ObjectType(Datetime* arg);
+			ObjectType(const std::string& arg);
+			ObjectType(const Datetime& arg);
 			~ObjectType();
 
-			ObjectTypeEnum GetType();
-			bool TryGetDouble(double &arg);
-			bool TryGetInt(int &arg);
-			bool TryGetBool(bool &arg);
-			bool TryGetString(std::string* arg);
-			bool TryGetDatetime(Datetime* arg);
+			ObjectType& operator=(const ObjectType &rhs);
+			ObjectType(const ObjectType& arg);
+
+			ObjectTypeEnum GetType() const;
+			bool TryGetDouble(double &arg) const;
+			bool TryGetInt(int &arg) const;
+			bool TryGetBool(bool &arg) const;
+			bool TryGetString(std::string& arg) const;
+			bool TryGetDatetime(Datetime& arg) const;
 
 		private:
 			ObjectTypeEnum _otype;
@@ -39,8 +42,7 @@ namespace BEmu
 			double _dbl;
 			int _int;
 			bool _bool;
-			std::string* _str;
-			Datetime* _datetime;
-
+			std::string _str;
+			Datetime _datetime;
 	};
 }

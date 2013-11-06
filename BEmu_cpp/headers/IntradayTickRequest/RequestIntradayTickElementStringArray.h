@@ -31,8 +31,8 @@ namespace BEmu
 				const std::vector<std::string*>& getValues();
 
 				virtual Name name() const;
-				virtual int numValues() const { return 0; }
-				virtual int numElements() const;
+				virtual size_t numValues() const { return 0; }
+				virtual size_t numElements() const;
 		
 				virtual bool isArray() const { return true; }
 				virtual bool isComplexType() const { return false; }

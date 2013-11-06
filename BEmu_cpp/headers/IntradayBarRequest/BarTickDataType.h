@@ -18,7 +18,7 @@ namespace BEmu
 		class BarTickDataType
 		{
 			private:
-				Datetime * _dtTime;
+				Datetime _dtTime;
 				double _open, _high, _low, _close, _value;
 				long _volume;
 				int _numEvents;
@@ -29,7 +29,7 @@ namespace BEmu
 				BarTickDataType(const BarTickDataType& arg);
 				BarTickDataType& operator=(const BarTickDataType &rhs);
 
-				Datetime * getDatetime() const;
+				Datetime getDatetime() const;
 				double getOpen() const;
 				double getHigh() const;
 				double getLow() const;

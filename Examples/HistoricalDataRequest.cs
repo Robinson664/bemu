@@ -52,7 +52,7 @@ namespace Examples
                     request.Append("fields", "ASK");
 
                     //uncomment the following line to see what a request for an invalid field looks like
-                    //request.append("fields", "ZBID");
+                    //request.Append("fields", "ZBID");
                     //  My code treats all fields that start with a 'Z' as an invalid field
 
                     //Historical requests allow a few overrides.  See the developer's guide A.2.4 for more information.

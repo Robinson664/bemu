@@ -56,7 +56,7 @@ namespace BEmu
 		return this->_ptr->topicName();
 	}
 
-	int Message::numElements() const
+	size_t Message::numElements() const
 	{
 		return this->_ptr->numElements();
 	}

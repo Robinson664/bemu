@@ -33,12 +33,12 @@ namespace BEmu
 				bool _isResponseError;
 
 			public:
-				MessageIntradayBar(CorrelationId * corr, const Service * service, const std::string& security);
-				MessageIntradayBar(CorrelationId * corr, const Service * service, const std::vector<BarTickDataType*>& bars);
+				MessageIntradayBar(const CorrelationId& corr, const Service& service, const std::string& security);
+				MessageIntradayBar(const CorrelationId& corr, const Service& service, const std::vector<BarTickDataType*>& bars);
 				~MessageIntradayBar();
 
 				virtual const char* topicName() const;
-				virtual int numElements() const;
+				virtual size_t numElements() const;
 
 				virtual const ElementPtr * getElement(const char* name) const;
 				virtual bool hasElement(const char* name, bool excludeNullElements=false) const;

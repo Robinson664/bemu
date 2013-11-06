@@ -55,7 +55,5 @@ namespace BEmu
 		MessagePtr * messageP = this->_list.at(this->_position);
 		Message msg(messageP);
 		return msg;
-
-		//return *(this->_list.at(this->_position));
 	}
 }

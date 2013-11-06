@@ -32,6 +32,16 @@ namespace BEmu
 		this->_value = other._value;
 	}
 
+	CorrelationId& CorrelationId::operator=(const CorrelationId &rhs)
+	{
+		if (this != &rhs)
+		{
+			this->_isInternal = rhs._isInternal;
+			this->_value = rhs._value;
+		}
+		return *this;
+	}
+
 	const long CorrelationId::asInteger() const
 	{
 		return this->_value;

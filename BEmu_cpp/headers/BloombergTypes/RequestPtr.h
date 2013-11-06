@@ -10,12 +10,12 @@
 #pragma once
 
 #include "BloombergTypes/Element.h"
+#include "BloombergTypes/CorrelationId.h"
 #include <exception>
 
 namespace BEmu
 {
 	class Name;
-	class Service;
 	class Session;
 	class EventPtr;
 	class CorrelationId;
@@ -28,7 +28,7 @@ namespace BEmu
 
 		private:
 			//Session::sendRequest needs to set the correlationId of a given request.  The API marks the Request parameter as a const, so the mutable here overrides that.
-			mutable CorrelationId *_correlationId;
+			mutable CorrelationId _correlationId;
 
 		protected:	
 			RequestPtr();
@@ -45,8 +45,8 @@ namespace BEmu
 				}
 			} requestEx;
 
-			CorrelationId * getCorrelationId() const;
-			void setCorrelationId(CorrelationId * arg);
+			CorrelationId getCorrelationId() const;
+			void setCorrelationId(const CorrelationId& arg);
 			RequestTypeEnum getRequestType() const;
 			
 			virtual void append(const char* name, const char* value);

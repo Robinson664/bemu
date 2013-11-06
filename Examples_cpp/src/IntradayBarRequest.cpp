@@ -15,7 +15,6 @@ using namespace std;
 
 namespace Examples
 {
-	Element test;
 	void ProcessIntradayBarEvent(Event evt, const char* security);
 
 	void RunIntradayBarExample()
@@ -139,10 +138,9 @@ namespace Examples
             else
             {
 				Element elmBarData = msg.getElement("barData");
-				test = elmBarData;
 				Element elmBarTickDataArray = elmBarData.getElement("barTickData");
 
-				for (int valueIndex = 0; valueIndex < (int)elmBarTickDataArray.numValues(); valueIndex++)
+				for (size_t valueIndex = 0; valueIndex < elmBarTickDataArray.numValues(); valueIndex++)
 				{
                     Element elmBarTickData = elmBarTickDataArray.getValueAsElement(valueIndex);
 

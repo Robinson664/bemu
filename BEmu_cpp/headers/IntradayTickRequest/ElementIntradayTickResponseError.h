@@ -31,8 +31,8 @@ namespace BEmu
 				~ElementIntradayTickResponseError();
 
 				virtual Name name() const;
-				virtual int numValues() const { return 1; }
-				virtual int numElements() const { return 5; }		
+				virtual size_t numValues() const { return 1; }
+				virtual size_t numElements() const { return 5; }		
 				virtual bool isArray() const { return false; }
 				virtual bool isComplexType() const { return true; }
 				

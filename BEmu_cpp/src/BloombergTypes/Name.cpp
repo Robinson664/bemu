@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------------------------
 
 #include "BloombergTypes/Name.h"
+#include "BloombergTypes/ElementPtr.h"
 
 namespace BEmu
 {
@@ -18,11 +19,15 @@ namespace BEmu
 	Name::Name(const char* nameString)
 	{
 		this->_name = nameString;
+		this->_cname = nameString;
+		this->_length = strlen(nameString);
 	}
 
 	Name::Name(const Name& original)
 	{
 		this->_name = original._name;
+		this->_cname = this->_name.c_str();
+		this->_length = original._length;
 	}
 
 	Name& Name::operator=(const Name &rhs)
@@ -30,33 +35,35 @@ namespace BEmu
 		if (this != &rhs)
 		{
 			this->_name = rhs._name;
+			this->_cname = this->_name.c_str();
+			this->_length = rhs._length;
 		}
 		return *this;
 	}
 
 	const char* Name::string() const
 	{
-		return this->_name.c_str();
+		return this->_cname;
 	}
 
 	bool Name::operator==(const char *rhs) const
 	{
-		return strcmp(this->string(), rhs) == 0;
+		return strncmp(this->_cname, rhs, this->_length + 1) == 0;
 	}
 
 	bool Name::operator==(const Name rhs) const
 	{
-		return strcmp(this->string(), rhs.string()) == 0;
+		return strncmp(this->_cname, rhs._cname, this->_length + 1) == 0;
 	}
 
 	bool Name::operator!=(const char *rhs) const
 	{
-		return strcmp(this->string(), rhs) != 0;
+		return !(*this == rhs);
 	}
 
 	bool Name::operator!=(const Name rhs) const
 	{
-		return strcmp(this->string(), rhs.string()) != 0;
+		return !(*this == rhs);
 	}
 
 
@@ -68,12 +75,12 @@ namespace BEmu
 
 	bool operator==(const char *lhs, const Name& rhs)
 	{
-		return strcmp(lhs, rhs.string()) == 0;
+		return rhs == lhs;
 	}
 
 	bool operator!=(const char *lhs, const Name& rhs)
 	{
-		return strcmp(lhs, rhs.string()) != 0;
+		return rhs == lhs;
 	}
 
 

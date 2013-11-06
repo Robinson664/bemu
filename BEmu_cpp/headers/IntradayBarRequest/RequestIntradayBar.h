@@ -28,7 +28,7 @@ namespace BEmu
 		class RequestIntradayBar : public RequestPtr
 		{
 			private:
-				const Service *_service;
+				Service _service;
 
 				RequestIntradayBarElementString * _security;
 				RequestIntradayBarElementStringArray * _eventTypes;
@@ -37,14 +37,16 @@ namespace BEmu
 				RequestIntradayBarElementBool * _gapFillInitialBar, * _returnEids, * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement, * _adjustmentFollowDPDF;
 
 			public:
-				RequestIntradayBar(const Service *svc);
+				RequestIntradayBar(const Service& svc);
 				~RequestIntradayBar();
-				const Service * getService() const;
-				std::vector<Datetime*>* getDateTimes() const;
+				const Service getService() const;
+				std::vector<Datetime>* getDateTimes() const;
 				const std::string& security() const;
 				
-				Datetime * getDtStart() const;
-				Datetime * getDtEnd() const;
+				Datetime getDtStart() const;
+				Datetime getDtEnd() const;
+				bool hasStartDate() const;
+				bool hasEndDate() const;
 
 				virtual void set(const char* name, const char* value);
 				virtual void set(const char* name, const Datetime& value);

@@ -20,7 +20,7 @@ namespace BEmu
 		class ElementIntradayBarDateTime : public ElementPtr
 		{
 			private:
-				Datetime* _value;
+				Datetime _value;
 				std::string _name;
 
 			public:
@@ -28,14 +28,14 @@ namespace BEmu
 				~ElementIntradayBarDateTime();
 
 				virtual Name name() const;
-				virtual int numValues() const;
-				virtual int numElements() const;
+				virtual size_t numValues() const;
+				virtual size_t numElements() const;
 		
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
 				virtual Datetime getValueAsDatetime(int index) const;
-				virtual char* getValueAsString(int index) const;
+				virtual const char * getValueAsString(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
 		};

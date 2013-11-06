@@ -10,6 +10,7 @@
 #pragma once
 
 #include <vector>
+#include "BloombergTypes/Service.h"
 #include "BloombergTypes/RequestPtr.h"
 
 #include "IntradayTickRequest/RequestIntradayTickElementString.h"
@@ -19,7 +20,6 @@
 
 namespace BEmu
 {
-	class Service;
 	class Datetime;
 	class Element;
 
@@ -35,21 +35,23 @@ namespace BEmu
 				RequestIntradayTickElementBool *_includeConditionCodes, *_includeNonPlottableEvents, *_includeExchangeCodes, *_returnEids,
 					*_includeBrokerCodes, *_includeRpsCodes, *_includeBicMicCodes;
 
-				const Service *_service;
+				Service _service;
 				
 				const Datetime getStartDate() const; //used only as a helper for getDates()
 				const Datetime getEndDate() const; //used only as a helper for getDates()
 
 			public:
-				RequestIntradayTick(const Service *svc);
+				RequestIntradayTick(const Service& svc);
 				~RequestIntradayTick();
-				const Service* getService();
-				std::vector<Datetime*>* getDates();
+				const Service getService();
+				std::vector<Datetime>* getDates();
 				bool includeConditionCodes();
 				const std::string& security();
+				bool hasStartDate() const;
+				bool hasEndDate() const;
 
-				Datetime* dtStart();
-				Datetime* dtEnd();
+				Datetime dtStart();
+				Datetime dtEnd();
 
 				virtual Element getElement(const char* name);
 				virtual void append(const char* name, const char* value);

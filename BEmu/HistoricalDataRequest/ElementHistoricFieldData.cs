@@ -16,7 +16,7 @@ namespace BEmu.HistoricalDataRequest
 
     internal class ElementHistoricFieldData : Element
     {
-        private readonly Dictionary<string, Element> _fields; //make a dic
+        private readonly Dictionary<string, Element> _fields;
 
         public ElementHistoricFieldData(DateTime date, Dictionary<string, object> values)
         {

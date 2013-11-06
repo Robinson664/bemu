@@ -19,34 +19,19 @@ namespace BEmu
 		RequestIntradayBarElementTime::RequestIntradayBarElementTime(const std::string& elementName) : RequestIntradayBarElementString(elementName, "")
 		{
 			this->_value = "";
-			this->_dtvalue = 0;
 		}
 		
 		RequestIntradayBarElementTime::RequestIntradayBarElementTime(const std::string& elementName, const Datetime& dtvalue) : RequestIntradayBarElementString(elementName, "")
 		{
-			std::stringstream ss;
-			ss << dtvalue.year();
-
-			if(dtvalue.month() < 10)
-				ss << '0';
-			ss << dtvalue.month();
-
-			if(dtvalue.day() < 10)
-				ss << '0';
-			ss << dtvalue.day();
-
-			this->_value = ss.str();
-
-			this->_dtvalue = new Datetime(dtvalue);
+			this->_value = dtvalue.ToYYYYMMDD();
+			this->_dtvalue = dtvalue;
 		}
 
 		RequestIntradayBarElementTime::~RequestIntradayBarElementTime()
 		{
-			delete this->_dtvalue;
-			this->_dtvalue = 0;
 		}
 
-		Datetime * RequestIntradayBarElementTime::getDatetime() const
+		Datetime RequestIntradayBarElementTime::getDatetime() const
 		{
 			return this->_dtvalue;
 		}
