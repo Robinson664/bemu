@@ -94,6 +94,11 @@ namespace BEmu
 		return result;
 	}
 
+	Datetime Datetime::FromYYMMDD(const std::string& str)
+	{
+		return Datetime::FromYYYYMMDD("20" + str);
+	}
+
 	Datetime Datetime::FromYYYYMMDD(const std::string& str)
 	{
 		if(str.length() < 8)
@@ -113,6 +118,23 @@ namespace BEmu
 		//Datetime result = new	Datetime(year, month, day);
 		Datetime result(year, month, day);
 		return result;
+	}
+
+	std::string Datetime::ToMMddYY() const
+	{
+		std::stringstream ss;
+		
+		if(this->month() < 10)
+			ss << '0';
+		ss << this->month() << '/';
+
+		if(this->day() < 10)
+			ss << '0';
+		ss << this->day() << '/';
+
+		ss << this->year() - 2000;
+		
+		return ss.str();
 	}
 
 	std::string Datetime::ToYYYYMMDD() const

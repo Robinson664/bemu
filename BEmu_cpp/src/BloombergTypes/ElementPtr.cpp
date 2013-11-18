@@ -41,7 +41,18 @@ namespace BEmu
 	//this is probably a memory leak. Even if the caller deletes the const char *, what happens to the str pointer?
 	const char * ElementPtr::toCharPointer(std::string& arg)
 	{
-		const char * result = arg.c_str();
+		char * result = new char[arg.length() + 1];
+		strncpy(result, arg.c_str(), arg.length() + 1);
+		
+		return result;
+	}
+
+	//this is probably a memory leak. Even if the caller deletes the const char *, what happens to the str pointer?
+	const char * ElementPtr::toCharPointer(const std::string& arg)
+	{
+		char * result = new char[arg.length() + 1];
+		strncpy(result, arg.c_str(), arg.length() + 1);
+		
 		return result;
 	}
 	
@@ -157,4 +168,43 @@ namespace BEmu
 	{
 		return this->getElement(name)->getValueAsString(0);
 	}
+
+
+
+	ElementPtr * ElementPtr::appendElement()
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::setElement(const char* name, const char* value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::setElement(const char* name, const Name& value)
+	{
+		this->setElement(name, value.string());
+	}
+
+	void ElementPtr::setElement(const Name& name, const char* value)
+	{
+		this->setElement(name.string(), value);
+	}
+
+	void ElementPtr::setElement(const Name& name, const Name& value)
+	{
+		this->setElement(name.string(), value.string());
+	}
+
+
+	void ElementPtr::setElement(const char* name, int value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::setElement(const Name& name, int value)
+	{
+		this->setElement(name.string(), value);
+	}
+
 }

@@ -75,7 +75,9 @@ namespace BEmu
 			static Datetime Today();
 			static Datetime Now();
 			static Datetime FromYYYYMMDD(const std::string& str);
+			static Datetime FromYYMMDD(const std::string& str);
 			std::string ToYYYYMMDD() const;
+			std::string ToMMddYY() const;
 
 			friend DLL_EXPORT bool operator<(const Datetime& lhs, const Datetime& rhs);
 			friend DLL_EXPORT bool operator<=(const Datetime& lhs, const Datetime& rhs);

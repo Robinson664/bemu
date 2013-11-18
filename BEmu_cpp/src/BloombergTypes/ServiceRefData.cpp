@@ -14,6 +14,7 @@
 #include "IntradayTickRequest/RequestIntradayTick.h"
 #include "IntradayBarRequest/RequestIntradayBar.h"
 #include "HistoricalDataRequest/RequestHistoric.h"
+#include "ReferenceDataRequest/RequestReference.h"
 
 namespace BEmu
 {
@@ -38,7 +39,8 @@ namespace BEmu
 		}
 		else if(strncmp(operation, "ReferenceDataRequest", 21) == 0)
 		{
-			throw serviceRefDataEx;
+			ReferenceDataRequest::RequestReference * result = new ReferenceDataRequest::RequestReference();
+			return result;
 		}
 		else if(strncmp(operation, "IntradayTickRequest", 20) == 0)
 		{

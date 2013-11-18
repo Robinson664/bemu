@@ -47,7 +47,7 @@ namespace BEmu
 			this->_responseError = 0;
 		}
 
-		const ElementPtr * MessageIntradayTick::getElement(const char* name) const
+		ElementPtr * MessageIntradayTick::getElement(const char* name) const
 		{
 			if(this->_isResponseError && strncmp(name, "responseError", 14) == 0)
 				return this->_responseError;
@@ -84,7 +84,7 @@ namespace BEmu
 			return 1;
 		}
 
-		const ElementPtr * MessageIntradayTick::asElement() const
+		ElementPtr * MessageIntradayTick::asElement() const
 		{
 			const MessageIntradayTick msg = *this;
 			ElementPtr * resultP = new ElementIntradayTick(msg);

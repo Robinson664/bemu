@@ -96,4 +96,16 @@ namespace BEmu
 	{
 		this->_ptr->set(name, value);
 	}
+
+
+	Element Request::getElement(const char* name)
+	{
+		return this->_ptr->getElement(name);
+	}
+
+	Element Request::getElement(const Name& name)
+	{
+		return this->_ptr->getElement(name);
+	}
+
 }

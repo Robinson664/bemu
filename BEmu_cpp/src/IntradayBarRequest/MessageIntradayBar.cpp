@@ -51,7 +51,7 @@ namespace BEmu
 			return 1;
 		}
 
-		const ElementPtr * MessageIntradayBar::getElement(const char* name) const
+		ElementPtr * MessageIntradayBar::getElement(const char* name) const
 		{
             if (this->_isResponseError)
 			{

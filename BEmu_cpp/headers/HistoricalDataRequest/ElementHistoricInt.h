@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="headers/HistoricalDataRequest/ElementHistoricInt.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/ElementHistoricInt.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License

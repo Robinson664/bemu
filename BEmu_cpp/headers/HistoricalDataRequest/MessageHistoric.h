@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="headers/HistoricalDataRequest/MessageHistoric.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/MessageHistoric.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -38,7 +38,7 @@ namespace BEmu
 
 				ElementHistoricSecurityData * getSecurity() const;
 				virtual bool hasElement(const char* name, bool excludeNullElements=false) const;
-				virtual const ElementPtr * getElement(const char* name) const;
+				virtual ElementPtr * getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

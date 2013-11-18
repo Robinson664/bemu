@@ -43,6 +43,12 @@
     <Filter Include="Header Files\HistoricalDataRequest">
       <UniqueIdentifier>{58afa5f0-1dec-47f7-91de-930a151301a1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\ReferenceDataRequest">
+      <UniqueIdentifier>{a3c2f1b3-824f-4963-9f8c-3e9e959c22d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ReferenceDataRequest">
+      <UniqueIdentifier>{49e34ca1-1ee5-4c27-8979-6ad132e4d841}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\BloombergTypes\EventPtr.h">
@@ -276,6 +282,75 @@
     <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTick.h">
       <Filter>Header Files\IntradayTickRequest</Filter>
     </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\EventReference.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\MessageReference.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\RequestReference.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementOverride.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementOverrideArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementString.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementStringArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReference.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceString.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceArrayChainTickers.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceArrayChainTickersItem.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceDateTime.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceDouble.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceErrorInfo.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceFieldData.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceFieldExceptions.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceFieldExceptionsArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceInt.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceObject.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceSecurityData.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceSecurityDataArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceSecurityError.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp">
@@ -506,5 +581,79 @@
     <ClCompile Include="src\IntradayTickRequest\ElementIntradayTick.cpp">
       <Filter>Source Files\IntradayTickRequests</Filter>
     </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReference.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementStringArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceArrayChainTickers.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceArrayChainTickersItem.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceDateTime.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceDouble.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceErrorInfo.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceFieldData.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceFieldExceptions.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceFieldExceptionsArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceInt.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceObject.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceSecurityData.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceSecurityDataArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceSecurityError.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceString.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\EventReference.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\MessageReference.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\RequestReference.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementOverride.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementOverrideArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementString.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

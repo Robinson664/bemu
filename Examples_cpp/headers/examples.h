@@ -15,6 +15,7 @@ namespace Examples
 	void RunIntradayBarExample();
 	void RunIntradayTickExample();
 	void RunHistoricalDataExample();
+	void RunReferenceDataExample();
 }
 
 using namespace std;

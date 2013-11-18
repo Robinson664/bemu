@@ -11,9 +11,100 @@
 #include <map>
 #include <list>
 #include <iostream>
+#include "ReferenceDataRequest/RequestReference.h"
+#include "ReferenceDataRequest/ElementReferenceArrayChainTickers.h"
+#include <boost\algorithm\string\predicate.hpp>
 
 namespace BEmu
 {
+	ObjectType RandomDataGenerator::ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, ReferenceDataRequest::RequestReference * rreq)
+	{
+		std::string upper(fieldName);
+		std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
+
+		if(upper.compare("CHAIN_TICKERS") == 0)
+		{
+			if(isOption)
+				return ObjectType(); //null
+			else
+			{
+				int numPoints = 1;
+                std::string dtExp;
+				ReferenceDataRequest::OptionalityEnum::EnumType optionality = ReferenceDataRequest::OptionalityEnum::call;
+
+				if(rreq->hasElement("overrides"))
+				{
+					Element elmOverrides = rreq->getElement("overrides");
+					for(int i = 0; i < elmOverrides.numValues(); i++)
+					{
+						Element element = elmOverrides.getValueAsElement(i);
+
+						const char * fieldId = element.getElementAsString("fieldId");
+						const char * value = element.getElementAsString("value");
+						
+						std::string fieldIdUpper(fieldId);
+						std::transform(fieldIdUpper.begin(), fieldIdUpper.end(), fieldIdUpper.begin(), ::toupper);
+						
+						if(fieldIdUpper.compare("CHAIN_POINTS_OVRD") == 0)
+						{
+							numPoints = atoi(value);
+						}
+						else if(fieldIdUpper.compare("CHAIN_EXP_DT_OVRD") == 0)
+						{
+							dtExp = value;
+						}
+						else if(fieldIdUpper.compare("CHAIN_PUT_CALL_TYPE_OVRD") == 0)
+						{
+							if(strncmp(value, "P", 2) == 0)
+								optionality = ReferenceDataRequest::OptionalityEnum::put;
+						}
+					}
+				}
+
+				ReferenceDataRequest::ElementReferenceArrayChainTickers * chain = new ReferenceDataRequest::ElementReferenceArrayChainTickers(security, numPoints, dtExp, optionality);
+				return ObjectType(chain);
+			}
+		}
+		else if(upper.find("TICKER") != std::string::npos)
+		{
+			int indexSpace = security.find(' ');
+			std::string ticker(security.substr(0, indexSpace));
+			return ObjectType(ticker);
+		}
+		else if(upper.find("OPT_EXPIRE_DT") != std::string::npos)
+		{
+			if(boost::algorithm::ends_with(security, "COMDTY") || boost::algorithm::ends_with(security, "INDEX"))
+			{
+				Datetime dt(Datetime::Today());
+				dt.addMonths(3);
+				return ObjectType(dt);
+			}
+			else if(isOption)
+			{
+				int lastIndexSpace = security.find_last_of(' ');
+				std::string strDate(security.substr(lastIndexSpace - 15, 6));
+
+				Datetime dt(Datetime::FromYYMMDD(strDate));
+				return ObjectType(dt);
+			}
+			else
+			{
+				return ObjectType(); //null
+			}
+		}
+		else if(upper.find("TRADEABLE_DT") != std::string::npos)
+		{
+			Datetime dt(Datetime::Today());
+			dt.addMonths(3);
+			return ObjectType(dt);
+		}
+		else
+		{
+			double value = RandomDataGenerator::RandomDouble();
+			return ObjectType(value);
+		}
+	}
+
 	IntradayBarRequest::BarTickDataType * RandomDataGenerator::GenerateBarData(const Datetime& date)
 	{
         double first = RandomDataGenerator::RandomDouble();

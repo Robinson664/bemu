@@ -25,7 +25,7 @@ namespace BEmu
 		this->_ptr = arg._ptr;
 	}
 
-	Element::Element(const ElementPtr* arg)
+	Element::Element(ElementPtr * arg)
 	{
 		this->_ptr = arg;
 	}
@@ -78,76 +78,44 @@ namespace BEmu
 		return this->getElement(name.string());
 	}
 
-	bool Element::hasElement(const char* name, bool excludeNullElements) const
-	{
-		return this->_ptr->hasElement(name, excludeNullElements);
-	}
-	bool Element::hasElement(const Name& name, bool excludeNullElements) const
-	{
-		return this->hasElement(name.string(), excludeNullElements);
-	}
+	bool Element::hasElement(const char* name, bool excludeNullElements) const { return this->_ptr->hasElement(name, excludeNullElements); }
+	bool Element::hasElement(const Name& name, bool excludeNullElements) const { return this->hasElement(name.string(), excludeNullElements); }
 	
-	bool Element::getElementAsBool(const char* name) const
-	{
-		return this->getElement(name).getValueAsBool(0);
-	}
-	bool Element::getElementAsBool(const Name& name) const
-	{
-		return this->getElementAsBool(name.string());
-	}
+	bool Element::getElementAsBool(const char* name) const { return this->getElement(name).getValueAsBool(0); }
+	bool Element::getElementAsBool(const Name& name) const { return this->getElementAsBool(name.string()); }
 	
-	int Element::getElementAsInt32(const char* name) const
-	{
-		return this->_ptr->getElementAsInt32(name);
-		//return this->getElement(name).getElementAsInt32(0);
-	}
-	int Element::getElementAsInt32(const Name& name) const
-	{
-		return this->getElementAsInt32(name.string());
-	}
+	int Element::getElementAsInt32(const char* name) const { return this->_ptr->getElementAsInt32(name); }
+	int Element::getElementAsInt32(const Name& name) const { return this->getElementAsInt32(name.string()); }
 	
-	long Element::getElementAsInt64(const char* name) const
+	long Element::getElementAsInt64(const char* name) const { return this->getElement(name).getValueAsInt64(0); }
+	long Element::getElementAsInt64(const Name& name) const { return this->getElementAsInt64(name.string()); }
+
+	float Element::getElementAsFloat32(const char* name) const { return this->getElement(name).getValueAsFloat32(0); }
+	float Element::getElementAsFloat32(const Name& name) const { return this->getElementAsFloat32(name.string()); }
+
+	double Element::getElementAsFloat64(const char* name) const { return this->getElement(name).getValueAsFloat64(0); }
+	double Element::getElementAsFloat64(const Name& name) const { return this->getElementAsFloat64(name.string()); }
+
+	Datetime Element::getElementAsDatetime(const char* name) const { return this->getElement(name).getValueAsDatetime(0); }
+	Datetime Element::getElementAsDatetime(const Name& name) const { return this->getElementAsDatetime(name.string()); }
+
+	const char* Element::getElementAsString(const char* name) const { return this->getElement(name).getValueAsString(0); }
+	const char* Element::getElementAsString(const Name& name) const { return this->getElementAsString(name.string()); }
+
+
+	Element Element::appendElement()
 	{
-		return this->getElement(name).getValueAsInt64(0);
-	}
-	long Element::getElementAsInt64(const Name& name) const
-	{
-		return this->getElementAsInt64(name.string());
+		ElementPtr * ptr = this->_ptr->appendElement();
+		Element result(ptr);
+		return result;
 	}
 
-	float Element::getElementAsFloat32(const char* name) const
-	{
-		return this->getElement(name).getValueAsFloat32(0);
-	}
-	float Element::getElementAsFloat32(const Name& name) const
-	{
-		return this->getElementAsFloat32(name.string());
-	}
+	void Element::setElement(const char* name, const char* value) { this->_ptr->setElement(name, value); }
+	void Element::setElement(const char* name, const Name& value) { this->_ptr->setElement(name, value); }
+	void Element::setElement(const Name& name, const char* value) { this->_ptr->setElement(name, value); }
+	void Element::setElement(const Name& name, const Name& value) { this->_ptr->setElement(name, value); }
 
-	double Element::getElementAsFloat64(const char* name) const
-	{
-		return this->getElement(name).getValueAsFloat64(0);
-	}
-	double Element::getElementAsFloat64(const Name& name) const
-	{
-		return this->getElementAsFloat64(name.string());
-	}
+	void Element::setElement(const char* name, int value) { this->_ptr->setElement(name, value); }
+	void Element::setElement(const Name& name, int value) { this->_ptr->setElement(name, value); }
 
-	Datetime Element::getElementAsDatetime(const char* name) const
-	{
-		return this->getElement(name).getValueAsDatetime(0);
-	}
-	Datetime Element::getElementAsDatetime(const Name& name) const
-	{
-		return this->getElementAsDatetime(name.string());
-	}
-
-	const char* Element::getElementAsString(const char* name) const
-	{
-		return this->getElement(name).getValueAsString(0);
-	}
-	const char* Element::getElementAsString(const Name& name) const
-	{
-		return this->getElementAsString(name.string());
-	}
 }

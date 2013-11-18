@@ -125,5 +125,13 @@
     <ClCompile Include="src\HistoricalDataRequest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="makefile">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

@@ -63,14 +63,14 @@ namespace BEmu
 
 	const Element Message::asElement() const
 	{
-		const ElementPtr * elementP = this->_ptr->asElement();
+		ElementPtr * elementP = this->_ptr->asElement();
 		Element result(elementP);
 		return result;
 	}
 
 	const Element Message::getElement(const char* name) const
 	{
-		const ElementPtr * elementP = this->_ptr->getElement(name);
+		ElementPtr * elementP = this->_ptr->getElement(name);
 		Element result(elementP);
 		return result;
 	}

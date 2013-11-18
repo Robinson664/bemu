@@ -21,10 +21,10 @@ namespace BEmu
 	class Element
 	{
 		private:
-			const ElementPtr * _ptr;
+			ElementPtr * _ptr;
 
 		public:
-			Element(const ElementPtr* arg);
+			Element(ElementPtr * arg);
 
 			DLL_EXPORT Element();
 			DLL_EXPORT Element(const Element& arg);
@@ -86,6 +86,16 @@ namespace BEmu
 			DLL_EXPORT const char* getElementAsString(const Name& name) const;
 
 			DLL_EXPORT std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
+
+			DLL_EXPORT Element appendElement();
+
+			DLL_EXPORT void setElement(const char* name, const char* value);
+			DLL_EXPORT void setElement(const char* name, const Name& value);
+			DLL_EXPORT void setElement(const Name& name, const char* value);
+			DLL_EXPORT void setElement(const Name& name, const Name& value);
+
+			DLL_EXPORT void setElement(const char* name, int value);
+			DLL_EXPORT void setElement(const Name& name, int value);
 	};
 
 	inline std::ostream& operator<< (std::ostream& out, const Element& mc)

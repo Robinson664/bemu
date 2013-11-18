@@ -18,6 +18,11 @@
 
 namespace BEmu
 {
+	namespace ReferenceDataRequest
+	{
+		class RequestReference;
+	}
+
 	class RandomDataGenerator
 	{
 		public:
@@ -43,5 +48,7 @@ namespace BEmu
 			static IntradayBarRequest::BarTickDataType * GenerateBarData(const Datetime& date);
 
 			static int IntradayTickIntervalInMinutes();
+
+			static ObjectType ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, ReferenceDataRequest::RequestReference * rreq);
 	};
 }

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="src/HistoricalDataRequest/ElementHistoricSecurityError.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/ElementHistoricSecurityError.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -28,7 +28,7 @@ namespace BEmu
 
 			//source
 			std::stringstream sourceValue;
-			sourceValue << nid << "::" << sourceGibberish << RandomDataGenerator::RandomInt(99);
+			sourceValue << nid << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
 			this->_source = new ElementHistoricString("source", sourceValue.str());
 
 			//code

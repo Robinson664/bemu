@@ -22,6 +22,9 @@
 #include "HistoricalDataRequest/RequestHistoric.h"
 #include "HistoricalDataRequest/EventHistoric.h"
 
+#include "ReferenceDataRequest/RequestReference.h"
+#include "ReferenceDataRequest/EventReference.h"
+
 namespace BEmu
 {
 	EventPtr::EventPtr(RequestPtr * request)
@@ -78,7 +81,9 @@ namespace BEmu
 		}
 		else if(request->getRequestType() == RequestPtr::reference)
 		{
-			throw request->requestEx;
+			ReferenceDataRequest::RequestReference * req = (ReferenceDataRequest::RequestReference *)request;
+			ReferenceDataRequest::EventReference * evt = new ReferenceDataRequest::EventReference(req);
+			return evt;
 		}
 		throw request->requestEx;
 	}

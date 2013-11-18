@@ -40,12 +40,12 @@ namespace BEmu
 		return this->_messageType;
 	}
 
-	const ElementPtr * MessagePtr::getElement(const char* name) const
+	ElementPtr * MessagePtr::getElement(const char* name) const
 	{
 		throw messageEx;
 	}
 
-	const ElementPtr * MessagePtr::getElement(const Name& name) const
+	ElementPtr * MessagePtr::getElement(const Name& name) const
 	{
 		return this->getElement(name.string());
 	}
@@ -60,7 +60,7 @@ namespace BEmu
 		throw messageEx;
 	}
 
-	const ElementPtr * MessagePtr::asElement() const
+	ElementPtr * MessagePtr::asElement() const
 	{
 		throw messageEx;
 	}

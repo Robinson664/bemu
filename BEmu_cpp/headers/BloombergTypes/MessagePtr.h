@@ -42,10 +42,10 @@ namespace BEmu
 			CorrelationId correlationId() const;
 			Name messageType() const;
 			virtual const char* topicName() const;
-			//Service service() const;
-			const ElementPtr * getElement(const Name& name) const;
-			virtual const ElementPtr * getElement(const char* name) const;
-			virtual const ElementPtr * asElement() const;
+			
+			ElementPtr * getElement(const Name& name) const;
+			virtual ElementPtr * getElement(const char* name) const;
+			virtual ElementPtr * asElement() const;
 			bool hasElement(const Name& name, bool excludeNullElements=false) const;
 			virtual bool hasElement(const char* name, bool excludeNullElements=false) const;
 			virtual size_t numElements() const;

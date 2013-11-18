@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="src/HistoricalDataRequest/MessageHistoric.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/MessageHistoric.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -31,7 +31,7 @@ namespace BEmu
 			this->_security = 0;
 		}
 
-		const ElementPtr * MessageHistoric::getElement(const char* name) const
+		ElementPtr * MessageHistoric::getElement(const char* name) const
 		{
 			if(strncmp(name, "securityData", 13) == 0)
 				return this->_security;

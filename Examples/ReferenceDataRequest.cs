@@ -188,7 +188,7 @@ namespace Examples
                         Console.WriteLine("\tTICKER = " + ticker.ToString());
 
                         bool excludeNullElements = true;
-                        if (elmFieldData.HasElement("CHAIN_TICKERS", excludeNullElements)) //be careful, excludeNullElements is false by default
+                        if (elmFieldData.HasElement("CHAIN_TICKERS", excludeNullElements)) //be careful, the excludeNullElements argument is false by default
                         {
                             Element chainTickers = elmFieldData["CHAIN_TICKERS"];
                             for (int chainTickerValueIndex = 0; chainTickerValueIndex < chainTickers.NumValues; chainTickerValueIndex++)

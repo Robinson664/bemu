@@ -22,8 +22,7 @@ void main()
 	switch(input)
 	{
 		case 1:
-			cout << "Reference data request not yet implemented." << endl;
-			informationReturned = false;
+			Examples::RunReferenceDataExample();
 			break;
 		case 2:
 			cout << "Market data request not yet implemented." << endl;

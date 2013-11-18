@@ -50,5 +50,8 @@ namespace BEmu
 
 			DLL_EXPORT void set(const char* name, int value);
 			DLL_EXPORT void set(const Name& name, int value);
+
+			DLL_EXPORT Element getElement(const char* name);
+			DLL_EXPORT Element getElement(const Name& name);
 	};
 }

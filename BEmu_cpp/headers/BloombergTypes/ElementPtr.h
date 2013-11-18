@@ -26,6 +26,7 @@ namespace BEmu
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const Datetime& value) const;
 			
 			static const char * toCharPointer(std::string& arg);
+			static const char * toCharPointer(const std::string& arg);
 			static const char * toCharPointer(std::stringstream& arg);
 			static const char * toCharPointer(int arg);
 			static const char * toCharPointer(double arg);
@@ -89,6 +90,18 @@ namespace BEmu
 
 			virtual const char* getElementAsString(const char* name) const;
 			const char* getElementAsString(const Name& name) const;
+
+
+			virtual ElementPtr * appendElement();
+
+			virtual void setElement(const char* name, const char* value);
+			void setElement(const char* name, const Name& value);
+			void setElement(const Name& name, const char* value);
+			void setElement(const Name& name, const Name& value);
+
+			virtual void setElement(const char* name, int value);
+			void setElement(const Name& name, int value);
+
 
 			virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 	};

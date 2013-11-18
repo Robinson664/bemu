@@ -27,7 +27,7 @@ namespace BEmu
 
 			//source
 			std::stringstream sourceValue;
-			sourceValue << code << "::" << sourceGibberish << RandomDataGenerator::RandomInt(99);
+			sourceValue << code << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
 			this->_source = new ElementIntradayBarString("source", sourceValue.str());
 
 			//code

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="src/HistoricalDataRequest/ElementHistoricErrorInfo.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/ElementHistoricErrorInfo.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -24,7 +24,7 @@ namespace BEmu
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
 			std::stringstream ssSource;
-			ssSource << RandomDataGenerator::RandomInt(999) << "::" << sourceGibberish << RandomDataGenerator::RandomInt(99);
+			ssSource << RandomDataGenerator::RandomInt(999) << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
 			this->_source = new ElementHistoricString("source", ssSource.str());
 
 			this->_code = new ElementHistoricInt("code", RandomDataGenerator::RandomInt(99));
