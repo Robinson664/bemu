@@ -45,7 +45,7 @@ namespace BEmu.MarketDataRequest
             StringBuilder result = new StringBuilder();
 
             result.AppendFormat("{0}{2} = {{{1}", tabs, Environment.NewLine, this.Name.ToString());
-            result.Append(this._reason.PrettyPrint(tabIndent + 1));            
+            result.Append(this._reason.PrettyPrint(tabIndent + 1));
             result.AppendFormat("{0}}}{1}", tabs, Environment.NewLine);
 
             return result;

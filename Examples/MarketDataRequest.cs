@@ -102,14 +102,14 @@ namespace Examples
 
                                 Element elmReason = elmException["reason"];
                                 string source = elmReason.GetElementAsString("source");
-                                int errorCode = elmReason.GetElementAsInt32("errorCode");
+                                //int errorCode = elmReason.GetElementAsInt32("errorCode");
                                 string category = elmReason.GetElementAsString("category");
                                 string description = elmReason.GetElementAsString("description");
 
                                 Console.Error.WriteLine("field error: ");
                                 Console.Error.WriteLine(string.Format("\tfieldId = {0}", fieldId));
                                 Console.Error.WriteLine(string.Format("\tsource = {0}", source));
-                                Console.Error.WriteLine(string.Format("\terrorCode = {0}", errorCode));
+                                //Console.Error.WriteLine(string.Format("\terrorCode = {0}", errorCode));
                                 Console.Error.WriteLine(string.Format("\tcategory = {0}", category));
                                 Console.Error.WriteLine(string.Format("\tdescription = {0}", description));
                             }

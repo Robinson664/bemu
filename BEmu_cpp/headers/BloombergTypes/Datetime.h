@@ -55,7 +55,7 @@ namespace BEmu
 			DLL_EXPORT Datetime& operator=(const Datetime &rhs);
 			DLL_EXPORT Datetime(const Datetime& arg);
 
-			DLL_EXPORT Datetime::~Datetime();
+			DLL_EXPORT ~Datetime();
 		
 			DLL_EXPORT unsigned year() const;
 			DLL_EXPORT unsigned month() const;
