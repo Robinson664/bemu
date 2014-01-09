@@ -25,6 +25,8 @@
 	#include "BloombergTypes\Element.h"
 	#include "BloombergTypes\Message.h"
 	#include "BloombergTypes\Service.h"
+	#include "BloombergTypes\SubscriptionList.h"
+	#include "BloombergTypes\EventHandler.h"
 
 	using namespace BEmu;
 
@@ -32,7 +34,7 @@
 
 	#include "blpapi_name.h"
 	#include "blpapi_correlationid.h"
-	#include "blpapi_session.h"
+	#include "blpapi_session.h" //defines EventHandler
 	#include "blpapi_event.h" //defines MessageIterator
 	#include "blpapi_sessionoptions.h"
 	#include "blpapi_request.h"
@@ -40,6 +42,7 @@
 	#include "blpapi_service.h"
 	#include "blpapi_element.h"
 	#include "blpapi_message.h"
+	#include "blpapi_subscriptionlist.h"
 
 	using namespace BloombergLP::blpapi;
 

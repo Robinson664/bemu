@@ -49,6 +49,12 @@
     <Filter Include="Source Files\ReferenceDataRequest">
       <UniqueIdentifier>{49e34ca1-1ee5-4c27-8979-6ad132e4d841}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\MarketDataRequest">
+      <UniqueIdentifier>{7506d622-8d8a-456f-bf07-8ee2a496e17c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MarketDataRequest">
+      <UniqueIdentifier>{8945528b-5f9d-4266-969e-8efb459340f8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\BloombergTypes\EventPtr.h">
@@ -351,6 +357,84 @@
     <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceSecurityError.h">
       <Filter>Header Files\ReferenceDataRequest</Filter>
     </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketExceptionsArray.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketInt.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketNull.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketReason.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketServiceStatus.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketString.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketSubscriptionCanceled.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketSubscriptionCancelReason.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketSubscriptionStarted.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\EventMarket.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MessageMarketServiceStatus.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MessageMarketSessionOpened.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MessageMarketSubscriptionCanceled.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MessageMarketSubscriptionData.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MessageMarketSubscriptionFailure.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MessageMarketSubscriptionStarted.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketBool.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketDouble.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketExceptions.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\ElementMarketDatetime.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\SubscriptionList.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Subscription.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\EventHandler.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Types\BEmuTimer.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Types\BEmuTimerFunction.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\SessionTimerFunction.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp">
@@ -649,6 +733,78 @@
     </ClCompile>
     <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementString.cpp">
       <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketBool.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MessageMarketSubscriptionStarted.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketDatetime.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketDouble.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketExceptions.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketExceptionsArray.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketInt.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketNull.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketReason.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketServiceStatus.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketString.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketSubscriptionCanceled.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketSubscriptionCancelReason.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\ElementMarketSubscriptionStarted.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\EventMarket.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MessageMarketServiceStatus.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MessageMarketSessionOpened.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MessageMarketSubscriptionCanceled.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MessageMarketSubscriptionData.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MessageMarketSubscriptionFailure.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Subscription.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\SubscriptionList.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\BEmuTimer.cpp">
+      <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\SessionTimerFunction.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

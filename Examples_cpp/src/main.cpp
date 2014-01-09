@@ -25,8 +25,7 @@ void main()
 			Examples::RunReferenceDataExample();
 			break;
 		case 2:
-			cout << "Market data request not yet implemented." << endl;
-			informationReturned = false;
+			Examples::RunMarketDataExample();
 			break;
 		case 3:
 			Examples::RunHistoricalDataExample();

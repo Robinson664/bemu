@@ -45,11 +45,11 @@ public class RunMarketDataSubscription
 						{
 							try
 							{
-								session.openServiceAsync("//blp/refdata", new CorrelationID(-9999));
+								session.openServiceAsync("//blp/mktdata", new CorrelationID(-9999));
 							}
 							catch (Exception e)
 							{
-								System.err.println("Could not open //blp/refdata for async");
+								System.err.println("Could not open //blp/mktdata for async");
 							}
 						}
 					}

@@ -144,6 +144,7 @@
     <ClCompile Include="src\IntradayBarRequest.cpp" />
     <ClCompile Include="src\IntradayTickRequest.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MarketDataRequest.cpp" />
     <ClCompile Include="src\ReferenceDataRequest.cpp" />
   </ItemGroup>
   <ItemGroup>
