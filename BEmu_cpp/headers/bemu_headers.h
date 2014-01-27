@@ -11,7 +11,8 @@
 
 #include <boost/cstdint.hpp>
 #include <string>
-#include <iostream>
+//#include <iostream>
+#include <iosfwd>
 
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>

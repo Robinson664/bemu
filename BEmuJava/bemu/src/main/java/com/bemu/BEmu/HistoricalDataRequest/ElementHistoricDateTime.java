@@ -59,7 +59,8 @@ public class ElementHistoricDateTime extends ElementParent
     
     protected StringBuilder prettyPrint(int tabIndent)
     {
-    	return super.prettyPrintHelper(tabIndent, this._date.toString());
+    	String strDate = com.bemu.BEmu.types.DisplayFormats.HistRef_FormatDate(this._date);
+    	return super.prettyPrintHelper(tabIndent, strDate);
     }
     
     public Object getValue()
@@ -84,6 +85,7 @@ public class ElementHistoricDateTime extends ElementParent
 
     public String getValueAsString()
     {
-        return this._date.toString();
+    	String strDate = com.bemu.BEmu.types.DisplayFormats.HistRef_FormatDate(this._date);
+        return strDate;
     }
 }

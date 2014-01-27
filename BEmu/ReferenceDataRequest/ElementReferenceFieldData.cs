@@ -122,5 +122,10 @@ namespace BEmu.ReferenceDataRequest
             return this[name].GetValueAsString();
         }
 
+        public override Datetime GetElementAsDatetime(string name)
+        {
+            return this[name].GetValueAsDatetime();
+        }
+
     }
 }

@@ -211,13 +211,13 @@ namespace BEmu.HistoricalDataRequest
             switch (name)
             {
                 case "startDate":
-                    if (DateTime.TryParseExact(elementValue, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtTemp))
+                    if (Types.DisplayFormats.HistoricalOrReferenceRequests.TryParseInput(elementValue, out dtTemp))
                         this._dtStart = new RequestHistoricElementDate("startDate", dtTemp);
                     else
                         throw new ArgumentException(string.Format("BEmu.Request.Set: Bad startDate format {0}, yyyyMMdd expected", elementValue));
                     break;
                 case "endDate":
-                    if (DateTime.TryParseExact(elementValue, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out dtTemp))
+                    if (Types.DisplayFormats.HistoricalOrReferenceRequests.TryParseInput(elementValue, out dtTemp))
                         this._dtEnd = new RequestHistoricElementDate("endDate", dtTemp);
                     else
                         throw new ArgumentException(string.Format("BEmu.Request.Set: Bad endDate format {0}, yyyyMMdd expected", elementValue));

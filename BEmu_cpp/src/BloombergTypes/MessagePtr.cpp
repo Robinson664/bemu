@@ -71,12 +71,39 @@ namespace BEmu
 	}
 
 
-	bool MessagePtr::getElementAsBool(const char* name) const { throw messageEx; }
-	int MessagePtr::getElementAsInt32(const char* name) const { throw messageEx; }
-	long MessagePtr::getElementAsInt64(const char* name) const { throw messageEx; }
-	float MessagePtr::getElementAsFloat32(const char* name) const { throw messageEx; }
-	double MessagePtr::getElementAsFloat64(const char* name) const { throw messageEx; }
-	Datetime MessagePtr::getElementAsDatetime(const char* name) const { throw messageEx; }
-	const char* MessagePtr::getElementAsString(const char* name) const { throw messageEx; }
+	bool MessagePtr::getElementAsBool(const char* name) const
+	{
+		return this->getElement(name)->getValueAsBool(0);
+	}
+
+	int MessagePtr::getElementAsInt32(const char* name) const
+	{
+		return this->getElement(name)->getValueAsInt32(0);
+	}
+
+	long MessagePtr::getElementAsInt64(const char* name) const
+	{
+		return this->getElement(name)->getValueAsInt64(0);
+	}
+
+	float MessagePtr::getElementAsFloat32(const char* name) const
+	{
+		return this->getElement(name)->getValueAsFloat32(0);
+	}
+
+	double MessagePtr::getElementAsFloat64(const char* name) const
+	{
+		return this->getElement(name)->getValueAsFloat64(0);
+	}
+
+	Datetime MessagePtr::getElementAsDatetime(const char* name) const
+	{
+		return this->getElement(name)->getValueAsDatetime(0);
+	}
+	
+	const char* MessagePtr::getElementAsString(const char* name) const
+	{
+		return this->getElement(name)->getValueAsString(0);
+	}
 
 }

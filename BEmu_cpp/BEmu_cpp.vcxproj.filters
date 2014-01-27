@@ -31,9 +31,6 @@
     <Filter Include="Source Files\IntradayTickRequests">
       <UniqueIdentifier>{f0a9f3b4-71e3-42f9-94c4-29dbefd01c5d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\IntradayBarRequest">
-      <UniqueIdentifier>{d13d5b9d-420e-4423-9fac-3ca6c4cff689}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\IntradayBarRequest">
       <UniqueIdentifier>{45785744-4c34-422a-aa16-a7a3d8ff8f52}</UniqueIdentifier>
     </Filter>
@@ -54,6 +51,9 @@
     </Filter>
     <Filter Include="Source Files\MarketDataRequest">
       <UniqueIdentifier>{8945528b-5f9d-4266-969e-8efb459340f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\IntradayBarRequest">
+      <UniqueIdentifier>{d13d5b9d-420e-4423-9fac-3ca6c4cff689}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

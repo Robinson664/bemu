@@ -54,6 +54,7 @@ namespace Examples
                     request.Append("fields", "BID");
                     request.Append("fields", "ASK");
                     request.Append("fields", "TICKER");
+                    request.Append("fields", "TRADEABLE_DT"); //hard-coded to be treated as a datetime to illustrated datetimes
                     request.Append("fields", "OPT_EXPIRE_DT"); //only stock options have this field
 
                     //request a field that can be overriden and returns bulk data
@@ -186,6 +187,15 @@ namespace Examples
                         Console.WriteLine("\tBID = " + bid.ToString());
                         Console.WriteLine("\tASK = " + ask.ToString());
                         Console.WriteLine("\tTICKER = " + ticker.ToString());
+
+                        if (elmFieldData.HasElement("TRADEABLE_DT", true))
+                        {
+                            Datetime trDate = elmFieldData.GetElementAsDatetime("TRADEABLE_DT");
+                            DateTime trDateSystem = elmFieldData.GetElementAsDatetime("TRADEABLE_DT").ToSystemDateTime(); //convenient conversion to C# DateTime object
+                            Console.WriteLine("\tTRADEABLE_DT = " + trDate.ToString());
+                        }
+
+                        //TRADEABLE_DT
 
                         bool excludeNullElements = true;
                         if (elmFieldData.HasElement("CHAIN_TICKERS", excludeNullElements)) //be careful, the excludeNullElements argument is false by default

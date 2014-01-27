@@ -13,11 +13,8 @@ import com.bemu.BEmu.Request;
 import com.bemu.BEmu.Datetime;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.ArrayList;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
 public class RequestHistoric extends Request
 {
@@ -219,11 +216,9 @@ public class RequestHistoric extends Request
     
     public void set(String name, String elementValue) throws Exception
     {
-    	SimpleDateFormat dateParse = new SimpleDateFormat("yyyyMMdd");
-
     	if(name.equals("startDate"))
     	{
-    		Datetime dtStart = RequestHistoric.TryParse(elementValue, dateParse);
+    		Datetime dtStart = com.bemu.BEmu.types.DisplayFormats.HistRef_TryParseInput(elementValue);
     		if(dtStart == null)
     			throw new Exception("startDate must be in the format yyyyMMdd");
     		else
@@ -231,7 +226,7 @@ public class RequestHistoric extends Request
     	}
     	else if(name.equals("endDate"))
     	{
-    		Datetime dtEnd = RequestHistoric.TryParse(elementValue, dateParse);
+    		Datetime dtEnd = com.bemu.BEmu.types.DisplayFormats.HistRef_TryParseInput(elementValue);
     		if(dtEnd == null)
     			throw new Exception("endDate must be in the format yyyyMMdd");
     		else
@@ -328,24 +323,6 @@ public class RequestHistoric extends Request
 
 		else
 			throw new Exception("not implemented. names are case-sensitive");
-    }
-    
-    
-    //either returns a date, or null if the string is not parse-able
-    private static Datetime TryParse(String arg, SimpleDateFormat dateParse)
-    {
-    	try
-    	{
-    		Date date = dateParse.parse(arg);
-    		Calendar cal = Calendar.getInstance();
-    		cal.setTime(date);
-    		Datetime result = new Datetime(cal);
-    		return result;
-    	}
-    	catch(ParseException e)
-    	{
-    		return null;
-    	}
     }
     
     

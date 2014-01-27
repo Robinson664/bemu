@@ -52,6 +52,7 @@ namespace Examples
 
             //Historical requests allow a few overrides.  See the developer's guide A.2.4 for more information.
 			
+			//30 days ago
 			time_t tStart = time(NULL) - (30 * 24 * 60 * 60); //days * hours * minutes * seconds
 			struct tm *aTimeStart = localtime(&tStart); //Visual Studio complains about this call, but the localtime_s replacement is not portable.
 			int day = aTimeStart->tm_mday;
@@ -63,13 +64,14 @@ namespace Examples
 			delete strDtStart;
 			strDtStart = 0;
 
+			//10 days ago
 			time_t tEnd = time(NULL) + (10 * 24 * 60 * 60); //days * hours * minutes * seconds
 			struct tm *aTimeEnd = localtime(&tEnd); //Visual Studio complains about this call, but the localtime_s replacement is not portable.
 			day = aTimeEnd->tm_mday;
 			month = aTimeEnd->tm_mon + 1;
 			year = aTimeEnd->tm_year + 1900;
 			Datetime dtEnd(year, month, day);
-			char * strDtEnd= DatetimeToYYYYMMDD(dtEnd);
+			char * strDtEnd = DatetimeToYYYYMMDD(dtEnd);
             request.set("endDate", strDtEnd); //Request that the information end three days before today.  This is an optional override.  The default is today.
 			delete strDtEnd;
 			strDtEnd = 0;

@@ -1,0 +1,44 @@
+//------------------------------------------------------------------------------------------------
+// <copyright project="BEmu_cpp" file="headers/BloombergTypes/Subscription.h" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------------------------
+
+#pragma once
+
+#include "BloombergTypes/CorrelationId.h"
+#include <vector>
+
+namespace BEmu
+{
+	class Subscription //Note that the BB API does not expose a Subscription class, hence no DLL_EXPORTs here
+	{
+		private:
+			std::string _security, _fields, _options;
+			std::vector<std::string> _fieldList;
+			CorrelationId _corr;
+
+			bool _hasConflationInterval;
+			int _conflationInterval;
+			void construct(std::string topic, std::string fields, std::string options, CorrelationId correlationId);
+
+		public:
+			Subscription(std::string topic, std::string fields, std::string options, CorrelationId correlationId);
+			Subscription(std::string topic, std::string fields, std::string options, CorrelationId correlationId, int conflationInterval);
+			~Subscription();
+			Subscription(const Subscription& arg);
+			Subscription& operator=(const Subscription& rhs);
+			
+			std::string security() const;
+			std::string fields() const;
+			std::vector<std::string> fieldList() const;
+			std::string options() const;
+			CorrelationId correlationId() const;
+
+			bool hasConflationInterval() const;
+			int conflationInterval() const;
+	};
+}

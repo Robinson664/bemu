@@ -138,6 +138,7 @@
     <ClInclude Include="headers\blpapi_types.h" />
     <ClInclude Include="headers\blpapi_versioninfo.h" />
     <ClInclude Include="headers\examples.h" />
+    <ClInclude Include="headers\SubscriptionEventHandler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\HistoricalDataRequest.cpp" />
@@ -146,6 +147,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MarketDataRequest.cpp" />
     <ClCompile Include="src\ReferenceDataRequest.cpp" />
+    <ClCompile Include="src\SubscriptionEventHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BEmu_cpp\BEmu_cpp.vcxproj">

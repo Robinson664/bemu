@@ -30,9 +30,9 @@ namespace Examples
             MarketDataRequest._fields.Add("BID");
             MarketDataRequest._fields.Add("ASK");
 
-            //uncomment the following line to see what a request for a nonexistent security looks like
+            //uncomment the following line to see what a request for a nonexistent field looks like
             //MarketDataRequest._fields.Add("ZASK");
-            //  My code treats all securities that start with a 'Z' as a nonexistent security
+            //  My code treats all fields that start with a 'Z' as a nonexistent security
 
             SessionOptions sessionOptions = new SessionOptions();
             sessionOptions.ServerHost = "localhost";
@@ -73,7 +73,10 @@ namespace Examples
                     //  I have not coded that in the emulator.
                     List<string> options = new string[] { "interval=2", "start_time=16:22", "end_time=16:23" }.ToList(); //2 seconds.  //Comment this line to receive a subscription data event whenever it happens in the market.
 
-                    //slist.Add(new Subscription("ZYZZ US EQUITY", MarketDataRequest._fields, options)); //the code treats securities that start with a "Z" as non-existent
+                    //uncomment the following line to see what a request for a nonexistent security looks like
+                    //slist.Add(new Subscription("ZYZZ US EQUITY", MarketDataRequest._fields, options));
+                    //  My code treats all securities that start with a 'Z' as a nonexistent security
+
                     slist.Add(new Subscription("SPY US EQUITY", MarketDataRequest._fields, options));
                     slist.Add(new Subscription("AAPL 150117C00600000 EQUITY", MarketDataRequest._fields, options));
 

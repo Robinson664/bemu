@@ -71,7 +71,7 @@ public class ElementIntradayTickDateTime extends ElementParent
     
     protected StringBuilder prettyPrint(int tabIndent)
     {
-    	return super.prettyPrintHelper(tabIndent, this.getValueAsString());
+    	return super.prettyPrintHelper(tabIndent, com.bemu.BEmu.types.DisplayFormats.Intraday_FormatDatetime(this._date));
     }
     
     public Object getValue()

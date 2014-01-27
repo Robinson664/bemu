@@ -92,9 +92,20 @@ public class Session {
     
     public Event nextEvent() throws Exception
     {
-    	boolean isLastRequest = this._sentRequests.size() == 1;
-    	Request next = this._sentRequests.poll();
-    	return Event.EventFactory(next, isLastRequest);
+    	if(this._sentRequests.isEmpty())
+    		return null;
+    	else
+    	{
+	    	boolean isLastRequest = this._sentRequests.size() == 1;
+	    	Request next = this._sentRequests.poll();
+	    	return Event.EventFactory(next, isLastRequest);
+    	}
+    }
+    
+    //The actual API will block up to timeoutMillis.  My code simply ignores the timeoutMillis argument.
+    public Event nextEvent(long timeoutMillis) throws Exception
+    {
+        return nextEvent();
     }
     
 	////////////////////////////////////////
@@ -177,7 +188,7 @@ public class Session {
             this._asyncHandler.processEvent(evtServiceStatus, this);
         }
         
-        this._marketSimulatorTypeClass.run();
+        this._marketSimulatorTypeClass.start();
         
         return true;
     }

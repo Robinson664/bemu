@@ -9,7 +9,6 @@
 
 package com.bemu.BEmu.types;
 
-import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -260,9 +259,9 @@ public class RandomDataGenerator
 	
 	public static double randomDouble(double low, double high)
 	{
-		DecimalFormat twoDForm = new DecimalFormat("#.####");
-		double result = RandomDataGenerator._rand.nextDouble() * (high - low) + low; 
-		return Double.valueOf(twoDForm.format(result));
+		double result = RandomDataGenerator._rand.nextDouble() * (high - low) + low;
+		result = Math.round(result * 10000) / 10000; //round to 4 decimal places
+		return result;
 	}
 	
 	public static int randomInt(int max)

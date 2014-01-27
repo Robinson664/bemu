@@ -28,7 +28,7 @@ namespace BEmu
 			{
 				dtExp = Datetime::Today();
 				dtExp.addMonths(1);
-				dtExp.addDays(-dtExp.day());
+				dtExp.addDays(-((long)dtExp.day()));
 				dtExp.addDays(20); //assume the 20th of the month
 			}
 			else if(strDtExp.length() == 8)
@@ -46,14 +46,14 @@ namespace BEmu
 
 				dtExp = Datetime::Today();
 				dtExp.addMonths(numMonths);
-				dtExp.addDays(-dtExp.day());
+				dtExp.addDays(-((long)dtExp.day()));
 				dtExp.addDays(20); //assume the 20th of the month
 			}
 			else
 				throw elementPtrEx;
 
 			int strike = RandomDataGenerator::Strike();
-			for (int count = 0; count < numPoints; count++, strike += 5)
+			for (unsigned count = 0; count < numPoints; count++, strike += 5)
 			{
 				ElementPtr * elm = new ElementReferenceArrayChainTickersItem(ticker, dtExp, optionality, strike);
 				this->_values.push_back(elm);

@@ -189,12 +189,16 @@ namespace BEmu
             {
                 case DateTimeTypeEnum.neither:
                     throw new NotImplementedException();
+
                 case DateTimeTypeEnum.date:
-                    return this._instance.ToString("yyyy-MM-dd%K");
+                    return Types.DisplayFormats.FormatDate(this);
+
                 case DateTimeTypeEnum.time:
-                    return this._instance.ToString("hh:mm:ss.fff%K");
+                    return Types.DisplayFormats.FormatTimeZone(this);
+
                 case DateTimeTypeEnum.both:
-                    return this._instance.ToString("yyyy-MM-dd hh:mm:ss.fff%K");
+                    return Types.DisplayFormats.FormatDatetimeZone(this);
+
                 default:
                     throw new NotImplementedException();
             }

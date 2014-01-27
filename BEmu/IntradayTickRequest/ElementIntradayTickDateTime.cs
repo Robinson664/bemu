@@ -59,7 +59,7 @@ namespace BEmu.IntradayTickRequest
 
         internal override StringBuilder PrettyPrint(int tabIndent)
         {
-            return base.PrettyPrintHelper(tabIndent, this._date.ToSystemDateTime().ToString("yyyy-MM-ddTHH:mm:ss.fff"));
+            return base.PrettyPrintHelper(tabIndent, Types.DisplayFormats.IntradayRequests.FormatDatetime(this._date));
         }
 
         public override Datetime GetValueAsDate()

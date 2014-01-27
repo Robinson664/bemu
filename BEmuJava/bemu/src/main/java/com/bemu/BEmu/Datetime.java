@@ -10,7 +10,6 @@
 package com.bemu.BEmu;
 
 import java.util.Calendar;
-import java.text.SimpleDateFormat;
 
 public class Datetime {
 	
@@ -200,22 +199,24 @@ public class Datetime {
 	
 	public String toString()
 	{
-		SimpleDateFormat s;
+		String result;
 		switch(this._dateTimeType)
 		{
 			case date:
-				s = new SimpleDateFormat("yyyy-MM-dd");
-				return s.format(this._instance.getTime());
+				result = com.bemu.BEmu.types.DisplayFormats.FormatDate(this);
+				break;
 			case time:
-				s = new SimpleDateFormat("hh:mm:ss.SSS");
-				return s.format(this._instance.getTime());
+				result = com.bemu.BEmu.types.DisplayFormats.FormatTimeZone(this);
+				break;
 			case both:
-				s = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss.SSS");
-				return s.format(this._instance.getTime());
+				result = com.bemu.BEmu.types.DisplayFormats.FormatDatetimeZone(this);
+				break;
 			case neither:
 			default:
-				return "Datetime._neither not supported";
+				result = "Datetime._neither not supported";
+				break;
 		}
+		return result;
 	}
 }
 

@@ -73,6 +73,6 @@ namespace BEmu
 			DLL_EXPORT Event& operator=(const Event &rhs);
 			DLL_EXPORT ~Event();
 
-			DLL_EXPORT EventType eventType();
+			DLL_EXPORT EventType eventType() const;
 	};
 }

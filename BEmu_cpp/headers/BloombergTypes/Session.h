@@ -11,6 +11,8 @@
 
 #include "BloombergTypes/SessionOptions.h"
 #include "BloombergTypes/CorrelationId.h"
+#include "BloombergTypes/SubscriptionList.h"
+#include "Types/BEmuTimerFunction.h"
 #include <queue>
 #include <vector>
 #include <exception>
@@ -21,17 +23,25 @@ namespace BEmu
 	class Service;
 	class Request;
 	class Event;
+	class EventHandler;
+	class BEmuTimer;
+	class SessionTimerFunction;
 
 	class Session
 	{
 		private:
-			Session(const Session&);
+			//Session(const Session&);
 
 			enum SessionStateType { initialized, started, serviceOpened, stopped, connectionFailure };
 			SessionStateType _sessionState;
 			SessionOptions _sessionOptions;
 
 			std::queue<RequestPtr*> _sentRequests;
+			EventHandler * _asyncHandler; //don't delete
+			SubscriptionList _subs;
+
+			SessionTimerFunction * _sessionTimerFunction;
+			BEmuTimer * _marketSimulatorTimer;
 
 		public:
 
@@ -46,13 +56,22 @@ namespace BEmu
 			///////////////////// Start Sync
 			DLL_EXPORT Session(const SessionOptions& options);
 			DLL_EXPORT bool start();
-			DLL_EXPORT bool startAsync();
 			DLL_EXPORT void stop();
 			DLL_EXPORT bool openService(const char* uri);
 			DLL_EXPORT Service getService(const char* uri) const;
 			DLL_EXPORT CorrelationId sendRequest(const Request& request, const CorrelationId& correlationId = CorrelationId());
 			DLL_EXPORT Event nextEvent(int timeout=0);
 			///////////////////// End Sync
+
+			///////////////////// Start Async
+			DLL_EXPORT Session(const SessionOptions& options, EventHandler * eventHandler);
+			DLL_EXPORT bool startAsync();
+			SubscriptionList getSubscriptions() const;
+
+			DLL_EXPORT void subscribe(const SubscriptionList& subscriptionList);
+
+			DLL_EXPORT CorrelationId openServiceAsync(const char* uri, const CorrelationId& correlationId = CorrelationId());
+			///////////////////// End Async
 
 			DLL_EXPORT ~Session();
 	};

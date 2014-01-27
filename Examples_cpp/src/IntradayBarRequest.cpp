@@ -40,6 +40,7 @@ namespace Examples
             //Note 2) If you request an eventType that isn't supported, the API will throw a KeyNotSupportedException at the "request.Set("eventType", "XXX")" line
             //Note 3) eventType values are case-sensitive.  Requesting "bid" instead of "BID" will throw a KeyNotSupportedException at the "request.Set("eventType", "bid")" line
 			
+			//the end time is right now
 			time_t tToday = time(NULL);
 			struct tm *aTimeToday = localtime(&tToday); //Visual Studio complains about this call, but the localtime_s replacement is not portable.
 			int day = aTimeToday->tm_mday;
@@ -48,6 +49,7 @@ namespace Examples
 			Datetime dtToday(year, month, day);
 			request.set("endDateTime", dtToday);
 			
+			//the start time is 1 day ago
 			time_t tYesterday = tToday - (1 * 24 * 60 * 60); //days * hours * minutes * seconds
 			struct tm *aTimeYesterday = localtime(&tYesterday); //Visual Studio complains about this call, but the localtime_s replacement is not portable.
 			day = aTimeYesterday->tm_mday;

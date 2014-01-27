@@ -27,9 +27,15 @@ namespace BEmu.ReferenceDataRequest
             if(BEmu.Types.Extensions.IsNullOrWhiteSpace(strDtExp))
                 dtExp = DateTime.Today.AddMonths(1).AddDays(-DateTime.Today.Day).AddDays(20); //assume the 20th of the month
             else if (strDtExp.Length == 8)
-                dtExp = DateTime.ParseExact(strDtExp, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+            {
+                if (!Types.DisplayFormats.HistoricalOrReferenceRequests.TryParseInput(strDtExp, out dtExp))
+                    throw new NotImplementedException("BEmu.ReferenceDataRequest.ElementReferenceArrayChainTickers: unable to determine the dtExp (10)");
+            }
             else if (strDtExp.Length == 6)
-                dtExp = DateTime.ParseExact(strDtExp + "20", "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture); //assume the 20th of the month
+            {
+                if (!Types.DisplayFormats.HistoricalOrReferenceRequests.TryParseInput(strDtExp + "20", out dtExp)) //assume the 20th of the month
+                    throw new NotImplementedException("BEmu.ReferenceDataRequest.ElementReferenceArrayChainTickers: unable to determine the dtExp (20)");
+            }
             else if (strDtExp[strDtExp.Length - 1] == 'F')
             {
                 uint numMonths = uint.Parse(strDtExp.Substring(0, strDtExp.Length - 1));

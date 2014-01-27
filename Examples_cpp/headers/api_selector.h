@@ -34,8 +34,8 @@
 
 	#include "blpapi_name.h"
 	#include "blpapi_correlationid.h"
-	#include "blpapi_session.h" //defines EventHandler
-	#include "blpapi_event.h" //defines MessageIterator
+	#include "blpapi_session.h" //also defines EventHandler
+	#include "blpapi_event.h" //also defines MessageIterator
 	#include "blpapi_sessionoptions.h"
 	#include "blpapi_request.h"
 	#include "blpapi_datetime.h"

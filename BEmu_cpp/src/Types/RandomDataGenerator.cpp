@@ -17,7 +17,7 @@
 
 namespace BEmu
 {
-	ObjectType RandomDataGenerator::ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, ReferenceDataRequest::RequestReference * rreq)
+	ObjectType RandomDataGenerator::ReferenceDataFromFieldName(std::string fieldName, std::string security, bool isOption, ReferenceDataRequest::RequestReference * rreq)
 	{
 		std::string upper(fieldName);
 		std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
@@ -35,7 +35,7 @@ namespace BEmu
 				if(rreq->hasElement("overrides"))
 				{
 					Element elmOverrides = rreq->getElement("overrides");
-					for(int i = 0; i < elmOverrides.numValues(); i++)
+					for(size_t i = 0; i < elmOverrides.numValues(); i++)
 					{
 						Element element = elmOverrides.getValueAsElement(i);
 
@@ -105,7 +105,7 @@ namespace BEmu
 		}
 	}
 
-	IntradayBarRequest::BarTickDataType * RandomDataGenerator::GenerateBarData(const Datetime& date)
+	IntradayBarRequest::BarTickDataType * RandomDataGenerator::GenerateBarData(Datetime date)
 	{
         double first = RandomDataGenerator::RandomDouble();
         double second = RandomDataGenerator::RandomDouble();
@@ -123,7 +123,7 @@ namespace BEmu
 		return result;
 	}
 
-	std::map<std::string, ObjectType> RandomDataGenerator::GetMarketDataFields(const std::list<std::string>& arg)
+	std::map<std::string, ObjectType> RandomDataGenerator::GetMarketDataFields(std::vector<std::string> arg)
 	{
 		std::map<std::string, ObjectType> result;
 	
@@ -131,12 +131,12 @@ namespace BEmu
 		//  The response contains the requested fields that changed.
 		while(result.size() == 0)
 		{
-			for(std::list<std::string>::const_iterator ii = arg.begin(); ii != arg.end(); ii++)
+			for(std::vector<std::string>::const_iterator ii = arg.begin(); ii != arg.end(); ii++)
 			{
 				if(RandomDataGenerator::RandomDouble(1, 10) < 3)
 				{
 					std::string str = *ii;
-					ObjectType obj = RandomDataGenerator::MarketDataFromFieldName(&str);
+					ObjectType obj = RandomDataGenerator::MarketDataFromFieldName(str);
 					result[str] = obj;
 				}
 			}
@@ -218,9 +218,9 @@ namespace BEmu
 		return result;
 	}
 
-	ObjectType RandomDataGenerator::MarketDataFromFieldName(std::string* arg)
+	ObjectType RandomDataGenerator::MarketDataFromFieldName(std::string arg)
 	{
-		std::string arg_lower(*arg);
+		std::string arg_lower(arg);
 		for(unsigned int i = 0; i < arg_lower.size(); i++)
 		{
 			arg_lower[i] = std::tolower(arg_lower[i]);
@@ -264,8 +264,10 @@ namespace BEmu
 
 	boost::posix_time::ptime::time_duration_type RandomDataGenerator::TimeBetweenMarketDataEvents()
 	{
-		int milliseconds = RandomDataGenerator::RandomInt(1, 2000) + 100;
-		boost::posix_time::ptime::time_duration_type result(0, 0, 0, milliseconds);
+		int milliseconds = RandomDataGenerator::RandomInt(500, 2000) + 100;
+		boost::posix_time::ptime::time_duration_type result(0,0,0,0);
+		result += boost::posix_time::milliseconds(milliseconds);
+
 		return result;
 	}
 

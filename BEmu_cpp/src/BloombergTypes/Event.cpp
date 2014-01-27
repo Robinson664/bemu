@@ -46,7 +46,7 @@ namespace BEmu
 		return *this;
 	}
 
-	Event::EventType Event::eventType()
+	Event::EventType Event::eventType() const
 	{
 		return this->_ptr->getEventType();
 	}

@@ -10,13 +10,12 @@
 #pragma once
 
 #include "BloombergTypes/Datetime.h"
+#include "BloombergTypes/Name.h"
 #include <exception>
 #include <sstream>
 
 namespace BEmu
 {
-	class Name;
-
 	class ElementPtr
 	{
 		protected:
@@ -25,16 +24,15 @@ namespace BEmu
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const double value) const;
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const Datetime& value) const;
 			
+			static std::string toString(int i);
+
+		public:			
 			static const char * toCharPointer(std::string& arg);
 			static const char * toCharPointer(const std::string& arg);
 			static const char * toCharPointer(std::stringstream& arg);
 			static const char * toCharPointer(int arg);
 			static const char * toCharPointer(double arg);
 			static const char * toCharPointer(const Datetime& arg);
-			
-			static std::string toString(int i);
-
-		public:
 
 			class ElementPtrException: public std::exception
 			{

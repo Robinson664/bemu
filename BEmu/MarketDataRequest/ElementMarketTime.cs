@@ -44,7 +44,7 @@ namespace BEmu.MarketDataRequest
 
         internal override StringBuilder PrettyPrint(int tabIndent)
         {
-            return base.PrettyPrintHelper(tabIndent, this._time.ToString());
+            return base.PrettyPrintHelper(tabIndent, Types.DisplayFormats.MarketDataRequests.FormatDateZone(this._time));
         }
 
         public override object GetValue()

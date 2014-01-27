@@ -62,7 +62,8 @@ public class ElementMarketTime extends ElementParent
     
     protected StringBuilder prettyPrint(int tabIndent)
     {
-    	return super.prettyPrintHelper(tabIndent, this._date.toString());
+    	String strDate = com.bemu.BEmu.types.DisplayFormats.MarketDataRequests_FormatDateZone(this._date);
+    	return super.prettyPrintHelper(tabIndent, strDate);
     }
     
     public Object getValue()

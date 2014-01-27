@@ -100,8 +100,19 @@ namespace BEmu
 
         public Event NextEvent()
         {
-            bool isLastRequest = this._sentRequests.Count == 1;
-            return Event.EventFactory(this._sentRequests.Dequeue(), isLastRequest);
+            if (this._sentRequests.Any())
+            {
+                bool isLastRequest = this._sentRequests.Count == 1;
+                return Event.EventFactory(this._sentRequests.Dequeue(), isLastRequest);
+            }
+            else
+                return null;
+        }
+
+        //The actual API blocks until either another event happens or timeoutMillis passes.  I just ignore the timeoutMillis argument here.
+        public Event NextEvent(long timeoutMillis)
+        {
+            return this.NextEvent();
         }
         #endregion
 

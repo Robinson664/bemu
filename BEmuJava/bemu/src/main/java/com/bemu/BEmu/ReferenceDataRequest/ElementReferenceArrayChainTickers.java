@@ -2,9 +2,6 @@ package com.bemu.BEmu.ReferenceDataRequest;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.types.RandomDataGenerator;
 
@@ -26,19 +23,11 @@ public class ElementReferenceArrayChainTickers extends ElementReferenceArray
 		}
 		else if(strDtExp.length() == 8)
 		{
-			DateFormat df = new SimpleDateFormat ("yyyyMMdd");
-			Date date = df.parse(strDtExp);
-			Calendar c = Calendar.getInstance();
-			c.setTime(date);
-			dtExp = new Datetime(c);
+			dtExp = com.bemu.BEmu.types.DisplayFormats.HistRef_TryParseInput(strDtExp);
 		}
 		else if(strDtExp.length() == 6)
 		{
-			DateFormat df = new SimpleDateFormat ("yyyyMMdd");
-			Date date = df.parse(strDtExp + "20");
-			Calendar c = Calendar.getInstance();
-			c.setTime(date);
-			dtExp = new Datetime(c);
+			dtExp = com.bemu.BEmu.types.DisplayFormats.HistRef_TryParseInput(strDtExp + "20");
 		}
 		else if (strDtExp.endsWith("F"))
 		{
@@ -60,17 +49,7 @@ public class ElementReferenceArrayChainTickers extends ElementReferenceArray
         int strike = RandomDataGenerator.strike();
         for (int count = 0; count < numPoints; count++, strike += 5)
         {
-        	/*
-			DateFormat df = new SimpleDateFormat ("MM/dd/yy");
-        	String optionTicker = String.format("%s US %s %s%s", 
-        			ticker, 
-        			df.format(dtExp.calendar().getTime()), 
-        			optionality.toString().toUpperCase(), 
-        			String.valueOf(strike));
-        			*/
-        	
-        	ElementParent elm = new ElementReferenceArrayChainTickersItem(ticker, dtExp, optionality, strike);
-        	
+        	ElementParent elm = new ElementReferenceArrayChainTickersItem(ticker, dtExp, optionality, strike);        	
         	super._values.add(elm);
         }
 		

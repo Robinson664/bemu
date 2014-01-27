@@ -48,7 +48,7 @@ namespace BEmu.HistoricalDataRequest
 
         internal override StringBuilder PrettyPrint(int tabIndent)
         {
-            return base.PrettyPrintHelper(tabIndent, this._date.ToSystemDateTime().ToString("yyyy-MM-dd"));
+            return base.PrettyPrintHelper(tabIndent, Types.DisplayFormats.HistoricalOrReferenceRequests.FormatDate(this._date));
         }
 
         public override Datetime GetValueAsDate()
@@ -68,7 +68,7 @@ namespace BEmu.HistoricalDataRequest
 
         public override string GetValueAsString()
         {
-            return this._date.ToSystemDateTime().ToString("yyyy-MM-dd");
+            return Types.DisplayFormats.HistoricalOrReferenceRequests.FormatDate(this._date);
         }
         
     }

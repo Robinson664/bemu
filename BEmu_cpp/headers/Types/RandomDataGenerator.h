@@ -42,13 +42,13 @@ namespace BEmu
 			static std::string RandomString();
 			static std::string RandomString(int length);
 			static bool RandomBool();
-			static std::map<std::string, ObjectType> GetMarketDataFields(const std::list<std::string>& arg);
-			static ObjectType MarketDataFromFieldName(std::string* arg);
+			static std::map<std::string, ObjectType> GetMarketDataFields(std::vector<std::string> arg);
+			static ObjectType MarketDataFromFieldName(std::string arg);
 
-			static IntradayBarRequest::BarTickDataType * GenerateBarData(const Datetime& date);
+			static IntradayBarRequest::BarTickDataType * GenerateBarData(Datetime date);
 
 			static int IntradayTickIntervalInMinutes();
 
-			static ObjectType ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, ReferenceDataRequest::RequestReference * rreq);
+			static ObjectType ReferenceDataFromFieldName(std::string fieldName, std::string security, bool isOption, ReferenceDataRequest::RequestReference * rreq);
 	};
 }

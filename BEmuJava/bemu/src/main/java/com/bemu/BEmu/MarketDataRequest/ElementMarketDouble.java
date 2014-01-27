@@ -60,7 +60,7 @@ public class ElementMarketDouble extends ElementParent
     
     protected StringBuilder prettyPrint(int tabIndent)
     {
-    	return super.prettyPrintHelper(tabIndent, String.valueOf(this._value));
+    	return super.prettyPrintHelper(tabIndent, com.bemu.BEmu.types.DisplayFormats.FormatNumberNoSeparators(this._value, 2));
     }
     
     public Object getValue()
