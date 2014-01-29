@@ -63,6 +63,7 @@ namespace BEmu
 			DLL_EXPORT unsigned hours() const;
 			DLL_EXPORT unsigned minutes() const;
 			DLL_EXPORT unsigned seconds() const;
+			DLL_EXPORT unsigned milliseconds() const;
 
 			//These are not exported to the DLL.  The actual Bloomberg API doesn't have these functions.
 			void addYears(int years);
@@ -71,13 +72,12 @@ namespace BEmu
 			void addHours(long hours);
 			void addMinutes(long minutes);
 			void addSeconds(long seconds);
+			boost::posix_time::ptime getInstance() const;
 			
 			static Datetime Today();
 			static Datetime Now();
 			static Datetime FromYYYYMMDD(const std::string& str);
 			static Datetime FromYYMMDD(const std::string& str);
-			std::string ToYYYYMMDD() const;
-			std::string ToMMddYY() const;
 
 			friend DLL_EXPORT bool operator<(const Datetime& lhs, const Datetime& rhs);
 			friend DLL_EXPORT bool operator<=(const Datetime& lhs, const Datetime& rhs);

@@ -9,6 +9,7 @@
 
 #include "HistoricalDataRequest/RequestHistoricElementDate.h"
 #include "BloombergTypes/Datetime.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -18,7 +19,8 @@ namespace BEmu
 		{
 		}
 
-		RequestHistoricElementDate::RequestHistoricElementDate(const std::string& elementName, const Datetime& datetime) : RequestHistoricElementString(elementName, datetime.ToYYYYMMDD())
+		RequestHistoricElementDate::RequestHistoricElementDate(const std::string& elementName, const Datetime& datetime) 
+			: RequestHistoricElementString(elementName, DisplayFormats::ToYYYYMMDDWithDashes(datetime))
 		{
 			this->_instance = datetime;
 		}

@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------------------------
 
 #include "BloombergTypes/Datetime.h"
+#include "Types/DisplayFormats.h"
 #include <boost/date_time/posix_time/posix_time_io.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/date_time/date_duration.hpp>
@@ -101,56 +102,16 @@ namespace BEmu
 
 	Datetime Datetime::FromYYYYMMDD(const std::string& str)
 	{
-		if(str.length() < 8)
+		Datetime result;
+
+		if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(str, result))
 		{
-			Datetime dt(2000, 1, 1);
-			throw dt.datetimeEx; //I don't know how to throw a static exception, so I simply declare an instance
+			return result;
 		}
-
-		std::string strYear = str.substr(0, 4);
-		std::string strMonth = str.substr(4, 2);
-		std::string strDay = str.substr(6, 2);
-
-		int year = atoi(strYear.c_str());
-		int month = atoi(strMonth.c_str());
-		int day = atoi(strDay.c_str());
-
-		//Datetime result = new	Datetime(year, month, day);
-		Datetime result(year, month, day);
-		return result;
-	}
-
-	std::string Datetime::ToMMddYY() const
-	{
-		std::stringstream ss;
-		
-		if(this->month() < 10)
-			ss << '0';
-		ss << this->month() << '/';
-
-		if(this->day() < 10)
-			ss << '0';
-		ss << this->day() << '/';
-
-		ss << this->year() - 2000;
-		
-		return ss.str();
-	}
-
-	std::string Datetime::ToYYYYMMDD() const
-	{
-		std::stringstream ss;
-		ss << this->year() << '-';
-
-		if(this->month() < 10)
-			ss << '0';
-		ss << this->month() << '-';
-
-		if(this->day() < 10)
-			ss << '0';
-		ss << this->day();
-
-		return ss.str();
+		else
+		{
+			throw result.datetimeEx; //I don't know how to throw a static exception, so I simply declare an instance
+		}
 	}
 
 	Datetime::WeekDayEnum Datetime::getWeekDay() const
@@ -176,7 +137,6 @@ namespace BEmu
 			this->_dateTimeType = Datetime::both; //if the user is adjusting days, assume that the dateTime is both date and time
 
 		this->_instance += boost::gregorian::date_duration(days);
-		//(*this->_instance) += boost::gregorian::date_duration(days);
 	}
 
 	void Datetime::addHours(long hours)
@@ -185,7 +145,6 @@ namespace BEmu
 			this->_dateTimeType = Datetime::both; //if the user is adjusting hours, assume that the dateTime is both date and time
 
 		this->_instance += boost::posix_time::hours(hours);
-		//(*this->_instance) += boost::posix_time::hours(hours);
 	}
 
 	void Datetime::addMinutes(long minutes)
@@ -194,7 +153,6 @@ namespace BEmu
 			this->_dateTimeType = Datetime::both; //if the user is adjusting minutes, assume that the dateTime is both date and time
 
 		this->_instance += boost::posix_time::minutes(minutes);
-		//(*this->_instance) += boost::posix_time::minutes(minutes);
 	}
 
 	void Datetime::addSeconds(long seconds)
@@ -203,7 +161,11 @@ namespace BEmu
 			this->_dateTimeType = Datetime::both; //if the user is adjusting seconds, assume that the dateTime is both date and time
 
 		this->_instance += boost::posix_time::seconds(seconds);
-		//(*this->_instance) += boost::posix_time::seconds(seconds);
+	}
+
+	boost::posix_time::ptime Datetime::getInstance() const
+	{
+		return this->_instance;
 	}
 
 	unsigned Datetime::year() const
@@ -236,30 +198,26 @@ namespace BEmu
 		return this->_instance.time_of_day().seconds();
 	}
 
+	unsigned Datetime::milliseconds() const
+	{
+		return (unsigned)this->_instance.time_of_day().total_milliseconds();
+	}
+
 	std::ostream& operator<<(std::ostream& os, const Datetime& datetime)
 	{
-		//std::locale takes ownership of this "facet" pointer, so I don't have to delete it
-		boost::posix_time::time_facet *facet;
-
 		if(datetime._dateTimeType == BEmu::Datetime::date)
 		{
-			facet = new boost::posix_time::time_facet("%Y-%m-%d");
-			os.imbue(std::locale(os.getloc(), facet));
-			os << datetime._instance;
+			os << DisplayFormats::FormatDate(datetime);
 		}
 
 		else if(datetime._dateTimeType == BEmu::Datetime::time)
 		{
-			facet = new boost::posix_time::time_facet("%H:%M:%S");
-			os.imbue(std::locale(os.getloc(), facet));
-			os << datetime._instance;
+			os << DisplayFormats::FormatTimeZone(datetime);
 		}
 
 		else if(datetime._dateTimeType == BEmu::Datetime::both)
 		{
-			facet = new boost::posix_time::time_facet("%Y-%m-%dT%H:%M:%S");
-			os.imbue(std::locale(os.getloc(), facet));
-			os << datetime._instance;
+			os << DisplayFormats::FormatDatetimeZone(datetime);
 		}
 
 		return os;

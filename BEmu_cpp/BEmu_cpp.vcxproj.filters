@@ -435,6 +435,9 @@
     <ClInclude Include="headers\BloombergTypes\SessionTimerFunction.h">
       <Filter>Header Files\BloombergTypes</Filter>
     </ClInclude>
+    <ClInclude Include="headers\Types\DisplayFormats.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp">
@@ -805,6 +808,9 @@
     </ClCompile>
     <ClCompile Include="src\BloombergTypes\SessionTimerFunction.cpp">
       <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\DisplayFormats.cpp">
+      <Filter>Source Files\Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

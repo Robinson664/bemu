@@ -218,6 +218,7 @@
     <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementStringArray.h" />
     <ClInclude Include="headers\Types\BEmuTimer.h" />
     <ClInclude Include="headers\Types\BEmuTimerFunction.h" />
+    <ClInclude Include="headers\Types\DisplayFormats.h" />
     <ClInclude Include="headers\Types\IndentType.h" />
     <ClInclude Include="headers\Types\ObjectType.h" />
     <ClInclude Include="headers\Types\RandomDataGenerator.h" />
@@ -343,6 +344,7 @@
     <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementString.cpp" />
     <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementStringArray.cpp" />
     <ClCompile Include="src\Types\BEmuTimer.cpp" />
+    <ClCompile Include="src\Types\DisplayFormats.cpp" />
     <ClCompile Include="src\Types\IndentType.cpp" />
     <ClCompile Include="src\Types\ObjectType.cpp" />
     <ClCompile Include="src\Types\RandomDataGenerator.cpp" />

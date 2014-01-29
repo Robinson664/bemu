@@ -10,6 +10,7 @@
 #include "IntradayBarRequest/ElementIntradayBarDateTime.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -68,7 +69,8 @@ namespace BEmu
 
 		std::ostream& ElementIntradayBarDateTime::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
+			std::string strvalue(DisplayFormats::IntradayRequests_FormatDatetime(this->_value));
+			this->prettyPrintHelper(stream, level, spacesPerLevel, strvalue);
 			return stream;
 		}
 

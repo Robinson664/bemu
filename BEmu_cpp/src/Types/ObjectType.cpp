@@ -12,6 +12,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include "ReferenceDataRequest/ElementReferenceArrayChainTickers.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -178,7 +179,7 @@ namespace BEmu
 				return this->_bool ? "true" : "false";
 
 			case ObjectType::eDatetime:
-				return this->_datetime.ToMMddYY();
+				return DisplayFormats::ToMMddYYWithSlashes(this->_datetime);
 
 			case ObjectType::eDouble:
 			{

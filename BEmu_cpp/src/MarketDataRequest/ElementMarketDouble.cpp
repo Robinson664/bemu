@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 
 #include "MarketDataRequest/ElementMarketDouble.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -59,7 +60,8 @@ namespace BEmu
 
 		std::ostream& ElementMarketDouble::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
+			std::string strValue(DisplayFormats::FormatNumberNoSeparators(this->_value, 2));
+			this->prettyPrintHelper(stream, level, spacesPerLevel, strValue);
 			return stream;
 		}
 

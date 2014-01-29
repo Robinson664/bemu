@@ -8,6 +8,7 @@
 //------------------------------------------------------------------------------
 
 #include "MarketDataRequest/ElementMarketDatetime.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -49,7 +50,8 @@ namespace BEmu
 
 		std::ostream& ElementMarketDatetime::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_datetime);
+			std::string strDateTime(DisplayFormats::MarketDataRequests_FormatDateZone(this->_datetime));
+			this->prettyPrintHelper(stream, level, spacesPerLevel, strDateTime);
 			return stream;
 		}
 		

@@ -11,6 +11,7 @@
 #include "ReferenceDataRequest/ElementReferenceArrayChainTickersItem.h"
 #include <vector>
 #include "Types/RandomDataGenerator.h"
+#include "Types/DisplayFormats.h"
 #include "BloombergTypes/Datetime.h"
 
 namespace BEmu
@@ -33,11 +34,16 @@ namespace BEmu
 			}
 			else if(strDtExp.length() == 8)
 			{
-				dtExp = Datetime::FromYYYYMMDD(strDtExp);
+				if(!DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(strDtExp, dtExp))
+					throw elementPtrEx;
 			}
 			else if(strDtExp.length() == 6)
 			{
-				dtExp = Datetime::FromYYMMDD(strDtExp);
+				stringstream ssDtExp;
+				ssDtExp << strDtExp << "20";
+
+				if(!DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(ssDtExp.str(), dtExp))
+					throw elementPtrEx;
 			}
 			else if (strDtExp[strDtExp.length() - 1] == 'F')
 			{

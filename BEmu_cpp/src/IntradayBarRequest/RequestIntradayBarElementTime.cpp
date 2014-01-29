@@ -11,6 +11,7 @@
 #include "BloombergTypes/Datetime.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "IntradayBarRequest/RequestIntradayBarElementTime.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -23,7 +24,7 @@ namespace BEmu
 		
 		RequestIntradayBarElementTime::RequestIntradayBarElementTime(const std::string& elementName, const Datetime& dtvalue) : RequestIntradayBarElementString(elementName, "")
 		{
-			this->_value = dtvalue.ToYYYYMMDD();
+			this->_value = DisplayFormats::ToYYYYMMDDWithDashes(dtvalue);
 			this->_dtvalue = dtvalue;
 		}
 

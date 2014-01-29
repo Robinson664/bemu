@@ -9,6 +9,7 @@
 
 #include "HistoricalDataRequest/ElementHistoricDateTime.h"
 #include "BloombergTypes/Name.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -35,12 +36,13 @@ namespace BEmu
 
 		const char * ElementHistoricDateTime::getValueAsString(int index) const
 		{
-			return this->_value.ToYYYYMMDD().c_str();
+			return DisplayFormats::HistoricalOrReferenceRequests_FormatDate(this->_value).c_str();
 		}
 
 		std::ostream& ElementHistoricDateTime::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			ElementPtr::prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
+			std::string strValue(DisplayFormats::HistoricalOrReferenceRequests_FormatDate(this->_value));
+			ElementPtr::prettyPrintHelper(stream, level, spacesPerLevel, strValue);
 			return stream;
 		}
 

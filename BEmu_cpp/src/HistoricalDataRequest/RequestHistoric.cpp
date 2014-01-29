@@ -14,6 +14,7 @@
 #include "HistoricalDataRequest/RequestHistoricElementBool.h"
 #include "HistoricalDataRequest/RequestHistoricElementString.h"
 #include "BloombergTypes/Datetime.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -211,13 +212,20 @@ namespace BEmu
 		{
 			if(strncmp(name, "startDate", 10) == 0)
 			{
-				Datetime dt = Datetime::FromYYYYMMDD(value);
-				this->_dtStart = new RequestHistoricElementDate("startDate", dt);
+				Datetime dt;
+				if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(value, dt))
+					this->_dtStart = new RequestHistoricElementDate("startDate", dt);
+				else
+					throw requestEx;
 			}
 			else if(strncmp(name, "endDate", 8) == 0)
 			{
-				Datetime dt = Datetime::FromYYYYMMDD(value);
-				this->_dtEnd = new RequestHistoricElementDate("endDate", dt);
+				Datetime dt;
+				if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(value, dt))
+					this->_dtEnd = new RequestHistoricElementDate("endDate", dt);
+				else
+					throw requestEx;
+				
 			}
 			else if(strncmp(name, "periodicityAdjustment", 22) == 0)
 			{

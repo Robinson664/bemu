@@ -11,6 +11,7 @@
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/Datetime.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -28,7 +29,8 @@ namespace BEmu
 
 		std::ostream& ElementIntradayTickDateTime::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
+			std::string strValue(DisplayFormats::IntradayRequests_FormatDatetime(this->_value));
+			this->prettyPrintHelper(stream, level, spacesPerLevel, strValue);
 			return stream;
 		}
 

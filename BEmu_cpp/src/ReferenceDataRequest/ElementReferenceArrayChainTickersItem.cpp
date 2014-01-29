@@ -11,6 +11,7 @@
 #include "ReferenceDataRequest/ElementReferenceString.h"
 #include "BloombergTypes/Name.h"
 #include "Types/IndentType.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -20,7 +21,7 @@ namespace BEmu
 		{
 			std::stringstream ss;
 			ss << ticker << " US ";
-			ss << dtExp.ToMMddYY() << ' ';
+			ss << DisplayFormats::ToMMddYYWithSlashes(dtExp) << ' ';
 
 			char cp = (optionality == ReferenceDataRequest::OptionalityEnum::call) ? 'C' : 'P';
 			ss << cp;
