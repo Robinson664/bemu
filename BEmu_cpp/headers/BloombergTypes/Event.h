@@ -22,7 +22,8 @@ namespace BEmu
 	class Datetime;
 	class RequestPtr;
 	class Message;
-
+	
+	//See my explanation of the RequetPtr class for an explanation of this class
 	class Event
 	{
 		private:

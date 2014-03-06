@@ -97,7 +97,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="headers\bemu_headers.h" />
+    <ClInclude Include="headers\BloombergTypes\Constant.h" />
+    <ClInclude Include="headers\BloombergTypes\ConstantList.h" />
     <ClInclude Include="headers\BloombergTypes\CorrelationId.h" />
+    <ClInclude Include="headers\BloombergTypes\Datatypes.h" />
     <ClInclude Include="headers\BloombergTypes\Datetime.h" />
     <ClInclude Include="headers\BloombergTypes\Element.h" />
     <ClInclude Include="headers\BloombergTypes\ElementPtr.h" />
@@ -110,6 +113,9 @@
     <ClInclude Include="headers\BloombergTypes\Name.h" />
     <ClInclude Include="headers\BloombergTypes\Request.h" />
     <ClInclude Include="headers\BloombergTypes\RequestPtr.h" />
+    <ClInclude Include="headers\BloombergTypes\SchemaElementDefinition.h" />
+    <ClInclude Include="headers\BloombergTypes\SchemaStatus.h" />
+    <ClInclude Include="headers\BloombergTypes\SchemaTypeDefinition.h" />
     <ClInclude Include="headers\BloombergTypes\Service.h" />
     <ClInclude Include="headers\BloombergTypes\ServiceRefData.h" />
     <ClInclude Include="headers\BloombergTypes\Session.h" />
@@ -117,6 +123,15 @@
     <ClInclude Include="headers\BloombergTypes\SessionTimerFunction.h" />
     <ClInclude Include="headers\BloombergTypes\Subscription.h" />
     <ClInclude Include="headers\BloombergTypes\SubscriptionList.h" />
+    <ClInclude Include="headers\Exceptions\DuplicateCorrelationIdException.h" />
+    <ClInclude Include="headers\Exceptions\Exception.h" />
+    <ClInclude Include="headers\Exceptions\FieldNotFoundException.h" />
+    <ClInclude Include="headers\Exceptions\IndexOutOfRangeException.h" />
+    <ClInclude Include="headers\Exceptions\InvalidArgumentException.h" />
+    <ClInclude Include="headers\Exceptions\InvalidConversionException.h" />
+    <ClInclude Include="headers\Exceptions\InvalidStateException.h" />
+    <ClInclude Include="headers\Exceptions\UnknownErrorException.h" />
+    <ClInclude Include="headers\Exceptions\UnsupportedOperationException.h" />
     <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricDateTime.h" />
     <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricDouble.h" />
     <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricErrorInfo.h" />
@@ -225,6 +240,8 @@
     <ClInclude Include="headers\Types\Rules.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\BloombergTypes\Constant.cpp" />
+    <ClCompile Include="src\BloombergTypes\ConstantList.cpp" />
     <ClCompile Include="src\BloombergTypes\CorrelationId.cpp" />
     <ClCompile Include="src\BloombergTypes\Datetime.cpp" />
     <ClCompile Include="src\BloombergTypes\Element.cpp" />
@@ -237,6 +254,8 @@
     <ClCompile Include="src\BloombergTypes\Name.cpp" />
     <ClCompile Include="src\BloombergTypes\Request.cpp" />
     <ClCompile Include="src\BloombergTypes\RequestPtr.cpp" />
+    <ClCompile Include="src\BloombergTypes\SchemaElementDefinition.cpp" />
+    <ClCompile Include="src\BloombergTypes\SchemaTypeDefinition.cpp" />
     <ClCompile Include="src\BloombergTypes\Service.cpp" />
     <ClCompile Include="src\BloombergTypes\ServiceRefData.cpp" />
     <ClCompile Include="src\BloombergTypes\Session.cpp" />

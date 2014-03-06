@@ -19,10 +19,40 @@ namespace BEmu
 {	
 	class Datetime
 	{
+		public:
+			struct DatetimeParts {
+				// Bit flags and masks used to determine which parts of a Datetime are valid.
+
+				enum Value {
+					// Enumeration used to indicate which parts of the 'Datetime' object
+					// have had their values set.  The actual enumeration constants are
+					// thus *not* consecutive -- they are bit fields that can be combined
+					// using bitwise operators.  Note that the constants themselves are
+					// defined in 'blpapi_defs.h'.
+
+					  YEAR            = 0x1            // year is set
+					, MONTH           = 0x2           // month is set
+					, DAY             = 0x4             // day is set
+					, OFFSET          = 0x8          // offset is set
+					, HOURS           = 0x10           // hours is set
+					, MINUTES         = 0x20         // minutes is set
+					, SECONDS         = 0x40         // seconds is set
+					, FRACSECONDS     = 0x80     // fraction-of-second (both millisecond and picosecond) is set
+					, MILLISECONDS    = 0x80    // 'MILLISECONDS' is a (legacy) synonym for 'FRACSECONDS'
+					, DATE            = 0x7 // year, month, and day are set
+					, TIME            = 0x70            // hours, minutes, and seconds are set
+					, TIMEFRACSECONDS = 0xF0 // hours, minutes, seconds, and fraction-of-second are set
+					, TIMEMILLI       = 0xF0       // 'TIMEMILLI' is a (legacy) synonym for 'TIMEFRACSECONDS'
+				};
+			};
+
 		private:
 			boost::posix_time::ptime _instance;
-			enum DateTimeTypeEnum { neither = 0, date = 1, time = 2, both = 3 };
+			enum DateTimeTypeEnum { neither = 0, date = DatetimeParts::DATE, time = DatetimeParts::TIME, both = DatetimeParts::DATE | DatetimeParts::TIME };
 			DateTimeTypeEnum _dateTimeType;
+
+			unsigned _parts;
+			void setDateTimeType(DateTimeTypeEnum dateTimeType);
 
 		public:
 			enum WeekDayEnum
@@ -57,6 +87,10 @@ namespace BEmu
 
 			DLL_EXPORT ~Datetime();
 		
+			DLL_EXPORT unsigned parts() const;
+			DLL_EXPORT bool hasParts(unsigned parts) const;
+			DLL_EXPORT bool isValid() const; //Always true since the boost ptime type does not support invalid datetimes.
+
 			DLL_EXPORT unsigned year() const;
 			DLL_EXPORT unsigned month() const;
 			DLL_EXPORT unsigned day() const;
@@ -74,10 +108,16 @@ namespace BEmu
 			void addSeconds(long seconds);
 			boost::posix_time::ptime getInstance() const;
 			
+			//These are not exported to the DLL.  The actual Bloomberg API doesn't have these functions.
 			static Datetime Today();
 			static Datetime Now();
 			static Datetime FromYYYYMMDD(const std::string& str);
 			static Datetime FromYYMMDD(const std::string& str);
+
+			DLL_EXPORT static bool isLeapYear(int year);
+			DLL_EXPORT static bool isValidDate(int year, int month, int day);
+			DLL_EXPORT static bool isValidTime(int hours, int minutes, int seconds);
+			DLL_EXPORT static bool isValidTime(int hours, int minutes, int seconds, int milliSeconds);
 
 			friend DLL_EXPORT bool operator<(const Datetime& lhs, const Datetime& rhs);
 			friend DLL_EXPORT bool operator<=(const Datetime& lhs, const Datetime& rhs);

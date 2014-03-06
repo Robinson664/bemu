@@ -39,6 +39,7 @@ namespace BEmu
 				virtual Name name() const;
 				virtual size_t numValues() const;
 				virtual size_t numElements() const;
+				virtual SchemaElementDefinition elementDefinition() const;
 		
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;

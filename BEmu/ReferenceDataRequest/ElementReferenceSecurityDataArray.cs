@@ -38,6 +38,7 @@ namespace BEmu.ReferenceDataRequest
         public override int NumValues { get { return this._securities.Count; } }
         public override Name Name { get { return new Name("securityData"); } }
         public override IEnumerable<Element> Elements { get { return this._securities; } }
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("ReferenceSecurityData")); } }
 
         public override bool HasElement(string name, bool excludeNullElements = false)
         {

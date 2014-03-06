@@ -198,10 +198,10 @@ namespace BEmu
 		void RequestHistoric::append(const char* name, const char* value)
 		{
 			if(strncmp(name, "securities", 11) == 0)
-				this->_securities->addValue(value);
+				this->_securities->appendValue(value);
 
 			else if(strncmp(name, "fields", 7) == 0)
-				this->_fields->addValue(value);
+				this->_fields->appendValue(value);
 
 			else
 				throw requestEx;

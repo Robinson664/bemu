@@ -29,6 +29,7 @@ namespace BEmu.IntradayBarRequest
         public override bool IsComplexType { get { return true; } }
         public override bool IsArray { get { return false; } }
         public override bool IsNull { get { return false; } }
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("BarData")); } }
 
         public override IEnumerable<Element> Elements { get { yield return this._array; } }
 

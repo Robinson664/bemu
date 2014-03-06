@@ -25,20 +25,6 @@ namespace BEmu
 	SubscriptionList::SubscriptionList(const SubscriptionList& original)
 	{
 		this->_subs = new std::vector<Subscription>(original._subs->begin(), original._subs->end());
-
-		//std::vector<Subscription> * subs = original._subs;
-		//for(std::vector<Subscription>::const_iterator iter = subs->begin(); iter != subs->end(); ++iter)
-		//{
-		//}
-	}
-
-	SubscriptionList& SubscriptionList::operator=(const SubscriptionList& rhs)
-	{
-		if(this != &rhs)
-		{
-			this->_subs = new std::vector<Subscription>(*(rhs._subs));
-		}
-		return *this;
 	}
 
 	int SubscriptionList::add(const char* topic, const char* fields, const char* options, const CorrelationId& correlationId)
@@ -48,9 +34,64 @@ namespace BEmu
 		return 1; //I'm not sure what the add function returns
 	}
 
+	int SubscriptionList::add(const char* topic, const std::vector<std::string>& fields, const std::vector<std::string>& options, const CorrelationId& correlationId)
+	{
+		Subscription sub(topic, fields, options, correlationId);
+		this->_subs->push_back(sub);
+		return 1; //I'm not sure what the add function returns
+	}
+
+	int SubscriptionList::append(const SubscriptionList& other)
+	{
+		for(size_t i = 0; i < other._subs->size(); i++)
+		{
+			this->_subs->push_back(other._subs->operator[](i));
+		}
+		return 1; //I'm not sure what the append function returns
+	}
+
+	SubscriptionList& SubscriptionList::operator=(const SubscriptionList& rhs)
+	{
+		if (this != &rhs)
+		{
+			this->_subs->clear();
+			this->append(rhs);
+		}
+		return *this;
+	}
+
+	size_t SubscriptionList::size() const
+	{
+		return this->_subs->size();
+	}
+
+	void SubscriptionList::clear()
+	{
+		this->_subs->clear();
+	}
+
 	void SubscriptionList::add(Subscription sub)
 	{
 		this->_subs->push_back(sub);
+	}
+
+	void SubscriptionList::remove(CorrelationId corr)
+	{
+		//Will replace the existing sub list with this new one
+		//There's probably a better way to do this, but I don't know it
+		std::vector<Subscription> * replacement = new std::vector<Subscription>();
+		
+		while(this->_subs->size() > 0)
+		{
+			Subscription sub = this->_subs->back();
+			this->_subs->pop_back();
+
+			if(sub.correlationId() != corr)
+				replacement->push_back(sub);
+		}
+
+		delete this->_subs;
+		this->_subs = replacement;
 	}
 
 	std::vector<Subscription> * SubscriptionList::list() const

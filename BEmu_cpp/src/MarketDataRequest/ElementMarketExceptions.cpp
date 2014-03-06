@@ -38,6 +38,13 @@ namespace BEmu
 			return 2;
 		}
 
+		SchemaElementDefinition ElementMarketExceptions::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("SubscriptionException"));
+			return result;
+		}
+
 		bool ElementMarketExceptions::isNull() const
 		{
 			return false;

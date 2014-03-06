@@ -22,7 +22,6 @@ namespace BEmu
 	class RequestPtr;
 	class MessagePtr;
 
-	//See my explanation of the RequetPtr class for an explanation of this class
 	class EventPtr
 	{
 		protected:
@@ -37,8 +36,8 @@ namespace BEmu
 			Event::EventType getEventType() const;
 			void setEventType(Event::EventType evtType);
 
-			virtual std::vector<MessagePtr*> *getMessages() const;
-			static EventPtr* EventFactory(RequestPtr *request, bool isLastRequest);
+			virtual std::vector<MessagePtr*> * getMessages() const;
+			static EventPtr * EventFactory(RequestPtr *request, bool isLastRequest);
 
 			class EventPtrException: public std::exception
 			{

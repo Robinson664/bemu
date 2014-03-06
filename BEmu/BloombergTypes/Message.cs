@@ -92,41 +92,49 @@ namespace BEmu
 
         public abstract IEnumerable<Element> Elements { get; }
 
+        public double GetElementAsFloat64(Name name) { return this.GetElementAsFloat64(name.ToString()); }
         public double GetElementAsFloat64(string name)
         {
             return this[name].GetValueAsFloat64();
         }
 
+        public float GetElementAsFloat32(Name name) { return this.GetElementAsFloat32(name.ToString()); }
         public float GetElementAsFloat32(string name)
         {
             return this[name].GetValueAsFloat32();
         }
 
+        public long GetElementAsInt64(Name name) { return this.GetElementAsInt64(name.ToString()); }
         public long GetElementAsInt64(string name)
         {
             return this[name].GetValueAsInt64();
         }
 
+        public int GetElementAsInt32(Name name) { return this.GetElementAsInt32(name.ToString()); }
         public int GetElementAsInt32(string name)
         {
             return this[name].GetValueAsInt32();
         }
 
+        public string GetElementAsString(Name name) { return this.GetElementAsString(name.ToString()); }
         public string GetElementAsString(string name)
         {
             return this[name].GetValueAsString();
         }
 
+        public Datetime GetElementAsDatetime(Name name) { return this.GetElementAsDatetime(name.ToString()); }
         public Datetime GetElementAsDatetime(string name)
         {
             return this[name].GetValueAsDatetime();
         }
 
+        public Datetime GetElementAsTime(Name name) { return this.GetElementAsTime(name.ToString()); }
         public Datetime GetElementAsTime(string name)
         {
             return this[name].GetValueAsTime();
         }
 
+        public Datetime GetElementAsDate(Name name) { return this.GetElementAsDate(name.ToString()); }
         public Datetime GetElementAsDate(string name)
         {
             return this[name].GetValueAsDate();

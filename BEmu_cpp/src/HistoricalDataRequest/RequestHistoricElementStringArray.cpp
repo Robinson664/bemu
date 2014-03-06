@@ -56,16 +56,15 @@ namespace BEmu
 		{
 			return false;
 		}
-
-
-		void RequestHistoricElementStringArray::addValue(const std::string& value)
-		{
-			this->_values.push_back(value);
-		}
-
+		
 		std::vector<std::string> RequestHistoricElementStringArray::values() const
 		{
 			return this->_values;
+		}
+
+		void RequestHistoricElementStringArray::appendValue(const char* value)
+		{
+			this->_values.push_back(value);
 		}
 
 

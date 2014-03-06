@@ -68,6 +68,13 @@ namespace BEmu
 		bool ElementReferenceSecurityError::isArray() const { return false; }
 		bool ElementReferenceSecurityError::isComplexType() const { return true; }
 
+		SchemaElementDefinition ElementReferenceSecurityError::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
+			return result;
+		}
+
 		const char* ElementReferenceSecurityError::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);

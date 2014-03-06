@@ -98,6 +98,12 @@ namespace BEmu
             return correlationId;
         }
 
+        public CorrelationID SendRequest(Request request, EventQueue eventQueue, CorrelationID correlationId)
+        {
+            eventQueue.Session = this;
+            return this.SendRequest(request, correlationId);
+        }
+
         public Event NextEvent()
         {
             if (this._sentRequests.Any())
@@ -144,7 +150,8 @@ namespace BEmu
 
         public void Stop()
         {
-            this._marketSimulatorTimer.Change(Timeout.Infinite, Timeout.Infinite);
+            if (this._marketSimulatorTimer != null)
+                this._marketSimulatorTimer.Change(Timeout.Infinite, Timeout.Infinite);
         }
 
         public void Dispose()
@@ -205,14 +212,24 @@ namespace BEmu
             }
         }
 
+        [Obsolete("Deprecated as of 3.2.2 and use Cancel(CorrelationID) instead")]
+        public void Unsubscribe(CorrelationID correlationId)
+        {
+            this.Cancel(correlationId);
+        }
+
+        public void Unsubscribe(IList<Subscription> subscriptionList)
+        {
+            this.Cancel(subscriptionList.Select(s => s.CorrelationID).ToList());
+        }
+
         private void MarketSimulatorTimerStep(object arg)
         {
             int? conflationIntervalInMilleseconds = null;
 
+            List<Subscription> subsToUse = new List<Subscription>();
             lock (this._syncroot) //protect _subscriptions
             {
-                List<Subscription> subsToUse = new List<Subscription>();                
-
                 foreach (var item in this._subscriptions)
                 {
                     if (Types.RandomDataGenerator.ShouldIncludeQuote()) //70% chance that I'll send a new quote for the current subscription (after the first response which contains all tickers)
@@ -221,7 +238,10 @@ namespace BEmu
                     if (item.ConflationInterval.HasValue)
                         conflationIntervalInMilleseconds = item.ConflationInterval.Value * 1000;
                 }
+            }
 
+            if (subsToUse.Count > 0)
+            {
                 MarketDataRequest.EventMarket evt = new MarketDataRequest.EventMarket(Event.EventType.SUBSCRIPTION_DATA, null, subsToUse);
 
                 if (this._asyncHandler != null)

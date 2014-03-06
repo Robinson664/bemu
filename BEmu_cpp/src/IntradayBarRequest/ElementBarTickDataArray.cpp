@@ -54,6 +54,13 @@ namespace BEmu
 			return 0;
 		}
 
+		SchemaElementDefinition ElementBarTickDataArray::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("IntradayBarTickData"));
+			return result;
+		}
+
 		bool ElementBarTickDataArray::isArray() const
 		{
 			return true;

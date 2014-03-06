@@ -41,6 +41,13 @@ namespace BEmu
 		bool ElementReferenceFieldExceptions::isArray() const { return false; }
 		bool ElementReferenceFieldExceptions::isComplexType() const { return true; }
 
+		SchemaElementDefinition ElementReferenceFieldExceptions::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("FieldException"));
+			return result;
+		}
+
 		const char* ElementReferenceFieldExceptions::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);

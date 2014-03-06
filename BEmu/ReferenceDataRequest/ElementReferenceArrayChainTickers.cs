@@ -18,6 +18,8 @@ namespace BEmu.ReferenceDataRequest
     {
         internal enum OptionalityEnum { put = 'P', call = 'C' }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("CHAIN_TICKERS")); } }
+
         internal ElementReferenceArrayChainTickers(string underlier, uint numPoints, string strDtExp, OptionalityEnum optionality) : base("CHAIN_TICKERS", new List<Element>())
         {
             //assume that the underlier takes the form "ABC US EQUITY"

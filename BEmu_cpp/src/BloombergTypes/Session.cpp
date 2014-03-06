@@ -73,12 +73,46 @@ namespace BEmu
 			this->_subs.add(sub);
 		}
 
-		MarketDataRequest::EventMarket * evtSubStatus = new MarketDataRequest::EventMarket(Event::SUBSCRIPTION_STATUS, 0, subscriptionList);
+		MarketDataRequest::EventMarket * evtSubStatus = new MarketDataRequest::EventMarket(Event::SUBSCRIPTION_STATUS, CorrelationId(), subscriptionList);
 
 		if (this->_asyncHandler != 0)
         {
 			this->_asyncHandler->processEvent(evtSubStatus, this);
         }
+	}
+
+	void Session::unsubscribe(const SubscriptionList& subscriptionList)
+	{
+		std::vector<Subscription> subs(*subscriptionList.list());
+		for(std::vector<Subscription>::const_iterator iter = subs.begin(); iter != subs.end(); ++iter)
+		{
+			Subscription subCurrent = *iter;
+			CorrelationId corr = subCurrent.correlationId();
+			this->cancel(corr);
+		}
+	}
+
+	void Session::cancel(const CorrelationId& correlationId)
+	{
+		this->_subs.remove(correlationId);
+	}
+
+	void Session::cancel(const std::vector<CorrelationId>& correlationIds)
+	{
+		for(std::vector<CorrelationId>::const_iterator iter = correlationIds.begin(); iter != correlationIds.end(); ++iter)
+		{
+			CorrelationId corr = *iter;
+			this->cancel(corr);
+		}
+	}
+
+	void Session::cancel(const CorrelationId* correlationIds, size_t numCorrelationIds)
+	{
+		for(size_t i = 0; i < numCorrelationIds; i++)
+		{
+			CorrelationId corr = correlationIds[i];
+			this->cancel(corr);
+		}
 	}
 
 	CorrelationId Session::openServiceAsync(const char* uri, const CorrelationId& correlationId)

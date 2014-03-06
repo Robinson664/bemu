@@ -54,7 +54,13 @@ namespace BEmu
             }
         }
 
+
         public abstract IEnumerable<Message> GetMessages();
+
+        public IEnumerator<Message> GetEnumerator()
+        {
+            return this.GetMessages().GetEnumerator();
+        }
 
         public enum EventType
         {

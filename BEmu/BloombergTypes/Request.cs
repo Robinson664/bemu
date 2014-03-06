@@ -16,7 +16,16 @@ namespace BEmu
 
     public abstract class Request
     {
+        protected Request()
+        {
+            this._operation = new Operation();
+        }
+
         internal CorrelationID correlationId { get; set; }
+        public Element AsElement { get { throw new NotImplementedException(); } }
+
+        private readonly Operation _operation;
+        public Operation Operation { get { return this._operation; } }
 
         public virtual void Append(string name, string elementValue)
         {

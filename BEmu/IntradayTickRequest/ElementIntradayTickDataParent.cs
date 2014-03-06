@@ -23,6 +23,7 @@ namespace BEmu.IntradayTickRequest
             this._array = new ElementIntradayTickDataArray(ticks, includeConditionCodes);
         }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("TickData")); } }
         public override Name Name { get { return new Name("tickData"); } }
         public override int NumValues { get { return 1; } }
         public override int NumElements { get { return 1; } }

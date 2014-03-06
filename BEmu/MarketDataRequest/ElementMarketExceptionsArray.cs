@@ -30,6 +30,7 @@ namespace BEmu.MarketDataRequest
         public override Element GetValueAsElement(int index) { return (Element)this._exceptions[index]; }
         public override object this[int index] { get { return this._exceptions[index]; } }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("SubscriptionException")); } }
         public override Name Name { get { return new Name("exceptions"); } }
         public override int NumElements { get { return 0; } }
         public override int NumValues { get { return this._exceptions.Count; } }

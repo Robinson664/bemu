@@ -13,7 +13,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MessageMarketSessionOpened::MessageMarketSessionOpened() : MessagePtr(Name("SessionStarted"), CorrelationId(0))
+		MessageMarketSessionOpened::MessageMarketSessionOpened() : MessagePtr(Name("SessionStarted"), CorrelationId((long)0))
 		{
 		}
 

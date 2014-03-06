@@ -11,13 +11,17 @@
 
 #include "bemu_headers.h"
 #include <exception>
+#include "BloombergTypes/SchemaElementDefinition.h"
 
 namespace BEmu
 {
 	class Name;
 	class ElementPtr;
 	class Datetime;
-
+	
+	//See my explanation of the RequetPtr class for an explanation of this class
+	//I've found that the BB API de-allocates Element memory in the ~MessageIterator() destructor.
+	//  I don't do that in the BEmu.  Maybe I'll do that in the future.  I consider it a low priority issue.
 	class Element
 	{
 		private:
@@ -37,6 +41,10 @@ namespace BEmu
 					return "My exception happened";
 				}
 			} elementEx;
+
+			DLL_EXPORT int datatype() const;
+			DLL_EXPORT SchemaElementDefinition elementDefinition() const;
+			static const char * toString(::blpapi_DataType_t datatype);
 
 			DLL_EXPORT Name name() const;
 			DLL_EXPORT size_t numValues() const;
@@ -85,9 +93,22 @@ namespace BEmu
 			DLL_EXPORT const char* getElementAsString(const char* name) const;
 			DLL_EXPORT const char* getElementAsString(const Name& name) const;
 
+			DLL_EXPORT char getElementAsChar(const char* name) const;
+			DLL_EXPORT char getElementAsChar(const Name& name) const;
+
 			DLL_EXPORT std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 
 			DLL_EXPORT Element appendElement();
+
+			DLL_EXPORT void appendValue(bool value);
+			DLL_EXPORT void appendValue(char value);
+			DLL_EXPORT void appendValue(int value);
+			DLL_EXPORT void appendValue(long long value);
+			DLL_EXPORT void appendValue(float value);
+			DLL_EXPORT void appendValue(double value);
+			DLL_EXPORT void appendValue(const Datetime& value);
+			DLL_EXPORT void appendValue(const char* value);
+			DLL_EXPORT void appendValue(const Name& value);
 
 			DLL_EXPORT void setElement(const char* name, const char* value);
 			DLL_EXPORT void setElement(const char* name, const Name& value);

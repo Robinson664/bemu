@@ -10,6 +10,7 @@
 #pragma once
 
 #include "bemu_headers.h"
+#include <map>
 
 namespace BEmu
 {
@@ -19,18 +20,26 @@ namespace BEmu
 			std::string _name;
 			const char * _cname;
 			int _length;
+			bool _isNull;
+			static std::map<std::string, Name> _globalNameTable;
 
 		public:
 			DLL_EXPORT Name();
 			DLL_EXPORT Name(const char* nameString);
 			DLL_EXPORT Name(const Name& original);
 			DLL_EXPORT const char *string() const;
-			Name& operator=(const Name &rhs);
+			DLL_EXPORT Name& operator=(const Name &rhs);
+
+			DLL_EXPORT size_t length() const;
+			DLL_EXPORT size_t hash() const;
 			
 			DLL_EXPORT bool operator==(const char *rhs) const;
 			DLL_EXPORT bool operator==(const Name rhs) const;
 			DLL_EXPORT bool operator!=(const char *rhs) const;
 			DLL_EXPORT bool operator!=(const Name rhs) const;
+
+			DLL_EXPORT static Name findName(const char *nameString);
+			DLL_EXPORT static bool hasName(const char *nameString);
 	};
 
 	DLL_EXPORT std::ostream& operator<<(std::ostream& stream, const Name& name);

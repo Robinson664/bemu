@@ -25,6 +25,7 @@ namespace BEmu.MarketDataRequest
             this._reason = new ElementMarketReason(ElementMarketReason.ReasonTypeEnum.badField);
         }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("SubscriptionException")); } }
         public override int NumElements { get { return 2; } }
         public override int NumValues { get { return 1; } }
         public override Name Name { get { return new Name("exceptions"); } }

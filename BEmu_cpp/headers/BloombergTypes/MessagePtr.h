@@ -24,7 +24,6 @@ namespace BEmu
 		private:
 			CorrelationId _correlationId;
 			Name _messageType;
-			//Service _service;
 
 		protected:
 			MessagePtr(const Name& messageType, const CorrelationId& corr);

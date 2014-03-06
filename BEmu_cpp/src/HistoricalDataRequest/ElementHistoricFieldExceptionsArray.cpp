@@ -53,6 +53,13 @@ namespace BEmu
 			return 0;
 		}
 
+		SchemaElementDefinition ElementHistoricFieldExceptionsArray::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("FieldException"));
+			return result;
+		}
+
 		
 		bool ElementHistoricFieldExceptionsArray::isNull() const
 		{

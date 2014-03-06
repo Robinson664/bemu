@@ -9,6 +9,7 @@
 
 #include "ReferenceDataRequest/ElementReferenceDateTime.h"
 #include "BloombergTypes/Name.h"
+#include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
@@ -39,7 +40,7 @@ namespace BEmu
 
 		std::ostream& ElementReferenceDateTime::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
+			this->prettyPrintHelper(stream, level, spacesPerLevel, DisplayFormats::FormatDatetimeZone(this->_value));
 			return stream;
 		}
 

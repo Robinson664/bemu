@@ -43,6 +43,7 @@ namespace BEmu.IntradayBarRequest
             }
         }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("ErrorInfo")); } }
         public override Name Name { get { return new Name("responseError"); } }
         public override int NumValues { get { return 1; } }
         public override int NumElements { get { return 5; } }

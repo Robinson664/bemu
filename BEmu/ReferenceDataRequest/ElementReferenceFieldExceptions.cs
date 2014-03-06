@@ -34,6 +34,7 @@ namespace BEmu.ReferenceDataRequest
             }
         }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("FieldException")); } }
         public override Name Name { get { return new Name("fieldExceptions"); } }
         public override int NumValues { get { return 1; } }
         public override int NumElements { get { return 2; } }

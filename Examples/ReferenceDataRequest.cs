@@ -42,39 +42,48 @@ namespace Examples
                     CorrelationID requestID = new CorrelationID(1);
                     Request request = refDataSvc.CreateRequest("ReferenceDataRequest");
 
-                    //request information for the following securities
-                    request.Append("securities", "SPY US EQUITY");
-                    request.Append("securities", "MSFT US EQUITY");
-                    request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
-                    //request.Append("securities", "ZYZZ US EQUITY"); //the code treats securities that start with a "Z" as non-existent
+                    { //append securities
+                        //request information for the following securities
+                        request.Append("securities", "SPY US EQUITY");
+                        request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
+                        //request.Append("securities", "ZYZZ US EQUITY"); //the code treats securities that start with a "Z" as non-existent
 
-                    //include the following simple fields in the result
-                    //request.Append("fields", "ZPX_LAST"); //the code treats a field that starts with a "Z" as a bad field
-                    request.Append("fields", "PX_LAST");
-                    request.Append("fields", "BID");
-                    request.Append("fields", "ASK");
-                    request.Append("fields", "TICKER");
-                    request.Append("fields", "TRADEABLE_DT"); //hard-coded to be treated as a datetime to illustrated datetimes
-                    request.Append("fields", "OPT_EXPIRE_DT"); //only stock options have this field
+                        request["securities"].AppendValue("MSFT US EQUITY"); //This is another way to append a security
+                    }
 
-                    //request a field that can be overriden and returns bulk data
-                    request.Append("fields", "CHAIN_TICKERS"); //only stocks have this field 
-                    Element overrides = request["overrides"];
+                    { //append regular fields
+                        //include the following simple fields in the result
+                        //request.Append("fields", "ZPX_LAST"); //the code treats a field that starts with a "Z" as a bad field
+                        request.Append("fields", "PX_LAST");
+                        request.Append("fields", "BID");
+                        
+                        request.Append("fields", "TICKER");
+                        request.Append("fields", "TRADEABLE_DT"); //hard-coded to be treated as a datetime to illustrated datetimes
+                        request.Append("fields", "OPT_EXPIRE_DT"); //only stock options have this field
 
-                    //request only puts
-                    Element ovrdPutCall = overrides.AppendElement();
-                    ovrdPutCall.SetElement("fieldId", "CHAIN_PUT_CALL_TYPE_OVRD");
-                    ovrdPutCall.SetElement("value", "P"); //accepts either "C" for calls or "P" for puts
+                        request["fields"].AppendValue("TICKER"); //This is another way to append a field
+                    }
 
-                    //request 5 options in the result
-                    Element ovrdNumStrikes = overrides.AppendElement();
-                    ovrdNumStrikes.SetElement("fieldId", "CHAIN_POINTS_OVRD");
-                    ovrdNumStrikes.SetElement("value", 5); //accepts a positive integer
+                    { //append an overridable field
+                        //request a field that can be overriden and returns bulk data
+                        request.Append("fields", "CHAIN_TICKERS"); //only stocks have this field 
+                        Element overrides = request["overrides"];
 
-                    //request options that expire on Dec. 20, 2014
-                    Element ovrdDtExps = overrides.AppendElement();
-                    ovrdDtExps.SetElement("fieldId", "CHAIN_EXP_DT_OVRD");
-                    ovrdDtExps.SetElement("value", "20141220"); //accepts dates in the format yyyyMMdd (this is Dec. 20, 2014)
+                        //request only puts
+                        Element ovrdPutCall = overrides.AppendElement();
+                        ovrdPutCall.SetElement("fieldId", "CHAIN_PUT_CALL_TYPE_OVRD");
+                        ovrdPutCall.SetElement("value", "P"); //accepts either "C" for calls or "P" for puts
+
+                        //request 5 options in the result
+                        Element ovrdNumStrikes = overrides.AppendElement();
+                        ovrdNumStrikes.SetElement("fieldId", "CHAIN_POINTS_OVRD");
+                        ovrdNumStrikes.SetElement("value", 5); //accepts a positive integer
+
+                        //request options that expire on Dec. 20, 2014
+                        Element ovrdDtExps = overrides.AppendElement();
+                        ovrdDtExps.SetElement("fieldId", "CHAIN_EXP_DT_OVRD");
+                        ovrdDtExps.SetElement("value", "20141220"); //accepts dates in the format yyyyMMdd (this is Dec. 20, 2014)
+                    }
 
                     session.SendRequest(request, requestID);
 

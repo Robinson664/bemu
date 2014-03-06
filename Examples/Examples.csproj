@@ -35,8 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bloomberglp.Blpapi">
-      <HintPath>..\..\BBLinq2\BBLinq\bin\Debug\Bloomberglp.Blpapi.dll</HintPath>
+    <Reference Include="Bloomberglp.Blpapi, Version=3.3.1.1, Culture=neutral, PublicKeyToken=ec3efa8c033c2bc5, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\BEmu\Bloomberglp.Blpapi.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

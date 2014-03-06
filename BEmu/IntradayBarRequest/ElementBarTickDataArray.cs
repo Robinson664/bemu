@@ -30,6 +30,7 @@ namespace BEmu.IntradayBarRequest
         public override Element GetValueAsElement(int index) { return (Element)this._elements[index]; }
         public override object this[int index] { get { return this._elements[index]; } }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("IntradayBarTickData")); } }
         public override Name Name { get { return new Name("barTickData"); } }
         public override int NumElements { get { return 0; } }
         public override int NumValues { get { return this._elements.Count; } }
@@ -37,7 +38,7 @@ namespace BEmu.IntradayBarRequest
         public override bool IsArray { get { return true; } }
         public override bool IsNull { get { return false; } }
         public override IEnumerable<Element> Elements { get { if (this._elements.Count < -1) yield return null; } } //This is the only way I can think to have the compiler output "Enumeration yielded no results"
-
+        
         public override object GetValue(int index)
         {
             return this._elements[index];

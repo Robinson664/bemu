@@ -32,7 +32,7 @@ namespace BEmu.HistoricalDataRequest
         public override bool IsComplexType { get { return false; } }
         public override bool IsNull { get { return false; } }
 
-        internal void AddValue(string value)
+        public override void AppendValue(string value)
         {
             this._values.Add(value);
         }

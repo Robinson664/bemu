@@ -46,9 +46,12 @@ namespace BEmu
 		size_t ElementReferenceSecurityDataArray::numValues() const { return this->_securities.size(); }
 		size_t ElementReferenceSecurityDataArray::numElements() const { return 0; }
 
-		//bool ElementReferenceSecurityDataArray::isNull() const { return false; }
-		//bool ElementReferenceSecurityDataArray::isArray() const { return false; }
-		//bool ElementReferenceSecurityDataArray::isComplexType() const { return false; }
+		SchemaElementDefinition ElementReferenceSecurityDataArray::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("ReferenceSecurityData"));
+			return result;
+		}
 
 		ElementPtr * ElementReferenceSecurityDataArray::getValueAsElement(int index) const
 		{

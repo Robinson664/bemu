@@ -38,6 +38,8 @@ namespace BEmu.HistoricalDataRequest
         public override bool IsComplexType { get { return false; } }
         public override bool IsArray { get { return true; } }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("HistoricalDataRow")); } }
+
         internal override StringBuilder PrettyPrint(int tabIndent)
         {
             string tabs = Types.IndentType.Indent(tabIndent);

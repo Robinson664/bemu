@@ -62,6 +62,13 @@ namespace BEmu
 			return 0;
 		}
 
+		SchemaElementDefinition ElementHistoricFieldDataArray::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("HistoricalDataRow"));
+			return result;
+		}
+
 		
 		bool ElementHistoricFieldDataArray::isNull() const
 		{

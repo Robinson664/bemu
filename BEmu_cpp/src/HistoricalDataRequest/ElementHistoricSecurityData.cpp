@@ -89,6 +89,13 @@ namespace BEmu
 			return 3 + (this->_elmFieldExceptions == 0 ? 0 : 1);
 		}
 
+		SchemaElementDefinition ElementHistoricSecurityData::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("HistoricalDataTable"));
+			return result;
+		}
+
 		
 		bool ElementHistoricSecurityData::isNull() const
 		{

@@ -195,10 +195,10 @@ namespace BEmu.HistoricalDataRequest
             switch (name)
             {
                 case "securities":
-                    this._securities.AddValue(elementValue);
+                    this._securities.AppendValue(elementValue);
                     break;
                 case "fields":
-                    this._fields.AddValue(elementValue);
+                    this._fields.AppendValue(elementValue);
                     break;
                 default:
                     throw new ArgumentException(string.Format("BEmu.RequestHistoric.Append: Element name {0} not supported.  Case-sensitive.", name));

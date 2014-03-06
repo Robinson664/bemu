@@ -44,7 +44,6 @@ namespace BEmu
 			DLL_EXPORT Name messageType() const;
 			DLL_EXPORT virtual const char* topicName() const;
 			DLL_EXPORT virtual size_t numElements() const;
-			//DLL_EXPORT Service service() const;
 			DLL_EXPORT virtual const Element asElement() const;
 
 			DLL_EXPORT const Element getElement(const Name& name) const;

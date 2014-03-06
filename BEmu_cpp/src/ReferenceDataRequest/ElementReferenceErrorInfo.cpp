@@ -59,6 +59,13 @@ namespace BEmu
 		size_t ElementReferenceErrorInfo::numValues() const { return 1; }
 		size_t ElementReferenceErrorInfo::numElements() const { return 5; }
 
+		SchemaElementDefinition ElementReferenceErrorInfo::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
+			return result;
+		}
+
 		bool ElementReferenceErrorInfo::isNull() const { return false; }
 		bool ElementReferenceErrorInfo::isArray() const { return false; }
 		bool ElementReferenceErrorInfo::isComplexType() const { return true; }

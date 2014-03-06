@@ -33,6 +33,7 @@ namespace BEmu.IntradayBarRequest
         private readonly ElementIntradayBarLong _volume;
         private readonly ElementIntradayBarInt _numEvents;
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("IntradayBarTickData")); } }
         public override Name Name { get { return new Name("barTickData"); } }
         public override int NumValues { get { return 0; } }
         public override int NumElements { get { return this.Elements.Count(); } }

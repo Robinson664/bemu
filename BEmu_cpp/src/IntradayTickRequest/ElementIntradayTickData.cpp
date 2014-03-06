@@ -54,6 +54,13 @@ namespace BEmu
 			return result;
 		}
 
+		SchemaElementDefinition ElementIntradayTickData::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("IntradayTickData"));
+			return result;
+		}
+
 		bool ElementIntradayTickData::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return 

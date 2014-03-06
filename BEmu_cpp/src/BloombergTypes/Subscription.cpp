@@ -30,6 +30,32 @@ namespace BEmu
 		this->_conflationInterval = conflationInterval;
 	}
 
+	Subscription::Subscription(const char* topic, const std::vector<std::string>& fields, const std::vector<std::string>& options, const CorrelationId& correlationId)
+	{
+		this->_corr = correlationId;
+		this->_security = topic;
+		this->_fieldList = std::vector<std::string>(fields);
+
+		std::stringstream ssFields;
+		for(size_t i = 0; i < fields.size(); i++)
+		{
+			ssFields << fields[i];
+			if(i < fields.size() - 1)
+				ssFields << ",";
+		}
+		this->_fields = std::string(ssFields.str());
+
+		std::stringstream ssOptions;
+		for(size_t i = 0; i < options.size(); i++)
+		{
+			ssOptions << options[i];
+			if(i < options.size())
+				ssOptions << ",";
+		}
+		this->_options = std::string(ssOptions.str());
+
+	}
+
 	void Subscription::construct(std::string topic, std::string fields, std::string options, CorrelationId correlationId)
 	{
 		this->_corr = correlationId;

@@ -11,6 +11,7 @@
 
 #include "BloombergTypes/Datetime.h"
 #include "BloombergTypes/Name.h"
+#include "BloombergTypes/SchemaElementDefinition.h"
 #include <exception>
 #include <sstream>
 
@@ -22,8 +23,7 @@ namespace BEmu
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string value) const;
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const int value) const;
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const double value) const;
-			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const Datetime& value) const;
-			
+
 			static std::string toString(int i);
 
 		public:			
@@ -45,10 +45,13 @@ namespace BEmu
 			virtual Name name() const;
 			virtual size_t numValues() const;
 			virtual size_t numElements() const;
+
+			virtual int datatype() const;
 		
 			virtual bool isNull() const;
 			virtual bool isArray() const;
 			virtual bool isComplexType() const;
+			virtual SchemaElementDefinition elementDefinition() const;
 
 			//The C++ version of the code doesn't have a getValue() function
 
@@ -89,8 +92,20 @@ namespace BEmu
 			virtual const char* getElementAsString(const char* name) const;
 			const char* getElementAsString(const Name& name) const;
 
+			virtual char getElementAsChar(const char* name) const;
+			char getElementAsChar(const Name& name) const;
 
 			virtual ElementPtr * appendElement();
+
+			virtual void appendValue(bool value);
+			virtual void appendValue(char value);
+			virtual void appendValue(int value);
+			virtual void appendValue(long long value);
+			virtual void appendValue(float value);
+			virtual void appendValue(double value);
+			virtual void appendValue(const Datetime& value);
+			virtual void appendValue(const char* value);
+			virtual void appendValue(const Name& value);
 
 			virtual void setElement(const char* name, const char* value);
 			void setElement(const char* name, const Name& value);

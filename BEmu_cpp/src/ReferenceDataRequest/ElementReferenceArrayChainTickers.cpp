@@ -67,5 +67,12 @@ namespace BEmu
 
 		}
 
+		SchemaElementDefinition ElementReferenceArrayChainTickers::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("CHAIN_TICKERS"));
+			return result;
+		}
+
 	}
 }

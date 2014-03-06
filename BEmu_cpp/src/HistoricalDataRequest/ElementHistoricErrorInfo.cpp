@@ -10,6 +10,7 @@
 #include "Types/RandomDataGenerator.h"
 #include "Types/IndentType.h"
 #include "BloombergTypes/Name.h"
+#include "BloombergTypes/SchemaElementDefinition.h"
 #include "HistoricalDataRequest/ElementHistoricErrorInfo.h"
 #include "HistoricalDataRequest/ElementHistoricString.h"
 #include "HistoricalDataRequest/ElementHistoricInt.h"
@@ -68,6 +69,13 @@ namespace BEmu
 		size_t ElementHistoricErrorInfo::numElements() const
 		{
 			return 5;
+		}
+
+		SchemaElementDefinition ElementHistoricErrorInfo::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
+			return result;
 		}
 
 		bool ElementHistoricErrorInfo::isNull() const

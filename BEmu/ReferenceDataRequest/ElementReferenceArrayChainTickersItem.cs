@@ -31,6 +31,7 @@ namespace BEmu.ReferenceDataRequest
         public override bool IsComplexType { get { return false; } }
         public override IEnumerable<Element> Elements { get { yield return this._element; } }
         public override string GetElementAsString(string name) { return this[name].GetValueAsString(); }
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("CHAIN_TICKERS")); } }
 
         //public override string GetElementAsString(string name)
         public override Element this[string name]

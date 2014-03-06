@@ -20,7 +20,9 @@ namespace BEmu
         public abstract Name Name { get; }
         public abstract int NumValues { get; }
         public abstract int NumElements { get; }
+
         public virtual Schema.Datatype Datatype { get { return Schema.Datatype.SEQUENCE; } }
+        public virtual SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype); } }
 
         public override string ToString()
         {
@@ -49,10 +51,61 @@ namespace BEmu
             get { throw new NotImplementedException("Element doesn't support IsComplexType"); }
         }
 
-        public virtual object GetValue() { return this.GetValue(0); }
-        public virtual object GetValue(int index)
+        #region GET ELEMENT ...
+        public Element GetElement(Name name)
         {
-            throw new NotImplementedException("Element is not a simple object (index)");
+            return this.GetElement(name.ToString());
+        }
+
+        public virtual Element GetElement(string name)
+        {
+            throw new NotImplementedException("Element doesn't support getting elements by name.  name is case-sensitive.");
+        }
+
+        public virtual Element GetElement(int index)
+        {
+            throw new NotImplementedException("Element doesn't support getting elements by index");
+        }
+
+        public virtual IEnumerable<Element> Elements
+        {
+            get { throw new NotImplementedException("Element doesn't support Elements getter"); }
+        }
+
+        public virtual object this[int index]
+        {
+            get { throw new NotImplementedException("Element doesn't support this[int index]"); }
+        }
+
+        public virtual Element this[string name]
+        {
+            get { throw new NotImplementedException("Element doesn't support this[string name] or 'name' didn't match.  'name' is case-sensitive."); }
+        }
+
+        public Element this[Name name]
+        {
+            get { return this[name.ToString()]; }
+        }
+
+        public virtual object this[string name, int index]
+        {
+            get { throw new NotImplementedException("Element doesn't support this[string name, int index] or 'name' didn't match.  'name' is case-sensitive."); }
+        }
+
+        public bool HasElement(Name name, bool excludeNullElements = false)
+        {
+            return this.HasElement(name.ToString(), excludeNullElements);
+        }
+
+        public virtual bool HasElement(string name, bool excludeNullElements = false)
+        {
+            throw new NotImplementedException("Element doesn't support HasElement");
+        }
+
+        public char GetElementAsChar(Name name) { return this.GetElementAsChar(name.ToString()); }
+        public virtual char GetElementAsChar(string name)
+        {
+            throw new NotImplementedException("Element doesn't support getting elements as chars");
         }
 
         public string GetElementAsString(Name name) { return this.GetElementAsString(name.ToString()); }
@@ -97,7 +150,7 @@ namespace BEmu
             throw new NotImplementedException("Element doesn't support getting elements as Float64");
         }
 
-        public bool GetElementAsBoolean(Name name) { return this.GetElementAsBool(name.ToString()); }
+        public bool GetElementAsBool(Name name) { return this.GetElementAsBool(name.ToString()); }
         public virtual bool GetElementAsBool(string name)
         {
             throw new NotImplementedException("Element doesn't support getting elements as bool");
@@ -107,6 +160,14 @@ namespace BEmu
         public virtual float GetElementAsFloat32(string name)
         {
             throw new NotImplementedException("Element doesn't support getting elements as Float32");
+        }
+        #endregion
+
+        #region GET VALUE ...
+        public virtual object GetValue() { return this.GetValue(0); }
+        public virtual object GetValue(int index)
+        {
+            throw new NotImplementedException("Element is not a simple object (index)");
         }
 
         public virtual Element GetValueAsElement() { return this.GetValueAsElement(0); }
@@ -189,62 +250,52 @@ namespace BEmu
         {
             throw new NotImplementedException("Element doesn't support GetValueAsTime");
         }
-
-
-
-        public Element GetElement(Name name)
-        {
-            return this.GetElement(name.ToString());
-        }
-
-        public virtual Element GetElement(string name)
-        {
-            throw new NotImplementedException("Element doesn't support getting elements by name.  name is case-sensitive.");
-        }
-
-        public virtual Element GetElement(int index)
-        {
-            throw new NotImplementedException("Element doesn't support getting elements by index");
-        }
-
-        public virtual IEnumerable<Element> Elements
-        {
-            get { throw new NotImplementedException("Element doesn't support Elements getter"); }
-        }
-
-        public virtual object this[int index]
-        {
-            get { throw new NotImplementedException("Element doesn't support this[int index]"); }
-        }
-
-        public virtual Element this[string name]
-        {
-            get { throw new NotImplementedException("Element doesn't support this[string name] or 'name' didn't match.  'name' is case-sensitive."); }
-        }
-
-        public Element this[Name name]
-        {
-            get { return this[name.ToString()]; }
-        }
-
-        public virtual object this[string name, int index]
-        {
-            get { throw new NotImplementedException("Element doesn't support this[string name, int index] or 'name' didn't match.  'name' is case-sensitive."); }
-        }
-
-        public bool HasElement(Name name, bool excludeNullElements = false)
-        {
-            return this.HasElement(name.ToString(), excludeNullElements);
-        }
-
-        public virtual bool HasElement(string name, bool excludeNullElements = false)
-        {
-            throw new NotImplementedException("Element doesn't support HasElement");
-        }
-
+        #endregion
+        
+        #region APPEND AND SET
         public virtual Element AppendElement()
         {
             throw new NotImplementedException("Element doesn't support AppendElement");
+        }
+
+        public virtual void AppendValue(string value)
+        {
+            throw new NotImplementedException("Element doesn't support AppendValue(string)");
+        }
+
+        public virtual void AppendValue(Datetime value)
+        {
+            throw new NotImplementedException("Element doesn't support AppendValue(Datetime)");
+        }
+
+        public virtual void AppendValue(float value)
+        {
+            throw new NotImplementedException("Element doesn't support AppendValue(float)");
+        }
+
+        public virtual void AppendValue(double value)
+        {
+            throw new NotImplementedException("Element doesn't support AppendValue(double)");
+        }
+
+        public virtual void AppendValue(long value)
+        {
+            throw new NotImplementedException("Element doesn't support AppendValue(long)");
+        }
+
+        public virtual void AppendValue(int value)
+        {
+            throw new NotImplementedException("Element doesn't support AppendValue(int)");
+        }
+
+        public virtual void AppendValue(char value)
+        {
+            throw new NotImplementedException("Element doesn't support AppendValue(char)");
+        }
+
+        public virtual void AppendValue(bool value)
+        {
+            throw new NotImplementedException("Element doesn't support AppendValue(bool)");
         }
 
         public void SetElement(Name name, object value)
@@ -256,6 +307,7 @@ namespace BEmu
         {
             throw new NotImplementedException("Element doesn't support SetElement(Name name, string value)");
         }
-        
+        #endregion
+
     }
 }

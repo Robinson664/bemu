@@ -46,7 +46,7 @@ namespace BEmu
 			}
 		}
 
-		MarketDataRequest::EventMarket * evt = new MarketDataRequest::EventMarket(Event::SUBSCRIPTION_DATA, 0, subsToUse);
+		MarketDataRequest::EventMarket * evt = new MarketDataRequest::EventMarket(Event::SUBSCRIPTION_DATA, CorrelationId(), subsToUse);
 		this->_eventHandler->processEvent(evt, this->_session);
 
 		if(hasConflationInterval)

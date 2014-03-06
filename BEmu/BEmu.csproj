@@ -42,12 +42,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BloombergTypes\Constant.cs" />
+    <Compile Include="BloombergTypes\ConstantsList.cs" />
+    <Compile Include="BloombergTypes\Constraint.cs" />
+    <Compile Include="BloombergTypes\ConstraintsList.cs" />
     <Compile Include="BloombergTypes\CorrelationID.cs" />
     <Compile Include="BloombergTypes\Datetime.cs" />
     <Compile Include="BloombergTypes\Element.cs" />
     <Compile Include="BloombergTypes\Event.cs" />
     <Compile Include="BloombergTypes\EventHandler.cs" />
+    <Compile Include="BloombergTypes\EventQueue.cs" />
+    <Compile Include="BloombergTypes\Operation.cs" />
     <Compile Include="BloombergTypes\Schema.cs" />
+    <Compile Include="BloombergTypes\SchemaElementDefinition.cs" />
+    <Compile Include="BloombergTypes\SchemaTypeDefinition.cs" />
+    <Compile Include="Exceptions\DuplicateCorrelationIDException.cs" />
+    <Compile Include="Exceptions\InvalidConversionException.cs" />
+    <Compile Include="Exceptions\InvalidRequestException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="Exceptions\RequestQueueOverflowException.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricDateTime.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricDouble.cs" />
     <Compile Include="HistoricalDataRequest\ElementHistoricErrorInfo.cs" />

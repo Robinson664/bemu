@@ -79,6 +79,13 @@ namespace BEmu
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
+		SchemaElementDefinition ElementIntradayTickResponseError::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
+			return result;
+		}
+
 		ElementPtr * ElementIntradayTickResponseError::getElement(const char* name) const
 		{
 			if(strncmp("source", name, 7) == 0)

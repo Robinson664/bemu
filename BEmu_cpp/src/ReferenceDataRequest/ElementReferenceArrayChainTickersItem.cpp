@@ -41,6 +41,13 @@ namespace BEmu
 		size_t ElementReferenceArrayChainTickersItem::numValues() const { return 0; }
 		size_t ElementReferenceArrayChainTickersItem::numElements() const { return 1; }
 
+		SchemaElementDefinition ElementReferenceArrayChainTickersItem::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("CHAIN_TICKERS"));
+			return result;
+		}
+
 		bool ElementReferenceArrayChainTickersItem::isNull() const { return false; }
 		bool ElementReferenceArrayChainTickersItem::isArray() const { return false; }
 		bool ElementReferenceArrayChainTickersItem::isComplexType() const { return false; }

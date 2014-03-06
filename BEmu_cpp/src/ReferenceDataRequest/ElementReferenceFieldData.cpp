@@ -73,9 +73,12 @@ namespace BEmu
 		size_t ElementReferenceFieldData::numValues() const { return 1; }
 		size_t ElementReferenceFieldData::numElements() const { return this->_fields.size(); }
 
-		//bool ElementReferenceFieldData::isNull() const { return false; }
-		//bool ElementReferenceFieldData::isArray() const { return false; }
-		//bool ElementReferenceFieldData::isComplexType() const { return false; }
+		SchemaElementDefinition ElementReferenceFieldData::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("ReferenceFieldData"));
+			return result;
+		}
 
 		ElementPtr * ElementReferenceFieldData::getElement(int position) const
 		{

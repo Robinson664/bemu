@@ -35,6 +35,7 @@ namespace BEmu
 				virtual size_t numElements() const { return 5; }		
 				virtual bool isArray() const { return false; }
 				virtual bool isComplexType() const { return true; }
+				virtual SchemaElementDefinition elementDefinition() const;
 				
 				virtual const char* getElementAsString(const char* name) const;
 				virtual int getElementAsInt32(const char* name) const;

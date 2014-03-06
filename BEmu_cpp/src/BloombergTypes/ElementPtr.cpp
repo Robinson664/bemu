@@ -7,13 +7,20 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
+#include "BloombergTypes/Element.h" //for blpapi_DataType_t definition
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/Datetime.h"
 #include "Types/IndentType.h"
 #include "BloombergTypes/Name.h"
+#include "BloombergTypes/SchemaElementDefinition.h"
 
 namespace BEmu
 {
+	int ElementPtr::datatype() const
+	{
+		return ::BLPAPI_DATATYPE_SEQUENCE;
+	}
+
 	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string value) const
 	{
 		std::string tabs = IndentType::Indent(tabIndent, spacesPerTab);
@@ -27,12 +34,6 @@ namespace BEmu
 	}
 	
 	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const double value) const
-	{
-		std::string tabs = IndentType::Indent(tabIndent, spacesPerTab);
-		stream << tabs << this->name().string() << " = " << value << std::endl;
-	}
-
-	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const Datetime& value) const
 	{
 		std::string tabs = IndentType::Indent(tabIndent, spacesPerTab);
 		stream << tabs << this->name().string() << " = " << value << std::endl;
@@ -102,6 +103,13 @@ namespace BEmu
 	bool ElementPtr::isNull() const { return false; }
 	bool ElementPtr::isArray() const { throw elementPtrEx; }
 	bool ElementPtr::isComplexType() const { throw elementPtrEx; }
+
+	SchemaElementDefinition ElementPtr::elementDefinition() const
+	{
+		::blpapi_DataType_t dt = (::blpapi_DataType_t)this->datatype();
+		SchemaElementDefinition result(dt);
+		return result;
+	}
 	
 	size_t ElementPtr::numValues() const { throw elementPtrEx; }
 	size_t ElementPtr::numElements() const { throw elementPtrEx; }
@@ -139,34 +147,86 @@ namespace BEmu
 		return this->getElement(name)->getValueAsBool(0);
 	}
 
+	bool ElementPtr::getElementAsBool(const Name& name) const
+	{
+		return this->getElementAsBool(name.string());
+	}
+
+
 	int ElementPtr::getElementAsInt32(const char* name) const
 	{
 		return this->getElement(name)->getValueAsInt32(0);
 	}
+
+	int ElementPtr::getElementAsInt32(const Name& name) const
+	{
+		return this->getElementAsInt32(name.string());
+	}
+
 
 	long ElementPtr::getElementAsInt64(const char* name) const
 	{
 		return this->getElement(name)->getValueAsInt64(0);
 	}
 
+	long ElementPtr::getElementAsInt64(const Name& name) const
+	{
+		return this->getElementAsInt64(name.string());
+	}
+
+
 	float ElementPtr::getElementAsFloat32(const char* name) const
 	{
 		return this->getElement(name)->getValueAsFloat32(0);
 	}
+
+	float ElementPtr::getElementAsFloat32(const Name& name) const
+	{
+		return this->getElementAsFloat32(name.string());
+	}
+
 
 	double ElementPtr::getElementAsFloat64(const char* name) const
 	{
 		return this->getElement(name)->getValueAsFloat64(0);
 	}
 
+	double ElementPtr::getElementAsFloat64(const Name& name) const
+	{
+		return this->getElementAsFloat64(name.string());
+	}
+
+
 	Datetime ElementPtr::getElementAsDatetime(const char* name) const
 	{
 		return this->getElement(name)->getValueAsDatetime(0);
 	}
 
+	Datetime ElementPtr::getElementAsDatetime(const Name& name) const
+	{
+		return this->getElementAsDatetime(name.string());
+	}
+
+
 	const char* ElementPtr::getElementAsString(const char* name) const
 	{
 		return this->getElement(name)->getValueAsString(0);
+	}
+
+	const char* ElementPtr::getElementAsString(const Name& name) const
+	{
+		return this->getElementAsString(name.string());
+	}
+
+
+	char ElementPtr::getElementAsChar(const char* name) const
+	{
+		throw elementPtrEx;
+	}
+
+	char ElementPtr::getElementAsChar(const Name& name) const
+	{
+		return this->getElementAsChar(name.string());
 	}
 
 
@@ -175,6 +235,54 @@ namespace BEmu
 	{
 		throw elementPtrEx;
 	}
+
+	void ElementPtr::appendValue(bool value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::appendValue(char value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::appendValue(int value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::appendValue(long long value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::appendValue(float value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::appendValue(double value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::appendValue(const Datetime& value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::appendValue(const char* value)
+	{
+		throw elementPtrEx;
+	}
+
+	void ElementPtr::appendValue(const Name& value)
+	{
+		throw elementPtrEx;
+	}
+
+
+
 
 	void ElementPtr::setElement(const char* name, const char* value)
 	{

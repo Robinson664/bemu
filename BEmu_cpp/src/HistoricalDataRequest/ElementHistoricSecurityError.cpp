@@ -81,6 +81,13 @@ namespace BEmu
 			return 5;
 		}
 
+		SchemaElementDefinition ElementHistoricSecurityError::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
+			return result;
+		}
+
 		
 		bool ElementHistoricSecurityError::isNull() const
 		{

@@ -71,6 +71,13 @@ namespace BEmu
 			DLL_EXPORT void subscribe(const SubscriptionList& subscriptionList);
 
 			DLL_EXPORT CorrelationId openServiceAsync(const char* uri, const CorrelationId& correlationId = CorrelationId());
+
+
+
+			DLL_EXPORT void unsubscribe(const SubscriptionList& subscriptionList);
+			DLL_EXPORT void cancel(const CorrelationId& correlationId); //defined in blpapi_abstractsession.h
+			DLL_EXPORT void cancel(const std::vector<CorrelationId>& correlationIds); //defined in blpapi_abstractsession.h
+			DLL_EXPORT void cancel(const CorrelationId* correlationIds, size_t numCorrelationIds); //defined in blpapi_abstractsession.h
 			///////////////////// End Async
 
 			DLL_EXPORT ~Session();

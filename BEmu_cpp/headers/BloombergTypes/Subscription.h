@@ -28,6 +28,7 @@ namespace BEmu
 		public:
 			Subscription(std::string topic, std::string fields, std::string options, CorrelationId correlationId);
 			Subscription(std::string topic, std::string fields, std::string options, CorrelationId correlationId, int conflationInterval);
+			Subscription(const char* topic, const std::vector<std::string>& fields, const std::vector<std::string>& options, const CorrelationId& correlationId);
 			~Subscription();
 			Subscription(const Subscription& arg);
 			Subscription& operator=(const Subscription& rhs);

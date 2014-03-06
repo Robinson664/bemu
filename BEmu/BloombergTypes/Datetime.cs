@@ -14,105 +14,175 @@ namespace BEmu
     using System.Linq;
     using System.Text;
 
+    /// <summary>
+    /// The BB API supports invalid dates (e.g., January 32, 2014)
+    ///   Since I'm using C#'s DateTime internally, and a C# DateTime doesn't support invalid dates, the emulator does not support invalid dates.
+    ///   The code will throw an Argument Out of Range Exception if given an invalid date.
+    /// </summary>
     public class Datetime : ICloneable
     {
         private DateTime _instance;
 
+        public const byte TIME_ZONE_OFFSET = 1;
+        public const byte MILLISECOND = 2;
+        public const byte SECOND = 4;
+        public const byte MINUTE = 8;
+        public const byte HOUR = 16;
+
+        /// <summary>
+        /// Hour | Minute | Second
+        /// </summary>
+        public const short TIME = 28;
+
+        /// <summary>
+        /// Hour | Minute | Second | Millisecond
+        /// </summary>
+        public const short TIMEMILLI = 30;
+
+        public const byte DAY_OF_MONTH = 32;
+        public const byte MONTH = 64;
+        public const short YEAR = 128;
+
+        /// <summary>
+        /// Year | Month | DayOfMonth
+        /// </summary>
+        public const short DATE = 224;
+
+        /// <summary>
+        /// Year | Month | DayOfMonth | Hour | Minute | Second | Millisecond
+        /// </summary>
+        internal const int DATE_TIME = 254;
+
         [Flags]
-        internal enum DateTimeTypeEnum { neither = 0, date = 1, time = 2, both = 3 }
+        internal enum DateTimeTypeEnum { neither = 0, date = Datetime.DATE, time = Datetime.TIMEMILLI, both = Datetime.DATE_TIME }
         private DateTimeTypeEnum _dateTimeType;
+        private void SetDateTimeType(DateTimeTypeEnum dateTimeType)
+        {
+            this._dateTimeType = dateTimeType;
+            this._parts = (int)dateTimeType;
+        }
         
         #region CONSTRUCTORS
         internal Datetime(DateTime datetime, DateTimeTypeEnum dateTimeType)
         {
             this._instance = datetime;
-            this._dateTimeType = dateTimeType;
+            this.SetDateTimeType(dateTimeType);
         }
 
         public Datetime()
         {
             this._instance = new DateTime();
-            this._dateTimeType = DateTimeTypeEnum.neither;
+            this.SetDateTimeType(DateTimeTypeEnum.neither);
         }
 
         public Datetime(DateTime datetime)
         {
             this._instance = datetime;
-            this._dateTimeType = DateTimeTypeEnum.both;
+            this.SetDateTimeType(DateTimeTypeEnum.both);
         }
 
         public Datetime(Datetime other)
         {
             this._instance = other._instance;
-            this._dateTimeType = other._dateTimeType;
+            this.SetDateTimeType(other._dateTimeType);
+            this._parts = other._parts;
         }
 
         public Datetime(int year, int month, int dayOfMonth)
         {
             this._instance = new DateTime(year, month, dayOfMonth);
-            this._dateTimeType = DateTimeTypeEnum.date;
+            this.SetDateTimeType(DateTimeTypeEnum.date);
         }
 
         public Datetime(int hour, int minute, int second, int milliSecond)
         {
             DateTime dtToday = DateTime.Today;
             this._instance = new DateTime(dtToday.Year, dtToday.Month, dtToday.Day, hour, minute, second, milliSecond);
-            this._dateTimeType = DateTimeTypeEnum.time;
+            this.SetDateTimeType(DateTimeTypeEnum.time);
         }
 
         public Datetime(int year, int month, int dayOfMonth, int hour, int minute, int second, int milliSecond)
         {
             this._instance = new DateTime(year, month, dayOfMonth, hour, minute, second, milliSecond);
-            this._dateTimeType = DateTimeTypeEnum.both;
+            this.SetDateTimeType(DateTimeTypeEnum.both);
         }
         #endregion
 
         #region PROPERTIES
         internal DateTimeTypeEnum DateTimeType { get { return this._dateTimeType; } }
 
+        private int _parts;
+        public int Parts { get { return this._parts; } }
+
         public int DayOfMonth
         {
             get { return this._instance.Day; }
-            set { this._instance = this._instance.AddDays(-this._instance.Day).AddDays(value); }
+            set
+            {
+                this._parts |= Datetime.DAY_OF_MONTH;
+                this._instance = this._instance.AddDays(value - this._instance.Day);
+            }
         }
 
         public int Hour
         {
             get { return this._instance.Hour; }
-            set { this._instance = this._instance.AddHours(-this._instance.Hour).AddHours(value); }
+            set
+            {
+                this._parts |= Datetime.HOUR;
+                this._instance = this._instance.AddHours(value - this._instance.Hour);
+            }
         }
 
         public int MilliSecond
         {
             get { return this._instance.Millisecond; }
-            set { this._instance = this._instance.AddMilliseconds(-this._instance.Millisecond).AddMilliseconds(value); }
+            set
+            {
+                this._parts |= Datetime.MILLISECOND;
+                this._instance = this._instance.AddMilliseconds(value - this._instance.Millisecond);
+            }
         }
 
         public int Minute
         {
             get { return this._instance.Minute; }
-            set { this._instance = this._instance.AddMinutes(-this._instance.Minute).AddMinutes(value); }
+            set
+            {
+                this._parts |= Datetime.MINUTE;
+                this._instance = this._instance.AddMinutes(value - this._instance.Minute);
+            }
         }
 
         public int Month
         {
             get { return this._instance.Month; }
-            set { this._instance = this._instance.AddMonths(-this._instance.Month).AddMonths(value); }
+            set
+            {
+                this._parts |= Datetime.MONTH;
+                this._instance = this._instance.AddMonths(value - this._instance.Month);
+            }
         }
 
         public int Second
         {
             get { return this._instance.Second; }
-            set { this._instance = this._instance.AddSeconds(-this._instance.Second).AddSeconds(value); }
+            set
+            {
+                this._parts |= Datetime.SECOND;
+                this._instance = this._instance.AddSeconds(value - this._instance.Second);
+            }
         }
 
         public int Year
         {
             get { return this._instance.Year; }
-            set { this._instance = this._instance.AddYears(-this._instance.Year).AddYears(value); }
+            set
+            {
+                this._parts |= Datetime.YEAR;
+                this._instance = this._instance.AddYears(value - this._instance.Year);
+            }
         }
-
-        public int Parts { get { throw new NotImplementedException(); } }
 
         public int TimezoneOffsetMinutes
         {
@@ -125,12 +195,21 @@ namespace BEmu
         public void Clear()
         {
             this._instance = new DateTime();
-            this._dateTimeType = DateTimeTypeEnum.neither;
+            this.SetDateTimeType(DateTimeTypeEnum.neither);
         }
 
         public object Clone()
         {
             return new Datetime(this);
+        }
+
+        /// <summary>
+        /// Always true since the C# DateTime type does not support invalid datetimes.
+        /// </summary>
+        /// <returns></returns>
+        public bool IsValid()
+        {
+            return true;
         }
 
         public override bool Equals(object obj)
@@ -140,7 +219,13 @@ namespace BEmu
 
         public override int GetHashCode()
         {
-            throw new IndexOutOfRangeException(); //I don't get it, but calling GetHashCode on a Bloomberg Datetime object seems to always throw an IndexOutOfRangeException.
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + this._instance.GetHashCode();
+                hash = hash * 23 + this._dateTimeType.GetHashCode();
+                return hash;
+            }
         }
 
         public void SetDate(int year, int month, int dayOfMonth)

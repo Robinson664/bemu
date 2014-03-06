@@ -44,6 +44,13 @@ namespace BEmu
 			return 1;
 		}
 
+		SchemaElementDefinition ElementBarData::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("BarData"));
+			return result;
+		}
+
 		bool ElementBarData::isArray() const
 		{
 			return false;

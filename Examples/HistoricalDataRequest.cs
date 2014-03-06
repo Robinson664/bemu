@@ -19,6 +19,14 @@ namespace Examples
 
     public static class HistoricalDataRequest
     {
+        //Using a Name object allows the API to pre-compute the hash values of strings to more quickly retrieve values
+        //  See <WAPI> -> API Best Practices -> Data Request Topics -> #2
+        //  I can't find this information in the publicly available documentation.
+        //Two equivalent ways to create a Name (new Name(string) or Name.GetName(string))
+        private static readonly Name _nAsk = new Name("ASK");
+        private static readonly Name _nBid = Name.GetName("BID");
+        private static readonly Name _nSecurities = Name.GetName("securities");
+
         public static void RunExample()
         {
             SessionOptions sessionOptions = new SessionOptions();
@@ -38,7 +46,7 @@ namespace Examples
                     Request request = service.CreateRequest("HistoricalDataRequest");
 
                     //request information for the following securities
-                    request.Append("securities", "MSFT US EQUITY");
+                    request.Append(HistoricalDataRequest._nSecurities, "MSFT US EQUITY");
                     request.Append("securities", "C A COMDTY");
                     request.Append("securities", "AAPL 150117C00600000 EQUITY"); //this is a stock option: TICKER yyMMdd[C/P]\d{8} EQUITY
 
@@ -46,10 +54,9 @@ namespace Examples
                     //request.Append("securities", "ZIBM US EQUITY");
                     //  My code treats all securities that start with a 'Z' as a nonexistent security
 
-
                     //include the following simple fields in the result
-                    request.Append("fields", "BID");
-                    request.Append("fields", "ASK");
+                    request.Append("fields", "BID"); //Note that the API will not allow you to use the HistoricalDataRequest._nBid name as a value here.  It expects a string.
+                    request.Append("fields", "ASK"); //ditto
 
                     //uncomment the following line to see what a request for an invalid field looks like
                     //request.Append("fields", "ZBID");
@@ -179,8 +186,10 @@ namespace Examples
                     {
                         Element elmValues = elmFieldData.GetValueAsElement(valueIndex);
                         DateTime date = elmValues.GetElementAsDate("date").ToSystemDateTime();
-                        double bid = elmValues.GetElementAsFloat64("BID");
-                        double ask = elmValues.GetElementAsFloat64("ASK");
+
+                        //You can use either a Name or a string to get elements.
+                        double bid = elmValues.GetElementAsFloat64(HistoricalDataRequest._nBid);
+                        double ask = elmValues.GetElementAsFloat64(HistoricalDataRequest._nAsk);
 
                         Console.WriteLine(string.Format("{0:yyyy-MM-dd}: BID = {1}, ASK = {2}", date, bid, ask));
                     }

@@ -73,10 +73,10 @@ namespace BEmu.ReferenceDataRequest
             switch (name)
             {
                 case "securities":
-                    this._securities.AddValue(elementValue);
+                    this._securities.AppendValue(elementValue);
                     break;
                 case "fields":
-                    this._fields.AddValue(elementValue);
+                    this._fields.AppendValue(elementValue);
                     break;
                 default:
                     throw new ArgumentException(string.Format("BEmu.RequestReference.Append: Element name {0} not supported. Names are case-sensitive", name));

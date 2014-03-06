@@ -34,7 +34,8 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				void addValue(const std::string& value);
+				virtual void appendValue(const char* value);
+
 				std::vector<std::string> values() const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

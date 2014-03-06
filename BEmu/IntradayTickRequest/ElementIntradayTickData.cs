@@ -44,6 +44,7 @@ namespace BEmu.IntradayTickRequest
 
         public override IEnumerable<Element> Elements { get { return this._fields.Values; } }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("IntradayTickData")); } }
         public override Name Name { get { return new Name("tickData"); } }
         public override int NumValues { get { return 1; } }
         public override int NumElements { get { return this._fields.Count; } }

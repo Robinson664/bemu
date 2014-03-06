@@ -54,6 +54,7 @@ namespace BEmu.ReferenceDataRequest
         public override Name Name { get { return new Name("fieldData"); } }
         public override int NumValues { get { return 1; } }
         public override int NumElements { get { return this._fields.Count; } }
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("ReferenceFieldData")); } }
 
         public override Element GetElement(int index)
         {

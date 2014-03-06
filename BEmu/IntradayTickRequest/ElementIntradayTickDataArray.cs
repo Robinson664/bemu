@@ -32,6 +32,7 @@ namespace BEmu.IntradayTickRequest
         public override Element GetValueAsElement(int index) { return (Element)this._tickData[index]; }
         public override object this[int index] { get { return this._tickData[index]; } }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("IntradayTickData")); } }
         public override Name Name { get { return new Name("tickData"); } }
         public override int NumElements { get { return 0; } }
         public override int NumValues { get { return this._tickData.Count; } }

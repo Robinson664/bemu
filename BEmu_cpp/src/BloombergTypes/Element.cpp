@@ -11,6 +11,7 @@
 #include "BloombergTypes/Element.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/Datetime.h"
+#include "BloombergTypes/SchemaElementDefinition.h"
 #include "Types/IndentType.h"
 
 namespace BEmu
@@ -52,6 +53,17 @@ namespace BEmu
 	size_t Element::numValues() const { return this->_ptr->numValues(); }
 	size_t Element::numElements() const { return this->_ptr->numElements(); }
 	Name Element::name() const { return this->_ptr->name(); }
+
+	int Element::datatype() const { return this->_ptr->datatype(); }
+
+	SchemaElementDefinition Element::elementDefinition() const
+	{
+		return this->_ptr->elementDefinition();
+
+		//::blpapi_DataType_t dt = (::blpapi_DataType_t)this->_ptr->datatype();
+		//SchemaElementDefinition result(dt);
+		//return result;
+	}
 
 	bool Element::getValueAsBool(int index) const { return this->_ptr->getValueAsBool(index); }
 	int Element::getValueAsInt32(int index) const { return this->_ptr->getValueAsInt32(index); }
@@ -110,6 +122,19 @@ namespace BEmu
 		return result;
 	}
 
+	char Element::getElementAsChar(const char* name) const { return this->_ptr->getElementAsChar(name); }
+	char Element::getElementAsChar(const Name& name) const { return this->getElementAsChar(name.string()); }
+
+	void Element::appendValue(bool value) { return this->_ptr->appendValue(value); }
+	void Element::appendValue(char value) { return this->_ptr->appendValue(value); }
+	void Element::appendValue(int value) { return this->_ptr->appendValue(value); }
+	void Element::appendValue(long long value) { return this->_ptr->appendValue(value); }
+	void Element::appendValue(float value) { return this->_ptr->appendValue(value); }
+	void Element::appendValue(double value) { return this->_ptr->appendValue(value); }
+	void Element::appendValue(const Datetime& value) { return this->_ptr->appendValue(value); }
+	void Element::appendValue(const char* value) { return this->_ptr->appendValue(value); }
+	void Element::appendValue(const Name& value) { return this->_ptr->appendValue(value); }
+
 	void Element::setElement(const char* name, const char* value) { this->_ptr->setElement(name, value); }
 	void Element::setElement(const char* name, const Name& value) { this->_ptr->setElement(name, value); }
 	void Element::setElement(const Name& name, const char* value) { this->_ptr->setElement(name, value); }
@@ -117,5 +142,29 @@ namespace BEmu
 
 	void Element::setElement(const char* name, int value) { this->_ptr->setElement(name, value); }
 	void Element::setElement(const Name& name, int value) { this->_ptr->setElement(name, value); }
-
+	
+	const char * Element::toString(::blpapi_DataType_t datatype)
+	{
+		switch(datatype)
+		{
+			case ::BLPAPI_DATATYPE_BOOL: return "BOOL";
+			case ::BLPAPI_DATATYPE_CHAR: return "CHAR";
+			case ::BLPAPI_DATATYPE_BYTE: return "BYTE";
+			case ::BLPAPI_DATATYPE_INT32: return "INT32";
+			case ::BLPAPI_DATATYPE_INT64: return "INT64";
+			case ::BLPAPI_DATATYPE_FLOAT32: return "FLOAT32";
+			case ::BLPAPI_DATATYPE_FLOAT64: return "FLOAT64";
+			case ::BLPAPI_DATATYPE_STRING: return "STRING";
+			case ::BLPAPI_DATATYPE_BYTEARRAY: return "BYTEARRAY";
+			case ::BLPAPI_DATATYPE_DATE: return "DATE";
+			case ::BLPAPI_DATATYPE_TIME: return "TIME";
+			case ::BLPAPI_DATATYPE_DECIMAL: return "DECIMAL";
+			case ::BLPAPI_DATATYPE_DATETIME: return "DATETIME";
+			case ::BLPAPI_DATATYPE_ENUMERATION: return "ENUMERATION";
+			case ::BLPAPI_DATATYPE_SEQUENCE: return "SEQUENCE";
+			case ::BLPAPI_DATATYPE_CHOICE: return "CHOICE";
+			case ::BLPAPI_DATATYPE_CORRELATION_ID: return "CORRELATION_ID";
+			default: return "default";
+		}
+	}
 }

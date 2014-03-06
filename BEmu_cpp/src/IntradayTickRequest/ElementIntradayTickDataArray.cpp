@@ -59,6 +59,13 @@ namespace BEmu
 			return this->_tickData.size();
 		}
 
+		SchemaElementDefinition ElementIntradayTickDataArray::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("IntradayTickData"));
+			return result;
+		}
+
 		std::ostream& ElementIntradayTickDataArray::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);

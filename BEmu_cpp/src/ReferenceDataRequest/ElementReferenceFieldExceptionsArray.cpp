@@ -39,6 +39,13 @@ namespace BEmu
 		size_t ElementReferenceFieldExceptionsArray::numValues() const { return this->_exceptions.size(); }
 		size_t ElementReferenceFieldExceptionsArray::numElements() const { return 0; }
 
+		SchemaElementDefinition ElementReferenceFieldExceptionsArray::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("FieldException"));
+			return result;
+		}
+
 		bool ElementReferenceFieldExceptionsArray::isNull() const { return false; }
 		bool ElementReferenceFieldExceptionsArray::isArray() const { return true; }
 		bool ElementReferenceFieldExceptionsArray::isComplexType() const { return false; }

@@ -33,5 +33,13 @@ namespace BEmu
             SEQUENCE = 258,
             CHOICE = 259,
         }
+
+        public enum Status
+        {
+            ACTIVE = 0,
+            DEPRECATED = 1,
+            INACTIVE = 2,
+            PENDING_DEPRECATION = 3,
+        }
     }
 }

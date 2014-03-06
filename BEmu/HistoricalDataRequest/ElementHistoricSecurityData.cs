@@ -54,6 +54,8 @@ namespace BEmu.HistoricalDataRequest
         public override bool IsArray { get { return false; } }
         public override object this[int index] { get { return null; } }
 
+        public override SchemaTypeDefinition TypeDefinition { get { return new SchemaTypeDefinition(this.Datatype, new Name("HistoricalDataTable")); } }
+
         public override IEnumerable<Element> Elements
         {
             get

@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Header Files\IntradayTickRequest">
       <UniqueIdentifier>{4277de55-ff16-4e59-afe2-44245be81865}</UniqueIdentifier>
     </Filter>
@@ -54,6 +50,13 @@
     </Filter>
     <Filter Include="Header Files\IntradayBarRequest">
       <UniqueIdentifier>{d13d5b9d-420e-4423-9fac-3ca6c4cff689}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Exceptions">
+      <UniqueIdentifier>{8b9674ac-7f92-4af4-b589-0e7bf6069f09}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -438,6 +441,51 @@
     <ClInclude Include="headers\Types\DisplayFormats.h">
       <Filter>Header Files\Types</Filter>
     </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\SchemaElementDefinition.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Datatypes.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\Constant.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\ConstantList.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\SchemaTypeDefinition.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\BloombergTypes\SchemaStatus.h">
+      <Filter>Header Files\BloombergTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\Exception.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\DuplicateCorrelationIdException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\InvalidStateException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\InvalidArgumentException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\InvalidConversionException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\IndexOutOfRangeException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\FieldNotFoundException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\UnknownErrorException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Exceptions\UnsupportedOperationException.h">
+      <Filter>Header Files\Exceptions</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp">
@@ -811,6 +859,18 @@
     </ClCompile>
     <ClCompile Include="src\Types\DisplayFormats.cpp">
       <Filter>Source Files\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\SchemaElementDefinition.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\Constant.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\ConstantList.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BloombergTypes\SchemaTypeDefinition.cpp">
+      <Filter>Source Files\BloombergTypes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

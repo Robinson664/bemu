@@ -80,6 +80,13 @@ namespace BEmu
 			return 4;
 		}
 
+		SchemaElementDefinition ElementMarketReason::elementDefinition() const
+		{
+			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
+			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
+			return result;
+		}
+
 		bool ElementMarketReason::isNull() const
 		{
 			return false;
