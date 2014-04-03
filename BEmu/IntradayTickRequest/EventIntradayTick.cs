@@ -44,7 +44,7 @@ namespace BEmu.IntradayTickRequest
             }
             else
             {
-                var tickData = new Dictionary<DateTime, BEmu.Types.Tuple3<string, double, int>>();
+                var tickData = new SortedDictionary<DateTime, BEmu.Types.Tuple3<string, double, int>>();
 
                 if (ireq.DtStart.HasValue)
                 {

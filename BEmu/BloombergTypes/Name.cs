@@ -72,6 +72,11 @@ namespace BEmu
             return result;
         }
 
+        public static bool HasName(string nameString)
+        {
+            return Name._globalNameTable.ContainsKey(nameString);
+        }
+
         public static void FreeGlobalNameTable()
         {
             Name._globalNameTable.Clear();

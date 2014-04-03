@@ -18,7 +18,7 @@ namespace BEmu.IntradayTickRequest
     {
         private readonly ElementIntradayTickDataArray _array;
 
-        internal ElementIntradayTickDataParent(Dictionary<DateTime, BEmu.Types.Tuple3<string, double, int>> ticks, bool includeConditionCodes)
+        internal ElementIntradayTickDataParent(SortedDictionary<DateTime, BEmu.Types.Tuple3<string, double, int>> ticks, bool includeConditionCodes)
         {
             this._array = new ElementIntradayTickDataArray(ticks, includeConditionCodes);
         }
