@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="IntradayBarRequest/ElementIntradayBarSecurityError.cs" company="Jordan Robinson">
+// <copyright project="BEmu" file="IntradayBarRequest/ElementIntradayBarResponseError.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License

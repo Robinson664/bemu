@@ -1,3 +1,12 @@
+//------------------------------------------------------------------------------------------------
+// <copyright project="BEmu_cpp" file="src/SubscriptionEventHandler.cpp" company="Jordan Robinson">
+//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
+//
+//     The use of this software is governed by the Microsoft Public License
+//     which is included with this distribution.
+// </copyright>
+//------------------------------------------------------------------------------------------------
+
 #include "SubscriptionEventHandler.h"
 
 namespace Examples

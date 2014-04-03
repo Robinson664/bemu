@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------
-// <copyright project="BEmuJava" file="BEmu.Types.Formats.java" company="Jordan Robinson">
+// <copyright project="BEmuJava" file="BEmu.Types.DisplayFormats.java" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
