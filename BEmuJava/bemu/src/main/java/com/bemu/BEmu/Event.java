@@ -23,28 +23,28 @@ public abstract class Event {
 		if(request.getClass() == com.bemu.BEmu.IntradayBarRequest.RequestIntradayBar.class)
 		{
 			result = new com.bemu.BEmu.IntradayBarRequest.EventIntradayBar((com.bemu.BEmu.IntradayBarRequest.RequestIntradayBar)request);
-			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
+			result._eventType = isLastRequest ? Event.EventType.RESPONSE : Event.EventType.PARTIAL_RESPONSE;
 			return result;
 		}
 		else if(request.getClass() == com.bemu.BEmu.IntradayTickRequest.RequestIntradayTick.class)
 		{
 			result = new com.bemu.BEmu.IntradayTickRequest.EventIntradayTick((com.bemu.BEmu.IntradayTickRequest.RequestIntradayTick)request);
-			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
+			result._eventType = isLastRequest ? Event.EventType.RESPONSE : Event.EventType.PARTIAL_RESPONSE;
 			return result;
 		}
 		else if(request.getClass() == com.bemu.BEmu.HistoricalDataRequest.RequestHistoric.class)
 		{
 			result = new com.bemu.BEmu.HistoricalDataRequest.EventHistoric((com.bemu.BEmu.HistoricalDataRequest.RequestHistoric)request);
-			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
+			result._eventType = isLastRequest ? Event.EventType.RESPONSE : Event.EventType.PARTIAL_RESPONSE;
 			return result;			
 		}
 		else if(request.getClass() == com.bemu.BEmu.ReferenceDataRequest.RequestReference.class)
 		{
 			result = new com.bemu.BEmu.ReferenceDataRequest.EventReference((com.bemu.BEmu.ReferenceDataRequest.RequestReference)request);
-			result._eventType = isLastRequest ? new EventType(Event.EventType.Constants.RESPONSE) : new EventType(Event.EventType.Constants.PARTIAL_RESPONSE);
+			result._eventType = isLastRequest ? Event.EventType.RESPONSE : Event.EventType.PARTIAL_RESPONSE;
 			return result;
 		}
-		throw new Exception("Todo: return appropriate events from requests");
+		throw new Exception("not implemented");
 	}
 	
 	public MessageIterator messageIterator()
@@ -59,6 +59,19 @@ public abstract class Event {
 	
 	public static class EventType
 	{
+		
+		public boolean equals(Object arg)
+		{
+			if(arg == null)
+				return false;
+			
+			else if(arg.getClass() == EventType.class)
+				return this._value == ((EventType)arg)._value;
+			
+			else
+				return false;
+		}
+		
 		private int _value;
 		
 		public EventType(int value)
@@ -111,5 +124,20 @@ public abstract class Event {
 			public static final int TOKEN_STATUS = 14;
 			public static final int REQUEST = 15;
 		}
+
+		public static final EventType RESPONSE = new EventType(Constants.RESPONSE);
+		public static final EventType PARTIAL_RESPONSE = new EventType(Constants.PARTIAL_RESPONSE);
+		public static final EventType ADMIN = new EventType(Constants.ADMIN);
+		public static final EventType SESSION_STATUS = new EventType(Constants.SESSION_STATUS);
+		public static final EventType SUBSCRIPTION_STATUS = new EventType(Constants.SUBSCRIPTION_STATUS);
+		public static final EventType REQUEST_STATUS = new EventType(Constants.REQUEST_STATUS);
+		public static final EventType SUBSCRIPTION_DATA = new EventType(Constants.SUBSCRIPTION_DATA);
+		public static final EventType SERVICE_STATUS = new EventType(Constants.SERVICE_STATUS);
+		public static final EventType TIMEOUT = new EventType(Constants.TIMEOUT);
+		public static final EventType AUTHORIZATION_STATUS = new EventType(Constants.AUTHORIZATION_STATUS);
+		public static final EventType RESOLUTION_STATUS = new EventType(Constants.RESOLUTION_STATUS);
+		public static final EventType TOPIC_STATUS = new EventType(Constants.TOPIC_STATUS);
+		public static final EventType TOKEN_STATUS = new EventType(Constants.TOKEN_STATUS);
+		public static final EventType REQUEST = new EventType(Constants.REQUEST);
 	}
 }

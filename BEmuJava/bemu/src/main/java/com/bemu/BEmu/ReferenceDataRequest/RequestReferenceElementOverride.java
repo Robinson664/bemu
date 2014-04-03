@@ -38,7 +38,7 @@ public class RequestReferenceElementOverride extends ElementParent
     		return super.getElement(name);
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("overrides");
     }
@@ -53,7 +53,7 @@ public class RequestReferenceElementOverride extends ElementParent
     	return 2;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

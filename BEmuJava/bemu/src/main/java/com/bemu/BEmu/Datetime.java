@@ -11,8 +11,8 @@ package com.bemu.BEmu;
 
 import java.util.Calendar;
 
-public class Datetime {
-	
+public class Datetime implements Comparable<Datetime>
+{	
 	private Calendar _instance;
 	private DateTimeTypeEnum _dateTimeType;
 	
@@ -195,6 +195,11 @@ public class Datetime {
 		}
 		else
 			return false;
+	}
+	
+	public int compareTo(Datetime arg)
+	{
+		return this._instance.compareTo(arg._instance);
 	}
 	
 	public String toString()

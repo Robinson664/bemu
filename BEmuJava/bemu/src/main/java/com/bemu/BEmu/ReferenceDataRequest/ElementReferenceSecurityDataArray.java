@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import com.bemu.BEmu.Name;
 import com.bemu.BEmu.Element;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 public class ElementReferenceSecurityDataArray extends ElementParent
 {
@@ -34,7 +35,12 @@ public class ElementReferenceSecurityDataArray extends ElementParent
         }
     }
     
-    public Name name()
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("ReferenceSecurityData"));
+    }
+    
+    public Name name() throws Exception
     {
     	return new Name("securityData");
     }
@@ -49,7 +55,7 @@ public class ElementReferenceSecurityDataArray extends ElementParent
     	return 0;
     }
     
-    public boolean hasElement(String name)
+    public boolean hasElement(String name) throws Exception
     {
     	for(int i = 0; i < this._securities.size(); i++)
     	{
@@ -65,7 +71,7 @@ public class ElementReferenceSecurityDataArray extends ElementParent
         return this._securities.get(index);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

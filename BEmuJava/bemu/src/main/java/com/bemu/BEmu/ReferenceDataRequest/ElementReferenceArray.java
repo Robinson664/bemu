@@ -16,7 +16,7 @@ public class ElementReferenceArray extends ElementParent
         this._values = elements;
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._name);
     }
@@ -56,7 +56,7 @@ public class ElementReferenceArray extends ElementParent
     	return this._values.get(index);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

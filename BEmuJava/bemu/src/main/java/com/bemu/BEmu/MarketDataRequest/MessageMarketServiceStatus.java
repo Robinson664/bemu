@@ -18,7 +18,7 @@ public class MessageMarketServiceStatus extends Message
 {
     private final ElementMarketString _serviceName;
 
-    MessageMarketServiceStatus(CorrelationID corr)
+    MessageMarketServiceStatus(CorrelationID corr) throws Exception
     {
     	super(new Name("ServiceOpened"), corr, null);
     	
@@ -35,7 +35,7 @@ public class MessageMarketServiceStatus extends Message
 		return "";
 	}
 	
-	public boolean hasElement(String name, boolean excludeNullElements)
+	public boolean hasElement(String name, boolean excludeNullElements) throws Exception
 	{
 		return this._serviceName.name().toString().equals(name);
 	}
@@ -53,7 +53,11 @@ public class MessageMarketServiceStatus extends Message
     {
         StringBuilder result = new StringBuilder();
         result.append(String.format("%s = {%s", this.messageType().toString(), System.getProperty("line.separator")));
-        result.append(this._serviceName.prettyPrint(1));
+        try
+        {
+			result.append(this._serviceName.prettyPrint(1));
+		}
+        catch (Exception e) { }
         result.append("}" + System.getProperty("line.separator"));
 
         return result.toString();

@@ -13,7 +13,7 @@ public class ElementReference extends Element
         this._securities = new ElementReferenceSecurityDataArray((ElementReferenceSecurityDataArray)arg.elements().get(0));
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("securityData");
     }
@@ -57,7 +57,7 @@ public class ElementReference extends Element
             return super.getElement(name);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         StringBuilder result = new StringBuilder();
 

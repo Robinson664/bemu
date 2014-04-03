@@ -16,7 +16,7 @@ public class RequestReferenceElementStringArray extends ElementParent
         this._values = new ArrayList<String>();
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._elementName);
     }
@@ -46,7 +46,7 @@ public class RequestReferenceElementStringArray extends ElementParent
     	return false;
     }
     
-    void addValue(String value)
+    void appendValue(String value)
     {
     	this._values.add(value);
     }

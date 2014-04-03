@@ -27,7 +27,7 @@ public class ElementIntradayBarDouble extends Element
         this._value = value;
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._name);
     }
@@ -72,7 +72,7 @@ public class ElementIntradayBarDouble extends Element
     	return false;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
     	return super.prettyPrintHelper(tabIndent, com.bemu.BEmu.types.Formats.formatDouble2NoCommas(this._value));
     }

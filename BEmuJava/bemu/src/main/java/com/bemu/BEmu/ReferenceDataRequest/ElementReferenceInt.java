@@ -14,7 +14,7 @@ public class ElementReferenceInt extends ElementParent
 		this._value = value;
 	}
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._name);
     }
@@ -49,7 +49,7 @@ public class ElementReferenceInt extends ElementParent
     	return Schema.Datatype.INT32;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
     	return super.prettyPrintHelper(tabIndent, String.valueOf(this._value));
     }

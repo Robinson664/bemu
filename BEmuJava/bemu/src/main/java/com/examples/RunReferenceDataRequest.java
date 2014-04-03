@@ -5,6 +5,8 @@ import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
 
 public class RunReferenceDataRequest
 {
+	private final static java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance();
+	
 	public static void RunExample() throws Exception
 	{
 		SessionOptions soptions = new SessionOptions();
@@ -156,10 +158,10 @@ public class RunReferenceDataRequest
 	                double bid = elmFieldData.getElementAsFloat64("BID");
 	                double ask = elmFieldData.getElementAsFloat64("ASK");
 	                String ticker = elmFieldData.getElementAsString("TICKER");
-	
-	                System.out.println("PX_LAST = " + String.valueOf(pxLast));
-	                System.out.println("BID = " + String.valueOf(bid));
-	                System.out.println("ASK = " + String.valueOf(ask));
+
+	                System.out.println("PX_LAST = " + RunReferenceDataRequest.formatter.format(pxLast));
+	                System.out.println("BID = " + RunReferenceDataRequest.formatter.format(bid));
+	                System.out.println("ASK = " + RunReferenceDataRequest.formatter.format(ask));
 	                System.out.println("TICKER = " + ticker);
 	
 	                boolean excludeNullElements = true;

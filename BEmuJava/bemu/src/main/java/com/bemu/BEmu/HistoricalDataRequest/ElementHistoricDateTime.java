@@ -22,7 +22,7 @@ public class ElementHistoricDateTime extends ElementParent
         this._date = new Datetime(date);
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("date");
     }
@@ -57,7 +57,7 @@ public class ElementHistoricDateTime extends ElementParent
     	return Schema.Datatype.DATE;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
     	String strDate = com.bemu.BEmu.types.DisplayFormats.HistRef_FormatDate(this._date);
     	return super.prettyPrintHelper(tabIndent, strDate);

@@ -20,7 +20,7 @@ public class ElementMarketSubscriptionCanceled extends ElementParent
         this._reason = (ElementMarketSubscriptionCancelReason)arg.getElement("reason");
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("SubscriptionTerminated");
     }
@@ -50,7 +50,7 @@ public class ElementMarketSubscriptionCanceled extends ElementParent
     	return false;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

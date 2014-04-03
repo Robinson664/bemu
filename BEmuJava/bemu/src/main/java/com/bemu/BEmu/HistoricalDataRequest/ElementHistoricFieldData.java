@@ -11,6 +11,7 @@ package com.bemu.BEmu.HistoricalDataRequest;
 
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class ElementHistoricFieldData extends ElementParent
 {
 	private final Map<String, ElementParent> _fields;
 	
-	ElementHistoricFieldData(Datetime date, Map<String, Object> values)
+	ElementHistoricFieldData(Datetime date, Map<String, Object> values) throws Exception
 	{
 		this._fields = new HashMap<String, ElementParent>();
 		
@@ -35,8 +36,13 @@ public class ElementHistoricFieldData extends ElementParent
 			}
 		}
 	}
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("HistoricalDataRow"));
+    }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("fieldData");
     }
@@ -116,7 +122,7 @@ public class ElementHistoricFieldData extends ElementParent
 		return this._fields.containsKey(name);
 	}
 	
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

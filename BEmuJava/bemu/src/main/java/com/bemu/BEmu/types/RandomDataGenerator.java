@@ -254,7 +254,8 @@ public class RandomDataGenerator
 	
     public static double randomDouble()
     {
-        return RandomDataGenerator.randomDouble(0, 1) * 100d;
+        //return RandomDataGenerator.randomDouble(0, 1) * 100d;
+    	return RandomDataGenerator._rand.nextDouble() * 100d;
     }
 	
 	public static double randomDouble(double low, double high)

@@ -14,6 +14,7 @@ import java.util.List;
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Name;
 import com.bemu.BEmu.Element;
+import com.bemu.BEmu.SchemaTypeDefinition;
 import com.bemu.BEmu.types.Rules;
 
 public class ElementHistoricSecurityData extends ElementParent
@@ -26,7 +27,7 @@ public class ElementHistoricSecurityData extends ElementParent
     private final boolean _isSecurityError;
     private final int _numElements;
 
-    ElementHistoricSecurityData(String securityName, List<String> badFields, Map<Datetime, Map<String, Object>> fieldData, int sequenceNumber)
+    ElementHistoricSecurityData(String securityName, List<String> badFields, Map<Datetime, Map<String, Object>> fieldData, int sequenceNumber) throws Exception
     {
         this._isSecurityError = Rules.isSecurityError(securityName);
 
@@ -53,7 +54,12 @@ public class ElementHistoricSecurityData extends ElementParent
         this._numElements = this._elmFieldExceptions == null ? 3 : 4;
     }
     
-    public Name name()
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("HistoricalDataTable"));
+    }
+    
+    public Name name() throws Exception
     {
     	return new Name("securityData");
     }
@@ -135,7 +141,7 @@ public class ElementHistoricSecurityData extends ElementParent
     		return super.getElementAsInt32(name);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

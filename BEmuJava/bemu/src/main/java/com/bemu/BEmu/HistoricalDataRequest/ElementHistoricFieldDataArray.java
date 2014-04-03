@@ -15,12 +15,13 @@ import java.util.Map;
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Name;
 import com.bemu.BEmu.Element;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 public class ElementHistoricFieldDataArray extends ElementParent
 {
 	private final List<ElementHistoricFieldData> _fieldData;
 	
-	ElementHistoricFieldDataArray(Map<Datetime, Map<String, Object>> fieldData)
+	ElementHistoricFieldDataArray(Map<Datetime, Map<String, Object>> fieldData) throws Exception
 	{
 		this._fieldData = new ArrayList<ElementHistoricFieldData>();
 		
@@ -30,13 +31,18 @@ public class ElementHistoricFieldDataArray extends ElementParent
 			this._fieldData.add(elmFieldData);
 		}
 	}
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("HistoricalDataRow"));
+    }
 	
 	public Element getValueAsElement(int index)
 	{
 		return this._fieldData.get(index);
 	}
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("fieldData");
     }
@@ -66,7 +72,7 @@ public class ElementHistoricFieldDataArray extends ElementParent
     	return false;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

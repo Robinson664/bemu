@@ -12,6 +12,7 @@ package com.bemu.BEmu.IntradayTickRequest;
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 import java.lang.StringBuilder;
 import java.util.Map;
@@ -22,7 +23,7 @@ public class ElementIntradayTickData extends ElementParent
 	private final Map<String, ElementParent> _fields; //for getElement(String)
 	private final ElementParent[] _fieldsArr; //for getElement(int)
 	
-	ElementIntradayTickData(Datetime datetime, String type, double value, int size, boolean includeConditionCodes)
+	ElementIntradayTickData(Datetime datetime, String type, double value, int size, boolean includeConditionCodes) throws Exception
 	{
 		this._fields = new HashMap<String, ElementParent>();
 		
@@ -55,8 +56,13 @@ public class ElementIntradayTickData extends ElementParent
     		this._fieldsArr[4] = elmConditionCodes;
         }
 	}
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("IntradayTickData"));
+    }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("tickData");
     }
@@ -152,7 +158,7 @@ public class ElementIntradayTickData extends ElementParent
     	return this._fields.containsKey(name);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

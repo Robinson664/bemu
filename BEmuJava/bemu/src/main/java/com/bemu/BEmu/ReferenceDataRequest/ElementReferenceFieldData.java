@@ -7,6 +7,7 @@ import java.util.Map;
 import com.bemu.BEmu.Name;
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Datetime;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 public class ElementReferenceFieldData extends ElementParent
 {
@@ -42,11 +43,15 @@ public class ElementReferenceFieldData extends ElementParent
         	}
         	else if(itemValue instanceof ElementReferenceArrayChainTickers)
                 this._fields.add((ElementReferenceArrayChainTickers)itemValue);
-        	
         }
     }
     
-    public Name name()
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("ReferenceFieldData"));
+    }
+    
+    public Name name() throws Exception
     {
     	return new Name("fieldData");
     }
@@ -79,7 +84,7 @@ public class ElementReferenceFieldData extends ElementParent
     	return super.getElement(name);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();
@@ -95,12 +100,12 @@ public class ElementReferenceFieldData extends ElementParent
         return result;
     }
     
-    public boolean hasElement(String name)
+    public boolean hasElement(String name) throws Exception
     {
     	return this.hasElement(name, false);
     }
     
-    public boolean hasElement(String name, boolean excludeNullElements)
+    public boolean hasElement(String name, boolean excludeNullElements) throws Exception
     {
     	for(int i = 0; i < this._fields.size(); i++)
     	{

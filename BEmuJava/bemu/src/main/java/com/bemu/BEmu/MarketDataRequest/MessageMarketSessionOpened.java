@@ -14,7 +14,7 @@ import com.bemu.BEmu.Message;
 
 public class MessageMarketSessionOpened extends Message
 {
-    MessageMarketSessionOpened()
+    MessageMarketSessionOpened() throws Exception
     {
     	super(new Name("SessionStarted"), null, null);
     }

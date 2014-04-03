@@ -21,13 +21,13 @@ import com.bemu.BEmu.types.Rules;
 
 public class EventHistoric extends Event
 {
-    public EventHistoric(RequestHistoric request)
+    public EventHistoric(RequestHistoric request) throws Exception
     {
         super._request = request;
         super._messages = this.generateMessages();
     }
 
-    private List<Message> generateMessages()
+    private List<Message> generateMessages() throws Exception
     {
     	List<Message> result = new ArrayList<Message>();
     	RequestHistoric hreq = (RequestHistoric)super._request;
@@ -61,7 +61,8 @@ public class EventHistoric extends Event
     					List<String> hfields = hreq.fields();
     					for(int k = 0; k < hfields.size(); k++)
     					{
-    						fields.put(hfields.get(k), com.bemu.BEmu.types.RandomDataGenerator.randomDouble());
+    						double dbl = com.bemu.BEmu.types.RandomDataGenerator.randomDouble();
+    						fields.put(hfields.get(k), dbl);
     					}
 
     					fieldData.put(current, fields);

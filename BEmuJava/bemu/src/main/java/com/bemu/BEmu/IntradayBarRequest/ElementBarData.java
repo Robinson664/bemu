@@ -11,6 +11,7 @@ package com.bemu.BEmu.IntradayBarRequest;
 
 import java.util.List;
 import com.bemu.BEmu.Element;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 import com.bemu.BEmu.Name;
 
@@ -23,7 +24,12 @@ public class ElementBarData extends Element
         this._array = new ElementBarTickDataArray(bars);
     }
     
-    public Name name()
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("BarData"));
+    }
+    
+    public Name name() throws Exception
     {
     	return new Name("barData");
     }
@@ -61,7 +67,7 @@ public class ElementBarData extends Element
     		return super.getElement(name);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

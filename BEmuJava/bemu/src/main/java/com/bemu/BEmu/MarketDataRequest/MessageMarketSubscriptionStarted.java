@@ -23,7 +23,7 @@ public class MessageMarketSubscriptionStarted extends Message
     private final ElementMarketNull _exceptionsNull;
     private final ElementMarketExceptionsArray _exceptionsBadFields;
 
-    MessageMarketSubscriptionStarted(Subscription sub)
+    MessageMarketSubscriptionStarted(Subscription sub) throws Exception
     {
     	super(new Name("SubscriptionStarted"), sub.correlationID(), null);
     	
@@ -53,7 +53,7 @@ public class MessageMarketSubscriptionStarted extends Message
         }
     }
 	
-	public boolean hasElement(String name, boolean excludeNullElements)
+	public boolean hasElement(String name, boolean excludeNullElements) throws Exception
 	{
 		return (this._exceptionsNull != null && this._exceptionsNull.name().toString().equals(name)) ||
 				(this._exceptionsBadFields != null && this._exceptionsBadFields.name().toString().equals(name));
@@ -92,7 +92,11 @@ public class MessageMarketSubscriptionStarted extends Message
     	{
             StringBuilder strb = new StringBuilder();
             strb.append(String.format("SubscriptionStarted = {%s", this.messageType().toString(), System.getProperty("line.separator")));
-            strb.append(this._exceptionsBadFields.prettyPrint(1));
+            try
+            {
+            	strb.append(this._exceptionsBadFields.prettyPrint(1));
+    		}
+    	    catch (Exception e) { }
             strb.append("}" + System.getProperty("line.separator"));
             result = strb.toString();
     	}

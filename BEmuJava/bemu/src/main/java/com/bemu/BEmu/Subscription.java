@@ -13,7 +13,6 @@ public class Subscription
     }
 
     private final List<String> _fields;
-    //Don't use this.  It doesn't exist in the actual Bloomberg API
     public List<String> fields()
     {
     	return this._fields;

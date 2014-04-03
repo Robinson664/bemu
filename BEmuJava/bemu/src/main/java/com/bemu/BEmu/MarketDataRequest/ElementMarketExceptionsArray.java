@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 public class ElementMarketExceptionsArray extends ElementParent
 {
@@ -19,13 +20,18 @@ public class ElementMarketExceptionsArray extends ElementParent
         	this._exceptions.add(new ElementMarketExceptions(item));
         }
     }
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("SubscriptionException"));
+    }
 	
 	public Element getValueAsElement(int index)
 	{
 		return this._exceptions.get(index);
 	}
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("exceptions");
     }
@@ -60,7 +66,7 @@ public class ElementMarketExceptionsArray extends ElementParent
     	return this._exceptions.get(index);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

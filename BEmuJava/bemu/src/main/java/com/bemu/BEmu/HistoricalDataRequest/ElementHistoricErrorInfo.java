@@ -11,6 +11,7 @@ package com.bemu.BEmu.HistoricalDataRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 import com.bemu.BEmu.types.RandomDataGenerator;
 
 public class ElementHistoricErrorInfo extends ElementParent
@@ -28,8 +29,13 @@ public class ElementHistoricErrorInfo extends ElementParent
         this._message = new ElementHistoricString("message", "Invalid field");
         this._subCategory = new ElementHistoricString("subcategory", "NOT_APPLICABLE_TO_HIST_DATA");
     }
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("ErrorInfo"));
+    }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("errorInfo");
     }
@@ -89,7 +95,7 @@ public class ElementHistoricErrorInfo extends ElementParent
     			name.equals("subcategory");
     }    
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

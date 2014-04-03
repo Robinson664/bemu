@@ -24,7 +24,7 @@ public class MessageMarketSubscriptionData extends Message
     private final Map<String, ElementParent> _fields;
     private final String _security;
 
-    MessageMarketSubscriptionData(Subscription sub, Map<String, Object> fields)
+    MessageMarketSubscriptionData(Subscription sub, Map<String, Object> fields) throws Exception
     {
     	super(new Name("MarketDataEvents"), sub.correlationID(), null);
     	
@@ -83,7 +83,7 @@ public class MessageMarketSubscriptionData extends Message
     	return this._fields.size();
     }
 	
-	public boolean hasElement(String name, boolean excludeNullElements)
+	public boolean hasElement(String name, boolean excludeNullElements) throws Exception
 	{
 		for(Entry<String, ElementParent> item : this._fields.entrySet())
 		{
@@ -109,10 +109,14 @@ public class MessageMarketSubscriptionData extends Message
 
         result.append(String.format("%s = {%s", this.messageType().toString(), System.getProperty("line.separator")));
         
-        for(Entry<String, ElementParent> item : this._fields.entrySet())
+        try
         {
-        	result.append(item.getValue().prettyPrint(1));
-        }
+	        for(Entry<String, ElementParent> item : this._fields.entrySet())
+	        {
+	        	result.append(item.getValue().prettyPrint(1));
+	        }
+		}
+	    catch (Exception e) { }
         result.append(String.format("}%s", System.getProperty("line.separator")));
         
         return result.toString();

@@ -11,6 +11,7 @@ package com.bemu.BEmu.MarketDataRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 import com.bemu.BEmu.types.RandomDataGenerator;
 
 public class ElementMarketReason extends ElementParent
@@ -37,8 +38,13 @@ public class ElementMarketReason extends ElementParent
             this._description = new ElementMarketString("description", "Unknown Field");
         }
     }
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("ErrorInfo"));
+    }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("reason");
     }
@@ -95,12 +101,12 @@ public class ElementMarketReason extends ElementParent
     		throw new Exception("name not recognized. names are case-sensitive.");
     }
     
-    public boolean hasElement(String name, boolean excludeNullElements)
+    public boolean hasElement(String name, boolean excludeNullElements) throws Exception
     {
     	return this.hasElement(name);
     }
     
-    public boolean hasElement(String name)
+    public boolean hasElement(String name) throws Exception
     {
     	return 
     			name.equals("source") || 
@@ -109,7 +115,7 @@ public class ElementMarketReason extends ElementParent
     			name.equals("description");
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

@@ -25,7 +25,7 @@ public class RequestIntradayTickElementString extends Element
         this._value = value;
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._elementName);
     }

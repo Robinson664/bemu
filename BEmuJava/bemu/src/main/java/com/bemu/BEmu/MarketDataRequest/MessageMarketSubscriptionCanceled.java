@@ -19,7 +19,7 @@ public class MessageMarketSubscriptionCanceled extends Message
     private final String _topicName;
     private final ElementMarketSubscriptionCancelReason _reason;
 
-    MessageMarketSubscriptionCanceled(Subscription sub)
+    MessageMarketSubscriptionCanceled(Subscription sub) throws Exception
     {
     	super(new Name("SubscriptionTerminated"), sub.correlationID(), null);
     	
@@ -37,7 +37,7 @@ public class MessageMarketSubscriptionCanceled extends Message
 		return this._topicName;
 	}
 	
-	public boolean hasElement(String name, boolean excludeNullElements)
+	public boolean hasElement(String name, boolean excludeNullElements) throws Exception
 	{
 		return this._reason.name().toString().equals(name);
 	}
@@ -55,7 +55,11 @@ public class MessageMarketSubscriptionCanceled extends Message
     {
         StringBuilder result = new StringBuilder();
         result.append(String.format("%s = {%s", this.messageType().toString(), System.getProperty("line.separator")));
-        result.append(this._reason.prettyPrint(1));
+        try
+        {
+        	result.append(this._reason.prettyPrint(1));
+		}
+	    catch (Exception e) { }
         result.append("}" + System.getProperty("line.separator"));
 
         return result.toString();

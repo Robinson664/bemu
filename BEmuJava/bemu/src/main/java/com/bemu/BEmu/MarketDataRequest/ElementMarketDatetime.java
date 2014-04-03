@@ -25,7 +25,7 @@ public class ElementMarketDatetime extends ElementParent
         this._name = name;
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._name);
     }
@@ -60,7 +60,7 @@ public class ElementMarketDatetime extends ElementParent
     	return Schema.Datatype.DATETIME;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
     	return super.prettyPrintHelper(tabIndent, this._date.toString());
     }

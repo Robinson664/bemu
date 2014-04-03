@@ -21,7 +21,7 @@ public class ElementReference extends ElementParent
     	this._security = msg.security();
     }
 
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("securityData");
     }
@@ -56,7 +56,7 @@ public class ElementReference extends ElementParent
     	return Schema.Datatype.CHOICE;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

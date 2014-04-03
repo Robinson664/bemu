@@ -25,7 +25,7 @@ public class ElementMarketTime extends ElementParent
         this._name = name;
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._name);
     }
@@ -60,7 +60,7 @@ public class ElementMarketTime extends ElementParent
     	return Schema.Datatype.TIME;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
     	String strDate = com.bemu.BEmu.types.DisplayFormats.MarketDataRequests_FormatDateZone(this._date);
     	return super.prettyPrintHelper(tabIndent, strDate);

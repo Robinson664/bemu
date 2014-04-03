@@ -23,7 +23,7 @@ public class MessageIntradayBar extends Message
     private final ElementIntradayBarResponseError _responseError;
     private final boolean _isResponseError;
 	
-    public MessageIntradayBar(CorrelationID corr, Service service, String security)
+    public MessageIntradayBar(CorrelationID corr, Service service, String security) throws Exception
     {
     	super(new Name("IntradayBarResponse"), corr, service);
         this._responseError = new ElementIntradayBarResponseError(security);
@@ -32,7 +32,7 @@ public class MessageIntradayBar extends Message
     }
     
     
-	public MessageIntradayBar(CorrelationID corr, List<BarTickDataType> bars, Service service)
+	public MessageIntradayBar(CorrelationID corr, List<BarTickDataType> bars, Service service) throws Exception
 	{
 		super(new Name("IntradayBarResponse"), corr, service);
 		this._parent = new ElementBarData(bars);
@@ -40,12 +40,12 @@ public class MessageIntradayBar extends Message
         this._isResponseError = false;
 	}
 	
-	public boolean hasElement(String name)
+	public boolean hasElement(String name) throws Exception
 	{
 		return this.hasElement(name, false);
 	}
 	
-	public boolean hasElement(String name, boolean excludeNullElements)
+	public boolean hasElement(String name, boolean excludeNullElements) throws Exception
 	{
 		return 
 				(this._isResponseError && name.equals(this._responseError.name().toString())) ||
@@ -83,10 +83,14 @@ public class MessageIntradayBar extends Message
         StringBuilder result = new StringBuilder();
         result.append("IntradayBarResponse (choice) = {" + System.getProperty("line.separator"));
         
-        if(this._isResponseError)
-        	result.append(this._responseError.prettyPrint(1));
-        else        
-        	result.append(this._parent.prettyPrint(1));
+        try
+    	{
+	        if(this._isResponseError)
+				result.append(this._responseError.prettyPrint(1));
+			else        
+	        	result.append(this._parent.prettyPrint(1));
+    	}
+        catch (Exception e) { }
         
         result.append("}");
 

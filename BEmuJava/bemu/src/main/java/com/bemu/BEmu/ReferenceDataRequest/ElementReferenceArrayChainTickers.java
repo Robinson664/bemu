@@ -3,6 +3,8 @@ package com.bemu.BEmu.ReferenceDataRequest;
 import java.util.ArrayList;
 import java.util.Calendar;
 import com.bemu.BEmu.Datetime;
+import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 import com.bemu.BEmu.types.RandomDataGenerator;
 
 public class ElementReferenceArrayChainTickers extends ElementReferenceArray
@@ -52,6 +54,10 @@ public class ElementReferenceArrayChainTickers extends ElementReferenceArray
         	ElementParent elm = new ElementReferenceArrayChainTickersItem(ticker, dtExp, optionality, strike);        	
         	super._values.add(elm);
         }
-		
 	}
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("CHAIN_TICKERS"));
+    }
 }

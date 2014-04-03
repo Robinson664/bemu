@@ -83,6 +83,23 @@ public class EventMarket extends Event
         }
     }
 	
+	public EventMarket(EventType evtType, Subscription subscription) throws Exception //use for unsubscribing
+	{
+        this._messages = new ArrayList<Message>();
+
+        switch (evtType.intValue())
+        {
+	        case Event.EventType.Constants.SUBSCRIPTION_STATUS:
+	        {
+	        	this._eventType = evtType;
+	        	MessageMarketSubscriptionCanceled msgCancel = new MessageMarketSubscriptionCanceled(subscription);
+	        	this._messages.add(msgCancel);
+	        }
+	        break;
+        }
+        
+	}
+	
     private static Map<String, Object> GenerateFakeMessageData(Subscription sub)
     {
     	return com.bemu.BEmu.types.RandomDataGenerator.getMarketDataFields(sub.fields());

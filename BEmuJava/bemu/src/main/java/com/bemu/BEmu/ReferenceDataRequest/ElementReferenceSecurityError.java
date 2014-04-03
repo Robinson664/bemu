@@ -11,6 +11,7 @@ package com.bemu.BEmu.ReferenceDataRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 import com.bemu.BEmu.types.RandomDataGenerator;
 
 public class ElementReferenceSecurityError extends ElementParent
@@ -29,8 +30,13 @@ public class ElementReferenceSecurityError extends ElementParent
         this._message = new ElementReferenceString("message", String.format("Unknown/Invalid security [nid:%s]", code));
         this._subCategory = new ElementReferenceString("subcategory", "INVALID_SECURITY");
     }
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("ErrorInfo"));
+    }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("securityError");
     }
@@ -85,7 +91,7 @@ public class ElementReferenceSecurityError extends ElementParent
     			name.equals("subcategory");
     } 
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

@@ -10,6 +10,8 @@ import com.bemu.BEmu.*; //un-comment this line to use the Bloomberg API Emulator
 
 public class RunMarketDataSubscription
 {
+	private final static java.text.NumberFormat formatter = java.text.NumberFormat.getCurrencyInstance();
+	
 	public static void RunExample() throws Exception
 	{
 		RunMarketDataSubscription._fields = new ArrayList<String>();
@@ -178,12 +180,18 @@ public class RunMarketDataSubscription
 				for(int i = 0; i < RunMarketDataSubscription._fields.size(); i++)
 				{
 					//This ignores the extraneous fields in the response
-					String field =RunMarketDataSubscription._fields.get(i);
+					String field = RunMarketDataSubscription._fields.get(i);
 					if(message.hasElement(field, true)) //be careful, excludeNullElements is false by default
 					{
 						Element elmField = message.getElement(field);
 						
-						String output = String.format("%s: %s, %s", fmt.format(new Date()), security, elmField.toString().trim());
+						String strValue;
+						if(elmField.datatype() == Schema.Datatype.FLOAT64)
+							strValue = RunMarketDataSubscription.formatter.format(elmField.getValueAsFloat64());
+						else
+							strValue = elmField.toString().trim();
+						
+						String output = String.format("%s: %s, %s", fmt.format(new Date()), security, strValue); 
 						System.out.println(output);
 					}
 				}

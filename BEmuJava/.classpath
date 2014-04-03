@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="bemu/src/main/java"/>
-	<classpathentry kind="lib" path="C:/Users/jrobinson.FOREFRONT/Documents/eclipse/BEmu_maven/bemu/target/bemu-1.0-SNAPSHOT.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/jrobinson.FOREFRONT/Documents/eclipse/BEmu_maven/bemu/src/main/java/com/bloomberglp/blpapi-3.6.1-0.jar"/>
+	<classpathentry kind="lib" path="BEmu_lib/bemu-1.0-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="BEmu_lib/blpapi-3.6.1-0.jar"/>
 	<classpathentry kind="output" path="bemu/target/test-classes"/>
 </classpath>

@@ -17,18 +17,19 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.TreeMap;
+import java.util.Iterator;
 import com.bemu.BEmu.types.Rules;
 
 public class EventIntradayTick extends Event
 {	
-	public EventIntradayTick(RequestIntradayTick request)
+	public EventIntradayTick(RequestIntradayTick request) throws Exception
 	{
 		super._request = request;
 		super._messages = this.generateMessages();
 	}
 	
-	private List<Message> generateMessages()
+	private List<Message> generateMessages() throws Exception
 	{
 		List<Message> result = new ArrayList<Message>();
 		RequestIntradayTick ireq = (RequestIntradayTick)super._request;
@@ -43,14 +44,15 @@ public class EventIntradayTick extends Event
         }
         else
         {		
-			Map<Datetime, Tuple3<String, Double, Integer>> tickData = new HashMap<Datetime, Tuple3<String, Double, Integer>>();
+			Map<Datetime, Tuple3<String, Double, Integer>> tickData = new TreeMap<Datetime, Tuple3<String, Double, Integer>>();
 			
 			if(ireq.dtStart() != null)
 			{
 				List<Datetime> dates = ireq.getDates();
-				for(int i = 0; i < dates.size(); i++)
+				Iterator<Datetime> iterator = dates.iterator();
+				while (iterator.hasNext())
 				{
-					Datetime dtCurrent = dates.get(i);
+					Datetime dtCurrent = iterator.next();
 					if(dtCurrent.calendar().get(Calendar.DAY_OF_WEEK) != Calendar.SATURDAY && dtCurrent.calendar().get(Calendar.DAY_OF_WEEK) != Calendar.SUNDAY)
 					{
 						String t1 = "TRADE";

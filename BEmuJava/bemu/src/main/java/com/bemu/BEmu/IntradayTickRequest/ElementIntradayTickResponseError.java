@@ -2,6 +2,7 @@ package com.bemu.BEmu.IntradayTickRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 import com.bemu.BEmu.types.RandomDataGenerator;
 
 public class ElementIntradayTickResponseError extends ElementParent
@@ -22,7 +23,12 @@ public class ElementIntradayTickResponseError extends ElementParent
         this._subCategory = new ElementIntradayTickString("subcategory", "INVALID_SECURITY");
     }
     
-    public Name name()
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("ErrorInfo"));
+    }
+    
+    public Name name() throws Exception
     {
     	return new Name("responseError");
     }
@@ -92,7 +98,7 @@ public class ElementIntradayTickResponseError extends ElementParent
     			name.equals("code");
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

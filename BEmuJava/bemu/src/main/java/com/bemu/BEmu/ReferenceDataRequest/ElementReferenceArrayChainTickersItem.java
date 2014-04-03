@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 public class ElementReferenceArrayChainTickersItem extends ElementParent
 {
@@ -22,7 +23,12 @@ public class ElementReferenceArrayChainTickersItem extends ElementParent
         this._element = new ElementReferenceString("Ticker", optionTicker);
     }
     
-    public Name name()
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("CHAIN_TICKERS"));
+    }
+    
+    public Name name() throws Exception
     {
     	return new Name("Ticker");
     }
@@ -61,7 +67,7 @@ public class ElementReferenceArrayChainTickersItem extends ElementParent
     		return super.getElementAsString(name);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

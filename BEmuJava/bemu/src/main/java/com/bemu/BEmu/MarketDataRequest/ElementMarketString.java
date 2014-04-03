@@ -23,7 +23,7 @@ public class ElementMarketString extends ElementParent
         this._value = value;
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._name);
     }
@@ -58,7 +58,7 @@ public class ElementMarketString extends ElementParent
     	return Schema.Datatype.STRING;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
     	return super.prettyPrintHelper(tabIndent, String.valueOf(this._value));
     }

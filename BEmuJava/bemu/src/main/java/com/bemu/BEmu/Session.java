@@ -171,6 +171,37 @@ public class Session {
         }
     }
     
+    public void unsubscribe(CorrelationID corr) throws Exception
+    {
+    	synchronized (this._syncroot) //protect _subscriptions
+    	{
+    		for(int i = this._subscriptions.size() - 1; i >= 0; i--)
+    		{
+    			Subscription sub = this._subscriptions.get(i); 
+    			if(sub.correlationID().equals(corr))
+    			{
+    				Event.EventType evttSub = new Event.EventType(Event.EventType.Constants.SUBSCRIPTION_STATUS);
+    				EventMarket evtSubCancel = new EventMarket(evttSub, sub);
+    				
+    				if (this._asyncHandler != null)
+    		        {
+    		            this._asyncHandler.processEvent(evtSubCancel, this);
+    		        }    				
+    				
+    				this._subscriptions.remove(i);
+    			}
+    		}
+    	}
+    }
+
+    public void unsubscribe(SubscriptionList subs) throws Exception
+    {
+    	for(int i = 0; i < subs.size(); i++)
+    	{
+    		this.unsubscribe(subs.get(i).correlationID());
+    	}
+    }
+    
     public boolean startAsync() throws Exception
     {
         this._sessionState = SessionStateType.started;
@@ -195,7 +226,8 @@ public class Session {
 
     public void stop()
     {
-        this._isMarketSimulatorRunning.set(false);
+    	if(this._isMarketSimulatorRunning != null)
+    		this._isMarketSimulatorRunning.set(false);
     }
     
     private class MarketSimulatorTypeClass extends java.lang.Thread
@@ -232,9 +264,14 @@ public class Session {
             	Event.EventType evtt = new Event.EventType(Event.EventType.Constants.SUBSCRIPTION_DATA);            	
                 try
                 {
-    				EventMarket evt = new EventMarket(evtt, null, subsToUse);
-    				if(this._session._asyncHandler != null)
-    					this._session._asyncHandler.processEvent(evt, this._session);
+                	if(subsToUse.size() > 0)
+                	{
+	    				EventMarket evt = new EventMarket(evtt, null, subsToUse);
+	    				if(this._session._asyncHandler != null)
+	    				{
+	    					this._session._asyncHandler.processEvent(evt, this._session);
+	    				}
+                	}
     			}
                 catch (Exception e)
                 {

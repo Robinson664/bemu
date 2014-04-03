@@ -12,6 +12,7 @@ package com.bemu.BEmu.IntradayTickRequest;
 import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class ElementIntradayTickDataArray extends ElementParent
 {
 	private List<ElementIntradayTickData> _tickData;
 	
-	ElementIntradayTickDataArray(Map<Datetime, Tuple3<String, Double, Integer>> ticks, boolean includeConditionCodes)
+	ElementIntradayTickDataArray(Map<Datetime, Tuple3<String, Double, Integer>> ticks, boolean includeConditionCodes) throws Exception
 	{
 		this._tickData = new ArrayList<ElementIntradayTickData>();
 		
@@ -38,13 +39,18 @@ public class ElementIntradayTickDataArray extends ElementParent
 			this._tickData.add(elmFieldData);
 		}
 	}
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("IntradayTickData"));
+    }
 	
 	public Element getValueAsElement(int index)
 	{
 		return this._tickData.get(index);
 	}
 
-	public Name name()
+	public Name name() throws Exception
 	{
 		return new Name("tickData");
 	}
@@ -79,12 +85,12 @@ public class ElementIntradayTickDataArray extends ElementParent
     	return this._tickData.get(index);
     }
 	
-	protected StringBuilder prettyPrint(int tabIndent)
+	protected StringBuilder prettyPrint(int tabIndent) throws Exception
 	{
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();
 
-        result.append(String.format("%s%s[] = {%s", tabs, this.name().toString(), System.getProperty("line.separator")));
+		result.append(String.format("%s%s[] = {%s", tabs, this.name().toString(), System.getProperty("line.separator")));        
         for(int i = 0; i < this._tickData.size(); i++)
         {
         	result.append(this._tickData.get(i).prettyPrint(tabIndent + 1));

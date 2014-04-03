@@ -16,18 +16,30 @@ import com.bemu.BEmu.Datetime;
 import com.bemu.BEmu.Schema;
 
 public abstract class Element {
-	protected abstract StringBuilder prettyPrint(int tabIndent);
-	public abstract Name name();
+	protected abstract StringBuilder prettyPrint(int tabIndent) throws Exception;
+	public abstract Name name() throws Exception;
 	public abstract int numValues();
 	public abstract int numElements();
 	public Schema.Datatype datatype() { return Schema.Datatype.SEQUENCE; }
 	
+	public SchemaTypeDefinition typeDefinition() throws Exception
+	{
+		return new SchemaTypeDefinition(this.datatype());
+	}
+	
 	public String toString()
 	{
-		return this.prettyPrint(0).toString();
+		try
+		{
+			return this.prettyPrint(0).toString();
+		}
+		catch (Exception e)
+		{
+			return "exception thrown";
+		}
 	}
 
-    protected StringBuilder prettyPrintHelper(int tabIndent, String value)
+    protected StringBuilder prettyPrintHelper(int tabIndent, String value) throws Exception
     {
         String tabs = IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder(String.format("%s%s = %s%s", 
@@ -98,7 +110,7 @@ public abstract class Element {
         throw new Exception("Element doesn't support getting elements as Float64");
     }
 
-    public boolean getElementAsBoolean(Name name) throws Exception { return this.getElementAsBool(name.toString()); }
+    public boolean getElementAsBool(Name name) throws Exception { return this.getElementAsBool(name.toString()); }
     public boolean getElementAsBool(String name) throws Exception
     {
         throw new Exception("Element doesn't support getting elements as bool");
@@ -114,6 +126,16 @@ public abstract class Element {
     public Element getValueAsElement(int index) throws Exception
     {
         throw new Exception("Element doesn't support getting values as elements (index)");
+    }
+    
+    public boolean getValueAsBool() throws Exception
+    {
+        throw new Exception("Element doesn't support getValueAsBool");
+    }
+    
+    public boolean getValueAsBool(int index) throws Exception
+    {
+        throw new Exception("Element doesn't support getValueAsBool by index");
     }
 
     public String getValueAsString(int i) throws Exception

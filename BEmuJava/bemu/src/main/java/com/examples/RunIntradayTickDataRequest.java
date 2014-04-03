@@ -8,6 +8,7 @@ import java.util.Calendar;
 
 public class RunIntradayTickDataRequest
 {
+	private final static java.text.NumberFormat currency = java.text.NumberFormat.getCurrencyInstance();
 	private static SimpleDateFormat timeFmt = new SimpleDateFormat("HH:mm:ss");
 	
 	public static void RunExample() throws Exception
@@ -36,14 +37,14 @@ public class RunIntradayTickDataRequest
             	
             	//goes back at most 140 days (documentation section 7.2.3)
 	            Calendar cStart = Calendar.getInstance();
-	            cStart.add(Calendar.DAY_OF_MONTH, -1);
+	            cStart.add(Calendar.DAY_OF_MONTH, -3);
 	            cStart.set(Calendar.HOUR, 2);
-	            cStart.set(Calendar.MINUTE, 50);
+	            cStart.set(Calendar.MINUTE, 0);
 				Datetime dtStart = new Datetime(cStart);	
 				request.set("startDateTime", dtStart);		
 	
 	            Calendar cEnd = Calendar.getInstance();
-	            cEnd.add(Calendar.DAY_OF_MONTH, -1);
+	            cEnd.add(Calendar.DAY_OF_MONTH, -3);
 	            cEnd.set(Calendar.HOUR, 3);
 	            cEnd.set(Calendar.MINUTE, 0);
 				Datetime dtEnd = new Datetime(cEnd);
@@ -85,6 +86,7 @@ public class RunIntradayTickDataRequest
             while (continueToLoop)
             {
 				Event evt = session.nextEvent();
+				
 				switch(evt.eventType().intValue())
 				{
 					case Event.EventType.Constants.RESPONSE:
@@ -94,6 +96,20 @@ public class RunIntradayTickDataRequest
 					case Event.EventType.Constants.PARTIAL_RESPONSE:
 						RunIntradayTickDataRequest.processResponseTick(evt, security);
 						break;
+				}
+				
+				if(evt.eventType() == Event.EventType.RESPONSE)
+				{
+					RunIntradayTickDataRequest.processResponseTick(evt, security);
+					continueToLoop = false;
+					
+					System.out.println("response");
+				}
+				else if(evt.eventType() == Event.EventType.PARTIAL_RESPONSE)
+				{
+					RunIntradayTickDataRequest.processResponseTick(evt, security);
+
+					System.out.println("partial response");
 				}
             }
 		}
@@ -137,10 +153,10 @@ public class RunIntradayTickDataRequest
 					double value = elmTickDataItem.getElementAsFloat64("value");
 					int size = elmTickDataItem.getElementAsInt32("size");
 					
-					String out = String.format("%s: %s, %f @ %d",
+					String out = String.format("%s: %s, %s @ %d",
 							RunIntradayTickDataRequest.timeFmt.format(time.calendar().getTime()),
 							type,
-							value,
+							currency.format(value),
 							size); 
 					
 					System.out.println(out);

@@ -21,7 +21,7 @@ public class MessageHistoric extends Message
 {
     private final ElementHistoricSecurityData _security;
     
-    MessageHistoric(CorrelationID corr, String securityName, List<String> badFields, Map<Datetime, Map<String, Object>> fieldData, int sequenceNumber)
+    MessageHistoric(CorrelationID corr, String securityName, List<String> badFields, Map<Datetime, Map<String, Object>> fieldData, int sequenceNumber) throws Exception
     {
     	super(new Name("HistoricalDataResponse"), corr, null);
     	this._security = new ElementHistoricSecurityData(securityName, badFields, fieldData, sequenceNumber);
@@ -45,7 +45,12 @@ public class MessageHistoric extends Message
         StringBuilder result = new StringBuilder();
         
         result.append("HistoricalDataResponse (choice) = {" + System.getProperty("line.separator"));
-        result.append(this._security.prettyPrint(1));
+        try {
+			result.append(this._security.prettyPrint(1));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         result.append("}");
 
         return result.toString();

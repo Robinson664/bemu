@@ -41,7 +41,7 @@ public class RequestReference extends Request
             return super.getElement(name);
     }
     
-    public boolean hasElement(String name)
+    public boolean hasElement(String name) throws Exception
     {
         if (this._securities.name().toString().equals(name))
             return this._securities.values().size() > 0;
@@ -59,10 +59,10 @@ public class RequestReference extends Request
     public void append(String name, String elementValue) throws Exception
     {
     	if(name.equals("securities"))
-    		this._securities.addValue(elementValue);
+    		this._securities.appendValue(elementValue);
     	
     	else if(name.equals("fields"))
-    		this._fields.addValue(elementValue);
+    		this._fields.appendValue(elementValue);
     	
     	else
     		throw new Exception(String.format("BEmu.RequestReference.Append: Element name %s not supported. names are case-sensitive.", name));
@@ -79,8 +79,12 @@ public class RequestReference extends Request
         if (this._fields.numValues() > 0)
             result.append(this._fields.prettyPrint(1));
 
-        if (this._overrides.numValues() > 0)
-            result.append(this._overrides.prettyPrint(1));
+        try
+        {
+			if (this._overrides.numValues() > 0)
+			    result.append(this._overrides.prettyPrint(1));
+		}
+        catch (Exception e) { }
 
         result.append("}");
 

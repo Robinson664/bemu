@@ -14,7 +14,23 @@ import com.bemu.BEmu.Element;
 
 public abstract class Request 
 {
+	protected Request()
+	{
+		this._operation = new Operation();
+	}
+	
 	private CorrelationID _correlationId;
+	private final Operation _operation;
+	
+	public Operation operation()
+	{
+		return this._operation;
+	}
+	
+	public Element asElement() throws Exception
+	{
+		throw new Exception("not implemented");
+	}
 	
 	public CorrelationID correlationId()
 	{

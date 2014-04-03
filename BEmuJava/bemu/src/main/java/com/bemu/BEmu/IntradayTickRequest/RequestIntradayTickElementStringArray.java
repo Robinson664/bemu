@@ -26,7 +26,7 @@ public class RequestIntradayTickElementStringArray extends Element
         this._values = new ArrayList<String>();
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._elementName);
     }

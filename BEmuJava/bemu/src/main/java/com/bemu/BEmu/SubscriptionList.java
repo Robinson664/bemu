@@ -21,4 +21,21 @@ public class SubscriptionList
 	{
 		return this._subscriptions;
 	}
+	
+	public Subscription remove(int index)
+	{
+		Subscription result = this._subscriptions.get(index);
+		this._subscriptions.remove(index);
+		return result;
+	}
+	
+	public int size()
+	{
+		return this._subscriptions.size();
+	}
+	
+	public Subscription get(int index)
+	{
+		return this._subscriptions.get(index);
+	}
 }

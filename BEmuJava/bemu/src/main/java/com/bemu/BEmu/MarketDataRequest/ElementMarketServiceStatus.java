@@ -22,7 +22,7 @@ public class ElementMarketServiceStatus extends Element
         this._serviceName = (ElementMarketString)arg.getElement("serviceName");
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("ServiceOpened");
     }
@@ -57,7 +57,7 @@ public class ElementMarketServiceStatus extends Element
     	return Schema.Datatype.SEQUENCE;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         StringBuilder result = new StringBuilder();
 

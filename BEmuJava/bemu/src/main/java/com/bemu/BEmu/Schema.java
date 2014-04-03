@@ -21,11 +21,33 @@ public class Schema
 		
 	    private final int index;   
 
-	    Datatype(int index) {
+	    Datatype(int index)
+	    {
 	        this.index = index;
 	    }
 
-	    public int index() { 
+	    public int index()
+	    { 
+	        return index; 
+	    }
+	}
+	
+	public enum Status
+	{
+		ACTIVE(0),
+		DEPRECATED(1),
+		INACTIVE(2),
+		PENDING_DEPRECATION(3);
+
+	    private final int index;  
+
+	    Status(int index)
+	    {
+	        this.index = index;
+	    } 
+
+	    public int index()
+	    { 
 	        return index; 
 	    }
 	}

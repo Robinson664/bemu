@@ -2,6 +2,7 @@ package com.bemu.BEmu.MarketDataRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 public class ElementMarketExceptions extends ElementParent
 {
@@ -13,8 +14,13 @@ public class ElementMarketExceptions extends ElementParent
         this._fieldId = new ElementMarketString("fieldId", badField);
         this._reason = new ElementMarketReason(ElementMarketReason.ReasonTypeEnum.badField);
     }
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("SubscriptionException"));
+    }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("exceptions");
     }
@@ -71,7 +77,7 @@ public class ElementMarketExceptions extends ElementParent
     		throw new Exception("name not recognized. names are case-sensitive.");
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

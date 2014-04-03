@@ -23,7 +23,7 @@ public class ElementMarketSubscriptionStarted extends ElementParent
 		this._exceptions = (ElementMarketNull)arg.getElement("exceptions");
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("SubscriptionStarted");
     }

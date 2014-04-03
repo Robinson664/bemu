@@ -24,7 +24,7 @@ public class MessageIntradayTick extends Message
     private final ElementIntradayTickResponseError _responseError;
     private final boolean _isResponseError;
 	
-    MessageIntradayTick(CorrelationID corr, Map<Datetime, Tuple3<String, Double, Integer>> ticks, boolean includeConditionCodes, Service service)
+    MessageIntradayTick(CorrelationID corr, Map<Datetime, Tuple3<String, Double, Integer>> ticks, boolean includeConditionCodes, Service service) throws Exception
     {
     	super(new Name("IntradayTickResponse"), corr, service);
         this._parent = new ElementIntradayTickDataParent(ticks, includeConditionCodes);
@@ -32,7 +32,7 @@ public class MessageIntradayTick extends Message
         this._isResponseError = false;
     }
     
-    MessageIntradayTick(CorrelationID corr, Service service)
+    MessageIntradayTick(CorrelationID corr, Service service) throws Exception
     {
     	super(new Name("IntradayTickResponse"), corr, service);
         this._parent = null;
@@ -56,12 +56,12 @@ public class MessageIntradayTick extends Message
 		throw new Exception("not implemented. names are case-sensitive.");
 	}
 	
-	public boolean hasElement(String name)
+	public boolean hasElement(String name) throws Exception
 	{
 		return this.hasElement(name, false);
 	}
 	
-	public boolean hasElement(String name, boolean excludeNullElements)
+	public boolean hasElement(String name, boolean excludeNullElements) throws Exception
 	{
 		return 
 				(this._isResponseError && name.equals(this._responseError.name().toString())) ||
@@ -88,11 +88,15 @@ public class MessageIntradayTick extends Message
         StringBuilder result = new StringBuilder();
         result.append("IntradayTickResponse (choice) = {" + System.getProperty("line.separator"));
         
-        if(this._isResponseError)
-        	result.append(this._responseError.prettyPrint(1));
-        
-        else
-        	result.append(this._parent.prettyPrint(1));
+        try
+        {
+			if(this._isResponseError)
+				result.append(this._responseError.prettyPrint(1));
+			
+			else
+				result.append(this._parent.prettyPrint(1));
+		}
+        catch (Exception e) { }
         
         result.append("}");
 

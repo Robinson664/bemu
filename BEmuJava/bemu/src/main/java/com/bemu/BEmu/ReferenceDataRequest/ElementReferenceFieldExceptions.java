@@ -2,6 +2,7 @@ package com.bemu.BEmu.ReferenceDataRequest;
 
 import com.bemu.BEmu.Element;
 import com.bemu.BEmu.Name;
+import com.bemu.BEmu.SchemaTypeDefinition;
 
 public class ElementReferenceFieldExceptions extends ElementParent
 {
@@ -13,8 +14,13 @@ public class ElementReferenceFieldExceptions extends ElementParent
         this._fieldId = new ElementReferenceString("fieldId", badField);
         this._errorInfo = new ElementReferenceErrorInfo();
     }
+    
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("FieldException"));
+    }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("fieldExceptions");
     }
@@ -56,7 +62,7 @@ public class ElementReferenceFieldExceptions extends ElementParent
     	return name.equals("fieldId") || name.equals("errorInfo");
     }
 
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

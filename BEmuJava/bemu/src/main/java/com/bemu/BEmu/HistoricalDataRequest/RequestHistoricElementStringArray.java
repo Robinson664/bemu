@@ -26,7 +26,7 @@ public class RequestHistoricElementStringArray extends Element
         this._values = new ArrayList<String>();
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._elementName);
     }
@@ -56,7 +56,7 @@ public class RequestHistoricElementStringArray extends Element
     	return false;
     }
     
-    void addValue(String value)
+    void appendValue(String value)
     {
     	this._values.add(value);
     }

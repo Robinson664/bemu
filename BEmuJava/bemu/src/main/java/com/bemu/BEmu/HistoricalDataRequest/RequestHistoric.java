@@ -205,10 +205,10 @@ public class RequestHistoric extends Request
     public void append(String name, String elementValue) throws Exception
     {
     	if(name.equals("securities"))
-    		this._securities.addValue(elementValue);
+    		this._securities.appendValue(elementValue);
     	
     	else if(name.equals("fields"))
-    		this._fields.addValue(elementValue);
+    		this._fields.appendValue(elementValue);
     	
     	else
     		throw new Exception("not implemented. names are case-sensitive");

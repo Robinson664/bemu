@@ -25,7 +25,7 @@ public class ElementIntradayBarDateTime extends Element
     	this._date = date;
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("time");
     }
@@ -70,7 +70,7 @@ public class ElementIntradayBarDateTime extends Element
     	return false;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
     	return super.prettyPrintHelper(tabIndent, com.bemu.BEmu.types.DisplayFormats.Intraday_FormatDatetime(this._date));
     }

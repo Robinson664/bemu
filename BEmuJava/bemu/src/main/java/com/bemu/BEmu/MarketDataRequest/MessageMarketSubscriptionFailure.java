@@ -10,7 +10,7 @@ public class MessageMarketSubscriptionFailure extends Message
     private final String _topicName;
     private final ElementMarketReason _reason;
 
-    MessageMarketSubscriptionFailure(Subscription sub)
+    MessageMarketSubscriptionFailure(Subscription sub) throws Exception
     {
     	super(new Name("SubscriptionFailure"), sub.correlationID(), null);
     	
@@ -28,7 +28,7 @@ public class MessageMarketSubscriptionFailure extends Message
     	return 1;
     }
 	
-	public boolean hasElement(String name, boolean excludeNullElements)
+	public boolean hasElement(String name, boolean excludeNullElements) throws Exception
 	{
 		return this._reason.name().toString().equals(name);
 	}
@@ -46,7 +46,11 @@ public class MessageMarketSubscriptionFailure extends Message
         StringBuilder result = new StringBuilder();
 
         result.append(String.format("SubscriptionFailure = {%s", System.getProperty("line.separator")));
-    	result.append(this._reason.prettyPrint(1));        
+    	try
+    	{
+    		result.append(this._reason.prettyPrint(1));
+		}
+	    catch (Exception e) { }        
         result.append(String.format("}%s", System.getProperty("line.separator")));
         
         return result.toString();

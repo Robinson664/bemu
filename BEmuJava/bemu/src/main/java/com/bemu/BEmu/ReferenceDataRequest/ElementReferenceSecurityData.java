@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import com.bemu.BEmu.Name;
 import com.bemu.BEmu.Element;
+import com.bemu.BEmu.SchemaTypeDefinition;
 import com.bemu.BEmu.types.Rules;
 
 public class ElementReferenceSecurityData extends ElementParent
@@ -60,7 +61,12 @@ public class ElementReferenceSecurityData extends ElementParent
         this._numElements = this._elmFieldExceptions == null ? 3 : 4;
     }
     
-    public Name name()
+    public SchemaTypeDefinition typeDefinition() throws Exception
+    {
+    	return new SchemaTypeDefinition(this.datatype(), new Name("ReferenceSecurityData"));
+    }
+    
+    public Name name() throws Exception
     {
     	return new Name("securityData");
     }
@@ -126,7 +132,7 @@ public class ElementReferenceSecurityData extends ElementParent
     		return super.getElementAsInt32(name);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

@@ -20,7 +20,7 @@ public class ElementMarketNull extends ElementParent
 		this._name = name;
 	}
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._name);
     }

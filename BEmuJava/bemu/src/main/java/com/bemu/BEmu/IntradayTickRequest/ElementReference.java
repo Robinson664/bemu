@@ -22,7 +22,7 @@ public class ElementReference extends Element
         this._parent = msg.firstElement();
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("IntradayTickRequest");
     }
@@ -57,7 +57,7 @@ public class ElementReference extends Element
     	return Schema.Datatype.CHOICE;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         StringBuilder result = new StringBuilder();
 

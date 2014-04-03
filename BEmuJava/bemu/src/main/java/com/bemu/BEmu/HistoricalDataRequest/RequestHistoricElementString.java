@@ -22,7 +22,7 @@ public class RequestHistoricElementString extends ElementParent
         this._value = value;
     }
     
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._elementName);
     }

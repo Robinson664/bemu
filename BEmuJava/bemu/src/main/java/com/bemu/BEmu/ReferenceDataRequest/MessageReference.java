@@ -13,7 +13,7 @@ public class MessageReference extends Message
 {
     private final ElementReferenceSecurityDataArray _securities;
 
-    MessageReference(CorrelationID corr, Map<String, Map<String, Object>> fieldData)
+    MessageReference(CorrelationID corr, Map<String, Map<String, Object>> fieldData) throws Exception
     {
     	super(new Name("ReferenceDataResponse"), corr, null);
         this._securities = new ElementReferenceSecurityDataArray(fieldData);
@@ -50,7 +50,7 @@ public class MessageReference extends Message
     	return new ElementReference(this);
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         StringBuilder result = new StringBuilder();
 

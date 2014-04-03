@@ -29,7 +29,7 @@ public class ElementMarketSubscriptionCancelReason extends ElementParent
         this._subCategory = new ElementMarketString("subcategory", "");
     }
 
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name("reason");
     }
@@ -70,7 +70,7 @@ public class ElementMarketSubscriptionCancelReason extends ElementParent
     	return result;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
         String tabs = com.bemu.BEmu.types.IndentType.Indent(tabIndent);
         StringBuilder result = new StringBuilder();

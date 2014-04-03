@@ -15,7 +15,7 @@ public class ElementReferenceDateTime extends ElementParent
         this._name = name;
     }
 	
-    public Name name()
+    public Name name() throws Exception
     {
     	return new Name(this._name);
     }
@@ -50,7 +50,7 @@ public class ElementReferenceDateTime extends ElementParent
     	return Schema.Datatype.DATE;
     }
     
-    protected StringBuilder prettyPrint(int tabIndent)
+    protected StringBuilder prettyPrint(int tabIndent) throws Exception
     {
     	return super.prettyPrintHelper(tabIndent, this._value.toString());
     }
