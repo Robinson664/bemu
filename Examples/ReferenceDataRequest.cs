@@ -56,6 +56,7 @@ namespace Examples
                         //request.Append("fields", "ZPX_LAST"); //the code treats a field that starts with a "Z" as a bad field
                         request.Append("fields", "PX_LAST");
                         request.Append("fields", "BID");
+                        request.Append("fields", "ASK");
                         
                         request.Append("fields", "TICKER");
                         request.Append("fields", "TRADEABLE_DT"); //hard-coded to be treated as a datetime to illustrated datetimes

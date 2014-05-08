@@ -43,15 +43,23 @@ namespace BEmu.ReferenceDataRequest
                     bool isOption = Regex.IsMatch(security.ToUpper(), @"[A-Z]{1,4}\s+\d{6}[CP]\d{8} EQUITY"); //options look like: AAPL 150117C00600000 EQUITY
 
                     var fieldData = new Dictionary<string, object>();
-                    securities.Add(security, fieldData);
+
+                    if (!securities.ContainsKey(security))
+                        securities.Add(security, fieldData);
+                    else
+                    {
+                    }
 
                     List<string> badFields = new List<string>();
                     foreach (var field in rreq.Fields)
                     {
                         object value = Types.RandomDataGenerator.ReferenceDataFromFieldName(field, security, isOption, rreq);
-                        if (value != null)
+                        if (value != null && !fieldData.ContainsKey(field))
                         {
                             fieldData.Add(field, value);
+                        }
+                        else
+                        {
                         }
                     }
                 }

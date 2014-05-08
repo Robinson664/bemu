@@ -248,7 +248,8 @@ namespace BEmu
                     this._asyncHandler(evt, this);
             }
 
-            this._marketSimulatorTimer.Change(conflationIntervalInMilleseconds.GetValueOrDefault((int)Types.RandomDataGenerator.TimeBetweenMarketDataEvents().TotalMilliseconds), Timeout.Infinite);
+            TimeSpan ts = Types.RandomDataGenerator.TimeBetweenMarketDataEvents();
+            this._marketSimulatorTimer.Change(conflationIntervalInMilleseconds.GetValueOrDefault((int)ts.TotalMilliseconds), Timeout.Infinite);
         }
         #endregion
 

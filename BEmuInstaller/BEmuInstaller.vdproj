@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_06DD751DAD164682BF266A2C91691E6B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_11AF553B76EE42B08B56B14613268A06"
         "OwnerKey" = "8:_6849982B5A4A4822896AB79326FA122B"
         "MsmSig" = "8:_UNDEFINED"
@@ -33,12 +39,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_265429C11E904EB9A475E97DCF705CB4"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_52F44E7FC7BF48AB866D2ADCCD4375CE"
         "OwnerKey" = "8:_11AF553B76EE42B08B56B14613268A06"
         "MsmSig" = "8:_UNDEFINED"
@@ -46,6 +46,12 @@
         "Entry"
         {
         "MsmKey" = "8:_6849982B5A4A4822896AB79326FA122B"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_68937CFD3B2B4DBDBEB300F4EAEBB350"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -76,12 +82,6 @@
         "Entry"
         {
         "MsmKey" = "8:_DC3A4310F144420BA6466D20126E5D85"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_FCCB32A0702C4A138F8466566F88F536"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -226,6 +226,26 @@
         }
         "File"
         {
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_06DD751DAD164682BF266A2C91691E6B"
+            {
+            "SourcePath" = "8:..\\BEmu_Java_Examples\\references\\BEmu.jar"
+            "TargetName" = "8:BEmu.jar"
+            "Tag" = "8:"
+            "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_175316D3A46B06032A16A4C83E7D6E34"
             {
             "AssemblyRegister" = "3:1"
@@ -257,9 +277,9 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_265429C11E904EB9A475E97DCF705CB4"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_68937CFD3B2B4DBDBEB300F4EAEBB350"
             {
-            "SourcePath" = "8:..\\BEmu_Java_Examples\\bin\\BEmu_Java_Examples.jar"
+            "SourcePath" = "8:..\\BEmu_Java_Examples\\BEmu_Java_Examples.jar"
             "TargetName" = "8:BEmu_Java_Examples.jar"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
@@ -312,26 +332,6 @@
             {
             "SourcePath" = "8:..\\BEmuJava\\RunJavaExamples.bat"
             "TargetName" = "8:RunJavaExamples.bat"
-            "Tag" = "8:"
-            "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FCCB32A0702C4A138F8466566F88F536"
-            {
-            "SourcePath" = "8:..\\BEmu_Java_Examples\\references\\BEmu.jar"
-            "TargetName" = "8:BEmu.jar"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
             "Condition" = "8:"
@@ -416,7 +416,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BEmuInstaller"
         "ProductCode" = "8:{B36F01DF-D842-4D4A-8DC0-5E1BB510FA98}"
-        "PackageCode" = "8:{A1174813-47E3-4B10-827E-D6AC8970BC44}"
+        "PackageCode" = "8:{7BDE4759-2C13-476F-8579-43EB5790E7AD}"
         "UpgradeCode" = "8:{828A53E8-0B63-4969-8540-9E1FF79CF627}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
