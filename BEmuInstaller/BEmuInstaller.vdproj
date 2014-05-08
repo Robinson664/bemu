@@ -15,20 +15,32 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_0FEB69B1EA1A446E9537577C7D14BE5C"
+        "MsmKey" = "8:_11AF553B76EE42B08B56B14613268A06"
+        "OwnerKey" = "8:_6849982B5A4A4822896AB79326FA122B"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_11AF553B76EE42B08B56B14613268A06"
+        "OwnerKey" = "8:_AC47523A1485422CA8E5E5C3EC000FDD"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_175316D3A46B06032A16A4C83E7D6E34"
+        "OwnerKey" = "8:_A733731D4320491480BE7F90E1C26B14"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_265429C11E904EB9A475E97DCF705CB4"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_2E80DF5FF48C4A868B05492795ACDD0F"
-        "OwnerKey" = "8:_86589FD30C5646079B10206FF4760EB0"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_5915008F4D6654989C1D8CFED572D239"
-        "OwnerKey" = "8:_A733731D4320491480BE7F90E1C26B14"
+        "MsmKey" = "8:_52F44E7FC7BF48AB866D2ADCCD4375CE"
+        "OwnerKey" = "8:_11AF553B76EE42B08B56B14613268A06"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -39,14 +51,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_86589FD30C5646079B10206FF4760EB0"
-        "OwnerKey" = "8:_6849982B5A4A4822896AB79326FA122B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_86589FD30C5646079B10206FF4760EB0"
-        "OwnerKey" = "8:_AC47523A1485422CA8E5E5C3EC000FDD"
+        "MsmKey" = "8:_7383565D5E17AAAF36EF0B73C2CC6746"
+        "OwnerKey" = "8:_A733731D4320491480BE7F90E1C26B14"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -75,20 +81,20 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_FCCB32A0702C4A138F8466566F88F536"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_5915008F4D6654989C1D8CFED572D239"
+        "OwnerKey" = "8:_6849982B5A4A4822896AB79326FA122B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_DC3A4310F144420BA6466D20126E5D85"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_A733731D4320491480BE7F90E1C26B14"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -106,7 +112,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_6849982B5A4A4822896AB79326FA122B"
+        "OwnerKey" = "8:_175316D3A46B06032A16A4C83E7D6E34"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7383565D5E17AAAF36EF0B73C2CC6746"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -214,10 +226,41 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0FEB69B1EA1A446E9537577C7D14BE5C"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_175316D3A46B06032A16A4C83E7D6E34"
             {
-            "SourcePath" = "8:..\\BEmuJava\\BEmu.jar"
-            "TargetName" = "8:BEmu.jar"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Bloomberglp.Blpapi, Version=3.7.1.1, Culture=neutral, PublicKeyToken=ec3efa8c033c2bc5, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_175316D3A46B06032A16A4C83E7D6E34"
+                    {
+                    "Name" = "8:Bloomberglp.Blpapi.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Bloomberglp.Blpapi.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_265429C11E904EB9A475E97DCF705CB4"
+            {
+            "SourcePath" = "8:..\\BEmu_Java_Examples\\bin\\BEmu_Java_Examples.jar"
+            "TargetName" = "8:BEmu_Java_Examples.jar"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
             "Condition" = "8:"
@@ -234,14 +277,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_5915008F4D6654989C1D8CFED572D239"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7383565D5E17AAAF36EF0B73C2CC6746"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:BEmu, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5915008F4D6654989C1D8CFED572D239"
+                    "_7383565D5E17AAAF36EF0B73C2CC6746"
                     {
                     "Name" = "8:BEmu.dll"
                     "Attributes" = "3:512"
@@ -269,6 +312,26 @@
             {
             "SourcePath" = "8:..\\BEmuJava\\RunJavaExamples.bat"
             "TargetName" = "8:RunJavaExamples.bat"
+            "Tag" = "8:"
+            "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_FCCB32A0702C4A138F8466566F88F536"
+            {
+            "SourcePath" = "8:..\\BEmu_Java_Examples\\references\\BEmu.jar"
+            "TargetName" = "8:BEmu.jar"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
             "Condition" = "8:"
@@ -353,7 +416,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:BEmuInstaller"
         "ProductCode" = "8:{B36F01DF-D842-4D4A-8DC0-5E1BB510FA98}"
-        "PackageCode" = "8:{BF3D359D-9A78-4D70-830E-94DA5B34FD95}"
+        "PackageCode" = "8:{A1174813-47E3-4B10-827E-D6AC8970BC44}"
         "UpgradeCode" = "8:{828A53E8-0B63-4969-8540-9E1FF79CF627}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -925,11 +988,11 @@
         }
         "MergeModule"
         {
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_2E80DF5FF48C4A868B05492795ACDD0F"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_11AF553B76EE42B08B56B14613268A06"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:microsoft_vc90_crt_x86.msm"
+            "SourcePath" = "8:policy_9_0_Microsoft_VC90_DebugCRT_x86.msm"
                 "Properties"
                 {
                 }
@@ -939,11 +1002,11 @@
             "Feature" = "8:"
             "IsolateTo" = "8:"
             }
-            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_86589FD30C5646079B10206FF4760EB0"
+            "{CEE29DC0-9FBA-4B99-8D47-5BC643D9B626}:_52F44E7FC7BF48AB866D2ADCCD4375CE"
             {
             "UseDynamicProperties" = "11:TRUE"
             "IsDependency" = "11:TRUE"
-            "SourcePath" = "8:policy_9_0_Microsoft_VC90_CRT_x86.msm"
+            "SourcePath" = "8:microsoft_vc90_debugcrt_x86.msm"
                 "Properties"
                 {
                 }
@@ -958,7 +1021,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_6849982B5A4A4822896AB79326FA122B"
             {
-            "SourcePath" = "8:..\\BEmu_cpp\\bin\\Release\\BEmu_cpp.dll"
+            "SourcePath" = "8:..\\BEmu_cpp\\bin\\Debug\\BEmu_cpp.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
@@ -986,7 +1049,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_A733731D4320491480BE7F90E1C26B14"
             {
-            "SourcePath" = "8:..\\Examples\\obj\\x86\\Release\\Examples.exe"
+            "SourcePath" = "8:..\\Examples\\obj\\x86\\Debug\\Examples.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
@@ -1014,7 +1077,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_AC47523A1485422CA8E5E5C3EC000FDD"
             {
-            "SourcePath" = "8:..\\Examples_cpp\\bin\\Release\\Examples_cpp.exe"
+            "SourcePath" = "8:..\\Examples_cpp\\bin\\Debug\\Examples_cpp.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
@@ -1042,7 +1105,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_DC3A4310F144420BA6466D20126E5D85"
             {
-            "SourcePath" = "8:..\\BEmu\\obj\\Release\\BEmu.dll"
+            "SourcePath" = "8:..\\BEmu\\obj\\Debug\\BEmu.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_546602977C334AF8B8A99C8BD453BA18"
