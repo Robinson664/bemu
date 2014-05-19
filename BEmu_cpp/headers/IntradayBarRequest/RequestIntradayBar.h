@@ -52,7 +52,6 @@ namespace BEmu
 				virtual void set(const char* name, const Datetime& value);
 				virtual void set(const char* name, int value);
 				virtual void set(const char* name, bool value);
-
 		};
 	}
 }

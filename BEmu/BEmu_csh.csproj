@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0DD8974E-DA15-4131-8805-B44815053F61}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bloomberglp.Blpapi</RootNamespace>
+    <AssemblyName>BEmu_csh</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RegisterForComInterop>false</RegisterForComInterop>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BloombergTypes\Constant.cs" />
+    <Compile Include="BloombergTypes\ConstantsList.cs" />
+    <Compile Include="BloombergTypes\Constraint.cs" />
+    <Compile Include="BloombergTypes\ConstraintsList.cs" />
+    <Compile Include="BloombergTypes\CorrelationID.cs" />
+    <Compile Include="BloombergTypes\Datetime.cs" />
+    <Compile Include="BloombergTypes\Element.cs" />
+    <Compile Include="BloombergTypes\Event.cs" />
+    <Compile Include="BloombergTypes\EventHandler.cs" />
+    <Compile Include="BloombergTypes\EventQueue.cs" />
+    <Compile Include="BloombergTypes\Operation.cs" />
+    <Compile Include="BloombergTypes\Schema.cs" />
+    <Compile Include="BloombergTypes\SchemaElementDefinition.cs" />
+    <Compile Include="BloombergTypes\SchemaTypeDefinition.cs" />
+    <Compile Include="Exceptions\DuplicateCorrelationIDException.cs" />
+    <Compile Include="Exceptions\InvalidConversionException.cs" />
+    <Compile Include="Exceptions\InvalidRequestException.cs" />
+    <Compile Include="Exceptions\NotFoundException.cs" />
+    <Compile Include="Exceptions\RequestQueueOverflowException.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementDateTime.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementDouble.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementErrorInfo.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementFieldData.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementFieldDataArray.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementFieldExceptions.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementFieldExceptionsArray.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementInt.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementSecurityData.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementSecurityError.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementString.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricElementReference.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricEvent.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricMessage.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricRequest.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricRequestElementBool.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricRequestElementDate.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricRequestElementInt.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricRequestElementString.cs" />
+    <Compile Include="HistoricalDataRequest\HistoricRequestElementStringArray.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementData.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarTickDataType.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementTickData.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementTickDataArray.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementDateTime.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementDouble.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementInt.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementLong.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementResponseError.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarElementString.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarEvent.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarMessage.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarRequest.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarRequestElementBool.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarRequestElementInt.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarRequestElementString.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarRequestElementStringArray.cs" />
+    <Compile Include="IntradayBarRequest\IntradayBarRequestElementTime.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementDataParent.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementDateTime.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementDouble.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementData.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementDataArray.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementInt.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementResponseError.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementString.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickElementReference.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickEvent.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickMessage.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickRequest.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickRequestElementBool.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickRequestElementInt.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickRequestElementString.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickRequestElementStringArray.cs" />
+    <Compile Include="IntradayTickRequest\IntradayTickRequestElementTime.cs" />
+    <Compile Include="MarketDataRequest\MarketElementBool.cs" />
+    <Compile Include="MarketDataRequest\MarketElementDatetime.cs" />
+    <Compile Include="MarketDataRequest\MarketElementExceptions.cs" />
+    <Compile Include="MarketDataRequest\MarketElementExceptionsArray.cs" />
+    <Compile Include="MarketDataRequest\MarketElementInt.cs" />
+    <Compile Include="MarketDataRequest\MarketElementNull.cs" />
+    <Compile Include="MarketDataRequest\MarketElementReason.cs" />
+    <Compile Include="MarketDataRequest\MarketElementServiceStatus.cs" />
+    <Compile Include="MarketDataRequest\MarketElementString.cs" />
+    <Compile Include="MarketDataRequest\MarketElementSubscriptionCanceled.cs" />
+    <Compile Include="MarketDataRequest\MarketElementSubscriptionCancelReason.cs" />
+    <Compile Include="MarketDataRequest\MarketElementSubscriptionStarted.cs" />
+    <Compile Include="MarketDataRequest\MarketMessageServiceStatus.cs" />
+    <Compile Include="MarketDataRequest\MarketMessageSubscriptionCanceled.cs" />
+    <Compile Include="MarketDataRequest\MarketMessageSubscriptionFailure.cs" />
+    <Compile Include="MarketDataRequest\MarketMessageSubscriptionStarted.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementErrorInfo.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementFieldExceptions.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElement.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementArray.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementArrayChainTickers.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementArrayChainTickersItem.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementDateTime.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementFieldExceptionsArray.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementObject.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementSecurityError.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceRequestElementOverride.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceRequestElementOverrideArray.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceRequestElementString.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceRequestElementStringArray.cs" />
+    <Compile Include="Types\Extensions.cs" />
+    <Compile Include="Types\IndentType.cs" />
+    <Compile Include="MarketDataRequest\MarketElementDate.cs" />
+    <Compile Include="MarketDataRequest\MarketElementDouble.cs" />
+    <Compile Include="MarketDataRequest\MarketElementTime.cs" />
+    <Compile Include="MarketDataRequest\MarketEvent.cs" />
+    <Compile Include="MarketDataRequest\MarketMessageSessionOpened.cs" />
+    <Compile Include="MarketDataRequest\MarketMessageSubscriptionData.cs" />
+    <Compile Include="BloombergTypes\Message.cs" />
+    <Compile Include="BloombergTypes\Name.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementSecurityData.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementFieldData.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementSecurityDataArray.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementString.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementInt.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceElementDouble.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceEvent.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceMessage.cs" />
+    <Compile Include="ReferenceDataRequest\ReferenceRequest.cs" />
+    <Compile Include="BloombergTypes\Request.cs" />
+    <Compile Include="BloombergTypes\Service.cs" />
+    <Compile Include="ServiceRefData.cs" />
+    <Compile Include="BloombergTypes\Session.cs" />
+    <Compile Include="BloombergTypes\SessionOptions.cs" />
+    <Compile Include="BloombergTypes\Subscription.cs" />
+    <Compile Include="Types\DisplayFormats.cs" />
+    <Compile Include="Types\RandomDataGenerator.cs" />
+    <Compile Include="Types\Rules.cs" />
+    <Compile Include="Types\Tuple3.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

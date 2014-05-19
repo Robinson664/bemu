@@ -19,8 +19,8 @@
 #include "IntradayBarRequest/RequestIntradayBar.h"
 #include "IntradayBarRequest/EventIntradayBar.h"
 
-#include "HistoricalDataRequest/RequestHistoric.h"
-#include "HistoricalDataRequest/EventHistoric.h"
+#include "HistoricalDataRequest/HistoricRequest.h"
+#include "HistoricalDataRequest/HistoricEvent.h"
 
 #include "ReferenceDataRequest/RequestReference.h"
 #include "ReferenceDataRequest/EventReference.h"
@@ -61,8 +61,8 @@ namespace BEmu
 	{
 		if(request->getRequestType() == RequestPtr::historic)
 		{
-			HistoricalDataRequest::RequestHistoric * req = (HistoricalDataRequest::RequestHistoric *)request;
-			HistoricalDataRequest::EventHistoric * evt = new HistoricalDataRequest::EventHistoric(req);
+			HistoricalDataRequest::HistoricRequest * req = (HistoricalDataRequest::HistoricRequest *)request;
+			HistoricalDataRequest::HistoricEvent * evt = new HistoricalDataRequest::HistoricEvent(req);
 
 			return evt;
 		}

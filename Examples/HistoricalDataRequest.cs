@@ -14,8 +14,7 @@ namespace Examples
     using System.Linq;
     using System.Text;
 
-    using BEmu; //un-comment this line to use the Bloomberg API Emulator
-    //using Bloomberglp.Blpapi; //un-comment this line to use the actual Bloomberg API
+    using Bloomberglp.Blpapi;
 
     public static class HistoricalDataRequest
     {

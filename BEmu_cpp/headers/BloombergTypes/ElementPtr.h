@@ -115,7 +115,6 @@ namespace BEmu
 			virtual void setElement(const char* name, int value);
 			void setElement(const Name& name, int value);
 
-
 			virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 	};
 

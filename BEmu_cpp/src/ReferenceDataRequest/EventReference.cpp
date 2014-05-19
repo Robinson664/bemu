@@ -77,8 +77,6 @@ namespace BEmu
 						if( !isnull && !inMap ) //if the value isn't null and the field isn't already in the map
 							(*fieldData)[reqField] = value;
 					}
-
-
 				}
 			}
 

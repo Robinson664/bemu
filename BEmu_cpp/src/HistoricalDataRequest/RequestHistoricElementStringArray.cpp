@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/RequestHistoricElementStringArray.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricRequestElementStringArray.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/RequestHistoricElementStringArray.h"
+#include "HistoricalDataRequest/HistoricRequestElementStringArray.h"
 #include "BloombergTypes/Name.h"
 #include "Types/IndentType.h"
 
@@ -15,60 +15,60 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		RequestHistoricElementStringArray::RequestHistoricElementStringArray(const std::string& elementName)
+		HistoricRequestElementStringArray::HistoricRequestElementStringArray(const std::string& elementName)
 		{
 			this->_elementName = elementName;
 		}
 
-		RequestHistoricElementStringArray::~RequestHistoricElementStringArray()
+		HistoricRequestElementStringArray::~HistoricRequestElementStringArray()
 		{
 		}
 
 
-		Name RequestHistoricElementStringArray::name() const
+		Name HistoricRequestElementStringArray::name() const
 		{
 			Name result(this->_elementName.c_str());
 			return result;
 		}
 
-		size_t RequestHistoricElementStringArray::numValues() const
+		size_t HistoricRequestElementStringArray::numValues() const
 		{
 			return this->_values.size();
 		}
 
-		size_t RequestHistoricElementStringArray::numElements() const
+		size_t HistoricRequestElementStringArray::numElements() const
 		{
 			return 0;
 		}
 
 		
-		bool RequestHistoricElementStringArray::isNull() const
+		bool HistoricRequestElementStringArray::isNull() const
 		{
 			return false;
 		}
 
-		bool RequestHistoricElementStringArray::isArray() const
+		bool HistoricRequestElementStringArray::isArray() const
 		{
 			return true;
 		}
 
-		bool RequestHistoricElementStringArray::isComplexType() const
+		bool HistoricRequestElementStringArray::isComplexType() const
 		{
 			return false;
 		}
 		
-		std::vector<std::string> RequestHistoricElementStringArray::values() const
+		std::vector<std::string> HistoricRequestElementStringArray::values() const
 		{
 			return this->_values;
 		}
 
-		void RequestHistoricElementStringArray::appendValue(const char* value)
+		void HistoricRequestElementStringArray::appendValue(const char* value)
 		{
 			this->_values.push_back(value);
 		}
 
 
-		std::ostream& RequestHistoricElementStringArray::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& HistoricRequestElementStringArray::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

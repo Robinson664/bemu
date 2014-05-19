@@ -49,8 +49,8 @@ namespace BEmu
 			DLL_EXPORT const Element getElement(const Name& name) const;
 			DLL_EXPORT const Element getElement(const char* name) const;
 
-			DLL_EXPORT bool hasElement(const Name& name, bool excludeNullElements=false) const;
-			DLL_EXPORT bool hasElement(const char* name, bool excludeNullElements=false) const;
+			DLL_EXPORT bool hasElement(const Name& name, bool excludeNullElements = false) const;
+			DLL_EXPORT bool hasElement(const char* name, bool excludeNullElements = false) const;
 			
 			DLL_EXPORT bool getElementAsBool(const Name& name) const;
 			DLL_EXPORT bool getElementAsBool(const char* name) const;

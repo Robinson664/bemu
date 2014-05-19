@@ -17,6 +17,5 @@ namespace BEmu
 	{
 		public:
 			static std::string Indent(int count, int spacesPerTab);
-			//static std::string Tab();
 	};
 }

@@ -41,10 +41,9 @@ namespace BEmu
 				virtual size_t numElements() const;
 
 				virtual ElementPtr * getElement(const char* name) const;
-				virtual bool hasElement(const char* name, bool excludeNullElements=false) const;
+				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
-
 		};
 	}
 }

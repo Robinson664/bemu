@@ -30,14 +30,12 @@ namespace BEmu
 	class Session
 	{
 		private:
-			//Session(const Session&);
-
 			enum SessionStateType { initialized, started, serviceOpened, stopped, connectionFailure };
 			SessionStateType _sessionState;
 			SessionOptions _sessionOptions;
 
 			std::queue<RequestPtr*> _sentRequests;
-			EventHandler * _asyncHandler; //don't delete
+			EventHandler * _asyncHandler;
 			SubscriptionList _subs;
 
 			SessionTimerFunction * _sessionTimerFunction;
@@ -71,8 +69,6 @@ namespace BEmu
 			DLL_EXPORT void subscribe(const SubscriptionList& subscriptionList);
 
 			DLL_EXPORT CorrelationId openServiceAsync(const char* uri, const CorrelationId& correlationId = CorrelationId());
-
-
 
 			DLL_EXPORT void unsubscribe(const SubscriptionList& subscriptionList);
 			DLL_EXPORT void cancel(const CorrelationId& correlationId); //defined in blpapi_abstractsession.h

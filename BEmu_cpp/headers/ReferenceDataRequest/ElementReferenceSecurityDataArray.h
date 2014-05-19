@@ -34,10 +34,6 @@ namespace BEmu
 				virtual size_t numValues() const;
 				virtual size_t numElements() const;
 				virtual SchemaElementDefinition elementDefinition() const;
-		
-				//virtual bool isNull() const;
-				//virtual bool isArray() const;
-				//virtual bool isComplexType() const;
 
 				virtual ElementPtr * getValueAsElement(int index) const;
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;

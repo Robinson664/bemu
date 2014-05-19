@@ -130,6 +130,4 @@ namespace BEmu
 	{
 		return rhs == lhs;
 	}
-
-
 }

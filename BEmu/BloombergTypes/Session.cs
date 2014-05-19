@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="BloombergTypes/Session.cs" company="Jordan Robinson">
+// <copyright project="BEmu_csh" file="BloombergTypes/Session.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace BEmu
+namespace Bloomberglp.Blpapi
 {
     using System;
     using System.Collections.Generic;
@@ -87,9 +87,9 @@ namespace BEmu
 
         public CorrelationID SendRequest(Request request, CorrelationID correlationId)
         {
-            if (request is HistoricalDataRequest.RequestHistoric)
+            if (request is HistoricalDataRequest.HistoricRequest)
             {
-                if (!((HistoricalDataRequest.RequestHistoric)request).DtStart.HasValue)
+                if (!((HistoricalDataRequest.HistoricRequest)request).DtStart.HasValue)
                     throw new ArgumentException("Historic requests must have start dates");
             }
 
@@ -136,8 +136,8 @@ namespace BEmu
         public bool StartAsync()
         {
             this._sessionState = SessionStateType.started;
-            MarketDataRequest.EventMarket evtSessionStatus = new MarketDataRequest.EventMarket(Event.EventType.SESSION_STATUS, null, null);
-            MarketDataRequest.EventMarket evtServiceStatus = new MarketDataRequest.EventMarket(Event.EventType.SERVICE_STATUS, new CorrelationID(), null);
+            MarketDataRequest.MarketEvent evtSessionStatus = new MarketDataRequest.MarketEvent(Event.EventType.SESSION_STATUS, null, null);
+            MarketDataRequest.MarketEvent evtServiceStatus = new MarketDataRequest.MarketEvent(Event.EventType.SERVICE_STATUS, new CorrelationID(), null);
 
             if (this._asyncHandler != null)
             {
@@ -178,7 +178,7 @@ namespace BEmu
             lock (this._syncroot) //protect _subscriptions
                 this._subscriptions.AddRange(subscriptionList);
 
-            MarketDataRequest.EventMarket evtSubStatus = new MarketDataRequest.EventMarket(Event.EventType.SUBSCRIPTION_STATUS, null, subscriptionList);
+            MarketDataRequest.MarketEvent evtSubStatus = new MarketDataRequest.MarketEvent(Event.EventType.SUBSCRIPTION_STATUS, null, subscriptionList);
             if (this._asyncHandler != null)
             {
                 this._asyncHandler(evtSubStatus, this);
@@ -201,7 +201,7 @@ namespace BEmu
                 {
                     if (this._subscriptions[i].CorrelationID.Value == corr.Value && this._subscriptions[i].CorrelationID.IsInternal == corr.IsInternal)
                     {
-                        MarketDataRequest.EventMarket evtSubCancel = new MarketDataRequest.EventMarket(Event.EventType.SUBSCRIPTION_STATUS, this._subscriptions[i]);
+                        MarketDataRequest.MarketEvent evtSubCancel = new MarketDataRequest.MarketEvent(Event.EventType.SUBSCRIPTION_STATUS, this._subscriptions[i]);
                         if (this._asyncHandler != null)
                         {
                             this._asyncHandler(evtSubCancel, this);
@@ -242,7 +242,7 @@ namespace BEmu
 
             if (subsToUse.Count > 0)
             {
-                MarketDataRequest.EventMarket evt = new MarketDataRequest.EventMarket(Event.EventType.SUBSCRIPTION_DATA, null, subsToUse);
+                MarketDataRequest.MarketEvent evt = new MarketDataRequest.MarketEvent(Event.EventType.SUBSCRIPTION_DATA, null, subsToUse);
 
                 if (this._asyncHandler != null)
                     this._asyncHandler(evt, this);

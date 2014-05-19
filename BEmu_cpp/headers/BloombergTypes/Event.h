@@ -23,7 +23,7 @@ namespace BEmu
 	class RequestPtr;
 	class Message;
 	
-	//See my explanation of the RequetPtr class for an explanation of this class
+	//See my explanation of the RequetPtr class in Request.h for an explanation of this class
 	class Event
 	{
 		private:

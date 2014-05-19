@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/ElementHistoricFieldExceptionsArray.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricElementFieldExceptionsArray.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,8 +7,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/ElementHistoricFieldExceptionsArray.h"
-#include "HistoricalDataRequest/ElementHistoricFieldExceptions.h"
+#include "HistoricalDataRequest/HistoricElementFieldExceptionsArray.h"
+#include "HistoricalDataRequest/HistoricElementFieldExceptions.h"
 
 #include "BloombergTypes/Name.h"
 #include "Types/IndentType.h"
@@ -17,43 +17,43 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		ElementHistoricFieldExceptionsArray::ElementHistoricFieldExceptionsArray(const std::vector<std::string>& badFields)
+		HistoricElementFieldExceptionsArray::HistoricElementFieldExceptionsArray(const std::vector<std::string>& badFields)
 		{
 			for(std::vector<std::string>::const_iterator iter = badFields.begin(); iter != badFields.end(); ++iter)
 			{
 				std::string str = *iter;
-				ElementHistoricFieldExceptions * elm = new ElementHistoricFieldExceptions(str);
+				HistoricElementFieldExceptions * elm = new HistoricElementFieldExceptions(str);
 				this->_exceptions.push_back(elm);
 			}
 		}
 
-		ElementHistoricFieldExceptionsArray::~ElementHistoricFieldExceptionsArray()
+		HistoricElementFieldExceptionsArray::~HistoricElementFieldExceptionsArray()
 		{
-			for(std::vector<ElementHistoricFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
+			for(std::vector<HistoricElementFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
 			{
-				ElementHistoricFieldExceptions * elm = *iter;
+				HistoricElementFieldExceptions * elm = *iter;
 				delete elm;
 			}
 		}
 
 
-		Name ElementHistoricFieldExceptionsArray::name() const
+		Name HistoricElementFieldExceptionsArray::name() const
 		{
 			Name result("fieldExceptions");
 			return result;
 		}
 
-		size_t ElementHistoricFieldExceptionsArray::numValues() const
+		size_t HistoricElementFieldExceptionsArray::numValues() const
 		{
 			return this->_exceptions.size();
 		}
 
-		size_t ElementHistoricFieldExceptionsArray::numElements() const
+		size_t HistoricElementFieldExceptionsArray::numElements() const
 		{
 			return 0;
 		}
 
-		SchemaElementDefinition ElementHistoricFieldExceptionsArray::elementDefinition() const
+		SchemaElementDefinition HistoricElementFieldExceptionsArray::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("FieldException"));
@@ -61,37 +61,37 @@ namespace BEmu
 		}
 
 		
-		bool ElementHistoricFieldExceptionsArray::isNull() const
+		bool HistoricElementFieldExceptionsArray::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementHistoricFieldExceptionsArray::isArray() const
+		bool HistoricElementFieldExceptionsArray::isArray() const
 		{
 			return true;
 		}
 
-		bool ElementHistoricFieldExceptionsArray::isComplexType() const
+		bool HistoricElementFieldExceptionsArray::isComplexType() const
 		{
 			return false;
 		}
 
 
-		ElementPtr * ElementHistoricFieldExceptionsArray::getValueAsElement(int index) const
+		ElementPtr * HistoricElementFieldExceptionsArray::getValueAsElement(int index) const
 		{
 			return this->_exceptions.at(index);
 		}
 
 
-		std::ostream& ElementHistoricFieldExceptionsArray::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& HistoricElementFieldExceptionsArray::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 
 			stream << tabs << "fieldExceptions = {" << std::endl;
 
-			for(std::vector<ElementHistoricFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
+			for(std::vector<HistoricElementFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
 			{
-				ElementHistoricFieldExceptions * elm = *iter;
+				HistoricElementFieldExceptions * elm = *iter;
 				elm->print(stream, level + 1, spacesPerLevel);
 			}
 

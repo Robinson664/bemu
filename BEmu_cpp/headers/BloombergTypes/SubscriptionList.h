@@ -36,7 +36,7 @@ namespace BEmu
 			DLL_EXPORT size_t size() const;
 
 			void add(Subscription sub);
-			void remove(CorrelationId corr); //does this work?
+			void remove(CorrelationId corr);
 
 			std::vector<Subscription> * list() const;
 	};

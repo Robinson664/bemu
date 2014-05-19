@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/ElementHistoricFieldDataArray.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricElementFieldDataArray.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -19,16 +19,16 @@ namespace BEmu
 
 	namespace HistoricalDataRequest
 	{
-		class ElementHistoricFieldData;
+		class HistoricElementFieldData;
 
-		class ElementHistoricFieldDataArray : public ElementPtr
+		class HistoricElementFieldDataArray : public ElementPtr
 		{
 			private:
-				std::vector<ElementHistoricFieldData*> _fieldData;
+				std::vector<HistoricElementFieldData*> _fieldData;
 
 			public:
-				ElementHistoricFieldDataArray(const std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData);
-				~ElementHistoricFieldDataArray();
+				HistoricElementFieldDataArray(const std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData);
+				~HistoricElementFieldDataArray();
 
 				virtual ElementPtr * getValueAsElement(int index) const;
 

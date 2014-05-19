@@ -23,7 +23,7 @@ namespace BEmu
 	//I built this timer class to work similar to C#'s System.Threading.Timer class
 	//  In C#, you give the object a delegate (function pointer) to run, tell it how long to wait before running, and how long between runs to wait.
 	//  Using BEmuTimer, you give the object a class with a Run(BEmuTimer * timer) function instead of a function pointer.  The rest is the same.
-	//With both timers, the function that you specify can update the timer on which its run.
+	//With both the C++ and C# timers, the function that you specify can update its own timer.
 	//  This is not the case with the timer I use in the Java version.
 	class BEmuTimer
 	{

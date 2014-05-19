@@ -64,8 +64,5 @@ namespace BEmu
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;
 		}
-
-
-
 	}
 }

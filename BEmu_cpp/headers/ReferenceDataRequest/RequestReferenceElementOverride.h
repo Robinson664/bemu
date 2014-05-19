@@ -31,10 +31,6 @@ namespace BEmu
 				virtual Name name() const;
 				virtual size_t numValues() const;
 				virtual size_t numElements() const;
-		
-				//virtual bool isNull() const;
-				//virtual bool isArray() const;
-				//virtual bool isComplexType() const;
 
 				virtual void setElement(const char* name, const char* value);
 				virtual void setElement(const char* name, int value);

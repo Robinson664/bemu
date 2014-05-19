@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/MessageHistoric.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricMessage.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,31 +7,31 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/MessageHistoric.h"
-#include "HistoricalDataRequest/ElementHistoricSecurityData.h"
+#include "HistoricalDataRequest/HistoricMessage.h"
+#include "HistoricalDataRequest/HistoricElementSecurityData.h"
 #include "BloombergTypes/Name.h"
 
 namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		MessageHistoric::MessageHistoric(
+		HistoricMessage::HistoricMessage(
 					const CorrelationId& corr, 
 					const std::string& securityName, 
 					const std::vector<std::string>& badFields, 
 					std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData, 
 					int sequenceNumber) : MessagePtr(Name("HistoricalDataResponse"), corr)
 		{
-			this->_security = new ElementHistoricSecurityData(securityName, badFields, fieldData, sequenceNumber);
+			this->_security = new HistoricElementSecurityData(securityName, badFields, fieldData, sequenceNumber);
 		}
 
-		MessageHistoric::~MessageHistoric()
+		HistoricMessage::~HistoricMessage()
 		{
 			delete this->_security;
 			this->_security = 0;
 		}
 
-		ElementPtr * MessageHistoric::getElement(const char* name) const
+		ElementPtr * HistoricMessage::getElement(const char* name) const
 		{
 			if(strncmp(name, "securityData", 13) == 0)
 				return this->_security;
@@ -40,12 +40,12 @@ namespace BEmu
 				throw messageEx;
 		}
 
-		bool MessageHistoric::hasElement(const char* name, bool excludeNullElements) const
+		bool HistoricMessage::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return strncmp(name, "securityData", 13) == 0;
 		}
 
-		std::ostream& MessageHistoric::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& HistoricMessage::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "HistoricalDataResponse (choice) = {" << std::endl;
 			this->_security->print(stream, 1, spacesPerLevel);

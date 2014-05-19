@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/ElementHistoricDateTime.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricElementDateTime.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,14 +15,14 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		class ElementHistoricDateTime : public ElementPtr
+		class HistoricElementDateTime : public ElementPtr
 		{
 			private:
 				Datetime _value;
 
 			public:
-				ElementHistoricDateTime(const Datetime& value);
-				~ElementHistoricDateTime();
+				HistoricElementDateTime(const Datetime& value);
+				~HistoricElementDateTime();
 
 				virtual Name name() const;
 				virtual size_t numValues() const { return 1; }

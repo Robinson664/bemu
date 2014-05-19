@@ -59,10 +59,6 @@ namespace BEmu
 	SchemaElementDefinition Element::elementDefinition() const
 	{
 		return this->_ptr->elementDefinition();
-
-		//::blpapi_DataType_t dt = (::blpapi_DataType_t)this->_ptr->datatype();
-		//SchemaElementDefinition result(dt);
-		//return result;
 	}
 
 	bool Element::getValueAsBool(int index) const { return this->_ptr->getValueAsBool(index); }

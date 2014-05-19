@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="BloombergTypes/Request.cs" company="Jordan Robinson">
+// <copyright project="BEmu_csh" file="BloombergTypes/Request.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace BEmu
+namespace Bloomberglp.Blpapi
 {
     using System;
     using System.Collections.Generic;

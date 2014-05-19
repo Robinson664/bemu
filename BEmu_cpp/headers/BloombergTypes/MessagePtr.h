@@ -18,7 +18,7 @@ namespace BEmu
 	class Message;
 	class ElementPtr;
 
-	//See my explanation of the RequetPtr class for an explanation of this class
+	//See my explanation of the RequetPtr class in Request.h for an explanation of this class
 	class MessagePtr
 	{
 		private:
@@ -45,8 +45,8 @@ namespace BEmu
 			ElementPtr * getElement(const Name& name) const;
 			virtual ElementPtr * getElement(const char* name) const;
 			virtual ElementPtr * asElement() const;
-			bool hasElement(const Name& name, bool excludeNullElements=false) const;
-			virtual bool hasElement(const char* name, bool excludeNullElements=false) const;
+			bool hasElement(const Name& name, bool excludeNullElements = false) const;
+			virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 			virtual size_t numElements() const;
 			
 			bool getElementAsBool(const char* name) const;

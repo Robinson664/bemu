@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/ElementHistoricFieldData.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricElementFieldData.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,14 +18,14 @@ namespace BEmu
 
 	namespace HistoricalDataRequest
 	{
-		class ElementHistoricFieldData : public ElementPtr
+		class HistoricElementFieldData : public ElementPtr
 		{
 			private:
 				std::map<std::string, ElementPtr*> _fields;
 
 			public:
-				ElementHistoricFieldData(const Datetime& date, const std::map<std::string, ObjectType>& values);
-				~ElementHistoricFieldData();
+				HistoricElementFieldData(const Datetime& date, const std::map<std::string, ObjectType>& values);
+				~HistoricElementFieldData();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

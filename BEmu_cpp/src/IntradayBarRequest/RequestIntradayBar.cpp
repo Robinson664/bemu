@@ -202,13 +202,5 @@ namespace BEmu
 			else
 				throw requestEx;
 		}
-
-		//std::ostream& RequestIntradayBar::print(std::ostream& stream, int level, int spacesPerLevel) const
-		//{
-		//	return stream;
-		//}
-
-
-
 	}
 }

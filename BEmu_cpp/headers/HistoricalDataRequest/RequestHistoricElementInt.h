@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/RequestHistoricElementInt.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricRequestElementInt.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -9,20 +9,20 @@
 
 #pragma once
 
-#include "HistoricalDataRequest/RequestHistoricElementString.h"
+#include "HistoricalDataRequest/HistoricRequestElementString.h"
 
 namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		class RequestHistoricElementInt : public RequestHistoricElementString
+		class HistoricRequestElementInt : public HistoricRequestElementString
 		{
 			private:
 				int _ivalue;
 
 			public:
-				RequestHistoricElementInt(const std::string& elementName, int value);
-				~RequestHistoricElementInt();
+				HistoricRequestElementInt(const std::string& elementName, int value);
+				~HistoricRequestElementInt();
 
 				int getInt() const;
 		};

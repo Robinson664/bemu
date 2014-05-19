@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/ElementHistoricFieldData.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricElementFieldData.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/ElementHistoricFieldData.h"
-#include "HistoricalDataRequest/ElementHistoricDateTime.h"
-#include "HistoricalDataRequest/ElementHistoricDouble.h"
+#include "HistoricalDataRequest/HistoricElementFieldData.h"
+#include "HistoricalDataRequest/HistoricElementDateTime.h"
+#include "HistoricalDataRequest/HistoricElementDouble.h"
 
 #include "BloombergTypes/Name.h"
 
@@ -20,9 +20,9 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		ElementHistoricFieldData::ElementHistoricFieldData(const Datetime& date, const std::map<std::string, ObjectType>& values)
+		HistoricElementFieldData::HistoricElementFieldData(const Datetime& date, const std::map<std::string, ObjectType>& values)
 		{
-			ElementPtr * elmDate = new ElementHistoricDateTime(date);
+			ElementPtr * elmDate = new HistoricElementDateTime(date);
 			this->_fields[elmDate->name().string()] = elmDate;
 
 			for(std::map<std::string, ObjectType>::const_iterator iter = values.begin(); iter != values.end(); ++iter)
@@ -33,13 +33,13 @@ namespace BEmu
 
 				if(obj.TryGetDouble(dvalue))
 				{
-					ElementPtr * elmDouble = new ElementHistoricDouble(str, dvalue);
+					ElementPtr * elmDouble = new HistoricElementDouble(str, dvalue);
 					this->_fields[elmDouble->name().string()] = elmDouble;
 				}
 			}
 		}
 
-		ElementHistoricFieldData::~ElementHistoricFieldData()
+		HistoricElementFieldData::~HistoricElementFieldData()
 		{
 			for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
 			{
@@ -49,23 +49,23 @@ namespace BEmu
 		}
 
 
-		Name ElementHistoricFieldData::name() const
+		Name HistoricElementFieldData::name() const
 		{
 			Name result("fieldData");
 			return result;
 		}
 
-		size_t ElementHistoricFieldData::numValues() const
+		size_t HistoricElementFieldData::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementHistoricFieldData::numElements() const
+		size_t HistoricElementFieldData::numElements() const
 		{
 			return this->_fields.size();
 		}
 
-		SchemaElementDefinition ElementHistoricFieldData::elementDefinition() const
+		SchemaElementDefinition HistoricElementFieldData::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("HistoricalDataRow"));
@@ -73,28 +73,28 @@ namespace BEmu
 		}
 
 		
-		bool ElementHistoricFieldData::isNull() const
+		bool HistoricElementFieldData::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementHistoricFieldData::isArray() const
+		bool HistoricElementFieldData::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementHistoricFieldData::isComplexType() const
+		bool HistoricElementFieldData::isComplexType() const
 		{
 			return true;
 		}
 
 
-		bool ElementHistoricFieldData::hasElement(const char* name, bool excludeNullElements) const
+		bool HistoricElementFieldData::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return this->_fields.find(name) != this->_fields.end();
 		}
 
-		ElementPtr * ElementHistoricFieldData::getElement(const char* name) const
+		ElementPtr * HistoricElementFieldData::getElement(const char* name) const
 		{
 			std::string key(name);
 
@@ -105,38 +105,38 @@ namespace BEmu
 				return it->second;
 		}
 
-		int ElementHistoricFieldData::getElementAsInt32(const char* name) const
+		int HistoricElementFieldData::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		Datetime ElementHistoricFieldData::getElementAsDatetime(const char* name) const
+		Datetime HistoricElementFieldData::getElementAsDatetime(const char* name) const
 		{
 			return this->getElement(name)->getValueAsDatetime(0);
 		}
 
-		const char* ElementHistoricFieldData::getElementAsString(const char* name) const
+		const char* HistoricElementFieldData::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		float ElementHistoricFieldData::getElementAsFloat32(const char* name) const
+		float HistoricElementFieldData::getElementAsFloat32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsFloat32(0);
 		}
 
-		double ElementHistoricFieldData::getElementAsFloat64(const char* name) const
+		double HistoricElementFieldData::getElementAsFloat64(const char* name) const
 		{
 			return this->getElement(name)->getValueAsFloat64(0);
 		}
 
-		long ElementHistoricFieldData::getElementAsInt64(const char* name) const
+		long HistoricElementFieldData::getElementAsInt64(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt64(0);
 		}
 
 
-		std::ostream& ElementHistoricFieldData::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& HistoricElementFieldData::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

@@ -77,7 +77,7 @@ namespace BEmu
 
 	void SubscriptionList::remove(CorrelationId corr)
 	{
-		//Will replace the existing sub list with this new one
+		//Will replace the existing sub list with this new one that doesn't have a subscription with corr
 		//There's probably a better way to do this, but I don't know it
 		std::vector<Subscription> * replacement = new std::vector<Subscription>();
 		

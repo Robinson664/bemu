@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/ElementHistoricFieldExceptions.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricElementFieldExceptions.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,18 +15,18 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		class ElementHistoricString;
-		class ElementHistoricErrorInfo;
+		class HistoricElementString;
+		class HistoricElementErrorInfo;
 
-		class ElementHistoricFieldExceptions : public ElementPtr
+		class HistoricElementFieldExceptions : public ElementPtr
 		{
 			private:
-				ElementHistoricString * _fieldId;
-				ElementHistoricErrorInfo * _errorInfo;
+				HistoricElementString * _fieldId;
+				HistoricElementErrorInfo * _errorInfo;
 
 			public:
-				ElementHistoricFieldExceptions(const std::string& badField);
-				~ElementHistoricFieldExceptions();
+				HistoricElementFieldExceptions(const std::string& badField);
+				~HistoricElementFieldExceptions();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

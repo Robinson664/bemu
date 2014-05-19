@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="Types/DisplayFormats.cs" company="Jordan Robinson">
+// <copyright project="BEmu_csh" file="Types/DisplayFormats.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BEmu.Types
+namespace Bloomberglp.Blpapi.Types
 {
     /// <summary>
     /// For Number formatters, see http://msdn.microsoft.com/en-us/library/dwhawy9k(v=vs.110).aspx

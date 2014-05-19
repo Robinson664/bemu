@@ -13,7 +13,7 @@
 
 #include "IntradayTickRequest/RequestIntradayTick.h"
 #include "IntradayBarRequest/RequestIntradayBar.h"
-#include "HistoricalDataRequest/RequestHistoric.h"
+#include "HistoricalDataRequest/HistoricRequest.h"
 #include "ReferenceDataRequest/RequestReference.h"
 
 namespace BEmu
@@ -34,7 +34,7 @@ namespace BEmu
 	{
 		if(strncmp(operation, "HistoricalDataRequest", 21) == 0)
 		{
-			HistoricalDataRequest::RequestHistoric * result = new HistoricalDataRequest::RequestHistoric();
+			HistoricalDataRequest::HistoricRequest * result = new HistoricalDataRequest::HistoricRequest();
 			return result;
 		}
 		else if(strncmp(operation, "ReferenceDataRequest", 21) == 0)
@@ -56,7 +56,5 @@ namespace BEmu
 		{
 			throw serviceRefDataEx;
 		}
-
-
 	}
 }

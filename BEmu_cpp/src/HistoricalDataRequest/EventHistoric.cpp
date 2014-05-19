@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/EventHistoric.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricEvent.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/EventHistoric.h"
-#include "HistoricalDataRequest/RequestHistoric.h"
-#include "HistoricalDataRequest/MessageHistoric.h"
+#include "HistoricalDataRequest/HistoricEvent.h"
+#include "HistoricalDataRequest/HistoricRequest.h"
+#include "HistoricalDataRequest/HistoricMessage.h"
 #include "BloombergTypes/Datetime.h"
 #include "Types/ObjectType.h"
 #include "Types/Rules.h"
@@ -19,26 +19,26 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		EventHistoric::EventHistoric(RequestHistoric * request) : EventPtr(request)
+		HistoricEvent::HistoricEvent(HistoricRequest * request) : EventPtr(request)
 		{
 			this->_request = request;
 			this->_internal = request;
 			this->_messages = this->GenerateMessages();
 		}
 
-		EventHistoric::~EventHistoric()
+		HistoricEvent::~HistoricEvent()
 		{
 			delete this->_messages;
 			this->_messages = 0;
 		}
 
 				
-		std::vector<MessagePtr*> * EventHistoric::getMessages() const
+		std::vector<MessagePtr*> * HistoricEvent::getMessages() const
 		{
 			return this->_messages;
 		}
 
-		std::vector<MessagePtr*> * EventHistoric::GenerateMessages() const
+		std::vector<MessagePtr*> * HistoricEvent::GenerateMessages() const
 		{
 			std::vector<MessagePtr*> * result = new std::vector<MessagePtr*>();
 
@@ -72,7 +72,6 @@ namespace BEmu
 							std::map<std::string, ObjectType> * fields = new std::map<std::string, ObjectType>();
 
 							(*fieldData)[date] = fields;
-							//fieldData->operator[](date) = fields;
 
 							for(std::vector<std::string>::const_iterator iterField2 = rfields.begin(); iterField2 != rfields.end(); ++iterField2)
 							{
@@ -84,7 +83,7 @@ namespace BEmu
 						}
 					}
 
-					MessageHistoric * msg = new MessageHistoric(this->_internal->getCorrelationId(), sec, badFields, fieldData, result->size());
+					HistoricMessage * msg = new HistoricMessage(this->_internal->getCorrelationId(), sec, badFields, fieldData, result->size());
 					result->push_back(msg);
 
 					delete dates;

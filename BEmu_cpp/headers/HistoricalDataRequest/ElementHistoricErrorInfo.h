@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/ElementHistoricErrorInfo.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricElementErrorInfo.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,18 +15,18 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		class ElementHistoricInt;
-		class ElementHistoricString;
+		class HistoricElementInt;
+		class HistoricElementString;
 
-		class ElementHistoricErrorInfo : public ElementPtr
+		class HistoricElementErrorInfo : public ElementPtr
 		{
 			private:
-				ElementHistoricString * _source, * _category, * _message, * _subCategory;
-				ElementHistoricInt * _code;
+				HistoricElementString * _source, * _category, * _message, * _subCategory;
+				HistoricElementInt * _code;
 
 			public:
-				ElementHistoricErrorInfo();
-				~ElementHistoricErrorInfo();
+				HistoricElementErrorInfo();
+				~HistoricElementErrorInfo();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

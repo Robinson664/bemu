@@ -18,9 +18,9 @@ namespace BEmu
 	{
 		private:
 
-			//The way I'm doing polymorphism is a little broken because actual Bloomberg API functions like Service.createRequest(...) returns a value rather than a reference.
+			//The way I'm doing polymorphism is a little broken because actual Bloomberg API functions like Service.createRequest(...) return a value rather than a reference.
 			//  Because I use several derived Request classes to emulate the behavior of the API's *one* Request object, I have some work to do to ensure the caller is calling the right functions.
-			//  When casting from a derived-Request to this parent Request, I internally keep a pointer to the derived-Request so that I know how to pass around function calls.
+			//  When casting from a derived-Request to this parent-Request, I internally keep a pointer to the derived-Request so that I know how to pass around function calls.
 			//  If each Request object keeps a pointer to some internal RequestPtr object, the user doesn't have to know that I've implemented the Request type as a collection of derived classes.
 			//One downside is that I don't know when to delete this->_ptr.  I can't do it in a ~Request() because that gets called often and at the wrong times.
 			//  I could possibly delete this pointer in a ~Session() because once a caller closes a session, why not delete all related Requests.

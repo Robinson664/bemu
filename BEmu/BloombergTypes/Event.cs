@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="BloombergTypes/Event.cs" company="Jordan Robinson">
+// <copyright project="BEmu_csh" file="BloombergTypes/Event.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace BEmu
+namespace Bloomberglp.Blpapi
 {
     using System;
     using System.Collections.Generic;
@@ -24,27 +24,27 @@ namespace BEmu
         internal static Event EventFactory(Request request, bool isLastRequest)
         {
             Event result;
-            if (request is HistoricalDataRequest.RequestHistoric)
+            if (request is HistoricalDataRequest.HistoricRequest)
             {
-                result = new HistoricalDataRequest.EventHistoric((HistoricalDataRequest.RequestHistoric)request);
+                result = new HistoricalDataRequest.HistoricEvent((HistoricalDataRequest.HistoricRequest)request);
                 result._type = isLastRequest ? EventType.RESPONSE : EventType.PARTIAL_RESPONSE;
                 return result;
             }
-            else if (request is ReferenceDataRequest.RequestReference)
+            else if (request is ReferenceDataRequest.ReferenceRequest)
             {
-                result = new ReferenceDataRequest.EventReference((ReferenceDataRequest.RequestReference)request);
+                result = new ReferenceDataRequest.ReferenceEvent((ReferenceDataRequest.ReferenceRequest)request);
                 result._type = isLastRequest ? EventType.RESPONSE : EventType.PARTIAL_RESPONSE;
                 return result;
             }
-            else if (request is IntradayTickRequest.RequestIntradayTick)
+            else if (request is IntradayTickRequest.IntradayTickRequest)
             {
-                result = new IntradayTickRequest.EventIntradayTick((IntradayTickRequest.RequestIntradayTick)request);
+                result = new IntradayTickRequest.IntradayTickEvent((IntradayTickRequest.IntradayTickRequest)request);
                 result._type = isLastRequest ? EventType.RESPONSE : EventType.PARTIAL_RESPONSE;
                 return result;
             }
-            else if (request is IntradayBarRequest.RequestIntradayBar)
+            else if (request is IntradayBarRequest.IntradayBarRequest)
             {
-                result = new IntradayBarRequest.EventIntradayBar((IntradayBarRequest.RequestIntradayBar)request);
+                result = new IntradayBarRequest.IntradayBarEvent((IntradayBarRequest.IntradayBarRequest)request);
                 result._type = isLastRequest ? EventType.RESPONSE : EventType.PARTIAL_RESPONSE;
                 return result;
             }

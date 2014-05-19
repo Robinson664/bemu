@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/ElementHistoricSecurityData.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricElementSecurityData.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,12 +7,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/ElementHistoricSecurityData.h"
-#include "HistoricalDataRequest/ElementHistoricFieldExceptionsArray.h"
-#include "HistoricalDataRequest/ElementHistoricString.h"
-#include "HistoricalDataRequest/ElementHistoricInt.h"
-#include "HistoricalDataRequest/ElementHistoricSecurityError.h"
-#include "HistoricalDataRequest/ElementHistoricFieldDataArray.h"
+#include "HistoricalDataRequest/HistoricElementSecurityData.h"
+#include "HistoricalDataRequest/HistoricElementFieldExceptionsArray.h"
+#include "HistoricalDataRequest/HistoricElementString.h"
+#include "HistoricalDataRequest/HistoricElementInt.h"
+#include "HistoricalDataRequest/HistoricElementSecurityError.h"
+#include "HistoricalDataRequest/HistoricElementFieldDataArray.h"
 
 #include "Types/Rules.h"
 #include "Types/IndentType.h"
@@ -22,10 +22,9 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		ElementHistoricSecurityData::ElementHistoricSecurityData(
+		HistoricElementSecurityData::HistoricElementSecurityData(
 			const std::string& securityName, 
 			const std::vector<std::string>& badFields, 
-			//const std::map<Datetime, std::map<std::string, ObjectType>*>& fieldData, 
 			const std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData,
 			int sequenceNumber)
 		{
@@ -35,26 +34,26 @@ namespace BEmu
             if (badFields.size() == 0)
                 this->_elmFieldExceptions = 0;
             else
-                this->_elmFieldExceptions = new ElementHistoricFieldExceptionsArray(badFields);
+                this->_elmFieldExceptions = new HistoricElementFieldExceptionsArray(badFields);
 
-			this->_elmSecurityName = new ElementHistoricString("security", securityName);
+			this->_elmSecurityName = new HistoricElementString("security", securityName);
 
-			this->_elmSequenceNumber = new ElementHistoricInt("sequenceNumber", sequenceNumber);
+			this->_elmSequenceNumber = new HistoricElementInt("sequenceNumber", sequenceNumber);
 
 			if (this->_isSecurityError)
             {
-                this->_elmSecError = new ElementHistoricSecurityError(securityName);
+                this->_elmSecError = new HistoricElementSecurityError(securityName);
                 this->_elmFieldDataArray = 0;
             }
             else
             {
                 this->_elmSecError = 0;
-                this->_elmFieldDataArray = new ElementHistoricFieldDataArray(fieldData);
+                this->_elmFieldDataArray = new HistoricElementFieldDataArray(fieldData);
             }
 		}
 
 
-		ElementHistoricSecurityData::~ElementHistoricSecurityData()
+		HistoricElementSecurityData::~HistoricElementSecurityData()
 		{
 			delete this->_elmFieldExceptions;
 			this->_elmFieldExceptions = 0;
@@ -73,23 +72,23 @@ namespace BEmu
 		}
 
 
-		Name ElementHistoricSecurityData::name() const
+		Name HistoricElementSecurityData::name() const
 		{
 			Name result("securityData");
 			return result;
 		}
 
-		size_t ElementHistoricSecurityData::numValues() const
+		size_t HistoricElementSecurityData::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementHistoricSecurityData::numElements() const
+		size_t HistoricElementSecurityData::numElements() const
 		{
 			return 3 + (this->_elmFieldExceptions == 0 ? 0 : 1);
 		}
 
-		SchemaElementDefinition ElementHistoricSecurityData::elementDefinition() const
+		SchemaElementDefinition HistoricElementSecurityData::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("HistoricalDataTable"));
@@ -97,23 +96,23 @@ namespace BEmu
 		}
 
 		
-		bool ElementHistoricSecurityData::isNull() const
+		bool HistoricElementSecurityData::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementHistoricSecurityData::isArray() const
+		bool HistoricElementSecurityData::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementHistoricSecurityData::isComplexType() const
+		bool HistoricElementSecurityData::isComplexType() const
 		{
 			return true;
 		}
 
 
-		ElementPtr * ElementHistoricSecurityData::getElement(const char* name) const
+		ElementPtr * HistoricElementSecurityData::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldData", 10) == 0)
 			{
@@ -142,7 +141,7 @@ namespace BEmu
 			throw elementPtrEx;
 		}
 
-		bool ElementHistoricSecurityData::hasElement(const char* name, bool excludeNullElements) const
+		bool HistoricElementSecurityData::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				( strncmp(name, "fieldData", 10) == 0 && !this->_isSecurityError ) ||
@@ -153,18 +152,18 @@ namespace BEmu
 		}
 
 
-		int ElementHistoricSecurityData::getElementAsInt32(const char* name) const
+		int HistoricElementSecurityData::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		const char* ElementHistoricSecurityData::getElementAsString(const char* name) const
+		const char* HistoricElementSecurityData::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
 
-		std::ostream& ElementHistoricSecurityData::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& HistoricElementSecurityData::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 			stream << tabs << "securityData = {" << std::endl;

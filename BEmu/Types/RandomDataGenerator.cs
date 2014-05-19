@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="Types/RandomDataGenerator.cs" company="Jordan Robinson">
+// <copyright project="BEmu_csh" file="Types/RandomDataGenerator.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace BEmu.Types
+namespace Bloomberglp.Blpapi.Types
 {
     using System;
     using System.Collections.Generic;
@@ -18,7 +18,7 @@ namespace BEmu.Types
     {
         private static Random _random = new Random(100);
 
-        public static object ReferenceDataFromFieldName(string fieldName, string security, bool isOption, ReferenceDataRequest.RequestReference rreq)
+        public static object ReferenceDataFromFieldName(string fieldName, string security, bool isOption, ReferenceDataRequest.ReferenceRequest rreq)
         {
             string upper = fieldName.ToUpper();
             object result;
@@ -33,7 +33,7 @@ namespace BEmu.Types
                 {
                     uint numPoints = 1;
                     string dtExp = null;
-                    var optionality = ReferenceDataRequest.ElementReferenceArrayChainTickers.OptionalityEnum.call;
+                    var optionality = ReferenceDataRequest.ReferenceElementArrayChainTickers.OptionalityEnum.call;
 
                     if (rreq.HasElement("overrides"))
                     {
@@ -55,13 +55,13 @@ namespace BEmu.Types
                                     break;
                                 case "CHAIN_PUT_CALL_TYPE_OVRD":
                                     if (value.ToUpper() == "P")
-                                        optionality = ReferenceDataRequest.ElementReferenceArrayChainTickers.OptionalityEnum.put;
+                                        optionality = ReferenceDataRequest.ReferenceElementArrayChainTickers.OptionalityEnum.put;
                                     break;
                             }
                         }
                     }
 
-                    ReferenceDataRequest.ElementReferenceArrayChainTickers chain = new ReferenceDataRequest.ElementReferenceArrayChainTickers(security, numPoints, dtExp, optionality);
+                    ReferenceDataRequest.ReferenceElementArrayChainTickers chain = new ReferenceDataRequest.ReferenceElementArrayChainTickers(security, numPoints, dtExp, optionality);
                     result = chain;
                 }
             }
@@ -115,7 +115,7 @@ namespace BEmu.Types
             return TimeSpan.FromMinutes(RandomDataGenerator._random.Next(1, 30)); //between 1 and 30 minutes
         }
 
-        public static IntradayBarRequest.BarTickDataType GenerateBarData(DateTime date)
+        public static IntradayBarRequest.IntradayBarTickDataType GenerateBarData(DateTime date)
         {
             double first = RandomDataGenerator.RandomDouble();
             double second = RandomDataGenerator.RandomDouble();
@@ -125,7 +125,7 @@ namespace BEmu.Types
             double open = RandomDataGenerator.RandomDouble(low, high);
             double close = RandomDataGenerator.RandomDouble(low, high);
 
-            IntradayBarRequest.BarTickDataType result = new IntradayBarRequest.BarTickDataType()
+            IntradayBarRequest.IntradayBarTickDataType result = new IntradayBarRequest.IntradayBarTickDataType()
             {
                 DtTime = date,
                 Volume = RandomDataGenerator.RandomInt(1000000),

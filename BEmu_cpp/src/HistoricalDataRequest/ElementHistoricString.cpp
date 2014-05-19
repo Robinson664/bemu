@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/ElementHistoricString.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricElementString.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,32 +7,32 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/ElementHistoricString.h"
+#include "HistoricalDataRequest/HistoricElementString.h"
 #include "BloombergTypes/Name.h"
 
 namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		ElementHistoricString::ElementHistoricString(const std::string& name, const std::string& value)
+		HistoricElementString::HistoricElementString(const std::string& name, const std::string& value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		ElementHistoricString::~ElementHistoricString()
+		HistoricElementString::~HistoricElementString()
 		{
 		}
 
 
-		Name ElementHistoricString::name() const
+		Name HistoricElementString::name() const
 		{
 			Name result(this->_name.c_str());
 			return result;
 		}
 
 
-		const char * ElementHistoricString::getValueAsString(int index) const
+		const char * HistoricElementString::getValueAsString(int index) const
 		{
 			if(index == 0)
 				return this->_value.c_str();
@@ -41,7 +41,7 @@ namespace BEmu
 		}
 
 
-		std::ostream& ElementHistoricString::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& HistoricElementString::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/RequestHistoricElementDate.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricRequestElementDate.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/RequestHistoricElementDate.h"
+#include "HistoricalDataRequest/HistoricRequestElementDate.h"
 #include "BloombergTypes/Datetime.h"
 #include "Types/DisplayFormats.h"
 
@@ -15,21 +15,21 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		RequestHistoricElementDate::RequestHistoricElementDate(const std::string& elementName) : RequestHistoricElementString(elementName, "")
+		HistoricRequestElementDate::HistoricRequestElementDate(const std::string& elementName) : HistoricRequestElementString(elementName, "")
 		{
 		}
 
-		RequestHistoricElementDate::RequestHistoricElementDate(const std::string& elementName, const Datetime& datetime) 
-			: RequestHistoricElementString(elementName, DisplayFormats::ToYYYYMMDDWithDashes(datetime))
+		HistoricRequestElementDate::HistoricRequestElementDate(const std::string& elementName, const Datetime& datetime) 
+			: HistoricRequestElementString(elementName, DisplayFormats::ToYYYYMMDDWithDashes(datetime))
 		{
 			this->_instance = datetime;
 		}
 
-		RequestHistoricElementDate::~RequestHistoricElementDate()
+		HistoricRequestElementDate::~HistoricRequestElementDate()
 		{
 		}
 
-		Datetime RequestHistoricElementDate::getDatetime() const
+		Datetime HistoricRequestElementDate::getDatetime() const
 		{
 			return this->_instance;
 		}

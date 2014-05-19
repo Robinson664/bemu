@@ -26,18 +26,6 @@
 
 namespace BEmu
 {
-	//Session::Session(const Session& session)
-	//{
-	//	srand((unsigned int)time(0));
-	//	this->_sessionState = session._sessionState;
-
-	//	this->_sessionOptions.setServerHost(session._sessionOptions.serverHost());
-	//	this->_sessionOptions.setServerPort(session._sessionOptions.serverPort());
-
-	//	this->_sessionTimerFunction = 0;
-	//	this->_marketSimulatorTimer = 0;
-	//}
-
 	Session::Session(const SessionOptions& options) //for sync calls (HistRef, Intraday, and Reference)
 	{
 		srand((unsigned int)time(0));

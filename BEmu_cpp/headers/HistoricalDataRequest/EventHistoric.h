@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/EventHistoric.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricEvent.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,18 +18,18 @@ namespace BEmu
 
 	namespace HistoricalDataRequest
 	{
-		class RequestHistoric;
+		class HistoricRequest;
 
-		class EventHistoric : public EventPtr
+		class HistoricEvent : public EventPtr
 		{
 			private:
 				std::vector<MessagePtr*> * _messages;
 				std::vector<MessagePtr*> * GenerateMessages() const;
-				RequestHistoric * _internal;
+				HistoricRequest * _internal;
 
 			public:
-				EventHistoric(RequestHistoric * request);
-				~EventHistoric();
+				HistoricEvent(HistoricRequest * request);
+				~HistoricEvent();
 				
 				virtual std::vector<MessagePtr*> *getMessages() const;
 		};

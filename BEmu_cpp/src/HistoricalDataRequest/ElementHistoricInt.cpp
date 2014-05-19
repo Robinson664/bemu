@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/ElementHistoricInt.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricElementInt.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/ElementHistoricInt.h"
+#include "HistoricalDataRequest/HistoricElementInt.h"
 
 #include "BloombergTypes/Name.h"
 
@@ -15,46 +15,46 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		ElementHistoricInt::ElementHistoricInt(const std::string& name, int value)
+		HistoricElementInt::HistoricElementInt(const std::string& name, int value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		ElementHistoricInt::~ElementHistoricInt()
+		HistoricElementInt::~HistoricElementInt()
 		{
 		}
 
 
-		Name ElementHistoricInt::name() const
+		Name HistoricElementInt::name() const
 		{
 			Name result(this->_name.c_str());
 			return result;
 		}
 
-		size_t ElementHistoricInt::numValues() const
+		size_t HistoricElementInt::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementHistoricInt::numElements() const
+		size_t HistoricElementInt::numElements() const
 		{
 			return 0;
 		}
 
 		
-		bool ElementHistoricInt::isArray() const
+		bool HistoricElementInt::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementHistoricInt::isComplexType() const
+		bool HistoricElementInt::isComplexType() const
 		{
 			return false;
 		}
 
 
-		int ElementHistoricInt::getValueAsInt32(int index) const
+		int HistoricElementInt::getValueAsInt32(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -62,7 +62,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		long ElementHistoricInt::getValueAsInt64(int index) const
+		long HistoricElementInt::getValueAsInt64(int index) const
 		{
 			if(index == 0)
 				return (long)this->_value;
@@ -70,7 +70,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		float ElementHistoricInt::getValueAsFloat32(int index) const
+		float HistoricElementInt::getValueAsFloat32(int index) const
 		{
 			if(index == 0)
 				return (float)this->_value;
@@ -78,7 +78,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		double ElementHistoricInt::getValueAsFloat64(int index) const
+		double HistoricElementInt::getValueAsFloat64(int index) const
 		{
 			if(index == 0)
 				return (double)this->_value;
@@ -86,7 +86,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		const char * ElementHistoricInt::getValueAsString(int index) const
+		const char * HistoricElementInt::getValueAsString(int index) const
 		{
 			if(index == 0)
 				return ElementPtr::toCharPointer(this->_value);
@@ -95,7 +95,7 @@ namespace BEmu
 		}
 
 
-		std::ostream& ElementHistoricInt::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& HistoricElementInt::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			ElementPtr::prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;

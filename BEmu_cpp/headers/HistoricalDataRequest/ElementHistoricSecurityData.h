@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/ElementHistoricSecurityData.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricElementSecurityData.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -19,30 +19,30 @@ namespace BEmu
 
 	namespace HistoricalDataRequest
 	{
-		class ElementHistoricString;
-		class ElementHistoricFieldDataArray;
-		class ElementHistoricInt;
-		class ElementHistoricFieldExceptionsArray;
-		class ElementHistoricSecurityError;
+		class HistoricElementString;
+		class HistoricElementFieldDataArray;
+		class HistoricElementInt;
+		class HistoricElementFieldExceptionsArray;
+		class HistoricElementSecurityError;
 
-		class ElementHistoricSecurityData : public ElementPtr
+		class HistoricElementSecurityData : public ElementPtr
 		{
 			private:
-				ElementHistoricString * _elmSecurityName;
-				ElementHistoricFieldDataArray * _elmFieldDataArray;
-				ElementHistoricInt * _elmSequenceNumber;
-				ElementHistoricFieldExceptionsArray * _elmFieldExceptions;
-				ElementHistoricSecurityError * _elmSecError;
+				HistoricElementString * _elmSecurityName;
+				HistoricElementFieldDataArray * _elmFieldDataArray;
+				HistoricElementInt * _elmSequenceNumber;
+				HistoricElementFieldExceptionsArray * _elmFieldExceptions;
+				HistoricElementSecurityError * _elmSecError;
 				bool _isSecurityError;
 
 			public:
-				ElementHistoricSecurityData(
+				HistoricElementSecurityData(
 					const std::string& securityName, 
 					const std::vector<std::string>& badFields, 
 					const std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData, 
 					int sequenceNumber);
 
-				~ElementHistoricSecurityData();
+				~HistoricElementSecurityData();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/ElementHistoric.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricElement.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,59 +7,59 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/ElementHistoric.h"
-#include "HistoricalDataRequest/ElementHistoricSecurityData.h"
-#include "HistoricalDataRequest/MessageHistoric.h"
+#include "HistoricalDataRequest/HistoricElement.h"
+#include "HistoricalDataRequest/HistoricElementSecurityData.h"
+#include "HistoricalDataRequest/HistoricMessage.h"
 #include "BloombergTypes/Name.h"
 
 namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		ElementHistoric::ElementHistoric(const MessageHistoric& msg)
+		HistoricElement::HistoricElement(const HistoricMessage& msg)
 		{
-			this->_security = (ElementHistoricSecurityData*)msg.getElement("securityData");
+			this->_security = (HistoricElementSecurityData*)msg.getElement("securityData");
 		}
 
-		ElementHistoric::~ElementHistoric()
+		HistoricElement::~HistoricElement()
 		{
 		}
 
 
-		Name ElementHistoric::name() const
+		Name HistoricElement::name() const
 		{
 			Name result("securityData");
 			return result;
 		}
 
-		size_t ElementHistoric::numValues() const
+		size_t HistoricElement::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementHistoric::numElements() const
+		size_t HistoricElement::numElements() const
 		{
 			return 1;
 		}
 
 		
-		bool ElementHistoric::isNull() const
+		bool HistoricElement::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementHistoric::isArray() const
+		bool HistoricElement::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementHistoric::isComplexType() const
+		bool HistoricElement::isComplexType() const
 		{
 			return true;
 		}
 
 
-		std::ostream& ElementHistoric::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& HistoricElement::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "HistoricalDataResponse (choice) = {" << std::endl;
 			this->_security->print(stream, level + 1, spacesPerLevel);

@@ -12,8 +12,6 @@
 #include "BloombergTypes/Datetime.h"
 #include "BloombergTypes/CorrelationId.h"
 
-#include "IntradayTickRequest/RequestIntradayTick.h"
-
 namespace BEmu
 {
 	RequestPtr::RequestPtr()
@@ -62,5 +60,4 @@ namespace BEmu
 
 	Element RequestPtr::getElement(const char* name) { throw requestEx; }
 	Element RequestPtr::getElement(const Name& name) { return this->getElement(name.string()); }
-
 }

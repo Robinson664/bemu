@@ -22,7 +22,6 @@ namespace BEmu
 			public:
 				MessageMarketSessionOpened();
 				virtual const char* topicName() const;
-
 		};
 	}
 }

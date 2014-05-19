@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/RequestHistoric.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/HistoricalDataRequest/HistoricRequest.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,12 +7,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "HistoricalDataRequest/RequestHistoric.h"
-#include "HistoricalDataRequest/RequestHistoricElementDate.h"
-#include "HistoricalDataRequest/RequestHistoricElementStringArray.h"
-#include "HistoricalDataRequest/RequestHistoricElementInt.h"
-#include "HistoricalDataRequest/RequestHistoricElementBool.h"
-#include "HistoricalDataRequest/RequestHistoricElementString.h"
+#include "HistoricalDataRequest/HistoricRequest.h"
+#include "HistoricalDataRequest/HistoricRequestElementDate.h"
+#include "HistoricalDataRequest/HistoricRequestElementStringArray.h"
+#include "HistoricalDataRequest/HistoricRequestElementInt.h"
+#include "HistoricalDataRequest/HistoricRequestElementBool.h"
+#include "HistoricalDataRequest/HistoricRequestElementString.h"
 #include "BloombergTypes/Datetime.h"
 #include "Types/DisplayFormats.h"
 
@@ -20,7 +20,7 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		RequestHistoric::RequestHistoric()
+		HistoricRequest::HistoricRequest()
 		{
 			this->_dtStart = 0;
 			this->_dtEnd = 0;
@@ -33,8 +33,8 @@ namespace BEmu
 			this->_overrideOptionsElement = 0;
 			this->_pricingOptionElement = 0;
 
-            this->_securities = new RequestHistoricElementStringArray("securities");
-            this->_fields = new RequestHistoricElementStringArray("fields");
+            this->_securities = new HistoricRequestElementStringArray("securities");
+            this->_fields = new HistoricRequestElementStringArray("fields");
 
 			this->_periodicityAdjustment = HistDataPeriodicityAdjustmentEnum::actual;
 			this->_periodicity = HistDataPeriodicityEnum::daily;
@@ -44,7 +44,7 @@ namespace BEmu
 			this->_requestType = RequestPtr::historic;
 		}
 
-		RequestHistoric::~RequestHistoric()
+		HistoricRequest::~HistoricRequest()
 		{
 			delete this->_dtStart;
 			this->_dtStart = 0;
@@ -60,38 +60,38 @@ namespace BEmu
 		}
 
 
-		std::vector<std::string> RequestHistoric::securities() const
+		std::vector<std::string> HistoricRequest::securities() const
 		{
 			return this->_securities->values();
 		}
 
-		std::vector<std::string> RequestHistoric::fields() const
+		std::vector<std::string> HistoricRequest::fields() const
 		{
 			return this->_fields->values();
 		}
 
-		bool RequestHistoric::hasStartDate() const
+		bool HistoricRequest::hasStartDate() const
 		{
 			return this->_dtStart != 0;
 		}
 
-		bool RequestHistoric::hasEndDate() const
+		bool HistoricRequest::hasEndDate() const
 		{
 			return this->_dtEnd != 0;
 		}
 
-		Datetime RequestHistoric::dtStart() const
+		Datetime HistoricRequest::dtStart() const
 		{
 			return this->_dtStart->getDatetime();
 		}
 
-		Datetime RequestHistoric::dtEnd() const
+		Datetime HistoricRequest::dtEnd() const
 		{
 			return this->_dtEnd->getDatetime();
 		}
 
 
-		std::vector<Datetime> * RequestHistoric::getDates() const
+		std::vector<Datetime> * HistoricRequest::getDates() const
 		{
 			std::vector<Datetime> * dates = this->getDatesBeforeMaxPoints();
 
@@ -125,7 +125,7 @@ namespace BEmu
 			}
 		}
 
-		std::vector<Datetime> * RequestHistoric::getDatesBeforeMaxPoints() const
+		std::vector<Datetime> * HistoricRequest::getDatesBeforeMaxPoints() const
 		{
 			std::vector<Datetime> * result = new std::vector<Datetime>();
 
@@ -195,7 +195,7 @@ namespace BEmu
 		}
 
 
-		void RequestHistoric::append(const char* name, const char* value)
+		void HistoricRequest::append(const char* name, const char* value)
 		{
 			if(strncmp(name, "securities", 11) == 0)
 				this->_securities->appendValue(value);
@@ -208,13 +208,13 @@ namespace BEmu
 		}
 
 
-		void RequestHistoric::set(const char* name, const char* value)
+		void HistoricRequest::set(const char* name, const char* value)
 		{
 			if(strncmp(name, "startDate", 10) == 0)
 			{
 				Datetime dt;
 				if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(value, dt))
-					this->_dtStart = new RequestHistoricElementDate("startDate", dt);
+					this->_dtStart = new HistoricRequestElementDate("startDate", dt);
 				else
 					throw requestEx;
 			}
@@ -222,7 +222,7 @@ namespace BEmu
 			{
 				Datetime dt;
 				if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(value, dt))
-					this->_dtEnd = new RequestHistoricElementDate("endDate", dt);
+					this->_dtEnd = new HistoricRequestElementDate("endDate", dt);
 				else
 					throw requestEx;
 				
@@ -290,25 +290,25 @@ namespace BEmu
 				throw requestEx;
 		}
 
-		void RequestHistoric::set(const char* name, bool value)
+		void HistoricRequest::set(const char* name, bool value)
 		{
 			if(strncmp(name, "adjustmentNormal", 17) == 0)
-				this->_adjustmentNormalElement = new RequestHistoricElementBool("adjustmentNormal", value);
+				this->_adjustmentNormalElement = new HistoricRequestElementBool("adjustmentNormal", value);
 
 			else if(strncmp(name, "adjustmentAbnormal", 19) == 0)
-				this->_adjustmentAbnormalElement = new RequestHistoricElementBool("adjustmentAbnormal", value);
+				this->_adjustmentAbnormalElement = new HistoricRequestElementBool("adjustmentAbnormal", value);
 			
 			else if(strncmp(name, "adjustmentSplit", 16) == 0)
-				this->_adjustmentSplitElement = new RequestHistoricElementBool("adjustmentSplit", value);
+				this->_adjustmentSplitElement = new HistoricRequestElementBool("adjustmentSplit", value);
 
 			else
 				throw requestEx;
 		}
 
-		void RequestHistoric::set(const char* name, int value)
+		void HistoricRequest::set(const char* name, int value)
 		{
 			if(strncmp(name, "maxDataPoints", 14) == 0)
-				this->_maxDataPointElement = new RequestHistoricElementInt("maxDataPoints", value);
+				this->_maxDataPointElement = new HistoricRequestElementInt("maxDataPoints", value);
 			
 			else
 				throw requestEx;

@@ -37,10 +37,6 @@ namespace BEmu
 		size_t RequestReferenceElementOverride::numValues() const { return 1; }
 		size_t RequestReferenceElementOverride::numElements() const { return 2; }
 
-		//bool RequestReferenceElementOverride::isNull() const { return false; }
-		//bool RequestReferenceElementOverride::isArray() const { return false; }
-		//bool RequestReferenceElementOverride::isComplexType() const { return false; }
-
 		void RequestReferenceElementOverride::setElement(const char* name, const char* value)
 		{
 			if(strncmp(name, "fieldId", 8) == 0)
@@ -97,7 +93,5 @@ namespace BEmu
 
 			return stream;
 		}
-
-
 	}
 }

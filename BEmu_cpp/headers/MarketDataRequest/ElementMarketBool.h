@@ -35,7 +35,6 @@ namespace BEmu
 				virtual bool getValueAsBool(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
-
 		};
 	}
 }

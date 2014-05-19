@@ -153,8 +153,5 @@ namespace BEmu
 
 			return stream;
 		}
-
-
-
 	}
 }

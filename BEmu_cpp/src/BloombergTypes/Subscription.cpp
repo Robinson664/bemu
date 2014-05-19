@@ -53,7 +53,6 @@ namespace BEmu
 				ssOptions << ",";
 		}
 		this->_options = std::string(ssOptions.str());
-
 	}
 
 	void Subscription::construct(std::string topic, std::string fields, std::string options, CorrelationId correlationId)

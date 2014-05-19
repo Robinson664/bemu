@@ -50,5 +50,4 @@ namespace BEmu
 	{
 		return this->_ptr->getEventType();
 	}
-
 }

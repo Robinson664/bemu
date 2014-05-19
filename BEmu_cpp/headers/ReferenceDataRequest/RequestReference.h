@@ -32,7 +32,7 @@ namespace BEmu
 				std::vector<std::string> getSecurities() const;
 				std::vector<std::string> getFields() const;
 
-				bool hasElement(std::string arg) const; //note that while the C# and Java versions of Request have a hasElement() function, the C++ version does not
+				bool hasElement(std::string arg) const; //note that while the C# and Java versions of Request have a DLL_EXPORT hasElement() function, the C++ version does not
 
 				virtual Element getElement(const char* name);
 

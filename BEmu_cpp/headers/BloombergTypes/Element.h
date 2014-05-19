@@ -19,7 +19,7 @@ namespace BEmu
 	class ElementPtr;
 	class Datetime;
 	
-	//See my explanation of the RequetPtr class for an explanation of this class
+	//See my explanation of the RequetPtr class in Request.h for an explanation of this class
 	//I've found that the BB API de-allocates Element memory in the ~MessageIterator() destructor.
 	//  I don't do that in the BEmu.  Maybe I'll do that in the future.  I consider it a low priority issue.
 	class Element
@@ -124,5 +124,4 @@ namespace BEmu
 		mc.print(out);
 		return out;
 	}
-
 }

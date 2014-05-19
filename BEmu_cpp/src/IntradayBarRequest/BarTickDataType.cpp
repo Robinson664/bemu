@@ -100,7 +100,5 @@ namespace BEmu
 		{
 			return this->_numEvents;
 		}
-
-
 	}
 }

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu" file="ServiceRefData.cs" company="Jordan Robinson">
+// <copyright project="BEmu_csh" file="ServiceRefData.cs" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace BEmu
+namespace Bloomberglp.Blpapi
 {
     using System;
     using System.Collections.Generic;
@@ -23,13 +23,13 @@ namespace BEmu
             switch (operationName)
             {
                 case "HistoricalDataRequest":
-                    return new HistoricalDataRequest.RequestHistoric();
+                    return new HistoricalDataRequest.HistoricRequest();
                 case "ReferenceDataRequest":
-                    return new ReferenceDataRequest.RequestReference();
+                    return new ReferenceDataRequest.ReferenceRequest();
                 case "IntradayTickRequest":
-                    return new IntradayTickRequest.RequestIntradayTick(this);
+                    return new IntradayTickRequest.IntradayTickRequest(this);
                 case "IntradayBarRequest":
-                    return new IntradayBarRequest.RequestIntradayBar(this);
+                    return new IntradayBarRequest.IntradayBarRequest(this);
                 default:
                     throw new NotImplementedException(string.Format("BEmu.ServiceRefData.CreateRequest: Operation {0} not supported. Case-sensitive.", operationName));
             }

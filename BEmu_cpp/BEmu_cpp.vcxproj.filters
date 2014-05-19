@@ -228,9 +228,6 @@
     <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementStringArray.h">
       <Filter>Header Files\IntradayTickRequest</Filter>
     </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldExceptionsArray.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
     <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricInt.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
@@ -265,24 +262,6 @@
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
     <ClInclude Include="headers\HistoricalDataRequest\RequestHistoricElementStringArray.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricDateTime.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricDouble.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricErrorInfo.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldData.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldDataArray.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldExceptions.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
     <ClInclude Include="headers\HistoricalDataRequest\ElementHistoric.h">
@@ -486,59 +465,29 @@
     <ClInclude Include="headers\Exceptions\UnsupportedOperationException.h">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldExceptionsArray.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldExceptions.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldDataArray.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldData.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricErrorInfo.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricDouble.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricDateTime.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickString.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\EventIntradayTick.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\MessageIntradayTick.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTick.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementBool.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementInt.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementString.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementStringArray.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementTime.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickData.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataArray.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataParent.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataTuple3.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDateTime.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDouble.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickInt.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
     <ClCompile Include="src\Types\RandomDataGenerator.cpp">
       <Filter>Source Files\Types</Filter>
     </ClCompile>
@@ -653,9 +602,6 @@
     <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarDateTime.cpp">
       <Filter>Source Files\IntradayBarRequest</Filter>
     </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldExceptionsArray.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
     <ClCompile Include="src\HistoricalDataRequest\ElementHistoricInt.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
@@ -692,29 +638,8 @@
     <ClCompile Include="src\HistoricalDataRequest\RequestHistoricElementStringArray.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricDateTime.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricDouble.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricErrorInfo.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldData.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldDataArray.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldExceptions.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
     <ClCompile Include="src\HistoricalDataRequest\ElementHistoric.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTick.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
     </ClCompile>
     <ClCompile Include="src\ReferenceDataRequest\ElementReference.cpp">
       <Filter>Source Files\ReferenceDataRequest</Filter>
@@ -871,6 +796,81 @@
     </ClCompile>
     <ClCompile Include="src\BloombergTypes\SchemaTypeDefinition.cpp">
       <Filter>Source Files\BloombergTypes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTick.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementTime.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickData.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataArray.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataParent.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataTuple3.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDateTime.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDouble.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickInt.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickString.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\EventIntradayTick.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\MessageIntradayTick.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTick.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementBool.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementInt.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementString.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementStringArray.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricDateTime.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricDouble.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricErrorInfo.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldData.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldDataArray.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldExceptions.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldExceptionsArray.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

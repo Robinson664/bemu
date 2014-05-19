@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/RequestHistoric.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricRequest.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -36,20 +36,20 @@ namespace BEmu
 			enum EnumType { closingPrice, averagePrice };
 		}
 
-		class RequestHistoricElementStringArray;
-		class RequestHistoricElementDate;
-		class RequestHistoricElementBool;
-		class RequestHistoricElementInt;
-		class RequestHistoricElementString;
+		class HistoricRequestElementStringArray;
+		class HistoricRequestElementDate;
+		class HistoricRequestElementBool;
+		class HistoricRequestElementInt;
+		class HistoricRequestElementString;
 
-		class RequestHistoric : public RequestPtr
+		class HistoricRequest : public RequestPtr
 		{
 			private:
-				RequestHistoricElementStringArray * _securities, * _fields;
-				RequestHistoricElementDate * _dtStart, * _dtEnd;
-				RequestHistoricElementBool * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement;
-				RequestHistoricElementInt * _maxDataPointElement;
-				RequestHistoricElementString * _periodicityAdjustmentElement, * _periodicityElement, * _overrideOptionsElement, * _pricingOptionElement;
+				HistoricRequestElementStringArray * _securities, * _fields;
+				HistoricRequestElementDate * _dtStart, * _dtEnd;
+				HistoricRequestElementBool * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement;
+				HistoricRequestElementInt * _maxDataPointElement;
+				HistoricRequestElementString * _periodicityAdjustmentElement, * _periodicityElement, * _overrideOptionsElement, * _pricingOptionElement;
 
 				HistDataPeriodicityAdjustmentEnum::EnumType _periodicityAdjustment;
 				HistDataPeriodicityEnum::EnumType _periodicity;
@@ -57,8 +57,8 @@ namespace BEmu
 				OverrideOptionsEnum::EnumType _overrideOptions;
 
 			public:
-				RequestHistoric();
-				~RequestHistoric();
+				HistoricRequest();
+				~HistoricRequest();
 
 				std::vector<std::string> securities() const;
 				std::vector<std::string> fields() const;

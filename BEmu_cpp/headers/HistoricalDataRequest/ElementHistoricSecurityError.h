@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/ElementHistoricSecurityError.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/HistoricalDataRequest/HistoricElementSecurityError.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,18 +15,18 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		class ElementHistoricString;
-		class ElementHistoricInt;
+		class HistoricElementString;
+		class HistoricElementInt;
 
-		class ElementHistoricSecurityError : public ElementPtr
+		class HistoricElementSecurityError : public ElementPtr
 		{
 			private:				
-				ElementHistoricString * _source, * _category, * _message, * _subCategory;
-				ElementHistoricInt * _code;
+				HistoricElementString * _source, * _category, * _message, * _subCategory;
+				HistoricElementInt * _code;
 
 			public:
-				ElementHistoricSecurityError(const std::string& security);
-				~ElementHistoricSecurityError();
+				HistoricElementSecurityError(const std::string& security);
+				~HistoricElementSecurityError();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

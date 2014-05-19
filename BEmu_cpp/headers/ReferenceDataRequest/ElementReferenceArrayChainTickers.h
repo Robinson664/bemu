@@ -22,7 +22,6 @@ namespace BEmu
 
 		class ElementReferenceArrayChainTickers : public ElementReferenceArray
 		{
-			private:
 			public:
 				ElementReferenceArrayChainTickers(const std::string& underlier, unsigned numPoints, const std::string& strDtExp, OptionalityEnum::EnumType optionality);
 				virtual SchemaElementDefinition elementDefinition() const;
