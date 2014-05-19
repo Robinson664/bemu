@@ -123,282 +123,6 @@
     <ClInclude Include="headers\bemu_headers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarDouble.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarInt.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarLong.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarResponseError.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarString.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\EventIntradayBar.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\MessageIntradayBar.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBar.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementBool.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementInt.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementString.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementStringArray.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\RequestIntradayBarElementTime.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\BarTickDataType.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementBarData.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementBarTickData.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementBarTickDataArray.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayBarRequest\ElementIntradayBarDateTime.h">
-      <Filter>Header Files\IntradayBarRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickData.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementTime.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataArray.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataParent.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDataTuple3.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDateTime.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickDouble.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickInt.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickResponseError.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTickString.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\EventIntradayTick.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\MessageIntradayTick.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTick.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementBool.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementInt.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementString.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\RequestIntradayTickElementStringArray.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricInt.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricSecurityData.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricSecurityError.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricString.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\EventHistoric.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\MessageHistoric.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\RequestHistoric.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\RequestHistoricElementBool.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\RequestHistoricElementDate.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\RequestHistoricElementInt.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\RequestHistoricElementString.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\RequestHistoricElementStringArray.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoric.h">
-      <Filter>Header Files\HistoricalDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\ElementIntradayTick.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\EventReference.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\MessageReference.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\RequestReference.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementOverride.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementOverrideArray.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementString.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\RequestReferenceElementStringArray.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReference.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceString.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceArray.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceArrayChainTickers.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceArrayChainTickersItem.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceDateTime.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceDouble.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceErrorInfo.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceFieldData.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceFieldExceptions.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceFieldExceptionsArray.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceInt.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceObject.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceSecurityData.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceSecurityDataArray.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\ReferenceDataRequest\ElementReferenceSecurityError.h">
-      <Filter>Header Files\ReferenceDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketExceptionsArray.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketInt.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketNull.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketReason.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketServiceStatus.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketString.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketSubscriptionCanceled.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketSubscriptionCancelReason.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketSubscriptionStarted.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\EventMarket.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\MessageMarketServiceStatus.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\MessageMarketSessionOpened.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\MessageMarketSubscriptionCanceled.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\MessageMarketSubscriptionData.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\MessageMarketSubscriptionFailure.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\MessageMarketSubscriptionStarted.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketBool.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketDouble.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketExceptions.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\MarketDataRequest\ElementMarketDatetime.h">
-      <Filter>Header Files\MarketDataRequest</Filter>
-    </ClInclude>
     <ClInclude Include="headers\BloombergTypes\SubscriptionList.h">
       <Filter>Header Files\BloombergTypes</Filter>
     </ClInclude>
@@ -465,26 +189,302 @@
     <ClInclude Include="headers\Exceptions\UnsupportedOperationException.h">
       <Filter>Header Files\Exceptions</Filter>
     </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldExceptionsArray.h">
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElement.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldExceptions.h">
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementDateTime.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldDataArray.h">
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementDouble.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricFieldData.h">
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementErrorInfo.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricErrorInfo.h">
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementFieldData.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricDouble.h">
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementFieldDataArray.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
     </ClInclude>
-    <ClInclude Include="headers\HistoricalDataRequest\ElementHistoricDateTime.h">
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementFieldExceptions.h">
       <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementFieldExceptionsArray.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementInt.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementSecurityData.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementSecurityError.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricElementString.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricEvent.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricMessage.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricRequest.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricRequestElementBool.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricRequestElementDate.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricRequestElementInt.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricRequestElementString.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\HistoricalDataRequest\HistoricRequestElementStringArray.h">
+      <Filter>Header Files\HistoricalDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarTickDataType.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementData.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementTickData.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementTickDataArray.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementDateTime.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementDouble.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementInt.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementLong.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementResponseError.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarElementString.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarEvent.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarMessage.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarRequest.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarRequestElementBool.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarRequestElementInt.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarRequestElementString.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarRequestElementStringArray.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayBarRequest\IntradayBarRequestElementTime.h">
+      <Filter>Header Files\IntradayBarRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElement.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementData.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDataArray.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDataParent.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementTuple3.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDateTime.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDouble.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementInt.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementResponseError.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementString.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickEvent.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickMessage.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequest.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementBool.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementInt.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementString.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementStringArray.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementTime.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementBool.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementDatetime.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementDouble.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementExceptions.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementExceptionsArray.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementInt.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementNull.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementReason.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementServiceStatus.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementString.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementSubscriptionCanceled.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementSubscriptionCancelReason.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketElementSubscriptionStarted.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketEvent.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketMessageServiceStatus.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketMessageSessionOpened.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketMessageSubscriptionCanceled.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketMessageSubscriptionData.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketMessageSubscriptionFailure.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\MarketDataRequest\MarketMessageSubscriptionStarted.h">
+      <Filter>Header Files\MarketDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElement.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementArrayChainTickers.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementArrayChainTickersItem.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementDateTime.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementDouble.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementErrorInfo.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementFieldData.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementFieldExceptions.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementFieldExceptionsArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementInt.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementObject.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementSecurityData.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementSecurityDataArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementSecurityError.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceElementString.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceEvent.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceMessage.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceRequest.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceRequestElementOverride.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceRequestElementOverrideArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceRequestElementString.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ReferenceDataRequest\ReferenceRequestElementStringArray.h">
+      <Filter>Header Files\ReferenceDataRequest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -548,228 +548,6 @@
     <ClCompile Include="src\BloombergTypes\Session.cpp">
       <Filter>Source Files\BloombergTypes</Filter>
     </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarDouble.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarInt.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarLong.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarResponseError.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarString.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\EventIntradayBar.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\MessageIntradayBar.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBar.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementBool.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementInt.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementString.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementStringArray.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\RequestIntradayBarElementTime.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\BarTickDataType.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementBarData.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementBarTickData.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementBarTickDataArray.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayBarRequest\ElementIntradayBarDateTime.cpp">
-      <Filter>Source Files\IntradayBarRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricInt.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricSecurityData.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricSecurityError.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricString.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\EventHistoric.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\MessageHistoric.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\RequestHistoric.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\RequestHistoricElementBool.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\RequestHistoricElementDate.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\RequestHistoricElementInt.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\RequestHistoricElementString.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\RequestHistoricElementStringArray.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoric.cpp">
-      <Filter>Source Files\HistoricalDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReference.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementStringArray.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceArray.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceArrayChainTickers.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceArrayChainTickersItem.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceDateTime.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceDouble.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceErrorInfo.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceFieldData.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceFieldExceptions.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceFieldExceptionsArray.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceInt.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceObject.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceSecurityData.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceSecurityDataArray.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceSecurityError.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\ElementReferenceString.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\EventReference.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\MessageReference.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\RequestReference.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementOverride.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementOverrideArray.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\ReferenceDataRequest\RequestReferenceElementString.cpp">
-      <Filter>Source Files\ReferenceDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketBool.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\MessageMarketSubscriptionStarted.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketDatetime.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketDouble.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketExceptions.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketExceptionsArray.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketInt.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketNull.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketReason.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketServiceStatus.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketString.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketSubscriptionCanceled.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketSubscriptionCancelReason.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\ElementMarketSubscriptionStarted.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\EventMarket.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\MessageMarketServiceStatus.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\MessageMarketSessionOpened.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\MessageMarketSubscriptionCanceled.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\MessageMarketSubscriptionData.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MarketDataRequest\MessageMarketSubscriptionFailure.cpp">
-      <Filter>Source Files\MarketDataRequest</Filter>
-    </ClCompile>
     <ClCompile Include="src\BloombergTypes\Subscription.cpp">
       <Filter>Source Files\BloombergTypes</Filter>
     </ClCompile>
@@ -797,80 +575,302 @@
     <ClCompile Include="src\BloombergTypes\SchemaTypeDefinition.cpp">
       <Filter>Source Files\BloombergTypes</Filter>
     </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTick.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementTime.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickData.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataArray.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataParent.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDataTuple3.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDateTime.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickDouble.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickInt.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickResponseError.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\ElementIntradayTickString.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\EventIntradayTick.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\MessageIntradayTick.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTick.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementBool.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementInt.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementString.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\IntradayTickRequest\RequestIntradayTickElementStringArray.cpp">
-      <Filter>Source Files\IntradayTickRequests</Filter>
-    </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricDateTime.cpp">
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElement.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricDouble.cpp">
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementDateTime.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricErrorInfo.cpp">
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementDouble.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldData.cpp">
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementErrorInfo.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldDataArray.cpp">
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementFieldData.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldExceptions.cpp">
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementFieldDataArray.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
     </ClCompile>
-    <ClCompile Include="src\HistoricalDataRequest\ElementHistoricFieldExceptionsArray.cpp">
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementFieldExceptions.cpp">
       <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementFieldExceptionsArray.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementInt.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementSecurityData.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementSecurityError.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricElementString.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricEvent.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricMessage.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricRequest.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricRequestElementBool.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricRequestElementDate.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricRequestElementInt.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricRequestElementString.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HistoricalDataRequest\HistoricRequestElementStringArray.cpp">
+      <Filter>Source Files\HistoricalDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarTickDataType.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementData.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementTickData.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementTickDataArray.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementDateTime.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementDouble.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementInt.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementLong.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementResponseError.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarElementString.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarEvent.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarMessage.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarRequest.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarRequestElementBool.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarRequestElementInt.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarRequestElementString.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarRequestElementStringArray.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayBarRequest\IntradayBarRequestElementTime.cpp">
+      <Filter>Source Files\IntradayBarRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElement.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementData.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementDataArray.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementDataParent.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementTuple3.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementDateTime.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementDouble.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementInt.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementResponseError.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickElementString.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickEvent.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickMessage.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickRequest.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickRequestElementBool.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickRequestElementInt.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickRequestElementString.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickRequestElementStringArray.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\IntradayTickRequest\IntradayTickRequestElementTime.cpp">
+      <Filter>Source Files\IntradayTickRequests</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementBool.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementDatetime.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementDouble.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementExceptions.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementExceptionsArray.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementInt.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementNull.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementReason.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementServiceStatus.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementString.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementSubscriptionCanceled.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementSubscriptionCancelReason.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketElementSubscriptionStarted.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketEvent.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketMessageServiceStatus.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketMessageSessionOpened.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketMessageSubscriptionCanceled.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketMessageSubscriptionData.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketMessageSubscriptionFailure.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MarketDataRequest\MarketMessageSubscriptionStarted.cpp">
+      <Filter>Source Files\MarketDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElement.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementArrayChainTickers.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementArrayChainTickersItem.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementDateTime.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementDouble.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementErrorInfo.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementFieldData.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementFieldExceptions.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementFieldExceptionsArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementInt.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementObject.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementSecurityData.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementSecurityDataArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementSecurityError.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceElementString.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceEvent.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceMessage.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceRequest.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceRequestElementOverride.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceRequestElementOverrideArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceRequestElementString.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ReferenceDataRequest\ReferenceRequestElementStringArray.cpp">
+      <Filter>Source Files\ReferenceDataRequest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

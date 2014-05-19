@@ -12,8 +12,6 @@
 #include "ReferenceDataRequest/ReferenceElementSecurityDataArray.h"
 #include "BloombergTypes/Name.h"
 
-
-
 namespace BEmu
 {
 	namespace ReferenceDataRequest
