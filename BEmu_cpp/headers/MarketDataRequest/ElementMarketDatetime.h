@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/ElementMarketDatetime.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketElementDatetime.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -16,14 +16,14 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class ElementMarketDatetime : public ElementPtr
+		class MarketElementDatetime : public ElementPtr
 		{
 			private:
 				std::string _name;
 				Datetime _datetime;
 
 			public:
-				ElementMarketDatetime(std::string name, Datetime datetime);
+				MarketElementDatetime(std::string name, Datetime datetime);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

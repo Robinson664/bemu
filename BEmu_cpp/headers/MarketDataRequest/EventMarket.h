@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/EventMarket.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketEvent.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -24,7 +24,7 @@ namespace BEmu
 
 	namespace MarketDataRequest
 	{
-		class EventMarket : public EventPtr
+		class MarketEvent : public EventPtr
 		{
 			private:
 				std::vector<MessagePtr*> * _messages;
@@ -32,9 +32,9 @@ namespace BEmu
 				virtual std::vector<MessagePtr*> * getMessages() const;
 
 			public:
-				EventMarket(Event::EventType evtType, CorrelationId corr, SubscriptionList subs); //use for subscribing
-				EventMarket(Event::EventType evtType, Subscription sub); //use for unsubscribing
-				~EventMarket();
+				MarketEvent(Event::EventType evtType, CorrelationId corr, SubscriptionList subs); //use for subscribing
+				MarketEvent(Event::EventType evtType, Subscription sub); //use for unsubscribing
+				~MarketEvent();
 		};
 	}
 }

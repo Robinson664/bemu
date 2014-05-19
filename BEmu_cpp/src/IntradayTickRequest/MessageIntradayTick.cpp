@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/MessageIntradayTick.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/IntradayTickMessage.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,38 +7,38 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayTickRequest/MessageIntradayTick.h"
+#include "IntradayTickRequest/IntradayTickMessage.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/CorrelationId.h"
 #include "BloombergTypes/Service.h"
-#include "IntradayTickRequest/ElementIntradayTickDataParent.h"
-#include "IntradayTickRequest/ElementIntradayTickResponseError.h"
-#include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
-#include "IntradayTickRequest/ElementIntradayTick.h"
+#include "IntradayTickRequest/IntradayTickElementDataParent.h"
+#include "IntradayTickRequest/IntradayTickElementResponseError.h"
+#include "IntradayTickRequest/IntradayTickElementTuple3.h"
+#include "IntradayTickRequest/IntradayTickElement.h"
 
 namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
 		//makes copies of the arguments
-		MessageIntradayTick::MessageIntradayTick(const CorrelationId& corr, const Service& service, std::map<Datetime, ElementIntradayTickDataTuple3*> *ticks, bool includeConditionCodes)
+		IntradayTickMessage::IntradayTickMessage(const CorrelationId& corr, const Service& service, std::map<Datetime, IntradayTickElementTuple3*> *ticks, bool includeConditionCodes)
 			: MessagePtr(Name("IntradayTickResponse"), corr)
 		{
-			this->_parent = new ElementIntradayTickDataParent(ticks, includeConditionCodes);
+			this->_parent = new IntradayTickElementDataParent(ticks, includeConditionCodes);
 			this->_responseError = 0;
 			this->_isResponseError = false;
 		}
 
-		MessageIntradayTick::MessageIntradayTick(const CorrelationId& corr, const Service& service)
+		IntradayTickMessage::IntradayTickMessage(const CorrelationId& corr, const Service& service)
 			: MessagePtr(Name("IntradayTickResponse"), corr)
 		{
 			this->_parent = 0;
-			this->_responseError = new ElementIntradayTickResponseError();
+			this->_responseError = new IntradayTickElementResponseError();
 			this->_isResponseError = true;
 		}
 
-		MessageIntradayTick::~MessageIntradayTick()
+		IntradayTickMessage::~IntradayTickMessage()
 		{
 			delete this->_parent;
 			this->_parent = 0;
@@ -47,7 +47,7 @@ namespace BEmu
 			this->_responseError = 0;
 		}
 
-		ElementPtr * MessageIntradayTick::getElement(const char* name) const
+		ElementPtr * IntradayTickMessage::getElement(const char* name) const
 		{
 			if(this->_isResponseError && strncmp(name, "responseError", 14) == 0)
 				return this->_responseError;
@@ -59,14 +59,14 @@ namespace BEmu
 				throw messageEx;
 		}
 
-		bool MessageIntradayTick::hasElement(const char* name, bool excludeNullElements) const
+		bool IntradayTickMessage::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				(this->_isResponseError && strncmp(name, "responseError", 14) == 0) ||
 				(!this->_isResponseError && strncmp(name, "tickData", 9) == 0);
 		}
 
-		ElementPtr* MessageIntradayTick::firstElement() const
+		ElementPtr* IntradayTickMessage::firstElement() const
 		{
 			if(this->_isResponseError)
 				return this->_responseError;
@@ -74,24 +74,24 @@ namespace BEmu
 				return this->_parent;
 		}
 
-		const char* MessageIntradayTick::topicName() const
+		const char* IntradayTickMessage::topicName() const
 		{
 			return "";
 		}
 
-		size_t MessageIntradayTick::numElements() const
+		size_t IntradayTickMessage::numElements() const
 		{
 			return 1;
 		}
 
-		ElementPtr * MessageIntradayTick::asElement() const
+		ElementPtr * IntradayTickMessage::asElement() const
 		{
-			const MessageIntradayTick msg = *this;
-			ElementPtr * resultP = new ElementIntradayTick(msg);
+			const IntradayTickMessage msg = *this;
+			ElementPtr * resultP = new IntradayTickElement(msg);
 			return resultP;
 		}
 
-		std::ostream& MessageIntradayTick::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayTickMessage::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "IntradayTickResponse = {" << std::endl;
 			

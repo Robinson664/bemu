@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/BarTickDataType.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarTickDataType.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -8,13 +8,13 @@
 //------------------------------------------------------------------------------------------------
 
 #include "BloombergTypes/Datetime.h"
-#include "IntradayBarRequest/BarTickDataType.h"
+#include "IntradayBarRequest/IntradayBarTickDataType.h"
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		BarTickDataType::BarTickDataType(const Datetime& dtTime, double open, double high, double low, double close, double value, long volume, int numEvents)
+		IntradayBarTickDataType::IntradayBarTickDataType(const Datetime& dtTime, double open, double high, double low, double close, double value, long volume, int numEvents)
 		{
 			this->_open = open;
 			this->_high = high;
@@ -27,11 +27,11 @@ namespace BEmu
 			this->_dtTime = dtTime;
 		}
 
-		BarTickDataType::~BarTickDataType()
+		IntradayBarTickDataType::~IntradayBarTickDataType()
 		{
 		}
 
-		BarTickDataType::BarTickDataType(const BarTickDataType& arg)
+		IntradayBarTickDataType::IntradayBarTickDataType(const IntradayBarTickDataType& arg)
 		{
 			this->_open = arg._open;
 			this->_high = arg._high;
@@ -44,7 +44,7 @@ namespace BEmu
 			this->_dtTime = arg._dtTime;
 		}
 
-		BarTickDataType& BarTickDataType::operator=(const BarTickDataType &rhs)
+		IntradayBarTickDataType& IntradayBarTickDataType::operator=(const IntradayBarTickDataType &rhs)
 		{
 			if (this != &rhs)
 			{
@@ -61,42 +61,42 @@ namespace BEmu
 			return *this;
 		}
 
-		Datetime BarTickDataType::getDatetime() const
+		Datetime IntradayBarTickDataType::getDatetime() const
 		{
 			return this->_dtTime;
 		}
 		
-		double BarTickDataType::getOpen() const
+		double IntradayBarTickDataType::getOpen() const
 		{
 			return this->_open;
 		}
 
-		double BarTickDataType::getHigh() const
+		double IntradayBarTickDataType::getHigh() const
 		{
 			return this->_high;
 		}
 
-		double BarTickDataType::getLow() const
+		double IntradayBarTickDataType::getLow() const
 		{
 			return this->_low;
 		}
 
-		double BarTickDataType::getClose() const
+		double IntradayBarTickDataType::getClose() const
 		{
 			return this->_close;
 		}
 
-		double BarTickDataType::getValue() const
+		double IntradayBarTickDataType::getValue() const
 		{
 			return this->_value;
 		}
 
-		long BarTickDataType::getVolume() const
+		long IntradayBarTickDataType::getVolume() const
 		{
 			return this->_volume;
 		}
 
-		int BarTickDataType::getNumevents() const
+		int IntradayBarTickDataType::getNumevents() const
 		{
 			return this->_numEvents;
 		}

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceSecurityData.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementSecurityData.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -19,25 +19,25 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-        class ElementReferenceString;
-        class ElementReferenceInt;
-        class ElementReferenceFieldData;
-        class ElementReferenceFieldExceptionsArray;
-        class ElementReferenceSecurityError;
+        class ReferenceElementString;
+        class ReferenceElementInt;
+        class ReferenceElementFieldData;
+        class ReferenceElementFieldExceptionsArray;
+        class ReferenceElementSecurityError;
 
-		class ElementReferenceSecurityData : public ElementPtr
+		class ReferenceElementSecurityData : public ElementPtr
 		{
 			private:
-				ElementReferenceString * _elmSecurityName;
-				ElementReferenceInt * _elmSequenceNumber;
-				ElementReferenceFieldData * _elmFieldData;
-				ElementReferenceFieldExceptionsArray * _elmFieldExceptions;
-				ElementReferenceSecurityError * _elmSecError;
+				ReferenceElementString * _elmSecurityName;
+				ReferenceElementInt * _elmSequenceNumber;
+				ReferenceElementFieldData * _elmFieldData;
+				ReferenceElementFieldExceptionsArray * _elmFieldExceptions;
+				ReferenceElementSecurityError * _elmSecError;
 				bool _isSecurityError;
 
 			public:
-				ElementReferenceSecurityData(const std::string& securityName, std::map<std::string, ObjectType> * fieldData, int sequenceNumber);
-				~ElementReferenceSecurityData();
+				ReferenceElementSecurityData(const std::string& securityName, std::map<std::string, ObjectType> * fieldData, int sequenceNumber);
+				~ReferenceElementSecurityData();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

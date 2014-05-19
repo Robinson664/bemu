@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/RequestIntradayBarElementTime.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarRequestElementTime.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -10,29 +10,29 @@
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/Datetime.h"
 #include "BloombergTypes/ElementPtr.h"
-#include "IntradayBarRequest/RequestIntradayBarElementTime.h"
+#include "IntradayBarRequest/IntradayBarRequestElementTime.h"
 #include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		RequestIntradayBarElementTime::RequestIntradayBarElementTime(const std::string& elementName) : RequestIntradayBarElementString(elementName, "")
+		IntradayBarRequestElementTime::IntradayBarRequestElementTime(const std::string& elementName) : IntradayBarRequestElementString(elementName, "")
 		{
 			this->_value = "";
 		}
 		
-		RequestIntradayBarElementTime::RequestIntradayBarElementTime(const std::string& elementName, const Datetime& dtvalue) : RequestIntradayBarElementString(elementName, "")
+		IntradayBarRequestElementTime::IntradayBarRequestElementTime(const std::string& elementName, const Datetime& dtvalue) : IntradayBarRequestElementString(elementName, "")
 		{
 			this->_value = DisplayFormats::ToYYYYMMDDWithDashes(dtvalue);
 			this->_dtvalue = dtvalue;
 		}
 
-		RequestIntradayBarElementTime::~RequestIntradayBarElementTime()
+		IntradayBarRequestElementTime::~IntradayBarRequestElementTime()
 		{
 		}
 
-		Datetime RequestIntradayBarElementTime::getDatetime() const
+		Datetime IntradayBarRequestElementTime::getDatetime() const
 		{
 			return this->_dtvalue;
 		}

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/ElementIntradayTickString.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickElementString.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -17,15 +17,15 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickString : public ElementPtr
+		class IntradayTickElementString : public ElementPtr
 		{
 			private:
 				std::string _value;
 				std::string _name;
 
 			public:
-				ElementIntradayTickString(const std::string& name, const std::string& value);
-				~ElementIntradayTickString();
+				IntradayTickElementString(const std::string& name, const std::string& value);
+				~IntradayTickElementString();
 
 				virtual Name name() const;
 				virtual size_t numValues() const { return 1; }

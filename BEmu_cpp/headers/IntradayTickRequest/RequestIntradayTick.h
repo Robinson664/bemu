@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/RequestIntradayTick.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickRequest.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -13,10 +13,10 @@
 #include "BloombergTypes/Service.h"
 #include "BloombergTypes/RequestPtr.h"
 
-#include "IntradayTickRequest/RequestIntradayTickElementString.h"
-#include "IntradayTickRequest/RequestIntradayTickElementStringArray.h"
-#include "IntradayTickRequest/RequestIntradayTickElementTime.h"
-#include "IntradayTickRequest/RequestIntradayTickElementBool.h"
+#include "IntradayTickRequest/IntradayTickRequestElementString.h"
+#include "IntradayTickRequest/IntradayTickRequestElementStringArray.h"
+#include "IntradayTickRequest/IntradayTickRequestElementTime.h"
+#include "IntradayTickRequest/IntradayTickRequestElementBool.h"
 
 namespace BEmu
 {
@@ -25,14 +25,14 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class RequestIntradayTick : public RequestPtr
+		class IntradayTickRequest : public RequestPtr
 		{
 			private:
-				RequestIntradayTickElementString *_security;
-				RequestIntradayTickElementStringArray *_eventTypes;
-				RequestIntradayTickElementTime *_timeStart, *_timeEnd;
+				IntradayTickRequestElementString *_security;
+				IntradayTickRequestElementStringArray *_eventTypes;
+				IntradayTickRequestElementTime *_timeStart, *_timeEnd;
 				
-				RequestIntradayTickElementBool *_includeConditionCodes, *_includeNonPlottableEvents, *_includeExchangeCodes, *_returnEids,
+				IntradayTickRequestElementBool *_includeConditionCodes, *_includeNonPlottableEvents, *_includeExchangeCodes, *_returnEids,
 					*_includeBrokerCodes, *_includeRpsCodes, *_includeBicMicCodes;
 
 				Service _service;
@@ -41,8 +41,8 @@ namespace BEmu
 				const Datetime getEndDate() const; //used only as a helper for getDates()
 
 			public:
-				RequestIntradayTick(const Service& svc);
-				~RequestIntradayTick();
+				IntradayTickRequest(const Service& svc);
+				~IntradayTickRequest();
 				const Service getService();
 				std::vector<Datetime>* getDates();
 				bool includeConditionCodes();

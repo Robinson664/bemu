@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReferenceSecurityError.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElementSecurityError.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,19 +7,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReferenceSecurityError.h"
+#include "ReferenceDataRequest/ReferenceElementSecurityError.h"
 #include "Types/RandomDataGenerator.h"
 #include "Types/IndentType.h"
 #include "BloombergTypes/Name.h"
 
-#include "ReferenceDataRequest/ElementReferenceString.h"
-#include "ReferenceDataRequest/ElementReferenceInt.h"
+#include "ReferenceDataRequest/ReferenceElementString.h"
+#include "ReferenceDataRequest/ReferenceElementInt.h"
 
 namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReferenceSecurityError::ElementReferenceSecurityError(const std::string& security)
+		ReferenceElementSecurityError::ReferenceElementSecurityError(const std::string& security)
 		{
 			int code = RandomDataGenerator::RandomInt(99);
 
@@ -29,20 +29,20 @@ namespace BEmu
 			std::stringstream ssSource;
 			ssSource << RandomDataGenerator::RandomInt(999) << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
 
-			this->_source = new ElementReferenceString("source", ssSource.str());
+			this->_source = new ReferenceElementString("source", ssSource.str());
 
-			this->_code = new ElementReferenceInt("code", code);
+			this->_code = new ReferenceElementInt("code", code);
 
-			this->_category = new ElementReferenceString("category", "BAD_SEC");
+			this->_category = new ReferenceElementString("category", "BAD_SEC");
 
 			std::stringstream ssMsg;
 			ssMsg << "Unknown/Invalid security [nid:" << code << ']';
-			this->_message = new ElementReferenceString("message", ssMsg.str());
+			this->_message = new ReferenceElementString("message", ssMsg.str());
 
-			this->_subCategory = new ElementReferenceString("subcategory", "INVALID_SECURITY");
+			this->_subCategory = new ReferenceElementString("subcategory", "INVALID_SECURITY");
 		}
 
-		ElementReferenceSecurityError::~ElementReferenceSecurityError()
+		ReferenceElementSecurityError::~ReferenceElementSecurityError()
 		{
 			delete this->_source;
 			this->_source = 0;
@@ -60,32 +60,32 @@ namespace BEmu
 			this->_subCategory = 0;
 		}
 
-		Name ElementReferenceSecurityError::name() const { return Name("securityError"); }
-		size_t ElementReferenceSecurityError::numValues() const { return 1; }
-		size_t ElementReferenceSecurityError::numElements() const { return 5; }
+		Name ReferenceElementSecurityError::name() const { return Name("securityError"); }
+		size_t ReferenceElementSecurityError::numValues() const { return 1; }
+		size_t ReferenceElementSecurityError::numElements() const { return 5; }
 
-		bool ElementReferenceSecurityError::isNull() const { return false; }
-		bool ElementReferenceSecurityError::isArray() const { return false; }
-		bool ElementReferenceSecurityError::isComplexType() const { return true; }
+		bool ReferenceElementSecurityError::isNull() const { return false; }
+		bool ReferenceElementSecurityError::isArray() const { return false; }
+		bool ReferenceElementSecurityError::isComplexType() const { return true; }
 
-		SchemaElementDefinition ElementReferenceSecurityError::elementDefinition() const
+		SchemaElementDefinition ReferenceElementSecurityError::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
 			return result;
 		}
 
-		const char* ElementReferenceSecurityError::getElementAsString(const char* name) const
+		const char* ReferenceElementSecurityError::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		int ElementReferenceSecurityError::getElementAsInt32(const char* name) const
+		int ReferenceElementSecurityError::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		ElementPtr * ElementReferenceSecurityError::getElement(const char* name) const
+		ElementPtr * ReferenceElementSecurityError::getElement(const char* name) const
 		{
 			if(strncmp(name, "category", 9) == 0)
 				return this->_category;
@@ -106,7 +106,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		bool ElementReferenceSecurityError::hasElement(const char* name, bool excludeNullElements) const
+		bool ReferenceElementSecurityError::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				(strncmp(name, "category", 9) == 0) ||
@@ -116,7 +116,7 @@ namespace BEmu
 				(strncmp(name, "subcategory", 12) == 0);
 		}
 
-		std::ostream& ElementReferenceSecurityError::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceElementSecurityError::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

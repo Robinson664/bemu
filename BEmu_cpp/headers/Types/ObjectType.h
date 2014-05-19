@@ -15,7 +15,7 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceArrayChainTickers;
+		class ReferenceElementArrayChainTickers;
 	}
 
 	class ObjectType
@@ -30,7 +30,7 @@ namespace BEmu
 			ObjectType(const std::string& arg);
 			ObjectType(const char * arg);
 			ObjectType(const Datetime& arg);
-			ObjectType(ReferenceDataRequest::ElementReferenceArrayChainTickers * arg);
+			ObjectType(ReferenceDataRequest::ReferenceElementArrayChainTickers * arg);
 
 			~ObjectType();
 
@@ -43,7 +43,7 @@ namespace BEmu
 			bool TryGetBool(bool &arg) const;
 			bool TryGetString(std::string& arg) const;
 			bool TryGetDatetime(Datetime& arg) const;
-			bool TryGetChainTickers(ReferenceDataRequest::ElementReferenceArrayChainTickers * arg) const;
+			bool TryGetChainTickers(ReferenceDataRequest::ReferenceElementArrayChainTickers * arg) const;
 
 			bool IsNull() const;
 
@@ -52,7 +52,7 @@ namespace BEmu
 			bool ValueAsBool() const;
 			std::string ValueAsString() const;
 			Datetime ValueAsDatetime() const;
-			ReferenceDataRequest::ElementReferenceArrayChainTickers * ValueAsChainTickers() const;
+			ReferenceDataRequest::ReferenceElementArrayChainTickers * ValueAsChainTickers() const;
 
 			std::string ToString() const;
 
@@ -72,6 +72,6 @@ namespace BEmu
 			bool _bool;
 			std::string _str;
 			Datetime _datetime;
-			ReferenceDataRequest::ElementReferenceArrayChainTickers * _chainTickers;
+			ReferenceDataRequest::ReferenceElementArrayChainTickers * _chainTickers;
 	};
 }

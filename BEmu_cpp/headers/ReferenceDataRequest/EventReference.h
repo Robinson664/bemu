@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/EventReference.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceEvent.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,18 +18,18 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class RequestReference;
+		class ReferenceRequest;
 
-		class EventReference : public EventPtr
+		class ReferenceEvent : public EventPtr
 		{
 			private:
 				std::vector<MessagePtr*> * _messages;
 				std::vector<MessagePtr*> * generateMessages() const;
-				RequestReference * _internal;
+				ReferenceRequest * _internal;
 
 			public:
-				EventReference(RequestReference * request);
-				~EventReference();
+				ReferenceEvent(ReferenceRequest * request);
+				~ReferenceEvent();
 
 				virtual std::vector<MessagePtr*> * getMessages() const;
 		};

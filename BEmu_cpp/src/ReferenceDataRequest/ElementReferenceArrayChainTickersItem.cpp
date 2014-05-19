@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReferenceArrayChainTickersItem.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElementArrayChainTickersItem.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,8 +7,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReferenceArrayChainTickersItem.h"
-#include "ReferenceDataRequest/ElementReferenceString.h"
+#include "ReferenceDataRequest/ReferenceElementArrayChainTickersItem.h"
+#include "ReferenceDataRequest/ReferenceElementString.h"
 #include "BloombergTypes/Name.h"
 #include "Types/IndentType.h"
 #include "Types/DisplayFormats.h"
@@ -17,7 +17,7 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReferenceArrayChainTickersItem::ElementReferenceArrayChainTickersItem(std::string ticker, Datetime dtExp, ReferenceDataRequest::OptionalityEnum::EnumType optionality, int strike)
+		ReferenceElementArrayChainTickersItem::ReferenceElementArrayChainTickersItem(std::string ticker, Datetime dtExp, ReferenceDataRequest::OptionalityEnum::EnumType optionality, int strike)
 		{
 			std::stringstream ss;
 			ss << ticker << " US ";
@@ -28,36 +28,36 @@ namespace BEmu
 
 			ss << strike;
 			
-			this->_element = new ElementReferenceString("Ticker", ss.str());
+			this->_element = new ReferenceElementString("Ticker", ss.str());
 		}
 
-		ElementReferenceArrayChainTickersItem::~ElementReferenceArrayChainTickersItem()
+		ReferenceElementArrayChainTickersItem::~ReferenceElementArrayChainTickersItem()
 		{
 			delete this->_element;
 			this->_element = 0;
 		}		
 
-		Name ElementReferenceArrayChainTickersItem::name() const { return Name("Ticker"); }
-		size_t ElementReferenceArrayChainTickersItem::numValues() const { return 0; }
-		size_t ElementReferenceArrayChainTickersItem::numElements() const { return 1; }
+		Name ReferenceElementArrayChainTickersItem::name() const { return Name("Ticker"); }
+		size_t ReferenceElementArrayChainTickersItem::numValues() const { return 0; }
+		size_t ReferenceElementArrayChainTickersItem::numElements() const { return 1; }
 
-		SchemaElementDefinition ElementReferenceArrayChainTickersItem::elementDefinition() const
+		SchemaElementDefinition ReferenceElementArrayChainTickersItem::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("CHAIN_TICKERS"));
 			return result;
 		}
 
-		bool ElementReferenceArrayChainTickersItem::isNull() const { return false; }
-		bool ElementReferenceArrayChainTickersItem::isArray() const { return false; }
-		bool ElementReferenceArrayChainTickersItem::isComplexType() const { return false; }
+		bool ReferenceElementArrayChainTickersItem::isNull() const { return false; }
+		bool ReferenceElementArrayChainTickersItem::isArray() const { return false; }
+		bool ReferenceElementArrayChainTickersItem::isComplexType() const { return false; }
 
-		const char* ElementReferenceArrayChainTickersItem::getElementAsString(const char* name) const
+		const char* ReferenceElementArrayChainTickersItem::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		ElementPtr * ElementReferenceArrayChainTickersItem::getElement(const char* name) const
+		ElementPtr * ReferenceElementArrayChainTickersItem::getElement(const char* name) const
 		{
 			if(strncmp(name, "Ticker", 7) == 0)
 				return this->_element;
@@ -66,7 +66,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementReferenceArrayChainTickersItem::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceElementArrayChainTickersItem::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

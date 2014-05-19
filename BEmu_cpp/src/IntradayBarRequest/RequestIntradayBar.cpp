@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/RequestIntradayBar.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarRequest.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,13 +7,13 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayBarRequest/RequestIntradayBar.h"
+#include "IntradayBarRequest/IntradayBarRequest.h"
 
-#include "IntradayBarRequest/RequestIntradayBarElementInt.h"
-#include "IntradayBarRequest/RequestIntradayBarElementBool.h"
-#include "IntradayBarRequest/RequestIntradayBarElementTime.h"
-#include "IntradayBarRequest/RequestIntradayBarElementString.h"
-#include "IntradayBarRequest/RequestIntradayBarElementStringArray.h"
+#include "IntradayBarRequest/IntradayBarRequestElementInt.h"
+#include "IntradayBarRequest/IntradayBarRequestElementBool.h"
+#include "IntradayBarRequest/IntradayBarRequestElementTime.h"
+#include "IntradayBarRequest/IntradayBarRequestElementString.h"
+#include "IntradayBarRequest/IntradayBarRequestElementStringArray.h"
 
 #include "BloombergTypes/Service.h"
 
@@ -22,7 +22,7 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		RequestIntradayBar::RequestIntradayBar(const Service& svc)
+		IntradayBarRequest::IntradayBarRequest(const Service& svc)
 		{
 			this->_eventTypes = 0;
 			this->_security = 0;
@@ -37,11 +37,11 @@ namespace BEmu
 			this->_adjustmentFollowDPDF = 0;
 
 			this->_service = svc;
-			this->_eventTypes = new RequestIntradayBarElementStringArray("TBD");
+			this->_eventTypes = new IntradayBarRequestElementStringArray("TBD");
 			this->_requestType = RequestPtr::intradayBar;
 		}
 
-		RequestIntradayBar::~RequestIntradayBar()
+		IntradayBarRequest::~IntradayBarRequest()
 		{
 			delete this->_eventTypes;
 			this->_eventTypes = 0;
@@ -77,7 +77,7 @@ namespace BEmu
 			this->_adjustmentFollowDPDF = 0;
 		}
 
-		std::vector<Datetime>* RequestIntradayBar::getDateTimes() const
+		std::vector<Datetime>* IntradayBarRequest::getDateTimes() const
 		{
 			//dtStart, dtEnd, and interval are required
 			if(this->_dtStart == 0 || this->_dtEnd == 0 || this->_intervalInMinutes == 0)
@@ -105,41 +105,41 @@ namespace BEmu
 			return result;
 		}
 
-		bool RequestIntradayBar::hasStartDate() const
+		bool IntradayBarRequest::hasStartDate() const
 		{
 			return this->_dtStart != 0;
 		}
 
-		bool RequestIntradayBar::hasEndDate() const
+		bool IntradayBarRequest::hasEndDate() const
 		{
 			return this->_dtEnd != 0;
 		}
 
-		Datetime RequestIntradayBar::getDtStart() const
+		Datetime IntradayBarRequest::getDtStart() const
 		{
 			return this->_dtStart->getDatetime();
 		}
 
-		Datetime RequestIntradayBar::getDtEnd() const
+		Datetime IntradayBarRequest::getDtEnd() const
 		{
 			return this->_dtEnd->getDatetime();
 		}
 
-		const Service RequestIntradayBar::getService() const
+		const Service IntradayBarRequest::getService() const
 		{
 			return this->_service;
 		}
 
-		const std::string& RequestIntradayBar::security() const
+		const std::string& IntradayBarRequest::security() const
 		{
 			return this->_security->security();
 		}
 
-		void RequestIntradayBar::set(const char* name, const char* value)
+		void IntradayBarRequest::set(const char* name, const char* value)
 		{
 			if(strncmp(name, "security", 9) == 0)
 			{
-				this->_security = new RequestIntradayBarElementString(name, value);
+				this->_security = new IntradayBarRequestElementString(name, value);
 			}
 			else if(strncmp(name, "eventType", 10) == 0)
 			{
@@ -149,55 +149,55 @@ namespace BEmu
 				throw requestEx;
 		}
 
-		void RequestIntradayBar::set(const char* name, const Datetime& elementValue)
+		void IntradayBarRequest::set(const char* name, const Datetime& elementValue)
 		{
 			if(strncmp(name, "startDateTime", 14) == 0)
 			{
-				this->_dtStart = new RequestIntradayBarElementTime(name, elementValue);
+				this->_dtStart = new IntradayBarRequestElementTime(name, elementValue);
 			}
 			else if(strncmp(name, "endDateTime", 12) == 0)
 			{
-				this->_dtEnd = new RequestIntradayBarElementTime(name, elementValue);
+				this->_dtEnd = new IntradayBarRequestElementTime(name, elementValue);
 			}
 			else
 				throw requestEx;
 		}
 
-		void RequestIntradayBar::set(const char* name, int elementValue)
+		void IntradayBarRequest::set(const char* name, int elementValue)
 		{
 			if(strncmp(name, "interval", 9) == 0)
 			{
-				this->_intervalInMinutes = new RequestIntradayBarElementInt(name, elementValue);
+				this->_intervalInMinutes = new IntradayBarRequestElementInt(name, elementValue);
 			}
 			else
 				throw requestEx;
 		}
 
-		void RequestIntradayBar::set(const char* name, bool elementValue)
+		void IntradayBarRequest::set(const char* name, bool elementValue)
 		{
 			if(strncmp(name, "gapFillInitialBar", 18) == 0)
 			{
-				this->_gapFillInitialBar = new RequestIntradayBarElementBool(name, elementValue);
+				this->_gapFillInitialBar = new IntradayBarRequestElementBool(name, elementValue);
 			}
 			else if(strncmp(name, "returnEids", 11) == 0)
 			{
-				this->_returnEids = new RequestIntradayBarElementBool(name, elementValue);
+				this->_returnEids = new IntradayBarRequestElementBool(name, elementValue);
 			}
 			else if(strncmp(name, "adjustmentNormal", 17) == 0)
 			{
-				this->_adjustmentNormalElement = new RequestIntradayBarElementBool(name, elementValue);
+				this->_adjustmentNormalElement = new IntradayBarRequestElementBool(name, elementValue);
 			}
 			else if(strncmp(name, "adjustmentAbnormal", 19) == 0)
 			{
-				this->_adjustmentAbnormalElement = new RequestIntradayBarElementBool(name, elementValue);
+				this->_adjustmentAbnormalElement = new IntradayBarRequestElementBool(name, elementValue);
 			}
 			else if(strncmp(name, "adjustmentSplit", 16) == 0)
 			{
-				this->_adjustmentSplitElement = new RequestIntradayBarElementBool(name, elementValue);
+				this->_adjustmentSplitElement = new IntradayBarRequestElementBool(name, elementValue);
 			}
 			else if(strncmp(name, "adjustmentFollowDPDF", 21) == 0)
 			{
-				this->_adjustmentFollowDPDF = new RequestIntradayBarElementBool(name, elementValue);
+				this->_adjustmentFollowDPDF = new IntradayBarRequestElementBool(name, elementValue);
 			}
 			else
 				throw requestEx;

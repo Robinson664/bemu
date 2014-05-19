@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MessageMarketSubscriptionCanceled.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketMessageSubscriptionCanceled.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,8 +7,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/MessageMarketSubscriptionCanceled.h"
-#include "MarketDataRequest/ElementMarketSubscriptionCancelReason.h"
+#include "MarketDataRequest/MarketMessageSubscriptionCanceled.h"
+#include "MarketDataRequest/MarketElementSubscriptionCancelReason.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/Subscription.h"
 
@@ -16,34 +16,34 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MessageMarketSubscriptionCanceled::MessageMarketSubscriptionCanceled(Subscription sub) : MessagePtr(Name("SubscriptionTerminated"), sub.correlationId())
+		MarketMessageSubscriptionCanceled::MarketMessageSubscriptionCanceled(Subscription sub) : MessagePtr(Name("SubscriptionTerminated"), sub.correlationId())
 		{
 			this->_topicName = sub.security();
-            this->_reason = new ElementMarketSubscriptionCancelReason();
+            this->_reason = new MarketElementSubscriptionCancelReason();
 		}
 
-		MessageMarketSubscriptionCanceled::~MessageMarketSubscriptionCanceled()
+		MarketMessageSubscriptionCanceled::~MarketMessageSubscriptionCanceled()
 		{
 			delete this->_reason;
 			this->_reason = 0;
 		}
 
-		size_t MessageMarketSubscriptionCanceled::numElements() const
+		size_t MarketMessageSubscriptionCanceled::numElements() const
 		{
 			return 1;
 		}
 
-		const char* MessageMarketSubscriptionCanceled::topicName() const
+		const char* MarketMessageSubscriptionCanceled::topicName() const
 		{
 			return ElementPtr::toCharPointer(this->_topicName);
 		}
 
-		ElementPtr * MessageMarketSubscriptionCanceled::asElement() const
+		ElementPtr * MarketMessageSubscriptionCanceled::asElement() const
 		{
 			throw messageEx;
 		}
 
-		std::ostream& MessageMarketSubscriptionCanceled::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketMessageSubscriptionCanceled::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "SubscriptionTerminated = {"  << std::endl;
 			this->_reason->print(stream, level + 1, spacesPerLevel);

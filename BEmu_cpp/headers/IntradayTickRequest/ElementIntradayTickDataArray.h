@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/ElementIntradayTickDataArray.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickElementDataArray.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -20,17 +20,17 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickData;
-		class ElementIntradayTickDataTuple3;
+		class IntradayTickElementData;
+		class IntradayTickElementTuple3;
 
-		class ElementIntradayTickDataArray : public ElementPtr
+		class IntradayTickElementDataArray : public ElementPtr
 		{
 			private:
-				std::vector<ElementIntradayTickData*> _tickData;
+				std::vector<IntradayTickElementData*> _tickData;
 
 			public:
-				ElementIntradayTickDataArray(std::map<Datetime, ElementIntradayTickDataTuple3*>* ticks, bool includeConditionCodes);
-				~ElementIntradayTickDataArray();
+				IntradayTickElementDataArray(std::map<Datetime, IntradayTickElementTuple3*>* ticks, bool includeConditionCodes);
+				~IntradayTickElementDataArray();
 
 				virtual ElementPtr * getValueAsElement(int index) const;
 				virtual Name name() const;

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReferenceArrayChainTickers.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElementArrayChainTickers.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,8 +7,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReferenceArrayChainTickers.h"
-#include "ReferenceDataRequest/ElementReferenceArrayChainTickersItem.h"
+#include "ReferenceDataRequest/ReferenceElementArrayChainTickers.h"
+#include "ReferenceDataRequest/ReferenceElementArrayChainTickersItem.h"
 #include <vector>
 #include "Types/RandomDataGenerator.h"
 #include "Types/DisplayFormats.h"
@@ -18,8 +18,8 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReferenceArrayChainTickers::ElementReferenceArrayChainTickers(const std::string& underlier, unsigned numPoints, const std::string& strDtExp, OptionalityEnum::EnumType optionality) :
-			ElementReferenceArray("CHAIN_TICKERS", std::vector<ElementPtr*>())
+		ReferenceElementArrayChainTickers::ReferenceElementArrayChainTickers(const std::string& underlier, unsigned numPoints, const std::string& strDtExp, OptionalityEnum::EnumType optionality) :
+			ReferenceElementArray("CHAIN_TICKERS", std::vector<ElementPtr*>())
 		{
 			int indexSpace = underlier.find(' ');
 			std::string ticker = underlier.substr(0, indexSpace); //assume that the underlier takes the form "ABC US EQUITY"
@@ -61,13 +61,13 @@ namespace BEmu
 			int strike = RandomDataGenerator::Strike();
 			for (unsigned count = 0; count < numPoints; count++, strike += 5)
 			{
-				ElementPtr * elm = new ElementReferenceArrayChainTickersItem(ticker, dtExp, optionality, strike);
+				ElementPtr * elm = new ReferenceElementArrayChainTickersItem(ticker, dtExp, optionality, strike);
 				this->_values.push_back(elm);
 			}
 
 		}
 
-		SchemaElementDefinition ElementReferenceArrayChainTickers::elementDefinition() const
+		SchemaElementDefinition ReferenceElementArrayChainTickers::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("CHAIN_TICKERS"));

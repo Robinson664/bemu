@@ -11,7 +11,7 @@
 #include "BloombergTypes/ElementPtr.h"
 #include <iostream>
 #include <stdlib.h>
-#include "ReferenceDataRequest/ElementReferenceArrayChainTickers.h"
+#include "ReferenceDataRequest/ReferenceElementArrayChainTickers.h"
 #include "Types/DisplayFormats.h"
 
 namespace BEmu
@@ -57,7 +57,7 @@ namespace BEmu
 		this->_otype = eDatetime;
 	}
 
-	ObjectType::ObjectType(ReferenceDataRequest::ElementReferenceArrayChainTickers * arg)
+	ObjectType::ObjectType(ReferenceDataRequest::ReferenceElementArrayChainTickers * arg)
 	{
 		this->_chainTickers = arg;
 		this->_otype = eChainTickers;
@@ -133,7 +133,7 @@ namespace BEmu
 		return this->_otype == eDatetime;
 	}
 
-	bool ObjectType::TryGetChainTickers(ReferenceDataRequest::ElementReferenceArrayChainTickers * arg) const
+	bool ObjectType::TryGetChainTickers(ReferenceDataRequest::ReferenceElementArrayChainTickers * arg) const
 	{
 		arg = this->_chainTickers;
 		return this->_otype == eChainTickers;
@@ -165,7 +165,7 @@ namespace BEmu
 		return this->_datetime;
 	}
 
-	ReferenceDataRequest::ElementReferenceArrayChainTickers * ObjectType::ValueAsChainTickers() const
+	ReferenceDataRequest::ReferenceElementArrayChainTickers * ObjectType::ValueAsChainTickers() const
 	{
 		return this->_chainTickers;
 	}

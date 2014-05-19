@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/RequestReferenceElementStringArray.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceRequestElementStringArray.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -16,15 +16,15 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		class RequestReferenceElementStringArray : public ElementPtr
+		class ReferenceRequestElementStringArray : public ElementPtr
 		{
 			private:
 				std::string _elementName;
 				std::vector<std::string> _values;
 
 			public:
-				RequestReferenceElementStringArray(const std::string& elementName);
-				~RequestReferenceElementStringArray();
+				ReferenceRequestElementStringArray(const std::string& elementName);
+				~ReferenceRequestElementStringArray();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

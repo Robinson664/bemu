@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketServiceStatus.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementServiceStatus.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,51 +7,51 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketServiceStatus.h"
-#include "MarketDataRequest/MessageMarketServiceStatus.h"
-#include "MarketDataRequest/ElementMarketString.h"
+#include "MarketDataRequest/MarketElementServiceStatus.h"
+#include "MarketDataRequest/MarketMessageServiceStatus.h"
+#include "MarketDataRequest/MarketElementString.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketServiceStatus::ElementMarketServiceStatus(const MessageMarketServiceStatus * arg)
+		MarketElementServiceStatus::MarketElementServiceStatus(const MarketMessageServiceStatus * arg)
 		{
 			ElementPtr * elmFirst = arg->firstElement();
-			this->_serviceName = (ElementMarketString*)elmFirst;
+			this->_serviceName = (MarketElementString*)elmFirst;
 		}
 
-		Name ElementMarketServiceStatus::name() const
+		Name MarketElementServiceStatus::name() const
 		{
 			return Name("ServiceOpened");
 		}
 
-		size_t ElementMarketServiceStatus::numValues() const
+		size_t MarketElementServiceStatus::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketServiceStatus::numElements() const
+		size_t MarketElementServiceStatus::numElements() const
 		{
 			return 1;
 		}
 
-		bool ElementMarketServiceStatus::isNull() const
+		bool MarketElementServiceStatus::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketServiceStatus::isArray() const
+		bool MarketElementServiceStatus::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketServiceStatus::isComplexType() const
+		bool MarketElementServiceStatus::isComplexType() const
 		{
 			return true;
 		}
 
-		ElementPtr * ElementMarketServiceStatus::getElement(int position) const
+		ElementPtr * MarketElementServiceStatus::getElement(int position) const
 		{
 			if(position == 0)
 				return this->_serviceName;
@@ -59,7 +59,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementMarketServiceStatus::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementServiceStatus::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "ServiceOpened = {" << std::endl;
 			this->_serviceName->print(stream, level + 1, spacesPerLevel);

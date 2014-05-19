@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/ElementBarTickDataArray.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarElementTickDataArray.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -10,68 +10,68 @@
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "Types/IndentType.h"
-#include "IntradayBarRequest/ElementBarTickData.h"
-#include "IntradayBarRequest/BarTickDataType.h"
-#include "IntradayBarRequest/ElementBarTickDataArray.h"
+#include "IntradayBarRequest/IntradayBarElementTickData.h"
+#include "IntradayBarRequest/IntradayBarTickDataType.h"
+#include "IntradayBarRequest/IntradayBarElementTickDataArray.h"
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		ElementBarTickDataArray::ElementBarTickDataArray(const std::vector<BarTickDataType*>& bars)
+		IntradayBarElementTickDataArray::IntradayBarElementTickDataArray(const std::vector<IntradayBarTickDataType*>& bars)
 		{
-			for(std::vector<BarTickDataType*>::const_iterator iter = bars.begin(); iter != bars.end(); ++iter)
+			for(std::vector<IntradayBarTickDataType*>::const_iterator iter = bars.begin(); iter != bars.end(); ++iter)
 			{
-				BarTickDataType * tick = *iter;
-				ElementBarTickData * elm = new ElementBarTickData(*tick);
+				IntradayBarTickDataType * tick = *iter;
+				IntradayBarElementTickData * elm = new IntradayBarElementTickData(*tick);
 				this->_elements.push_back(elm);
 			}
 		}
 
-		ElementBarTickDataArray::~ElementBarTickDataArray()
+		IntradayBarElementTickDataArray::~IntradayBarElementTickDataArray()
 		{
-			for(std::vector<ElementBarTickData*>::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
+			for(std::vector<IntradayBarElementTickData*>::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
 			{
-				ElementBarTickData * elm = *iter;
+				IntradayBarElementTickData * elm = *iter;
 				delete elm;
 				elm = 0;
 			}
 		}
 
-		Name ElementBarTickDataArray::name() const
+		Name IntradayBarElementTickDataArray::name() const
 		{
 			Name result("barTickData");
 			return result;
 		}
 
-		size_t ElementBarTickDataArray::numValues() const
+		size_t IntradayBarElementTickDataArray::numValues() const
 		{
 			return this->_elements.size();
 		}
 
-		size_t ElementBarTickDataArray::numElements() const
+		size_t IntradayBarElementTickDataArray::numElements() const
 		{
 			return 0;
 		}
 
-		SchemaElementDefinition ElementBarTickDataArray::elementDefinition() const
+		SchemaElementDefinition IntradayBarElementTickDataArray::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("IntradayBarTickData"));
 			return result;
 		}
 
-		bool ElementBarTickDataArray::isArray() const
+		bool IntradayBarElementTickDataArray::isArray() const
 		{
 			return true;
 		}
 
-		bool ElementBarTickDataArray::isComplexType() const
+		bool IntradayBarElementTickDataArray::isComplexType() const
 		{
 			return false;
 		}
 
-		ElementPtr * ElementBarTickDataArray::getValueAsElement(int index) const
+		ElementPtr * IntradayBarElementTickDataArray::getValueAsElement(int index) const
 		{
 			if(index >= 0 && index < (int)this->_elements.size())
 				return this->_elements[index];
@@ -80,15 +80,15 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementBarTickDataArray::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarElementTickDataArray::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);
 
 			stream << tabs << "barTickData[] = {" << std::endl;
 
-			for(std::vector<ElementBarTickData*>::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
+			for(std::vector<IntradayBarElementTickData*>::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
 			{
-				ElementBarTickData * elm = *iter;
+				IntradayBarElementTickData * elm = *iter;
 				elm->print(stream, level + 1, spacesPerLevel);
 			}
 

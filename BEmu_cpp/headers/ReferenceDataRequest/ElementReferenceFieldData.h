@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceFieldData.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementFieldData.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -20,14 +20,14 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceFieldData : public ElementPtr
+		class ReferenceElementFieldData : public ElementPtr
 		{
 			private:
 				std::vector<ElementPtr*> _fields;
 
 			public:
-				ElementReferenceFieldData(const std::map<std::string, ObjectType>& values);
-				~ElementReferenceFieldData();
+				ReferenceElementFieldData(const std::map<std::string, ObjectType>& values);
+				~ReferenceElementFieldData();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

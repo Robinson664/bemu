@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketSubscriptionCanceled.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementSubscriptionCanceled.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketSubscriptionCanceled.h"
-#include "MarketDataRequest/MessageMarketSubscriptionCanceled.h"
-#include "MarketDataRequest/ElementMarketSubscriptionCancelReason.h"
+#include "MarketDataRequest/MarketElementSubscriptionCanceled.h"
+#include "MarketDataRequest/MarketMessageSubscriptionCanceled.h"
+#include "MarketDataRequest/MarketElementSubscriptionCancelReason.h"
 
 #include "Types/IndentType.h"
 
@@ -17,42 +17,42 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketSubscriptionCanceled::ElementMarketSubscriptionCanceled(MessageMarketSubscriptionCanceled * arg)
+		MarketElementSubscriptionCanceled::MarketElementSubscriptionCanceled(MarketMessageSubscriptionCanceled * arg)
 		{
-			this->_reason = (ElementMarketSubscriptionCancelReason*)arg->getElement("reason");
+			this->_reason = (MarketElementSubscriptionCancelReason*)arg->getElement("reason");
 		}
 
-		Name ElementMarketSubscriptionCanceled::name() const
+		Name MarketElementSubscriptionCanceled::name() const
 		{
 			return Name("SubscriptionTerminated");
 		}
 
-		size_t ElementMarketSubscriptionCanceled::numValues() const
+		size_t MarketElementSubscriptionCanceled::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketSubscriptionCanceled::numElements() const
+		size_t MarketElementSubscriptionCanceled::numElements() const
 		{
 			return 1;
 		}
 
-		bool ElementMarketSubscriptionCanceled::isNull() const
+		bool MarketElementSubscriptionCanceled::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketSubscriptionCanceled::isArray() const
+		bool MarketElementSubscriptionCanceled::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketSubscriptionCanceled::isComplexType() const
+		bool MarketElementSubscriptionCanceled::isComplexType() const
 		{
 			return true;
 		}
 
-		std::ostream& ElementMarketSubscriptionCanceled::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementSubscriptionCanceled::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

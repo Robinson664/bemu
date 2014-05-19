@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MessageMarketSubscriptionData.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketMessageSubscriptionData.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -20,15 +20,15 @@ namespace BEmu
 
 	namespace MarketDataRequest
 	{
-		class MessageMarketSubscriptionData : public MessagePtr
+		class MarketMessageSubscriptionData : public MessagePtr
 		{
 			private:
 				std::map<std::string, ElementPtr*> _fields;
 				std::string _security;
 
 			public:
-				MessageMarketSubscriptionData(Subscription sub, std::map<std::string, ObjectType> fields);
-				~MessageMarketSubscriptionData();
+				MarketMessageSubscriptionData(Subscription sub, std::map<std::string, ObjectType> fields);
+				~MarketMessageSubscriptionData();
 
 				virtual const char* topicName() const;
 				virtual size_t numElements() const;

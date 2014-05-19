@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/ElementIntradayTickDataTuple3.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickElementTuple3.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -13,7 +13,7 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickDataTuple3
+		class IntradayTickElementTuple3
 		{
 			private:
 				std::string _item1;
@@ -21,7 +21,7 @@ namespace BEmu
 				int _item3;
 
 			public:
-				ElementIntradayTickDataTuple3(std::string item1, double item2, int item3);
+				IntradayTickElementTuple3(std::string item1, double item2, int item3);
 
 				std::string item1() const;
 				double item2() const;

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketInt.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementInt.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,49 +7,49 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketInt.h"
+#include "MarketDataRequest/MarketElementInt.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketInt::ElementMarketInt(std::string name, int value)
+		MarketElementInt::MarketElementInt(std::string name, int value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		Name ElementMarketInt::name() const
+		Name MarketElementInt::name() const
 		{
 			return Name(this->_name.c_str());
 		}
 
-		size_t ElementMarketInt::numValues() const
+		size_t MarketElementInt::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketInt::numElements() const
+		size_t MarketElementInt::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementMarketInt::isNull() const
+		bool MarketElementInt::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketInt::isArray() const
+		bool MarketElementInt::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketInt::isComplexType() const
+		bool MarketElementInt::isComplexType() const
 		{
 			return false;
 		}
 
-		int ElementMarketInt::getValueAsInt32(int index) const
+		int MarketElementInt::getValueAsInt32(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -57,7 +57,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		long ElementMarketInt::getValueAsInt64(int index) const
+		long MarketElementInt::getValueAsInt64(int index) const
 		{
 			if(index == 0)
 				return (long)this->_value;
@@ -65,7 +65,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		float ElementMarketInt::getValueAsFloat32(int index) const
+		float MarketElementInt::getValueAsFloat32(int index) const
 		{
 			if(index == 0)
 				return (float)this->_value;
@@ -73,7 +73,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		double ElementMarketInt::getValueAsFloat64(int index) const
+		double MarketElementInt::getValueAsFloat64(int index) const
 		{
 			if(index == 0)
 				return (double)this->_value;
@@ -81,7 +81,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementMarketInt::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementInt::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;

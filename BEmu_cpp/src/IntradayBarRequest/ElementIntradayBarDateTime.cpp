@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/ElementIntradayBarDateTime.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarElementDateTime.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayBarRequest/ElementIntradayBarDateTime.h"
+#include "IntradayBarRequest/IntradayBarElementDateTime.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "Types/DisplayFormats.h"
@@ -16,42 +16,42 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		ElementIntradayBarDateTime::ElementIntradayBarDateTime(const std::string& name, const Datetime& value)
+		IntradayBarElementDateTime::IntradayBarElementDateTime(const std::string& name, const Datetime& value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		ElementIntradayBarDateTime::~ElementIntradayBarDateTime()
+		IntradayBarElementDateTime::~IntradayBarElementDateTime()
 		{
 		}
 
-		Name ElementIntradayBarDateTime::name() const
+		Name IntradayBarElementDateTime::name() const
 		{
 			return Name(this->_name.c_str());
 		}
 
-		size_t ElementIntradayBarDateTime::numValues() const
+		size_t IntradayBarElementDateTime::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementIntradayBarDateTime::numElements() const
+		size_t IntradayBarElementDateTime::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementIntradayBarDateTime::isArray() const
+		bool IntradayBarElementDateTime::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementIntradayBarDateTime::isComplexType() const
+		bool IntradayBarElementDateTime::isComplexType() const
 		{
 			return false;
 		}
 
-		Datetime ElementIntradayBarDateTime::getValueAsDatetime(int index) const
+		Datetime IntradayBarElementDateTime::getValueAsDatetime(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -59,7 +59,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		const char * ElementIntradayBarDateTime::getValueAsString(int index) const
+		const char * IntradayBarElementDateTime::getValueAsString(int index) const
 		{
 			if(index == 0)
 				return ElementPtr::toCharPointer(this->_value);
@@ -67,7 +67,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementIntradayBarDateTime::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarElementDateTime::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string strvalue(DisplayFormats::IntradayRequests_FormatDatetime(this->_value));
 			this->prettyPrintHelper(stream, level, spacesPerLevel, strvalue);

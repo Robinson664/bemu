@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReferenceSecurityData.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElementSecurityData.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,14 +7,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReferenceSecurityData.h"
-#include "ReferenceDataRequest/ElementReferenceFieldExceptionsArray.h"
-#include "ReferenceDataRequest/ElementReferenceString.h"
+#include "ReferenceDataRequest/ReferenceElementSecurityData.h"
+#include "ReferenceDataRequest/ReferenceElementFieldExceptionsArray.h"
+#include "ReferenceDataRequest/ReferenceElementString.h"
 
-#include "ReferenceDataRequest/ElementReferenceInt.h"
-#include "ReferenceDataRequest/ElementReferenceSecurityError.h"
-#include "ReferenceDataRequest/ElementReferenceFieldData.h"
-#include "ReferenceDataRequest/ElementReferenceFieldData.h"
+#include "ReferenceDataRequest/ReferenceElementInt.h"
+#include "ReferenceDataRequest/ReferenceElementSecurityError.h"
+#include "ReferenceDataRequest/ReferenceElementFieldData.h"
+#include "ReferenceDataRequest/ReferenceElementFieldData.h"
 
 #include "Types/Rules.h"
 #include "Types/IndentType.h"
@@ -24,7 +24,7 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReferenceSecurityData::ElementReferenceSecurityData(const std::string& securityName, std::map<std::string, ObjectType> * fieldData, int sequenceNumber)
+		ReferenceElementSecurityData::ReferenceElementSecurityData(const std::string& securityName, std::map<std::string, ObjectType> * fieldData, int sequenceNumber)
 		{
 			this->_isSecurityError = Rules::IsSecurityError(securityName);
 
@@ -50,28 +50,28 @@ namespace BEmu
                 if (badFields.size() == 0)
                     this->_elmFieldExceptions = 0;
                 else
-                    this->_elmFieldExceptions = new ElementReferenceFieldExceptionsArray(badFields);
+                    this->_elmFieldExceptions = new ReferenceElementFieldExceptionsArray(badFields);
 			}
 
-			this->_elmSecurityName = new ElementReferenceString("security", securityName);
+			this->_elmSecurityName = new ReferenceElementString("security", securityName);
 
             if (this->_isSecurityError)
             {
-                this->_elmSequenceNumber = new ElementReferenceInt("sequenceNumber", sequenceNumber);
-                this->_elmSecError = new ElementReferenceSecurityError(securityName);
+                this->_elmSequenceNumber = new ReferenceElementInt("sequenceNumber", sequenceNumber);
+                this->_elmSecError = new ReferenceElementSecurityError(securityName);
 
 				std::map<std::string, ObjectType> mm;
-                this->_elmFieldData = new ElementReferenceFieldData(mm); //not used if there's a security error
+                this->_elmFieldData = new ReferenceElementFieldData(mm); //not used if there's a security error
             }
             else
             {
-                this->_elmSequenceNumber = new ElementReferenceInt("sequenceNumber", sequenceNumber);
+                this->_elmSequenceNumber = new ReferenceElementInt("sequenceNumber", sequenceNumber);
                 this->_elmSecError = 0;
-                this->_elmFieldData = new ElementReferenceFieldData(*fieldData);
+                this->_elmFieldData = new ReferenceElementFieldData(*fieldData);
             }
 		}
 
-		ElementReferenceSecurityData::~ElementReferenceSecurityData()
+		ReferenceElementSecurityData::~ReferenceElementSecurityData()
 		{
 			delete this->_elmFieldExceptions;
 			this->_elmFieldExceptions = 0;
@@ -89,23 +89,23 @@ namespace BEmu
 			this->_elmFieldData = 0;
 		}
 
-		Name ElementReferenceSecurityData::name() const { return Name("securityData"); }
-		size_t ElementReferenceSecurityData::numValues() const { return 0; }
-		size_t ElementReferenceSecurityData::numElements() const { return 4 + (this->_elmFieldExceptions == 0 ? 0 : 1); }
+		Name ReferenceElementSecurityData::name() const { return Name("securityData"); }
+		size_t ReferenceElementSecurityData::numValues() const { return 0; }
+		size_t ReferenceElementSecurityData::numElements() const { return 4 + (this->_elmFieldExceptions == 0 ? 0 : 1); }
 
-		SchemaElementDefinition ElementReferenceSecurityData::elementDefinition() const
+		SchemaElementDefinition ReferenceElementSecurityData::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("ReferenceSecurityData"));
 			return result;
 		}
 
-		const char* ElementReferenceSecurityData::getElementAsString(const char* name) const
+		const char* ReferenceElementSecurityData::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		ElementPtr * ElementReferenceSecurityData::getElement(const char* name) const
+		ElementPtr * ReferenceElementSecurityData::getElement(const char* name) const
 		{
 			if(strncmp(name, "security", 9) == 0)
 				return this->_elmSecurityName;
@@ -125,7 +125,7 @@ namespace BEmu
 			else throw elementPtrEx;
 		}
 
-		bool ElementReferenceSecurityData::hasElement(const char* name, bool excludeNullElements) const
+		bool ReferenceElementSecurityData::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return 
 				(strncmp(name, "security", 9) == 0) ||
@@ -135,7 +135,7 @@ namespace BEmu
 				(this->_isSecurityError && strncmp(name, "securityError", 14) == 0);
 		}
 
-		std::ostream& ElementReferenceSecurityData::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceElementSecurityData::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

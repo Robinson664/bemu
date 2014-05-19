@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketSubscriptionStarted.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementSubscriptionStarted.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,49 +7,49 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketSubscriptionStarted.h"
-#include "MarketDataRequest/MessageMarketSubscriptionStarted.h"
+#include "MarketDataRequest/MarketElementSubscriptionStarted.h"
+#include "MarketDataRequest/MarketMessageSubscriptionStarted.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketSubscriptionStarted::ElementMarketSubscriptionStarted(MessageMarketSubscriptionStarted * arg)
+		MarketElementSubscriptionStarted::MarketElementSubscriptionStarted(MarketMessageSubscriptionStarted * arg)
 		{
-			this->_exceptions = (ElementMarketNull*)arg->firstElement();
+			this->_exceptions = (MarketElementNull*)arg->firstElement();
 		}
 
-		Name ElementMarketSubscriptionStarted::name() const
+		Name MarketElementSubscriptionStarted::name() const
 		{
 			return Name("SubscriptionStarted");
 		}
 
-		size_t ElementMarketSubscriptionStarted::numValues() const
+		size_t MarketElementSubscriptionStarted::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketSubscriptionStarted::numElements() const
+		size_t MarketElementSubscriptionStarted::numElements() const
 		{
 			return 1;
 		}
 
-		bool ElementMarketSubscriptionStarted::isNull() const
+		bool MarketElementSubscriptionStarted::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketSubscriptionStarted::isArray() const
+		bool MarketElementSubscriptionStarted::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketSubscriptionStarted::isComplexType() const
+		bool MarketElementSubscriptionStarted::isComplexType() const
 		{
 			return true;
 		}
 
-		std::ostream& ElementMarketSubscriptionStarted::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementSubscriptionStarted::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "SubscriptionStarted = {" << std::endl << '}' << std::endl;
 			return stream;

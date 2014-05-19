@@ -13,7 +13,7 @@
 #include "Types/BEmuTimer.h"
 
 #include "Types/RandomDataGenerator.h"
-#include "MarketDataRequest/EventMarket.h"
+#include "MarketDataRequest/MarketEvent.h"
 
 namespace BEmu
 {
@@ -46,7 +46,7 @@ namespace BEmu
 			}
 		}
 
-		MarketDataRequest::EventMarket * evt = new MarketDataRequest::EventMarket(Event::SUBSCRIPTION_DATA, CorrelationId(), subsToUse);
+		MarketDataRequest::MarketEvent * evt = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_DATA, CorrelationId(), subsToUse);
 		this->_eventHandler->processEvent(evt, this->_session);
 
 		if(hasConflationInterval)

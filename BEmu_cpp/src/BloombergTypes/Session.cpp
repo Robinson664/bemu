@@ -19,7 +19,7 @@
 #include "Types/BEmuTimer.h"
 #include "BloombergTypes/SessionTimerFunction.h"
 
-#include "MarketDataRequest/EventMarket.h"
+#include "MarketDataRequest/MarketEvent.h"
 #include "BloombergTypes/CorrelationId.h"
 #include "BloombergTypes/SubscriptionList.h"
 
@@ -61,7 +61,7 @@ namespace BEmu
 			this->_subs.add(sub);
 		}
 
-		MarketDataRequest::EventMarket * evtSubStatus = new MarketDataRequest::EventMarket(Event::SUBSCRIPTION_STATUS, CorrelationId(), subscriptionList);
+		MarketDataRequest::MarketEvent * evtSubStatus = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, CorrelationId(), subscriptionList);
 
 		if (this->_asyncHandler != 0)
         {
@@ -118,8 +118,8 @@ namespace BEmu
 	{
 		this->_sessionState = started;
 
-		MarketDataRequest::EventMarket * evtSessionStatus = new MarketDataRequest::EventMarket(Event::SESSION_STATUS, CorrelationId(), SubscriptionList());
-		MarketDataRequest::EventMarket * evtServiceStatus = new MarketDataRequest::EventMarket(Event::SERVICE_STATUS, CorrelationId(), SubscriptionList());
+		MarketDataRequest::MarketEvent * evtSessionStatus = new MarketDataRequest::MarketEvent(Event::SESSION_STATUS, CorrelationId(), SubscriptionList());
+		MarketDataRequest::MarketEvent * evtServiceStatus = new MarketDataRequest::MarketEvent(Event::SERVICE_STATUS, CorrelationId(), SubscriptionList());
 
         if (this->_asyncHandler != 0)
         {

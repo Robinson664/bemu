@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/ElementBarData.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarElementData.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -10,58 +10,58 @@
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include <vector>
-#include "IntradayBarRequest/ElementBarData.h"
-#include "IntradayBarRequest/ElementBarTickDataArray.h"
+#include "IntradayBarRequest/IntradayBarElementData.h"
+#include "IntradayBarRequest/IntradayBarElementTickDataArray.h"
 #include "Types/IndentType.h"
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		ElementBarData::ElementBarData(const std::vector<BarTickDataType*>& bars)
+		IntradayBarElementData::IntradayBarElementData(const std::vector<IntradayBarTickDataType*>& bars)
 		{
-			this->_array = new ElementBarTickDataArray(bars);
+			this->_array = new IntradayBarElementTickDataArray(bars);
 		}
 
-		ElementBarData::~ElementBarData()
+		IntradayBarElementData::~IntradayBarElementData()
 		{
 			delete this->_array;
 		}
 
-		Name ElementBarData::name() const
+		Name IntradayBarElementData::name() const
 		{
 			Name result("barData");
 			return result;
 		}
 
-		size_t ElementBarData::numValues() const
+		size_t IntradayBarElementData::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementBarData::numElements() const
+		size_t IntradayBarElementData::numElements() const
 		{
 			return 1;
 		}
 
-		SchemaElementDefinition ElementBarData::elementDefinition() const
+		SchemaElementDefinition IntradayBarElementData::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("BarData"));
 			return result;
 		}
 
-		bool ElementBarData::isArray() const
+		bool IntradayBarElementData::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementBarData::isComplexType() const
+		bool IntradayBarElementData::isComplexType() const
 		{
 			return true;
 		}
 
-		ElementPtr * ElementBarData::getElement(const char* name) const
+		ElementPtr * IntradayBarElementData::getElement(const char* name) const
 		{
 			int length = strlen(name);
 			
@@ -71,7 +71,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementBarData::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarElementData::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

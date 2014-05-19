@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketBool.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementBool.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,49 +7,49 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketBool.h"
+#include "MarketDataRequest/MarketElementBool.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketBool::ElementMarketBool(std::string name, bool value)
+		MarketElementBool::MarketElementBool(std::string name, bool value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		Name ElementMarketBool::name() const
+		Name MarketElementBool::name() const
 		{
 			return Name(this->_name.c_str());
 		}
 
-		size_t ElementMarketBool::numValues() const
+		size_t MarketElementBool::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketBool::numElements() const
+		size_t MarketElementBool::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementMarketBool::isNull() const
+		bool MarketElementBool::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketBool::isArray() const
+		bool MarketElementBool::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketBool::isComplexType() const
+		bool MarketElementBool::isComplexType() const
 		{
 			return false;
 		}
 
-		bool ElementMarketBool::getValueAsBool(int index) const
+		bool MarketElementBool::getValueAsBool(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -57,7 +57,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementMarketBool::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementBool::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value ? "True" : "False");
 			return stream;

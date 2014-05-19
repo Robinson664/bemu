@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/ElementIntradayTickData.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickElementData.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,25 +18,25 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickDateTime;
-		class ElementIntradayTickDouble;
-		class ElementIntradayTickInt;
-		class ElementIntradayTickString;
-		class ElementIntradayTickDataTuple3;
+		class IntradayTickElementDateTime;
+		class IntradayTickElementDouble;
+		class IntradayTickElementInt;
+		class IntradayTickElementString;
+		class IntradayTickElementTuple3;
 
-		class ElementIntradayTickData : public ElementPtr
+		class IntradayTickElementData : public ElementPtr
 		{
 			private:
 				bool _includeConditionCodes;
 
-				ElementIntradayTickDateTime * _time;
-				ElementIntradayTickDouble * _value;
-				ElementIntradayTickInt * _size;
-				ElementIntradayTickString * _type, * _conditionCodes;
+				IntradayTickElementDateTime * _time;
+				IntradayTickElementDouble * _value;
+				IntradayTickElementInt * _size;
+				IntradayTickElementString * _type, * _conditionCodes;
 				
 			public:
-				ElementIntradayTickData(const Datetime& datetime, const ElementIntradayTickDataTuple3& arg, bool includeConditionCodes);
-				~ElementIntradayTickData();
+				IntradayTickElementData(const Datetime& datetime, const IntradayTickElementTuple3& arg, bool includeConditionCodes);
+				~IntradayTickElementData();
 
 				virtual Name name() const;
 				virtual size_t numValues() const { return 1; }

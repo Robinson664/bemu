@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/MessageIntradayBar.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarMessage.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -21,21 +21,21 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class ElementBarData;
-		class BarTickDataType;
-		class ElementIntradayBarResponseError;
+		class IntradayBarElementData;
+		class IntradayBarTickDataType;
+		class IntradayBarElementResponseError;
 
-		class MessageIntradayBar : public MessagePtr
+		class IntradayBarMessage : public MessagePtr
 		{
 			private:
-				ElementBarData * _parent;
-				ElementIntradayBarResponseError * _responseError;
+				IntradayBarElementData * _parent;
+				IntradayBarElementResponseError * _responseError;
 				bool _isResponseError;
 
 			public:
-				MessageIntradayBar(const CorrelationId& corr, const Service& service, const std::string& security);
-				MessageIntradayBar(const CorrelationId& corr, const Service& service, const std::vector<BarTickDataType*>& bars);
-				~MessageIntradayBar();
+				IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::string& security);
+				IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::vector<IntradayBarTickDataType*>& bars);
+				~IntradayBarMessage();
 
 				virtual const char* topicName() const;
 				virtual size_t numElements() const;

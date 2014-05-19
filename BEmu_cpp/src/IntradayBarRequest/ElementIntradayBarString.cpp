@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/ElementIntradayBarString.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarElementString.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayBarRequest/ElementIntradayBarString.h"
+#include "IntradayBarRequest/IntradayBarElementString.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 
@@ -15,43 +15,43 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		ElementIntradayBarString::ElementIntradayBarString(const std::string& name, const std::string& value)
+		IntradayBarElementString::IntradayBarElementString(const std::string& name, const std::string& value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		ElementIntradayBarString::~ElementIntradayBarString()
+		IntradayBarElementString::~IntradayBarElementString()
 		{
 		}
 
-		Name ElementIntradayBarString::name() const
+		Name IntradayBarElementString::name() const
 		{
 			Name result(this->_name.c_str());
 			return result;
 		}
 
-		size_t ElementIntradayBarString::numValues() const
+		size_t IntradayBarElementString::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementIntradayBarString::numElements() const
+		size_t IntradayBarElementString::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementIntradayBarString::isArray() const
+		bool IntradayBarElementString::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementIntradayBarString::isComplexType() const
+		bool IntradayBarElementString::isComplexType() const
 		{
 			return false;
 		}
 
-		const char * ElementIntradayBarString::getValueAsString(int index) const
+		const char * IntradayBarElementString::getValueAsString(int index) const
 		{
 			if(index == 0)
 				return this->_value.c_str();
@@ -59,7 +59,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementIntradayBarString::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarElementString::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;

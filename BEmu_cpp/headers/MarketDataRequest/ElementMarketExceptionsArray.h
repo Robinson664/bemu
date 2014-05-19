@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/ElementMarketExceptionsArray.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketElementExceptionsArray.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -16,16 +16,16 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class ElementMarketExceptions;
+		class MarketElementExceptions;
 
-		class ElementMarketExceptionsArray : public ElementPtr
+		class MarketElementExceptionsArray : public ElementPtr
 		{
 			private:
-				std::vector<ElementMarketExceptions*> _exceptions;
+				std::vector<MarketElementExceptions*> _exceptions;
 
 			public:
-				ElementMarketExceptionsArray(std::vector<std::string> badFields);
-				~ElementMarketExceptionsArray();
+				MarketElementExceptionsArray(std::vector<std::string> badFields);
+				~MarketElementExceptionsArray();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

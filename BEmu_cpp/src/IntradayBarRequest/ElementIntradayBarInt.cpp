@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/ElementIntradayBarInt.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarElementInt.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayBarRequest/ElementIntradayBarInt.h"
+#include "IntradayBarRequest/IntradayBarElementInt.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 
@@ -15,43 +15,43 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		ElementIntradayBarInt::ElementIntradayBarInt(const std::string& name, int value)
+		IntradayBarElementInt::IntradayBarElementInt(const std::string& name, int value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		ElementIntradayBarInt::~ElementIntradayBarInt()
+		IntradayBarElementInt::~IntradayBarElementInt()
 		{
 		}
 
-		Name ElementIntradayBarInt::name() const
+		Name IntradayBarElementInt::name() const
 		{
 			Name result(this->_name.c_str());
 			return result;
 		}
 
-		size_t ElementIntradayBarInt::numValues() const
+		size_t IntradayBarElementInt::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementIntradayBarInt::numElements() const
+		size_t IntradayBarElementInt::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementIntradayBarInt::isArray() const
+		bool IntradayBarElementInt::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementIntradayBarInt::isComplexType() const
+		bool IntradayBarElementInt::isComplexType() const
 		{
 			return false;
 		}
 
-		int ElementIntradayBarInt::getValueAsInt32(int index) const
+		int IntradayBarElementInt::getValueAsInt32(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -59,7 +59,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementIntradayBarInt::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarElementInt::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;

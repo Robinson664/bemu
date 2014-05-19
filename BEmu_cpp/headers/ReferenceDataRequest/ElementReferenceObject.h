@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceObject.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementObject.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,7 +18,7 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceObject : public ElementPtr
+		class ReferenceElementObject : public ElementPtr
 		{
 			private:
 				ObjectType _value;
@@ -26,8 +26,8 @@ namespace BEmu
 				const char * _cstr;
 
 			public:
-				ElementReferenceObject(std::string name, ObjectType value);
-				~ElementReferenceObject();
+				ReferenceElementObject(std::string name, ObjectType value);
+				~ReferenceElementObject();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

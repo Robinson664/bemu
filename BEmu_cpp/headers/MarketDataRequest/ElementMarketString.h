@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/ElementMarketString.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketElementString.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,13 +15,13 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class ElementMarketString : public ElementPtr
+		class MarketElementString : public ElementPtr
 		{
 			private:
 				std::string _name, _value;
 
 			public:
-				ElementMarketString(std::string name, std::string value);
+				MarketElementString(std::string name, std::string value);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

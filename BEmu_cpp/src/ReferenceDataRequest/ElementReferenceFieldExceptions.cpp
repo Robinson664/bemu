@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReferenceFieldExceptions.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElementFieldExceptions.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReferenceFieldExceptions.h"
-#include "ReferenceDataRequest/ElementReferenceString.h"
-#include "ReferenceDataRequest/ElementReferenceErrorInfo.h"
+#include "ReferenceDataRequest/ReferenceElementFieldExceptions.h"
+#include "ReferenceDataRequest/ReferenceElementString.h"
+#include "ReferenceDataRequest/ReferenceElementErrorInfo.h"
 
 #include "BloombergTypes/Name.h"
 #include "Types/IndentType.h"
@@ -18,13 +18,13 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReferenceFieldExceptions::ElementReferenceFieldExceptions(const std::string& badField)
+		ReferenceElementFieldExceptions::ReferenceElementFieldExceptions(const std::string& badField)
 		{
-            this->_fieldId = new ElementReferenceString("fieldId", badField);
-            this->_errorInfo = new ElementReferenceErrorInfo();
+            this->_fieldId = new ReferenceElementString("fieldId", badField);
+            this->_errorInfo = new ReferenceElementErrorInfo();
 		}
 
-		ElementReferenceFieldExceptions::~ElementReferenceFieldExceptions()
+		ReferenceElementFieldExceptions::~ReferenceElementFieldExceptions()
 		{
 			delete this->_fieldId;
 			this->_fieldId = 0;
@@ -33,32 +33,32 @@ namespace BEmu
 			this->_errorInfo = 0;
 		}
 
-		Name ElementReferenceFieldExceptions::name() const { return Name("fieldExceptions"); }
-		size_t ElementReferenceFieldExceptions::numValues() const { return 1; }
-		size_t ElementReferenceFieldExceptions::numElements() const { return 2; }
+		Name ReferenceElementFieldExceptions::name() const { return Name("fieldExceptions"); }
+		size_t ReferenceElementFieldExceptions::numValues() const { return 1; }
+		size_t ReferenceElementFieldExceptions::numElements() const { return 2; }
 
-		bool ElementReferenceFieldExceptions::isNull() const { return false; }
-		bool ElementReferenceFieldExceptions::isArray() const { return false; }
-		bool ElementReferenceFieldExceptions::isComplexType() const { return true; }
+		bool ReferenceElementFieldExceptions::isNull() const { return false; }
+		bool ReferenceElementFieldExceptions::isArray() const { return false; }
+		bool ReferenceElementFieldExceptions::isComplexType() const { return true; }
 
-		SchemaElementDefinition ElementReferenceFieldExceptions::elementDefinition() const
+		SchemaElementDefinition ReferenceElementFieldExceptions::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("FieldException"));
 			return result;
 		}
 
-		const char* ElementReferenceFieldExceptions::getElementAsString(const char* name) const
+		const char* ReferenceElementFieldExceptions::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		int ElementReferenceFieldExceptions::getElementAsInt32(const char* name) const
+		int ReferenceElementFieldExceptions::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		ElementPtr * ElementReferenceFieldExceptions::getElement(const char* name) const
+		ElementPtr * ReferenceElementFieldExceptions::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldId", 8) == 0)
 				return this->_fieldId;
@@ -70,14 +70,14 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		bool ElementReferenceFieldExceptions::hasElement(const char* name, bool excludeNullElements) const
+		bool ReferenceElementFieldExceptions::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				strncmp(name, "fieldId", 8) == 0 ||
 				strncmp(name, "errorInfo", 0) == 0;
 		}
 
-		std::ostream& ElementReferenceFieldExceptions::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceElementFieldExceptions::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

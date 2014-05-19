@@ -11,10 +11,10 @@
 #include "BloombergTypes/RequestPtr.h"
 #include "BloombergTypes/Service.h"
 
-#include "IntradayTickRequest/RequestIntradayTick.h"
-#include "IntradayBarRequest/RequestIntradayBar.h"
+#include "IntradayTickRequest/IntradayTickRequest.h"
+#include "IntradayBarRequest/IntradayBarRequest.h"
 #include "HistoricalDataRequest/HistoricRequest.h"
-#include "ReferenceDataRequest/RequestReference.h"
+#include "ReferenceDataRequest/ReferenceRequest.h"
 
 namespace BEmu
 {
@@ -39,17 +39,17 @@ namespace BEmu
 		}
 		else if(strncmp(operation, "ReferenceDataRequest", 21) == 0)
 		{
-			ReferenceDataRequest::RequestReference * result = new ReferenceDataRequest::RequestReference();
+			ReferenceDataRequest::ReferenceRequest * result = new ReferenceDataRequest::ReferenceRequest();
 			return result;
 		}
 		else if(strncmp(operation, "IntradayTickRequest", 20) == 0)
 		{
-			IntradayTickRequest::RequestIntradayTick * result = new IntradayTickRequest::RequestIntradayTick(*this);
+			IntradayTickRequest::IntradayTickRequest * result = new IntradayTickRequest::IntradayTickRequest(*this);
 			return result;
 		}
 		else if(strncmp(operation, "IntradayBarRequest", 19) == 0)
 		{
-			IntradayBarRequest::RequestIntradayBar * result = new IntradayBarRequest::RequestIntradayBar(*this);
+			IntradayBarRequest::IntradayBarRequest * result = new IntradayBarRequest::IntradayBarRequest(*this);
 			return result;
 		}
 		else

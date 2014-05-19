@@ -13,17 +13,17 @@
 #include <exception>
 #include <vector>
 
-#include "IntradayTickRequest/RequestIntradayTick.h"
-#include "IntradayTickRequest/EventIntradayTick.h"
+#include "IntradayTickRequest/IntradayTickRequest.h"
+#include "IntradayTickRequest/IntradayTickEvent.h"
 
-#include "IntradayBarRequest/RequestIntradayBar.h"
-#include "IntradayBarRequest/EventIntradayBar.h"
+#include "IntradayBarRequest/IntradayBarRequest.h"
+#include "IntradayBarRequest/IntradayBarEvent.h"
 
 #include "HistoricalDataRequest/HistoricRequest.h"
 #include "HistoricalDataRequest/HistoricEvent.h"
 
-#include "ReferenceDataRequest/RequestReference.h"
-#include "ReferenceDataRequest/EventReference.h"
+#include "ReferenceDataRequest/ReferenceRequest.h"
+#include "ReferenceDataRequest/ReferenceEvent.h"
 
 namespace BEmu
 {
@@ -68,21 +68,21 @@ namespace BEmu
 		}
 		else if(request->getRequestType() == RequestPtr::intradayBar)
 		{
-			IntradayBarRequest::RequestIntradayBar * req = (IntradayBarRequest::RequestIntradayBar *)request;
-			IntradayBarRequest::EventIntradayBar * evt = new IntradayBarRequest::EventIntradayBar(req);
+			IntradayBarRequest::IntradayBarRequest * req = (IntradayBarRequest::IntradayBarRequest *)request;
+			IntradayBarRequest::IntradayBarEvent * evt = new IntradayBarRequest::IntradayBarEvent(req);
 			
 			return evt;
 		}
 		else if(request->getRequestType() == RequestPtr::intradayTick)
 		{
-			IntradayTickRequest::RequestIntradayTick * req = (IntradayTickRequest::RequestIntradayTick *)request;
-			IntradayTickRequest::EventIntradayTick * evt = new IntradayTickRequest::EventIntradayTick(req);
+			IntradayTickRequest::IntradayTickRequest * req = (IntradayTickRequest::IntradayTickRequest *)request;
+			IntradayTickRequest::IntradayTickEvent * evt = new IntradayTickRequest::IntradayTickEvent(req);
 			return evt;
 		}
 		else if(request->getRequestType() == RequestPtr::reference)
 		{
-			ReferenceDataRequest::RequestReference * req = (ReferenceDataRequest::RequestReference *)request;
-			ReferenceDataRequest::EventReference * evt = new ReferenceDataRequest::EventReference(req);
+			ReferenceDataRequest::ReferenceRequest * req = (ReferenceDataRequest::ReferenceRequest *)request;
+			ReferenceDataRequest::ReferenceEvent * evt = new ReferenceDataRequest::ReferenceEvent(req);
 			return evt;
 		}
 		throw request->requestEx;

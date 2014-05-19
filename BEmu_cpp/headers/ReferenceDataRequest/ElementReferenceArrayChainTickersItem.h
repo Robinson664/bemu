@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceArrayChainTickersItem.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementArrayChainTickersItem.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -10,7 +10,7 @@
 #pragma once
 
 #include "BloombergTypes/ElementPtr.h"
-#include "ReferenceDataRequest/ElementReferenceArrayChainTickers.h"
+#include "ReferenceDataRequest/ReferenceElementArrayChainTickers.h"
 
 namespace BEmu
 {
@@ -19,16 +19,16 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceString;
+		class ReferenceElementString;
 
-		class ElementReferenceArrayChainTickersItem : public ElementPtr
+		class ReferenceElementArrayChainTickersItem : public ElementPtr
 		{
 			private:
-				ElementReferenceString * _element;
+				ReferenceElementString * _element;
 
 			public:
-				ElementReferenceArrayChainTickersItem(std::string ticker, Datetime dtExp, ReferenceDataRequest::OptionalityEnum::EnumType optionality, int strike);
-				~ElementReferenceArrayChainTickersItem();
+				ReferenceElementArrayChainTickersItem(std::string ticker, Datetime dtExp, ReferenceDataRequest::OptionalityEnum::EnumType optionality, int strike);
+				~ReferenceElementArrayChainTickersItem();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

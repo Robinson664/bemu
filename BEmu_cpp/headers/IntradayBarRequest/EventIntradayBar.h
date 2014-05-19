@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/EventIntradayBar.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarEvent.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,18 +18,18 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class RequestIntradayBar;
+		class IntradayBarRequest;
 
-		class EventIntradayBar : public EventPtr
+		class IntradayBarEvent : public EventPtr
 		{
 			private:
 				std::vector<MessagePtr*> * _message;
 				std::vector<MessagePtr*> * GenerateMessages() const;
-				RequestIntradayBar *_internal;
+				IntradayBarRequest *_internal;
 
 			public:
-				EventIntradayBar(RequestIntradayBar * request);
-				~EventIntradayBar();
+				IntradayBarEvent(IntradayBarRequest * request);
+				~IntradayBarEvent();
 
 				virtual std::vector<MessagePtr*> *getMessages() const;
 		};

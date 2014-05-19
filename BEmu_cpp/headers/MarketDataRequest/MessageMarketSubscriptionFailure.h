@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MessageMarketSubscriptionFailure.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketMessageSubscriptionFailure.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -16,18 +16,18 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class ElementMarketReason;
+		class MarketElementReason;
 
-		class MessageMarketSubscriptionFailure : public MessagePtr
+		class MarketMessageSubscriptionFailure : public MessagePtr
 		{
 			private:
 				CorrelationId _correlationId;
 				std::string _topicName;
-				ElementMarketReason * _reason;
+				MarketElementReason * _reason;
 
 			public:
-				MessageMarketSubscriptionFailure(Subscription sub);
-				~MessageMarketSubscriptionFailure();
+				MarketMessageSubscriptionFailure(Subscription sub);
+				~MarketMessageSubscriptionFailure();
 
 				virtual size_t numElements() const;
 				virtual const char* topicName() const;

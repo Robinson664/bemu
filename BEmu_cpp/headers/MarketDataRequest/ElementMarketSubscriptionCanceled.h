@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/ElementMarketSubscriptionCanceled.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketElementSubscriptionCanceled.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,16 +15,16 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class ElementMarketSubscriptionCancelReason;
-		class MessageMarketSubscriptionCanceled;
+		class MarketElementSubscriptionCancelReason;
+		class MarketMessageSubscriptionCanceled;
 
-		class ElementMarketSubscriptionCanceled : public ElementPtr
+		class MarketElementSubscriptionCanceled : public ElementPtr
 		{
 			private:
-				ElementMarketSubscriptionCancelReason * _reason;
+				MarketElementSubscriptionCancelReason * _reason;
 
 			public:
-				ElementMarketSubscriptionCanceled(MessageMarketSubscriptionCanceled * arg);
+				MarketElementSubscriptionCanceled(MarketMessageSubscriptionCanceled * arg);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

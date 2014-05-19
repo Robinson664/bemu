@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MessageMarketSessionOpened.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketMessageSessionOpened.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,17 +7,17 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/MessageMarketSessionOpened.h"
+#include "MarketDataRequest/MarketMessageSessionOpened.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MessageMarketSessionOpened::MessageMarketSessionOpened() : MessagePtr(Name("SessionStarted"), CorrelationId((long)0))
+		MarketMessageSessionOpened::MarketMessageSessionOpened() : MessagePtr(Name("SessionStarted"), CorrelationId((long)0))
 		{
 		}
 
-		const char* MessageMarketSessionOpened::topicName() const
+		const char* MarketMessageSessionOpened::topicName() const
 		{
 			return "";
 		}

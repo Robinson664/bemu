@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/ElementIntradayBarResponseError.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarElementResponseError.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -9,9 +9,9 @@
 
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
-#include "IntradayBarRequest/ElementIntradayBarString.h"
-#include "IntradayBarRequest/ElementIntradayBarInt.h"
-#include "IntradayBarRequest/ElementIntradayBarResponseError.h"
+#include "IntradayBarRequest/IntradayBarElementString.h"
+#include "IntradayBarRequest/IntradayBarElementInt.h"
+#include "IntradayBarRequest/IntradayBarElementResponseError.h"
 #include "Types/RandomDataGenerator.h"
 #include "Types/IndentType.h"
 
@@ -19,7 +19,7 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		ElementIntradayBarResponseError::ElementIntradayBarResponseError(const std::string& security)
+		IntradayBarElementResponseError::IntradayBarElementResponseError(const std::string& security)
 		{
 			int code = RandomDataGenerator::RandomInt(99);
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
@@ -28,24 +28,24 @@ namespace BEmu
 			//source
 			std::stringstream sourceValue;
 			sourceValue << code << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
-			this->_source = new ElementIntradayBarString("source", sourceValue.str());
+			this->_source = new IntradayBarElementString("source", sourceValue.str());
 
 			//code
-			this->_code = new ElementIntradayBarInt("code", code);
+			this->_code = new IntradayBarElementInt("code", code);
 
 			//category
-			this->_category = new ElementIntradayBarString("category", "BAD_SEC");
+			this->_category = new IntradayBarElementString("category", "BAD_SEC");
 
 			//message
 			std::stringstream messageValue;
 			messageValue << "Unknown/Invalid security [nid:" << code << "]";
-			this->_message = new ElementIntradayBarString("message", messageValue.str());
+			this->_message = new IntradayBarElementString("message", messageValue.str());
 
 			//sub-category
-			this->_subCategory = new ElementIntradayBarString("subcategory", "INVALID_SECURITY");
+			this->_subCategory = new IntradayBarElementString("subcategory", "INVALID_SECURITY");
 		}
 
-		ElementIntradayBarResponseError::~ElementIntradayBarResponseError()
+		IntradayBarElementResponseError::~IntradayBarElementResponseError()
 		{
 			delete this->_source;
 			this->_source = 0;
@@ -63,50 +63,50 @@ namespace BEmu
 			this->_code = 0;
 		}
 
-		Name ElementIntradayBarResponseError::name() const
+		Name IntradayBarElementResponseError::name() const
 		{
 			Name result("responseError");
 			return result;
 		}
 
-		size_t ElementIntradayBarResponseError::numValues() const
+		size_t IntradayBarElementResponseError::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementIntradayBarResponseError::numElements() const
+		size_t IntradayBarElementResponseError::numElements() const
 		{
 			return 5;
 		}
 
-		SchemaElementDefinition ElementIntradayBarResponseError::elementDefinition() const
+		SchemaElementDefinition IntradayBarElementResponseError::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
 			return result;
 		}
 
-		bool ElementIntradayBarResponseError::isArray() const
+		bool IntradayBarElementResponseError::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementIntradayBarResponseError::isComplexType() const
+		bool IntradayBarElementResponseError::isComplexType() const
 		{
 			return false;
 		}
 
-		int ElementIntradayBarResponseError::getElementAsInt32(const char* name) const
+		int IntradayBarElementResponseError::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		const char* ElementIntradayBarResponseError::getElementAsString(const char* name) const
+		const char* IntradayBarElementResponseError::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		ElementPtr * ElementIntradayBarResponseError::getElement(const char* name) const
+		ElementPtr * IntradayBarElementResponseError::getElement(const char* name) const
 		{
 			if(strncmp("source", name, 7) == 0)
 				return this->_source;
@@ -127,7 +127,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		bool ElementIntradayBarResponseError::hasElement(const char* name, bool excludeNullElements) const
+		bool IntradayBarElementResponseError::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				(strncmp("source", name, 7) == 0) ||
@@ -137,7 +137,7 @@ namespace BEmu
 				(strncmp("subcategory", name, 12) == 0);
 		}
 
-		std::ostream& ElementIntradayBarResponseError::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarElementResponseError::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/EventIntradayTick.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickEvent.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,18 +18,18 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class RequestIntradayTick;
+		class IntradayTickRequest;
 
-		class EventIntradayTick : public EventPtr
+		class IntradayTickEvent : public EventPtr
 		{
 			private:
 				std::vector<MessagePtr*> *_messages;
 				std::vector<MessagePtr*>* GenerateMessages();
-				RequestIntradayTick *_internal;
+				IntradayTickRequest *_internal;
 
 			public:
-				EventIntradayTick(RequestIntradayTick *request);
-				~EventIntradayTick();
+				IntradayTickEvent(IntradayTickRequest *request);
+				~IntradayTickEvent();
 
 				virtual std::vector<MessagePtr*> *getMessages() const;
 		};

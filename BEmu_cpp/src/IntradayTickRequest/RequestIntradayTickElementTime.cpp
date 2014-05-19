@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/RequestIntradayTickElementTime.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/IntradayTickRequestElementTime.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,8 +7,8 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayTickRequest/RequestIntradayTickElementTime.h"
-#include "IntradayTickRequest/RequestIntradayTickElementString.h"
+#include "IntradayTickRequest/IntradayTickRequestElementTime.h"
+#include "IntradayTickRequest/IntradayTickRequestElementString.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/Element.h"
 #include "Types/IndentType.h"
@@ -17,20 +17,20 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		RequestIntradayTickElementTime::RequestIntradayTickElementTime(const std::string& elementName) : RequestIntradayTickElementString(elementName, "")
+		IntradayTickRequestElementTime::IntradayTickRequestElementTime(const std::string& elementName) : IntradayTickRequestElementString(elementName, "")
 		{
 		}
 
-		RequestIntradayTickElementTime::RequestIntradayTickElementTime(const std::string& elementName, const Datetime& date) : RequestIntradayTickElementString(elementName, ElementPtr::toCharPointer(date))
+		IntradayTickRequestElementTime::IntradayTickRequestElementTime(const std::string& elementName, const Datetime& date) : IntradayTickRequestElementString(elementName, ElementPtr::toCharPointer(date))
 		{	
 			this->_instance = date;
 		}
 
-		RequestIntradayTickElementTime::~RequestIntradayTickElementTime()
+		IntradayTickRequestElementTime::~IntradayTickRequestElementTime()
 		{
 		}
 
-		Datetime RequestIntradayTickElementTime::getDate()
+		Datetime IntradayTickRequestElementTime::getDate()
 		{
 			return this->_instance;
 		}

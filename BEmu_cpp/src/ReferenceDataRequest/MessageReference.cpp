@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/MessageReference.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceMessage.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,42 +7,42 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/MessageReference.h"
-#include "ReferenceDataRequest/ElementReferenceSecurityDataArray.h"
-#include "ReferenceDataRequest/ElementReference.h"
+#include "ReferenceDataRequest/ReferenceMessage.h"
+#include "ReferenceDataRequest/ReferenceElementSecurityDataArray.h"
+#include "ReferenceDataRequest/ReferenceElement.h"
 
 namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		MessageReference::MessageReference(const CorrelationId& corr, const std::map<std::string, std::map<std::string, ObjectType>*>& fieldData) : MessagePtr(Name("ReferenceDataResponse"), corr)
+		ReferenceMessage::ReferenceMessage(const CorrelationId& corr, const std::map<std::string, std::map<std::string, ObjectType>*>& fieldData) : MessagePtr(Name("ReferenceDataResponse"), corr)
 		{
-			this->_securities = new ElementReferenceSecurityDataArray(fieldData);
+			this->_securities = new ReferenceElementSecurityDataArray(fieldData);
 		}
 
-		MessageReference::~MessageReference()
+		ReferenceMessage::~ReferenceMessage()
 		{
 			delete this->_securities;
 			this->_securities = 0;
 		}
 
-		const char* MessageReference::topicName() const
+		const char* ReferenceMessage::topicName() const
 		{
 			return "";
 		}
 
-		ElementPtr * MessageReference::asElement() const
+		ElementPtr * ReferenceMessage::asElement() const
 		{
-			ElementPtr * result = new ElementReference(*this);
+			ElementPtr * result = new ReferenceElement(*this);
 			return result;
 		}
 
-		ElementPtr * MessageReference::firstElement() const
+		ElementPtr * ReferenceMessage::firstElement() const
 		{
 			return this->_securities;
 		}
 
-		ElementPtr * MessageReference::getElement(const char* name) const
+		ElementPtr * ReferenceMessage::getElement(const char* name) const
 		{
 			if(strncmp(name, "securityData", 13) == 0)
 				return this->_securities;
@@ -51,7 +51,7 @@ namespace BEmu
 				throw messageEx;
 		}
 
-		std::ostream& MessageReference::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceMessage::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "ReferenceDataResponse (choice) = {" << std::endl;
 			this->_securities->print(stream, 1, spacesPerLevel);

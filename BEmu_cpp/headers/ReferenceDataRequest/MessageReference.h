@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/MessageReference.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceMessage.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -19,16 +19,16 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceSecurityDataArray;
+		class ReferenceElementSecurityDataArray;
 
-		class MessageReference : public MessagePtr
+		class ReferenceMessage : public MessagePtr
 		{
 			private:
-				ElementReferenceSecurityDataArray * _securities;
+				ReferenceElementSecurityDataArray * _securities;
 
 			public:
-				MessageReference(const CorrelationId& corr, const std::map<std::string, std::map<std::string, ObjectType>*>& fieldData);
-				~MessageReference();
+				ReferenceMessage(const CorrelationId& corr, const std::map<std::string, std::map<std::string, ObjectType>*>& fieldData);
+				~ReferenceMessage();
 
 				virtual ElementPtr * getElement(const char* name) const;
 

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/RequestIntradayBarElementStringArray.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarRequestElementStringArray.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,7 +18,7 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class RequestIntradayBarElementStringArray : public ElementPtr
+		class IntradayBarRequestElementStringArray : public ElementPtr
 		{
 			private:
 				std::vector<std::string*> _values;
@@ -27,8 +27,8 @@ namespace BEmu
 				bool isEventTypeAllowed(const std::string& value);
 
 			public:
-				RequestIntradayBarElementStringArray(const std::string& elementName);
-				~RequestIntradayBarElementStringArray();
+				IntradayBarRequestElementStringArray(const std::string& elementName);
+				~IntradayBarRequestElementStringArray();
 				
 				void addValue(const std::string& value);
 				std::vector<std::string*> values();

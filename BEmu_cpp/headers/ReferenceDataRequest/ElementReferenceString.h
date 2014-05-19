@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceString.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementString.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -17,13 +17,13 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceString : public ElementPtr
+		class ReferenceElementString : public ElementPtr
 		{
 			private:
 				std::string _name, _value;
 
 			public:
-				ElementReferenceString(const std::string& name, const std::string& value);
+				ReferenceElementString(const std::string& name, const std::string& value);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

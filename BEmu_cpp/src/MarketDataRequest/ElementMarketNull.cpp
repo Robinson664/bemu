@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketNull.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementNull.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,48 +7,48 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketNull.h"
+#include "MarketDataRequest/MarketElementNull.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketNull::ElementMarketNull(std::string name)
+		MarketElementNull::MarketElementNull(std::string name)
 		{
 			this->_name = name;
 		}
 
-		Name ElementMarketNull::name() const
+		Name MarketElementNull::name() const
 		{
 			return Name(this->_name.c_str());
 		}
 
-		size_t ElementMarketNull::numValues() const
+		size_t MarketElementNull::numValues() const
 		{
 			return 0;
 		}
 
-		size_t ElementMarketNull::numElements() const
+		size_t MarketElementNull::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementMarketNull::isNull() const
+		bool MarketElementNull::isNull() const
 		{
 			return true;
 		}
 
-		bool ElementMarketNull::isArray() const
+		bool MarketElementNull::isArray() const
 		{
 			return true;
 		}
 
-		bool ElementMarketNull::isComplexType() const
+		bool MarketElementNull::isComplexType() const
 		{
 			return false;
 		}
 
-		std::ostream& ElementMarketNull::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementNull::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			return stream;
 		}

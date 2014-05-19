@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MessageMarketSubscriptionStarted.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketMessageSubscriptionStarted.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -16,20 +16,20 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class ElementMarketNull;
-		class ElementMarketExceptionsArray;
+		class MarketElementNull;
+		class MarketElementExceptionsArray;
 
-		class MessageMarketSubscriptionStarted : public MessagePtr
+		class MarketMessageSubscriptionStarted : public MessagePtr
 		{
 			private:
 				CorrelationId _correlationId;
 				std::string _topicName;
-				ElementMarketNull * _exceptionsNull;
-				ElementMarketExceptionsArray * _exceptionsBadFields;
+				MarketElementNull * _exceptionsNull;
+				MarketElementExceptionsArray * _exceptionsBadFields;
 
 			public:
-				MessageMarketSubscriptionStarted(Subscription sub);
-				~MessageMarketSubscriptionStarted();
+				MarketMessageSubscriptionStarted(Subscription sub);
+				~MarketMessageSubscriptionStarted();
 
 				ElementPtr * firstElement() const;
 

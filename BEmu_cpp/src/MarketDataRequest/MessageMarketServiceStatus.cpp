@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MessageMarketServiceStatus.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketMessageServiceStatus.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,41 +7,41 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/MessageMarketServiceStatus.h"
-#include "MarketDataRequest/ElementMarketString.h"
-#include "MarketDataRequest/ElementMarketServiceStatus.h"
+#include "MarketDataRequest/MarketMessageServiceStatus.h"
+#include "MarketDataRequest/MarketElementString.h"
+#include "MarketDataRequest/MarketElementServiceStatus.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MessageMarketServiceStatus::MessageMarketServiceStatus(CorrelationId corr) : MessagePtr(Name("ServiceOpened"), corr)
+		MarketMessageServiceStatus::MarketMessageServiceStatus(CorrelationId corr) : MessagePtr(Name("ServiceOpened"), corr)
 		{
-			this->_serviceName = new ElementMarketString("serviceName", "//blp/mktdata");
+			this->_serviceName = new MarketElementString("serviceName", "//blp/mktdata");
 		}
 
-		ElementPtr * MessageMarketServiceStatus::firstElement() const
+		ElementPtr * MarketMessageServiceStatus::firstElement() const
 		{
 			return this->_serviceName;
 		}
 
-		size_t MessageMarketServiceStatus::numElements() const
+		size_t MarketMessageServiceStatus::numElements() const
 		{
 			return 1;
 		}
 
-		const char* MessageMarketServiceStatus::topicName() const
+		const char* MarketMessageServiceStatus::topicName() const
 		{
 			return "";
 		}
 
-		ElementPtr * MessageMarketServiceStatus::asElement() const
+		ElementPtr * MarketMessageServiceStatus::asElement() const
 		{
-			const MessageMarketServiceStatus * ptr = this;
-			return new ElementMarketServiceStatus(ptr);
+			const MarketMessageServiceStatus * ptr = this;
+			return new MarketElementServiceStatus(ptr);
 		}
 
-		std::ostream& MessageMarketServiceStatus::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketMessageServiceStatus::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "ServiceOpened = {" << std::endl;
 			this->_serviceName->print(stream, level + 1, spacesPerLevel);

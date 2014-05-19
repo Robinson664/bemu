@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/EventIntradayTick.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/IntradayTickEvent.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -9,10 +9,10 @@
 
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
-#include "IntradayTickRequest/EventIntradayTick.h"
-#include "IntradayTickRequest/RequestIntradayTick.h"
-#include "IntradayTickRequest/MessageIntradayTick.h"
-#include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
+#include "IntradayTickRequest/IntradayTickEvent.h"
+#include "IntradayTickRequest/IntradayTickRequest.h"
+#include "IntradayTickRequest/IntradayTickMessage.h"
+#include "IntradayTickRequest/IntradayTickElementTuple3.h"
 #include "BloombergTypes/RequestPtr.h"
 #include "BloombergTypes/MessagePtr.h"
 #include "BloombergTypes/Datetime.h"
@@ -25,7 +25,7 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		EventIntradayTick::EventIntradayTick(RequestIntradayTick *request) : EventPtr(request)
+		IntradayTickEvent::IntradayTickEvent(IntradayTickRequest *request) : EventPtr(request)
 		{
 			this->_request = request;
 			this->_internal = request;
@@ -33,7 +33,7 @@ namespace BEmu
 			this->_messages = this->GenerateMessages();
 		}
 
-		EventIntradayTick::~EventIntradayTick()
+		IntradayTickEvent::~IntradayTickEvent()
 		{
 			for(unsigned i = 0; i < this->_messages->size(); i++)
 			{
@@ -43,12 +43,12 @@ namespace BEmu
 			this->_messages = 0;
 		}
 
-		std::vector<MessagePtr*>* EventIntradayTick::getMessages() const
+		std::vector<MessagePtr*>* IntradayTickEvent::getMessages() const
 		{
 			return this->_messages;
 		}
 
-		std::vector<MessagePtr*>* EventIntradayTick::GenerateMessages()
+		std::vector<MessagePtr*>* IntradayTickEvent::GenerateMessages()
 		{
 			std::vector<MessagePtr*>* result = new std::vector<MessagePtr*>();
 
@@ -57,12 +57,12 @@ namespace BEmu
 
 			if (isResponseError)
             {
-				MessageIntradayTick *msg = new MessageIntradayTick(this->_internal->getCorrelationId(), this->_internal->getService());
+				IntradayTickMessage *msg = new IntradayTickMessage(this->_internal->getCorrelationId(), this->_internal->getService());
 				result->push_back( (MessagePtr*)msg );
             }
 			else
 			{
-				std::map<Datetime, ElementIntradayTickDataTuple3*> *tickData = new std::map<Datetime, ElementIntradayTickDataTuple3*>();
+				std::map<Datetime, IntradayTickElementTuple3*> *tickData = new std::map<Datetime, IntradayTickElementTuple3*>();
 
 				if(this->_internal->hasStartDate())
 				{
@@ -75,24 +75,24 @@ namespace BEmu
 
 						if( (wd != Datetime::Sunday) && (wd != Datetime::Saturday) )
 						{
-							ElementIntradayTickDataTuple3 *t3 = new ElementIntradayTickDataTuple3("TRADE", RandomDataGenerator::RandomDouble(), RandomDataGenerator::IntradayTickTradeSize());
+							IntradayTickElementTuple3 *t3 = new IntradayTickElementTuple3("TRADE", RandomDataGenerator::RandomDouble(), RandomDataGenerator::IntradayTickTradeSize());
 							(*tickData)[dt] = t3;
 						}
 					}
 
 					//the constructor makes copies of the arguments, so I can delete the inputs
-					MessageIntradayTick *msg = new MessageIntradayTick(this->_internal->getCorrelationId(), this->_internal->getService(), tickData, this->_internal->includeConditionCodes());
+					IntradayTickMessage *msg = new IntradayTickMessage(this->_internal->getCorrelationId(), this->_internal->getService(), tickData, this->_internal->includeConditionCodes());
 					result->push_back(msg);
 
 					delete dates;
 					dates = 0;
 				}
 
-				//delete the tickData map (the MessageIntradayTick constructor made copies of the data, so nothing will be lost)
-				for(std::map<Datetime, ElementIntradayTickDataTuple3*>::const_iterator iter = tickData->begin(); iter != tickData->end(); ++iter)
+				//delete the tickData map (the IntradayTickMessage constructor made copies of the data, so nothing will be lost)
+				for(std::map<Datetime, IntradayTickElementTuple3*>::const_iterator iter = tickData->begin(); iter != tickData->end(); ++iter)
 				{
 					//note that I don't have to delete the Datetime because it is deleted in the "delete date vector" code block above
-					ElementIntradayTickDataTuple3* tp = iter->second;
+					IntradayTickElementTuple3* tp = iter->second;
 					delete tp;
 				}
 				delete tickData;

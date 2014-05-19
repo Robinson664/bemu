@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/ElementIntradayTickData.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/IntradayTickElementData.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,37 +7,37 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayTickRequest/ElementIntradayTickData.h"
-#include "IntradayTickRequest/ElementIntradayTickDataTuple3.h"
+#include "IntradayTickRequest/IntradayTickElementData.h"
+#include "IntradayTickRequest/IntradayTickElementTuple3.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/Datetime.h"
 #include "Types/IndentType.h"
-#include "IntradayTickRequest/ElementIntradayTickDateTime.h"
-#include "IntradayTickRequest/ElementIntradayTickString.h"
-#include "IntradayTickRequest/ElementIntradayTickDouble.h"
-#include "IntradayTickRequest/ElementIntradayTickInt.h"
+#include "IntradayTickRequest/IntradayTickElementDateTime.h"
+#include "IntradayTickRequest/IntradayTickElementString.h"
+#include "IntradayTickRequest/IntradayTickElementDouble.h"
+#include "IntradayTickRequest/IntradayTickElementInt.h"
 
 namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		ElementIntradayTickData::ElementIntradayTickData(const Datetime& datetime, const ElementIntradayTickDataTuple3& arg, bool includeConditionCodes)
+		IntradayTickElementData::IntradayTickElementData(const Datetime& datetime, const IntradayTickElementTuple3& arg, bool includeConditionCodes)
 		{
 			this->_includeConditionCodes = includeConditionCodes;
 
-			this->_time = new ElementIntradayTickDateTime("time", datetime);
-			this->_type = new ElementIntradayTickString("type", arg.item1());
-			this->_value = new ElementIntradayTickDouble("value", arg.item2());
-			this->_size = new ElementIntradayTickInt("size", arg.item3());
+			this->_time = new IntradayTickElementDateTime("time", datetime);
+			this->_type = new IntradayTickElementString("type", arg.item1());
+			this->_value = new IntradayTickElementDouble("value", arg.item2());
+			this->_size = new IntradayTickElementInt("size", arg.item3());
 
 			if(includeConditionCodes)
-				this->_conditionCodes = new ElementIntradayTickString("conditionCodes", "R6,IS");
+				this->_conditionCodes = new IntradayTickElementString("conditionCodes", "R6,IS");
 			else
 				this->_conditionCodes = 0;
 		}
 
-		ElementIntradayTickData::~ElementIntradayTickData()
+		IntradayTickElementData::~IntradayTickElementData()
 		{
 			delete this->_time;
 			delete this->_type;
@@ -48,20 +48,20 @@ namespace BEmu
 				delete this->_conditionCodes;
 		}
 
-		Name ElementIntradayTickData::name() const
+		Name IntradayTickElementData::name() const
 		{
 			Name result("tickData");
 			return result;
 		}
 
-		SchemaElementDefinition ElementIntradayTickData::elementDefinition() const
+		SchemaElementDefinition IntradayTickElementData::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("IntradayTickData"));
 			return result;
 		}
 
-		bool ElementIntradayTickData::hasElement(const char* name, bool excludeNullElements) const
+		bool IntradayTickElementData::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return 
 				strncmp("time", name, 5) == 0 ||
@@ -71,7 +71,7 @@ namespace BEmu
 				(this->_includeConditionCodes && strncmp("conditionCodes", name, 15) == 0);
 		}
 
-		ElementPtr * ElementIntradayTickData::getElement(int position) const
+		ElementPtr * IntradayTickElementData::getElement(int position) const
 		{
 			ElementPtr *result = 0;
 
@@ -96,7 +96,7 @@ namespace BEmu
 				return result;
 		}
 
-		ElementPtr * ElementIntradayTickData::getElement(const char* name) const
+		ElementPtr * IntradayTickElementData::getElement(const char* name) const
 		{
 			ElementPtr *result = 0;
 
@@ -121,25 +121,25 @@ namespace BEmu
 				return result;
 		}
 
-		int ElementIntradayTickData::getElementAsInt32(const char* name) const
+		int IntradayTickElementData::getElementAsInt32(const char* name) const
 		{
 			ElementPtr * elm = this->getElement(name);
 			return elm->getValueAsInt32(0);
 		}
 
-		Datetime ElementIntradayTickData::getElementAsDatetime(const char* name) const
+		Datetime IntradayTickElementData::getElementAsDatetime(const char* name) const
 		{
 			ElementPtr * elm = this->getElement(name);
 			return elm->getValueAsDatetime(0);
 		}
 
-		const char* ElementIntradayTickData::getElementAsString(const char* name) const
+		const char* IntradayTickElementData::getElementAsString(const char* name) const
 		{
 			ElementPtr * elm = this->getElement(name);
 			return elm->getValueAsString(0);
 		}
 
-		std::ostream& ElementIntradayTickData::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayTickElementData::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);
 			stream << tabs << "tickData = {" << std::endl;

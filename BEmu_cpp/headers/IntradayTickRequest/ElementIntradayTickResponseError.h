@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/ElementIntradayTickResponseError.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickElementResponseError.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -17,18 +17,18 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickString;
-		class ElementIntradayTickInt;
+		class IntradayTickElementString;
+		class IntradayTickElementInt;
 
-		class ElementIntradayTickResponseError : public ElementPtr
+		class IntradayTickElementResponseError : public ElementPtr
 		{
 			private:
-				ElementIntradayTickString *_source, *_category, *_message, *_subCategory;
-				ElementIntradayTickInt *_code;
+				IntradayTickElementString *_source, *_category, *_message, *_subCategory;
+				IntradayTickElementInt *_code;
 
 			public:
-				ElementIntradayTickResponseError();
-				~ElementIntradayTickResponseError();
+				IntradayTickElementResponseError();
+				~IntradayTickElementResponseError();
 
 				virtual Name name() const;
 				virtual size_t numValues() const { return 1; }

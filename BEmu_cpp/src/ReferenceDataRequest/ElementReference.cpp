@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReference.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElement.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReference.h"
-#include "ReferenceDataRequest/MessageReference.h"
-#include "ReferenceDataRequest/ElementReferenceSecurityDataArray.h"
+#include "ReferenceDataRequest/ReferenceElement.h"
+#include "ReferenceDataRequest/ReferenceMessage.h"
+#include "ReferenceDataRequest/ReferenceElementSecurityDataArray.h"
 #include "BloombergTypes/Name.h"
 
 
@@ -18,21 +18,21 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReference::ElementReference(const MessageReference& arg)
+		ReferenceElement::ReferenceElement(const ReferenceMessage& arg)
 		{
-			ElementReferenceSecurityDataArray * elm = (ElementReferenceSecurityDataArray*)arg.firstElement();
-			this->_securities = new ElementReferenceSecurityDataArray(*elm);
+			ReferenceElementSecurityDataArray * elm = (ReferenceElementSecurityDataArray*)arg.firstElement();
+			this->_securities = new ReferenceElementSecurityDataArray(*elm);
 		}
 
-		Name ElementReference::name() const { return Name("securityData"); }
-		size_t ElementReference::numValues() const { return 1; }
-		size_t ElementReference::numElements() const { return 1; }
+		Name ReferenceElement::name() const { return Name("securityData"); }
+		size_t ReferenceElement::numValues() const { return 1; }
+		size_t ReferenceElement::numElements() const { return 1; }
 
-		bool ElementReference::isNull() const { return false; }
-		bool ElementReference::isArray() const { return false; }
-		bool ElementReference::isComplexType() const { return true; }
+		bool ReferenceElement::isNull() const { return false; }
+		bool ReferenceElement::isArray() const { return false; }
+		bool ReferenceElement::isComplexType() const { return true; }
 
-		ElementPtr * ElementReference::getElement(const char* name) const
+		ElementPtr * ReferenceElement::getElement(const char* name) const
 		{
 			if(strncmp(name, "securityData", 13) == 0)
 				return this->_securities;
@@ -41,7 +41,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementReference::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceElement::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "ReferenceDataResponse (choice) = {" << std::endl;
 			this->_securities->print(stream, level + 1, spacesPerLevel);

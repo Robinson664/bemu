@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/EventReference.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceEvent.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/EventReference.h"
-#include "ReferenceDataRequest/RequestReference.h"
-#include "ReferenceDataRequest/MessageReference.h"
+#include "ReferenceDataRequest/ReferenceEvent.h"
+#include "ReferenceDataRequest/ReferenceRequest.h"
+#include "ReferenceDataRequest/ReferenceMessage.h"
 #include <map>
 #include "Types/ObjectType.h"
 #include "Types/RandomDataGenerator.h"
@@ -19,14 +19,14 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		EventReference::EventReference(RequestReference * request) : EventPtr(request)
+		ReferenceEvent::ReferenceEvent(ReferenceRequest * request) : EventPtr(request)
 		{
 			this->_request = request;
 			this->_internal = request;
 			this->_messages = this->generateMessages();
 		}
 
-		EventReference::~EventReference()
+		ReferenceEvent::~ReferenceEvent()
 		{
 			for(std::vector<MessagePtr*>::const_iterator iter = this->_messages->begin(); iter != this->_messages->end(); ++iter)
 			{
@@ -38,12 +38,12 @@ namespace BEmu
 			this->_messages = 0;
 		}
 
-		std::vector<MessagePtr*> * EventReference::getMessages() const
+		std::vector<MessagePtr*> * ReferenceEvent::getMessages() const
 		{
 			return this->_messages;
 		}
 
-		std::vector<MessagePtr*> * EventReference::generateMessages() const
+		std::vector<MessagePtr*> * ReferenceEvent::generateMessages() const
 		{
 			const boost::regex exIsOption("[A-Z]{1,4}\\s+\\d{6}[CP]\\d{8} EQUITY");
 
@@ -80,7 +80,7 @@ namespace BEmu
 				}
 			}
 
-			MessageReference * msg = new MessageReference(this->_request->getCorrelationId(), securities);
+			ReferenceMessage * msg = new ReferenceMessage(this->_request->getCorrelationId(), securities);
 			result->push_back(msg);
 
 			return result;

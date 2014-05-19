@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/RequestReference.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceRequest.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,25 +7,25 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/RequestReference.h"
+#include "ReferenceDataRequest/ReferenceRequest.h"
 
-#include "ReferenceDataRequest/RequestReferenceElementStringArray.h"
-#include "ReferenceDataRequest/RequestReferenceElementOverrideArray.h"
+#include "ReferenceDataRequest/ReferenceRequestElementStringArray.h"
+#include "ReferenceDataRequest/ReferenceRequestElementOverrideArray.h"
 
 namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		RequestReference::RequestReference()
+		ReferenceRequest::ReferenceRequest()
 		{
-            this->_securities = new RequestReferenceElementStringArray("securities");
-            this->_fields = new RequestReferenceElementStringArray("fields");
-            this->_overrides = new RequestReferenceElementOverrideArray();
+            this->_securities = new ReferenceRequestElementStringArray("securities");
+            this->_fields = new ReferenceRequestElementStringArray("fields");
+            this->_overrides = new ReferenceRequestElementOverrideArray();
 			
 			this->_requestType = RequestPtr::reference;
 		}
 
-		RequestReference::~RequestReference()
+		ReferenceRequest::~ReferenceRequest()
 		{
 			delete this->_securities;
 			this->_securities = 0;
@@ -37,17 +37,17 @@ namespace BEmu
 			this->_overrides = 0;
 		}
 
-		std::vector<std::string> RequestReference::getSecurities() const
+		std::vector<std::string> ReferenceRequest::getSecurities() const
 		{
 			return this->_securities->getValues();
 		}
 
-		std::vector<std::string> RequestReference::getFields() const
+		std::vector<std::string> ReferenceRequest::getFields() const
 		{
 			return this->_fields->getValues();
 		}
 
-		bool RequestReference::hasElement(std::string arg) const
+		bool ReferenceRequest::hasElement(std::string arg) const
 		{
 			return 
 				arg.compare("securities") == 0 ||
@@ -55,7 +55,7 @@ namespace BEmu
 				arg.compare("overrides") == 0;
 		}
 
-		Element RequestReference::getElement(const char* name)
+		Element ReferenceRequest::getElement(const char* name)
 		{
 			if(strncmp(name, "securities", 11) == 0)
 				return this->_securities;
@@ -70,7 +70,7 @@ namespace BEmu
 				throw requestEx;
 		}
 
-		void RequestReference::append(const char* name, const char* value)
+		void ReferenceRequest::append(const char* name, const char* value)
 		{
 			if(strncmp(name, "securities", 11) == 0)
 				this->_securities->addValue(value);

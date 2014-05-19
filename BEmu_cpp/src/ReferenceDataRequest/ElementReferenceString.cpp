@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReferenceString.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElementString.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,38 +7,38 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReferenceString.h"
+#include "ReferenceDataRequest/ReferenceElementString.h"
 #include "BloombergTypes/Name.h"
 
 namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReferenceString::ElementReferenceString(const std::string& name, const std::string& value)
+		ReferenceElementString::ReferenceElementString(const std::string& name, const std::string& value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		Name ElementReferenceString::name() const { return Name(this->_name.c_str()); }
-		size_t ElementReferenceString::numValues() const { return 1; }
-		size_t ElementReferenceString::numElements() const { return 0; }
+		Name ReferenceElementString::name() const { return Name(this->_name.c_str()); }
+		size_t ReferenceElementString::numValues() const { return 1; }
+		size_t ReferenceElementString::numElements() const { return 0; }
 
-		bool ElementReferenceString::isNull() const { return false; }
-		bool ElementReferenceString::isArray() const { return false; }
-		bool ElementReferenceString::isComplexType() const { return false; }
+		bool ReferenceElementString::isNull() const { return false; }
+		bool ReferenceElementString::isArray() const { return false; }
+		bool ReferenceElementString::isComplexType() const { return false; }
 
-		void ElementReferenceString::setName(const std::string& name)
+		void ReferenceElementString::setName(const std::string& name)
 		{
 			this->_name = name;
 		}
 
-		void ElementReferenceString::setValue(const std::string& value)
+		void ReferenceElementString::setValue(const std::string& value)
 		{
 			this->_value = value;
 		}
 
-		const char * ElementReferenceString::getValueAsString(int index) const
+		const char * ReferenceElementString::getValueAsString(int index) const
 		{
 			if(index == 0)
 				return ElementPtr::toCharPointer(this->_value);
@@ -46,7 +46,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementReferenceString::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceElementString::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/ElementMarketReason.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketElementReason.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -20,18 +20,18 @@ namespace BEmu
 			enum ReasonTypeEnum { badSecurity, badField };
 		};
 
-		class ElementMarketString;
-		class ElementMarketInt;
+		class MarketElementString;
+		class MarketElementInt;
 
-		class ElementMarketReason : public ElementPtr
+		class MarketElementReason : public ElementPtr
 		{
 			private:
-				ElementMarketString * _source, * _category, * _description;
-				ElementMarketInt * _errorCode;
+				MarketElementString * _source, * _category, * _description;
+				MarketElementInt * _errorCode;
 
 			public:
-				ElementMarketReason(ReasonType::ReasonTypeEnum reasonType);
-				~ElementMarketReason();
+				MarketElementReason(ReasonType::ReasonTypeEnum reasonType);
+				~MarketElementReason();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

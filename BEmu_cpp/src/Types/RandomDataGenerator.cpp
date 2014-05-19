@@ -11,13 +11,13 @@
 #include <map>
 #include <list>
 #include <iostream>
-#include "ReferenceDataRequest/RequestReference.h"
-#include "ReferenceDataRequest/ElementReferenceArrayChainTickers.h"
+#include "ReferenceDataRequest/ReferenceRequest.h"
+#include "ReferenceDataRequest/ReferenceElementArrayChainTickers.h"
 #include <boost\algorithm\string\predicate.hpp>
 
 namespace BEmu
 {
-	ObjectType RandomDataGenerator::ReferenceDataFromFieldName(std::string fieldName, std::string security, bool isOption, ReferenceDataRequest::RequestReference * rreq)
+	ObjectType RandomDataGenerator::ReferenceDataFromFieldName(std::string fieldName, std::string security, bool isOption, ReferenceDataRequest::ReferenceRequest * rreq)
 	{
 		std::string upper(fieldName);
 		std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
@@ -61,7 +61,7 @@ namespace BEmu
 					}
 				}
 
-				ReferenceDataRequest::ElementReferenceArrayChainTickers * chain = new ReferenceDataRequest::ElementReferenceArrayChainTickers(security, numPoints, dtExp, optionality);
+				ReferenceDataRequest::ReferenceElementArrayChainTickers * chain = new ReferenceDataRequest::ReferenceElementArrayChainTickers(security, numPoints, dtExp, optionality);
 				return ObjectType(chain);
 			}
 		}
@@ -105,7 +105,7 @@ namespace BEmu
 		}
 	}
 
-	IntradayBarRequest::BarTickDataType * RandomDataGenerator::GenerateBarData(Datetime date)
+	IntradayBarRequest::IntradayBarTickDataType * RandomDataGenerator::GenerateBarData(Datetime date)
 	{
         double first = RandomDataGenerator::RandomDouble();
         double second = RandomDataGenerator::RandomDouble();
@@ -119,7 +119,7 @@ namespace BEmu
 		double value = RandomDataGenerator::RandomDouble(1, 10000);
 		int numEvents = RandomDataGenerator::RandomInt(10000);
 
-		IntradayBarRequest::BarTickDataType * result = new IntradayBarRequest::BarTickDataType(date, open, high, low, close, value, volume, numEvents);
+		IntradayBarRequest::IntradayBarTickDataType * result = new IntradayBarRequest::IntradayBarTickDataType(date, open, high, low, close, value, volume, numEvents);
 		return result;
 	}
 

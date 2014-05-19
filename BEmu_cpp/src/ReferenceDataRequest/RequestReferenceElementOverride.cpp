@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/RequestReferenceElementOverride.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceRequestElementOverride.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/RequestReferenceElementOverride.h"
-#include "ReferenceDataRequest/ElementReferenceString.h"
-#include "ReferenceDataRequest/ElementReferenceObject.h"
+#include "ReferenceDataRequest/ReferenceRequestElementOverride.h"
+#include "ReferenceDataRequest/ReferenceElementString.h"
+#include "ReferenceDataRequest/ReferenceElementObject.h"
 
 #include "Types/IndentType.h"
 #include "BloombergTypes/Name.h"
@@ -18,13 +18,13 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		RequestReferenceElementOverride::RequestReferenceElementOverride()
+		ReferenceRequestElementOverride::ReferenceRequestElementOverride()
 		{
-            this->_fieldId = new ElementReferenceString("fieldId", "");
-            this->_value = new ElementReferenceObject("value", "");
+            this->_fieldId = new ReferenceElementString("fieldId", "");
+            this->_value = new ReferenceElementObject("value", "");
 		}
 
-		RequestReferenceElementOverride::~RequestReferenceElementOverride()
+		ReferenceRequestElementOverride::~ReferenceRequestElementOverride()
 		{
 			delete this->_fieldId;
 			this->_fieldId = 0;
@@ -33,11 +33,11 @@ namespace BEmu
 			this->_value = 0;
 		}
 
-		Name RequestReferenceElementOverride::name() const { return Name("overrides"); }
-		size_t RequestReferenceElementOverride::numValues() const { return 1; }
-		size_t RequestReferenceElementOverride::numElements() const { return 2; }
+		Name ReferenceRequestElementOverride::name() const { return Name("overrides"); }
+		size_t ReferenceRequestElementOverride::numValues() const { return 1; }
+		size_t ReferenceRequestElementOverride::numElements() const { return 2; }
 
-		void RequestReferenceElementOverride::setElement(const char* name, const char* value)
+		void ReferenceRequestElementOverride::setElement(const char* name, const char* value)
 		{
 			if(strncmp(name, "fieldId", 8) == 0)
 			{
@@ -55,7 +55,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		void RequestReferenceElementOverride::setElement(const char* name, int value)
+		void ReferenceRequestElementOverride::setElement(const char* name, int value)
 		{
 			if(strncmp(name, "value", 6) == 0)
 			{
@@ -68,7 +68,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		ElementPtr * RequestReferenceElementOverride::getElement(const char* name) const
+		ElementPtr * ReferenceRequestElementOverride::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldId", 8) == 0)
 				return this->_fieldId;
@@ -80,7 +80,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& RequestReferenceElementOverride::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceRequestElementOverride::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

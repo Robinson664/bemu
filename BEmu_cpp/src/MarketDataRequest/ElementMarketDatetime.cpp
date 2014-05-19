@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketDatetime.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementDatetime.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,40 +7,40 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketDatetime.h"
+#include "MarketDataRequest/MarketElementDatetime.h"
 #include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketDatetime::ElementMarketDatetime(std::string name, Datetime datetime)
+		MarketElementDatetime::MarketElementDatetime(std::string name, Datetime datetime)
 		{
 			this->_name = name;
 			this->_datetime = datetime;
 		}
 
-		Name ElementMarketDatetime::name() const
+		Name MarketElementDatetime::name() const
 		{
 			return Name(this->_name.c_str());
 		}
 
-		size_t ElementMarketDatetime::numValues() const
+		size_t MarketElementDatetime::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketDatetime::numElements() const
+		size_t MarketElementDatetime::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementMarketDatetime::isNull() const
+		bool MarketElementDatetime::isNull() const
 		{
 			return false;
 		}
 
-		Datetime ElementMarketDatetime::getValueAsDatetime(int index) const
+		Datetime MarketElementDatetime::getValueAsDatetime(int index) const
 		{
 			if(index == 0)
 				return this->_datetime;
@@ -48,7 +48,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementMarketDatetime::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementDatetime::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string strDateTime(DisplayFormats::MarketDataRequests_FormatDateZone(this->_datetime));
 			this->prettyPrintHelper(stream, level, spacesPerLevel, strDateTime);

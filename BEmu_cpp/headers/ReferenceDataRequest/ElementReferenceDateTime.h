@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceDateTime.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementDateTime.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,14 +18,14 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceDateTime : public ElementPtr
+		class ReferenceElementDateTime : public ElementPtr
 		{
 			private:
 				Datetime _value;
 				std::string _name;
 
 			public:
-				ElementReferenceDateTime(const std::string& name, const Datetime& value);
+				ReferenceElementDateTime(const std::string& name, const Datetime& value);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

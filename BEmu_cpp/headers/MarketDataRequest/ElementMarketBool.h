@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/ElementMarketBool.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketElementBool.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,14 +15,14 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class ElementMarketBool : public ElementPtr
+		class MarketElementBool : public ElementPtr
 		{
 			private:
 				bool _value;
 				std::string _name;
 
 			public:
-				ElementMarketBool(std::string name, bool value);
+				MarketElementBool(std::string name, bool value);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

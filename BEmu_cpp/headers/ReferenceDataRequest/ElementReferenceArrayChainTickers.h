@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceArrayChainTickers.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementArrayChainTickers.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include "ReferenceDataRequest/ElementReferenceArray.h"
+#include "ReferenceDataRequest/ReferenceElementArray.h"
 
 namespace BEmu
 {
@@ -20,10 +20,10 @@ namespace BEmu
 			enum EnumType { put, call };
 		}
 
-		class ElementReferenceArrayChainTickers : public ElementReferenceArray
+		class ReferenceElementArrayChainTickers : public ReferenceElementArray
 		{
 			public:
-				ElementReferenceArrayChainTickers(const std::string& underlier, unsigned numPoints, const std::string& strDtExp, OptionalityEnum::EnumType optionality);
+				ReferenceElementArrayChainTickers(const std::string& underlier, unsigned numPoints, const std::string& strDtExp, OptionalityEnum::EnumType optionality);
 				virtual SchemaElementDefinition elementDefinition() const;
 		};
 	}

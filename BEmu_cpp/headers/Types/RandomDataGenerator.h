@@ -13,14 +13,14 @@
 #include <map>
 #include <list>
 #include "Types/ObjectType.h"
-#include "IntradayBarRequest/BarTickDataType.h"
+#include "IntradayBarRequest/IntradayBarTickDataType.h"
 #include "BloombergTypes/Datetime.h"
 
 namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		class RequestReference;
+		class ReferenceRequest;
 	}
 
 	class RandomDataGenerator
@@ -45,10 +45,10 @@ namespace BEmu
 			static std::map<std::string, ObjectType> GetMarketDataFields(std::vector<std::string> arg);
 			static ObjectType MarketDataFromFieldName(std::string arg);
 
-			static IntradayBarRequest::BarTickDataType * GenerateBarData(Datetime date);
+			static IntradayBarRequest::IntradayBarTickDataType * GenerateBarData(Datetime date);
 
 			static int IntradayTickIntervalInMinutes();
 
-			static ObjectType ReferenceDataFromFieldName(std::string fieldName, std::string security, bool isOption, ReferenceDataRequest::RequestReference * rreq);
+			static ObjectType ReferenceDataFromFieldName(std::string fieldName, std::string security, bool isOption, ReferenceDataRequest::ReferenceRequest * rreq);
 	};
 }

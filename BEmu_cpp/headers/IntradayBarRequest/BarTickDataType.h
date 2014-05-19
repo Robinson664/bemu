@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/BarTickDataType.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarTickDataType.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,7 +15,7 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class BarTickDataType
+		class IntradayBarTickDataType
 		{
 			private:
 				Datetime _dtTime;
@@ -24,10 +24,10 @@ namespace BEmu
 				int _numEvents;
 
 			public:
-				BarTickDataType(const Datetime& dtTime, double open, double high, double low, double close, double value, long volume, int numEvents);
-				~BarTickDataType();
-				BarTickDataType(const BarTickDataType& arg);
-				BarTickDataType& operator=(const BarTickDataType &rhs);
+				IntradayBarTickDataType(const Datetime& dtTime, double open, double high, double low, double close, double value, long volume, int numEvents);
+				~IntradayBarTickDataType();
+				IntradayBarTickDataType(const IntradayBarTickDataType& arg);
+				IntradayBarTickDataType& operator=(const IntradayBarTickDataType &rhs);
 
 				Datetime getDatetime() const;
 				double getOpen() const;

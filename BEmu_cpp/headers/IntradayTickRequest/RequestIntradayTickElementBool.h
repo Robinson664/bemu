@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/RequestIntradayTickElementBool.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickRequestElementBool.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -9,19 +9,19 @@
 
 #pragma once
 
-#include "IntradayTickRequest/RequestIntradayTickElementString.h"
+#include "IntradayTickRequest/IntradayTickRequestElementString.h"
 
 namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		class RequestIntradayTickElementBool : public RequestIntradayTickElementString
+		class IntradayTickRequestElementBool : public IntradayTickRequestElementString
 		{
 			private:
 				bool _bvalue;
 
 			public:
-				RequestIntradayTickElementBool(std::string& elementName, bool bvalue);
+				IntradayTickRequestElementBool(std::string& elementName, bool bvalue);
 				bool getBool();
 		};
 	}

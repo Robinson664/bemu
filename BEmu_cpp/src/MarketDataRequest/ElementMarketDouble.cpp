@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketDouble.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementDouble.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,50 +7,50 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketDouble.h"
+#include "MarketDataRequest/MarketElementDouble.h"
 #include "Types/DisplayFormats.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketDouble::ElementMarketDouble(std::string name, double value)
+		MarketElementDouble::MarketElementDouble(std::string name, double value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		Name ElementMarketDouble::name() const
+		Name MarketElementDouble::name() const
 		{
 			return Name(this->_name.c_str());
 		}
 
-		size_t ElementMarketDouble::numValues() const
+		size_t MarketElementDouble::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketDouble::numElements() const
+		size_t MarketElementDouble::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementMarketDouble::isNull() const
+		bool MarketElementDouble::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketDouble::isArray() const
+		bool MarketElementDouble::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketDouble::isComplexType() const
+		bool MarketElementDouble::isComplexType() const
 		{
 			return false;
 		}
 
-		double ElementMarketDouble::getValueAsFloat64(int index) const
+		double MarketElementDouble::getValueAsFloat64(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -58,7 +58,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementMarketDouble::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementDouble::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string strValue(DisplayFormats::FormatNumberNoSeparators(this->_value, 2));
 			this->prettyPrintHelper(stream, level, spacesPerLevel, strValue);

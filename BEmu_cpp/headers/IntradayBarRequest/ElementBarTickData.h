@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/ElementBarTickData.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarElementTickData.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,23 +18,23 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class BarTickDataType;
-		class ElementIntradayBarDateTime;
-		class ElementIntradayBarDouble;
-		class ElementIntradayBarLong;
-		class ElementIntradayBarInt;
+		class IntradayBarTickDataType;
+		class IntradayBarElementDateTime;
+		class IntradayBarElementDouble;
+		class IntradayBarElementLong;
+		class IntradayBarElementInt;
 
-		class ElementBarTickData : public ElementPtr
+		class IntradayBarElementTickData : public ElementPtr
 		{
 			private:
-				ElementIntradayBarDateTime * _time;
-				ElementIntradayBarDouble * _open, * _high, * _low, * _close, * _value;
-				ElementIntradayBarLong * _volume;
-				ElementIntradayBarInt * _numEvents;
+				IntradayBarElementDateTime * _time;
+				IntradayBarElementDouble * _open, * _high, * _low, * _close, * _value;
+				IntradayBarElementLong * _volume;
+				IntradayBarElementInt * _numEvents;
 
 			public:
-				ElementBarTickData(const BarTickDataType& arg);
-				~ElementBarTickData();
+				IntradayBarElementTickData(const IntradayBarTickDataType& arg);
+				~IntradayBarElementTickData();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

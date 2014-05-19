@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReference.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElement.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -17,17 +17,17 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class MessageReference;
-		class ElementReferenceSecurityDataArray;
+		class ReferenceMessage;
+		class ReferenceElementSecurityDataArray;
 
-		class ElementReference : public ElementPtr
+		class ReferenceElement : public ElementPtr
 		{
 			private:
-				ElementReferenceSecurityDataArray *	_securities;
+				ReferenceElementSecurityDataArray *	_securities;
 
 			public:
-				ElementReference(const MessageReference& arg);
-				~ElementReference();
+				ReferenceElement(const ReferenceMessage& arg);
+				~ReferenceElement();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MessageMarketSubscriptionFailure.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketMessageSubscriptionFailure.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,43 +7,43 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/MessageMarketSubscriptionFailure.h"
-#include "MarketDataRequest/ElementMarketReason.h"
+#include "MarketDataRequest/MarketMessageSubscriptionFailure.h"
+#include "MarketDataRequest/MarketElementReason.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MessageMarketSubscriptionFailure::MessageMarketSubscriptionFailure(Subscription sub)
+		MarketMessageSubscriptionFailure::MarketMessageSubscriptionFailure(Subscription sub)
 			: MessagePtr(Name("SubscriptionFailure"), sub.correlationId())
 		{
             this->_correlationId = sub.correlationId();
 			this->_topicName = sub.security();
-			this->_reason = new ElementMarketReason(ReasonType::badSecurity);
+			this->_reason = new MarketElementReason(ReasonType::badSecurity);
 		}
 
-		MessageMarketSubscriptionFailure::~MessageMarketSubscriptionFailure()
+		MarketMessageSubscriptionFailure::~MarketMessageSubscriptionFailure()
 		{
 			delete this->_reason;
 			this->_reason = 0;
 		}
 
-		size_t MessageMarketSubscriptionFailure::numElements() const
+		size_t MarketMessageSubscriptionFailure::numElements() const
 		{
 			return 1;
 		}
 
-		const char* MessageMarketSubscriptionFailure::topicName() const
+		const char* MarketMessageSubscriptionFailure::topicName() const
 		{
 			return ElementPtr::toCharPointer(this->_topicName);
 		}
 
-		bool MessageMarketSubscriptionFailure::hasElement(const char* name, bool excludeNullElements) const
+		bool MarketMessageSubscriptionFailure::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return this->_reason->name() == name;
 		}
 
-		ElementPtr * MessageMarketSubscriptionFailure::getElement(const char* name) const
+		ElementPtr * MarketMessageSubscriptionFailure::getElement(const char* name) const
 		{
 			if(this->_reason->name() == name)
 				return this->_reason;
@@ -52,7 +52,7 @@ namespace BEmu
 				throw messageEx;
 		}
 
-		std::ostream& MessageMarketSubscriptionFailure::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketMessageSubscriptionFailure::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "SubscriptionFailure = {" << std::endl;
 			this->_reason->print(stream, level + 1, spacesPerLevel);

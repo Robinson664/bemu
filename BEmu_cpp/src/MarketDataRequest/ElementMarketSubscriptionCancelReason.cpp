@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketSubscriptionCancelReason.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementSubscriptionCancelReason.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketSubscriptionCancelReason.h"
-#include "MarketDataRequest/ElementMarketString.h"
-#include "MarketDataRequest/ElementMarketInt.h"
+#include "MarketDataRequest/MarketElementSubscriptionCancelReason.h"
+#include "MarketDataRequest/MarketElementString.h"
+#include "MarketDataRequest/MarketElementInt.h"
 
 #include "Types/IndentType.h"
 
@@ -17,16 +17,16 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketSubscriptionCancelReason::ElementMarketSubscriptionCancelReason()
+		MarketElementSubscriptionCancelReason::MarketElementSubscriptionCancelReason()
 		{
-            this->_source = new ElementMarketString("source", "Session");
-            this->_errorCode = new ElementMarketInt("errorCode", 0);
-            this->_category = new ElementMarketString("category", "CANCELED");
-            this->_description = new ElementMarketString("description", "Subscription canceled");
-            this->_subCategory = new ElementMarketString("subcategory", "");
+            this->_source = new MarketElementString("source", "Session");
+            this->_errorCode = new MarketElementInt("errorCode", 0);
+            this->_category = new MarketElementString("category", "CANCELED");
+            this->_description = new MarketElementString("description", "Subscription canceled");
+            this->_subCategory = new MarketElementString("subcategory", "");
 		}
 
-		ElementMarketSubscriptionCancelReason::~ElementMarketSubscriptionCancelReason()
+		MarketElementSubscriptionCancelReason::~MarketElementSubscriptionCancelReason()
 		{
 			delete this->_source;
 			this->_source = 0;
@@ -44,37 +44,37 @@ namespace BEmu
 			this->_subCategory = 0;
 		}
 
-		Name ElementMarketSubscriptionCancelReason::name() const
+		Name MarketElementSubscriptionCancelReason::name() const
 		{
 			return Name("reason");
 		}
 
-		size_t ElementMarketSubscriptionCancelReason::numValues() const
+		size_t MarketElementSubscriptionCancelReason::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketSubscriptionCancelReason::numElements() const
+		size_t MarketElementSubscriptionCancelReason::numElements() const
 		{
 			return 5;
 		}
 
-		bool ElementMarketSubscriptionCancelReason::isNull() const
+		bool MarketElementSubscriptionCancelReason::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketSubscriptionCancelReason::isArray() const
+		bool MarketElementSubscriptionCancelReason::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketSubscriptionCancelReason::isComplexType() const
+		bool MarketElementSubscriptionCancelReason::isComplexType() const
 		{
 			return true;
 		}
 
-		std::ostream& ElementMarketSubscriptionCancelReason::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementSubscriptionCancelReason::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

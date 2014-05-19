@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/ElementIntradayTickResponseError.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/IntradayTickElementResponseError.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,19 +7,19 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayTickRequest/ElementIntradayTickResponseError.h"
+#include "IntradayTickRequest/IntradayTickElementResponseError.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "Types/RandomDataGenerator.h"
-#include "IntradayTickRequest/ElementIntradayTickString.h"
-#include "IntradayTickRequest/ElementIntradayTickInt.h"
+#include "IntradayTickRequest/IntradayTickElementString.h"
+#include "IntradayTickRequest/IntradayTickElementInt.h"
 #include "Types/IndentType.h"
 
 namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		ElementIntradayTickResponseError::ElementIntradayTickResponseError()
+		IntradayTickElementResponseError::IntradayTickElementResponseError()
 		{
 			int code = RandomDataGenerator::RandomInt(99);
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
@@ -28,24 +28,24 @@ namespace BEmu
 			//source
 			std::stringstream sourceValue;
 			sourceValue << code << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
-			this->_source = new ElementIntradayTickString("source", sourceValue.str());
+			this->_source = new IntradayTickElementString("source", sourceValue.str());
 
 			//code
-			this->_code = new ElementIntradayTickInt("code", code);
+			this->_code = new IntradayTickElementInt("code", code);
 
 			//category
-			this->_category = new ElementIntradayTickString("category", "BAD_SEC");
+			this->_category = new IntradayTickElementString("category", "BAD_SEC");
 
 			//message
 			std::stringstream messageValue;
 			messageValue << "Unknown/Invalid security [nid:" << code << "]";
-			this->_message = new ElementIntradayTickString("message", messageValue.str());
+			this->_message = new IntradayTickElementString("message", messageValue.str());
 
 			//sub-category
-			this->_subCategory = new ElementIntradayTickString("subcategory", "INVALID_SECURITY");
+			this->_subCategory = new IntradayTickElementString("subcategory", "INVALID_SECURITY");
 		}
 
-		ElementIntradayTickResponseError::~ElementIntradayTickResponseError()
+		IntradayTickElementResponseError::~IntradayTickElementResponseError()
 		{
 			delete this->_source;
 			this->_source = 0;
@@ -63,30 +63,30 @@ namespace BEmu
 			this->_subCategory = 0;
 		}
 
-		Name ElementIntradayTickResponseError::name() const
+		Name IntradayTickElementResponseError::name() const
 		{
 			Name result("responseError");
 			return result;
 		}
 
-		const char* ElementIntradayTickResponseError::getElementAsString(const char* name) const
+		const char* IntradayTickElementResponseError::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		int ElementIntradayTickResponseError::getElementAsInt32(const char* name) const
+		int IntradayTickElementResponseError::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		SchemaElementDefinition ElementIntradayTickResponseError::elementDefinition() const
+		SchemaElementDefinition IntradayTickElementResponseError::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
 			return result;
 		}
 
-		ElementPtr * ElementIntradayTickResponseError::getElement(const char* name) const
+		ElementPtr * IntradayTickElementResponseError::getElement(const char* name) const
 		{
 			if(strncmp("source", name, 7) == 0)
 				return this->_source;
@@ -107,7 +107,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		bool ElementIntradayTickResponseError::hasElement(const char* name, bool excludeNullElements) const
+		bool IntradayTickElementResponseError::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				(strncmp("source", name, 7) == 0) ||
@@ -117,7 +117,7 @@ namespace BEmu
 				(strncmp("subcategory", name, 12) == 0);
 		}
 
-		std::ostream& ElementIntradayTickResponseError::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayTickElementResponseError::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);
 

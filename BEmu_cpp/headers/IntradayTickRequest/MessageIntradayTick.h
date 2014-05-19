@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/MessageIntradayTick.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayTickRequest/IntradayTickMessage.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -21,21 +21,21 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class ElementIntradayTickDataParent;
-		class ElementIntradayTickResponseError;
-		class ElementIntradayTickDataTuple3;
+		class IntradayTickElementDataParent;
+		class IntradayTickElementResponseError;
+		class IntradayTickElementTuple3;
 
-		class MessageIntradayTick : public MessagePtr
+		class IntradayTickMessage : public MessagePtr
 		{
 			private:		
-				ElementIntradayTickDataParent *_parent;
-				ElementIntradayTickResponseError *_responseError;
+				IntradayTickElementDataParent *_parent;
+				IntradayTickElementResponseError *_responseError;
 				bool _isResponseError;
 
 			public:
-				MessageIntradayTick(const CorrelationId& corr, const Service& service, std::map<Datetime, ElementIntradayTickDataTuple3*> *ticks, bool includeConditionCodes);
-				MessageIntradayTick(const CorrelationId& corr, const Service& service);
-				~MessageIntradayTick();
+				IntradayTickMessage(const CorrelationId& corr, const Service& service, std::map<Datetime, IntradayTickElementTuple3*> *ticks, bool includeConditionCodes);
+				IntradayTickMessage(const CorrelationId& corr, const Service& service);
+				~IntradayTickMessage();
 				ElementPtr* firstElement() const;
 
 				virtual const char* topicName() const;

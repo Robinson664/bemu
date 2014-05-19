@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceErrorInfo.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementErrorInfo.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -17,18 +17,18 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceString;
-		class ElementReferenceInt;
+		class ReferenceElementString;
+		class ReferenceElementInt;
 
-		class ElementReferenceErrorInfo : public ElementPtr
+		class ReferenceElementErrorInfo : public ElementPtr
 		{
 			private:
-				ElementReferenceString * _source, * _category, * _message, * _subCategory;
-				ElementReferenceInt * _code;
+				ReferenceElementString * _source, * _category, * _message, * _subCategory;
+				ReferenceElementInt * _code;
 
 			public:
-				ElementReferenceErrorInfo();
-				~ElementReferenceErrorInfo();
+				ReferenceElementErrorInfo();
+				~ReferenceElementErrorInfo();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

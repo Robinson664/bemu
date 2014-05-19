@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/ElementBarTickData.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarElementTickData.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -11,32 +11,32 @@
 #include "BloombergTypes/Datetime.h"
 #include "BloombergTypes/ElementPtr.h"
 #include "Types/IndentType.h"
-#include "IntradayBarRequest/BarTickDataType.h"
-#include "IntradayBarRequest/ElementBarTickData.h"
-#include "IntradayBarRequest/ElementIntradayBarDateTime.h"
-#include "IntradayBarRequest/ElementIntradayBarDouble.h"
-#include "IntradayBarRequest/ElementIntradayBarLong.h"
-#include "IntradayBarRequest/ElementIntradayBarInt.h"
+#include "IntradayBarRequest/IntradayBarTickDataType.h"
+#include "IntradayBarRequest/IntradayBarElementTickData.h"
+#include "IntradayBarRequest/IntradayBarElementDateTime.h"
+#include "IntradayBarRequest/IntradayBarElementDouble.h"
+#include "IntradayBarRequest/IntradayBarElementLong.h"
+#include "IntradayBarRequest/IntradayBarElementInt.h"
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		ElementBarTickData::ElementBarTickData(const BarTickDataType& arg)
+		IntradayBarElementTickData::IntradayBarElementTickData(const IntradayBarTickDataType& arg)
 		{
 			Datetime dtTime = arg.getDatetime();
-			this->_time = new ElementIntradayBarDateTime("time", dtTime);
+			this->_time = new IntradayBarElementDateTime("time", dtTime);
 			
-			this->_open = new ElementIntradayBarDouble("open", arg.getOpen());
-			this->_high = new ElementIntradayBarDouble("high", arg.getHigh());
-			this->_low = new ElementIntradayBarDouble("low", arg.getLow());
-			this->_close = new ElementIntradayBarDouble("close", arg.getClose());
-			this->_value = new ElementIntradayBarDouble("value", arg.getValue());
-			this->_volume = new ElementIntradayBarLong("volume", arg.getVolume());
-			this->_numEvents = new ElementIntradayBarInt("numEvents", arg.getNumevents());
+			this->_open = new IntradayBarElementDouble("open", arg.getOpen());
+			this->_high = new IntradayBarElementDouble("high", arg.getHigh());
+			this->_low = new IntradayBarElementDouble("low", arg.getLow());
+			this->_close = new IntradayBarElementDouble("close", arg.getClose());
+			this->_value = new IntradayBarElementDouble("value", arg.getValue());
+			this->_volume = new IntradayBarElementLong("volume", arg.getVolume());
+			this->_numEvents = new IntradayBarElementInt("numEvents", arg.getNumevents());
 		}
 
-		ElementBarTickData::~ElementBarTickData()
+		IntradayBarElementTickData::~IntradayBarElementTickData()
 		{
 			delete this->_time;
 			this->_time = 0;
@@ -63,40 +63,40 @@ namespace BEmu
 			this->_numEvents = 0;
 		}
 
-		Name ElementBarTickData::name() const
+		Name IntradayBarElementTickData::name() const
 		{
 			Name result("barTickData");
 			return result;
 		}
 
-		size_t ElementBarTickData::numValues() const
+		size_t IntradayBarElementTickData::numValues() const
 		{
 			return 0;
 		}
 
-		size_t ElementBarTickData::numElements() const
+		size_t IntradayBarElementTickData::numElements() const
 		{
 			return 8;
 		}
 
-		SchemaElementDefinition ElementBarTickData::elementDefinition() const
+		SchemaElementDefinition IntradayBarElementTickData::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("IntradayBarTickData"));
 			return result;
 		}
 
-		bool ElementBarTickData::isArray() const
+		bool IntradayBarElementTickData::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementBarTickData::isComplexType() const
+		bool IntradayBarElementTickData::isComplexType() const
 		{
 			return true;
 		}
 
-		ElementPtr * ElementBarTickData::getElement(const char* name) const
+		ElementPtr * IntradayBarElementTickData::getElement(const char* name) const
 		{
 			if(strncmp(name, "time", 5) == 0)
 				return this->_time;
@@ -126,7 +126,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		bool ElementBarTickData::hasElement(const char* name, bool excludeNullElements) const
+		bool IntradayBarElementTickData::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				(strncmp(name, "time", 5) == 0) ||
@@ -139,27 +139,27 @@ namespace BEmu
 				(strncmp(name, "numEvents", 10) == 0);
 		}
 
-		int ElementBarTickData::getElementAsInt32(const char* name) const
+		int IntradayBarElementTickData::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		long ElementBarTickData::getElementAsInt64(const char* name) const
+		long IntradayBarElementTickData::getElementAsInt64(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt64(0);
 		}
 
-		Datetime ElementBarTickData::getElementAsDatetime(const char* name) const
+		Datetime IntradayBarElementTickData::getElementAsDatetime(const char* name) const
 		{
 			return this->getElement(name)->getValueAsDatetime(0);
 		}
 
-		double ElementBarTickData::getElementAsFloat64(const char* name) const
+		double IntradayBarElementTickData::getElementAsFloat64(const char* name) const
 		{
 			return this->getElement(name)->getValueAsFloat64(0);
 		}
 
-		std::ostream& ElementBarTickData::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarElementTickData::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

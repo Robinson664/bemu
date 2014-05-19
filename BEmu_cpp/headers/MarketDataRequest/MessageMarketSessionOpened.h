@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MessageMarketSessionOpened.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketMessageSessionOpened.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,12 +15,10 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class MessageMarketSessionOpened : public MessagePtr
+		class MarketMessageSessionOpened : public MessagePtr
 		{
-			private:
-
 			public:
-				MessageMarketSessionOpened();
+				MarketMessageSessionOpened();
 				virtual const char* topicName() const;
 		};
 	}

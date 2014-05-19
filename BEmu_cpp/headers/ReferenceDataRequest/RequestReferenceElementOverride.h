@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/RequestReferenceElementOverride.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceRequestElementOverride.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,18 +15,18 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceString;
-		class ElementReferenceObject;
+		class ReferenceElementString;
+		class ReferenceElementObject;
 
-		class RequestReferenceElementOverride : public ElementPtr
+		class ReferenceRequestElementOverride : public ElementPtr
 		{
 			private:
-				ElementReferenceString * _fieldId;
-				ElementReferenceObject * _value;
+				ReferenceElementString * _fieldId;
+				ReferenceElementObject * _value;
 
 			public:
-				RequestReferenceElementOverride();
-				~RequestReferenceElementOverride();
+				ReferenceRequestElementOverride();
+				~ReferenceRequestElementOverride();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

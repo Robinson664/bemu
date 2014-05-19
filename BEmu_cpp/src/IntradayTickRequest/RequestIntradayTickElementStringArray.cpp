@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/RequestIntradayTickElementStringArray.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/IntradayTickRequestElementStringArray.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayTickRequest/RequestIntradayTickElementStringArray.h"
+#include "IntradayTickRequest/IntradayTickRequestElementStringArray.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/Element.h"
 #include "Types/IndentType.h"
@@ -17,12 +17,12 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		RequestIntradayTickElementStringArray::RequestIntradayTickElementStringArray(const std::string& elementName)
+		IntradayTickRequestElementStringArray::IntradayTickRequestElementStringArray(const std::string& elementName)
 		{
 			this->_elementName = elementName;
 		}
 
-		RequestIntradayTickElementStringArray::~RequestIntradayTickElementStringArray()
+		IntradayTickRequestElementStringArray::~IntradayTickRequestElementStringArray()
 		{
 			for(std::vector<std::string*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
 			{
@@ -32,7 +32,7 @@ namespace BEmu
 			}
 		}
 
-		void RequestIntradayTickElementStringArray::addValue(const std::string& value)
+		void IntradayTickRequestElementStringArray::addValue(const std::string& value)
 		{
 			if(value.compare("TRADE") == 0 ||
 				value.compare("BID") == 0 ||
@@ -54,23 +54,23 @@ namespace BEmu
 			}
 		}
 
-		const std::vector<std::string*>& RequestIntradayTickElementStringArray::getValues()
+		const std::vector<std::string*>& IntradayTickRequestElementStringArray::getValues()
 		{
 			return this->_values;
 		}
 
-		Name RequestIntradayTickElementStringArray::name() const
+		Name IntradayTickRequestElementStringArray::name() const
 		{
 			Name result(this->_elementName.c_str());
 			return result;
 		}
 
-		size_t RequestIntradayTickElementStringArray::numElements() const
+		size_t IntradayTickRequestElementStringArray::numElements() const
 		{
 			return this->_values.size();
 		}
 
-		std::ostream& RequestIntradayTickElementStringArray::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayTickRequestElementStringArray::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);
 			std::string tab = IndentType::Indent(level, 1);

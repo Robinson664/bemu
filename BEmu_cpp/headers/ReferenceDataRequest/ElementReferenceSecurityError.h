@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceSecurityError.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementSecurityError.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -17,18 +17,18 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceString;
-		class ElementReferenceInt;
+		class ReferenceElementString;
+		class ReferenceElementInt;
 
-		class ElementReferenceSecurityError : public ElementPtr
+		class ReferenceElementSecurityError : public ElementPtr
 		{
 			private:
-				ElementReferenceString * _source, * _category, * _message, * _subCategory;
-				ElementReferenceInt * _code;
+				ReferenceElementString * _source, * _category, * _message, * _subCategory;
+				ReferenceElementInt * _code;
 
 			public:
-				ElementReferenceSecurityError(const std::string& security);
-				~ElementReferenceSecurityError();
+				ReferenceElementSecurityError(const std::string& security);
+				~ReferenceElementSecurityError();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/RequestIntradayBarElementTime.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarRequestElementTime.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -9,7 +9,7 @@
 
 #pragma once
 
-#include "IntradayBarRequest/RequestIntradayBarElementString.h"
+#include "IntradayBarRequest/IntradayBarRequestElementString.h"
 
 namespace BEmu
 {
@@ -17,15 +17,15 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class RequestIntradayBarElementTime : public RequestIntradayBarElementString
+		class IntradayBarRequestElementTime : public IntradayBarRequestElementString
 		{
 			private:
 				Datetime _dtvalue;
 
 			public:
-				RequestIntradayBarElementTime(const std::string& elementName);
-				RequestIntradayBarElementTime(const std::string& elementName, const Datetime& dtvalue);
-				~RequestIntradayBarElementTime();
+				IntradayBarRequestElementTime(const std::string& elementName);
+				IntradayBarRequestElementTime(const std::string& elementName, const Datetime& dtvalue);
+				~IntradayBarRequestElementTime();
 				Datetime getDatetime() const;
 		};
 	}

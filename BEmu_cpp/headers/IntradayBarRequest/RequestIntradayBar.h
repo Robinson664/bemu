@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/RequestIntradayBar.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarRequest.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -19,26 +19,26 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class RequestIntradayBarElementString;
-		class RequestIntradayBarElementStringArray;
-		class RequestIntradayBarElementTime;
-		class RequestIntradayBarElementInt;
-		class RequestIntradayBarElementBool;
+		class IntradayBarRequestElementString;
+		class IntradayBarRequestElementStringArray;
+		class IntradayBarRequestElementTime;
+		class IntradayBarRequestElementInt;
+		class IntradayBarRequestElementBool;
 
-		class RequestIntradayBar : public RequestPtr
+		class IntradayBarRequest : public RequestPtr
 		{
 			private:
 				Service _service;
 
-				RequestIntradayBarElementString * _security;
-				RequestIntradayBarElementStringArray * _eventTypes;
-				RequestIntradayBarElementTime * _dtStart, * _dtEnd;
-				RequestIntradayBarElementInt * _intervalInMinutes;
-				RequestIntradayBarElementBool * _gapFillInitialBar, * _returnEids, * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement, * _adjustmentFollowDPDF;
+				IntradayBarRequestElementString * _security;
+				IntradayBarRequestElementStringArray * _eventTypes;
+				IntradayBarRequestElementTime * _dtStart, * _dtEnd;
+				IntradayBarRequestElementInt * _intervalInMinutes;
+				IntradayBarRequestElementBool * _gapFillInitialBar, * _returnEids, * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement, * _adjustmentFollowDPDF;
 
 			public:
-				RequestIntradayBar(const Service& svc);
-				~RequestIntradayBar();
+				IntradayBarRequest(const Service& svc);
+				~IntradayBarRequest();
 				const Service getService() const;
 				std::vector<Datetime>* getDateTimes() const;
 				const std::string& security() const;

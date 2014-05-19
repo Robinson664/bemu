@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MessageMarketServiceStatus.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/MarketDataRequest/MarketMessageServiceStatus.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -15,15 +15,15 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		class ElementMarketString;
+		class MarketElementString;
 
-		class MessageMarketServiceStatus : public MessagePtr
+		class MarketMessageServiceStatus : public MessagePtr
 		{
 			private:
-				ElementMarketString * _serviceName;
+				MarketElementString * _serviceName;
 
 			public:
-				MessageMarketServiceStatus(CorrelationId corr);
+				MarketMessageServiceStatus(CorrelationId corr);
 
 				ElementPtr * firstElement() const;
 

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/ElementIntradayTickString.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/IntradayTickElementString.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayTickRequest/ElementIntradayTickString.h"
+#include "IntradayTickRequest/IntradayTickElementString.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 
@@ -15,34 +15,34 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		ElementIntradayTickString::ElementIntradayTickString(const std::string& name, const std::string& value)
+		IntradayTickElementString::IntradayTickElementString(const std::string& name, const std::string& value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		ElementIntradayTickString::~ElementIntradayTickString()
+		IntradayTickElementString::~IntradayTickElementString()
 		{
 		}
 
-		Name ElementIntradayTickString::name() const
+		Name IntradayTickElementString::name() const
 		{
 			Name result(this->_name.c_str());
 			return result;
 		}
 		
-		bool ElementIntradayTickString::hasElement(const char* name, bool excludeNullElements) const
+		bool IntradayTickElementString::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return false;
 		}
 
-		std::ostream& ElementIntradayTickString::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayTickElementString::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;
 		}
 
-		const char * ElementIntradayTickString::getValueAsString(int index) const
+		const char * IntradayTickElementString::getValueAsString(int index) const
 		{
 			if(index == 0)
 			{

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketReason.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementReason.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketReason.h"
-#include "MarketDataRequest/ElementMarketInt.h"
-#include "MarketDataRequest/ElementMarketString.h"
+#include "MarketDataRequest/MarketElementReason.h"
+#include "MarketDataRequest/MarketElementInt.h"
+#include "MarketDataRequest/MarketElementString.h"
 
 #include "Types/IndentType.h"
 #include "Types/RandomDataGenerator.h"
@@ -18,7 +18,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketReason::ElementMarketReason(ReasonType::ReasonTypeEnum reasonType)
+		MarketElementReason::MarketElementReason(ReasonType::ReasonTypeEnum reasonType)
 		{
 			if(reasonType == ReasonType::badSecurity)
 			{
@@ -26,13 +26,13 @@ namespace BEmu
 				std::transform(source.begin(), source.end(), source.begin(), ::tolower);
 				std::stringstream ssSource;
 				ssSource << source << RandomDataGenerator::RandomInt(9) << '@' << RandomDataGenerator::RandomInt(99);
-				this->_source = new ElementMarketString("source", ssSource.str());
+				this->_source = new MarketElementString("source", ssSource.str());
 
-				this->_errorCode = new ElementMarketInt("errorCode", RandomDataGenerator::RandomInt(99));
+				this->_errorCode = new MarketElementInt("errorCode", RandomDataGenerator::RandomInt(99));
 
-				this->_category = new ElementMarketString("category", "BAD_SEC");
+				this->_category = new MarketElementString("category", "BAD_SEC");
                 
-				this->_description = new ElementMarketString("description", "Invalid security, rcode = -1");
+				this->_description = new MarketElementString("description", "Invalid security, rcode = -1");
 			}
 			else if(reasonType == ReasonType::badField)
 			{
@@ -40,17 +40,17 @@ namespace BEmu
 				std::transform(source.begin(), source.end(), source.begin(), ::tolower);
 				std::stringstream ssSource;
 				ssSource << source << '@' << RandomDataGenerator::RandomInt(999);
-				this->_source = new ElementMarketString("source", ssSource.str());
+				this->_source = new MarketElementString("source", ssSource.str());
 
-				this->_errorCode = new ElementMarketInt("errorCode", RandomDataGenerator::RandomInt(99));
+				this->_errorCode = new MarketElementInt("errorCode", RandomDataGenerator::RandomInt(99));
 
-				this->_category = new ElementMarketString("category", "BAD_FLD");
+				this->_category = new MarketElementString("category", "BAD_FLD");
 				
-                this->_description = new ElementMarketString("description", "Unknown Field");
+                this->_description = new MarketElementString("description", "Unknown Field");
 			}
 		}
 
-		ElementMarketReason::~ElementMarketReason()
+		MarketElementReason::~MarketElementReason()
 		{
 			delete this->_source;
 			this->_source = 0;
@@ -65,44 +65,44 @@ namespace BEmu
 			this->_description = 0;
 		}
 
-		Name ElementMarketReason::name() const
+		Name MarketElementReason::name() const
 		{
 			return Name("reason");
 		}
 
-		size_t ElementMarketReason::numValues() const
+		size_t MarketElementReason::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketReason::numElements() const
+		size_t MarketElementReason::numElements() const
 		{
 			return 4;
 		}
 
-		SchemaElementDefinition ElementMarketReason::elementDefinition() const
+		SchemaElementDefinition MarketElementReason::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
 			return result;
 		}
 
-		bool ElementMarketReason::isNull() const
+		bool MarketElementReason::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketReason::isArray() const
+		bool MarketElementReason::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketReason::isComplexType() const
+		bool MarketElementReason::isComplexType() const
 		{
 			return true;
 		}
 
-		ElementPtr * ElementMarketReason::getElement(const char* name) const
+		ElementPtr * MarketElementReason::getElement(const char* name) const
 		{
 			if(strncmp(name, "source", 7) == 0)
 				return this->_source;
@@ -120,7 +120,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		bool ElementMarketReason::hasElement(const char* name, bool excludeNullElements) const
+		bool MarketElementReason::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return 
 				strncmp(name, "source", 7) == 0 ||
@@ -129,17 +129,17 @@ namespace BEmu
 				strncmp(name, "description", 12) == 0;
 		}
 
-		int ElementMarketReason::getElementAsInt32(const char* name) const
+		int MarketElementReason::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		const char* ElementMarketReason::getElementAsString(const char* name) const
+		const char* MarketElementReason::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		std::ostream& ElementMarketReason::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementReason::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

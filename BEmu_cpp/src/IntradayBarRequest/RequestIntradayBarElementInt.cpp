@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/RequestIntradayBarElementInt.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarRequestElementInt.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -9,13 +9,13 @@
 
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
-#include "IntradayBarRequest/RequestIntradayBarElementInt.h"
+#include "IntradayBarRequest/IntradayBarRequestElementInt.h"
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		RequestIntradayBarElementInt::RequestIntradayBarElementInt(const std::string& elementName, int ivalue) : RequestIntradayBarElementString(elementName, "")
+		IntradayBarRequestElementInt::IntradayBarRequestElementInt(const std::string& elementName, int ivalue) : IntradayBarRequestElementString(elementName, "")
 		{
 			std::stringstream ss;
 			ss << ivalue;
@@ -24,11 +24,11 @@ namespace BEmu
 			this->_ivalue = ivalue;
 		}
 
-		RequestIntradayBarElementInt::~RequestIntradayBarElementInt()
+		IntradayBarRequestElementInt::~IntradayBarRequestElementInt()
 		{
 		}
 
-		int RequestIntradayBarElementInt::getInt() const
+		int IntradayBarRequestElementInt::getInt() const
 		{
 			return this->_ivalue;
 		}

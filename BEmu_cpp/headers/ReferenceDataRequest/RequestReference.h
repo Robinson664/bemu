@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/RequestReference.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceRequest.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -16,18 +16,18 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		class RequestReferenceElementStringArray;
-		class RequestReferenceElementOverrideArray;
+		class ReferenceRequestElementStringArray;
+		class ReferenceRequestElementOverrideArray;
 
-		class RequestReference : public RequestPtr
+		class ReferenceRequest : public RequestPtr
 		{
 			private:
-				RequestReferenceElementStringArray * _securities, * _fields;
-				RequestReferenceElementOverrideArray * _overrides;
+				ReferenceRequestElementStringArray * _securities, * _fields;
+				ReferenceRequestElementOverrideArray * _overrides;
 
 			public:
-				RequestReference();
-				~RequestReference();
+				ReferenceRequest();
+				~ReferenceRequest();
 				
 				std::vector<std::string> getSecurities() const;
 				std::vector<std::string> getFields() const;

@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/ElementMarketExceptions.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketElementExceptions.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,9 +7,9 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/ElementMarketExceptions.h"
-#include "MarketDataRequest/ElementMarketString.h"
-#include "MarketDataRequest/ElementMarketReason.h"
+#include "MarketDataRequest/MarketElementExceptions.h"
+#include "MarketDataRequest/MarketElementString.h"
+#include "MarketDataRequest/MarketElementReason.h"
 
 #include "Types/IndentType.h"
 
@@ -17,50 +17,50 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		ElementMarketExceptions::ElementMarketExceptions(std::string badField)
+		MarketElementExceptions::MarketElementExceptions(std::string badField)
 		{
-            this->_fieldId = new ElementMarketString("fieldId", badField);
-            this->_reason = new ElementMarketReason(MarketDataRequest::ReasonType::badField);
+            this->_fieldId = new MarketElementString("fieldId", badField);
+            this->_reason = new MarketElementReason(MarketDataRequest::ReasonType::badField);
 		}
 
-		Name ElementMarketExceptions::name() const
+		Name MarketElementExceptions::name() const
 		{
 			return Name("exceptions");
 		}
 
-		size_t ElementMarketExceptions::numValues() const
+		size_t MarketElementExceptions::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementMarketExceptions::numElements() const
+		size_t MarketElementExceptions::numElements() const
 		{
 			return 2;
 		}
 
-		SchemaElementDefinition ElementMarketExceptions::elementDefinition() const
+		SchemaElementDefinition MarketElementExceptions::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("SubscriptionException"));
 			return result;
 		}
 
-		bool ElementMarketExceptions::isNull() const
+		bool MarketElementExceptions::isNull() const
 		{
 			return false;
 		}
 
-		bool ElementMarketExceptions::isArray() const
+		bool MarketElementExceptions::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementMarketExceptions::isComplexType() const
+		bool MarketElementExceptions::isComplexType() const
 		{
 			return true;
 		}
 
-		ElementPtr * ElementMarketExceptions::getElement(const char* name) const
+		ElementPtr * MarketElementExceptions::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldId", 8) == 0)
 				return this->_fieldId;
@@ -72,17 +72,17 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		bool ElementMarketExceptions::hasElement(const char* name, bool excludeNullElements) const
+		bool MarketElementExceptions::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return strncmp(name, "fieldId", 8) == 0 || strncmp(name, "reason", 7) == 0;
 		}
 
-		const char* ElementMarketExceptions::getElementAsString(const char* name) const
+		const char* MarketElementExceptions::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		std::ostream& ElementMarketExceptions::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketElementExceptions::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

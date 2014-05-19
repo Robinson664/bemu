@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/ElementIntradayBarDouble.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarElementDouble.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayBarRequest/ElementIntradayBarDouble.h"
+#include "IntradayBarRequest/IntradayBarElementDouble.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 
@@ -15,43 +15,43 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		ElementIntradayBarDouble::ElementIntradayBarDouble(const std::string& name, double value)
+		IntradayBarElementDouble::IntradayBarElementDouble(const std::string& name, double value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		ElementIntradayBarDouble::~ElementIntradayBarDouble()
+		IntradayBarElementDouble::~IntradayBarElementDouble()
 		{
 		}
 
-		Name ElementIntradayBarDouble::name() const
+		Name IntradayBarElementDouble::name() const
 		{
 			Name result(this->_name.c_str());
 			return result;
 		}
 
-		size_t ElementIntradayBarDouble::numValues() const
+		size_t IntradayBarElementDouble::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementIntradayBarDouble::numElements() const
+		size_t IntradayBarElementDouble::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementIntradayBarDouble::isArray() const
+		bool IntradayBarElementDouble::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementIntradayBarDouble::isComplexType() const
+		bool IntradayBarElementDouble::isComplexType() const
 		{
 			return false;
 		}
 
-		double ElementIntradayBarDouble::getValueAsFloat64(int index) const
+		double IntradayBarElementDouble::getValueAsFloat64(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -59,7 +59,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		int ElementIntradayBarDouble::getValueAsInt32(int index) const
+		int IntradayBarElementDouble::getValueAsInt32(int index) const
 		{
 			if(index == 0)
 				return (int)this->_value;
@@ -67,7 +67,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		const char * ElementIntradayBarDouble::getValueAsString(int index) const
+		const char * IntradayBarElementDouble::getValueAsString(int index) const
 		{
 			if(index == 0)
 				return ElementPtr::toCharPointer(this->_value);
@@ -75,7 +75,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementIntradayBarDouble::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarElementDouble::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;

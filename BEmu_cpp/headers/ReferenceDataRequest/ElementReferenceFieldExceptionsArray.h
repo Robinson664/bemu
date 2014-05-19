@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceFieldExceptionsArray.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementFieldExceptionsArray.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -18,16 +18,16 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceFieldExceptions;
+		class ReferenceElementFieldExceptions;
 
-		class ElementReferenceFieldExceptionsArray : public ElementPtr
+		class ReferenceElementFieldExceptionsArray : public ElementPtr
 		{
 			private:
-				std::vector<ElementReferenceFieldExceptions*> _exceptions;
+				std::vector<ReferenceElementFieldExceptions*> _exceptions;
 
 			public:
-				ElementReferenceFieldExceptionsArray(const std::vector<std::string>& badFields);
-				~ElementReferenceFieldExceptionsArray();
+				ReferenceElementFieldExceptionsArray(const std::vector<std::string>& badFields);
+				~ReferenceElementFieldExceptionsArray();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

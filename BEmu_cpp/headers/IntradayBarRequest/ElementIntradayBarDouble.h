@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/ElementIntradayBarDouble.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarElementDouble.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -17,15 +17,15 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class ElementIntradayBarDouble : public ElementPtr
+		class IntradayBarElementDouble : public ElementPtr
 		{
 			private:
 				double _value;
 				std::string _name;
 
 			public:
-				ElementIntradayBarDouble(const std::string& name, double value);
-				~ElementIntradayBarDouble();
+				IntradayBarElementDouble(const std::string& name, double value);
+				~IntradayBarElementDouble();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

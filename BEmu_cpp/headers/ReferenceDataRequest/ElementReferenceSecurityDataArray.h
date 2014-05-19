@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ElementReferenceSecurityDataArray.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/ReferenceDataRequest/ReferenceElementSecurityDataArray.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -20,15 +20,15 @@ namespace BEmu
 
 	namespace ReferenceDataRequest
 	{
-		class ElementReferenceSecurityDataArray : public ElementPtr
+		class ReferenceElementSecurityDataArray : public ElementPtr
 		{
 			private:
 				std::vector<ElementPtr*> _securities;
 
 			public:
-				ElementReferenceSecurityDataArray(const std::map<std::string, std::map<std::string, ObjectType>*>& securities);
-				ElementReferenceSecurityDataArray(const ElementReferenceSecurityDataArray& arg);
-				~ElementReferenceSecurityDataArray();
+				ReferenceElementSecurityDataArray(const std::map<std::string, std::map<std::string, ObjectType>*>& securities);
+				ReferenceElementSecurityDataArray(const ReferenceElementSecurityDataArray& arg);
+				~ReferenceElementSecurityDataArray();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

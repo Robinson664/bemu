@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MessageMarketSubscriptionStarted.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketMessageSubscriptionStarted.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,19 +7,19 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/MessageMarketSubscriptionStarted.h"
+#include "MarketDataRequest/MarketMessageSubscriptionStarted.h"
 #include <vector>
 #include "Types/Rules.h"
 
-#include "MarketDataRequest/ElementMarketNull.h"
-#include "MarketDataRequest/ElementMarketExceptionsArray.h"
-#include "MarketDataRequest/ElementMarketSubscriptionStarted.h"
+#include "MarketDataRequest/MarketElementNull.h"
+#include "MarketDataRequest/MarketElementExceptionsArray.h"
+#include "MarketDataRequest/MarketElementSubscriptionStarted.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MessageMarketSubscriptionStarted::MessageMarketSubscriptionStarted(Subscription sub)
+		MarketMessageSubscriptionStarted::MarketMessageSubscriptionStarted(Subscription sub)
 			: MessagePtr(Name("SubscriptionStarted"), sub.correlationId())
 		{
             this->_correlationId = sub.correlationId();
@@ -39,18 +39,18 @@ namespace BEmu
 
 				if (badFields.size() == 0)
 				{
-                    this->_exceptionsNull = new ElementMarketNull("exceptions");
+                    this->_exceptionsNull = new MarketElementNull("exceptions");
 					this->_exceptionsBadFields = 0;
 				}
                 else
 				{
 					this->_exceptionsNull = 0;
-                    this->_exceptionsBadFields = new ElementMarketExceptionsArray(badFields);
+                    this->_exceptionsBadFields = new MarketElementExceptionsArray(badFields);
 				}
 			}
 		}
 
-		MessageMarketSubscriptionStarted::~MessageMarketSubscriptionStarted()
+		MarketMessageSubscriptionStarted::~MarketMessageSubscriptionStarted()
 		{
 			delete this->_exceptionsNull;
 			this->_exceptionsNull = 0;
@@ -59,7 +59,7 @@ namespace BEmu
 			this->_exceptionsBadFields = 0;
 		}
 
-		ElementPtr * MessageMarketSubscriptionStarted::firstElement() const
+		ElementPtr * MarketMessageSubscriptionStarted::firstElement() const
 		{
 			if(this->_exceptionsNull != 0)
 				return this->_exceptionsNull;
@@ -71,7 +71,7 @@ namespace BEmu
 				throw messageEx;
 		}
 
-		bool MessageMarketSubscriptionStarted::hasElement(const char* name, bool excludeNullElements) const
+		bool MarketMessageSubscriptionStarted::hasElement(const char* name, bool excludeNullElements) const
 		{
 			if(this->_exceptionsNull != 0 && this->_exceptionsNull->name() == name)
 				return true;
@@ -82,7 +82,7 @@ namespace BEmu
 			return false;
 		}
 
-		ElementPtr * MessageMarketSubscriptionStarted::getElement(const char* name) const
+		ElementPtr * MarketMessageSubscriptionStarted::getElement(const char* name) const
 		{
 			if(this->_exceptionsNull != 0 && this->_exceptionsNull->name() == name)
 				return this->_exceptionsNull;
@@ -94,22 +94,22 @@ namespace BEmu
 				throw messageEx;
 		}
 
-		size_t MessageMarketSubscriptionStarted::numElements() const
+		size_t MarketMessageSubscriptionStarted::numElements() const
 		{
 			return 1;
 		}
 
-		ElementPtr * MessageMarketSubscriptionStarted::asElement() const
+		ElementPtr * MarketMessageSubscriptionStarted::asElement() const
 		{
 			throw messageEx;
 		}
 
-		const char* MessageMarketSubscriptionStarted::topicName() const
+		const char* MarketMessageSubscriptionStarted::topicName() const
 		{
 			return ElementPtr::toCharPointer(this->_topicName);
 		}
 
-		std::ostream& MessageMarketSubscriptionStarted::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& MarketMessageSubscriptionStarted::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
             if (this->_exceptionsNull != 0)
 			{

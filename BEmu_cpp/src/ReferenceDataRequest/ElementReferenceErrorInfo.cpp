@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReferenceErrorInfo.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElementErrorInfo.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,37 +7,37 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReferenceErrorInfo.h"
+#include "ReferenceDataRequest/ReferenceElementErrorInfo.h"
 #include "Types/RandomDataGenerator.h"
 #include "Types/IndentType.h"
 #include "BloombergTypes/Name.h"
 
-#include "ReferenceDataRequest/ElementReferenceString.h"
-#include "ReferenceDataRequest/ElementReferenceInt.h"
+#include "ReferenceDataRequest/ReferenceElementString.h"
+#include "ReferenceDataRequest/ReferenceElementInt.h"
 
 namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReferenceErrorInfo::ElementReferenceErrorInfo()
+		ReferenceElementErrorInfo::ReferenceElementErrorInfo()
 		{
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
 			std::stringstream ssSource;
 			ssSource << RandomDataGenerator::RandomInt(99) << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
-			this->_source = new ElementReferenceString("source", ssSource.str());
+			this->_source = new ReferenceElementString("source", ssSource.str());
 
-			this->_code = new ElementReferenceInt("code", RandomDataGenerator::RandomInt(99));
+			this->_code = new ReferenceElementInt("code", RandomDataGenerator::RandomInt(99));
 
-			this->_category = new ElementReferenceString("category", "BAD_FLD");
+			this->_category = new ReferenceElementString("category", "BAD_FLD");
 
-            this->_message = new ElementReferenceString("message", "Field not valid");
+            this->_message = new ReferenceElementString("message", "Field not valid");
 
-            this->_subCategory = new ElementReferenceString("subcategory", "INVALID_FIELD");
+            this->_subCategory = new ReferenceElementString("subcategory", "INVALID_FIELD");
 		}
 
-		ElementReferenceErrorInfo::~ElementReferenceErrorInfo()
+		ReferenceElementErrorInfo::~ReferenceElementErrorInfo()
 		{
 			delete this->_source;
 			this->_source = 0;
@@ -55,32 +55,32 @@ namespace BEmu
 			this->_subCategory = 0;
 		}
 
-		Name ElementReferenceErrorInfo::name() const { return Name("errorInfo"); }
-		size_t ElementReferenceErrorInfo::numValues() const { return 1; }
-		size_t ElementReferenceErrorInfo::numElements() const { return 5; }
+		Name ReferenceElementErrorInfo::name() const { return Name("errorInfo"); }
+		size_t ReferenceElementErrorInfo::numValues() const { return 1; }
+		size_t ReferenceElementErrorInfo::numElements() const { return 5; }
 
-		SchemaElementDefinition ElementReferenceErrorInfo::elementDefinition() const
+		SchemaElementDefinition ReferenceElementErrorInfo::elementDefinition() const
 		{
 			::blpapi_DataType_t dtype = (::blpapi_DataType_t)this->datatype();
 			SchemaElementDefinition result(dtype, Name("ErrorInfo"));
 			return result;
 		}
 
-		bool ElementReferenceErrorInfo::isNull() const { return false; }
-		bool ElementReferenceErrorInfo::isArray() const { return false; }
-		bool ElementReferenceErrorInfo::isComplexType() const { return true; }
+		bool ReferenceElementErrorInfo::isNull() const { return false; }
+		bool ReferenceElementErrorInfo::isArray() const { return false; }
+		bool ReferenceElementErrorInfo::isComplexType() const { return true; }
 
-		const char* ElementReferenceErrorInfo::getElementAsString(const char* name) const
+		const char* ReferenceElementErrorInfo::getElementAsString(const char* name) const
 		{
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		int ElementReferenceErrorInfo::getElementAsInt32(const char* name) const
+		int ReferenceElementErrorInfo::getElementAsInt32(const char* name) const
 		{
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		ElementPtr * ElementReferenceErrorInfo::getElement(const char* name) const
+		ElementPtr * ReferenceElementErrorInfo::getElement(const char* name) const
 		{
 			if(strncmp(name, "category", 9) == 0)
 				return this->_category;
@@ -101,7 +101,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		bool ElementReferenceErrorInfo::hasElement(const char* name, bool excludeNullElements) const
+		bool ReferenceElementErrorInfo::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				(strncmp(name, "category", 9) == 0) ||
@@ -111,7 +111,7 @@ namespace BEmu
 				(strncmp(name, "subcategory", 12) == 0);
 		}
 
-		std::ostream& ElementReferenceErrorInfo::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceElementErrorInfo::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 

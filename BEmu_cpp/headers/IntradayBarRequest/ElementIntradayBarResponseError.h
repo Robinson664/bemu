@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/ElementIntradayBarResponseError.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarElementResponseError.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -17,18 +17,18 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class ElementIntradayBarString;
-		class ElementIntradayBarInt;
+		class IntradayBarElementString;
+		class IntradayBarElementInt;
 
-		class ElementIntradayBarResponseError : public ElementPtr
+		class IntradayBarElementResponseError : public ElementPtr
 		{
 			private:
-				ElementIntradayBarString * _source, * _category, * _message, * _subCategory;
-				ElementIntradayBarInt * _code;
+				IntradayBarElementString * _source, * _category, * _message, * _subCategory;
+				IntradayBarElementInt * _code;
 
 			public:
-				ElementIntradayBarResponseError(const std::string& security);
-				~ElementIntradayBarResponseError();
+				IntradayBarElementResponseError(const std::string& security);
+				~IntradayBarElementResponseError();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

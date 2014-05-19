@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ElementReferenceDouble.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/ReferenceDataRequest/ReferenceElementDouble.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,28 +7,28 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "ReferenceDataRequest/ElementReferenceDouble.h"
+#include "ReferenceDataRequest/ReferenceElementDouble.h"
 #include "BloombergTypes/Name.h"
 
 namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ElementReferenceDouble::ElementReferenceDouble(const std::string& name, double value)
+		ReferenceElementDouble::ReferenceElementDouble(const std::string& name, double value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		Name ElementReferenceDouble::name() const { return Name(this->_name.c_str()); }
-		size_t ElementReferenceDouble::numValues() const { return 1; }
-		size_t ElementReferenceDouble::numElements() const { return 0; }
+		Name ReferenceElementDouble::name() const { return Name(this->_name.c_str()); }
+		size_t ReferenceElementDouble::numValues() const { return 1; }
+		size_t ReferenceElementDouble::numElements() const { return 0; }
 
-		bool ElementReferenceDouble::isNull() const { return false; }
-		bool ElementReferenceDouble::isArray() const { return false; }
-		bool ElementReferenceDouble::isComplexType() const { return false; }
+		bool ReferenceElementDouble::isNull() const { return false; }
+		bool ReferenceElementDouble::isArray() const { return false; }
+		bool ReferenceElementDouble::isComplexType() const { return false; }
 
-		double ElementReferenceDouble::getValueAsFloat64(int index) const
+		double ReferenceElementDouble::getValueAsFloat64(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -36,7 +36,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		int ElementReferenceDouble::getValueAsInt32(int index) const
+		int ReferenceElementDouble::getValueAsInt32(int index) const
 		{
 			if(index == 0)
 				return (int)this->_value;
@@ -44,7 +44,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		long ElementReferenceDouble::getValueAsInt64(int index) const
+		long ReferenceElementDouble::getValueAsInt64(int index) const
 		{
 			if(index == 0)
 				return (long)this->_value;
@@ -52,7 +52,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		std::ostream& ElementReferenceDouble::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& ReferenceElementDouble::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;

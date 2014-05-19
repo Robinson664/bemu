@@ -1,5 +1,5 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/MarketDataRequest/EventMarket.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/MarketDataRequest/MarketEvent.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,13 +7,13 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-#include "MarketDataRequest/EventMarket.h"
-#include "MarketDataRequest/MessageMarketSessionOpened.h"
-#include "MarketDataRequest/MessageMarketServiceStatus.h"
-#include "MarketDataRequest/MessageMarketSubscriptionFailure.h"
-#include "MarketDataRequest/MessageMarketSubscriptionStarted.h"
-#include "MarketDataRequest/MessageMarketSubscriptionData.h"
-#include "MarketDataRequest/MessageMarketSubscriptionCanceled.h"
+#include "MarketDataRequest/MarketEvent.h"
+#include "MarketDataRequest/MarketMessageSessionOpened.h"
+#include "MarketDataRequest/MarketMessageServiceStatus.h"
+#include "MarketDataRequest/MarketMessageSubscriptionFailure.h"
+#include "MarketDataRequest/MarketMessageSubscriptionStarted.h"
+#include "MarketDataRequest/MarketMessageSubscriptionData.h"
+#include "MarketDataRequest/MarketMessageSubscriptionCanceled.h"
 
 #include "Types/Rules.h"
 #include "Types/RandomDataGenerator.h"
@@ -22,7 +22,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		EventMarket::EventMarket(Event::EventType evtType, CorrelationId corr, SubscriptionList subs) : EventPtr(0)
+		MarketEvent::MarketEvent(Event::EventType evtType, CorrelationId corr, SubscriptionList subs) : EventPtr(0)
 		{
 			this->_messages = new std::vector<MessagePtr*>();
 
@@ -31,7 +31,7 @@ namespace BEmu
 				case Event::SESSION_STATUS:
 				{
 					this->_type = evtType;
-					MessageMarketSessionOpened * msgSessionOpened = new MessageMarketSessionOpened();
+					MarketMessageSessionOpened * msgSessionOpened = new MarketMessageSessionOpened();
 					this->_messages->push_back(msgSessionOpened);
 					break;
 				}
@@ -39,7 +39,7 @@ namespace BEmu
 				case Event::SERVICE_STATUS:
 				{
 					this->_type = evtType;
-					MessageMarketServiceStatus * msgServiceStatus = new MessageMarketServiceStatus(corr);
+					MarketMessageServiceStatus * msgServiceStatus = new MarketMessageServiceStatus(corr);
 					this->_messages->push_back(msgServiceStatus);
 					break;
 				}
@@ -54,12 +54,12 @@ namespace BEmu
 						bool securityError = Rules::IsSecurityError(sub.security());
 						if(securityError)
 						{
-							MessageMarketSubscriptionFailure * msgError = new MessageMarketSubscriptionFailure(sub);
+							MarketMessageSubscriptionFailure * msgError = new MarketMessageSubscriptionFailure(sub);
 							this->_messages->push_back(msgError);
 						}
 						else
 						{
-							MessageMarketSubscriptionStarted * msgSubStatus = new MessageMarketSubscriptionStarted(sub);
+							MarketMessageSubscriptionStarted * msgSubStatus = new MarketMessageSubscriptionStarted(sub);
 							this->_messages->push_back(msgSubStatus);
 						}
 					}
@@ -75,7 +75,7 @@ namespace BEmu
 						bool securityError = Rules::IsSecurityError(sub.security());
 						if (!securityError)
 						{
-							MessageMarketSubscriptionData * msgSubData = new MessageMarketSubscriptionData(sub, EventMarket::generateFakeMessageData(sub));
+							MarketMessageSubscriptionData * msgSubData = new MarketMessageSubscriptionData(sub, MarketEvent::generateFakeMessageData(sub));
 							this->_messages->push_back(msgSubData);
 						}
 					}
@@ -87,7 +87,7 @@ namespace BEmu
 			}
 		}
 
-		EventMarket::EventMarket(Event::EventType evtType, Subscription sub) : EventPtr(0)
+		MarketEvent::MarketEvent(Event::EventType evtType, Subscription sub) : EventPtr(0)
 		{
 			this->_messages = new std::vector<MessagePtr*>();
 
@@ -96,24 +96,24 @@ namespace BEmu
 				case Event::SUBSCRIPTION_STATUS:
 				{
 					this->_type = evtType;
-					MessageMarketSubscriptionCanceled * msgCancel = new MessageMarketSubscriptionCanceled(sub);
+					MarketMessageSubscriptionCanceled * msgCancel = new MarketMessageSubscriptionCanceled(sub);
 					this->_messages->push_back(msgCancel);
 				}
 				break;
 			}
 		}
 
-		EventMarket::~EventMarket()
+		MarketEvent::~MarketEvent()
 		{
 			delete this->_messages;
 		}
 
-		std::vector<MessagePtr*> * EventMarket::getMessages() const
+		std::vector<MessagePtr*> * MarketEvent::getMessages() const
 		{
 			return this->_messages;
 		}
 
-		std::map<std::string, ObjectType> EventMarket::generateFakeMessageData(Subscription sub)
+		std::map<std::string, ObjectType> MarketEvent::generateFakeMessageData(Subscription sub)
 		{
 			return RandomDataGenerator::GetMarketDataFields(sub.fieldList());
 		}

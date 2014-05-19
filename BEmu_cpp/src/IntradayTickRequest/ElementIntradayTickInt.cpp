@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/ElementIntradayTickInt.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayTickRequest/IntradayTickElementInt.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -7,7 +7,7 @@
 // </copyright>
 //------------------------------------------------------------------------------------------------
 
-#include "IntradayTickRequest/ElementIntradayTickInt.h"
+#include "IntradayTickRequest/IntradayTickElementInt.h"
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/ElementPtr.h"
 
@@ -15,54 +15,54 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		ElementIntradayTickInt::ElementIntradayTickInt(const std::string& name, int value)
+		IntradayTickElementInt::IntradayTickElementInt(const std::string& name, int value)
 		{
 			this->_name = name;
 			this->_value = value;
 		}
 
-		ElementIntradayTickInt::~ElementIntradayTickInt()
+		IntradayTickElementInt::~IntradayTickElementInt()
 		{
 		}
 
-		Name ElementIntradayTickInt::name() const
+		Name IntradayTickElementInt::name() const
 		{
 			Name result(this->_name.c_str());
 			return result;
 		}
 
-		size_t ElementIntradayTickInt::numValues() const
+		size_t IntradayTickElementInt::numValues() const
 		{
 			return 1;
 		}
 
-		size_t ElementIntradayTickInt::numElements() const
+		size_t IntradayTickElementInt::numElements() const
 		{
 			return 0;
 		}
 
-		bool ElementIntradayTickInt::isArray() const
+		bool IntradayTickElementInt::isArray() const
 		{
 			return false;
 		}
 
-		bool ElementIntradayTickInt::isComplexType() const
+		bool IntradayTickElementInt::isComplexType() const
 		{
 			return false;
 		}
 		
-		bool ElementIntradayTickInt::hasElement(const char* name, bool excludeNullElements) const
+		bool IntradayTickElementInt::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return false;
 		}
 
-		std::ostream& ElementIntradayTickInt::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayTickElementInt::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
 			return stream;
 		}
 
-		int ElementIntradayTickInt::getValueAsInt32(int index) const
+		int IntradayTickElementInt::getValueAsInt32(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -70,7 +70,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		long ElementIntradayTickInt::getValueAsInt64(int index) const
+		long IntradayTickElementInt::getValueAsInt64(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -78,7 +78,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 		
-		float ElementIntradayTickInt::getValueAsFloat32(int index) const
+		float IntradayTickElementInt::getValueAsFloat32(int index) const
 		{
 			if(index == 0)
 				return (float)this->_value;
@@ -86,7 +86,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		double ElementIntradayTickInt::getValueAsFloat64(int index) const
+		double IntradayTickElementInt::getValueAsFloat64(int index) const
 		{
 			if(index == 0)
 				return this->_value;
@@ -94,7 +94,7 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		const char * ElementIntradayTickInt::getValueAsString(int index) const
+		const char * IntradayTickElementInt::getValueAsString(int index) const
 		{
 			if(index == 0)
 			{

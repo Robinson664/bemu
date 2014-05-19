@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/RequestIntradayBarElementBool.h" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="headers/IntradayBarRequest/IntradayBarRequestElementBool.h" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -9,20 +9,20 @@
 
 #pragma once
 
-#include "IntradayBarRequest/RequestIntradayBarElementString.h"
+#include "IntradayBarRequest/IntradayBarRequestElementString.h"
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		class RequestIntradayBarElementBool : public RequestIntradayBarElementString
+		class IntradayBarRequestElementBool : public IntradayBarRequestElementString
 		{
 			private:
 				bool _bvalue;
 
 			public:
-				RequestIntradayBarElementBool(const std::string& elementName, bool bvalue);
-				~RequestIntradayBarElementBool();
+				IntradayBarRequestElementBool(const std::string& elementName, bool bvalue);
+				~IntradayBarRequestElementBool();
 				bool getBool() const;
 		};
 	}

@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------
-// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/MessageIntradayBar.cpp" company="Jordan Robinson">
+// <copyright project="BEmu_cpp" file="src/IntradayBarRequest/IntradayBarMessage.cpp" company="Jordan Robinson">
 //     Copyright (c) 2013 Jordan Robinson. All rights reserved.
 //
 //     The use of this software is governed by the Microsoft Public License
@@ -8,31 +8,31 @@
 //------------------------------------------------------------------------------------------------
 
 #include "BloombergTypes/MessagePtr.h"
-#include "IntradayBarRequest/MessageIntradayBar.h"
-#include "IntradayBarRequest/ElementBarData.h"
-#include "IntradayBarRequest/MessageIntradayBar.h"
-#include "IntradayBarRequest/ElementIntradayBarResponseError.h"
+#include "IntradayBarRequest/IntradayBarMessage.h"
+#include "IntradayBarRequest/IntradayBarElementData.h"
+#include "IntradayBarRequest/IntradayBarMessage.h"
+#include "IntradayBarRequest/IntradayBarElementResponseError.h"
 #include "BloombergTypes/Name.h"
 
 namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		MessageIntradayBar::MessageIntradayBar(const CorrelationId& corr, const Service& service, const std::string& security) : MessagePtr(Name("IntradayBarResponse"), corr)
+		IntradayBarMessage::IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::string& security) : MessagePtr(Name("IntradayBarResponse"), corr)
 		{
-            this->_responseError = new ElementIntradayBarResponseError(security);
+            this->_responseError = new IntradayBarElementResponseError(security);
             this->_parent = 0;
             this->_isResponseError = true;
 		}
 
-		MessageIntradayBar::MessageIntradayBar(const CorrelationId& corr, const Service& service, const std::vector<BarTickDataType*>& bars) : MessagePtr(Name("IntradayBarResponse"), corr)
+		IntradayBarMessage::IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::vector<IntradayBarTickDataType*>& bars) : MessagePtr(Name("IntradayBarResponse"), corr)
 		{
-            this->_parent = new ElementBarData(bars);
+            this->_parent = new IntradayBarElementData(bars);
             this->_responseError = 0;
             this->_isResponseError = false;
 		}
 
-		MessageIntradayBar::~MessageIntradayBar()
+		IntradayBarMessage::~IntradayBarMessage()
 		{
 			delete this->_responseError;
 			this->_responseError = 0;
@@ -41,17 +41,17 @@ namespace BEmu
 			this->_parent = 0;
 		}
 
-		const char* MessageIntradayBar::topicName() const
+		const char* IntradayBarMessage::topicName() const
 		{
 			return "";
 		}
 
-		size_t MessageIntradayBar::numElements() const
+		size_t IntradayBarMessage::numElements() const
 		{
 			return 1;
 		}
 
-		ElementPtr * MessageIntradayBar::getElement(const char* name) const
+		ElementPtr * IntradayBarMessage::getElement(const char* name) const
 		{
             if (this->_isResponseError)
 			{
@@ -69,14 +69,14 @@ namespace BEmu
 			}
 		}
 
-		bool MessageIntradayBar::hasElement(const char* name, bool excludeNullElements) const
+		bool IntradayBarMessage::hasElement(const char* name, bool excludeNullElements) const
 		{
 			return
 				(strncmp(name, "responseError", 14) == 0 && this->_isResponseError) ||
 				(strncmp(name, "barData", 8) == 0 && !this->_isResponseError);
 		}
 
-		std::ostream& MessageIntradayBar::print(std::ostream& stream, int level, int spacesPerLevel) const
+		std::ostream& IntradayBarMessage::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			stream << "IntradayBarResponse (choice) = {" << std::endl;
 
