@@ -30,6 +30,8 @@ namespace BEmu
 				MarketMessageSubscriptionData(Subscription sub, std::map<std::string, ObjectType> fields);
 				~MarketMessageSubscriptionData();
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				virtual const char* topicName() const;
 				virtual size_t numElements() const;
 

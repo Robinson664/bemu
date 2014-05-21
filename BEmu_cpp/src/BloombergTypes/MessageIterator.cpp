@@ -12,6 +12,7 @@
 #include "BloombergTypes/MessageIterator.h"
 #include "BloombergTypes/Event.h"
 #include "BloombergTypes/EventPtr.h"
+#include <stack>
 
 namespace BEmu
 {
@@ -29,11 +30,24 @@ namespace BEmu
 		}
 	}
 
-	MessageIterator::~MessageIterator()
+	MessageIterator::~MessageIterator() //this should delete all Elements and Messages within it
 	{
+		//I can't put the Element deletion code in the MessagePtr destructor because that gets called before the MessageIterator destructor
 		for(std::vector<MessagePtr*>::const_iterator iter = this->_list.begin(); iter != this->_list.end(); ++iter)
 		{
 			MessagePtr* msg = *iter;
+
+			//Delete all of the elements within the current Message.
+			std::stack<ElementPtr*> rootElements = msg->getRootElements();
+
+			while(!rootElements.empty())
+			{
+				ElementPtr * root = rootElements.top();
+				rootElements.pop();
+
+				delete root;
+			}
+
 			delete msg;
 			msg = 0;
 		}

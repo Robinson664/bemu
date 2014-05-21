@@ -38,6 +38,8 @@ namespace BEmu
 				~IntradayTickMessage();
 				ElementPtr* firstElement() const;
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				virtual const char* topicName() const;
 				virtual size_t numElements() const;
 				virtual ElementPtr * asElement() const;

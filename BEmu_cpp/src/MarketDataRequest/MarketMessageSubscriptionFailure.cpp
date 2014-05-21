@@ -28,6 +28,16 @@ namespace BEmu
 			this->_reason = 0;
 		}
 
+		std::stack<ElementPtr*> MarketMessageSubscriptionFailure::getRootElements() const
+		{
+			std::stack<ElementPtr*> result;
+
+			if(this->_reason != 0)
+				result.push(this->_reason);
+
+			return result;
+		}
+
 		size_t MarketMessageSubscriptionFailure::numElements() const
 		{
 			return 1;

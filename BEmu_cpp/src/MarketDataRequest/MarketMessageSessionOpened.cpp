@@ -21,5 +21,11 @@ namespace BEmu
 		{
 			return "";
 		}
+
+		std::stack<ElementPtr*> MarketMessageSessionOpened::getRootElements() const
+		{
+			std::stack<ElementPtr*> result; //no contents
+			return result;
+		}
 	}
 }

@@ -28,6 +28,8 @@ namespace BEmu
 				MarketMessageSubscriptionCanceled(Subscription sub);
 				~MarketMessageSubscriptionCanceled();
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				virtual size_t numElements() const;
 				virtual const char* topicName() const;
 				virtual ElementPtr * asElement() const;

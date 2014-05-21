@@ -47,6 +47,19 @@ namespace BEmu
 			this->_responseError = 0;
 		}
 
+		std::stack<ElementPtr*> IntradayTickMessage::getRootElements() const
+		{
+			std::stack<ElementPtr*> result;
+
+			if(this->_parent != 0)
+				result.push(this->_parent);
+
+			if(this->_responseError != 0)
+				result.push(this->_responseError);
+
+			return result;
+		}
+
 		ElementPtr * IntradayTickMessage::getElement(const char* name) const
 		{
 			if(this->_isResponseError && strncmp(name, "responseError", 14) == 0)

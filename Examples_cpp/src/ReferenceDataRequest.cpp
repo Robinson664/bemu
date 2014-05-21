@@ -107,6 +107,7 @@ namespace Examples
 
 			cout << endl << endl;
 			Element elmSecurityDataArray = msg.getElement("securityData");
+			
 			for (size_t valueIndex = 0; valueIndex < elmSecurityDataArray.numValues(); valueIndex++)
 			{
 				Element elmSecurityData = elmSecurityDataArray.getValueAsElement(valueIndex);

@@ -20,6 +20,16 @@ namespace BEmu
 			this->_serviceName = new MarketElementString("serviceName", "//blp/mktdata");
 		}
 
+		std::stack<ElementPtr*> MarketMessageServiceStatus::getRootElements() const
+		{
+			std::stack<ElementPtr*> result;
+
+			if(this->_serviceName != 0)
+				result.push(this->_serviceName);
+
+			return result;
+		}
+
 		ElementPtr * MarketMessageServiceStatus::firstElement() const
 		{
 			return this->_serviceName;

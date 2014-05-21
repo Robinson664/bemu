@@ -20,6 +20,7 @@ namespace BEmu
 			public:
 				MarketMessageSessionOpened();
 				virtual const char* topicName() const;
+				virtual std::stack<ElementPtr*> getRootElements() const;
 		};
 	}
 }

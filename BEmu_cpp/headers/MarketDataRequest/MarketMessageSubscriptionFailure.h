@@ -29,6 +29,8 @@ namespace BEmu
 				MarketMessageSubscriptionFailure(Subscription sub);
 				~MarketMessageSubscriptionFailure();
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				virtual size_t numElements() const;
 				virtual const char* topicName() const;
 

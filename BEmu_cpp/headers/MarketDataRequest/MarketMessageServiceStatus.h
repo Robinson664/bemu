@@ -25,6 +25,8 @@ namespace BEmu
 			public:
 				MarketMessageServiceStatus(CorrelationId corr);
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				ElementPtr * firstElement() const;
 
 				virtual size_t numElements() const;

@@ -36,6 +36,8 @@ namespace BEmu
 
 				~HistoricMessage();
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				HistoricElementSecurityData * getSecurity() const;
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 				virtual ElementPtr * getElement(const char* name) const;

@@ -61,10 +61,9 @@ namespace BEmu
 			this->_subs.add(sub);
 		}
 
-		MarketDataRequest::MarketEvent * evtSubStatus = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, CorrelationId(), subscriptionList);
-
 		if (this->_asyncHandler != 0)
         {
+			MarketDataRequest::MarketEvent * evtSubStatus = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, CorrelationId(), subscriptionList);
 			this->_asyncHandler->processEvent(evtSubStatus, this);
         }
 	}
@@ -82,7 +81,30 @@ namespace BEmu
 
 	void Session::cancel(const CorrelationId& correlationId)
 	{
+		//get a copy of the subscription that was removed
+		Subscription * subRemoved = 0;
+		std::vector<Subscription> * subs = this->_subs.list();
+		for(std::vector<Subscription>::const_iterator iter = subs->begin(); iter != subs->end(); ++iter)
+		{
+			Subscription current = *iter;
+			if(current.correlationId() == correlationId)
+			{
+				subRemoved = new Subscription(current);
+				break;
+			}
+		}
+
+		//remove subscription from the internal list
 		this->_subs.remove(correlationId);
+		
+		//send a notification to the user about the removed subscription
+		if (this->_asyncHandler != 0 && subRemoved != 0)
+		{
+			MarketDataRequest::MarketEvent * evtCancel = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, *subRemoved);
+			this->_asyncHandler->processEvent(evtCancel, this);
+		}
+
+		delete subRemoved;
 	}
 
 	void Session::cancel(const std::vector<CorrelationId>& correlationIds)
@@ -118,11 +140,11 @@ namespace BEmu
 	{
 		this->_sessionState = started;
 
-		MarketDataRequest::MarketEvent * evtSessionStatus = new MarketDataRequest::MarketEvent(Event::SESSION_STATUS, CorrelationId(), SubscriptionList());
-		MarketDataRequest::MarketEvent * evtServiceStatus = new MarketDataRequest::MarketEvent(Event::SERVICE_STATUS, CorrelationId(), SubscriptionList());
+		if (this->_asyncHandler != 0)
+		{
+			MarketDataRequest::MarketEvent * evtSessionStatus = new MarketDataRequest::MarketEvent(Event::SESSION_STATUS, CorrelationId(), SubscriptionList());
+			MarketDataRequest::MarketEvent * evtServiceStatus = new MarketDataRequest::MarketEvent(Event::SERVICE_STATUS, CorrelationId(), SubscriptionList());
 
-        if (this->_asyncHandler != 0)
-        {
 			this->_asyncHandler->processEvent(evtSessionStatus, this);
 			this->_asyncHandler->processEvent(evtServiceStatus, this);
         }

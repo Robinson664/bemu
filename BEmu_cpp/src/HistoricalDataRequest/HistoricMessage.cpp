@@ -9,6 +9,7 @@
 
 #include "HistoricalDataRequest/HistoricMessage.h"
 #include "HistoricalDataRequest/HistoricElementSecurityData.h"
+#include "BloombergTypes/ElementPtr.h"
 #include "BloombergTypes/Name.h"
 
 namespace BEmu
@@ -29,6 +30,16 @@ namespace BEmu
 		{
 			delete this->_security;
 			this->_security = 0;
+		}
+
+		std::stack<ElementPtr*> HistoricMessage::getRootElements() const
+		{
+			std::stack<ElementPtr*> result;
+
+			if(this->_security != 0)
+				result.push(this->_security);
+
+			return result;
 		}
 
 		ElementPtr * HistoricMessage::getElement(const char* name) const

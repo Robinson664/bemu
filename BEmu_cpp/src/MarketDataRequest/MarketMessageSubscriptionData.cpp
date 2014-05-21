@@ -62,6 +62,21 @@ namespace BEmu
 			}
 		}
 
+		std::stack<ElementPtr*> MarketMessageSubscriptionData::getRootElements() const
+		{
+			std::stack<ElementPtr*> result;
+
+			for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			{
+				ElementPtr * elm = iter->second;
+
+				if(elm != 0)
+					result.push(elm);
+			}
+
+			return result;
+		}
+
 		const char* MarketMessageSubscriptionData::topicName() const
 		{
 			return ElementPtr::toCharPointer(this->_security);

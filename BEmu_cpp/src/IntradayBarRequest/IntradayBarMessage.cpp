@@ -41,6 +41,19 @@ namespace BEmu
 			this->_parent = 0;
 		}
 
+		std::stack<ElementPtr*> IntradayBarMessage::getRootElements() const
+		{
+			std::stack<ElementPtr*> result;
+
+			if(this->_parent != 0)
+				result.push(this->_parent);
+
+			if(this->_responseError != 0)
+				result.push(this->_responseError);
+
+			return result;
+		}
+
 		const char* IntradayBarMessage::topicName() const
 		{
 			return "";

@@ -11,6 +11,7 @@
 
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/CorrelationId.h"
+#include <stack>
 
 namespace BEmu
 {
@@ -37,6 +38,11 @@ namespace BEmu
 					return "My exception happened";
 				}
 			} messageEx;
+
+			//Returns an array of root Elements in this message.
+			//  All elements from the root down must be deleted when a MessageIterator goes out of scope.
+			//  This method is not visible to the API developer.
+			virtual std::stack<ElementPtr*> getRootElements() const = 0;
 
 			CorrelationId correlationId() const;
 			Name messageType() const;

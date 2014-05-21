@@ -37,6 +37,8 @@ namespace BEmu
 				IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::vector<IntradayBarTickDataType*>& bars);
 				~IntradayBarMessage();
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				virtual const char* topicName() const;
 				virtual size_t numElements() const;
 

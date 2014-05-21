@@ -130,13 +130,13 @@ namespace Examples
 	void ProcessHistoricalDataEvent(Event evt)
 	{
 		cout << "EventType = " << evt.eventType();
-
+		
 		MessageIterator iter(evt);
 		while(iter.next())
 		{
 			Message msg = iter.message();
 
-            cout << endl;
+			cout << endl;
 			cout << "correlationID = " << msg.correlationId() << endl;
 			cout << "messageType = " << msg.messageType() << endl;
 

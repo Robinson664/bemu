@@ -26,6 +26,16 @@ namespace BEmu
 			this->_securities = 0;
 		}
 
+		std::stack<ElementPtr*> ReferenceMessage::getRootElements() const
+		{
+			std::stack<ElementPtr*> result;
+
+			if(this->_securities != 0)
+				result.push(this->_securities);
+
+			return result;
+		}
+
 		const char* ReferenceMessage::topicName() const
 		{
 			return "";

@@ -138,6 +138,7 @@ namespace Examples
 
 			bool fieldExceptionsExist = message.messageType() == "SubscriptionStarted" && message.hasElement("exceptions", true);
 			bool securityError = message.messageType() == "SubscriptionFailure" && message.hasElement("reason", true);
+			bool subscriptionCancelled = message.messageType() == "SubscriptionTerminated";
 
 			if(fieldExceptionsExist)
 			{
@@ -175,6 +176,11 @@ namespace Examples
 				cerr << "\terrorCode = " << errorCode << endl;
 				cerr << "\tcategory = " << category << endl;
 				cerr << "\tdescription = " << description << endl;
+			}
+			else if(subscriptionCancelled)
+			{
+				string security = this->_corrs2Security[(int)message.correlationId().asInteger()];
+				cout << "Cancelled \"" << security << "\" subscription" << endl;
 			}
 		}
 	}

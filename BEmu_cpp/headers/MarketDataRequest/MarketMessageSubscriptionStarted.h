@@ -31,6 +31,8 @@ namespace BEmu
 				MarketMessageSubscriptionStarted(Subscription sub);
 				~MarketMessageSubscriptionStarted();
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				ElementPtr * firstElement() const;
 
 				virtual size_t numElements() const;

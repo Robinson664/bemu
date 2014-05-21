@@ -31,6 +31,6 @@ namespace BEmu
 			DLL_EXPORT bool isValid() const;
 			DLL_EXPORT Message message(bool createClonable = false) const;
 			DLL_EXPORT MessageIterator(Event evt);
-			DLL_EXPORT ~MessageIterator(); //when the messageIterator goes out of scope in the actual BB API, its elements are deleted.  I don't do that here.
+			DLL_EXPORT ~MessageIterator(); //when the messageIterator goes out of scope in the actual BB API, its elements and messages are deleted
 	};
 }

@@ -59,6 +59,19 @@ namespace BEmu
 			this->_exceptionsBadFields = 0;
 		}
 
+		std::stack<ElementPtr*> MarketMessageSubscriptionStarted::getRootElements() const
+		{
+			std::stack<ElementPtr*> result;
+
+			if(this->_exceptionsNull != 0)
+				result.push(this->_exceptionsNull);
+
+			if(this->_exceptionsBadFields != 0)
+				result.push(this->_exceptionsBadFields);
+
+			return result;
+		}
+
 		ElementPtr * MarketMessageSubscriptionStarted::firstElement() const
 		{
 			if(this->_exceptionsNull != 0)

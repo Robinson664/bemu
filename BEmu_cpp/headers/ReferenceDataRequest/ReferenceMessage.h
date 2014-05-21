@@ -30,6 +30,8 @@ namespace BEmu
 				ReferenceMessage(const CorrelationId& corr, const std::map<std::string, std::map<std::string, ObjectType>*>& fieldData);
 				~ReferenceMessage();
 
+				virtual std::stack<ElementPtr*> getRootElements() const;
+
 				virtual ElementPtr * getElement(const char* name) const;
 
 				virtual const char* topicName() const;
