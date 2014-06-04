@@ -56,7 +56,7 @@ namespace BEmu
 			friend DLL_EXPORT std::ostream& operator<<(std::ostream& os, const CorrelationId& correlator); //needs access to _isInternal
 	};
 
-	bool operator==(const CorrelationId& lhs, const CorrelationId& rhs);
-	bool operator!=(const CorrelationId& lhs, const CorrelationId& rhs);
-	bool operator<(const CorrelationId& lhs, const CorrelationId& rhs);
+	DLL_EXPORT bool operator==(const CorrelationId& lhs, const CorrelationId& rhs);
+	DLL_EXPORT bool operator!=(const CorrelationId& lhs, const CorrelationId& rhs);
+	DLL_EXPORT bool operator<(const CorrelationId& lhs, const CorrelationId& rhs);
 }

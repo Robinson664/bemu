@@ -13,7 +13,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementString::MarketElementString(std::string name, std::string value)
+		MarketElementString::MarketElementString(const std::string& name, const std::string& value)
 		{
 			this->_name = name;
 			this->_value = value;
@@ -52,7 +52,7 @@ namespace BEmu
 		const char * MarketElementString::getValueAsString(int index) const
 		{
 			if(index == 0)
-				return this->toCharPointer(this->_value);
+				return this->_value.c_str();
 			else
 				throw elementPtrEx;
 		}

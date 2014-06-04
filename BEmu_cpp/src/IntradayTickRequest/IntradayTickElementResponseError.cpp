@@ -19,48 +19,53 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		IntradayTickElementResponseError::IntradayTickElementResponseError()
+		IntradayTickElementResponseError::IntradayTickElementResponseError() :
+			_category(new IntradayTickElementString("category", "BAD_SEC")),
+			_subCategory(new IntradayTickElementString("subcategory", "INVALID_SECURITY"))
+
 		{
 			int code = RandomDataGenerator::RandomInt(99);
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
+			//All deleted in destructor
+
 			//source
 			std::stringstream sourceValue;
 			sourceValue << code << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
-			this->_source = new IntradayTickElementString("source", sourceValue.str());
+			this->_source = boost::shared_ptr<IntradayTickElementString>(new IntradayTickElementString("source", sourceValue.str()));
 
 			//code
-			this->_code = new IntradayTickElementInt("code", code);
+			this->_code = boost::shared_ptr<IntradayTickElementInt>(new IntradayTickElementInt("code", code));
 
 			//category
-			this->_category = new IntradayTickElementString("category", "BAD_SEC");
+			//this->_category = new IntradayTickElementString("category", "BAD_SEC");
 
 			//message
 			std::stringstream messageValue;
 			messageValue << "Unknown/Invalid security [nid:" << code << "]";
-			this->_message = new IntradayTickElementString("message", messageValue.str());
+			this->_message = boost::shared_ptr<IntradayTickElementString>(new IntradayTickElementString("message", messageValue.str()));
 
 			//sub-category
-			this->_subCategory = new IntradayTickElementString("subcategory", "INVALID_SECURITY");
+			//this->_subCategory = new IntradayTickElementString("subcategory", "INVALID_SECURITY");
 		}
 
 		IntradayTickElementResponseError::~IntradayTickElementResponseError()
 		{
-			delete this->_source;
-			this->_source = 0;
+			//delete this->_source;
+			//this->_source = 0;
 
-			delete this->_code;
-			this->_code = 0;
+			//delete this->_code;
+			//this->_code = 0;
 
-			delete this->_category;
-			this->_category = 0;
+			//delete this->_category;
+			//this->_category = 0;
 
-			delete this->_message;
-			this->_message = 0;
+			//delete this->_message;
+			//this->_message = 0;
 
-			delete this->_subCategory;
-			this->_subCategory = 0;
+			//delete this->_subCategory;
+			//this->_subCategory = 0;
 		}
 
 		Name IntradayTickElementResponseError::name() const
@@ -86,22 +91,23 @@ namespace BEmu
 			return result;
 		}
 
-		ElementPtr * IntradayTickElementResponseError::getElement(const char* name) const
+		//ElementPtr * IntradayTickElementResponseError::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> IntradayTickElementResponseError::getElement(const char* name) const
 		{
 			if(strncmp("source", name, 7) == 0)
-				return this->_source;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_source);
 
 			else if(strncmp("code", name, 5) == 0)
-				return this->_code;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_code);
 
 			else if(strncmp("category", name, 9) == 0)
-				return this->_category;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_category);
 
 			else if(strncmp("message", name, 8) == 0)
-				return this->_message;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_message);
 
 			else if(strncmp("subcategory", name, 12) == 0)
-				return this->_subCategory;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_subCategory);
 
 			else
 				throw elementPtrEx;

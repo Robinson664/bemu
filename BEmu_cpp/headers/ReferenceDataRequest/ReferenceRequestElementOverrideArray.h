@@ -21,7 +21,8 @@ namespace BEmu
 		class ReferenceRequestElementOverrideArray : public ElementPtr
 		{
 			private:
-				std::vector<ReferenceRequestElementOverride*> _overrides;
+				//std::vector<ReferenceRequestElementOverride*> _overrides;
+				std::vector< boost::shared_ptr<ReferenceRequestElementOverride> > _overrides;
 
 			public:
 				ReferenceRequestElementOverrideArray();
@@ -35,8 +36,11 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				virtual ElementPtr * getValueAsElement(int index) const;
-				virtual ElementPtr * appendElement();
+				//virtual ElementPtr * getValueAsElement(int index) const;
+				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
+
+				//virtual ElementPtr * appendElement();
+				virtual boost::shared_ptr<ElementPtr> appendElement();
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

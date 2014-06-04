@@ -17,14 +17,21 @@
 
 namespace BEmu
 {
-	Subscription::Subscription(std::string topic, std::string fields, std::string options, CorrelationId correlationId)
+	Subscription::Subscription()
 	{
+		this->_isDefault = true;
+	}
+
+	Subscription::Subscription(const std::string& topic, const std::string& fields, const std::string& options, const CorrelationId& correlationId)
+	{
+		this->_isDefault = false;
 		this->construct(topic, fields, options, correlationId);
 		this->_hasConflationInterval = false;
 	}
 
-	Subscription::Subscription(std::string topic, std::string fields, std::string options, CorrelationId correlationId, int conflationInterval)
+	Subscription::Subscription(const std::string& topic, const std::string& fields, const std::string& options, const CorrelationId& correlationId, int conflationInterval)
 	{
+		this->_isDefault = false;
 		this->construct(topic, fields, options, correlationId);
 		this->_hasConflationInterval = true;
 		this->_conflationInterval = conflationInterval;
@@ -32,6 +39,7 @@ namespace BEmu
 
 	Subscription::Subscription(const char* topic, const std::vector<std::string>& fields, const std::vector<std::string>& options, const CorrelationId& correlationId)
 	{
+		this->_isDefault = false;
 		this->_corr = correlationId;
 		this->_security = topic;
 		this->_fieldList = std::vector<std::string>(fields);
@@ -55,7 +63,7 @@ namespace BEmu
 		this->_options = std::string(ssOptions.str());
 	}
 
-	void Subscription::construct(std::string topic, std::string fields, std::string options, CorrelationId correlationId)
+	void Subscription::construct(const std::string& topic, const std::string& fields, const std::string& options, const CorrelationId& correlationId)
 	{
 		this->_corr = correlationId;
 		this->_fields = fields;
@@ -85,6 +93,7 @@ namespace BEmu
 
 	Subscription::Subscription(const Subscription& arg)
 	{
+		this->_isDefault = arg._isDefault;
 		this->_corr = arg._corr;
 		this->_fields = arg._fields;
 		this->_options = arg._options;
@@ -97,6 +106,7 @@ namespace BEmu
 	{
 		if (this != &rhs)
 		{
+			this->_isDefault = rhs._isDefault;
 			this->_corr = rhs._corr;
 			this->_fields = rhs._fields;
 			this->_options = rhs._options;
@@ -140,5 +150,10 @@ namespace BEmu
 	int Subscription::conflationInterval() const
 	{
 		return this->_conflationInterval;
+	}
+
+	bool Subscription::isDefault() const
+	{
+		return this->_isDefault;
 	}
 }

@@ -15,7 +15,7 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		IntradayTickElementInt::IntradayTickElementInt(const std::string& name, int value)
+		IntradayTickElementInt::IntradayTickElementInt(const std::string& name, int value) : CanConvertToStringType(value)
 		{
 			this->_name = name;
 			this->_value = value;
@@ -97,15 +97,9 @@ namespace BEmu
 		const char * IntradayTickElementInt::getValueAsString(int index) const
 		{
 			if(index == 0)
-			{
-				const char * result = ElementPtr::toCharPointer(this->_value);
-				return result;
-			}
+				return this->ValueAsString().c_str();
 			else
 				throw elementPtrEx;
 		}
-
-
-
 	}
 }

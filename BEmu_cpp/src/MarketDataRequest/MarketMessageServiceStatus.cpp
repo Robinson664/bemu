@@ -15,24 +15,51 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketMessageServiceStatus::MarketMessageServiceStatus(CorrelationId corr) : MessagePtr(Name("ServiceOpened"), corr)
+		MarketMessageServiceStatus::MarketMessageServiceStatus(const CorrelationId& corr) : 
+			MessagePtr(Name("ServiceOpened"), corr),
+			_serviceName(new MarketElementString("serviceName", "//blp/mktdata"))
 		{
-			this->_serviceName = new MarketElementString("serviceName", "//blp/mktdata");
+			//this->_serviceName = new MarketElementString("serviceName", "//blp/mktdata"); //deleted in destructor
 		}
 
-		std::stack<ElementPtr*> MarketMessageServiceStatus::getRootElements() const
+		MarketMessageServiceStatus::MarketMessageServiceStatus(const MarketMessageServiceStatus& arg) :
+			MessagePtr(Name("ServiceOpened"), arg.correlationId()),
+			_serviceName(arg._serviceName)
 		{
-			std::stack<ElementPtr*> result;
+			//this->_correlationId = arg._correlationId;
+			//this->_messageType = arg._messageType;
+			//this->_serviceName = arg._serviceName;
+		}
 
-			if(this->_serviceName != 0)
-				result.push(this->_serviceName);
+		MarketMessageServiceStatus::~MarketMessageServiceStatus()
+		{
+			//delete this->_serviceName;
+			//this->_serviceName = 0;
+		}
+
+		//std::stack<ElementPtr*> MarketMessageServiceStatus::getRootElements() const
+		std::stack< boost::shared_ptr<ElementPtr> > MarketMessageServiceStatus::getRootElements() const
+		{
+			//std::stack<ElementPtr*> result;
+			std::stack< boost::shared_ptr<ElementPtr> > result;
+
+			//if(this->_serviceName != 0)
+			result.push( boost::dynamic_pointer_cast<ElementPtr>(this->_serviceName) );
 
 			return result;
 		}
 
-		ElementPtr * MarketMessageServiceStatus::firstElement() const
+		void MarketMessageServiceStatus::markRootElementsDeleted()
 		{
-			return this->_serviceName;
+			//this->_serviceName = 0;
+		}
+
+		//ElementPtr * MarketMessageServiceStatus::firstElement() const
+		boost::shared_ptr<ElementPtr> MarketMessageServiceStatus::firstElement() const
+		{
+			return boost::dynamic_pointer_cast<ElementPtr>(this->_serviceName);
+
+			//return this->_serviceName;
 		}
 
 		size_t MarketMessageServiceStatus::numElements() const
@@ -45,10 +72,16 @@ namespace BEmu
 			return "";
 		}
 
-		ElementPtr * MarketMessageServiceStatus::asElement() const
+		//ElementPtr * MarketMessageServiceStatus::asElement() const
+		boost::shared_ptr<ElementPtr> MarketMessageServiceStatus::asElement() const
 		{
-			const MarketMessageServiceStatus * ptr = this;
-			return new MarketElementServiceStatus(ptr);
+			//const MarketMessageServiceStatus * ptr = this;
+			//return new MarketElementServiceStatus(ptr); //TODO: delete
+
+			boost::shared_ptr<MarketMessageServiceStatus> elm( new MarketMessageServiceStatus(*this) );
+			boost::shared_ptr<ElementPtr> result(boost::dynamic_pointer_cast<ElementPtr>(elm));
+
+			return result;
 		}
 
 		std::ostream& MarketMessageServiceStatus::print(std::ostream& stream, int level, int spacesPerLevel) const

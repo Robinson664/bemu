@@ -14,7 +14,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementDatetime::MarketElementDatetime(std::string name, Datetime datetime)
+		MarketElementDatetime::MarketElementDatetime(const std::string& name, Datetime datetime)
 		{
 			this->_name = name;
 			this->_datetime = datetime;

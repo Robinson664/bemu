@@ -14,25 +14,33 @@
 #include "BloombergTypes/SchemaElementDefinition.h"
 #include <exception>
 #include <sstream>
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
 	class ElementPtr
 	{
 		protected:
-			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string value) const;
+			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string& value) const;
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const int value) const;
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const double value) const;
 
-			static std::string toString(int i);
+		public:
 
-		public:			
+			virtual ~ElementPtr(); //The actual BB API does not provide a destructor
+
+			//these possibly allocate heap memory
 			static const char * toCharPointer(std::string& arg);
 			static const char * toCharPointer(const std::string& arg);
 			static const char * toCharPointer(std::stringstream& arg);
 			static const char * toCharPointer(int arg);
 			static const char * toCharPointer(double arg);
 			static const char * toCharPointer(const Datetime& arg);
+
+			//these do not allocate any heap memory (the calling Element will control this)
+			static std::string toString(int arg);
+			static std::string toString(double arg, std::stringstream& ss);
+			static std::string toString(const Datetime& arg);
 
 			class ElementPtrException: public std::exception
 			{
@@ -61,15 +69,22 @@ namespace BEmu
 			virtual float getValueAsFloat32(int index) const;
 			virtual double getValueAsFloat64(int index) const;
 			virtual Datetime getValueAsDatetime(int index) const;
-			virtual const char * getValueAsString(int index) const;
-			virtual ElementPtr * getValueAsElement(int index) const;
+			virtual const char * getValueAsString(int index) const; //result good until this Element is deleted
+			
+			//virtual ElementPtr * getValueAsElement(int index) const;
+			virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
 		
-			virtual ElementPtr * getElement(int position) const;
+			//virtual ElementPtr * getElement(int position) const;
+			virtual boost::shared_ptr<ElementPtr> getElement(int position) const;
+
 			virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 			bool hasElement(const Name& name, bool excludeNullElements = false) const;
 			
-			virtual ElementPtr * getElement(const char* name) const;
-			ElementPtr * getElement(const Name& name) const;
+			//virtual ElementPtr * getElement(const char* name) const;
+			virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
+			//ElementPtr * getElement(const Name& name) const;
+			boost::shared_ptr<ElementPtr> getElement(const Name& name) const;
 
 			virtual bool getElementAsBool(const char* name) const;
 			bool getElementAsBool(const Name& name) const;
@@ -89,13 +104,14 @@ namespace BEmu
 			virtual Datetime getElementAsDatetime(const char* name) const;
 			Datetime getElementAsDatetime(const Name& name) const;
 
-			virtual const char* getElementAsString(const char* name) const;
-			const char* getElementAsString(const Name& name) const;
+			virtual const char* getElementAsString(const char* name) const; //result good until this Element is deleted
+			const char* getElementAsString(const Name& name) const; //result good until this Element is deleted
 
 			virtual char getElementAsChar(const char* name) const;
 			char getElementAsChar(const Name& name) const;
 
-			virtual ElementPtr * appendElement();
+			//virtual ElementPtr * appendElement();
+			virtual boost::shared_ptr<ElementPtr> appendElement();
 
 			virtual void appendValue(bool value);
 			virtual void appendValue(char value);

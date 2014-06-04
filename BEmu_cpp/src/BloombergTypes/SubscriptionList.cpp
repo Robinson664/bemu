@@ -60,6 +60,16 @@ namespace BEmu
 		return *this;
 	}
 
+	CorrelationId SubscriptionList::correlationIdAt(size_t index) const
+	{
+		return this->_subs->at(index).correlationId();
+	}
+
+	const char* SubscriptionList::topicStringAt(size_t index) const
+	{
+		return this->_subs->at(index).security().c_str();
+	}
+
 	size_t SubscriptionList::size() const
 	{
 		return this->_subs->size();
@@ -70,28 +80,27 @@ namespace BEmu
 		this->_subs->clear();
 	}
 
-	void SubscriptionList::add(Subscription sub)
+	void SubscriptionList::add(const Subscription& sub)
 	{
 		this->_subs->push_back(sub);
 	}
 
-	void SubscriptionList::remove(CorrelationId corr)
+	Subscription SubscriptionList::remove(const CorrelationId& corr)
 	{
-		//Will replace the existing sub list with this new one that doesn't have a subscription with corr
-		//There's probably a better way to do this, but I don't know it
-		std::vector<Subscription> * replacement = new std::vector<Subscription>();
-		
-		while(this->_subs->size() > 0)
+		Subscription removed;
+		for(size_t i = 0; i < this->_subs->size(); i++)
 		{
-			Subscription sub = this->_subs->back();
-			this->_subs->pop_back();
+			Subscription * current = &(this->_subs->operator[](i));
 
-			if(sub.correlationId() != corr)
-				replacement->push_back(sub);
+			if(current->correlationId() == corr) //find the subscription by corrId
+			{
+				removed = *current;
+				this->_subs->erase(this->_subs->begin() + i); //remove the subscription
+				break;
+			}
 		}
 
-		delete this->_subs;
-		this->_subs = replacement;
+		return removed;
 	}
 
 	std::vector<Subscription> * SubscriptionList::list() const

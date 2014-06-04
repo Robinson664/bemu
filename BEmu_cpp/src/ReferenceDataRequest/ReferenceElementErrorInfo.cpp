@@ -19,40 +19,46 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceElementErrorInfo::ReferenceElementErrorInfo()
+		ReferenceElementErrorInfo::ReferenceElementErrorInfo() :
+			_code(new ReferenceElementInt("code", RandomDataGenerator::RandomInt(99))),
+			_category(new ReferenceElementString("category", "BAD_FLD")),
+			_message(new ReferenceElementString("message", "Field not valid")),
+			_subCategory(new ReferenceElementString("subcategory", "INVALID_FIELD"))
 		{
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
+			//all deleted in destructor
+
 			std::stringstream ssSource;
 			ssSource << RandomDataGenerator::RandomInt(99) << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
-			this->_source = new ReferenceElementString("source", ssSource.str());
+			this->_source = boost::shared_ptr<ReferenceElementString>(new ReferenceElementString("source", ssSource.str()));
 
-			this->_code = new ReferenceElementInt("code", RandomDataGenerator::RandomInt(99));
+			//this->_code = new ReferenceElementInt("code", RandomDataGenerator::RandomInt(99));
 
-			this->_category = new ReferenceElementString("category", "BAD_FLD");
+			//this->_category = new ReferenceElementString("category", "BAD_FLD");
 
-            this->_message = new ReferenceElementString("message", "Field not valid");
+            //this->_message = new ReferenceElementString("message", "Field not valid");
 
-            this->_subCategory = new ReferenceElementString("subcategory", "INVALID_FIELD");
+            //this->_subCategory = new ReferenceElementString("subcategory", "INVALID_FIELD");
 		}
 
 		ReferenceElementErrorInfo::~ReferenceElementErrorInfo()
 		{
-			delete this->_source;
-			this->_source = 0;
-			
-			delete this->_code;
-			this->_code = 0;
-			
-			delete this->_category;
-			this->_category = 0;
-			
-			delete this->_message;
-			this->_message = 0;
-			
-			delete this->_subCategory;
-			this->_subCategory = 0;
+			//delete this->_source;
+			//this->_source = 0;
+			//
+			//delete this->_code;
+			//this->_code = 0;
+			//
+			//delete this->_category;
+			//this->_category = 0;
+			//
+			//delete this->_message;
+			//this->_message = 0;
+			//
+			//delete this->_subCategory;
+			//this->_subCategory = 0;
 		}
 
 		Name ReferenceElementErrorInfo::name() const { return Name("errorInfo"); }
@@ -80,22 +86,23 @@ namespace BEmu
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		ElementPtr * ReferenceElementErrorInfo::getElement(const char* name) const
+		//ElementPtr * ReferenceElementErrorInfo::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> ReferenceElementErrorInfo::getElement(const char* name) const
 		{
 			if(strncmp(name, "category", 9) == 0)
-				return this->_category;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_category);
 
 			else if(strncmp(name, "code", 5) == 0)
-				return this->_code;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_code);
 
 			else if(strncmp(name, "message", 8) == 0)
-				return this->_message;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_message);
 
 			else if(strncmp(name, "source", 7) == 0)
-				return this->_source;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_source);
 
 			else if(strncmp(name, "subcategory", 12) == 0)
-				return this->_subCategory;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_subCategory);
 
 			else
 				throw elementPtrEx;

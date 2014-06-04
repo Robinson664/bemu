@@ -22,65 +22,80 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarRequest::IntradayBarRequest(const Service& svc)
+		IntradayBarRequest::IntradayBarRequest(const Service& svc) :
+			_eventTypes(new IntradayBarRequestElementStringArray("TBD"))
 		{
-			this->_eventTypes = 0;
-			this->_security = 0;
-			this->_dtStart = 0;
-			this->_dtEnd = 0;
-			this->_intervalInMinutes = 0;
-			this->_gapFillInitialBar = 0;
-			this->_returnEids = 0;
-			this->_adjustmentNormalElement = 0;
-			this->_adjustmentAbnormalElement = 0;
-			this->_adjustmentSplitElement = 0;
-			this->_adjustmentFollowDPDF = 0;
+			this->_isNull_eventTypes = false;
+
+			this->_isNull_security = true;
+			this->_isNull_dtStart = true;
+			this->_isNull_dtEnd = true;
+			this->_isNull_intervalInMinutes = true;
+			this->_isNull_gapFillInitialBar = true;
+			this->_isNull_returnEids = true;
+			this->_isNull_adjustmentNormalElement = true;
+			this->_isNull_adjustmentAbnormalElement = true;
+			this->_isNull_adjustmentSplitElement = true;
+			this->_isNull_adjustmentFollowDPDF = true;
+
+			//this->_eventTypes = 0;
+			//this->_security = 0;
+			//this->_dtStart = 0;
+			//this->_dtEnd = 0;
+			//this->_intervalInMinutes = 0;
+			//this->_gapFillInitialBar = 0;
+			//this->_returnEids = 0;
+			//this->_adjustmentNormalElement = 0;
+			//this->_adjustmentAbnormalElement = 0;
+			//this->_adjustmentSplitElement = 0;
+			//this->_adjustmentFollowDPDF = 0;
 
 			this->_service = svc;
-			this->_eventTypes = new IntradayBarRequestElementStringArray("TBD");
+			//this->_eventTypes = new IntradayBarRequestElementStringArray("TBD"); //deleted in the destructor
 			this->_requestType = RequestPtr::intradayBar;
 		}
 
 		IntradayBarRequest::~IntradayBarRequest()
 		{
-			delete this->_eventTypes;
-			this->_eventTypes = 0;
+			//delete this->_eventTypes;
+			//this->_eventTypes = 0;
 
-			delete this->_security;
-			this->_security = 0;
+			//delete this->_security;
+			//this->_security = 0;
 
-			delete this->_dtStart;
-			this->_dtStart = 0;
+			//delete this->_dtStart;
+			//this->_dtStart = 0;
 
-			delete this->_dtEnd;
-			this->_dtEnd = 0;
+			//delete this->_dtEnd;
+			//this->_dtEnd = 0;
 
-			delete this->_intervalInMinutes;
-			this->_intervalInMinutes = 0;
+			//delete this->_intervalInMinutes;
+			//this->_intervalInMinutes = 0;
 
-			delete this->_gapFillInitialBar;
-			this->_gapFillInitialBar = 0;
+			//delete this->_gapFillInitialBar;
+			//this->_gapFillInitialBar = 0;
 
-			delete this->_returnEids;
-			this->_returnEids = 0;
+			//delete this->_returnEids;
+			//this->_returnEids = 0;
 
-			delete this->_adjustmentNormalElement;
-			this->_adjustmentNormalElement = 0;
+			//delete this->_adjustmentNormalElement;
+			//this->_adjustmentNormalElement = 0;
 
-			delete this->_adjustmentAbnormalElement;
-			this->_adjustmentAbnormalElement = 0;
+			//delete this->_adjustmentAbnormalElement;
+			//this->_adjustmentAbnormalElement = 0;
 
-			delete this->_adjustmentSplitElement;
-			this->_adjustmentSplitElement = 0;
+			//delete this->_adjustmentSplitElement;
+			//this->_adjustmentSplitElement = 0;
 
-			delete this->_adjustmentFollowDPDF;
-			this->_adjustmentFollowDPDF = 0;
+			//delete this->_adjustmentFollowDPDF;
+			//this->_adjustmentFollowDPDF = 0;
 		}
 
-		std::vector<Datetime>* IntradayBarRequest::getDateTimes() const
+		std::vector<Datetime> IntradayBarRequest::getDateTimes() const
 		{
 			//dtStart, dtEnd, and interval are required
-			if(this->_dtStart == 0 || this->_dtEnd == 0 || this->_intervalInMinutes == 0)
+			//if(this->_dtStart == 0 || this->_dtEnd == 0 || this->_intervalInMinutes == 0)
+			if(this->_isNull_dtStart || this->_isNull_dtEnd || this->_isNull_intervalInMinutes)
 				throw requestEx;
 
 			int intervalInMinutes = this->_intervalInMinutes->getInt();
@@ -93,12 +108,12 @@ namespace BEmu
 			if(dtStart >= dtEnd) //dtStart must be before dtEnd
 				throw requestEx;
 
-			std::vector<Datetime>* result = new std::vector<Datetime>();
+			std::vector<Datetime> result;
 
 			Datetime dtLoop(dtStart.year(), dtStart.month(), dtStart.day(), dtStart.hours(), dtStart.minutes(), dtStart.seconds());
 			while(dtLoop < dtEnd)
 			{
-				result->push_back(Datetime(dtLoop));
+				result.push_back(Datetime(dtLoop));
 				dtLoop.addMinutes(this->_intervalInMinutes->getInt());
 			}
 
@@ -107,12 +122,14 @@ namespace BEmu
 
 		bool IntradayBarRequest::hasStartDate() const
 		{
-			return this->_dtStart != 0;
+			return !this->_isNull_dtStart;
+			//return this->_dtStart != 0;
 		}
 
 		bool IntradayBarRequest::hasEndDate() const
 		{
-			return this->_dtEnd != 0;
+			return !this->_isNull_dtEnd;
+			//return this->_dtEnd != 0;
 		}
 
 		Datetime IntradayBarRequest::getDtStart() const
@@ -139,7 +156,13 @@ namespace BEmu
 		{
 			if(strncmp(name, "security", 9) == 0)
 			{
-				this->_security = new IntradayBarRequestElementString(name, value);
+				//if(this->_security != 0)
+				//	delete this->_security;
+
+				//this->_security = new IntradayBarRequestElementString(name, value); //deleted in destructor
+
+				this->_security = boost::shared_ptr<IntradayBarRequestElementString>(new IntradayBarRequestElementString(name, value));
+				this->_isNull_security = false;
 			}
 			else if(strncmp(name, "eventType", 10) == 0)
 			{
@@ -153,11 +176,23 @@ namespace BEmu
 		{
 			if(strncmp(name, "startDateTime", 14) == 0)
 			{
-				this->_dtStart = new IntradayBarRequestElementTime(name, elementValue);
+				//if(this->_dtStart != 0)
+				//	delete this->_dtStart;
+
+				//this->_dtStart = new IntradayBarRequestElementTime(name, elementValue); //deleted in destructor
+
+				this->_dtStart = boost::shared_ptr<IntradayBarRequestElementTime>(new IntradayBarRequestElementTime(name, elementValue));
+				this->_isNull_dtStart = false;
 			}
 			else if(strncmp(name, "endDateTime", 12) == 0)
 			{
-				this->_dtEnd = new IntradayBarRequestElementTime(name, elementValue);
+				//if(this->_dtEnd != 0)
+				//	delete this->_dtEnd;
+
+				//this->_dtEnd = new IntradayBarRequestElementTime(name, elementValue); //deleted in destructor
+
+				this->_dtEnd = boost::shared_ptr<IntradayBarRequestElementTime>(new IntradayBarRequestElementTime(name, elementValue));
+				this->_isNull_dtEnd = false;
 			}
 			else
 				throw requestEx;
@@ -167,7 +202,13 @@ namespace BEmu
 		{
 			if(strncmp(name, "interval", 9) == 0)
 			{
-				this->_intervalInMinutes = new IntradayBarRequestElementInt(name, elementValue);
+				//if(this->_intervalInMinutes != 0)
+				//	delete this->_intervalInMinutes;
+
+				//this->_intervalInMinutes = new IntradayBarRequestElementInt(name, elementValue); //deleted in destructor
+
+				this->_intervalInMinutes = boost::shared_ptr<IntradayBarRequestElementInt>(new IntradayBarRequestElementInt(name, elementValue));
+				this->_isNull_intervalInMinutes = false;
 			}
 			else
 				throw requestEx;
@@ -177,27 +218,63 @@ namespace BEmu
 		{
 			if(strncmp(name, "gapFillInitialBar", 18) == 0)
 			{
-				this->_gapFillInitialBar = new IntradayBarRequestElementBool(name, elementValue);
+				//if(this->_gapFillInitialBar != 0)
+				//	delete this->_gapFillInitialBar;
+
+				//this->_gapFillInitialBar = new IntradayBarRequestElementBool(name, elementValue);
+
+				this->_gapFillInitialBar = boost::shared_ptr<IntradayBarRequestElementBool>(new IntradayBarRequestElementBool(name, elementValue));
+				this->_isNull_gapFillInitialBar = false;
 			}
 			else if(strncmp(name, "returnEids", 11) == 0)
 			{
-				this->_returnEids = new IntradayBarRequestElementBool(name, elementValue);
+				//if(this->_returnEids != 0)
+				//	delete this->_returnEids;
+
+				//this->_returnEids = new IntradayBarRequestElementBool(name, elementValue);
+
+				this->_returnEids = boost::shared_ptr<IntradayBarRequestElementBool>(new IntradayBarRequestElementBool(name, elementValue));
+				this->_isNull_returnEids = false;
 			}
 			else if(strncmp(name, "adjustmentNormal", 17) == 0)
 			{
-				this->_adjustmentNormalElement = new IntradayBarRequestElementBool(name, elementValue);
+				//if(this->_adjustmentNormalElement != 0)
+				//	delete this->_adjustmentNormalElement;
+
+				//this->_adjustmentNormalElement = new IntradayBarRequestElementBool(name, elementValue);
+
+				this->_adjustmentNormalElement = boost::shared_ptr<IntradayBarRequestElementBool>(new IntradayBarRequestElementBool(name, elementValue));
+				this->_isNull_adjustmentNormalElement = false;
 			}
 			else if(strncmp(name, "adjustmentAbnormal", 19) == 0)
 			{
-				this->_adjustmentAbnormalElement = new IntradayBarRequestElementBool(name, elementValue);
+				//if(this->_adjustmentAbnormalElement != 0)
+				//	delete this->_adjustmentAbnormalElement;
+
+				//this->_adjustmentAbnormalElement = new IntradayBarRequestElementBool(name, elementValue);
+
+				this->_adjustmentAbnormalElement = boost::shared_ptr<IntradayBarRequestElementBool>(new IntradayBarRequestElementBool(name, elementValue));
+				this->_isNull_adjustmentAbnormalElement = false;
 			}
 			else if(strncmp(name, "adjustmentSplit", 16) == 0)
 			{
-				this->_adjustmentSplitElement = new IntradayBarRequestElementBool(name, elementValue);
+				//if(this->_adjustmentSplitElement != 0)
+				//	delete this->_adjustmentSplitElement;
+
+				//this->_adjustmentSplitElement = new IntradayBarRequestElementBool(name, elementValue);
+
+				this->_adjustmentSplitElement = boost::shared_ptr<IntradayBarRequestElementBool>(new IntradayBarRequestElementBool(name, elementValue));
+				this->_isNull_adjustmentSplitElement = false;
 			}
 			else if(strncmp(name, "adjustmentFollowDPDF", 21) == 0)
 			{
-				this->_adjustmentFollowDPDF = new IntradayBarRequestElementBool(name, elementValue);
+				//if(this->_adjustmentFollowDPDF != 0)
+				//	delete this->_adjustmentFollowDPDF;
+
+				//this->_adjustmentFollowDPDF = new IntradayBarRequestElementBool(name, elementValue);
+
+				this->_adjustmentFollowDPDF = boost::shared_ptr<IntradayBarRequestElementBool>(new IntradayBarRequestElementBool(name, elementValue));
+				this->_isNull_adjustmentFollowDPDF = false;
 			}
 			else
 				throw requestEx;

@@ -20,14 +20,16 @@ namespace BEmu
 			std::string _security, _fields, _options;
 			std::vector<std::string> _fieldList;
 			CorrelationId _corr;
+			bool _isDefault;
 
 			bool _hasConflationInterval;
 			int _conflationInterval;
-			void construct(std::string topic, std::string fields, std::string options, CorrelationId correlationId);
+			void construct(const std::string& topic, const std::string& fields, const std::string& options, const CorrelationId& correlationId);
 
 		public:
-			Subscription(std::string topic, std::string fields, std::string options, CorrelationId correlationId);
-			Subscription(std::string topic, std::string fields, std::string options, CorrelationId correlationId, int conflationInterval);
+			Subscription();
+			Subscription(const std::string& topic, const std::string& fields, const std::string& options, const CorrelationId& correlationId);
+			Subscription(const std::string& topic, const std::string& fields, const std::string& options, const CorrelationId& correlationId, int conflationInterval);
 			Subscription(const char* topic, const std::vector<std::string>& fields, const std::vector<std::string>& options, const CorrelationId& correlationId);
 			~Subscription();
 			Subscription(const Subscription& arg);
@@ -41,5 +43,6 @@ namespace BEmu
 
 			bool hasConflationInterval() const;
 			int conflationInterval() const;
+			bool isDefault() const;
 	};
 }

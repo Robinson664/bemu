@@ -23,7 +23,7 @@ namespace BEmu
 		class ReferenceElement : public ElementPtr
 		{
 			private:
-				ReferenceElementSecurityDataArray *	_securities;
+				boost::shared_ptr<ReferenceElementSecurityDataArray> _securities;
 
 			public:
 				ReferenceElement(const ReferenceMessage& arg);
@@ -37,7 +37,8 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

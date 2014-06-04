@@ -22,7 +22,7 @@ namespace BEmu
 		return result;
 	}
 
-	string DisplayFormats::Format(Datetime dt, const char * format)
+	string DisplayFormats::Format(const Datetime& dt, const char * format)
 	{
 		//std::locale takes ownership of this "facet" pointer, so I don't have to delete it http://rhubbarb.wordpress.com/2009/10/17/boost-datetime-locales-and-facets/
 		boost::posix_time::time_facet * facet = new boost::posix_time::time_facet(format);
@@ -35,49 +35,49 @@ namespace BEmu
 		return result;
 	}
 
-	string DisplayFormats::ToMMddYYWithSlashes(Datetime date)
+	string DisplayFormats::ToMMddYYWithSlashes(const Datetime& date)
 	{
 		string result(DisplayFormats::Format(date, "%m/%d/%y")); //obviously US format
 		return result;
 	}
 
-	string DisplayFormats::ToYYYYMMDDWithDashes(Datetime date)
+	string DisplayFormats::ToYYYYMMDDWithDashes(const Datetime& date)
 	{
 		string result(DisplayFormats::Format(date, "%Y-%m-%d"));
 		return result;
 	}
 
-	string DisplayFormats::FormatDate(Datetime date)  //mkt data has time zone information, but the other requests don't
+	string DisplayFormats::FormatDate(const Datetime& date)  //mkt data has time zone information, but the other requests don't
 	{
 		string result(DisplayFormats::Format(date, "%Y-%m-%d"));
 		return result;
 	}
 
-	string DisplayFormats::FormatTimeZone(Datetime time)
+	string DisplayFormats::FormatTimeZone(const Datetime& time)
 	{
 		string result(DisplayFormats::Format(time, "%H:%M:%S.%f%q"));
 		return result;
 	}
 
-	string DisplayFormats::FormatDatetimeZone(Datetime datetime)
+	string DisplayFormats::FormatDatetimeZone(const Datetime& datetime)
 	{
 		string result(DisplayFormats::Format(datetime, "%Y-%m-%dT%H:%M:%S.%f%q"));
 		return result;
 	}
 
-	string DisplayFormats::MarketDataRequests_FormatDateZone(Datetime date)
+	string DisplayFormats::MarketDataRequests_FormatDateZone(const Datetime& date)
 	{
 		string result(DisplayFormats::Format(date, "%Y-%m-%d%q"));
 		return result;
 	}
 
-	string DisplayFormats::HistoricalOrReferenceRequests_FormatDate(Datetime date)
+	string DisplayFormats::HistoricalOrReferenceRequests_FormatDate(const Datetime& date)
 	{
 		string result(DisplayFormats::Format(date, "%Y-%m-%d"));
 		return result;
 	}
 
-	bool DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(string str, Datetime & dt)
+	bool DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(const string& str, Datetime & dt)
 	{
 		try
 		{
@@ -91,7 +91,7 @@ namespace BEmu
 		}
 	}
 
-	string DisplayFormats::IntradayRequests_FormatDatetime(Datetime datetime)
+	string DisplayFormats::IntradayRequests_FormatDatetime(const Datetime& datetime)
 	{
 		string result(DisplayFormats::Format(datetime, "%Y-%m-%dT%H:%M:%S.%f"));
 		return result;

@@ -22,13 +22,13 @@ namespace BEmu
 		{
 			private:
 				std::string _elementName;
-				std::vector<std::string*> _values;
+				std::vector<std::string> _values;
 				
 			public:
 				IntradayTickRequestElementStringArray(const std::string& elementName);
 				~IntradayTickRequestElementStringArray();
 				void addValue(const std::string& value);
-				const std::vector<std::string*>& getValues();
+				std::vector<std::string> getValues();
 
 				virtual Name name() const;
 				virtual size_t numValues() const { return 0; }

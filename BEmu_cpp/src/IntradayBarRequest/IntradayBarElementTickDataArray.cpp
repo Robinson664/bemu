@@ -18,24 +18,30 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarElementTickDataArray::IntradayBarElementTickDataArray(const std::vector<IntradayBarTickDataType*>& bars)
+		IntradayBarElementTickDataArray::IntradayBarElementTickDataArray(std::vector< boost::shared_ptr<IntradayBarTickDataType> > bars)
 		{
-			for(std::vector<IntradayBarTickDataType*>::const_iterator iter = bars.begin(); iter != bars.end(); ++iter)
+			//for(std::vector<IntradayBarTickDataType*>::const_iterator iter = bars.begin(); iter != bars.end(); ++iter)
+			for(std::vector< boost::shared_ptr<IntradayBarTickDataType> >::const_iterator iter = bars.begin(); iter != bars.end(); ++iter)
 			{
-				IntradayBarTickDataType * tick = *iter;
-				IntradayBarElementTickData * elm = new IntradayBarElementTickData(*tick);
-				this->_elements.push_back(elm);
+				boost::shared_ptr<IntradayBarTickDataType> tick = *iter;
+				
+				//IntradayBarElementTickData * elm = new IntradayBarElementTickData(*tick); //deleted in destructor
+				boost::shared_ptr<IntradayBarElementTickData> elmP(new IntradayBarElementTickData(*tick));
+
+				this->_elements.push_back(elmP);
 			}
 		}
 
 		IntradayBarElementTickDataArray::~IntradayBarElementTickDataArray()
 		{
-			for(std::vector<IntradayBarElementTickData*>::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
-			{
-				IntradayBarElementTickData * elm = *iter;
-				delete elm;
-				elm = 0;
-			}
+			//for(std::vector<IntradayBarElementTickData*>::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
+			//{
+			//	IntradayBarElementTickData * elm = *iter;
+			//	delete elm;
+			//	elm = 0;
+			//}
+
+			this->_elements.clear();
 		}
 
 		Name IntradayBarElementTickDataArray::name() const
@@ -71,7 +77,8 @@ namespace BEmu
 			return false;
 		}
 
-		ElementPtr * IntradayBarElementTickDataArray::getValueAsElement(int index) const
+		//ElementPtr * IntradayBarElementTickDataArray::getValueAsElement(int index) const
+		boost::shared_ptr<ElementPtr> IntradayBarElementTickDataArray::getValueAsElement(int index) const
 		{
 			if(index >= 0 && index < (int)this->_elements.size())
 				return this->_elements[index];
@@ -86,9 +93,10 @@ namespace BEmu
 
 			stream << tabs << "barTickData[] = {" << std::endl;
 
-			for(std::vector<IntradayBarElementTickData*>::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
+			//for(std::vector<IntradayBarElementTickData*>::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
+			for(std::vector< boost::shared_ptr<IntradayBarElementTickData> >::const_iterator iter = this->_elements.begin(); iter != this->_elements.end(); ++iter)
 			{
-				IntradayBarElementTickData * elm = *iter;
+				boost::shared_ptr<IntradayBarElementTickData> elm = *iter;
 				elm->print(stream, level + 1, spacesPerLevel);
 			}
 

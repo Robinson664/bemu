@@ -17,31 +17,38 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementSubscriptionCancelReason::MarketElementSubscriptionCancelReason()
+		MarketElementSubscriptionCancelReason::MarketElementSubscriptionCancelReason() :
+            _source(new MarketElementString("source", "Session")),
+            _errorCode(new MarketElementInt("errorCode", 0)),
+            _category(new MarketElementString("category", "CANCELED")),
+            _description(new MarketElementString("description", "Subscription canceled")),
+            _subCategory(new MarketElementString("subcategory", ""))
 		{
-            this->_source = new MarketElementString("source", "Session");
-            this->_errorCode = new MarketElementInt("errorCode", 0);
-            this->_category = new MarketElementString("category", "CANCELED");
-            this->_description = new MarketElementString("description", "Subscription canceled");
-            this->_subCategory = new MarketElementString("subcategory", "");
+			//all deleted in destructor
+
+            //this->_source = new MarketElementString("source", "Session");
+            //this->_errorCode = new MarketElementInt("errorCode", 0);
+            //this->_category = new MarketElementString("category", "CANCELED");
+            //this->_description = new MarketElementString("description", "Subscription canceled");
+            //this->_subCategory = new MarketElementString("subcategory", "");
 		}
 
 		MarketElementSubscriptionCancelReason::~MarketElementSubscriptionCancelReason()
 		{
-			delete this->_source;
-			this->_source = 0;
-			
-			delete this->_errorCode;
-			this->_errorCode = 0;
-			
-			delete this->_category;
-			this->_category = 0;
-			
-			delete this->_description;
-			this->_description = 0;
-			
-			delete this->_subCategory;
-			this->_subCategory = 0;
+			//delete this->_source;
+			//this->_source = 0;
+			//
+			//delete this->_errorCode;
+			//this->_errorCode = 0;
+			//
+			//delete this->_category;
+			//this->_category = 0;
+			//
+			//delete this->_description;
+			//this->_description = 0;
+			//
+			//delete this->_subCategory;
+			//this->_subCategory = 0;
 		}
 
 		Name MarketElementSubscriptionCancelReason::name() const

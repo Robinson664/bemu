@@ -10,12 +10,13 @@
 #pragma once
 
 #include "BloombergTypes/ElementPtr.h"
+#include "Types/CanConvertToStringType.h"
 
 namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		class HistoricElementDateTime : public ElementPtr
+		class HistoricElementDateTime : public ElementPtr, public CanConvertToStringType
 		{
 			private:
 				Datetime _value;

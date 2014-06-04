@@ -36,6 +36,10 @@ namespace BEmu
 			RequestTypeEnum _requestType;
 	
 		public:
+			
+			virtual ~RequestPtr();
+
+			int referenceCount;
 
 			class RequestException: public std::exception
 			{

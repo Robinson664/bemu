@@ -23,7 +23,8 @@ namespace BEmu
 		class ReferenceElementFieldExceptionsArray : public ElementPtr
 		{
 			private:
-				std::vector<ReferenceElementFieldExceptions*> _exceptions;
+				//std::vector<ReferenceElementFieldExceptions*> _exceptions;
+				std::vector< boost::shared_ptr<ReferenceElementFieldExceptions> > _exceptions;
 
 			public:
 				ReferenceElementFieldExceptionsArray(const std::vector<std::string>& badFields);
@@ -38,7 +39,8 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				virtual ElementPtr * getValueAsElement(int index) const;
+				//virtual ElementPtr * getValueAsElement(int index) const;
+				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

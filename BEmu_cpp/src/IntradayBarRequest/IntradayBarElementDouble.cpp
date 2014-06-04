@@ -15,7 +15,7 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarElementDouble::IntradayBarElementDouble(const std::string& name, double value)
+		IntradayBarElementDouble::IntradayBarElementDouble(const std::string& name, double value) : CanConvertToStringType(value)
 		{
 			this->_name = name;
 			this->_value = value;
@@ -70,7 +70,7 @@ namespace BEmu
 		const char * IntradayBarElementDouble::getValueAsString(int index) const
 		{
 			if(index == 0)
-				return ElementPtr::toCharPointer(this->_value);
+				return this->ValueAsString().c_str();
 			else
 				throw elementPtrEx;
 		}

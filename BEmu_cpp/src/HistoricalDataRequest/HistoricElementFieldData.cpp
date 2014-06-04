@@ -22,8 +22,12 @@ namespace BEmu
 	{
 		HistoricElementFieldData::HistoricElementFieldData(const Datetime& date, const std::map<std::string, ObjectType>& values)
 		{
-			ElementPtr * elmDate = new HistoricElementDateTime(date);
-			this->_fields[elmDate->name().string()] = elmDate;
+			//ElementPtr * elmDate = new HistoricElementDateTime(date); //deleted in destructor
+
+			boost::shared_ptr<HistoricElementDateTime> elmDate(new HistoricElementDateTime(date));
+			boost::shared_ptr<ElementPtr> elmDateP(elmDate);
+
+			this->_fields[elmDateP->name().string()] = elmDateP;
 
 			for(std::map<std::string, ObjectType>::const_iterator iter = values.begin(); iter != values.end(); ++iter)
 			{
@@ -33,19 +37,24 @@ namespace BEmu
 
 				if(obj.TryGetDouble(dvalue))
 				{
-					ElementPtr * elmDouble = new HistoricElementDouble(str, dvalue);
-					this->_fields[elmDouble->name().string()] = elmDouble;
+					//ElementPtr * elmDouble = new HistoricElementDouble(str, dvalue); //deleted in destructor
+					boost::shared_ptr<HistoricElementDouble> elmDouble(new HistoricElementDouble(str, dvalue));
+					boost::shared_ptr<ElementPtr> elmDoubleP(elmDouble);
+
+					this->_fields[elmDoubleP->name().string()] = elmDoubleP;
 				}
 			}
 		}
 
 		HistoricElementFieldData::~HistoricElementFieldData()
 		{
-			for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
-			{
-				ElementPtr * elm = iter->second;
-				delete elm;
-			}
+			//for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//{
+			//	ElementPtr * elm = iter->second;
+			//	delete elm;
+			//}
+
+			this->_fields.clear();
 		}
 
 
@@ -94,11 +103,14 @@ namespace BEmu
 			return this->_fields.find(name) != this->_fields.end();
 		}
 
-		ElementPtr * HistoricElementFieldData::getElement(const char* name) const
+		//ElementPtr * HistoricElementFieldData::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> HistoricElementFieldData::getElement(const char* name) const
 		{
 			std::string key(name);
 
-			std::map<std::string, ElementPtr*>::const_iterator it = this->_fields.find(key);
+			//std::map<std::string, ElementPtr*>::const_iterator it = this->_fields.find(key);
+			std::map<std::string, boost::shared_ptr<ElementPtr> >::const_iterator it = this->_fields.find(key);
+
 			if(it == this->_fields.end())
 				throw elementPtrEx;
 			else
@@ -142,9 +154,10 @@ namespace BEmu
 
 			stream << tabs << "fieldData = {" << std::endl;
 
-			for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			for(std::map<std::string, boost::shared_ptr<ElementPtr> >::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
 			{
-				const ElementPtr * elm = iter->second;
+				const boost::shared_ptr<ElementPtr> elm = iter->second;
 				elm->print(stream, level + 1, spacesPerLevel);
 			}
 

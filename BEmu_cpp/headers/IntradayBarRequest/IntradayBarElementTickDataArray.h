@@ -24,10 +24,11 @@ namespace BEmu
 		class IntradayBarElementTickDataArray : public ElementPtr
 		{
 			private:
-				std::vector<IntradayBarElementTickData*> _elements;
+				//std::vector<IntradayBarElementTickData*> _elements;
+				std::vector< boost::shared_ptr<IntradayBarElementTickData> > _elements;
 
 			public:
-				IntradayBarElementTickDataArray(const std::vector<IntradayBarTickDataType*>& bars);
+				IntradayBarElementTickDataArray(std::vector< boost::shared_ptr<IntradayBarTickDataType> > bars);
 				~IntradayBarElementTickDataArray();
 
 				virtual Name name() const;
@@ -38,7 +39,8 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				virtual ElementPtr * getValueAsElement(int index) const;
+				//virtual ElementPtr * getValueAsElement(int index) const;
+				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
 		};

@@ -16,25 +16,28 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceRequest::ReferenceRequest()
+		ReferenceRequest::ReferenceRequest() :
+			_securities(new ReferenceRequestElementStringArray("securities")),
+			_fields(new ReferenceRequestElementStringArray("fields")),
+			_overrides(new ReferenceRequestElementOverrideArray())
 		{
-            this->_securities = new ReferenceRequestElementStringArray("securities");
-            this->_fields = new ReferenceRequestElementStringArray("fields");
-            this->_overrides = new ReferenceRequestElementOverrideArray();
+            //this->_securities = new ReferenceRequestElementStringArray("securities"); //deleted in destructor
+            //this->_fields = new ReferenceRequestElementStringArray("fields"); //deleted in destructor
+            //this->_overrides = new ReferenceRequestElementOverrideArray(); //deleted in destructor
 			
 			this->_requestType = RequestPtr::reference;
 		}
 
 		ReferenceRequest::~ReferenceRequest()
 		{
-			delete this->_securities;
-			this->_securities = 0;
-			
-			delete this->_fields;
-			this->_fields = 0;
-			
-			delete this->_overrides;
-			this->_overrides = 0;
+			//delete this->_securities;
+			//this->_securities = 0;
+			//
+			//delete this->_fields;
+			//this->_fields = 0;
+			//
+			//delete this->_overrides;
+			//this->_overrides = 0;
 		}
 
 		std::vector<std::string> ReferenceRequest::getSecurities() const
@@ -47,7 +50,7 @@ namespace BEmu
 			return this->_fields->getValues();
 		}
 
-		bool ReferenceRequest::hasElement(std::string arg) const
+		bool ReferenceRequest::hasElement(const std::string& arg) const
 		{
 			return 
 				arg.compare("securities") == 0 ||
@@ -58,13 +61,13 @@ namespace BEmu
 		Element ReferenceRequest::getElement(const char* name)
 		{
 			if(strncmp(name, "securities", 11) == 0)
-				return this->_securities;
+				return Element(boost::dynamic_pointer_cast<ElementPtr>(this->_securities));
 			
 			else if(strncmp(name, "fields", 7) == 0)
-				return this->_fields;
+				return Element(boost::dynamic_pointer_cast<ElementPtr>(this->_fields));
 			
 			else if(strncmp(name, "overrides", 10) == 0)
-				return this->_overrides;
+				return Element(boost::dynamic_pointer_cast<ElementPtr>(this->_overrides));
 
 			else
 				throw requestEx;

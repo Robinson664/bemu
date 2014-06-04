@@ -9,14 +9,16 @@
 
 #include "MarketDataRequest/MarketElementSubscriptionStarted.h"
 #include "MarketDataRequest/MarketMessageSubscriptionStarted.h"
+#include "MarketDataRequest/MarketElementNull.h"
 
 namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementSubscriptionStarted::MarketElementSubscriptionStarted(MarketMessageSubscriptionStarted * arg)
+		MarketElementSubscriptionStarted::MarketElementSubscriptionStarted(MarketMessageSubscriptionStarted * arg) :
+			_exceptions( boost::dynamic_pointer_cast<MarketElementNull>(arg->firstElement()) )
 		{
-			this->_exceptions = (MarketElementNull*)arg->firstElement();
+			//this->_exceptions = (MarketElementNull*)arg->firstElement();
 		}
 
 		Name MarketElementSubscriptionStarted::name() const

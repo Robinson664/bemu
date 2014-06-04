@@ -16,12 +16,16 @@
 
 namespace BEmu
 {
+	ElementPtr::~ElementPtr()
+	{
+	}
+
 	int ElementPtr::datatype() const
 	{
 		return ::BLPAPI_DATATYPE_SEQUENCE;
 	}
 
-	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string value) const
+	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string& value) const
 	{
 		std::string tabs = IndentType::Indent(tabIndent, spacesPerTab);
 		stream << tabs << this->name().string() << " = " << value << std::endl;
@@ -88,11 +92,27 @@ namespace BEmu
 		return result;
 	}
 
-	std::string ElementPtr::toString(int i)
+	std::string ElementPtr::toString(int arg)
 	{
 		std::stringstream ss;
-		ss << i;
-		return ss.str();
+		ss << arg;
+		std::string result(ss.str());
+		return result;
+	}
+
+	std::string ElementPtr::toString(double arg, std::stringstream& ss)
+	{
+		ss << arg;
+		std::string result(ss.str());
+		return result;
+	}
+
+	std::string ElementPtr::toString(const Datetime& arg)
+	{
+		std::stringstream ss;
+		ss << arg;
+		std::string result(ss.str());
+		return result;
 	}
 
 	std::ostream& ElementPtr::print(std::ostream& stream, int level, int spacesPerLevel) const
@@ -122,12 +142,18 @@ namespace BEmu
 	double ElementPtr::getValueAsFloat64(int index) const { throw elementPtrEx; }
 	Datetime ElementPtr::getValueAsDatetime(int index) const { throw elementPtrEx; }
 	const char * ElementPtr::getValueAsString(int index) const { throw elementPtrEx; }
-	ElementPtr * ElementPtr::getValueAsElement(int index) const { throw elementPtrEx; }
-
-	ElementPtr * ElementPtr::getElement(int position) const { throw elementPtrEx; }
-	ElementPtr * ElementPtr::getElement(const char* name) const { throw elementPtrEx; }
 	
-	ElementPtr * ElementPtr::getElement(const Name& name) const
+	//ElementPtr * ElementPtr::getValueAsElement(int index) const { throw elementPtrEx; }
+	boost::shared_ptr<ElementPtr> ElementPtr::getValueAsElement(int index) const { throw elementPtrEx; }
+
+	//ElementPtr * ElementPtr::getElement(int position) const { throw elementPtrEx; }
+	boost::shared_ptr<ElementPtr> ElementPtr::getElement(int position) const { throw elementPtrEx; }
+
+	//ElementPtr * ElementPtr::getElement(const char* name) const { throw elementPtrEx; }
+	boost::shared_ptr<ElementPtr> ElementPtr::getElement(const char* name) const { throw elementPtrEx; }
+	
+	//ElementPtr * ElementPtr::getElement(const Name& name) const
+	boost::shared_ptr<ElementPtr> ElementPtr::getElement(const Name& name) const
 	{
 		return this->getElement(name.string());
 	}
@@ -231,7 +257,8 @@ namespace BEmu
 
 
 
-	ElementPtr * ElementPtr::appendElement()
+	//ElementPtr * ElementPtr::appendElement()
+	boost::shared_ptr<ElementPtr> ElementPtr::appendElement()
 	{
 		throw elementPtrEx;
 	}

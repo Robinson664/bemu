@@ -16,22 +16,23 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementExceptionsArray::MarketElementExceptionsArray(std::vector<std::string> badFields)
+		MarketElementExceptionsArray::MarketElementExceptionsArray(const std::vector<std::string>& badFields)
 		{
 			for(std::vector<std::string>::const_iterator iter = badFields.begin(); iter != badFields.end(); ++iter)
 			{
 				std::string badField = *iter;
-				this->_exceptions.push_back(new MarketElementExceptions(badField));
+				this->_exceptions.push_back( boost::shared_ptr<MarketElementExceptions>(new MarketElementExceptions(badField))); //deleted in destructor
 			}
 		}
 
 		MarketElementExceptionsArray::~MarketElementExceptionsArray()
 		{
-			for(std::vector<MarketElementExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
-			{
-				MarketElementExceptions * elm = *iter;
-				delete elm;
-			}
+			//for(std::vector<MarketElementExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
+			//{
+			//	MarketElementExceptions * elm = *iter;
+			//	delete elm;
+			//}
+			this->_exceptions.clear();
 		}
 
 		Name MarketElementExceptionsArray::name() const
@@ -71,10 +72,13 @@ namespace BEmu
 			return false;
 		}
 
-		ElementPtr * MarketElementExceptionsArray::getValueAsElement(int index) const
+		//ElementPtr * MarketElementExceptionsArray::getValueAsElement(int index) const
+		boost::shared_ptr<ElementPtr> MarketElementExceptionsArray::getValueAsElement(int index) const
 		{
-			ElementPtr * result = this->_exceptions.at(index);
-			return result;
+			return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptions.at(index));
+
+			//ElementPtr * result = this->_exceptions.at(index);
+			//return result;
 		}
 
 		std::ostream& MarketElementExceptionsArray::print(std::ostream& stream, int level, int spacesPerLevel) const
@@ -83,9 +87,9 @@ namespace BEmu
 
 			stream << tabs << "exceptions[] = {" << std::endl;
 
-			for(std::vector<MarketElementExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
+			for(std::vector< boost::shared_ptr<MarketElementExceptions> >::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
 			{
-				MarketElementExceptions * elm = *iter;
+				boost::shared_ptr<MarketElementExceptions> elm = *iter;
 				elm->print(stream, level, spacesPerLevel);
 			}
 

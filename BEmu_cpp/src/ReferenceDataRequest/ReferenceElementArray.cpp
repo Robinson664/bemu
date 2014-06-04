@@ -15,10 +15,16 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceElementArray::ReferenceElementArray(const std::string& name, const std::vector<ElementPtr*>& elements)
+		//ReferenceElementArray::ReferenceElementArray(const std::string& name, const std::vector<ElementPtr*>& elements)
+		ReferenceElementArray::ReferenceElementArray(const std::string& name, const std::vector< boost::shared_ptr<ElementPtr> >& elements)
 		{
 			this->_name = name;
 			this->_values = elements;
+		}
+
+		ReferenceElementArray::~ReferenceElementArray()
+		{
+			this->_values.clear();
 		}
 
 		Name ReferenceElementArray::name() const { return Name(this->_name.c_str()); }
@@ -29,7 +35,8 @@ namespace BEmu
 		bool ReferenceElementArray::isArray() const { return true; }
 		bool ReferenceElementArray::isComplexType() const { return false; }
 
-		ElementPtr * ReferenceElementArray::getValueAsElement(int index) const
+		//ElementPtr * ReferenceElementArray::getValueAsElement(int index) const
+		boost::shared_ptr<ElementPtr> ReferenceElementArray::getValueAsElement(int index) const
 		{
 			return this->_values.at(index);
 		}
@@ -40,9 +47,10 @@ namespace BEmu
 
 			stream << tabs << this->_name << "[] = {" << std::endl;
 
-			for(std::vector<ElementPtr*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
+			//for(std::vector<ElementPtr*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
+			for(std::vector< boost::shared_ptr<ElementPtr> >::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
 			{
-				ElementPtr* elm = *iter;
+				boost::shared_ptr<ElementPtr> elm = *iter;
 				elm->print(stream, level + 1, spacesPerLevel);
 			}
 

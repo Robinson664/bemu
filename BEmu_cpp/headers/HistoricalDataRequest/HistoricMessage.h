@@ -24,7 +24,8 @@ namespace BEmu
 		class HistoricMessage : public MessagePtr
 		{
 			private:
-				HistoricElementSecurityData * _security;
+				boost::shared_ptr<HistoricElementSecurityData> _security;
+				//HistoricElementSecurityData * _security;
 
 			public:
 				HistoricMessage(
@@ -36,11 +37,18 @@ namespace BEmu
 
 				~HistoricMessage();
 
-				virtual std::stack<ElementPtr*> getRootElements() const;
+				//virtual std::stack<ElementPtr*> getRootElements() const;
+				virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const;
+				
+				virtual void markRootElementsDeleted();
 
-				HistoricElementSecurityData * getSecurity() const;
+				//HistoricElementSecurityData * getSecurity() const;
+				//boost::shared_ptr<HistoricElementSecurityData> getSecurity() const; //TODO: this isn't implemented.  Do I need it?
+
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
-				virtual ElementPtr * getElement(const char* name) const;
+				
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

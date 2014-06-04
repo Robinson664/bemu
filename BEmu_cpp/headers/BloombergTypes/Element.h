@@ -12,6 +12,7 @@
 #include "bemu_headers.h"
 #include <exception>
 #include "BloombergTypes/SchemaElementDefinition.h"
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -25,10 +26,12 @@ namespace BEmu
 	class Element
 	{
 		private:
-			ElementPtr * _ptr;
+			//ElementPtr * _ptr;
+			boost::shared_ptr<ElementPtr> _ptr;
 
 		public:
-			Element(ElementPtr * arg);
+			//Element(ElementPtr * arg);
+			Element(boost::shared_ptr<ElementPtr> arg);
 
 			DLL_EXPORT Element();
 			DLL_EXPORT Element(const Element& arg);

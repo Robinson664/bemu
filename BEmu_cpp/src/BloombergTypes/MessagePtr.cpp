@@ -25,6 +25,10 @@ namespace BEmu
 		this->_correlationId = corr;
 	}
 
+	MessagePtr::~MessagePtr()
+	{
+	}
+
 	CorrelationId MessagePtr::correlationId() const
 	{
 		return this->_correlationId;
@@ -40,12 +44,14 @@ namespace BEmu
 		return this->_messageType;
 	}
 
-	ElementPtr * MessagePtr::getElement(const char* name) const
+	//ElementPtr * MessagePtr::getElement(const char* name) const
+	boost::shared_ptr<ElementPtr> MessagePtr::getElement(const char* name) const
 	{
 		throw messageEx;
 	}
 
-	ElementPtr * MessagePtr::getElement(const Name& name) const
+	//ElementPtr * MessagePtr::getElement(const Name& name) const
+	boost::shared_ptr<ElementPtr> MessagePtr::getElement(const Name& name) const
 	{
 		return this->getElement(name.string());
 	}
@@ -60,7 +66,8 @@ namespace BEmu
 		throw messageEx;
 	}
 
-	ElementPtr * MessagePtr::asElement() const
+	//ElementPtr * MessagePtr::asElement() const
+	boost::shared_ptr<ElementPtr> MessagePtr::asElement() const
 	{
 		throw messageEx;
 	}

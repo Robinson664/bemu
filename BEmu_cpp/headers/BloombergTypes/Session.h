@@ -16,6 +16,7 @@
 #include <queue>
 #include <vector>
 #include <exception>
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -34,7 +35,9 @@ namespace BEmu
 			SessionStateType _sessionState;
 			SessionOptions _sessionOptions;
 
-			std::queue<RequestPtr*> _sentRequests;
+			//std::queue<RequestPtr*> _sentRequests;
+			std::queue<boost::shared_ptr<RequestPtr>> _sentRequests2;
+
 			EventHandler * _asyncHandler;
 			SubscriptionList _subs;
 

@@ -21,62 +21,93 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		IntradayTickRequest::IntradayTickRequest(const Service& svc)
+		IntradayTickRequest::IntradayTickRequest(const Service& svc) :
+			_eventTypes(new IntradayTickRequestElementStringArray("eventTypes"))
 		{
-			this->_eventTypes = 0;
-			this->_security = 0;
-			this->_timeStart = 0;
-			this->_timeEnd = 0;
-			this->_includeConditionCodes = 0;
-			this->_includeNonPlottableEvents = 0;
-			this->_includeExchangeCodes = 0;
-			this->_returnEids = 0;
-			this->_includeBrokerCodes = 0;
-			this->_includeRpsCodes = 0;
-			this->_includeBicMicCodes = 0;
+			//this->_eventTypes = 0;
+			//this->_security = 0;
+			//this->_timeStart = 0;
+			//this->_timeEnd = 0;
+			//this->_includeConditionCodes = 0;
+			//this->_includeNonPlottableEvents = 0;
+			//this->_includeExchangeCodes = 0;
+			//this->_returnEids = 0;
+			//this->_includeBrokerCodes = 0;
+			//this->_includeRpsCodes = 0;
+			//this->_includeBicMicCodes = 0;
 
-			this->_eventTypes = new IntradayTickRequestElementStringArray("eventTypes");
+			//this->_eventTypes = new IntradayTickRequestElementStringArray("eventTypes"); //deleted in destructor
 			this->_service = svc;
 			this->_requestType = RequestPtr::intradayTick;
 		}
 
 		IntradayTickRequest::~IntradayTickRequest()
 		{
-			delete this->_eventTypes;
-			this->_eventTypes = 0;
+			//if(this->_eventTypes != 0)
+			//{
+			//	delete this->_eventTypes;
+			//	this->_eventTypes = 0;
+			//}
 
-			if(this->_security != 0) //I don't know why I need this
-			{
-				delete this->_security;
-				this->_security = 0;
-			}
+			//if(this->_security != 0)
+			//{
+			//	delete this->_security;
+			//	this->_security = 0;
+			//}
 
-			delete this->_timeStart;
-			this->_timeStart = 0;
+			//if(this->_timeStart != 0)
+			//{
+			//	delete this->_timeStart;
+			//	this->_timeStart = 0;
+			//}
 
-			delete this->_timeEnd;
-			this->_timeEnd = 0;
+			//if(this->_timeEnd != 0)
+			//{
+			//	delete this->_timeEnd;
+			//	this->_timeEnd = 0;
+			//}
 
-			delete this->_includeConditionCodes;
-			this->_includeConditionCodes = 0;
+			//if(this->_includeConditionCodes != 0)
+			//{
+			//	delete this->_includeConditionCodes;
+			//	this->_includeConditionCodes = 0;
+			//}
 
-			delete this->_includeNonPlottableEvents;
-			this->_includeNonPlottableEvents = 0;
+			//if(this->_includeNonPlottableEvents != 0)
+			//{
+			//	delete this->_includeNonPlottableEvents;
+			//	this->_includeNonPlottableEvents = 0;
+			//}
 
-			delete this->_includeExchangeCodes;
-			this->_includeExchangeCodes = 0;
+			//if(this->_includeExchangeCodes != 0)
+			//{
+			//	delete this->_includeExchangeCodes;
+			//	this->_includeExchangeCodes = 0;
+			//}
 
-			delete this->_returnEids;
-			this->_returnEids = 0;
+			//if(this->_returnEids != 0)
+			//{
+			//	delete this->_returnEids;
+			//	this->_returnEids = 0;
+			//}
 
-			delete this->_includeBrokerCodes;
-			this->_includeBrokerCodes = 0;
+			//if(this->_includeBrokerCodes != 0)
+			//{
+			//	delete this->_includeBrokerCodes;
+			//	this->_includeBrokerCodes = 0;
+			//}
 
-			delete this->_includeRpsCodes;
-			this->_includeRpsCodes = 0;
-			
-			delete this->_includeBicMicCodes;
-			this->_includeBicMicCodes = 0;
+			//if(this->_includeRpsCodes != 0)
+			//{
+			//	delete this->_includeRpsCodes;
+			//	this->_includeRpsCodes = 0;
+			//}
+			//
+			//if(this->_includeBicMicCodes != 0)
+			//{
+			//	delete this->_includeBicMicCodes;
+			//	this->_includeBicMicCodes = 0;
+			//}
 		}
 
 		const Service IntradayTickRequest::getService()
@@ -129,9 +160,9 @@ namespace BEmu
 			return dtEnd;
 		}
 
-		std::vector<Datetime>* IntradayTickRequest::getDates() //the caller will need to delete the vector
+		std::vector<Datetime> IntradayTickRequest::getDates()
 		{
-			std::vector<Datetime>* result = new std::vector<Datetime>();
+			std::vector<Datetime> result;
 
 			Datetime dtStart = this->getStartDate();
 			Datetime dtEnd = this->getEndDate();
@@ -139,7 +170,7 @@ namespace BEmu
 
 			while(dtLoop < dtEnd)
 			{
-				result->push_back(dtLoop);
+				result.push_back(dtLoop);
 				dtLoop.addMinutes(RandomDataGenerator::IntradayTickIntervalInMinutes());
 			}
 
@@ -170,67 +201,67 @@ namespace BEmu
 		{
 			if(strncmp(name, "eventTypes", 11) == 0)
 			{
-				Element result(this->_eventTypes);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_eventTypes) );
 				return result;
 			}
 
 			else if(strncmp(name, "security", 9) == 0)
 			{
-				Element result(this->_security);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_security) );
 				return result;
 			}
 
 			else if(strncmp(name, "startDateTime", 14) == 0)
 			{
-				Element result(this->_timeStart);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_timeStart) );
 				return result;
 			}
 
 			else if(strncmp(name, "endDateTime", 12) == 0)
 			{
-				Element result(this->_timeEnd);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_timeEnd) );
 				return result;
 			}
 			
 			else if(strncmp(name, "includeConditionCodes", 22) == 0)
 			{
-				Element result(this->_includeConditionCodes);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_includeConditionCodes) );
 				return result;
 			}
 			
 			else if(strncmp(name, "includeNonPlottableEvents", 26) == 0)
 			{
-				Element result(this->_includeNonPlottableEvents);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_includeNonPlottableEvents) );
 				return result;
 			}
 
 			else if(strncmp(name, "includeExchangeCodes", 21) == 0)
 			{
-				Element result(this->_includeExchangeCodes);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_includeExchangeCodes) );
 				return result;
 			}
 
 			else if(strncmp(name, "returnEids", 11) == 0)
 			{
-				Element result(this->_returnEids);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_returnEids) );
 				return result;
 			}
 
 			else if(strncmp(name, "includeBrokerCodes", 19) == 0)
 			{
-				Element result(this->_includeBrokerCodes);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_includeBrokerCodes) );
 				return result;
 			}
 
 			else if(strncmp(name, "includeRpsCodes", 16) == 0)
 			{
-				Element result(this->_includeRpsCodes);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_includeRpsCodes) );
 				return result;
 			}
 
 			else if(strncmp(name, "includeBicMicCodes", 19) == 0)
 			{
-				Element result(this->_includeBicMicCodes);
+				Element result( boost::dynamic_pointer_cast<ElementPtr>(this->_includeBicMicCodes) );
 				return result;
 			}
 
@@ -250,7 +281,14 @@ namespace BEmu
 		void IntradayTickRequest::set(const char* name, const char* value)
 		{
 			if(strncmp(name, "security", 9) == 0)
-				this->_security = new IntradayTickRequestElementString(std::string(name), value);
+			{
+				//if(this->_security != 0)
+				//	delete this->_security;
+
+				//this->_security = new IntradayTickRequestElementString(std::string(name), value); //deleted in destructor
+
+				this->_security = boost::shared_ptr<IntradayTickRequestElementString>(new IntradayTickRequestElementString(std::string(name), value));
+			}
 
 			else
 				throw requestEx;
@@ -259,10 +297,24 @@ namespace BEmu
 		void IntradayTickRequest::set(const char* name, const Datetime& value)
 		{
 			if(strncmp(name, "startDateTime", 14) == 0)
-				this->_timeStart = new IntradayTickRequestElementTime(std::string(name), value);
+			{
+				//if(this->_timeStart != 0)
+				//	delete this->_timeStart;
+
+				//this->_timeStart = new IntradayTickRequestElementTime(std::string(name), value); //deleted in destructor
+
+				this->_timeStart = boost::shared_ptr<IntradayTickRequestElementTime>(new IntradayTickRequestElementTime(std::string(name), value));
+			}
 
 			else if(strncmp(name, "endDateTime", 12) == 0)
-				this->_timeEnd = new IntradayTickRequestElementTime(std::string(name), value);
+			{
+				//if(this->_timeEnd != 0)
+				//	delete this->_timeEnd;
+
+				//this->_timeEnd = new IntradayTickRequestElementTime(std::string(name), value); //deleted in destructor
+
+				this->_timeEnd = boost::shared_ptr<IntradayTickRequestElementTime>(new IntradayTickRequestElementTime(std::string(name), value));
+			}
 
 			else
 				throw requestEx;
@@ -271,25 +323,74 @@ namespace BEmu
 		void IntradayTickRequest::set(const char* name, bool value)
 		{
 			if(strncmp(name, "includeConditionCodes", 22) == 0)
-				this->_includeConditionCodes = new IntradayTickRequestElementBool(std::string(name), value);
+			{
+				//if(this->_includeConditionCodes != 0)
+				//	delete this->_includeConditionCodes;
+
+				//this->_includeConditionCodes = new IntradayTickRequestElementBool(std::string(name), value); //deleted in destructor
+
+				this->_includeConditionCodes = boost::shared_ptr<IntradayTickRequestElementBool>(new IntradayTickRequestElementBool(std::string(name), value));
+			}
 			
 			else if(strncmp(name, "includeNonPlottableEvents", 26) == 0)
-				this->_includeNonPlottableEvents = new IntradayTickRequestElementBool(std::string(name), value);
+			{
+				//if(this->_includeNonPlottableEvents != 0)
+				//	delete this->_includeNonPlottableEvents;
+
+				//this->_includeNonPlottableEvents = new IntradayTickRequestElementBool(std::string(name), value); //deleted in destructor
+
+				this->_includeNonPlottableEvents = boost::shared_ptr<IntradayTickRequestElementBool>(new IntradayTickRequestElementBool(std::string(name), value));
+			}
 
 			else if(strncmp(name, "includeExchangeCodes", 21) == 0)
-				this->_includeExchangeCodes = new IntradayTickRequestElementBool(std::string(name), value);
+			{
+				//if(this->_includeExchangeCodes != 0)
+				//	delete this->_includeExchangeCodes;
+
+				//this->_includeExchangeCodes = new IntradayTickRequestElementBool(std::string(name), value); //deleted in destructor
+
+				this->_includeExchangeCodes = boost::shared_ptr<IntradayTickRequestElementBool>(new IntradayTickRequestElementBool(std::string(name), value));
+			}
 
 			else if(strncmp(name, "returnEids", 11) == 0)
-				this->_returnEids = new IntradayTickRequestElementBool(std::string(name), value);
+			{
+				//if(this->_returnEids != 0)
+				//	delete this->_returnEids;
+
+				//this->_returnEids = new IntradayTickRequestElementBool(std::string(name), value); //deleted in destructor
+
+				this->_returnEids = boost::shared_ptr<IntradayTickRequestElementBool>(new IntradayTickRequestElementBool(std::string(name), value));
+			}
 
 			else if(strncmp(name, "includeBrokerCodes", 19) == 0)
-				this->_includeBrokerCodes = new IntradayTickRequestElementBool(std::string(name), value);
+			{
+				//if(this->_includeBrokerCodes != 0)
+				//	delete this->_includeBrokerCodes;
+
+				//this->_includeBrokerCodes = new IntradayTickRequestElementBool(std::string(name), value); //deleted in destructor
+
+				this->_includeBrokerCodes = boost::shared_ptr<IntradayTickRequestElementBool>(new IntradayTickRequestElementBool(std::string(name), value));
+			}
 
 			else if(strncmp(name, "includeRpsCodes", 16) == 0)
-				this->_includeRpsCodes = new IntradayTickRequestElementBool(std::string(name), value);
+			{
+				//if(this->_includeRpsCodes != 0)
+				//	delete this->_includeRpsCodes;
+
+				//this->_includeRpsCodes = new IntradayTickRequestElementBool(std::string(name), value); //deleted in destructor
+
+				this->_includeRpsCodes = boost::shared_ptr<IntradayTickRequestElementBool>(new IntradayTickRequestElementBool(std::string(name), value));
+			}
 
 			else if(strncmp(name, "includeBicMicCodes", 19) == 0)
-				this->_includeBicMicCodes = new IntradayTickRequestElementBool(std::string(name), value);
+			{
+				//if(this->_includeBicMicCodes != 0)
+				//	delete this->_includeBicMicCodes;
+
+				//this->_includeBicMicCodes = new IntradayTickRequestElementBool(std::string(name), value); //deleted in destructor
+
+				this->_includeBicMicCodes = boost::shared_ptr<IntradayTickRequestElementBool>(new IntradayTickRequestElementBool(std::string(name), value));
+			}
 
 			else
 				throw requestEx;

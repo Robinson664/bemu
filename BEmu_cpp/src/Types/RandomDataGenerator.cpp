@@ -17,7 +17,7 @@
 
 namespace BEmu
 {
-	ObjectType RandomDataGenerator::ReferenceDataFromFieldName(std::string fieldName, std::string security, bool isOption, ReferenceDataRequest::ReferenceRequest * rreq)
+	ObjectType RandomDataGenerator::ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, boost::shared_ptr<ReferenceDataRequest::ReferenceRequest> rreq)
 	{
 		std::string upper(fieldName);
 		std::transform(upper.begin(), upper.end(), upper.begin(), ::toupper);
@@ -61,8 +61,10 @@ namespace BEmu
 					}
 				}
 
-				ReferenceDataRequest::ReferenceElementArrayChainTickers * chain = new ReferenceDataRequest::ReferenceElementArrayChainTickers(security, numPoints, dtExp, optionality);
-				return ObjectType(chain);
+				boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> chainP(new ReferenceDataRequest::ReferenceElementArrayChainTickers(security, numPoints, dtExp, optionality));
+				//ReferenceDataRequest::ReferenceElementArrayChainTickers * chain = new ReferenceDataRequest::ReferenceElementArrayChainTickers(security, numPoints, dtExp, optionality);
+				
+				return ObjectType(chainP);
 			}
 		}
 		else if(upper.find("TICKER") != std::string::npos)
@@ -105,7 +107,11 @@ namespace BEmu
 		}
 	}
 
-	IntradayBarRequest::IntradayBarTickDataType * RandomDataGenerator::GenerateBarData(Datetime date)
+	//ObjectType RandomDataGenerator::ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, ReferenceDataRequest::ReferenceRequest * rreq)
+	//{
+	//}
+
+	IntradayBarRequest::IntradayBarTickDataType * RandomDataGenerator::GenerateBarData(const Datetime& date)
 	{
         double first = RandomDataGenerator::RandomDouble();
         double second = RandomDataGenerator::RandomDouble();
@@ -123,7 +129,7 @@ namespace BEmu
 		return result;
 	}
 
-	std::map<std::string, ObjectType> RandomDataGenerator::GetMarketDataFields(std::vector<std::string> arg)
+	std::map<std::string, ObjectType> RandomDataGenerator::GetMarketDataFields(const std::vector<std::string>& arg)
 	{
 		std::map<std::string, ObjectType> result;
 	
@@ -218,7 +224,7 @@ namespace BEmu
 		return result;
 	}
 
-	ObjectType RandomDataGenerator::MarketDataFromFieldName(std::string arg)
+	ObjectType RandomDataGenerator::MarketDataFromFieldName(const std::string& arg)
 	{
 		std::string arg_lower(arg);
 		for(unsigned int i = 0; i < arg_lower.size(); i++)

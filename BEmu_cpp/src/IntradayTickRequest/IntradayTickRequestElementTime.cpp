@@ -22,7 +22,7 @@ namespace BEmu
 		}
 
 		IntradayTickRequestElementTime::IntradayTickRequestElementTime(const std::string& elementName, const Datetime& date) : IntradayTickRequestElementString(elementName, ElementPtr::toCharPointer(date))
-		{	
+		{
 			this->_instance = date;
 		}
 

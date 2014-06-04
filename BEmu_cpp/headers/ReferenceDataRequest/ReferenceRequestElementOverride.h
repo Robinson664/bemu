@@ -21,8 +21,11 @@ namespace BEmu
 		class ReferenceRequestElementOverride : public ElementPtr
 		{
 			private:
-				ReferenceElementString * _fieldId;
-				ReferenceElementObject * _value;
+				boost::shared_ptr<ReferenceElementString> _fieldId;
+				boost::shared_ptr<ReferenceElementObject> _value;
+
+				//ReferenceElementString * _fieldId;
+				//ReferenceElementObject * _value;
 
 			public:
 				ReferenceRequestElementOverride();
@@ -35,7 +38,8 @@ namespace BEmu
 				virtual void setElement(const char* name, const char* value);
 				virtual void setElement(const char* name, int value);
 
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

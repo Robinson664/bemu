@@ -21,7 +21,8 @@ namespace BEmu
 		class HistoricElementFieldData : public ElementPtr
 		{
 			private:
-				std::map<std::string, ElementPtr*> _fields;
+				//std::map<std::string, ElementPtr*> _fields;
+				std::map<std::string, boost::shared_ptr<ElementPtr> > _fields;
 
 			public:
 				HistoricElementFieldData(const Datetime& date, const std::map<std::string, ObjectType>& values);
@@ -37,7 +38,9 @@ namespace BEmu
 				virtual bool isComplexType() const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
-				virtual ElementPtr * getElement(const char* name) const;
+
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual int getElementAsInt32(const char* name) const;
 				virtual Datetime getElementAsDatetime(const char* name) const;

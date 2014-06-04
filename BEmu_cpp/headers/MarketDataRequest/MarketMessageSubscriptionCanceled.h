@@ -11,6 +11,7 @@
 
 #include "BloombergTypes/MessagePtr.h"
 #include "BloombergTypes/Subscription.h"
+#include "Types/CanConvertToStringType.h"
 
 namespace BEmu
 {
@@ -18,21 +19,28 @@ namespace BEmu
 	{
 		class MarketElementSubscriptionCancelReason;
 
-		class MarketMessageSubscriptionCanceled : public MessagePtr
+		class MarketMessageSubscriptionCanceled : public MessagePtr, public CanConvertToStringType
 		{
 			private:
 				std::string _topicName;
-				MarketElementSubscriptionCancelReason * _reason;
+
+				boost::shared_ptr<MarketElementSubscriptionCancelReason> _reason;
+				//MarketElementSubscriptionCancelReason * _reason;
 
 			public:
-				MarketMessageSubscriptionCanceled(Subscription sub);
+				MarketMessageSubscriptionCanceled(const Subscription& sub);
 				~MarketMessageSubscriptionCanceled();
 
-				virtual std::stack<ElementPtr*> getRootElements() const;
+				//virtual std::stack<ElementPtr*> getRootElements() const;
+				virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const;
+
+				virtual void markRootElementsDeleted();
 
 				virtual size_t numElements() const;
 				virtual const char* topicName() const;
-				virtual ElementPtr * asElement() const;
+
+				//virtual ElementPtr * asElement() const;
+				virtual boost::shared_ptr<ElementPtr> asElement() const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

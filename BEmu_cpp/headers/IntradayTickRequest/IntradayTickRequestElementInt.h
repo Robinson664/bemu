@@ -21,7 +21,9 @@ namespace BEmu
 				int _ivalue;
 
 			public:
-				IntradayTickRequestElementInt(std::string& elementName, int ivalue);
+				IntradayTickRequestElementInt(const std::string& elementName, int ivalue);
+				~IntradayTickRequestElementInt();
+
 				int getInt();
 		};
 	}

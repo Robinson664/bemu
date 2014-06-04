@@ -23,18 +23,25 @@ namespace BEmu
 			private:
 				CorrelationId _correlationId;
 				std::string _topicName;
-				MarketElementReason * _reason;
+
+				//MarketElementReason * _reason;
+				boost::shared_ptr<MarketElementReason> _reason;
 
 			public:
-				MarketMessageSubscriptionFailure(Subscription sub);
+				MarketMessageSubscriptionFailure(const Subscription& sub);
 				~MarketMessageSubscriptionFailure();
 
-				virtual std::stack<ElementPtr*> getRootElements() const;
+				//virtual std::stack<ElementPtr*> getRootElements() const;
+				virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const;
+
+				virtual void markRootElementsDeleted();
 
 				virtual size_t numElements() const;
 				virtual const char* topicName() const;
 
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

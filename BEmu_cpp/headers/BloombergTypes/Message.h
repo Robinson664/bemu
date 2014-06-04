@@ -11,6 +11,7 @@
 
 #include "bemu_headers.h"
 #include <exception>
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -23,11 +24,13 @@ namespace BEmu
 	class Message
 	{
 		private:
-			MessagePtr * _ptr;
+			//MessagePtr * _ptr;
+			boost::shared_ptr<MessagePtr> _ptr;
 
 		public:
 			Message();
-			Message(MessagePtr* ptr);
+			//Message(MessagePtr* ptr);
+			Message(boost::shared_ptr<MessagePtr> ptr);
 
 			class MessageException: public std::exception
 			{

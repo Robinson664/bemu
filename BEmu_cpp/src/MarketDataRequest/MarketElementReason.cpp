@@ -20,19 +20,21 @@ namespace BEmu
 	{
 		MarketElementReason::MarketElementReason(ReasonType::ReasonTypeEnum reasonType)
 		{
+			//all deleted in destructor
+
 			if(reasonType == ReasonType::badSecurity)
 			{
 				std::string source = RandomDataGenerator::RandomString(5);
 				std::transform(source.begin(), source.end(), source.begin(), ::tolower);
 				std::stringstream ssSource;
 				ssSource << source << RandomDataGenerator::RandomInt(9) << '@' << RandomDataGenerator::RandomInt(99);
-				this->_source = new MarketElementString("source", ssSource.str());
+				this->_source = boost::shared_ptr<MarketElementString>(new MarketElementString("source", ssSource.str()));
 
-				this->_errorCode = new MarketElementInt("errorCode", RandomDataGenerator::RandomInt(99));
+				this->_errorCode = boost::shared_ptr<MarketElementInt>(new MarketElementInt("errorCode", RandomDataGenerator::RandomInt(99)));
 
-				this->_category = new MarketElementString("category", "BAD_SEC");
+				this->_category = boost::shared_ptr<MarketElementString>(new MarketElementString("category", "BAD_SEC"));
                 
-				this->_description = new MarketElementString("description", "Invalid security, rcode = -1");
+				this->_description = boost::shared_ptr<MarketElementString>(new MarketElementString("description", "Invalid security, rcode = -1"));
 			}
 			else if(reasonType == ReasonType::badField)
 			{
@@ -40,29 +42,29 @@ namespace BEmu
 				std::transform(source.begin(), source.end(), source.begin(), ::tolower);
 				std::stringstream ssSource;
 				ssSource << source << '@' << RandomDataGenerator::RandomInt(999);
-				this->_source = new MarketElementString("source", ssSource.str());
+				this->_source = boost::shared_ptr<MarketElementString>(new MarketElementString("source", ssSource.str()));
 
-				this->_errorCode = new MarketElementInt("errorCode", RandomDataGenerator::RandomInt(99));
+				this->_errorCode = boost::shared_ptr<MarketElementInt>(new MarketElementInt("errorCode", RandomDataGenerator::RandomInt(99)));
 
-				this->_category = new MarketElementString("category", "BAD_FLD");
+				this->_category = boost::shared_ptr<MarketElementString>(new MarketElementString("category", "BAD_FLD"));
 				
-                this->_description = new MarketElementString("description", "Unknown Field");
+                this->_description = boost::shared_ptr<MarketElementString>(new MarketElementString("description", "Unknown Field"));
 			}
 		}
 
 		MarketElementReason::~MarketElementReason()
 		{
-			delete this->_source;
-			this->_source = 0;
-			
-			delete this->_errorCode;
-			this->_errorCode = 0;
-			
-			delete this->_category;
-			this->_category = 0;
-			
-			delete this->_description;
-			this->_description = 0;
+			//delete this->_source;
+			//this->_source = 0;
+			//
+			//delete this->_errorCode;
+			//this->_errorCode = 0;
+			//
+			//delete this->_category;
+			//this->_category = 0;
+			//
+			//delete this->_description;
+			//this->_description = 0;
 		}
 
 		Name MarketElementReason::name() const
@@ -102,19 +104,20 @@ namespace BEmu
 			return true;
 		}
 
-		ElementPtr * MarketElementReason::getElement(const char* name) const
+		//ElementPtr * MarketElementReason::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> MarketElementReason::getElement(const char* name) const
 		{
 			if(strncmp(name, "source", 7) == 0)
-				return this->_source;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_source);
 			
 			else if(strncmp(name, "errorCode", 10) == 0)
-				return this->_errorCode;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_errorCode);
 			
 			else if(strncmp(name, "category", 9) == 0)
-				return this->_category;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_category);
 			
 			else if(strncmp(name, "description", 12) == 0)
-				return this->_description;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_description);
 
 			else
 				throw elementPtrEx;

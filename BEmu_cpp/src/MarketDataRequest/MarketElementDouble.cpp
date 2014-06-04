@@ -14,7 +14,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementDouble::MarketElementDouble(std::string name, double value)
+		MarketElementDouble::MarketElementDouble(const std::string& name, double value)
 		{
 			this->_name = name;
 			this->_value = value;

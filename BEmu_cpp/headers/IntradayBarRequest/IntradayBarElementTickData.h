@@ -27,10 +27,15 @@ namespace BEmu
 		class IntradayBarElementTickData : public ElementPtr
 		{
 			private:
-				IntradayBarElementDateTime * _time;
-				IntradayBarElementDouble * _open, * _high, * _low, * _close, * _value;
-				IntradayBarElementLong * _volume;
-				IntradayBarElementInt * _numEvents;
+				boost::shared_ptr<IntradayBarElementDateTime> _time;
+				boost::shared_ptr<IntradayBarElementDouble> _open, _high, _low, _close, _value;
+				boost::shared_ptr<IntradayBarElementLong> _volume;
+				boost::shared_ptr<IntradayBarElementInt> _numEvents;
+
+				//IntradayBarElementDateTime * _time;
+				//IntradayBarElementDouble * _open, * _high, * _low, * _close, * _value;
+				//IntradayBarElementLong * _volume;
+				//IntradayBarElementInt * _numEvents;
 
 			public:
 				IntradayBarElementTickData(const IntradayBarTickDataType& arg);
@@ -44,7 +49,9 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 				
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 				
 				virtual int getElementAsInt32(const char* name) const;

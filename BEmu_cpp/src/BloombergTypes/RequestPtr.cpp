@@ -25,6 +25,10 @@ namespace BEmu
 		this->_requestType = src._requestType;
 	}
 
+	RequestPtr::~RequestPtr()
+	{
+	}
+
 	CorrelationId RequestPtr::getCorrelationId() const
 	{
 		return this->_correlationId;

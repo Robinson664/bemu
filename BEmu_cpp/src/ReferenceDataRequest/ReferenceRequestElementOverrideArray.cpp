@@ -32,16 +32,21 @@ namespace BEmu
 		bool ReferenceRequestElementOverrideArray::isArray() const { return true; }
 		bool ReferenceRequestElementOverrideArray::isComplexType() const { return false; }
 
-		ElementPtr * ReferenceRequestElementOverrideArray::getValueAsElement(int index) const
+		//ElementPtr * ReferenceRequestElementOverrideArray::getValueAsElement(int index) const
+		boost::shared_ptr<ElementPtr> ReferenceRequestElementOverrideArray::getValueAsElement(int index) const
 		{
-			return this->_overrides[index];
+			return boost::dynamic_pointer_cast<ElementPtr>(this->_overrides[index]);
 		}
 
-		ElementPtr * ReferenceRequestElementOverrideArray::appendElement()
+		//ElementPtr * ReferenceRequestElementOverrideArray::appendElement()
+		boost::shared_ptr<ElementPtr> ReferenceRequestElementOverrideArray::appendElement()
 		{
-            ReferenceRequestElementOverride * result = new ReferenceRequestElementOverride();
-			this->_overrides.push_back(result);
-            return result;
+			boost::shared_ptr<ReferenceRequestElementOverride> elmP(new ReferenceRequestElementOverride());
+
+            //ReferenceRequestElementOverride * result = new ReferenceRequestElementOverride(); //TODO: delete
+
+			this->_overrides.push_back(elmP);
+			return boost::dynamic_pointer_cast<ElementPtr>(elmP);
 		}
 
 		std::ostream& ReferenceRequestElementOverrideArray::print(std::ostream& stream, int level, int spacesPerLevel) const
@@ -50,9 +55,10 @@ namespace BEmu
 
 			stream << tabs << "overrides[] = {" << std::endl;
 
-			for(std::vector<ReferenceRequestElementOverride*>::const_iterator iter = this->_overrides.begin(); iter != this->_overrides.end(); iter++)
+			//for(std::vector<ReferenceRequestElementOverride*>::const_iterator iter = this->_overrides.begin(); iter != this->_overrides.end(); iter++)
+			for(std::vector< boost::shared_ptr<ReferenceRequestElementOverride> >::const_iterator iter = this->_overrides.begin(); iter != this->_overrides.end(); iter++)
 			{
-				ReferenceRequestElementOverride * req = *iter;
+				boost::shared_ptr<ReferenceRequestElementOverride> req = *iter;
 				req->print(stream, level + 1, spacesPerLevel);
 			}
 
@@ -60,9 +66,6 @@ namespace BEmu
 
 			return stream;
 		}
-		
-			
-
 
 	}
 }

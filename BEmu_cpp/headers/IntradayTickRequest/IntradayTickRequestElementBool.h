@@ -21,7 +21,9 @@ namespace BEmu
 				bool _bvalue;
 
 			public:
-				IntradayTickRequestElementBool(std::string& elementName, bool bvalue);
+				IntradayTickRequestElementBool(const std::string& elementName, bool bvalue);
+				~IntradayTickRequestElementBool();
+
 				bool getBool();
 		};
 	}

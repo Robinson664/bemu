@@ -21,7 +21,7 @@ namespace BEmu
 		class MarketElementSubscriptionStarted : public ElementPtr
 		{
 			private:
-				MarketElementNull * _exceptions;
+				boost::shared_ptr<MarketElementNull> _exceptions;
 
 			public:
 				MarketElementSubscriptionStarted(MarketMessageSubscriptionStarted * arg);

@@ -19,49 +19,54 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricElementSecurityError::HistoricElementSecurityError(const std::string& security)
+		HistoricElementSecurityError::HistoricElementSecurityError(const std::string& security) :
+			_code(new HistoricElementInt("code", RandomDataGenerator::RandomInt(99))),
+			_category(new HistoricElementString("category", "BAD_SEC")),
+			_subCategory(new HistoricElementString("subcategory", "INVALID_SECURITY"))
 		{
 			int nid = RandomDataGenerator::RandomInt(99);
 
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
+			//all deleted in destructor
+
 			//source
 			std::stringstream sourceValue;
 			sourceValue << nid << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
-			this->_source = new HistoricElementString("source", sourceValue.str());
+			this->_source = boost::shared_ptr<HistoricElementString>(new HistoricElementString("source", sourceValue.str()));
 
 			//code
-			this->_code = new HistoricElementInt("code", RandomDataGenerator::RandomInt(99));
+			//this->_code = new HistoricElementInt("code", RandomDataGenerator::RandomInt(99));
 
 			//category
-			this->_category = new HistoricElementString("category", "BAD_SEC");
+			//this->_category = new HistoricElementString("category", "BAD_SEC");
 
 			//message
 			std::stringstream messageValue;
 			messageValue << "Unknown/Invalid security [nid:" << nid << "]";
-			this->_message = new HistoricElementString("message", messageValue.str());
+			this->_message = boost::shared_ptr<HistoricElementString>(new HistoricElementString("message", messageValue.str()));
 
 			//sub-category
-			this->_subCategory = new HistoricElementString("subcategory", "INVALID_SECURITY");
+			//this->_subCategory = new HistoricElementString("subcategory", "INVALID_SECURITY");
 		}
 
 		HistoricElementSecurityError::~HistoricElementSecurityError()
 		{
-			delete this->_source;
-			this->_source = 0;
-			
-			delete this->_code;
-			this->_code = 0;
-			
-			delete this->_category;
-			this->_category = 0;
-			
-			delete this->_message;
-			this->_message = 0;
-			
-			delete this->_subCategory;
-			this->_subCategory = 0;
+			//delete this->_source;
+			//this->_source = 0;
+			//
+			//delete this->_code;
+			//this->_code = 0;
+			//
+			//delete this->_category;
+			//this->_category = 0;
+			//
+			//delete this->_message;
+			//this->_message = 0;
+			//
+			//delete this->_subCategory;
+			//this->_subCategory = 0;
 		}
 
 
@@ -105,22 +110,23 @@ namespace BEmu
 		}
 
 
-		ElementPtr * HistoricElementSecurityError::getElement(const char* name) const
+		//ElementPtr * HistoricElementSecurityError::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> HistoricElementSecurityError::getElement(const char* name) const
 		{
 			if(strncmp(name, "source", 7) == 0)
-				return this->_source;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_source);
 
 			else if(strncmp(name, "code", 5) == 0)
-				return this->_code;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_code);
 
 			else if(strncmp(name, "category", 9) == 0)
-				return this->_category;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_category);
 
 			else if(strncmp(name, "message", 8) == 0)
-				return this->_message;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_message);
 
 			else if(strncmp(name, "subcategory", 12) == 0)
-				return this->_subCategory;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_subCategory);
 
 			else
 				throw elementPtrEx;

@@ -28,12 +28,20 @@ namespace BEmu
 		class HistoricElementSecurityData : public ElementPtr
 		{
 			private:
-				HistoricElementString * _elmSecurityName;
-				HistoricElementFieldDataArray * _elmFieldDataArray;
-				HistoricElementInt * _elmSequenceNumber;
-				HistoricElementFieldExceptionsArray * _elmFieldExceptions;
-				HistoricElementSecurityError * _elmSecError;
+				boost::shared_ptr<HistoricElementString> _elmSecurityName;
+				boost::shared_ptr<HistoricElementFieldDataArray> _elmFieldDataArray;
+				boost::shared_ptr<HistoricElementInt> _elmSequenceNumber;
+				boost::shared_ptr<HistoricElementFieldExceptionsArray> _elmFieldExceptions;
+				boost::shared_ptr<HistoricElementSecurityError> _elmSecError;
+
+				//HistoricElementString * _elmSecurityName;
+				//HistoricElementFieldDataArray * _elmFieldDataArray;
+				//HistoricElementInt * _elmSequenceNumber;
+				//HistoricElementFieldExceptionsArray * _elmFieldExceptions;
+				//HistoricElementSecurityError * _elmSecError;
+
 				bool _isSecurityError;
+				bool _isNull_elmFieldExceptions;
 
 			public:
 				HistoricElementSecurityData(
@@ -53,7 +61,9 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual int getElementAsInt32(const char* name) const;

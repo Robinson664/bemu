@@ -24,6 +24,8 @@ namespace BEmu
 		{
 			public:
 				ReferenceElementArrayChainTickers(const std::string& underlier, unsigned numPoints, const std::string& strDtExp, OptionalityEnum::EnumType optionality);
+				~ReferenceElementArrayChainTickers();
+
 				virtual SchemaElementDefinition elementDefinition() const;
 		};
 	}

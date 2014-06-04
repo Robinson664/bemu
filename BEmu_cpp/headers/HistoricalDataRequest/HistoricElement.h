@@ -21,7 +21,7 @@ namespace BEmu
 		class HistoricElement : public ElementPtr
 		{
 			private:
-				HistoricElementSecurityData * _security;
+				boost::shared_ptr<HistoricElementSecurityData> _security;
 
 			public:
 				HistoricElement(const HistoricMessage& msg);

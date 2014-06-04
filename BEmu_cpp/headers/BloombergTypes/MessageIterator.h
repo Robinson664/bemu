@@ -12,6 +12,7 @@
 #include "bemu_headers.h"
 #include <exception>
 #include <vector>
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -23,14 +24,17 @@ namespace BEmu
 	class MessageIterator
 	{
 		private:
-			std::vector<MessagePtr*> _list;
+			std::vector< boost::shared_ptr<MessagePtr> > _listP;
+			//std::vector<MessagePtr*> _list;
+
 			int _position;
 
 		public:
 			DLL_EXPORT bool next();
 			DLL_EXPORT bool isValid() const;
 			DLL_EXPORT Message message(bool createClonable = false) const;
-			DLL_EXPORT MessageIterator(Event evt);
+
+			DLL_EXPORT MessageIterator(const Event& evt);
 			DLL_EXPORT ~MessageIterator(); //when the messageIterator goes out of scope in the actual BB API, its elements and messages are deleted
 	};
 }

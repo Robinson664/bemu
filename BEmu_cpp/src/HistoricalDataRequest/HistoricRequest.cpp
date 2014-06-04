@@ -20,21 +20,37 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricRequest::HistoricRequest()
+		HistoricRequest::HistoricRequest() :
+			_securities(new HistoricRequestElementStringArray("securities")),
+			_fields(new HistoricRequestElementStringArray("fields"))
 		{
-			this->_dtStart = 0;
-			this->_dtEnd = 0;
-			this->_adjustmentNormalElement = 0;
-			this->_adjustmentAbnormalElement = 0;
-			this->_adjustmentSplitElement = 0;
-			this->_maxDataPointElement = 0;
-			this->_periodicityAdjustmentElement = 0;
-			this->_periodicityElement = 0;
-			this->_overrideOptionsElement = 0;
-			this->_pricingOptionElement = 0;
+			this->_isNull_securities = false;
+			this->_isNull_fields = false;
 
-            this->_securities = new HistoricRequestElementStringArray("securities");
-            this->_fields = new HistoricRequestElementStringArray("fields");
+			this->_isNull_dtStart = true;
+			this->_isNull_dtEnd = true;
+			this->_isNull_adjustmentNormalElement = true;
+			this->_isNull_adjustmentAbnormalElement = true;
+			this->_isNull_adjustmentSplitElement = true;
+			this->_isNull_maxDataPointElement = true;
+			this->_isNull_periodicityAdjustmentElement = true;
+			this->_isNull_periodicityElement = true;
+			this->_isNull_overrideOptionsElement = true;
+			this->_isNull_pricingOptionElement = true;
+
+			//this->_dtStart = 0;
+			//this->_dtEnd = 0;
+			//this->_adjustmentNormalElement = 0;
+			//this->_adjustmentAbnormalElement = 0;
+			//this->_adjustmentSplitElement = 0;
+			//this->_maxDataPointElement = 0;
+			//this->_periodicityAdjustmentElement = 0;
+			//this->_periodicityElement = 0;
+			//this->_overrideOptionsElement = 0;
+			//this->_pricingOptionElement = 0;
+
+            //this->_securities = new HistoricRequestElementStringArray("securities"); //deleted in destructor
+            //this->_fields = new HistoricRequestElementStringArray("fields"); //deleted in destructor
 
 			this->_periodicityAdjustment = HistDataPeriodicityAdjustmentEnum::actual;
 			this->_periodicity = HistDataPeriodicityEnum::daily;
@@ -46,17 +62,53 @@ namespace BEmu
 
 		HistoricRequest::~HistoricRequest()
 		{
-			delete this->_dtStart;
-			this->_dtStart = 0;
+			//if(this->_dtStart != 0)
+			//{
+			//	delete this->_dtStart;
+			//	this->_dtStart = 0;
+			//}
 
-			delete this->_dtEnd;
-			this->_dtEnd = 0;
+			//if(this->_dtEnd != 0)
+			//{
+			//	delete this->_dtEnd;
+			//	this->_dtEnd = 0;
+			//}
 
-			delete this->_securities;
-			this->_securities = 0;
+			//if(this->_securities != 0)
+			//{
+			//	delete this->_securities;
+			//	this->_securities = 0;
+			//}
 
-			delete this->_fields;
-			this->_fields = 0;
+			//if(this->_fields != 0)
+			//{
+			//	delete this->_fields;
+			//	this->_fields = 0;
+			//}
+
+			//if(this->_adjustmentNormalElement != 0)
+			//{
+			//	delete this->_adjustmentNormalElement;
+			//	this->_adjustmentNormalElement = 0;
+			//}
+
+			//if(this->_adjustmentAbnormalElement != 0)
+			//{
+			//	delete this->_adjustmentAbnormalElement;
+			//	this->_adjustmentAbnormalElement = 0;
+			//}
+
+			//if(this->_adjustmentSplitElement != 0)
+			//{
+			//	delete this->_adjustmentSplitElement;
+			//	this->_adjustmentSplitElement = 0;
+			//}
+
+			//if(this->_maxDataPointElement != 0)
+			//{
+			//	delete this->_maxDataPointElement;
+			//	this->_maxDataPointElement = 0;
+			//}
 		}
 
 
@@ -72,12 +124,14 @@ namespace BEmu
 
 		bool HistoricRequest::hasStartDate() const
 		{
-			return this->_dtStart != 0;
+			return !this->_isNull_dtStart;
+			//return this->_dtStart != 0;
 		}
 
 		bool HistoricRequest::hasEndDate() const
 		{
-			return this->_dtEnd != 0;
+			return !this->_isNull_dtEnd;
+			//return this->_dtEnd != 0;
 		}
 
 		Datetime HistoricRequest::dtStart() const
@@ -91,22 +145,23 @@ namespace BEmu
 		}
 
 
-		std::vector<Datetime> * HistoricRequest::getDates() const
+		std::vector<Datetime> HistoricRequest::getDates() const
 		{
-			std::vector<Datetime> * dates = this->getDatesBeforeMaxPoints();
+			std::vector<Datetime> dates = this->getDatesBeforeMaxPoints();
 
-			if(this->_maxDataPointElement == 0)
+			//if(this->_maxDataPointElement == 0)
+			if(this->_isNull_maxDataPointElement)
 				return dates;
 			else
 			{
 				int max = this->_maxDataPointElement->getInt();
-				int dateCount = dates->size();
+				int dateCount = dates.size();
 				
-				std::vector<Datetime> * result = new std::vector<Datetime>();
+				std::vector<Datetime> result;
 				
 				for(int i = 0; i < dateCount; i++, max--)
 				{
-					Datetime dt = dates->at(i);
+					Datetime dt = dates.at(i);
 
 					if(max >= 0)
 					{
@@ -114,20 +169,17 @@ namespace BEmu
 					}
 					else
 					{
-						result->push_back(dt); //add this date
+						result.push_back(dt); //add this date
 					}
 				}
-
-				delete dates;
-				dates = 0;
 
 				return result;
 			}
 		}
 
-		std::vector<Datetime> * HistoricRequest::getDatesBeforeMaxPoints() const
+		std::vector<Datetime> HistoricRequest::getDatesBeforeMaxPoints() const
 		{
-			std::vector<Datetime> * result = new std::vector<Datetime>();
+			std::vector<Datetime> result;
 
 			Datetime dtStart; //BEmu.Session.SendRequest assures that dtStart is not null
 			if(this->hasStartDate())
@@ -157,7 +209,7 @@ namespace BEmu
 			Datetime dtToday = Datetime::Today();
 			do
 			{
-				result->push_back(dtCurrent);
+				result.push_back(dtCurrent);
 
 				switch(this->_periodicity)
 				{
@@ -214,7 +266,15 @@ namespace BEmu
 			{
 				Datetime dt;
 				if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(value, dt))
-					this->_dtStart = new HistoricRequestElementDate("startDate", dt);
+				{
+					//if(this->_dtStart != 0)
+					//	delete this->_dtStart;
+
+					//this->_dtStart = new HistoricRequestElementDate("startDate", dt); //deleted in destructor
+
+					this->_dtStart = boost::shared_ptr<HistoricRequestElementDate>(new HistoricRequestElementDate("startDate", dt));
+					this->_isNull_dtStart = false;
+				}
 				else
 					throw requestEx;
 			}
@@ -222,7 +282,15 @@ namespace BEmu
 			{
 				Datetime dt;
 				if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(value, dt))
-					this->_dtEnd = new HistoricRequestElementDate("endDate", dt);
+				{
+					//if(this->_dtEnd != 0)
+					//	delete this->_dtEnd;
+
+					//this->_dtEnd = new HistoricRequestElementDate("endDate", dt); //deleted in destructor
+
+					this->_dtEnd = boost::shared_ptr<HistoricRequestElementDate>(new HistoricRequestElementDate("endDate", dt));
+					this->_isNull_dtEnd = false;
+				}
 				else
 					throw requestEx;
 				
@@ -240,6 +308,9 @@ namespace BEmu
 
 				else
 					throw requestEx;
+
+				this->_periodicityAdjustmentElement = boost::shared_ptr<HistoricRequestElementString>( new HistoricRequestElementString("periodicityAdjustment", value) );
+				this->_isNull_periodicityAdjustmentElement = false;
 			}
 			else if(strncmp(name, "periodicitySelection", 21) == 0)
 			{
@@ -263,6 +334,9 @@ namespace BEmu
 
 				else
 					throw requestEx;
+
+				this->_periodicityElement = boost::shared_ptr<HistoricRequestElementString>( new HistoricRequestElementString("periodicitySelection", value) );
+				this->_isNull_periodicityElement = false;
 			}
 			else if(strncmp(name, "pricingOption", 14) == 0)
 			{
@@ -274,6 +348,9 @@ namespace BEmu
 
 				else
 					throw requestEx;
+
+				this->_pricingOptionElement = boost::shared_ptr<HistoricRequestElementString>( new HistoricRequestElementString("pricingOption", value) );
+				this->_isNull_pricingOptionElement = false;
 			}
 			else if(strncmp(name, "overrideOption", 15) == 0)
 			{
@@ -285,6 +362,9 @@ namespace BEmu
 
 				else
 					throw requestEx;
+
+				this->_overrideOptionsElement = boost::shared_ptr<HistoricRequestElementString>( new HistoricRequestElementString("overrideOption", value) );
+				this->_isNull_overrideOptionsElement = false;
 			}
 			else
 				throw requestEx;
@@ -293,13 +373,37 @@ namespace BEmu
 		void HistoricRequest::set(const char* name, bool value)
 		{
 			if(strncmp(name, "adjustmentNormal", 17) == 0)
-				this->_adjustmentNormalElement = new HistoricRequestElementBool("adjustmentNormal", value);
+			{
+				//if(this->_adjustmentNormalElement != 0)
+				//	delete this->_adjustmentNormalElement;
+
+				//this->_adjustmentNormalElement = new HistoricRequestElementBool("adjustmentNormal", value); //deleted in destructor
+
+				this->_adjustmentNormalElement = boost::shared_ptr<HistoricRequestElementBool>(new HistoricRequestElementBool("adjustmentNormal", value));
+				this->_isNull_adjustmentNormalElement = false;
+			}
 
 			else if(strncmp(name, "adjustmentAbnormal", 19) == 0)
-				this->_adjustmentAbnormalElement = new HistoricRequestElementBool("adjustmentAbnormal", value);
+			{
+				//if(this->_adjustmentAbnormalElement != 0)
+				//	delete this->_adjustmentAbnormalElement;
+
+				//this->_adjustmentAbnormalElement = new HistoricRequestElementBool("adjustmentAbnormal", value); //deleted in destructor
+
+				this->_adjustmentAbnormalElement = boost::shared_ptr<HistoricRequestElementBool>(new HistoricRequestElementBool("adjustmentAbnormal", value));
+				this->_isNull_adjustmentAbnormalElement = false;
+			}
 			
 			else if(strncmp(name, "adjustmentSplit", 16) == 0)
-				this->_adjustmentSplitElement = new HistoricRequestElementBool("adjustmentSplit", value);
+			{
+				//if(this->_adjustmentSplitElement != 0)
+				//	delete this->_adjustmentSplitElement;
+
+				//this->_adjustmentSplitElement = new HistoricRequestElementBool("adjustmentSplit", value); //deleted in destructor
+
+				this->_adjustmentSplitElement = boost::shared_ptr<HistoricRequestElementBool>(new HistoricRequestElementBool("adjustmentSplit", value));
+				this->_isNull_adjustmentSplitElement = false;
+			}
 
 			else
 				throw requestEx;
@@ -308,7 +412,15 @@ namespace BEmu
 		void HistoricRequest::set(const char* name, int value)
 		{
 			if(strncmp(name, "maxDataPoints", 14) == 0)
-				this->_maxDataPointElement = new HistoricRequestElementInt("maxDataPoints", value);
+			{
+				//if(this->_maxDataPointElement != 0)
+				//	delete this->_maxDataPointElement;
+
+				//this->_maxDataPointElement = new HistoricRequestElementInt("maxDataPoints", value); //deleted in destructor
+
+				this->_maxDataPointElement = boost::shared_ptr<HistoricRequestElementInt>(new HistoricRequestElementInt("maxDataPoints", value));
+				this->_isNull_maxDataPointElement = false;
+			}
 			
 			else
 				throw requestEx;

@@ -27,13 +27,17 @@ namespace BEmu
 		class MarketEvent : public EventPtr
 		{
 			private:
-				std::vector<MessagePtr*> * _messages;
-				std::map<std::string, ObjectType> generateFakeMessageData(Subscription sub);
-				virtual std::vector<MessagePtr*> * getMessages() const;
+				//std::vector<MessagePtr*> * _messages;
+				std::vector< boost::shared_ptr<MessagePtr> > * _messages;
+
+				std::map<std::string, ObjectType> generateFakeMessageData(const Subscription& sub);
+
+				//virtual std::vector<MessagePtr*> * getMessages() const;
+				virtual std::vector< boost::shared_ptr<MessagePtr> > getMessages() const;
 
 			public:
-				MarketEvent(Event::EventType evtType, CorrelationId corr, SubscriptionList subs); //use for subscribing
-				MarketEvent(Event::EventType evtType, Subscription sub); //use for unsubscribing
+				MarketEvent(Event::EventType evtType, const CorrelationId& corr, const SubscriptionList& subs); //use for subscribing //TODO byref
+				MarketEvent(Event::EventType evtType, const Subscription& sub); //use for unsubscribing //TODO byref
 				~MarketEvent();
 		};
 	}

@@ -17,18 +17,22 @@
 namespace BEmu
 {
 	Element::Element()
+		: _ptr(boost::shared_ptr<ElementPtr>())
 	{
-		this->_ptr = 0;
+		//this->_ptr = 0;
 	}
 
 	Element::Element(const Element& arg)
+		: _ptr(arg._ptr)
 	{
-		this->_ptr = arg._ptr;
+		//this->_ptr = arg._ptr;
 	}
 
-	Element::Element(ElementPtr * arg)
+	//Element::Element(ElementPtr * arg)
+	Element::Element(boost::shared_ptr<ElementPtr> arg)
+		: _ptr(arg)
 	{
-		this->_ptr = arg;
+		//this->_ptr = arg;
 	}
 
 	Element& Element::operator=(const Element &rhs)
@@ -68,7 +72,14 @@ namespace BEmu
 	double Element::getValueAsFloat64(int index) const { return this->_ptr->getValueAsFloat64(index); }
 	Datetime Element::getValueAsDatetime(int index) const { return this->_ptr->getValueAsDatetime(index); }
 	const char * Element::getValueAsString(int index) const { return this->_ptr->getValueAsString(index); }
-	Element Element::getValueAsElement(int index) const { return this->_ptr->getValueAsElement(index); }
+	
+	Element Element::getValueAsElement(int index) const
+	{
+		Element result(this->_ptr->getValueAsElement(index));
+		return result;
+
+		//return *(this->_ptr->getValueAsElement(index));
+	}
 
 	Element Element::getElement(int position) const
 	{
@@ -77,9 +88,13 @@ namespace BEmu
 	}
 	Element Element::getElement(const char* name) const
 	{
-		ElementPtr * elementP = this->_ptr->getElement(name);
-		Element result(elementP);
+		boost::shared_ptr<ElementPtr> elmP(this->_ptr->getElement(name));
+		Element result(elmP);
 		return result;
+
+		//ElementPtr * elementP = this->_ptr->getElement(name);
+		//Element result(elementP);
+		//return result;
 	}	
 	Element Element::getElement(const Name& name) const
 	{
@@ -113,9 +128,13 @@ namespace BEmu
 
 	Element Element::appendElement()
 	{
-		ElementPtr * ptr = this->_ptr->appendElement();
-		Element result(ptr);
+		boost::shared_ptr<ElementPtr> elmP(this->_ptr->appendElement());
+		Element result(elmP);
 		return result;
+
+		//ElementPtr * ptr = this->_ptr->appendElement();
+		//Element result(ptr);
+		//return result;
 	}
 
 	char Element::getElementAsChar(const char* name) const { return this->_ptr->getElementAsChar(name); }

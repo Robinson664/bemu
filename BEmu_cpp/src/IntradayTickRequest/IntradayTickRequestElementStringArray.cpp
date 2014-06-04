@@ -24,12 +24,12 @@ namespace BEmu
 
 		IntradayTickRequestElementStringArray::~IntradayTickRequestElementStringArray()
 		{
-			for(std::vector<std::string*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
-			{
-				std::string* value = *iter;
-				delete value;
-				value = 0;
-			}
+			//for(std::vector<std::string*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
+			//{
+			//	std::string* value = *iter;
+			//	delete value;
+			//	value = 0;
+			//}
 		}
 
 		void IntradayTickRequestElementStringArray::addValue(const std::string& value)
@@ -44,8 +44,8 @@ namespace BEmu
 				value.compare("BEST_BID") == 0 ||
 				value.compare("BEST_ASK") == 0)
 			{
-				std::string* str = new std::string(value);
-				this->_values.push_back(str);
+				//std::string str(std::string(value)); //deleted in destructor
+				this->_values.push_back(value);
 			}
 			else
 			{
@@ -54,7 +54,7 @@ namespace BEmu
 			}
 		}
 
-		const std::vector<std::string*>& IntradayTickRequestElementStringArray::getValues()
+		std::vector<std::string> IntradayTickRequestElementStringArray::getValues()
 		{
 			return this->_values;
 		}
@@ -78,9 +78,9 @@ namespace BEmu
 			stream << tabs << tab;
 
 			unsigned count = 1;
-			for(std::vector<std::string*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter, ++count)
+			for(std::vector<std::string>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter, ++count)
 			{
-				std::string* str = *iter;
+				std::string str = *iter;
 
 				stream << str;
 				if(count < this->_values.size())

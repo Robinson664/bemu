@@ -10,12 +10,13 @@
 #pragma once
 
 #include "BloombergTypes/ElementPtr.h"
+#include "Types/CanConvertToStringType.h"
 
 namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		class HistoricElementString : public ElementPtr
+		class HistoricElementString : public ElementPtr, public CanConvertToStringType
 		{
 			private:
 				std::string _value;

@@ -17,10 +17,21 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementExceptions::MarketElementExceptions(std::string badField)
+		MarketElementExceptions::MarketElementExceptions(const std::string& badField) :
+			_fieldId(new MarketElementString("fieldId", badField)),
+			_reason(new MarketElementReason(MarketDataRequest::ReasonType::badField))
 		{
-            this->_fieldId = new MarketElementString("fieldId", badField);
-            this->_reason = new MarketElementReason(MarketDataRequest::ReasonType::badField);
+            //this->_fieldId = new MarketElementString("fieldId", badField); //deleted in destructor
+            //this->_reason = new MarketElementReason(MarketDataRequest::ReasonType::badField); //deleted in destructor
+		}
+
+		MarketElementExceptions::~MarketElementExceptions()
+		{
+			//delete this->_fieldId;
+			//this->_fieldId = 0;
+
+			//delete this->_reason;
+			//this->_reason = 0;
 		}
 
 		Name MarketElementExceptions::name() const
@@ -60,13 +71,14 @@ namespace BEmu
 			return true;
 		}
 
-		ElementPtr * MarketElementExceptions::getElement(const char* name) const
+		//ElementPtr * MarketElementExceptions::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> MarketElementExceptions::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldId", 8) == 0)
-				return this->_fieldId;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_fieldId);
 			
 			else if(strncmp(name, "reason", 7) == 0)
-				return this->_reason;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_reason);
 
 			else
 				throw elementPtrEx;

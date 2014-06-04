@@ -13,6 +13,7 @@
 #include "Types/ObjectType.h"
 #include <vector>
 #include <map>
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -23,7 +24,8 @@ namespace BEmu
 		class ReferenceElementFieldData : public ElementPtr
 		{
 			private:
-				std::vector<ElementPtr*> _fields;
+				//std::vector<ElementPtr*> _fields;
+				std::vector< boost::shared_ptr<ElementPtr> > _fields;
 
 			public:
 				ReferenceElementFieldData(const std::map<std::string, ObjectType>& values);
@@ -34,8 +36,12 @@ namespace BEmu
 				virtual size_t numElements() const;
 				virtual SchemaElementDefinition elementDefinition() const;
 
-				virtual ElementPtr * getElement(int position) const;
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(int position) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(int position) const;
+				
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual double getElementAsFloat64(const char* name) const;

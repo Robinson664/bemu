@@ -11,6 +11,7 @@
 
 #include "bemu_headers.h"
 #include "BloombergTypes/RequestPtr.h"
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -26,15 +27,22 @@ namespace BEmu
 			//  I could possibly delete this pointer in a ~Session() because once a caller closes a session, why not delete all related Requests.
 			//  I'm not going to do that though because it is probably not how the actual Bloomberg API handles this.
 			//  I'll leave this pointer allocated, meaning this is a memory leak.  As this emulator is not built for performance, it's probably ok.
-			RequestPtr *_ptr;
+			//RequestPtr *_ptr;
+			
+			const boost::shared_ptr<RequestPtr> _shptr;
 
 		public:
-			RequestPtr * getRequestPtr() const;
+			boost::shared_ptr<RequestPtr> getRequestPtr() const;
 
 			DLL_EXPORT Request();
-			DLL_EXPORT Request(RequestPtr *ptr);
+
+			/*DLL_EXPORT*/ Request(boost::shared_ptr<RequestPtr> ptr);
+			// /*DLL_EXPORT*/ Request(RequestPtr *ptr);
+
 			DLL_EXPORT Request(const Request& arg);
 			DLL_EXPORT Request& operator=(const Request &rhs);
+
+			DLL_EXPORT ~Request();
 			
 			DLL_EXPORT void append(const char* name, const char* value);
 			DLL_EXPORT void append(const Name& name, const char* value);

@@ -14,20 +14,14 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceElementObject::ReferenceElementObject(std::string name, ObjectType value)
+		ReferenceElementObject::ReferenceElementObject(const std::string& name, const ObjectType& value)
 		{
-			this->_name = name;
-			
+			this->_name = name;			
 			this->_value = value;
-
-			const char * cstr = value.ToString().c_str();
-			this->_cstr = ElementPtr::toCharPointer(cstr);
 		}
 
 		ReferenceElementObject::~ReferenceElementObject()
 		{
-			delete this->_cstr;
-			this->_cstr = 0;
 		}
 
 		Name ReferenceElementObject::name() const { return Name(this->_name.c_str()); }
@@ -45,14 +39,12 @@ namespace BEmu
 
 		void ReferenceElementObject::setValue(const ObjectType& value)
 		{
-			delete this->_cstr;
-			this->_cstr = ElementPtr::toCharPointer(value.ToString());
 			this->_value = value;
 		}
 
 		const char * ReferenceElementObject::getValueAsString(int index) const
 		{
-			return this->_cstr;
+			return this->_value.ToString().c_str(); //This memory exists until this ReferenceElementObject goes out of scope
 		}
 
 		std::ostream& ReferenceElementObject::print(std::ostream& stream, int level, int spacesPerLevel) const

@@ -18,19 +18,21 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceRequestElementOverride::ReferenceRequestElementOverride()
+		ReferenceRequestElementOverride::ReferenceRequestElementOverride() :
+			_fieldId(new ReferenceElementString("fieldId", "")),
+			_value(new ReferenceElementObject("value", ""))
 		{
-            this->_fieldId = new ReferenceElementString("fieldId", "");
-            this->_value = new ReferenceElementObject("value", "");
+            //this->_fieldId = new ReferenceElementString("fieldId", ""); //deleted in destructor
+            //this->_value = new ReferenceElementObject("value", ""); //deleted in destructor
 		}
 
 		ReferenceRequestElementOverride::~ReferenceRequestElementOverride()
 		{
-			delete this->_fieldId;
-			this->_fieldId = 0;
+			//delete this->_fieldId;
+			//this->_fieldId = 0;
 
-			delete this->_value;
-			this->_value = 0;
+			//delete this->_value;
+			//this->_value = 0;
 		}
 
 		Name ReferenceRequestElementOverride::name() const { return Name("overrides"); }
@@ -68,13 +70,14 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		ElementPtr * ReferenceRequestElementOverride::getElement(const char* name) const
+		//ElementPtr * ReferenceRequestElementOverride::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> ReferenceRequestElementOverride::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldId", 8) == 0)
-				return this->_fieldId;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_fieldId);
 
 			else if(strncmp(name, "value", 6) == 0)
-				return this->_value;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_value);
 			
 			else
 				throw elementPtrEx;

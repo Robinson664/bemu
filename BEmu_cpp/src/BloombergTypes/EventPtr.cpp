@@ -27,14 +27,18 @@
 
 namespace BEmu
 {
-	EventPtr::EventPtr(RequestPtr * request)
+	//EventPtr::EventPtr(RequestPtr * request)
+	//{
+	//	this->_request = _request;
+	//}
+
+	EventPtr::EventPtr(boost::shared_ptr<RequestPtr> request) : _requestP(request)
 	{
-		this->_request = _request;
 	}
 
-	EventPtr::EventPtr(const EventPtr &src)
+	EventPtr::EventPtr(const EventPtr &src) : _requestP(src._requestP), _type(src._type)
 	{
-		this->_request = src._request;
+		//this->_request = src._request;
 	}
 
 	EventPtr::~EventPtr()
@@ -42,10 +46,15 @@ namespace BEmu
 
 	}
 
-	std::vector<MessagePtr*>* EventPtr::getMessages() const
+	std::vector< boost::shared_ptr<MessagePtr> > EventPtr::getMessages() const
 	{
 		throw eventPtrEx;
 	}
+
+	//std::vector<MessagePtr*>* EventPtr::getMessages() const
+	//{
+	//	throw eventPtrEx;
+	//}
 
 	Event::EventType EventPtr::getEventType() const
 	{
@@ -57,35 +66,80 @@ namespace BEmu
 		this->_type = evtType;
 	}
 
-	EventPtr* EventPtr::EventFactory(RequestPtr *request, bool isLastRequest)
+	boost::shared_ptr<EventPtr> EventPtr::EventFactory(boost::shared_ptr<RequestPtr> request, bool isLastRequest)
 	{
 		if(request->getRequestType() == RequestPtr::historic)
 		{
-			HistoricalDataRequest::HistoricRequest * req = (HistoricalDataRequest::HistoricRequest *)request;
-			HistoricalDataRequest::HistoricEvent * evt = new HistoricalDataRequest::HistoricEvent(req);
+			boost::shared_ptr<HistoricalDataRequest::HistoricRequest> reqP = boost::dynamic_pointer_cast<HistoricalDataRequest::HistoricRequest>(request);
+			boost::shared_ptr<HistoricalDataRequest::HistoricEvent> evtP(new HistoricalDataRequest::HistoricEvent(reqP));
 
-			return evt;
+			//HistoricalDataRequest::HistoricRequest * req = (HistoricalDataRequest::HistoricRequest *)request;
+			//HistoricalDataRequest::HistoricEvent * evt = new HistoricalDataRequest::HistoricEvent(req);
+
+			return evtP;
 		}
 		else if(request->getRequestType() == RequestPtr::intradayBar)
 		{
-			IntradayBarRequest::IntradayBarRequest * req = (IntradayBarRequest::IntradayBarRequest *)request;
-			IntradayBarRequest::IntradayBarEvent * evt = new IntradayBarRequest::IntradayBarEvent(req);
+			boost::shared_ptr<IntradayBarRequest::IntradayBarRequest> reqP = boost::dynamic_pointer_cast<IntradayBarRequest::IntradayBarRequest>(request);
+			boost::shared_ptr<IntradayBarRequest::IntradayBarEvent> evtP(new IntradayBarRequest::IntradayBarEvent(reqP));
+
+			//IntradayBarRequest::IntradayBarRequest * req = (IntradayBarRequest::IntradayBarRequest *)request;
+			//IntradayBarRequest::IntradayBarEvent * evt = new IntradayBarRequest::IntradayBarEvent(req);
 			
-			return evt;
+			return evtP;
 		}
 		else if(request->getRequestType() == RequestPtr::intradayTick)
 		{
-			IntradayTickRequest::IntradayTickRequest * req = (IntradayTickRequest::IntradayTickRequest *)request;
-			IntradayTickRequest::IntradayTickEvent * evt = new IntradayTickRequest::IntradayTickEvent(req);
-			return evt;
+			boost::shared_ptr<IntradayTickRequest::IntradayTickRequest> reqP = boost::dynamic_pointer_cast<IntradayTickRequest::IntradayTickRequest>(request);
+			boost::shared_ptr<IntradayTickRequest::IntradayTickEvent> evtP(new IntradayTickRequest::IntradayTickEvent(reqP));
+
+			//IntradayTickRequest::IntradayTickRequest * req = (IntradayTickRequest::IntradayTickRequest *)request;
+			//IntradayTickRequest::IntradayTickEvent * evt = new IntradayTickRequest::IntradayTickEvent(req);
+
+			return evtP;
 		}
 		else if(request->getRequestType() == RequestPtr::reference)
 		{
-			ReferenceDataRequest::ReferenceRequest * req = (ReferenceDataRequest::ReferenceRequest *)request;
-			ReferenceDataRequest::ReferenceEvent * evt = new ReferenceDataRequest::ReferenceEvent(req);
-			return evt;
+			boost::shared_ptr<ReferenceDataRequest::ReferenceRequest> reqP = boost::dynamic_pointer_cast<ReferenceDataRequest::ReferenceRequest>(request);
+			boost::shared_ptr<ReferenceDataRequest::ReferenceEvent> evtP(new ReferenceDataRequest::ReferenceEvent(reqP));
+
+			//ReferenceDataRequest::ReferenceRequest * req = (ReferenceDataRequest::ReferenceRequest *)request;
+			//ReferenceDataRequest::ReferenceEvent * evt = new ReferenceDataRequest::ReferenceEvent(req);
+
+			return evtP;
 		}
 		throw request->requestEx;
 	}
+
+	//EventPtr* EventPtr::EventFactory(RequestPtr *request, bool isLastRequest)
+	//{
+	//	if(request->getRequestType() == RequestPtr::historic)
+	//	{
+	//		HistoricalDataRequest::HistoricRequest * req = (HistoricalDataRequest::HistoricRequest *)request;
+	//		HistoricalDataRequest::HistoricEvent * evt = new HistoricalDataRequest::HistoricEvent(req);
+
+	//		return evt;
+	//	}
+	//	else if(request->getRequestType() == RequestPtr::intradayBar)
+	//	{
+	//		IntradayBarRequest::IntradayBarRequest * req = (IntradayBarRequest::IntradayBarRequest *)request;
+	//		IntradayBarRequest::IntradayBarEvent * evt = new IntradayBarRequest::IntradayBarEvent(req);
+	//		
+	//		return evt;
+	//	}
+	//	else if(request->getRequestType() == RequestPtr::intradayTick)
+	//	{
+	//		IntradayTickRequest::IntradayTickRequest * req = (IntradayTickRequest::IntradayTickRequest *)request;
+	//		IntradayTickRequest::IntradayTickEvent * evt = new IntradayTickRequest::IntradayTickEvent(req);
+	//		return evt;
+	//	}
+	//	else if(request->getRequestType() == RequestPtr::reference)
+	//	{
+	//		ReferenceDataRequest::ReferenceRequest * req = (ReferenceDataRequest::ReferenceRequest *)request;
+	//		ReferenceDataRequest::ReferenceEvent * evt = new ReferenceDataRequest::ReferenceEvent(req);
+	//		return evt;
+	//	}
+	//	throw request->requestEx;
+	//}
 
 }

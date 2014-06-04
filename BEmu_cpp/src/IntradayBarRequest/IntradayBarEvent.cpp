@@ -19,52 +19,79 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarEvent::IntradayBarEvent(IntradayBarRequest * request) : EventPtr(request)
+		IntradayBarEvent::IntradayBarEvent(boost::shared_ptr<IntradayBarRequest> request) :
+			EventPtr(request),
+			_internalP(request)
 		{
-			this->_request = request;
-			this->_internal = request;
+			this->_requestP = boost::shared_ptr<RequestPtr>( boost::dynamic_pointer_cast<RequestPtr>(request) );
 
-			this->_message = this->GenerateMessages();
+			//this->_requestP = request;
+			//this->_internalP = request;
+
+			this->_messages = this->GenerateMessages();
 		}
 
-		std::vector<MessagePtr*>* IntradayBarEvent::GenerateMessages() const
+		IntradayBarEvent::~IntradayBarEvent()
 		{
-			std::vector<MessagePtr*>* result = new std::vector<MessagePtr*>();
-			IntradayBarRequest * ireq = this->_internal;
+			this->_messages->clear();
+
+			delete this->_messages;
+			this->_messages = 0;
+		}
+
+		//std::vector<MessagePtr*>* IntradayBarEvent::GenerateMessages() const
+		std::vector< boost::shared_ptr<MessagePtr> > * IntradayBarEvent::GenerateMessages() const
+		{
+			//std::vector<MessagePtr*>* result = new std::vector<MessagePtr*>(); //deleted in the destructor
+			std::vector< boost::shared_ptr<MessagePtr> > * result = new std::vector< boost::shared_ptr<MessagePtr> >();
+
+			boost::shared_ptr<IntradayBarRequest> ireq = this->_internalP;
 
 			bool isSecurityError = Rules::IsSecurityError(ireq->security());
 			if(isSecurityError)
 			{
-				MessagePtr * msg = new IntradayBarMessage(this->_internal->getCorrelationId(), this->_internal->getService(), this->_internal->security());
-				result->push_back(msg);
+				//this is deleted when a MessageIterator goes out of scope
+				//MessagePtr * msg = new IntradayBarMessage(this->_internalP->getCorrelationId(), this->_internalP->getService(), this->_internalP->security());
+
+				boost::shared_ptr<IntradayBarMessage> msgIP(new IntradayBarMessage(this->_internalP->getCorrelationId(), this->_internalP->getService(), this->_internalP->security()));
+				boost::shared_ptr<MessagePtr> msgP(boost::dynamic_pointer_cast<MessagePtr>(msgIP));
+
+				result->push_back(msgP);
 			}
 			else
 			{
-				std::vector<IntradayBarTickDataType*> barData;
+				//std::vector<IntradayBarTickDataType*> barData;
+				std::vector< boost::shared_ptr<IntradayBarTickDataType> > barData;
+
 				if(ireq->hasStartDate())
 				{
-					std::vector<Datetime>* datetimes = ireq->getDateTimes();
-					for(std::vector<Datetime>::const_iterator iter = datetimes->begin(); iter != datetimes->end(); ++iter)
+					std::vector<Datetime> datetimes = ireq->getDateTimes();
+					for(std::vector<Datetime>::const_iterator iter = datetimes.begin(); iter != datetimes.end(); ++iter)
 					{
 						Datetime date = *iter;
-						IntradayBarTickDataType * bar = RandomDataGenerator::GenerateBarData(date);
+
+						//IntradayBarTickDataType * bar = RandomDataGenerator::GenerateBarData(date);
+						boost::shared_ptr<IntradayBarTickDataType> bar( RandomDataGenerator::GenerateBarData(date) );						
+						
 						barData.push_back(bar);
 					}
-					
-					delete datetimes;
-					datetimes = 0;
 				}
+				
+				//this is deleted when a MessageIterator goes out of scope
+				//MessagePtr * msg = new IntradayBarMessage(this->_internalP->getCorrelationId(), ireq->getService(), barData);
+				boost::shared_ptr<IntradayBarMessage> msgIP(new IntradayBarMessage(this->_internalP->getCorrelationId(), ireq->getService(), barData));
+				boost::shared_ptr<MessagePtr> msgP(boost::dynamic_pointer_cast<MessagePtr>(msgIP));
 
-				MessagePtr * msg = new IntradayBarMessage(this->_internal->getCorrelationId(), ireq->getService(), barData);
-				result->push_back(msg);
+				result->push_back(msgP);
 			}
 
 			return result;
 		}
 
-		std::vector<MessagePtr*>* IntradayBarEvent::getMessages() const
+		//std::vector<MessagePtr*>* IntradayBarEvent::getMessages() const
+		std::vector< boost::shared_ptr<MessagePtr> > IntradayBarEvent::getMessages() const
 		{
-			return this->_message;
+			return *(this->_messages);
 		}
 
 	}

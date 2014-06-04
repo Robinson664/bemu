@@ -26,13 +26,16 @@ namespace BEmu
 		class IntradayTickElementDataArray : public ElementPtr
 		{
 			private:
-				std::vector<IntradayTickElementData*> _tickData;
+				//std::vector<IntradayTickElementData*> _tickData;
+				std::vector< boost::shared_ptr<IntradayTickElementData> > _tickData;
 
 			public:
-				IntradayTickElementDataArray(std::map<Datetime, IntradayTickElementTuple3*>* ticks, bool includeConditionCodes);
+				IntradayTickElementDataArray(std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> > * ticks, bool includeConditionCodes);
 				~IntradayTickElementDataArray();
 
-				virtual ElementPtr * getValueAsElement(int index) const;
+				//virtual ElementPtr * getValueAsElement(int index) const;
+				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
+
 				virtual Name name() const;
 
 				virtual size_t numValues() const;

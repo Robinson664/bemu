@@ -16,9 +16,10 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricElement::HistoricElement(const HistoricMessage& msg)
+		HistoricElement::HistoricElement(const HistoricMessage& msg) :
+			_security(boost::dynamic_pointer_cast<HistoricElementSecurityData>(msg.getElement("securityData")))
 		{
-			this->_security = (HistoricElementSecurityData*)msg.getElement("securityData");
+			//this->_security = (HistoricElementSecurityData*)msg.getElement("securityData");
 		}
 
 		HistoricElement::~HistoricElement()

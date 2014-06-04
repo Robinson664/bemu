@@ -15,7 +15,7 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarElementString::IntradayBarElementString(const std::string& name, const std::string& value)
+		IntradayBarElementString::IntradayBarElementString(const std::string& name, const std::string& value) : CanConvertToStringType(value)
 		{
 			this->_name = name;
 			this->_value = value;

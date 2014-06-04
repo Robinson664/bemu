@@ -21,8 +21,11 @@ namespace BEmu
 		class MarketElementSubscriptionCancelReason : public ElementPtr
 		{
 			private:
-				MarketElementString * _source, * _category, * _description, * _subCategory;
-				MarketElementInt * _errorCode;
+				boost::shared_ptr<MarketElementString> _source, _category, _description, _subCategory;
+				boost::shared_ptr<MarketElementInt> _errorCode;
+
+				//MarketElementString * _source, * _category, * _description, * _subCategory;
+				//MarketElementInt * _errorCode;
 
 			public:
 				MarketElementSubscriptionCancelReason();

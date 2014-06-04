@@ -21,31 +21,38 @@ namespace BEmu
 	namespace IntradayTickRequest
 	{
 		//makes copies of the arguments
-		IntradayTickElementDataArray::IntradayTickElementDataArray(std::map<Datetime, IntradayTickElementTuple3*>* ticks, bool includeConditionCodes)
+		IntradayTickElementDataArray::IntradayTickElementDataArray(std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >* ticks, bool includeConditionCodes)
 		{
-			for(std::map<Datetime, IntradayTickElementTuple3*>::const_iterator iter = ticks->begin(); iter != ticks->end(); ++iter)
+			for(std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >::const_iterator iter = ticks->begin(); iter != ticks->end(); ++iter)
 			{
 				IntradayTickElementTuple3 tuple(iter->second->item1(), iter->second->item2(), iter->second->item3());
-				IntradayTickElementData* elmFieldData = new IntradayTickElementData(iter->first, tuple, includeConditionCodes);
 
-				this->_tickData.push_back(elmFieldData);
+				//IntradayTickElementData* elmFieldData = new IntradayTickElementData(iter->first, tuple, includeConditionCodes); //deleted in destructor
+				boost::shared_ptr<IntradayTickElementData> elmFieldDataP(new IntradayTickElementData(iter->first, tuple, includeConditionCodes));
+
+				this->_tickData.push_back(elmFieldDataP);
 			}
 		}
 
 		IntradayTickElementDataArray::~IntradayTickElementDataArray()
 		{
-			for(std::vector<IntradayTickElementData*>::const_iterator iter = this->_tickData.begin(); iter != this->_tickData.end(); ++iter)
-			{
-				IntradayTickElementData* elmFieldData = *iter;
-				delete elmFieldData;
-				elmFieldData = 0;
-			}
+			//for(std::vector<IntradayTickElementData*>::const_iterator iter = this->_tickData.begin(); iter != this->_tickData.end(); ++iter)
+			//{
+			//	IntradayTickElementData* elmFieldData = *iter;
+			//	delete elmFieldData;
+			//	elmFieldData = 0;
+			//}
+
+			this->_tickData.clear();
 		}
 
-		ElementPtr * IntradayTickElementDataArray::getValueAsElement(int index) const
+		//ElementPtr * IntradayTickElementDataArray::getValueAsElement(int index) const
+		boost::shared_ptr<ElementPtr> IntradayTickElementDataArray::getValueAsElement(int index) const
 		{
-			IntradayTickElementData* result = this->_tickData.operator[](index);
-			return result;
+			return boost::dynamic_pointer_cast<ElementPtr>(this->_tickData.operator[](index));
+
+			//IntradayTickElementData* result = this->_tickData.operator[](index);
+			//return result;
 		}
 
 		Name IntradayTickElementDataArray::name() const
@@ -71,9 +78,10 @@ namespace BEmu
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);
 
 			stream << tabs << "tickData[] = {" << std::endl;
-			for(std::vector<IntradayTickElementData*>::const_iterator iter = this->_tickData.begin(); iter != this->_tickData.end(); ++iter)
+			//for(std::vector<IntradayTickElementData*>::const_iterator iter = this->_tickData.begin(); iter != this->_tickData.end(); ++iter)
+			for(std::vector< boost::shared_ptr<IntradayTickElementData> >::const_iterator iter = this->_tickData.begin(); iter != this->_tickData.end(); ++iter)
 			{
-				IntradayTickElementData* elmFieldData = *iter;
+				boost::shared_ptr<IntradayTickElementData> elmFieldData = *iter;
 				elmFieldData->print(stream, level + 1, spacesPerLevel);
 			}
 			stream << tabs << '}' << std::endl;

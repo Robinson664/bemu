@@ -18,7 +18,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketMessageSubscriptionData::MarketMessageSubscriptionData(Subscription sub, std::map<std::string, ObjectType> fields)
+		MarketMessageSubscriptionData::MarketMessageSubscriptionData(const Subscription& sub, const std::map<std::string, ObjectType>& fields)
 			: MessagePtr(Name("MarketDataEvents"), sub.correlationId())
 		{
 			for(std::map<std::string, ObjectType>::const_iterator iter = fields.begin(); iter != fields.end(); ++iter)
@@ -26,60 +26,110 @@ namespace BEmu
 				std::string str = iter->first;
 				ObjectType field = iter->second;
 
-				ElementPtr * elm = 0;
-
-				switch(field.GetType())
+				if(!field.IsNull())
 				{
-					case ObjectType::eDouble:
-						elm = new MarketElementDouble(str, field.ValueAsDouble());
-						break;
-					case ObjectType::eDatetime:
-						elm = new MarketElementDatetime(str, field.ValueAsDatetime());
-						break;
-					case ObjectType::eString:
-						elm = new MarketElementString(str, field.ValueAsString());
-						break;
-					case ObjectType::eInt:
-						elm = new MarketElementInt(str, field.ValueAsInt());
-						break;
-					case ObjectType::eBool:
-						elm = new MarketElementBool(str, field.ValueAsBool());
-						break;
-				}
+					//all deleted in destructor
+					switch(field.GetType())
+					{
+						case ObjectType::eDouble:
+						{
+							boost::shared_ptr<MarketElementDouble> elmP(new MarketElementDouble(str, field.ValueAsDouble()));
+							boost::shared_ptr<ElementPtr> elm(boost::dynamic_pointer_cast<ElementPtr>(elmP));
 
-				if(elm != 0)
-					this->_fields[str] = elm;
+							this->_fields[str] = elm;
+
+							//elm = new MarketElementDouble(str, field.ValueAsDouble());
+						}
+						break;
+						case ObjectType::eDatetime:
+						{
+							boost::shared_ptr<MarketElementDatetime> elmP(new MarketElementDatetime(str, field.ValueAsDatetime()));
+							boost::shared_ptr<ElementPtr> elm(boost::dynamic_pointer_cast<ElementPtr>(elmP));
+						
+							this->_fields[str] = elm;
+
+							//elm = new MarketElementDatetime(str, field.ValueAsDatetime());
+						}
+						break;
+						case ObjectType::eString:
+						{
+							boost::shared_ptr<MarketElementString> elmP(new MarketElementString(str, field.ValueAsString()));
+							boost::shared_ptr<ElementPtr> elm(boost::dynamic_pointer_cast<ElementPtr>(elmP));
+						
+							this->_fields[str] = elm;
+
+							//elm = new MarketElementString(str, field.ValueAsString());
+						}
+						break;
+						case ObjectType::eInt:
+						{
+							boost::shared_ptr<MarketElementInt> elmP(new MarketElementInt(str, field.ValueAsInt()));
+							boost::shared_ptr<ElementPtr> elm(boost::dynamic_pointer_cast<ElementPtr>(elmP));
+						
+							this->_fields[str] = elm;
+
+							//elm = new MarketElementInt(str, field.ValueAsInt());
+						}
+						break;
+						case ObjectType::eBool:
+						{
+							boost::shared_ptr<MarketElementBool> elmP(new MarketElementBool(str, field.ValueAsBool()));
+							boost::shared_ptr<ElementPtr> elm(boost::dynamic_pointer_cast<ElementPtr>(elmP));
+						
+							this->_fields[str] = elm;
+
+							//elm = new MarketElementBool(str, field.ValueAsBool());
+						}
+						break;
+					}
+				}
 			}
 			this->_security = sub.security();
 		}
 
 		MarketMessageSubscriptionData::~MarketMessageSubscriptionData()
 		{
-			for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
-			{
-				ElementPtr * elm = iter->second;
-				delete elm;
-			}
+			this->_fields.clear();
+
+			//for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//{
+			//	ElementPtr * elm = iter->second;
+
+			//	if(elm != 0)
+			//		delete elm;
+			//}
 		}
 
-		std::stack<ElementPtr*> MarketMessageSubscriptionData::getRootElements() const
+		//std::stack<ElementPtr*> MarketMessageSubscriptionData::getRootElements() const
+		std::stack< boost::shared_ptr<ElementPtr> > MarketMessageSubscriptionData::getRootElements() const
 		{
-			std::stack<ElementPtr*> result;
+			//std::stack<ElementPtr*> result;
+			std::stack< boost::shared_ptr<ElementPtr> > result;
 
-			for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			for(std::map<std::string, boost::shared_ptr<ElementPtr> >::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
 			{
-				ElementPtr * elm = iter->second;
+				boost::shared_ptr<ElementPtr> elm = iter->second;
 
-				if(elm != 0)
+				//if(elm != 0)
 					result.push(elm);
 			}
 
 			return result;
 		}
 
+		void MarketMessageSubscriptionData::markRootElementsDeleted()
+		{
+			//for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//{
+			//	std::string key = iter->first;
+			//	this->_fields[key] = 0;
+			//}
+		}
+
 		const char* MarketMessageSubscriptionData::topicName() const
 		{
-			return ElementPtr::toCharPointer(this->_security);
+			return this->_security.c_str();
 		}
 
 		size_t MarketMessageSubscriptionData::numElements() const
@@ -92,15 +142,17 @@ namespace BEmu
 			return this->_fields.find(name) != this->_fields.end();
 		}
 
-		ElementPtr * MarketMessageSubscriptionData::getElement(const char* name) const
+		//ElementPtr * MarketMessageSubscriptionData::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> MarketMessageSubscriptionData::getElement(const char* name) const
 		{
-			for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			for(std::map<std::string, boost::shared_ptr<ElementPtr> >::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
 			{
 				std::string key = iter->first;
 
 				if(key == name)
 				{
-					ElementPtr * result = iter->second;
+					boost::shared_ptr<ElementPtr> result = iter->second;
 					return result;
 				}
 			}
@@ -111,9 +163,10 @@ namespace BEmu
 		{
 			stream << "MarketDataEvents = {" << std::endl;
 			
-			for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//for(std::map<std::string, ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			for(std::map<std::string, boost::shared_ptr<ElementPtr> >::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
 			{
-				ElementPtr * elm = iter->second;
+				boost::shared_ptr<ElementPtr> elm = iter->second;
 				elm->print(stream, level + 1, spacesPerLevel);
 			}
 			stream << "}" << std::endl;

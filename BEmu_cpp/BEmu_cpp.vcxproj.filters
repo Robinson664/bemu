@@ -303,60 +303,6 @@
     <ClInclude Include="headers\IntradayBarRequest\IntradayBarRequestElementTime.h">
       <Filter>Header Files\IntradayBarRequest</Filter>
     </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElement.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementData.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDataArray.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDataParent.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementTuple3.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDateTime.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDouble.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementInt.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementResponseError.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementString.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickEvent.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickMessage.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequest.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementBool.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementInt.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementString.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementStringArray.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementTime.h">
-      <Filter>Header Files\IntradayTickRequest</Filter>
-    </ClInclude>
     <ClInclude Include="headers\MarketDataRequest\MarketElementBool.h">
       <Filter>Header Files\MarketDataRequest</Filter>
     </ClInclude>
@@ -485,6 +431,63 @@
     </ClInclude>
     <ClInclude Include="headers\ReferenceDataRequest\ReferenceRequestElementStringArray.h">
       <Filter>Header Files\ReferenceDataRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Types\CanConvertToStringType.h">
+      <Filter>Header Files\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElement.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementTime.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementData.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDataArray.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDataParent.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDateTime.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementDouble.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementInt.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementResponseError.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementString.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickElementTuple3.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickEvent.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickMessage.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequest.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementBool.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementInt.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementString.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\IntradayTickRequest\IntradayTickRequestElementStringArray.h">
+      <Filter>Header Files\IntradayTickRequest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -871,6 +874,9 @@
     </ClCompile>
     <ClCompile Include="src\ReferenceDataRequest\ReferenceRequestElementStringArray.cpp">
       <Filter>Source Files\ReferenceDataRequest</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Types\CanConvertToStringType.cpp">
+      <Filter>Source Files\Types</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

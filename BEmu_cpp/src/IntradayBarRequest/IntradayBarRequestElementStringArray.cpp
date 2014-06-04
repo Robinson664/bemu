@@ -65,7 +65,7 @@ namespace BEmu
 		{
 			if(this->isEventTypeAllowed(value))
 			{
-				std::string* str = new std::string(value);
+				std::string* str = new std::string(value); //deleted in the destructor
 				this->_values.push_back(str);
 			}
 			else

@@ -14,7 +14,7 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceElementString::ReferenceElementString(const std::string& name, const std::string& value)
+		ReferenceElementString::ReferenceElementString(const std::string& name, const std::string& value) : CanConvertToStringType(value)
 		{
 			this->_name = name;
 			this->_value = value;
@@ -41,7 +41,7 @@ namespace BEmu
 		const char * ReferenceElementString::getValueAsString(int index) const
 		{
 			if(index == 0)
-				return ElementPtr::toCharPointer(this->_value);
+				return this->ValueAsString().c_str();
 			else
 				throw elementPtrEx;
 		}

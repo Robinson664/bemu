@@ -21,10 +21,10 @@ namespace BEmu
 		class MarketElementExceptionsArray : public ElementPtr
 		{
 			private:
-				std::vector<MarketElementExceptions*> _exceptions;
+				std::vector< boost::shared_ptr<MarketElementExceptions> > _exceptions;
 
 			public:
-				MarketElementExceptionsArray(std::vector<std::string> badFields);
+				MarketElementExceptionsArray(const std::vector<std::string>& badFields);
 				~MarketElementExceptionsArray();
 
 				virtual Name name() const;
@@ -36,7 +36,8 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				virtual ElementPtr * getValueAsElement(int index) const;
+				//virtual ElementPtr * getValueAsElement(int index) const;
+				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

@@ -11,6 +11,7 @@
 
 #include <vector>
 #include "BloombergTypes/EventPtr.h"
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -23,15 +24,22 @@ namespace BEmu
 		class IntradayTickEvent : public EventPtr
 		{
 			private:
-				std::vector<MessagePtr*> *_messages;
-				std::vector<MessagePtr*>* GenerateMessages();
-				IntradayTickRequest *_internal;
+				//std::vector<MessagePtr*> *_messages;
+				std::vector< boost::shared_ptr<MessagePtr> > * _messages;
+
+				//std::vector<MessagePtr*>* GenerateMessages();
+				std::vector< boost::shared_ptr<MessagePtr> > * GenerateMessages();
+				
+				//IntradayTickRequest *_internal;
+				boost::shared_ptr<IntradayTickRequest> _internalP;
 
 			public:
-				IntradayTickEvent(IntradayTickRequest *request);
+				//IntradayTickEvent(IntradayTickRequest *request);
+				IntradayTickEvent(boost::shared_ptr<IntradayTickRequest> request);
 				~IntradayTickEvent();
 
-				virtual std::vector<MessagePtr*> *getMessages() const;
+				//virtual std::vector<MessagePtr*> * getMessages() const;
+				virtual std::vector< boost::shared_ptr<MessagePtr> > getMessages() const;
 		};
 	}
 }

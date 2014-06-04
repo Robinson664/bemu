@@ -12,6 +12,7 @@
 #include "bemu_headers.h"
 #include <exception>
 #include <vector>
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -27,7 +28,8 @@ namespace BEmu
 	class Event
 	{
 		private:
-			EventPtr * _ptr;
+			//EventPtr * _ptr;
+			boost::shared_ptr<EventPtr> _ptrP;
 
 		public:
 			enum EventType {
@@ -66,8 +68,10 @@ namespace BEmu
 			  UNKNOWN               = -1
 			};
 			
-			Event(EventPtr *ptr);
-			EventPtr * getEventPtr() const;
+			//Event(EventPtr *ptr);
+			Event(boost::shared_ptr<EventPtr> ptr);
+
+			boost::shared_ptr<EventPtr> getEventPtr() const;
 
 			DLL_EXPORT Event();			
 			DLL_EXPORT Event(const Event& arg);

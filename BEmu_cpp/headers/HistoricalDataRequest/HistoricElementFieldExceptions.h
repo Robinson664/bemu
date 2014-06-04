@@ -21,8 +21,8 @@ namespace BEmu
 		class HistoricElementFieldExceptions : public ElementPtr
 		{
 			private:
-				HistoricElementString * _fieldId;
-				HistoricElementErrorInfo * _errorInfo;
+				boost::shared_ptr<HistoricElementString> _fieldId;
+				boost::shared_ptr<HistoricElementErrorInfo> _errorInfo;
 
 			public:
 				HistoricElementFieldExceptions(const std::string& badField);
@@ -36,8 +36,10 @@ namespace BEmu
 				bool isNull() const;
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
+				
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
-				virtual ElementPtr * getElement(const char* name) const;
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual int getElementAsInt32(const char* name) const;

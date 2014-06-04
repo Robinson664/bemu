@@ -19,31 +19,38 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricEvent::HistoricEvent(HistoricRequest * request) : EventPtr(request)
+		HistoricEvent::HistoricEvent(boost::shared_ptr<HistoricRequest> request) : EventPtr(request)
 		{
-			this->_request = request;
-			this->_internal = request;
+			this->_requestP = request;
+
+			//this->_request = request;
+			this->_internalP = request;
 			this->_messages = this->GenerateMessages();
 		}
 
 		HistoricEvent::~HistoricEvent()
 		{
+			this->_messages->clear();
+
 			delete this->_messages;
 			this->_messages = 0;
 		}
 
 				
-		std::vector<MessagePtr*> * HistoricEvent::getMessages() const
+		//std::vector<MessagePtr*> * HistoricEvent::getMessages() const
+		std::vector< boost::shared_ptr<MessagePtr> > HistoricEvent::getMessages() const
 		{
-			return this->_messages;
+			return *(this->_messages);
 		}
 
-		std::vector<MessagePtr*> * HistoricEvent::GenerateMessages() const
+		//std::vector<MessagePtr*> * HistoricEvent::GenerateMessages() const
+		std::vector< boost::shared_ptr<MessagePtr> > * HistoricEvent::GenerateMessages() const
 		{
-			std::vector<MessagePtr*> * result = new std::vector<MessagePtr*>();
+			//std::vector<MessagePtr*> * result = new std::vector<MessagePtr*>();
+			std::vector< boost::shared_ptr<MessagePtr> > * result = new std::vector< boost::shared_ptr<MessagePtr> >();
 
 			std::vector<std::string> badFields;
-			std::vector<std::string> rfields(this->_internal->fields());
+			std::vector<std::string> rfields(this->_internalP->fields());
 			for(std::vector<std::string>::const_iterator iterField = rfields.begin(); iterField != rfields.end(); ++iterField)
 			{
 				std::string field = *iterField;
@@ -52,19 +59,19 @@ namespace BEmu
 					badFields.push_back(field);
 			}
 
-			std::vector<std::string> securities(this->_internal->securities());
+			std::vector<std::string> securities(this->_internalP->securities());
 			for(std::vector<std::string>::const_iterator iterSec = securities.begin(); iterSec != securities.end(); ++iterSec)
 			{
 				std::string sec = *iterSec;
 
 				std::map<Datetime, std::map<std::string, ObjectType> *> * fieldData = new std::map<Datetime, std::map<std::string, ObjectType> *>();
 
-				if(this->_internal->hasStartDate())
+				if(this->_internalP->hasStartDate())
 				{
-					Datetime dtStart = this->_internal->dtStart();
-					std::vector<Datetime> * dates = this->_internal->getDates();
+					Datetime dtStart = this->_internalP->dtStart();
+					std::vector<Datetime> dates = this->_internalP->getDates();
 
-					for(std::vector<Datetime>::const_iterator iterDate = dates->begin(); iterDate != dates->end(); ++iterDate)
+					for(std::vector<Datetime>::const_iterator iterDate = dates.begin(); iterDate != dates.end(); ++iterDate)
 					{
 						Datetime date = *iterDate;
 						if(date.getWeekDay() != Datetime::Saturday && date.getWeekDay() != Datetime::Sunday)
@@ -83,11 +90,12 @@ namespace BEmu
 						}
 					}
 
-					HistoricMessage * msg = new HistoricMessage(this->_internal->getCorrelationId(), sec, badFields, fieldData, result->size());
-					result->push_back(msg);
+					//HistoricMessage * msg = new HistoricMessage(this->_internalP->getCorrelationId(), sec, badFields, fieldData, result->size());
+					//result->push_back(msg);
 
-					delete dates;
-					dates = 0;
+					boost::shared_ptr<HistoricMessage> msgHP(new HistoricMessage(this->_internalP->getCorrelationId(), sec, badFields, fieldData, result->size()));
+					boost::shared_ptr<MessagePtr> msg(boost::dynamic_pointer_cast<MessagePtr>(msgHP));
+					result->push_back(msg);
 				}
 			}
 

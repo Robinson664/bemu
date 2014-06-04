@@ -16,7 +16,7 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarElementDateTime::IntradayBarElementDateTime(const std::string& name, const Datetime& value)
+		IntradayBarElementDateTime::IntradayBarElementDateTime(const std::string& name, const Datetime& value) : CanConvertToStringType(value)
 		{
 			this->_name = name;
 			this->_value = value;
@@ -62,7 +62,7 @@ namespace BEmu
 		const char * IntradayBarElementDateTime::getValueAsString(int index) const
 		{
 			if(index == 0)
-				return ElementPtr::toCharPointer(this->_value);
+				return this->ValueAsString().c_str();
 			else
 				throw elementPtrEx;
 		}

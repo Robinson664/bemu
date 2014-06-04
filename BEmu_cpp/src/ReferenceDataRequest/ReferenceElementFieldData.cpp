@@ -29,44 +29,85 @@ namespace BEmu
 				std::string name = iter->first;
 				ObjectType value = iter->second;
 
-				ElementPtr * elm = 0;
+				//ElementPtr * elm = 0;
 
+				//all deleted in destructor
 				switch(value.GetType())
 				{
 					case ObjectType::eDouble:
-						elm = new ReferenceElementDouble(name, value.ValueAsDouble());
+					{
+						//elm = new ReferenceElementDouble(name, value.ValueAsDouble());
+
+						boost::shared_ptr<ReferenceElementDouble> elmDbl(new ReferenceElementDouble(name, value.ValueAsDouble()));
+						boost::shared_ptr<ElementPtr> elmDblP(boost::dynamic_pointer_cast<ElementPtr>(elmDbl));
+
+						this->_fields.push_back(elmDblP);
+
 						break;
+					}
 						
 					case ObjectType::eInt:
-						elm = new ReferenceElementInt(name, value.ValueAsInt());
+					{
+						//elm = new ReferenceElementInt(name, value.ValueAsInt());
+
+						boost::shared_ptr<ReferenceElementInt> elmInt(new ReferenceElementInt(name, value.ValueAsInt()));
+						boost::shared_ptr<ElementPtr> elmIntP(boost::dynamic_pointer_cast<ElementPtr>(elmInt));
+						
+						this->_fields.push_back(elmIntP);
+
 						break;
+					}
 						
 					case ObjectType::eDatetime:
-						elm = new ReferenceElementDateTime(name, value.ValueAsDatetime());
+					{
+						//elm = new ReferenceElementDateTime(name, value.ValueAsDatetime());
+
+						boost::shared_ptr<ReferenceElementDateTime> elmDt(new ReferenceElementDateTime(name, value.ValueAsDatetime()));
+						boost::shared_ptr<ElementPtr> elmDtP(boost::dynamic_pointer_cast<ElementPtr>(elmDt));
+						
+						this->_fields.push_back(elmDtP);
+
 						break;
+					}
 						
 					case ObjectType::eString:
-						elm = new ReferenceElementString(name, value.ValueAsString());
+					{
+						//elm = new ReferenceElementString(name, value.ValueAsString());
+						
+						boost::shared_ptr<ReferenceElementString> elmStr(new ReferenceElementString(name, value.ValueAsString()));
+						boost::shared_ptr<ElementPtr> elmStrP(boost::dynamic_pointer_cast<ElementPtr>(elmStr));
+						
+						this->_fields.push_back(elmStrP);
+
 						break;
+					}
 
 					case ObjectType::eChainTickers:
-						elm = value.ValueAsChainTickers();
+					{
+						boost::shared_ptr<ElementPtr> elmChainP(boost::dynamic_pointer_cast<ElementPtr>(value.ValueAsChainTickers()));
+
+						this->_fields.push_back(elmChainP);
+
+						//elm = value.ValueAsChainTickers();
 						break;
+					}
 				}
 
-				if(elm != 0)
-					this->_fields.push_back(elm);
+				//if(elm != 0)
+				//	this->_fields.push_back(elm);
 
 			}
 		}
 
 		ReferenceElementFieldData::~ReferenceElementFieldData()
 		{
-			for(std::vector<ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
-			{
-				ElementPtr * elm = *iter;
-				delete elm;
-			}
+			//for(std::vector<ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//{
+			//	ElementPtr * elm = *iter;
+			//	delete elm;
+			//}
+
+			this->_fields.clear();
 		}
 
 		Name ReferenceElementFieldData::name() const { return Name("fieldData"); }
@@ -80,16 +121,19 @@ namespace BEmu
 			return result;
 		}
 
-		ElementPtr * ReferenceElementFieldData::getElement(int position) const
+		//ElementPtr * ReferenceElementFieldData::getElement(int position) const
+		boost::shared_ptr<ElementPtr> ReferenceElementFieldData::getElement(int position) const
 		{
-			return this->_fields.at(position);
+			return boost::dynamic_pointer_cast<ElementPtr>(this->_fields.at(position));
 		}
 
-		ElementPtr * ReferenceElementFieldData::getElement(const char* name) const
+		//ElementPtr * ReferenceElementFieldData::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> ReferenceElementFieldData::getElement(const char* name) const
 		{
-			for(std::vector<ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//for(std::vector<ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			for(std::vector< boost::shared_ptr<ElementPtr> >::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
 			{
-				ElementPtr * elm = *iter;
+				boost::shared_ptr<ElementPtr> elm = *iter;
 
 				if(elm->name() == name)
 					return elm;
@@ -99,9 +143,10 @@ namespace BEmu
 
 		bool ReferenceElementFieldData::hasElement(const char* name, bool excludeNullElements) const
 		{
-			for(std::vector<ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//for(std::vector<ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			for(std::vector< boost::shared_ptr<ElementPtr> >::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
 			{
-				ElementPtr * elm = *iter;
+				boost::shared_ptr<ElementPtr> elm = *iter;
 
 				if(elm->name() == name)
 					return true;
@@ -135,10 +180,13 @@ namespace BEmu
 
 			stream << tabs << "fieldData = {" << std::endl;
 			
-			for(std::vector<ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			//for(std::vector<ElementPtr*>::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
+			for(std::vector< boost::shared_ptr<ElementPtr> >::const_iterator iter = this->_fields.begin(); iter != this->_fields.end(); ++iter)
 			{
-				ElementPtr * elm = *iter;
-				elm->print(stream, level + 1, spacesPerLevel);
+				//ElementPtr * elm = *iter;
+				boost::shared_ptr<ElementPtr> elmP(*iter);
+
+				elmP->print(stream, level + 1, spacesPerLevel);
 			}
 
 			stream << tabs << '}' << std::endl;

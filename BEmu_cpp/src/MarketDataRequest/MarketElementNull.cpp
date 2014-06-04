@@ -13,7 +13,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementNull::MarketElementNull(std::string name)
+		MarketElementNull::MarketElementNull(const std::string& name)
 		{
 			this->_name = name;
 		}

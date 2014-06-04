@@ -24,7 +24,7 @@ namespace BEmu
 		class ReferenceElementArrayChainTickersItem : public ElementPtr
 		{
 			private:
-				ReferenceElementString * _element;
+				boost::shared_ptr<ReferenceElementString> _element;
 
 			public:
 				ReferenceElementArrayChainTickersItem(std::string ticker, Datetime dtExp, ReferenceDataRequest::OptionalityEnum::EnumType optionality, int strike);
@@ -40,7 +40,9 @@ namespace BEmu
 				virtual bool isComplexType() const;
 
 				virtual const char* getElementAsString(const char* name) const;
-				virtual ElementPtr * getElement(const char* name) const;
+				
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

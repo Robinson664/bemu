@@ -20,22 +20,22 @@ namespace BEmu
 	class DisplayFormats
 	{
 		private:
-			static string Format(Datetime dt, const char * format);
+			static string Format(const Datetime& dt, const char * format);
 
 		public:
-			static string ToMMddYYWithSlashes(Datetime date);
-			static string ToYYYYMMDDWithDashes(Datetime date);
+			static string ToMMddYYWithSlashes(const Datetime& date);
+			static string ToYYYYMMDDWithDashes(const Datetime& date);
 
 			static string FormatNumberNoSeparators(double dbl, int numDecimals = 0);
-			static string FormatDate(Datetime date);
-			static string FormatTimeZone(Datetime time);
-			static string FormatDatetimeZone(Datetime datetime);
+			static string FormatDate(const Datetime& date);
+			static string FormatTimeZone(const Datetime& time);
+			static string FormatDatetimeZone(const Datetime& datetime);
 
-			static string MarketDataRequests_FormatDateZone(Datetime date);
+			static string MarketDataRequests_FormatDateZone(const Datetime& date);
 
-			static string HistoricalOrReferenceRequests_FormatDate(Datetime date);
-			static bool HistoricalOrReferenceRequests_TryParseInput(string str, Datetime & dt);
+			static string HistoricalOrReferenceRequests_FormatDate(const Datetime& date);
+			static bool HistoricalOrReferenceRequests_TryParseInput(const string& str, Datetime & dt);
 
-			static string IntradayRequests_FormatDatetime(Datetime datetime);
+			static string IntradayRequests_FormatDatetime(const Datetime& date);
 	};
 }

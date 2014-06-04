@@ -14,7 +14,7 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricElementString::HistoricElementString(const std::string& name, const std::string& value)
+		HistoricElementString::HistoricElementString(const std::string& name, const std::string& value) : CanConvertToStringType(value)
 		{
 			this->_name = name;
 			this->_value = value;

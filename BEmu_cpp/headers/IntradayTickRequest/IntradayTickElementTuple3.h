@@ -21,7 +21,8 @@ namespace BEmu
 				int _item3;
 
 			public:
-				IntradayTickElementTuple3(std::string item1, double item2, int item3);
+				IntradayTickElementTuple3(const std::string& item1, double item2, int item3);
+				~IntradayTickElementTuple3();
 
 				std::string item1() const;
 				double item2() const;

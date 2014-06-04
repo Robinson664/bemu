@@ -46,8 +46,15 @@ namespace BEmu
 			}
 		}
 
-		MarketDataRequest::MarketEvent * evt = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_DATA, CorrelationId(), subsToUse);
-		this->_eventHandler->processEvent(evt, this->_session);
+		//MarketDataRequest::MarketEvent * evt = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_DATA, CorrelationId(), subsToUse);
+
+		
+		boost::shared_ptr<MarketDataRequest::MarketEvent> evtSubStatusP(new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_DATA, CorrelationId(), subsToUse));
+		boost::shared_ptr<EventPtr> evtP = boost::dynamic_pointer_cast<EventPtr>(evtSubStatusP);
+		const Event ev(evtP);
+
+
+		this->_eventHandler->processEvent(ev, this->_session);
 
 		if(hasConflationInterval)
 			timer->reset(conflationIntervalInMilleseconds);

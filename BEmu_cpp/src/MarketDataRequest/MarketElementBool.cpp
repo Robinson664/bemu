@@ -13,7 +13,7 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementBool::MarketElementBool(std::string name, bool value)
+		MarketElementBool::MarketElementBool(const std::string& name, bool value)
 		{
 			this->_name = name;
 			this->_value = value;

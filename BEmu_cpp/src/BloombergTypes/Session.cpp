@@ -23,6 +23,7 @@
 #include "BloombergTypes/CorrelationId.h"
 #include "BloombergTypes/SubscriptionList.h"
 
+#include "IntradayTickRequest/IntradayTickElement.h"
 
 namespace BEmu
 {
@@ -63,8 +64,11 @@ namespace BEmu
 
 		if (this->_asyncHandler != 0)
         {
-			MarketDataRequest::MarketEvent * evtSubStatus = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, CorrelationId(), subscriptionList);
-			this->_asyncHandler->processEvent(evtSubStatus, this);
+			boost::shared_ptr<MarketDataRequest::MarketEvent> evtSubStatusP(new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, CorrelationId(), subscriptionList));
+			boost::shared_ptr<EventPtr> evtP = boost::dynamic_pointer_cast<EventPtr>(evtSubStatusP);
+			const Event ev(evtP);
+
+			this->_asyncHandler->processEvent(ev, this);
         }
 	}
 
@@ -81,30 +85,20 @@ namespace BEmu
 
 	void Session::cancel(const CorrelationId& correlationId)
 	{
-		//get a copy of the subscription that was removed
-		Subscription * subRemoved = 0;
-		std::vector<Subscription> * subs = this->_subs.list();
-		for(std::vector<Subscription>::const_iterator iter = subs->begin(); iter != subs->end(); ++iter)
-		{
-			Subscription current = *iter;
-			if(current.correlationId() == correlationId)
-			{
-				subRemoved = new Subscription(current);
-				break;
-			}
-		}
-
 		//remove subscription from the internal list
-		this->_subs.remove(correlationId);
+		Subscription removed = this->_subs.remove(correlationId);
 		
 		//send a notification to the user about the removed subscription
-		if (this->_asyncHandler != 0 && subRemoved != 0)
+		if (this->_asyncHandler != 0 && !removed.isDefault())
 		{
-			MarketDataRequest::MarketEvent * evtCancel = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, *subRemoved);
-			this->_asyncHandler->processEvent(evtCancel, this);
-		}
+			//MarketDataRequest::MarketEvent * evtCancel = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, removed);
+			
+			boost::shared_ptr<MarketDataRequest::MarketEvent> evtSubStatusP(new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_STATUS, removed));
+			boost::shared_ptr<EventPtr> evtP = boost::dynamic_pointer_cast<EventPtr>(evtSubStatusP);
+			const Event ev(evtP);
 
-		delete subRemoved;
+			this->_asyncHandler->processEvent(ev, this);
+		}
 	}
 
 	void Session::cancel(const std::vector<CorrelationId>& correlationIds)
@@ -142,11 +136,27 @@ namespace BEmu
 
 		if (this->_asyncHandler != 0)
 		{
-			MarketDataRequest::MarketEvent * evtSessionStatus = new MarketDataRequest::MarketEvent(Event::SESSION_STATUS, CorrelationId(), SubscriptionList());
-			MarketDataRequest::MarketEvent * evtServiceStatus = new MarketDataRequest::MarketEvent(Event::SERVICE_STATUS, CorrelationId(), SubscriptionList());
 
-			this->_asyncHandler->processEvent(evtSessionStatus, this);
-			this->_asyncHandler->processEvent(evtServiceStatus, this);
+			{
+				//MarketDataRequest::MarketEvent * evtSessionStatus = new MarketDataRequest::MarketEvent(Event::SESSION_STATUS, CorrelationId(), SubscriptionList());
+			
+				boost::shared_ptr<MarketDataRequest::MarketEvent> evtSessionStatusP(new MarketDataRequest::MarketEvent(Event::SESSION_STATUS, CorrelationId(), SubscriptionList()));
+				boost::shared_ptr<EventPtr> evtP1 = boost::dynamic_pointer_cast<EventPtr>(evtSessionStatusP);
+				const Event ev1(evtP1);
+
+				this->_asyncHandler->processEvent(ev1, this);
+			}
+
+			{
+				//MarketDataRequest::MarketEvent * evtServiceStatus = new MarketDataRequest::MarketEvent(Event::SERVICE_STATUS, CorrelationId(), SubscriptionList());
+			
+				boost::shared_ptr<MarketDataRequest::MarketEvent> evtServiceStatusP(new MarketDataRequest::MarketEvent(Event::SERVICE_STATUS, CorrelationId(), SubscriptionList()));
+				boost::shared_ptr<EventPtr> evtP2 = boost::dynamic_pointer_cast<EventPtr>(evtServiceStatusP);
+				const Event ev2(evtP2);
+			
+				this->_asyncHandler->processEvent(ev2, this);
+			}
+
         }
 		
 		return true;
@@ -167,12 +177,15 @@ namespace BEmu
 			this->_marketSimulatorTimer = 0;
 		}
 
-		while(!this->_sentRequests.empty())
+		while(!this->_sentRequests2.empty())
 		{
-			RequestPtr* request = this->_sentRequests.front();
-			this->_sentRequests.pop();
-			delete request;
-			request = 0;
+			//RequestPtr* request = this->_sentRequests.front();
+			boost::shared_ptr<RequestPtr> request(this->_sentRequests2.front());
+
+			this->_sentRequests2.pop();
+			
+			//delete request;
+			//request = 0;
 		}
 	}
 
@@ -238,24 +251,31 @@ namespace BEmu
 	CorrelationId Session::sendRequest(const Request& request, const CorrelationId& correlationId)
 	{
 		request.getRequestPtr()->setCorrelationId(correlationId);
-		this->_sentRequests.push(request.getRequestPtr());
+		
+		//this->_sentRequests.push(request.getRequestPtr());
+		this->_sentRequests2.push(request.getRequestPtr());
+
 		return correlationId;
 	}
 
 	Event Session::nextEvent(int timeout)
 	{
-		bool isLastRequest = this->_sentRequests.size() == 1;
-		RequestPtr *reqP = this->_sentRequests.front();
-		this->_sentRequests.pop();
+		bool isLastRequest = this->_sentRequests2.size() == 1;
+		
+		//RequestPtr *reqP = this->_sentRequests.front();
+		boost::shared_ptr<RequestPtr> reqP = this->_sentRequests2.front();
+		
+		this->_sentRequests2.pop();
 
-		EventPtr * evt = EventPtr::EventFactory(reqP, isLastRequest);
+		boost::shared_ptr<EventPtr> evtP(EventPtr::EventFactory(reqP, isLastRequest));
+		//EventPtr * evt = EventPtr::EventFactory(reqP, isLastRequest);
 
 		if(isLastRequest)
-			evt->setEventType(Event::RESPONSE);
+			evtP->setEventType(Event::RESPONSE);
 		else
-			evt->setEventType(Event::PARTIAL_RESPONSE);
+			evtP->setEventType(Event::PARTIAL_RESPONSE);
 
-		Event result(evt);
+		Event result(evtP);
 		return result;
 	}
 

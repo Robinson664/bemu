@@ -18,34 +18,50 @@
 #include "IntradayTickRequest/IntradayTickElementDouble.h"
 #include "IntradayTickRequest/IntradayTickElementInt.h"
 
+#include "IntradayTickRequest/IntradayTickElement.h"
+
 namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		IntradayTickElementData::IntradayTickElementData(const Datetime& datetime, const IntradayTickElementTuple3& arg, bool includeConditionCodes)
+		IntradayTickElementData::IntradayTickElementData(const Datetime& datetime, const IntradayTickElementTuple3& arg, bool includeConditionCodes) :
+			_time(new IntradayTickElementDateTime("time", datetime)),
+			_type(new IntradayTickElementString("type", arg.item1())),
+			_value(new IntradayTickElementDouble("value", arg.item2())),
+			_size(new IntradayTickElementInt("size", arg.item3()))
 		{
 			this->_includeConditionCodes = includeConditionCodes;
 
-			this->_time = new IntradayTickElementDateTime("time", datetime);
-			this->_type = new IntradayTickElementString("type", arg.item1());
-			this->_value = new IntradayTickElementDouble("value", arg.item2());
-			this->_size = new IntradayTickElementInt("size", arg.item3());
+			//this->_time = new IntradayTickElementDateTime("time", datetime);
+			//this->_type = new IntradayTickElementString("type", arg.item1());
+			//this->_value = new IntradayTickElementDouble("value", arg.item2());
+			//this->_size = new IntradayTickElementInt("size", arg.item3());
 
 			if(includeConditionCodes)
-				this->_conditionCodes = new IntradayTickElementString("conditionCodes", "R6,IS");
+				this->_conditionCodes = boost::shared_ptr<IntradayTickElementString>(new IntradayTickElementString("conditionCodes", "R6,IS"));
 			else
-				this->_conditionCodes = 0;
+				this->_conditionCodes = boost::shared_ptr<IntradayTickElementString>();
 		}
 
 		IntradayTickElementData::~IntradayTickElementData()
 		{
-			delete this->_time;
-			delete this->_type;
-			delete this->_value;
-			delete this->_size;
+			//delete this->_time;
+			//this->_time = 0;
 
-			if(this->_includeConditionCodes)
-				delete this->_conditionCodes;
+			//delete this->_type;
+			//this->_type = 0;
+
+			//delete this->_value;
+			//this->_value = 0;
+
+			//delete this->_size;
+			//this->_size = 0;
+
+			//if(this->_includeConditionCodes)
+			//{
+			//	delete this->_conditionCodes;
+			//	this->_conditionCodes = 0;
+			//}
 		}
 
 		Name IntradayTickElementData::name() const
@@ -71,79 +87,77 @@ namespace BEmu
 				(this->_includeConditionCodes && strncmp("conditionCodes", name, 15) == 0);
 		}
 
-		ElementPtr * IntradayTickElementData::getElement(int position) const
+		//ElementPtr * IntradayTickElementData::getElement(int position) const
+		boost::shared_ptr<ElementPtr> IntradayTickElementData::getElement(int position) const
 		{
-			ElementPtr *result = 0;
-
 			switch(position)
 			{
 				case 0:
-					result = this->_time;
+					return boost::dynamic_pointer_cast<ElementPtr>(this->_time);
+					//result = this->_time;
 				case 1:
-					result = this->_type;
+					return boost::dynamic_pointer_cast<ElementPtr>(this->_type);
+					//result = this->_type;
 				case 2:
-					result = this->_value;
+					return boost::dynamic_pointer_cast<ElementPtr>(this->_value);
+					//result = this->_value;
 				case 3:
-					result = this->_size;
+					return boost::dynamic_pointer_cast<ElementPtr>(this->_size);
+					//result = this->_size;
 				case 4:
 					if(this->_includeConditionCodes)
-						result = this->_conditionCodes;
+						return boost::dynamic_pointer_cast<ElementPtr>(this->_conditionCodes);
+						//result = this->_conditionCodes;
 			}
 
-			if(result == 0)
-				throw elementPtrEx;
-			else
-				return result;
+			throw elementPtrEx;
 		}
 
-		ElementPtr * IntradayTickElementData::getElement(const char* name) const
+		//ElementPtr * IntradayTickElementData::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> IntradayTickElementData::getElement(const char* name) const
 		{
-			ElementPtr *result = 0;
-
 			if(strncmp("time", name, 5) == 0)
-				result = this->_time;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_time);
+				//result = this->_time;
 
 			else if(strncmp("type", name, 5) == 0)
-				result = this->_type;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_type);
+				//result = this->_type;
 
 			else if(strncmp("value", name, 6) == 0)
-				result = this->_value;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_value);
+				//result = this->_value;
 
 			else if(strncmp("size", name, 5) == 0)
-				result = this->_size;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_size);
+				//result = this->_size;
 
 			else if(this->_includeConditionCodes && strncmp("conditionCodes", name, 15) == 0)
-				result = this->_conditionCodes;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_conditionCodes);
+				//result = this->_conditionCodes;
 
-			if(result == 0)
-				throw elementPtrEx;
-			else
-				return result;
+			throw elementPtrEx;
 		}
 
 		int IntradayTickElementData::getElementAsInt32(const char* name) const
 		{
-			ElementPtr * elm = this->getElement(name);
-			return elm->getValueAsInt32(0);
+			return this->getElement(name)->getValueAsInt32(0);
 		}
 
 		Datetime IntradayTickElementData::getElementAsDatetime(const char* name) const
 		{
-			ElementPtr * elm = this->getElement(name);
-			return elm->getValueAsDatetime(0);
+			return this->getElement(name)->getValueAsDatetime(0);
 		}
 
 		const char* IntradayTickElementData::getElementAsString(const char* name) const
 		{
-			ElementPtr * elm = this->getElement(name);
-			return elm->getValueAsString(0);
+			return this->getElement(name)->getValueAsString(0);
 		}
 
 		std::ostream& IntradayTickElementData::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);
 			stream << tabs << "tickData = {" << std::endl;
-
 			
 			this->_time->print(stream, level + 1, spacesPerLevel);
 			this->_type->print(stream, level + 1, spacesPerLevel);

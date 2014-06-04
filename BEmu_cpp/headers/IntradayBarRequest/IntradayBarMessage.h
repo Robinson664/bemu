@@ -28,21 +28,33 @@ namespace BEmu
 		class IntradayBarMessage : public MessagePtr
 		{
 			private:
-				IntradayBarElementData * _parent;
-				IntradayBarElementResponseError * _responseError;
+				boost::shared_ptr<IntradayBarElementData> _parent;
+				boost::shared_ptr<IntradayBarElementResponseError> _responseError;
+
+				//IntradayBarElementData * _parent;
+				//IntradayBarElementResponseError * _responseError;
+
 				bool _isResponseError;
 
 			public:
 				IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::string& security);
-				IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::vector<IntradayBarTickDataType*>& bars);
+				
+				//IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::vector<IntradayBarTickDataType*>& bars);
+				IntradayBarMessage(const CorrelationId& corr, const Service& service, const std::vector< boost::shared_ptr<IntradayBarTickDataType> >& bars);
+
 				~IntradayBarMessage();
 
-				virtual std::stack<ElementPtr*> getRootElements() const;
+				//virtual std::stack<ElementPtr*> getRootElements() const;
+				virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const;
+
+				virtual void markRootElementsDeleted();
 
 				virtual const char* topicName() const;
 				virtual size_t numElements() const;
 
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

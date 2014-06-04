@@ -23,10 +23,9 @@ namespace BEmu
 			private:
 				ObjectType _value;
 				std::string _name;
-				const char * _cstr;
 
 			public:
-				ReferenceElementObject(std::string name, ObjectType value);
+				ReferenceElementObject(const std::string& name, const ObjectType& value);
 				~ReferenceElementObject();
 
 				virtual Name name() const;

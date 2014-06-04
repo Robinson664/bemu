@@ -15,7 +15,7 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricElementDateTime::HistoricElementDateTime(const Datetime& value)
+		HistoricElementDateTime::HistoricElementDateTime(const Datetime& value) : CanConvertToStringType(DisplayFormats::HistoricalOrReferenceRequests_FormatDate(value))
 		{
 			this->_value = value;
 		}
@@ -36,7 +36,9 @@ namespace BEmu
 
 		const char * HistoricElementDateTime::getValueAsString(int index) const
 		{
-			return DisplayFormats::HistoricalOrReferenceRequests_FormatDate(this->_value).c_str();
+			//return DisplayFormats::HistoricalOrReferenceRequests_FormatDate(this->_value).c_str();
+			//return this->_valueAsString.c_str();
+			return this->ValueAsString().c_str();
 		}
 
 		std::ostream& HistoricElementDateTime::print(std::ostream& stream, int level, int spacesPerLevel) const

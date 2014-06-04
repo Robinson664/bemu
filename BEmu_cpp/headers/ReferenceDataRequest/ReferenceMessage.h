@@ -24,19 +24,27 @@ namespace BEmu
 		class ReferenceMessage : public MessagePtr
 		{
 			private:
-				ReferenceElementSecurityDataArray * _securities;
+				boost::shared_ptr<ReferenceElementSecurityDataArray> _securities;
 
 			public:
 				ReferenceMessage(const CorrelationId& corr, const std::map<std::string, std::map<std::string, ObjectType>*>& fieldData);
 				~ReferenceMessage();
 
-				virtual std::stack<ElementPtr*> getRootElements() const;
+				//virtual std::stack<ElementPtr*> getRootElements() const;
+				virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const;
 
-				virtual ElementPtr * getElement(const char* name) const;
+				virtual void markRootElementsDeleted();
+
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual const char* topicName() const;
-				virtual ElementPtr * asElement() const;
-				ElementPtr * firstElement() const;
+
+				//virtual ElementPtr * asElement() const;
+				virtual boost::shared_ptr<ElementPtr> asElement() const;
+
+				//ElementPtr * firstElement() const;
+				boost::shared_ptr<ElementPtr> firstElement() const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};

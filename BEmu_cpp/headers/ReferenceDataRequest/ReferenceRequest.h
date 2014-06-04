@@ -22,8 +22,11 @@ namespace BEmu
 		class ReferenceRequest : public RequestPtr
 		{
 			private:
-				ReferenceRequestElementStringArray * _securities, * _fields;
-				ReferenceRequestElementOverrideArray * _overrides;
+				boost::shared_ptr<ReferenceRequestElementStringArray> _securities, _fields;
+				boost::shared_ptr<ReferenceRequestElementOverrideArray> _overrides;
+
+				//ReferenceRequestElementStringArray * _securities, * _fields;
+				//ReferenceRequestElementOverrideArray * _overrides;
 
 			public:
 				ReferenceRequest();
@@ -32,7 +35,7 @@ namespace BEmu
 				std::vector<std::string> getSecurities() const;
 				std::vector<std::string> getFields() const;
 
-				bool hasElement(std::string arg) const; //note that while the C# and Java versions of Request have a DLL_EXPORT hasElement() function, the C++ version does not
+				bool hasElement(const std::string& arg) const; //note that while the C# and Java versions of Request have a DLL_EXPORT hasElement() function, the C++ version does not
 
 				virtual Element getElement(const char* name);
 

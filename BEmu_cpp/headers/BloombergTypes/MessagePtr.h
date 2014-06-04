@@ -31,6 +31,8 @@ namespace BEmu
 
 		public:
 
+			virtual ~MessagePtr();
+
 			class MessageException: public std::exception
 			{
 				virtual const char* what() const throw()
@@ -42,15 +44,24 @@ namespace BEmu
 			//Returns an array of root Elements in this message.
 			//  All elements from the root down must be deleted when a MessageIterator goes out of scope.
 			//  This method is not visible to the API developer.
-			virtual std::stack<ElementPtr*> getRootElements() const = 0;
+			//virtual std::stack<ElementPtr*> getRootElements() const = 0;
+			virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const = 0;
+
+			virtual void markRootElementsDeleted() = 0;
 
 			CorrelationId correlationId() const;
 			Name messageType() const;
 			virtual const char* topicName() const;
 			
-			ElementPtr * getElement(const Name& name) const;
-			virtual ElementPtr * getElement(const char* name) const;
-			virtual ElementPtr * asElement() const;
+			//ElementPtr * getElement(const Name& name) const;
+			boost::shared_ptr<ElementPtr> getElement(const Name& name) const;
+
+			//virtual ElementPtr * getElement(const char* name) const;
+			virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
+			//virtual ElementPtr * asElement() const;
+			virtual boost::shared_ptr<ElementPtr> asElement() const;
+
 			bool hasElement(const Name& name, bool excludeNullElements = false) const;
 			virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 			virtual size_t numElements() const;

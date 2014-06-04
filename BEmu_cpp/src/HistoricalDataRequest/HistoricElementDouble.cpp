@@ -14,7 +14,7 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricElementDouble::HistoricElementDouble(const std::string& name, double value)
+		HistoricElementDouble::HistoricElementDouble(const std::string& name, double value) : CanConvertToStringType(value)
 		{
 			this->_name = name;
 			this->_value = value;
@@ -66,8 +66,9 @@ namespace BEmu
 		{
 			if(index == 0)
 			{
-				const char * result = ElementPtr::toCharPointer(this->_value);
-				return result;
+				/*const char * result = this->_valueAsString.c_str();
+				return result;*/
+				return this->ValueAsString().c_str();
 			}
 			else
 				throw elementPtrEx;

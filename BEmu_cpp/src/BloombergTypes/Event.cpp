@@ -14,40 +14,47 @@
 namespace BEmu
 {
 	Event::Event()
+		: _ptrP()
 	{
-		this->_ptr = 0;
+		//this->_ptr = boost::shared_ptr<EventPtr>();
 	}
 
-	Event::Event(EventPtr *ptr)
+	Event::Event(boost::shared_ptr<EventPtr> ptr)
+		: _ptrP(ptr)
 	{
-		this->_ptr = ptr;
 	}
+
+	//Event::Event(EventPtr *ptr)
+	//{
+	//	this->_ptr = ptr;
+	//}
 
 	Event::Event(const Event& arg)
+		: _ptrP(arg._ptrP)
 	{
-		this->_ptr = arg._ptr;
+		//this->_ptr = arg._ptr;
 	}
 
 	Event::~Event()
 	{
 	}
 
-	EventPtr * Event::getEventPtr() const
+	boost::shared_ptr<EventPtr> Event::getEventPtr() const
 	{
-		return this->_ptr;
+		return this->_ptrP;
 	}
 
 	Event& Event::operator=(const Event &rhs)
 	{
 		if (this != &rhs)
 		{
-			this->_ptr = rhs._ptr;
+			this->_ptrP = rhs._ptrP;
 		}
 		return *this;
 	}
 
 	Event::EventType Event::eventType() const
 	{
-		return this->_ptr->getEventType();
+		return this->_ptrP->getEventType();
 	}
 }

@@ -12,61 +12,70 @@
 #include "BloombergTypes/MessageIterator.h"
 #include "BloombergTypes/Event.h"
 #include "BloombergTypes/EventPtr.h"
+#include "BloombergTypes/ElementPtr.h"
 #include <stack>
 
 namespace BEmu
 {
-	MessageIterator::MessageIterator(Event evt)
+	MessageIterator::MessageIterator(const Event& evt)
 	{
 		this->_position = -1;
 
-		EventPtr * evtPtr = evt.getEventPtr();
-		std::vector<MessagePtr*>* list = evtPtr->getMessages();
+		boost::shared_ptr<EventPtr> evtP(evt.getEventPtr());
+		//EventPtr * evtPtr = evt.getEventPtr();
+
+		std::vector< boost::shared_ptr<MessagePtr> > list = evtP->getMessages();
 		
-		for(std::vector<MessagePtr*>::const_iterator iter = list->begin(); iter != list->end(); ++iter)
+		//for(std::vector<MessagePtr*>::const_iterator iter = list->begin(); iter != list->end(); ++iter)
+		for(std::vector< boost::shared_ptr<MessagePtr> >::const_iterator iter = list.begin(); iter != list.end(); ++iter)
 		{
-			MessagePtr* msg = *iter;
-			this->_list.push_back(msg);
+			boost::shared_ptr<MessagePtr> msg = *iter;
+
+			this->_listP.push_back(msg);
 		}
 	}
 
 	MessageIterator::~MessageIterator() //this should delete all Elements and Messages within it
 	{
-		//I can't put the Element deletion code in the MessagePtr destructor because that gets called before the MessageIterator destructor
-		for(std::vector<MessagePtr*>::const_iterator iter = this->_list.begin(); iter != this->_list.end(); ++iter)
-		{
-			MessagePtr* msg = *iter;
+		////I can't put the Element deletion code in the MessagePtr destructor because that gets called before the MessageIterator destructor
+		////for(std::vector<MessagePtr*>::iterator iter = this->_listP.begin(); iter != this->_listP.end(); ++iter)
+		//for(std::vector< boost::shared_ptr<MessagePtr> >::iterator iter = this->_listP.begin(); iter != this->_listP.end(); ++iter)
+		//{
+		//	boost::shared_ptr<MessagePtr> msg = *iter;
 
-			//Delete all of the elements within the current Message.
-			std::stack<ElementPtr*> rootElements = msg->getRootElements();
+		//	//Delete all of the elements within the current Message.
+		//	std::stack<ElementPtr> rootElements = msg->getRootElements();
 
-			while(!rootElements.empty())
-			{
-				ElementPtr * root = rootElements.top();
-				rootElements.pop();
+		//	while(!rootElements.empty())
+		//	{
+		//		ElementPtr * root = rootElements.top();
+		//		rootElements.pop();
 
-				delete root;
-			}
+		//		delete root;
+		//	}
+		//	msg->markRootElementsDeleted();
 
-			delete msg;
-			msg = 0;
-		}
+		//	//delete msg;
+		//	//msg = 0;
+		//}
+
+		this->_listP.clear();
 	}
 
 	bool MessageIterator::next()
 	{
 		this->_position++;
-		return this->_position < (int)(this->_list.size());
+		return this->_position < (int)(this->_listP.size());
 	}
 
 	bool MessageIterator::isValid() const
 	{
-		return this->_position >= 0 && this->_position < (int)(this->_list.size());
+		return this->_position >= 0 && this->_position < (int)(this->_listP.size());
 	}
 
 	Message MessageIterator::message(bool createClonable) const
 	{
-		MessagePtr * messageP = this->_list.at(this->_position);
+		boost::shared_ptr<MessagePtr> messageP = this->_listP.at(this->_position);
 		Message msg(messageP);
 		return msg;
 	}

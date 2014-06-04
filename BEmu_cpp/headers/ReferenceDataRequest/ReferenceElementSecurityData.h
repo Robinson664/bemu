@@ -28,15 +28,24 @@ namespace BEmu
 		class ReferenceElementSecurityData : public ElementPtr
 		{
 			private:
-				ReferenceElementString * _elmSecurityName;
-				ReferenceElementInt * _elmSequenceNumber;
-				ReferenceElementFieldData * _elmFieldData;
-				ReferenceElementFieldExceptionsArray * _elmFieldExceptions;
-				ReferenceElementSecurityError * _elmSecError;
+				boost::shared_ptr<ReferenceElementString> _elmSecurityName;
+				boost::shared_ptr<ReferenceElementInt> _elmSequenceNumber;
+				boost::shared_ptr<ReferenceElementFieldData> _elmFieldData;
+				boost::shared_ptr<ReferenceElementFieldExceptionsArray> _elmFieldExceptions;
+				boost::shared_ptr<ReferenceElementSecurityError> _elmSecError;
+
+				bool _isNull_elmFieldExceptions;
+
+				//ReferenceElementString * _elmSecurityName;
+				//ReferenceElementInt * _elmSequenceNumber;
+				//ReferenceElementFieldData * _elmFieldData;
+				//ReferenceElementFieldExceptionsArray * _elmFieldExceptions;
+				//ReferenceElementSecurityError * _elmSecError;
+
 				bool _isSecurityError;
 
 			public:
-				ReferenceElementSecurityData(const std::string& securityName, std::map<std::string, ObjectType> * fieldData, int sequenceNumber);
+				ReferenceElementSecurityData(const std::string& securityName, std::map<std::string, ObjectType>& fieldData, int sequenceNumber);
 				~ReferenceElementSecurityData();
 
 				virtual Name name() const;
@@ -45,7 +54,10 @@ namespace BEmu
 				virtual SchemaElementDefinition elementDefinition() const;
 
 				virtual const char* getElementAsString(const char* name) const;
-				virtual ElementPtr * getElement(const char* name) const;
+				
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

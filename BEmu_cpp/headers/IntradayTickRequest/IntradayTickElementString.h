@@ -10,6 +10,7 @@
 #pragma once
 
 #include "BloombergTypes/ElementPtr.h"
+#include "Types/CanConvertToStringType.h"
 
 namespace BEmu
 {
@@ -17,7 +18,7 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class IntradayTickElementString : public ElementPtr
+		class IntradayTickElementString : public ElementPtr, public CanConvertToStringType
 		{
 			private:
 				std::string _value;

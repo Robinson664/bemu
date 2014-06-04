@@ -22,10 +22,12 @@ namespace BEmu
 		class IntradayTickElement : public ElementPtr
 		{
 			private:
-				ElementPtr *_parent;
+				boost::shared_ptr<ElementPtr> _parent;
+				//ElementPtr *_parent;
 
 			public:
 				IntradayTickElement(const IntradayTickMessage& msg);
+				~IntradayTickElement();
 
 				virtual Name name() const;
 				virtual size_t numValues() const { return 1; }
@@ -33,7 +35,9 @@ namespace BEmu
 		
 				virtual bool isArray() const { return false; }
 				virtual bool isComplexType() const { return false; }
-				virtual ElementPtr * getElement(const char* name) const;
+				
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
 		};

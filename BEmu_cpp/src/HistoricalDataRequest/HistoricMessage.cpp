@@ -21,31 +21,40 @@ namespace BEmu
 					const std::string& securityName, 
 					const std::vector<std::string>& badFields, 
 					std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData, 
-					int sequenceNumber) : MessagePtr(Name("HistoricalDataResponse"), corr)
+					int sequenceNumber) : 
+			MessagePtr(Name("HistoricalDataResponse"), corr),
+			_security(new HistoricElementSecurityData(securityName, badFields, fieldData, sequenceNumber))
 		{
-			this->_security = new HistoricElementSecurityData(securityName, badFields, fieldData, sequenceNumber);
+			//this->_security = new HistoricElementSecurityData(securityName, badFields, fieldData, sequenceNumber); //deleted in destructor
 		}
 
 		HistoricMessage::~HistoricMessage()
 		{
-			delete this->_security;
-			this->_security = 0;
+			//delete this->_security;
+			//this->_security = 0;
 		}
 
-		std::stack<ElementPtr*> HistoricMessage::getRootElements() const
+		//std::stack<ElementPtr*> HistoricMessage::getRootElements() const
+		std::stack< boost::shared_ptr<ElementPtr> > HistoricMessage::getRootElements() const
 		{
-			std::stack<ElementPtr*> result;
+			//std::stack<ElementPtr*> result;
+			std::stack< boost::shared_ptr<ElementPtr> > result;
 
-			if(this->_security != 0)
-				result.push(this->_security);
+			result.push( boost::dynamic_pointer_cast<ElementPtr>(this->_security) );
 
 			return result;
 		}
 
-		ElementPtr * HistoricMessage::getElement(const char* name) const
+		void HistoricMessage::markRootElementsDeleted()
+		{
+			//this->_security = 0;
+		}
+
+		//ElementPtr * HistoricMessage::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> HistoricMessage::getElement(const char* name) const
 		{
 			if(strncmp(name, "securityData", 13) == 0)
-				return this->_security;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_security);
 
 			else
 				throw messageEx;

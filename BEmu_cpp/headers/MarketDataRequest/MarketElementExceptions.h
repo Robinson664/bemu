@@ -21,11 +21,15 @@ namespace BEmu
 		class MarketElementExceptions : public ElementPtr
 		{
 			private:
-				MarketElementString * _fieldId;
-				MarketElementReason * _reason;
+				boost::shared_ptr<MarketElementString> _fieldId;
+				boost::shared_ptr<MarketElementReason> _reason;
+
+				//MarketElementString * _fieldId;
+				//MarketElementReason * _reason;
 
 			public:
-				MarketElementExceptions(std::string badField);
+				MarketElementExceptions(const std::string& badField);
+				~MarketElementExceptions();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;
@@ -36,7 +40,9 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
 				virtual const char* getElementAsString(const char* name) const;
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 

@@ -18,19 +18,21 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricElementFieldExceptions::HistoricElementFieldExceptions(const std::string& badField)
+		HistoricElementFieldExceptions::HistoricElementFieldExceptions(const std::string& badField) :
+			_fieldId(new HistoricElementString("fieldId", badField)),
+			_errorInfo(new HistoricElementErrorInfo())
 		{
-            this->_fieldId = new HistoricElementString("fieldId", badField);
-            this->_errorInfo = new HistoricElementErrorInfo();
+            //this->_fieldId = new HistoricElementString("fieldId", badField); //deleted in destructor
+            //this->_errorInfo = new HistoricElementErrorInfo(); //deleted in destructor
 		}
 
 		HistoricElementFieldExceptions::~HistoricElementFieldExceptions()
 		{
-			delete this->_fieldId;
-			this->_fieldId = 0;
+			//delete this->_fieldId;
+			//this->_fieldId = 0;
 
-			delete this->_errorInfo;
-			this->_errorInfo = 0;
+			//delete this->_errorInfo;
+			//this->_errorInfo = 0;
 		}
 
 
@@ -74,13 +76,14 @@ namespace BEmu
 		}
 
 
-		ElementPtr * HistoricElementFieldExceptions::getElement(const char* name) const
+		//ElementPtr * HistoricElementFieldExceptions::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> HistoricElementFieldExceptions::getElement(const char* name) const
 		{
 			if(strncmp(name, "errorInfo", 10) == 0)
-				return this->_errorInfo;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_errorInfo);
 
 			else if(strncmp(name, "fieldId", 8) == 0)
-				return this->_fieldId;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_fieldId);
 
 			else
 				throw elementPtrEx;

@@ -45,11 +45,23 @@ namespace BEmu
 		class HistoricRequest : public RequestPtr
 		{
 			private:
-				HistoricRequestElementStringArray * _securities, * _fields;
-				HistoricRequestElementDate * _dtStart, * _dtEnd;
-				HistoricRequestElementBool * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement;
-				HistoricRequestElementInt * _maxDataPointElement;
-				HistoricRequestElementString * _periodicityAdjustmentElement, * _periodicityElement, * _overrideOptionsElement, * _pricingOptionElement;
+				boost::shared_ptr<HistoricRequestElementStringArray> _securities, _fields;
+				boost::shared_ptr<HistoricRequestElementDate> _dtStart, _dtEnd;
+				boost::shared_ptr<HistoricRequestElementBool> _adjustmentNormalElement, _adjustmentAbnormalElement, _adjustmentSplitElement;
+				boost::shared_ptr<HistoricRequestElementInt> _maxDataPointElement;
+				boost::shared_ptr<HistoricRequestElementString> _periodicityAdjustmentElement, _periodicityElement, _overrideOptionsElement, _pricingOptionElement;
+
+				bool _isNull_securities, _isNull_fields;
+				bool _isNull_dtStart, _isNull_dtEnd;
+				bool _isNull_adjustmentNormalElement, _isNull_adjustmentAbnormalElement, _isNull_adjustmentSplitElement;
+				bool _isNull_maxDataPointElement;
+				bool _isNull_periodicityAdjustmentElement, _isNull_periodicityElement, _isNull_overrideOptionsElement, _isNull_pricingOptionElement;
+
+				//HistoricRequestElementStringArray * _securities, * _fields;
+				//HistoricRequestElementDate * _dtStart, * _dtEnd;
+				//HistoricRequestElementBool * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement;
+				//HistoricRequestElementInt * _maxDataPointElement;
+				//HistoricRequestElementString * _periodicityAdjustmentElement, * _periodicityElement, * _overrideOptionsElement, * _pricingOptionElement;
 
 				HistDataPeriodicityAdjustmentEnum::EnumType _periodicityAdjustment;
 				HistDataPeriodicityEnum::EnumType _periodicity;
@@ -65,8 +77,8 @@ namespace BEmu
 				Datetime dtStart() const;
 				Datetime dtEnd() const;
 
-				std::vector<Datetime> * getDates() const;
-				std::vector<Datetime> * getDatesBeforeMaxPoints() const;
+				std::vector<Datetime> getDates() const;
+				std::vector<Datetime> getDatesBeforeMaxPoints() const;
 				
 				bool hasStartDate() const;
 				bool hasEndDate() const;

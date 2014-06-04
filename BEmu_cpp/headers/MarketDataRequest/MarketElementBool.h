@@ -22,7 +22,7 @@ namespace BEmu
 				std::string _name;
 
 			public:
-				MarketElementBool(std::string name, bool value);
+				MarketElementBool(const std::string& name, bool value);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

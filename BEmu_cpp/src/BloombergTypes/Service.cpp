@@ -30,9 +30,14 @@ namespace BEmu
 	Request Service::createRequest(const char* operation) const
 	{
 		ServiceRefData sref;
-		RequestPtr* reqP = sref.createRequestPtr(operation);
+		boost::shared_ptr<RequestPtr> reqP(sref.createRequestPtr2(operation));
 		Request result(reqP);
 		return result;
+
+		//ServiceRefData sref;
+		//RequestPtr* reqP = sref.createRequestPtr(operation);
+		//Request result(reqP);
+		//return result;
 	}
 
 	const char* Service::name() const

@@ -22,45 +22,55 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarElementTickData::IntradayBarElementTickData(const IntradayBarTickDataType& arg)
+		IntradayBarElementTickData::IntradayBarElementTickData(const IntradayBarTickDataType& arg) :
+			_time(new IntradayBarElementDateTime("time", arg.getDatetime())),
+			_open(new IntradayBarElementDouble("open", arg.getOpen())),
+			_high(new IntradayBarElementDouble("high", arg.getHigh())),
+			_low(new IntradayBarElementDouble("low", arg.getLow())),
+			_close(new IntradayBarElementDouble("close", arg.getClose())),
+			_value(new IntradayBarElementDouble("value", arg.getValue())),
+			_volume(new IntradayBarElementLong("volume", arg.getVolume())),
+			_numEvents(new IntradayBarElementInt("numEvents", arg.getNumevents()))
 		{
-			Datetime dtTime = arg.getDatetime();
-			this->_time = new IntradayBarElementDateTime("time", dtTime);
-			
-			this->_open = new IntradayBarElementDouble("open", arg.getOpen());
-			this->_high = new IntradayBarElementDouble("high", arg.getHigh());
-			this->_low = new IntradayBarElementDouble("low", arg.getLow());
-			this->_close = new IntradayBarElementDouble("close", arg.getClose());
-			this->_value = new IntradayBarElementDouble("value", arg.getValue());
-			this->_volume = new IntradayBarElementLong("volume", arg.getVolume());
-			this->_numEvents = new IntradayBarElementInt("numEvents", arg.getNumevents());
+			////all deleted in destructor
+
+			//Datetime dtTime = arg.getDatetime();
+			//this->_time = new IntradayBarElementDateTime("time", dtTime);
+			//
+			//this->_open = new IntradayBarElementDouble("open", arg.getOpen());
+			//this->_high = new IntradayBarElementDouble("high", arg.getHigh());
+			//this->_low = new IntradayBarElementDouble("low", arg.getLow());
+			//this->_close = new IntradayBarElementDouble("close", arg.getClose());
+			//this->_value = new IntradayBarElementDouble("value", arg.getValue());
+			//this->_volume = new IntradayBarElementLong("volume", arg.getVolume());
+			//this->_numEvents = new IntradayBarElementInt("numEvents", arg.getNumevents());
 		}
 
 		IntradayBarElementTickData::~IntradayBarElementTickData()
 		{
-			delete this->_time;
-			this->_time = 0;
-			
-			delete this->_open;
-			this->_open = 0;
-			
-			delete this->_high;
-			this->_high = 0;
-			
-			delete this->_low;
-			this->_low = 0;
-			
-			delete this->_close;
-			this->_close = 0;
-			
-			delete this->_value;
-			this->_value = 0;
-			
-			delete this->_volume;
-			this->_volume = 0;
-			
-			delete this->_numEvents;
-			this->_numEvents = 0;
+			//delete this->_time;
+			//this->_time = 0;
+			//
+			//delete this->_open;
+			//this->_open = 0;
+			//
+			//delete this->_high;
+			//this->_high = 0;
+			//
+			//delete this->_low;
+			//this->_low = 0;
+			//
+			//delete this->_close;
+			//this->_close = 0;
+			//
+			//delete this->_value;
+			//this->_value = 0;
+			//
+			//delete this->_volume;
+			//this->_volume = 0;
+			//
+			//delete this->_numEvents;
+			//this->_numEvents = 0;
 		}
 
 		Name IntradayBarElementTickData::name() const
@@ -96,31 +106,32 @@ namespace BEmu
 			return true;
 		}
 
-		ElementPtr * IntradayBarElementTickData::getElement(const char* name) const
+		//ElementPtr * IntradayBarElementTickData::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> IntradayBarElementTickData::getElement(const char* name) const
 		{
 			if(strncmp(name, "time", 5) == 0)
-				return this->_time;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_time);
 
 			else if(strncmp(name, "open", 5) == 0)
-				return this->_open;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_open);
 
 			else if(strncmp(name, "high", 5) == 0)
-				return this->_high;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_high);
 
 			else if(strncmp(name, "low", 4) == 0)
-				return this->_low;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_low);
 
 			else if(strncmp(name, "close", 6) == 0)
-				return this->_close;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_close);
 
 			else if(strncmp(name, "value", 6) == 0)
-				return this->_value;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_value);
 
 			else if(strncmp(name, "volume", 7) == 0)
-				return this->_volume;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_volume);
 
 			else if(strncmp(name, "numEvents", 10) == 0)
-				return this->_numEvents;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_numEvents);
 
 			else
 				throw elementPtrEx;
@@ -176,7 +187,5 @@ namespace BEmu
 
 			return stream;
 		}
-
-
 	}
 }

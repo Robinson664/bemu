@@ -28,11 +28,16 @@ namespace BEmu
 		{
 			private:
 				bool _includeConditionCodes;
+				
+				boost::shared_ptr<IntradayTickElementDateTime> _time;
+				boost::shared_ptr<IntradayTickElementDouble> _value;
+				boost::shared_ptr<IntradayTickElementInt> _size;
+				boost::shared_ptr<IntradayTickElementString> _type, _conditionCodes;
 
-				IntradayTickElementDateTime * _time;
-				IntradayTickElementDouble * _value;
-				IntradayTickElementInt * _size;
-				IntradayTickElementString * _type, * _conditionCodes;
+				//IntradayTickElementDateTime * _time;
+				//IntradayTickElementDouble * _value;
+				//IntradayTickElementInt * _size;
+				//IntradayTickElementString * _type, * _conditionCodes;
 				
 			public:
 				IntradayTickElementData(const Datetime& datetime, const IntradayTickElementTuple3& arg, bool includeConditionCodes);
@@ -47,8 +52,12 @@ namespace BEmu
 				virtual bool isComplexType() const { return false; }
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
-				virtual ElementPtr * getElement(int position) const;
-				virtual ElementPtr * getElement(const char* name) const;
+				
+				//virtual ElementPtr * getElement(int position) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(int position) const;
+				
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual int getElementAsInt32(const char* name) const;
 				virtual Datetime getElementAsDatetime(const char* name) const;

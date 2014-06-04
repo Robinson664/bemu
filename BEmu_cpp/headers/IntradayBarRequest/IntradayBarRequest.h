@@ -30,17 +30,29 @@ namespace BEmu
 			private:
 				Service _service;
 
-				IntradayBarRequestElementString * _security;
-				IntradayBarRequestElementStringArray * _eventTypes;
-				IntradayBarRequestElementTime * _dtStart, * _dtEnd;
-				IntradayBarRequestElementInt * _intervalInMinutes;
-				IntradayBarRequestElementBool * _gapFillInitialBar, * _returnEids, * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement, * _adjustmentFollowDPDF;
+				boost::shared_ptr<IntradayBarRequestElementString> _security;
+				boost::shared_ptr<IntradayBarRequestElementStringArray> _eventTypes;
+				boost::shared_ptr<IntradayBarRequestElementTime> _dtStart, _dtEnd;
+				boost::shared_ptr<IntradayBarRequestElementInt> _intervalInMinutes;
+				boost::shared_ptr<IntradayBarRequestElementBool> _gapFillInitialBar, _returnEids, _adjustmentNormalElement, _adjustmentAbnormalElement, _adjustmentSplitElement, _adjustmentFollowDPDF;
+
+				bool _isNull_security;
+				bool _isNull_eventTypes;
+				bool _isNull_dtStart, _isNull_dtEnd;
+				bool _isNull_intervalInMinutes;
+				bool _isNull_gapFillInitialBar, _isNull_returnEids, _isNull_adjustmentNormalElement, _isNull_adjustmentAbnormalElement, _isNull_adjustmentSplitElement, _isNull_adjustmentFollowDPDF;
+
+				//IntradayBarRequestElementString * _security;
+				//IntradayBarRequestElementStringArray * _eventTypes;
+				//IntradayBarRequestElementTime * _dtStart, * _dtEnd;
+				//IntradayBarRequestElementInt * _intervalInMinutes;
+				//IntradayBarRequestElementBool * _gapFillInitialBar, * _returnEids, * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement, * _adjustmentFollowDPDF;
 
 			public:
 				IntradayBarRequest(const Service& svc);
 				~IntradayBarRequest();
 				const Service getService() const;
-				std::vector<Datetime>* getDateTimes() const;
+				std::vector<Datetime> getDateTimes() const;
 				const std::string& security() const;
 				
 				Datetime getDtStart() const;

@@ -21,7 +21,7 @@ namespace BEmu
 		class MarketElementSubscriptionCanceled : public ElementPtr
 		{
 			private:
-				MarketElementSubscriptionCancelReason * _reason;
+				boost::shared_ptr<MarketElementSubscriptionCancelReason> _reason;
 
 			public:
 				MarketElementSubscriptionCanceled(MarketMessageSubscriptionCanceled * arg);

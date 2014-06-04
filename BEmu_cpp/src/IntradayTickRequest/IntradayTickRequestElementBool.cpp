@@ -17,9 +17,14 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		IntradayTickRequestElementBool::IntradayTickRequestElementBool(std::string& elementName, bool bvalue) : IntradayTickRequestElementString(elementName, bvalue ? "True" : "False")
+		IntradayTickRequestElementBool::IntradayTickRequestElementBool(const std::string& elementName, bool bvalue)
+			: IntradayTickRequestElementString(elementName, bvalue ? "True" : "False")
 		{
 			this->_bvalue = bvalue;
+		}
+
+		IntradayTickRequestElementBool::~IntradayTickRequestElementBool()
+		{
 		}
 
 		bool IntradayTickRequestElementBool::getBool()

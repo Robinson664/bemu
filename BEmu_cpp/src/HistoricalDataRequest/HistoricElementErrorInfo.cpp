@@ -19,40 +19,50 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricElementErrorInfo::HistoricElementErrorInfo()
+		HistoricElementErrorInfo::HistoricElementErrorInfo() : 
+			_category(boost::shared_ptr<HistoricElementString>(new HistoricElementString("category", "BAD_FLD"))),
+			_message(boost::shared_ptr<HistoricElementString>(new HistoricElementString("message", "Invalid field"))), 
+			_subCategory(boost::shared_ptr<HistoricElementString>(new HistoricElementString("subcategory", "NOT_APPLICABLE_TO_HIST_DATA")))
 		{
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
+			//All deleted in destructor
+
 			std::stringstream ssSource;
 			ssSource << RandomDataGenerator::RandomInt(999) << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
-			this->_source = new HistoricElementString("source", ssSource.str());
 
-			this->_code = new HistoricElementInt("code", RandomDataGenerator::RandomInt(99));
 
-			this->_category = new HistoricElementString("category", "BAD_FLD");
+			this->_source = boost::shared_ptr<HistoricElementString>(new HistoricElementString("source", ssSource.str()));
+			this->_code = boost::shared_ptr<HistoricElementInt>(new HistoricElementInt("code", RandomDataGenerator::RandomInt(99)));
 
-            this->_message = new HistoricElementString("message", "Invalid field");
+			//this->_source = new HistoricElementString("source", ssSource.str());
 
-            this->_subCategory = new HistoricElementString("subcategory", "NOT_APPLICABLE_TO_HIST_DATA");
+			//this->_code = new HistoricElementInt("code", RandomDataGenerator::RandomInt(99));
+
+			//this->_category = new HistoricElementString("category", "BAD_FLD");
+
+            //this->_message = new HistoricElementString("message", "Invalid field");
+
+            //this->_subCategory = new HistoricElementString("subcategory", "NOT_APPLICABLE_TO_HIST_DATA");
 		}
 
 		HistoricElementErrorInfo::~HistoricElementErrorInfo()
 		{
-			delete this->_source;
-			this->_source = 0;
+			//delete this->_source;
+			//this->_source = 0;
 
-			delete this->_code;
-			this->_code = 0;
+			//delete this->_code;
+			//this->_code = 0;
 
-			delete this->_category;
-			this->_category = 0;
+			//delete this->_category;
+			//this->_category = 0;
 
-			delete this->_message;
-			this->_message = 0;
+			//delete this->_message;
+			//this->_message = 0;
 
-			delete this->_subCategory;
-			this->_subCategory = 0;
+			//delete this->_subCategory;
+			//this->_subCategory = 0;
 		}
 
 		Name HistoricElementErrorInfo::name() const
@@ -94,22 +104,23 @@ namespace BEmu
 		}
 
 				
-		ElementPtr * HistoricElementErrorInfo::getElement(const char* name) const
+		//ElementPtr * HistoricElementErrorInfo::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> HistoricElementErrorInfo::getElement(const char* name) const
 		{
 			if(strncmp(name, "category", 9) == 0)
-				return this->_category;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_category);
 
 			else if(strncmp(name, "code", 5) == 0)
-				return this->_code;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_code);
 
 			else if(strncmp(name, "message", 8) == 0)
-				return this->_message;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_message);
 
 			else if(strncmp(name, "source", 7) == 0)
-				return this->_source;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_source);
 
 			else if(strncmp(name, "subcategory", 12) == 0)
-				return this->_subCategory;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_subCategory);
 
 			else
 				throw elementPtrEx;

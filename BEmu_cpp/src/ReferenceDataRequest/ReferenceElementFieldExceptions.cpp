@@ -18,19 +18,21 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceElementFieldExceptions::ReferenceElementFieldExceptions(const std::string& badField)
+		ReferenceElementFieldExceptions::ReferenceElementFieldExceptions(const std::string& badField) :
+			_fieldId(new ReferenceElementString("fieldId", badField)),
+			_errorInfo(new ReferenceElementErrorInfo())
 		{
-            this->_fieldId = new ReferenceElementString("fieldId", badField);
-            this->_errorInfo = new ReferenceElementErrorInfo();
+            //this->_fieldId = new ReferenceElementString("fieldId", badField); //deleted in destructor
+            //this->_errorInfo = new ReferenceElementErrorInfo(); //deleted in destructor
 		}
 
 		ReferenceElementFieldExceptions::~ReferenceElementFieldExceptions()
 		{
-			delete this->_fieldId;
-			this->_fieldId = 0;
+			//delete this->_fieldId;
+			//this->_fieldId = 0;
 
-			delete this->_errorInfo;
-			this->_errorInfo = 0;
+			//delete this->_errorInfo;
+			//this->_errorInfo = 0;
 		}
 
 		Name ReferenceElementFieldExceptions::name() const { return Name("fieldExceptions"); }
@@ -58,13 +60,14 @@ namespace BEmu
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		ElementPtr * ReferenceElementFieldExceptions::getElement(const char* name) const
+		//ElementPtr * ReferenceElementFieldExceptions::getElement(const char* name) const
+		boost::shared_ptr<ElementPtr> ReferenceElementFieldExceptions::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldId", 8) == 0)
-				return this->_fieldId;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_fieldId);
 
 			else if(strncmp(name, "errorInfo", 0) == 0)
-				return this->_errorInfo;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_errorInfo);
 
 			else
 				throw elementPtrEx;

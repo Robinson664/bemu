@@ -15,7 +15,7 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		IntradayTickElementString::IntradayTickElementString(const std::string& name, const std::string& value)
+		IntradayTickElementString::IntradayTickElementString(const std::string& name, const std::string& value) : CanConvertToStringType(value)
 		{
 			this->_name = name;
 			this->_value = value;

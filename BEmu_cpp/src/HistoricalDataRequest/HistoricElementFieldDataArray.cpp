@@ -14,7 +14,6 @@
 #include "BloombergTypes/Name.h"
 #include "BloombergTypes/Datetime.h"
 
-
 namespace BEmu
 {
 	namespace HistoricalDataRequest
@@ -25,24 +24,29 @@ namespace BEmu
 			{
 				const std::map<std::string, ObjectType> * mm = iter->second;
 
-				HistoricElementFieldData * elmFieldData = new HistoricElementFieldData(iter->first, *mm);
-				this->_fieldData.push_back(elmFieldData);
+				//HistoricElementFieldData * elmFieldData = new HistoricElementFieldData(iter->first, *mm); //deleted in destructor
+				boost::shared_ptr<HistoricElementFieldData> elmFieldDataP(new HistoricElementFieldData(iter->first, *mm));
+
+				this->_fieldData.push_back(elmFieldDataP);
 			}
 		}
 
 		HistoricElementFieldDataArray::~HistoricElementFieldDataArray()
 		{
-			for(std::vector<HistoricElementFieldData*>::const_iterator iter = this->_fieldData.begin(); iter != this->_fieldData.end(); ++iter)
-			{
-				HistoricElementFieldData * elm = *iter;
-				delete elm;
-			}
+			//for(std::vector<HistoricElementFieldData*>::const_iterator iter = this->_fieldData.begin(); iter != this->_fieldData.end(); ++iter)
+			//{
+			//	HistoricElementFieldData * elm = *iter;
+			//	delete elm;
+			//}
+
+			this->_fieldData.clear();
 		}
 
 
-		ElementPtr * HistoricElementFieldDataArray::getValueAsElement(int index) const
+		//ElementPtr * HistoricElementFieldDataArray::getValueAsElement(int index) const
+		boost::shared_ptr<ElementPtr> HistoricElementFieldDataArray::getValueAsElement(int index) const
 		{
-			return this->_fieldData.at(index);
+			return boost::dynamic_pointer_cast<ElementPtr>(this->_fieldData.at(index));
 		}
 
 
@@ -91,9 +95,10 @@ namespace BEmu
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 
 			stream << tabs << "fieldData[] = {" << std::endl;
-			for(std::vector<HistoricElementFieldData*>::const_iterator iter = this->_fieldData.begin(); iter != this->_fieldData.end(); ++iter)
+			//for(std::vector<HistoricElementFieldData*>::const_iterator iter = this->_fieldData.begin(); iter != this->_fieldData.end(); ++iter)
+			for(std::vector< boost::shared_ptr<HistoricElementFieldData> >::const_iterator iter = this->_fieldData.begin(); iter != this->_fieldData.end(); ++iter)
 			{
-				HistoricElementFieldData * elm = *iter;
+				boost::shared_ptr<HistoricElementFieldData> elm = *iter;
 				elm->print(stream, level + 1, spacesPerLevel);
 			}
 			stream << tabs << '}' << std::endl;

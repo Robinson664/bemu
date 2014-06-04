@@ -130,7 +130,6 @@ namespace Examples
 	void ProcessHistoricalDataEvent(Event evt)
 	{
 		cout << "EventType = " << evt.eventType();
-		
 		MessageIterator iter(evt);
 		while(iter.next())
 		{

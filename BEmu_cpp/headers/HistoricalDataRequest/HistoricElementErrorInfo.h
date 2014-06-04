@@ -21,8 +21,11 @@ namespace BEmu
 		class HistoricElementErrorInfo : public ElementPtr
 		{
 			private:
-				HistoricElementString * _source, * _category, * _message, * _subCategory;
-				HistoricElementInt * _code;
+				boost::shared_ptr<HistoricElementString> _source, _category, _message, _subCategory;
+				boost::shared_ptr<HistoricElementInt> _code;
+				
+				//HistoricElementString * _source, * _category, * _message, * _subCategory;
+				//HistoricElementInt * _code;
 
 			public:
 				HistoricElementErrorInfo();
@@ -37,7 +40,9 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 				
-				virtual ElementPtr * getElement(const char* name) const;
+				//virtual ElementPtr * getElement(const char* name) const;
+				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
+
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
 				virtual int getElementAsInt32(const char* name) const;

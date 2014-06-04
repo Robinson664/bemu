@@ -22,18 +22,23 @@ namespace BEmu
 			for(std::vector<std::string>::const_iterator iter = badFields.begin(); iter != badFields.end(); ++iter)
 			{
 				std::string str = *iter;
-				HistoricElementFieldExceptions * elm = new HistoricElementFieldExceptions(str);
-				this->_exceptions.push_back(elm);
+				
+				//HistoricElementFieldExceptions * elm = new HistoricElementFieldExceptions(str); //deleted in destructor
+				boost::shared_ptr<HistoricElementFieldExceptions> elmP(new HistoricElementFieldExceptions(str));
+				
+				this->_exceptions.push_back(elmP);
 			}
 		}
 
 		HistoricElementFieldExceptionsArray::~HistoricElementFieldExceptionsArray()
 		{
-			for(std::vector<HistoricElementFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
-			{
-				HistoricElementFieldExceptions * elm = *iter;
-				delete elm;
-			}
+			//for(std::vector<HistoricElementFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
+			//{
+			//	HistoricElementFieldExceptions * elm = *iter;
+			//	delete elm;
+			//}
+
+			this->_exceptions.clear();
 		}
 
 
@@ -77,9 +82,10 @@ namespace BEmu
 		}
 
 
-		ElementPtr * HistoricElementFieldExceptionsArray::getValueAsElement(int index) const
+		//ElementPtr * HistoricElementFieldExceptionsArray::getValueAsElement(int index) const
+		boost::shared_ptr<ElementPtr> HistoricElementFieldExceptionsArray::getValueAsElement(int index) const
 		{
-			return this->_exceptions.at(index);
+			return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptions.at(index));
 		}
 
 
@@ -89,9 +95,10 @@ namespace BEmu
 
 			stream << tabs << "fieldExceptions = {" << std::endl;
 
-			for(std::vector<HistoricElementFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
+			//for(std::vector<HistoricElementFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
+			for(std::vector< boost::shared_ptr<HistoricElementFieldExceptions> >::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
 			{
-				HistoricElementFieldExceptions * elm = *iter;
+				boost::shared_ptr<HistoricElementFieldExceptions> elm = *iter;
 				elm->print(stream, level + 1, spacesPerLevel);
 			}
 

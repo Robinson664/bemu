@@ -15,10 +15,11 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementServiceStatus::MarketElementServiceStatus(const MarketMessageServiceStatus * arg)
+		MarketElementServiceStatus::MarketElementServiceStatus(MarketMessageServiceStatus * arg) :
+			_serviceName(boost::dynamic_pointer_cast<MarketElementString>(arg->firstElement()))
 		{
-			ElementPtr * elmFirst = arg->firstElement();
-			this->_serviceName = (MarketElementString*)elmFirst;
+			//ElementPtr * elmFirst = arg->firstElement();
+			//this->_serviceName = (MarketElementString*)elmFirst;
 		}
 
 		Name MarketElementServiceStatus::name() const
@@ -51,10 +52,11 @@ namespace BEmu
 			return true;
 		}
 
-		ElementPtr * MarketElementServiceStatus::getElement(int position) const
+		//ElementPtr * MarketElementServiceStatus::getElement(int position) const
+		boost::shared_ptr<ElementPtr> MarketElementServiceStatus::getElement(int position) const
 		{
 			if(position == 0)
-				return this->_serviceName;
+				return boost::dynamic_pointer_cast<ElementPtr>(this->_serviceName);
 			else
 				throw elementPtrEx;
 		}

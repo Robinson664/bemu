@@ -28,12 +28,18 @@ namespace BEmu
 		class IntradayTickRequest : public RequestPtr
 		{
 			private:
-				IntradayTickRequestElementString *_security;
-				IntradayTickRequestElementStringArray *_eventTypes;
-				IntradayTickRequestElementTime *_timeStart, *_timeEnd;
-				
-				IntradayTickRequestElementBool *_includeConditionCodes, *_includeNonPlottableEvents, *_includeExchangeCodes, *_returnEids,
-					*_includeBrokerCodes, *_includeRpsCodes, *_includeBicMicCodes;
+				boost::shared_ptr<IntradayTickRequestElementString> _security;
+				boost::shared_ptr<IntradayTickRequestElementStringArray> _eventTypes;
+				boost::shared_ptr<IntradayTickRequestElementTime> _timeStart, _timeEnd;
+				boost::shared_ptr<IntradayTickRequestElementBool> _includeConditionCodes, _includeNonPlottableEvents, _includeExchangeCodes, _returnEids,
+					_includeBrokerCodes, _includeRpsCodes, _includeBicMicCodes;
+
+				//IntradayTickRequestElementString *_security;
+				//IntradayTickRequestElementStringArray *_eventTypes;
+				//IntradayTickRequestElementTime *_timeStart, *_timeEnd;
+				//
+				//IntradayTickRequestElementBool *_includeConditionCodes, *_includeNonPlottableEvents, *_includeExchangeCodes, *_returnEids,
+				//	*_includeBrokerCodes, *_includeRpsCodes, *_includeBicMicCodes;
 
 				Service _service;
 				
@@ -44,7 +50,7 @@ namespace BEmu
 				IntradayTickRequest(const Service& svc);
 				~IntradayTickRequest();
 				const Service getService();
-				std::vector<Datetime>* getDates();
+				std::vector<Datetime> getDates();
 				bool includeConditionCodes();
 				const std::string& security();
 				bool hasStartDate() const;
