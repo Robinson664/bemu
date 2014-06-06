@@ -19,6 +19,10 @@ namespace BEmu
 		{
 			private:
 				std::string _elementName, _value;
+				std::stringstream _ss; //for protected constructors
+
+			protected:
+				HistoricRequestElementString(const std::string& elementName, int value);
 
 			public:
 				HistoricRequestElementString(const std::string& elementName, const std::string& value);

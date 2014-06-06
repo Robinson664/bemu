@@ -11,7 +11,6 @@
 
 #include "bemu_headers.h"
 #include <exception>
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -24,12 +23,10 @@ namespace BEmu
 	class Message
 	{
 		private:
-			//MessagePtr * _ptr;
 			boost::shared_ptr<MessagePtr> _ptr;
 
 		public:
 			Message();
-			//Message(MessagePtr* ptr);
 			Message(boost::shared_ptr<MessagePtr> ptr);
 
 			class MessageException: public std::exception
@@ -79,5 +76,5 @@ namespace BEmu
 			DLL_EXPORT virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 	};
 
-	std::ostream& operator<<(std::ostream& stream, const Message &message);
+	DLL_EXPORT std::ostream& operator<<(std::ostream& stream, const Message &message);
 }

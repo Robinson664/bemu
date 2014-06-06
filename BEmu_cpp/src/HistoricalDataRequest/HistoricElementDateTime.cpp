@@ -36,8 +36,6 @@ namespace BEmu
 
 		const char * HistoricElementDateTime::getValueAsString(int index) const
 		{
-			//return DisplayFormats::HistoricalOrReferenceRequests_FormatDate(this->_value).c_str();
-			//return this->_valueAsString.c_str();
 			return this->ValueAsString().c_str();
 		}
 

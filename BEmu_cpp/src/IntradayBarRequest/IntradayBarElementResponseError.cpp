@@ -27,8 +27,6 @@ namespace BEmu
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
-			//all deleted in destructor
-
 			//source
 			std::stringstream sourceValue;
 			sourceValue << code << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
@@ -37,34 +35,14 @@ namespace BEmu
 			//code
 			this->_code = boost::shared_ptr<IntradayBarElementInt>(new IntradayBarElementInt("code", code));
 
-			//category
-			//this->_category = new IntradayBarElementString("category", "BAD_SEC");
-
 			//message
 			std::stringstream messageValue;
 			messageValue << "Unknown/Invalid security [nid:" << code << "]";
 			this->_message = boost::shared_ptr<IntradayBarElementString>(new IntradayBarElementString("message", messageValue.str()));
-
-			//sub-category
-			//this->_subCategory = new IntradayBarElementString("subcategory", "INVALID_SECURITY");
 		}
 
 		IntradayBarElementResponseError::~IntradayBarElementResponseError()
 		{
-			//delete this->_source;
-			//this->_source = 0;
-			//
-			//delete this->_category;
-			//this->_category = 0;
-			//
-			//delete this->_message;
-			//this->_message = 0;
-			//
-			//delete this->_subCategory;
-			//this->_subCategory = 0;
-			//
-			//delete this->_code;
-			//this->_code = 0;
 		}
 
 		Name IntradayBarElementResponseError::name() const
@@ -110,7 +88,6 @@ namespace BEmu
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		//ElementPtr * IntradayBarElementResponseError::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> IntradayBarElementResponseError::getElement(const char* name) const
 		{
 			if(strncmp("source", name, 7) == 0)

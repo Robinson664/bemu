@@ -16,7 +16,6 @@ namespace BEmu
 	Event::Event()
 		: _ptrP()
 	{
-		//this->_ptr = boost::shared_ptr<EventPtr>();
 	}
 
 	Event::Event(boost::shared_ptr<EventPtr> ptr)
@@ -24,15 +23,9 @@ namespace BEmu
 	{
 	}
 
-	//Event::Event(EventPtr *ptr)
-	//{
-	//	this->_ptr = ptr;
-	//}
-
 	Event::Event(const Event& arg)
 		: _ptrP(arg._ptrP)
 	{
-		//this->_ptr = arg._ptr;
 	}
 
 	Event::~Event()

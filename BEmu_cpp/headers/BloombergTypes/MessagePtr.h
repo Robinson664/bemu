@@ -41,25 +41,12 @@ namespace BEmu
 				}
 			} messageEx;
 
-			//Returns an array of root Elements in this message.
-			//  All elements from the root down must be deleted when a MessageIterator goes out of scope.
-			//  This method is not visible to the API developer.
-			//virtual std::stack<ElementPtr*> getRootElements() const = 0;
-			virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const = 0;
-
-			virtual void markRootElementsDeleted() = 0;
-
 			CorrelationId correlationId() const;
 			Name messageType() const;
 			virtual const char* topicName() const;
 			
-			//ElementPtr * getElement(const Name& name) const;
 			boost::shared_ptr<ElementPtr> getElement(const Name& name) const;
-
-			//virtual ElementPtr * getElement(const char* name) const;
 			virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
-
-			//virtual ElementPtr * asElement() const;
 			virtual boost::shared_ptr<ElementPtr> asElement() const;
 
 			bool hasElement(const Name& name, bool excludeNullElements = false) const;

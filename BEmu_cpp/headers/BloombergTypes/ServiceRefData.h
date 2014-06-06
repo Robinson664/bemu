@@ -11,7 +11,6 @@
 
 #include "BloombergTypes/Service.h"
 #include <exception>
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -21,12 +20,10 @@ namespace BEmu
 	class ServiceRefData : Service
 	{
 		public:
-			/*DLL_EXPORT*/ virtual const char* name() const;
-			/*DLL_EXPORT*/ RequestPtr* createRequestPtr(const char* operation) const;
-			// /*DLL_EXPORT*/ virtual Request createRequest(const char* operation) const;
+			virtual const char* name() const;
 
-			/*DLL_EXPORT*/ boost::shared_ptr<RequestPtr> createRequestPtr2(const char* operation) const;
-			/*DLL_EXPORT*/ Request createRequest2(const char* operation) const;
+			boost::shared_ptr<RequestPtr> createRequestPtr(const char* operation) const;
+			Request createRequest(const char* operation) const;
 
 			class ServiceRefDataException: public std::exception
 			{

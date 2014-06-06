@@ -17,10 +17,9 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementSubscriptionCanceled::MarketElementSubscriptionCanceled(MarketMessageSubscriptionCanceled * arg) :
-			_reason(boost::dynamic_pointer_cast<MarketElementSubscriptionCancelReason>(arg->getElement("reason")))
+		MarketElementSubscriptionCanceled::MarketElementSubscriptionCanceled(const MarketMessageSubscriptionCanceled& arg) :
+			_reason(boost::dynamic_pointer_cast<MarketElementSubscriptionCancelReason>(arg.getElement("reason")))
 		{
-			//this->_reason = (MarketElementSubscriptionCancelReason*)arg->getElement("reason");
 		}
 
 		Name MarketElementSubscriptionCanceled::name() const

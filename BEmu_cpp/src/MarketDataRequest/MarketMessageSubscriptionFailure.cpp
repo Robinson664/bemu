@@ -20,29 +20,10 @@ namespace BEmu
 		{
             this->_correlationId = sub.correlationId();
 			this->_topicName = sub.security();
-			//this->_reason = new MarketElementReason(ReasonType::badSecurity); //deleted in destructor
 		}
 
 		MarketMessageSubscriptionFailure::~MarketMessageSubscriptionFailure()
 		{
-			//delete this->_reason;
-			//this->_reason = 0;
-		}
-
-		//std::stack<ElementPtr*> MarketMessageSubscriptionFailure::getRootElements() const
-		std::stack< boost::shared_ptr<ElementPtr> > MarketMessageSubscriptionFailure::getRootElements() const
-		{
-			std::stack< boost::shared_ptr<ElementPtr> > result;
-
-			//if(this->_reason != 0)
-			result.push( boost::dynamic_pointer_cast<ElementPtr>(this->_reason) );
-
-			return result;
-		}
-
-		void MarketMessageSubscriptionFailure::markRootElementsDeleted()
-		{
-			//this->_reason = 0;
 		}
 
 		size_t MarketMessageSubscriptionFailure::numElements() const
@@ -60,7 +41,6 @@ namespace BEmu
 			return this->_reason->name() == name;
 		}
 
-		//ElementPtr * MarketMessageSubscriptionFailure::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> MarketMessageSubscriptionFailure::getElement(const char* name) const
 		{
 			if(this->_reason->name() == name)

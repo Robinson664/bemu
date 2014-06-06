@@ -22,17 +22,10 @@ namespace BEmu
 			_fieldId(new ReferenceElementString("fieldId", "")),
 			_value(new ReferenceElementObject("value", ""))
 		{
-            //this->_fieldId = new ReferenceElementString("fieldId", ""); //deleted in destructor
-            //this->_value = new ReferenceElementObject("value", ""); //deleted in destructor
 		}
 
 		ReferenceRequestElementOverride::~ReferenceRequestElementOverride()
 		{
-			//delete this->_fieldId;
-			//this->_fieldId = 0;
-
-			//delete this->_value;
-			//this->_value = 0;
 		}
 
 		Name ReferenceRequestElementOverride::name() const { return Name("overrides"); }
@@ -70,7 +63,6 @@ namespace BEmu
 				throw elementPtrEx;
 		}
 
-		//ElementPtr * ReferenceRequestElementOverride::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> ReferenceRequestElementOverride::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldId", 8) == 0)

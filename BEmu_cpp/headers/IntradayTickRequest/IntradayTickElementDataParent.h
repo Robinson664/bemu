@@ -27,10 +27,9 @@ namespace BEmu
 		{
 			private:
 				boost::shared_ptr<IntradayTickElementDataArray> _array;
-				//IntradayTickElementDataArray *_array;
 
 			public:
-				IntradayTickElementDataParent(std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >* ticks, bool includeConditionCodes);
+				IntradayTickElementDataParent(const std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >& ticks, bool includeConditionCodes);
 				~IntradayTickElementDataParent();
 
 				virtual Name name() const;
@@ -40,7 +39,6 @@ namespace BEmu
 				virtual bool isComplexType() const { return true; }
 				virtual SchemaElementDefinition elementDefinition() const;
 
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;

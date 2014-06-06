@@ -29,9 +29,6 @@ namespace BEmu
 				boost::shared_ptr<MarketElementString> _source, _category, _description;
 				boost::shared_ptr<MarketElementInt> _errorCode;
 
-				//MarketElementString * _source, * _category, * _description;
-				//MarketElementInt * _errorCode;
-
 			public:
 				MarketElementReason(ReasonType::ReasonTypeEnum reasonType);
 				~MarketElementReason();
@@ -48,7 +45,6 @@ namespace BEmu
 				virtual int getElementAsInt32(const char* name) const;
 				virtual const char* getElementAsString(const char* name) const;
 
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;

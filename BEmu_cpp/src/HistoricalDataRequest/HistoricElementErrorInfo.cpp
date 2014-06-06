@@ -27,42 +27,16 @@ namespace BEmu
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
-			//All deleted in destructor
-
 			std::stringstream ssSource;
 			ssSource << RandomDataGenerator::RandomInt(999) << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
 
 
 			this->_source = boost::shared_ptr<HistoricElementString>(new HistoricElementString("source", ssSource.str()));
 			this->_code = boost::shared_ptr<HistoricElementInt>(new HistoricElementInt("code", RandomDataGenerator::RandomInt(99)));
-
-			//this->_source = new HistoricElementString("source", ssSource.str());
-
-			//this->_code = new HistoricElementInt("code", RandomDataGenerator::RandomInt(99));
-
-			//this->_category = new HistoricElementString("category", "BAD_FLD");
-
-            //this->_message = new HistoricElementString("message", "Invalid field");
-
-            //this->_subCategory = new HistoricElementString("subcategory", "NOT_APPLICABLE_TO_HIST_DATA");
 		}
 
 		HistoricElementErrorInfo::~HistoricElementErrorInfo()
 		{
-			//delete this->_source;
-			//this->_source = 0;
-
-			//delete this->_code;
-			//this->_code = 0;
-
-			//delete this->_category;
-			//this->_category = 0;
-
-			//delete this->_message;
-			//this->_message = 0;
-
-			//delete this->_subCategory;
-			//this->_subCategory = 0;
 		}
 
 		Name HistoricElementErrorInfo::name() const
@@ -103,8 +77,6 @@ namespace BEmu
 			return true;
 		}
 
-				
-		//ElementPtr * HistoricElementErrorInfo::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> HistoricElementErrorInfo::getElement(const char* name) const
 		{
 			if(strncmp(name, "category", 9) == 0)

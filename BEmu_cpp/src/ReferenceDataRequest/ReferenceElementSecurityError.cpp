@@ -31,37 +31,17 @@ namespace BEmu
 			std::stringstream ssSource;
 			ssSource << RandomDataGenerator::RandomInt(999) << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
 
-			 //all deleted in destructor
-
 			this->_source = boost::shared_ptr<ReferenceElementString>(new ReferenceElementString("source", ssSource.str()));
 
 			this->_code = boost::shared_ptr<ReferenceElementInt>(new ReferenceElementInt("code", code));
 
-			//this->_category = new ReferenceElementString("category", "BAD_SEC");
-
 			std::stringstream ssMsg;
 			ssMsg << "Unknown/Invalid security [nid:" << code << ']';
 			this->_message = boost::shared_ptr<ReferenceElementString>(new ReferenceElementString("message", ssMsg.str()));
-
-			//this->_subCategory = new ReferenceElementString("subcategory", "INVALID_SECURITY");
 		}
 
 		ReferenceElementSecurityError::~ReferenceElementSecurityError()
 		{
-			//delete this->_source;
-			//this->_source = 0;
-
-			//delete this->_code;
-			//this->_code = 0;
-
-			//delete this->_category;
-			//this->_category = 0;
-
-			//delete this->_message;
-			//this->_message = 0;
-
-			//delete this->_subCategory;
-			//this->_subCategory = 0;
 		}
 
 		Name ReferenceElementSecurityError::name() const { return Name("securityError"); }
@@ -89,7 +69,6 @@ namespace BEmu
 			return this->getElement(name)->getValueAsInt32(0);
 		}
 
-		//ElementPtr * ReferenceElementSecurityError::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> ReferenceElementSecurityError::getElement(const char* name) const
 		{
 			if(strncmp(name, "category", 9) == 0)

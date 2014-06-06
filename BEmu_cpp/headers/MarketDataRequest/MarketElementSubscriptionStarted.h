@@ -24,7 +24,8 @@ namespace BEmu
 				boost::shared_ptr<MarketElementNull> _exceptions;
 
 			public:
-				MarketElementSubscriptionStarted(MarketMessageSubscriptionStarted * arg);
+				//MarketElementSubscriptionStarted(MarketMessageSubscriptionStarted * arg);
+				MarketElementSubscriptionStarted(const MarketMessageSubscriptionStarted& arg);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

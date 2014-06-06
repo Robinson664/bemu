@@ -24,12 +24,7 @@ namespace BEmu
 
 		IntradayTickRequestElementStringArray::~IntradayTickRequestElementStringArray()
 		{
-			//for(std::vector<std::string*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
-			//{
-			//	std::string* value = *iter;
-			//	delete value;
-			//	value = 0;
-			//}
+			this->_values.clear();
 		}
 
 		void IntradayTickRequestElementStringArray::addValue(const std::string& value)
@@ -44,7 +39,6 @@ namespace BEmu
 				value.compare("BEST_BID") == 0 ||
 				value.compare("BEST_ASK") == 0)
 			{
-				//std::string str(std::string(value)); //deleted in destructor
 				this->_values.push_back(value);
 			}
 			else

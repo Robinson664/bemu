@@ -20,7 +20,6 @@ namespace BEmu
 		IntradayTickElement::IntradayTickElement(const IntradayTickMessage& msg) :
 			_parent(msg.firstElement())
 		{
-			//this->_parent = msg.firstElement();
 		}
 
 		IntradayTickElement::~IntradayTickElement()
@@ -33,7 +32,6 @@ namespace BEmu
 			return result;
 		}
 
-		//ElementPtr * IntradayTickElement::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> IntradayTickElement::getElement(const char* name) const
 		{
 			if(this->_parent->name() == name)

@@ -30,18 +30,15 @@ namespace BEmu
 
 				for (int i = fields.size() - 1; i >= 0; i--)
 				{
-					if(Rules::IsBadField(fields.at(i)))
+					if(Rules::IsBadField(fields[i]))
 					{
-						badFields.push_back(fields.at(i));
+						badFields.push_back(fields[i]);
 						fields.erase(fields.begin() + i);
 					}
 				}
 
 				if (badFields.size() == 0)
 				{
-     //               this->_exceptionsNull = new MarketElementNull("exceptions"); //deleted in destructor
-					//this->_exceptionsBadFields = 0;
-
 					this->_exceptionsNull = boost::shared_ptr<MarketElementNull>(new MarketElementNull("exceptions"));
 					this->_exceptionsBadFields = boost::shared_ptr<MarketElementExceptionsArray>();
 
@@ -50,9 +47,6 @@ namespace BEmu
 				}
                 else
 				{
-					//this->_exceptionsNull = 0;
-     //               this->_exceptionsBadFields = new MarketElementExceptionsArray(badFields); //deleted in destructor
-
 					this->_exceptionsNull = boost::shared_ptr<MarketElementNull>();
 					this->_exceptionsBadFields = boost::shared_ptr<MarketElementExceptionsArray>(new MarketElementExceptionsArray(badFields));
 
@@ -64,49 +58,13 @@ namespace BEmu
 
 		MarketMessageSubscriptionStarted::~MarketMessageSubscriptionStarted()
 		{
-			//if(this->_exceptionsNull != 0)
-			//{
-			//	delete this->_exceptionsNull;
-			//	this->_exceptionsNull = 0;
-			//}
-
-			//if(this->_exceptionsBadFields != 0)
-			//{
-			//	delete this->_exceptionsBadFields;
-			//	this->_exceptionsBadFields = 0;
-			//}
 		}
 
-		//std::stack<ElementPtr*> MarketMessageSubscriptionStarted::getRootElements() const
-		std::stack< boost::shared_ptr<ElementPtr> > MarketMessageSubscriptionStarted::getRootElements() const
-		{
-			std::stack< boost::shared_ptr<ElementPtr> > result;
-
-			//if(this->_exceptionsNull != 0)
-			if(!this->_isNull_exceptionsNull)
-				result.push( boost::dynamic_pointer_cast<ElementPtr>(this->_exceptionsNull) );
-
-			//if(this->_exceptionsBadFields != 0)
-			if(!this->_isNull_exceptionsBadFields)
-				result.push( boost::dynamic_pointer_cast<ElementPtr>(this->_exceptionsBadFields) );
-
-			return result;
-		}
-
-		void MarketMessageSubscriptionStarted::markRootElementsDeleted()
-		{
-			//this->_exceptionsNull = 0;
-			//this->_exceptionsBadFields = 0;
-		}
-
-		//ElementPtr * MarketMessageSubscriptionStarted::firstElement() const
 		boost::shared_ptr<ElementPtr> MarketMessageSubscriptionStarted::firstElement() const
 		{
-			//if(this->_exceptionsNull != 0)
 			if(!this->_isNull_exceptionsNull)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptionsNull);
 
-			//else if(this->_exceptionsBadFields != 0)
 			else if(!this->_isNull_exceptionsBadFields)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptionsBadFields);
 
@@ -116,26 +74,21 @@ namespace BEmu
 
 		bool MarketMessageSubscriptionStarted::hasElement(const char* name, bool excludeNullElements) const
 		{
-			//if(this->_exceptionsNull != 0 && this->_exceptionsNull->name() == name)
-			if(!this->_isNull_exceptionsNull && this->_exceptionsNull->name() == name)
+			if(!this->_isNull_exceptionsNull && this->_exceptionsNull->name() == name /*&& (!this->_exceptionsNull->isNull() || !excludeNullElements)*/ )
 				return true;
 
-			//else if(this->_exceptionsBadFields != 0 && this->_exceptionsBadFields->name() == name)
-			else if(!this->_isNull_exceptionsBadFields && this->_exceptionsBadFields->name() == name)
+			else if(!this->_isNull_exceptionsBadFields && this->_exceptionsBadFields->name() == name /*&& (!this->_exceptionsBadFields->isNull() || !excludeNullElements)*/ )
 				return true;
 
 			return false;
 		}
 
-		//ElementPtr * MarketMessageSubscriptionStarted::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> MarketMessageSubscriptionStarted::getElement(const char* name) const
 		{
-			//if(this->_exceptionsNull != 0 && this->_exceptionsNull->name() == name)
-			if(!this->_isNull_exceptionsNull && this->_exceptionsNull->name() == name)
+			if(!this->_isNull_exceptionsNull && this->_exceptionsNull->name() == name /*&& !this->_exceptionsNull->isNull()*/ )
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptionsNull);
 
-			//else if(this->_exceptionsBadFields != 0 && this->_exceptionsBadFields->name() == name)
-			else if(!this->_isNull_exceptionsBadFields && this->_exceptionsBadFields->name() == name)
+			else if(!this->_isNull_exceptionsBadFields && this->_exceptionsBadFields->name() == name /*&& !this->_exceptionsBadFields->isNull()*/ )
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptionsBadFields);
 
 			else
@@ -147,7 +100,6 @@ namespace BEmu
 			return 1;
 		}
 
-		//ElementPtr * MarketMessageSubscriptionStarted::asElement() const
 		boost::shared_ptr<ElementPtr> MarketMessageSubscriptionStarted::asElement() const
 		{
 			throw messageEx;
@@ -160,13 +112,11 @@ namespace BEmu
 
 		std::ostream& MarketMessageSubscriptionStarted::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-            //if (this->_exceptionsNull != 0)
-			if(!this->_isNull_exceptionsNull)
+			if(!this->_isNull_exceptionsNull /*&& !this->_exceptionsNull->isNull()*/ )
 			{
 				stream << "SubscriptionStarted = {" << std::endl << "}" << std::endl;
 			}
-			//else if(this->_exceptionsBadFields != 0)
-			else if(!this->_isNull_exceptionsBadFields)
+			else if(!this->_isNull_exceptionsBadFields /*&& !this->_exceptionsBadFields->isNull()*/ )
 			{
 				stream << "SubscriptionStarted = {" << std::endl;
 				this->_exceptionsBadFields->print(stream, level + 1, spacesPerLevel);

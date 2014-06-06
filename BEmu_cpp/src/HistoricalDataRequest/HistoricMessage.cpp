@@ -20,37 +20,17 @@ namespace BEmu
 					const CorrelationId& corr, 
 					const std::string& securityName, 
 					const std::vector<std::string>& badFields, 
-					std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData, 
+					const std::map<Datetime, std::map<std::string, ObjectType>>& fieldData, 
 					int sequenceNumber) : 
 			MessagePtr(Name("HistoricalDataResponse"), corr),
 			_security(new HistoricElementSecurityData(securityName, badFields, fieldData, sequenceNumber))
 		{
-			//this->_security = new HistoricElementSecurityData(securityName, badFields, fieldData, sequenceNumber); //deleted in destructor
 		}
 
 		HistoricMessage::~HistoricMessage()
 		{
-			//delete this->_security;
-			//this->_security = 0;
 		}
 
-		//std::stack<ElementPtr*> HistoricMessage::getRootElements() const
-		std::stack< boost::shared_ptr<ElementPtr> > HistoricMessage::getRootElements() const
-		{
-			//std::stack<ElementPtr*> result;
-			std::stack< boost::shared_ptr<ElementPtr> > result;
-
-			result.push( boost::dynamic_pointer_cast<ElementPtr>(this->_security) );
-
-			return result;
-		}
-
-		void HistoricMessage::markRootElementsDeleted()
-		{
-			//this->_security = 0;
-		}
-
-		//ElementPtr * HistoricMessage::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> HistoricMessage::getElement(const char* name) const
 		{
 			if(strncmp(name, "securityData", 13) == 0)

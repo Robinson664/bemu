@@ -16,7 +16,6 @@
 #include <queue>
 #include <vector>
 #include <exception>
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -35,14 +34,15 @@ namespace BEmu
 			SessionStateType _sessionState;
 			SessionOptions _sessionOptions;
 
-			//std::queue<RequestPtr*> _sentRequests;
-			std::queue<boost::shared_ptr<RequestPtr>> _sentRequests2;
+			std::queue<boost::shared_ptr<RequestPtr>> _sentRequests;
 
 			EventHandler * _asyncHandler;
 			SubscriptionList _subs;
 
-			SessionTimerFunction * _sessionTimerFunction;
-			BEmuTimer * _marketSimulatorTimer;
+			boost::shared_ptr<SessionTimerFunction> _sessionTimerFunction;
+			boost::shared_ptr<BEmuTimer> _marketSimulatorTimer;
+
+			bool _isNull_marketSimulatorTimer;
 
 		public:
 

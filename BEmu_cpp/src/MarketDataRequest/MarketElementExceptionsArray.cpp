@@ -27,11 +27,6 @@ namespace BEmu
 
 		MarketElementExceptionsArray::~MarketElementExceptionsArray()
 		{
-			//for(std::vector<MarketElementExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
-			//{
-			//	MarketElementExceptions * elm = *iter;
-			//	delete elm;
-			//}
 			this->_exceptions.clear();
 		}
 
@@ -72,13 +67,9 @@ namespace BEmu
 			return false;
 		}
 
-		//ElementPtr * MarketElementExceptionsArray::getValueAsElement(int index) const
 		boost::shared_ptr<ElementPtr> MarketElementExceptionsArray::getValueAsElement(int index) const
 		{
 			return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptions.at(index));
-
-			//ElementPtr * result = this->_exceptions.at(index);
-			//return result;
 		}
 
 		std::ostream& MarketElementExceptionsArray::print(std::ostream& stream, int level, int spacesPerLevel) const

@@ -19,14 +19,10 @@ namespace BEmu
 		ReferenceElement::ReferenceElement(const ReferenceMessage& arg) :
 			_securities(boost::dynamic_pointer_cast<ReferenceElementSecurityDataArray>(arg.firstElement()))
 		{
-			//ReferenceElementSecurityDataArray * elm = (ReferenceElementSecurityDataArray*)arg.firstElement();
-			//this->_securities = new ReferenceElementSecurityDataArray(*elm); //deleted in destructor
 		}
 
 		ReferenceElement::~ReferenceElement()
 		{
-			//delete this->_securities;
-			//this->_securities = 0;
 		}
 
 		Name ReferenceElement::name() const { return Name("securityData"); }
@@ -37,7 +33,6 @@ namespace BEmu
 		bool ReferenceElement::isArray() const { return false; }
 		bool ReferenceElement::isComplexType() const { return true; }
 
-		//ElementPtr * ReferenceElement::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> ReferenceElement::getElement(const char* name) const
 		{
 			if(strncmp(name, "securityData", 13) == 0)

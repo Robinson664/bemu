@@ -19,44 +19,30 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceEvent::ReferenceEvent(boost::shared_ptr<ReferenceRequest> request) : 
-			EventPtr(request),
+		ReferenceEvent::ReferenceEvent(const boost::shared_ptr<ReferenceRequest>& request) : 
+			EventPtr(boost::dynamic_pointer_cast<RequestPtr>(request)),
 			_internalP(request)
 		{
-			this->_requestP = boost::dynamic_pointer_cast<RequestPtr>(request);
-			//this->_internalP = request;
-			this->_messages = this->generateMessages(); //deleted in destructor
+			this->_messages = this->generateMessages();
 		}
 
 		ReferenceEvent::~ReferenceEvent()
 		{
-			//for(std::vector<MessagePtr*>::const_iterator iter = this->_messages->begin(); iter != this->_messages->end(); ++iter)
-			//{
-			//	MessagePtr * msg = *iter;
-			//	delete msg;
-			//}
-
-			this->_messages->clear();
-
-			delete this->_messages;
-			this->_messages = 0;
+			this->_messages.clear();
 		}
 
 		std::vector< boost::shared_ptr<MessagePtr> > ReferenceEvent::getMessages() const
-		//std::vector<MessagePtr*> * ReferenceEvent::getMessages() const
 		{
-			return *(this->_messages);
+			return this->_messages;
 		}
 
-		std::vector< boost::shared_ptr<MessagePtr> > * ReferenceEvent::generateMessages() const
-		//std::vector<MessagePtr*> * ReferenceEvent::generateMessages() const
+		std::vector< boost::shared_ptr<MessagePtr> > ReferenceEvent::generateMessages() const
 		{
 			const boost::regex exIsOption("[A-Z]{1,4}\\s+\\d{6}[CP]\\d{8} EQUITY");
 
-			std::vector< boost::shared_ptr<MessagePtr> > * result = new std::vector< boost::shared_ptr<MessagePtr> >(); //deleted in destructor (as this->_messages)
-			//std::vector<MessagePtr*> * result = new std::vector<MessagePtr*>(); //deleted in destructor (as this->_messages)
+			std::vector< boost::shared_ptr<MessagePtr> > result;
 
-			std::map<std::string, std::map<std::string, ObjectType>*> securities;
+			std::map<std::string, std::map<std::string, ObjectType>> securities;
 
 			std::vector<std::string> reqSecurities = this->_internalP->getSecurities();
 			for(std::vector<std::string>::const_iterator iterSec = reqSecurities.begin(); iterSec != reqSecurities.end(); ++iterSec)
@@ -66,9 +52,7 @@ namespace BEmu
 				{
 					bool isOption = boost::regex_match(security, exIsOption);
 
-					std::map<std::string, ObjectType> * fieldData = new std::map<std::string, ObjectType>(); //deleted in the outer loop below
-					securities[security] = fieldData;
-
+					std::map<std::string, ObjectType> fieldData;
 					std::vector<std::string> badFields;
 
 					std::vector<std::string> reqFields = this->_internalP->getFields();
@@ -79,27 +63,20 @@ namespace BEmu
 						ObjectType value(RandomDataGenerator::ReferenceDataFromFieldName(reqField, security, isOption, this->_internalP));
 
 						bool isnull = value.IsNull();
-						bool inMap = fieldData->find(reqField) != fieldData->end();
+						bool inMap = fieldData.find(reqField) != fieldData.end();
 
 						if( !isnull && !inMap ) //if the value isn't null and the field isn't already in the map
-							(*fieldData)[reqField] = value;
+							fieldData[reqField] = value;
 					}
+					
+					securities[security] = fieldData;
 				}
 			}
 
 			boost::shared_ptr<ReferenceMessage> msgRP(new ReferenceMessage(this->_internalP->getCorrelationId(), securities));
-			//ReferenceMessage * msg = new ReferenceMessage(this->_internalP->getCorrelationId(), securities); //deleted in destructor
-
 			boost::shared_ptr<MessagePtr> msgP(boost::dynamic_pointer_cast<MessagePtr>(msgRP));
 
-			//no longer need the collections in "securities"
-			for(std::map<std::string, std::map<std::string, ObjectType>*>::iterator iterSec = securities.begin(); iterSec != securities.end(); ++iterSec)
-			{
-				std::map<std::string, ObjectType> * mm = iterSec->second;
-				delete mm;
-			}
-
-			result->push_back(msgP);
+			result.push_back(msgP);
 
 			return result;
 		}

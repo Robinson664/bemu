@@ -37,7 +37,6 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 				
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;

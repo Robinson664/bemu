@@ -30,9 +30,9 @@ namespace BEmu
 
 		SubscriptionList subs = this->_session->getSubscriptions();
 		SubscriptionList subsToUse;
-		std::vector<Subscription> * list = subs.list();
+		std::vector<Subscription> list = subs.list();
 
-		for(std::vector<Subscription>::const_iterator iter = list->begin(); iter != list->end(); ++iter)
+		for(std::vector<Subscription>::const_iterator iter = list.begin(); iter != list.end(); ++iter)
 		{
 			Subscription current = *iter;
 			if(RandomDataGenerator::ShouldIncludeQuote())
@@ -45,14 +45,10 @@ namespace BEmu
 				conflationIntervalInMilleseconds = current.conflationInterval() * 1000;
 			}
 		}
-
-		//MarketDataRequest::MarketEvent * evt = new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_DATA, CorrelationId(), subsToUse);
-
 		
 		boost::shared_ptr<MarketDataRequest::MarketEvent> evtSubStatusP(new MarketDataRequest::MarketEvent(Event::SUBSCRIPTION_DATA, CorrelationId(), subsToUse));
 		boost::shared_ptr<EventPtr> evtP = boost::dynamic_pointer_cast<EventPtr>(evtSubStatusP);
 		const Event ev(evtP);
-
 
 		this->_eventHandler->processEvent(ev, this->_session);
 

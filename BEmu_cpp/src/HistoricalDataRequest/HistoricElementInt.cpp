@@ -89,7 +89,6 @@ namespace BEmu
 		const char * HistoricElementInt::getValueAsString(int index) const
 		{
 			if(index == 0)
-				//return this->_valueAsString.c_str();
 				return this->ValueAsString().c_str();
 			else
 				throw elementPtrEx;

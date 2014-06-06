@@ -22,17 +22,10 @@ namespace BEmu
 			_fieldId(new HistoricElementString("fieldId", badField)),
 			_errorInfo(new HistoricElementErrorInfo())
 		{
-            //this->_fieldId = new HistoricElementString("fieldId", badField); //deleted in destructor
-            //this->_errorInfo = new HistoricElementErrorInfo(); //deleted in destructor
 		}
 
 		HistoricElementFieldExceptions::~HistoricElementFieldExceptions()
 		{
-			//delete this->_fieldId;
-			//this->_fieldId = 0;
-
-			//delete this->_errorInfo;
-			//this->_errorInfo = 0;
 		}
 
 
@@ -76,7 +69,6 @@ namespace BEmu
 		}
 
 
-		//ElementPtr * HistoricElementFieldExceptions::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> HistoricElementFieldExceptions::getElement(const char* name) const
 		{
 			if(strncmp(name, "errorInfo", 10) == 0)

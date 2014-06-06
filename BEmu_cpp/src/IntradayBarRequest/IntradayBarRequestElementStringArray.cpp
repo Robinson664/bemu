@@ -23,11 +23,7 @@ namespace BEmu
 
 		IntradayBarRequestElementStringArray::~IntradayBarRequestElementStringArray()
 		{
-			for(std::vector<std::string*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
-			{
-				std::string* value = *iter;
-				delete value;
-			}
+			this->_values.clear();
 		}
 
 		Name IntradayBarRequestElementStringArray::name() const
@@ -56,7 +52,7 @@ namespace BEmu
 			return false;
 		}
 
-		std::vector<std::string*> IntradayBarRequestElementStringArray::values()
+		std::vector<std::string> IntradayBarRequestElementStringArray::values()
 		{
 			return this->_values;
 		}
@@ -64,12 +60,9 @@ namespace BEmu
 		void IntradayBarRequestElementStringArray::addValue(const std::string& value)
 		{
 			if(this->isEventTypeAllowed(value))
-			{
-				std::string* str = new std::string(value); //deleted in the destructor
-				this->_values.push_back(str);
-			}
+				this->_values.push_back(value);
 			else
-				throw elementPtrEx;
+				throw elementPtrEx; //Yes the actual Bloomberg API really does throw an exception here
 		}
 
 		bool IntradayBarRequestElementStringArray::isEventTypeAllowed(const std::string& value)
@@ -96,9 +89,9 @@ namespace BEmu
 			stream << tabs << this->_name << "[] = {" << std::endl;
 
 			int index = 0, lastIndex = this->_values.size() - 1;
-			for(std::vector<std::string*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
+			for(std::vector<std::string>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
 			{
-				std::string* value = *iter;
+				std::string value = *iter;
 
 				stream << value;
 

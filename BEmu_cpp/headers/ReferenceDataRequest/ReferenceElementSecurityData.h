@@ -36,16 +36,10 @@ namespace BEmu
 
 				bool _isNull_elmFieldExceptions;
 
-				//ReferenceElementString * _elmSecurityName;
-				//ReferenceElementInt * _elmSequenceNumber;
-				//ReferenceElementFieldData * _elmFieldData;
-				//ReferenceElementFieldExceptionsArray * _elmFieldExceptions;
-				//ReferenceElementSecurityError * _elmSecError;
-
 				bool _isSecurityError;
 
 			public:
-				ReferenceElementSecurityData(const std::string& securityName, std::map<std::string, ObjectType>& fieldData, int sequenceNumber);
+				ReferenceElementSecurityData(const std::string& securityName, std::map<std::string, ObjectType> * fieldData, int sequenceNumber);
 				~ReferenceElementSecurityData();
 
 				virtual Name name() const;
@@ -55,7 +49,6 @@ namespace BEmu
 
 				virtual const char* getElementAsString(const char* name) const;
 				
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;

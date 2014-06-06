@@ -12,7 +12,7 @@
 
 namespace BEmu
 {
-	BEmuTimer::BEmuTimer(BEmuTimerFunction * toRun)
+	BEmuTimer::BEmuTimer(boost::shared_ptr<BEmuTimerFunction> toRun)
 	{
 		this->_toRun = toRun;
 		this->_isRunning = false;
@@ -91,7 +91,6 @@ namespace BEmu
 		this->_syncroot.unlock();
 
 		if(start == RunType::runImmediately)
-			//boost::thread(&BEmuTimer::pStart, this); //start new thread
 			this->_threadGroup.create_thread(boost::bind(&BEmuTimer::pStart, this));
 	}
 
@@ -106,7 +105,6 @@ namespace BEmu
 			this->_runRestart = restart;
 		this->_syncroot.unlock();
 
-		//boost::thread(&BEmuTimer::pStart, this); //start new thread
 		this->_threadGroup.create_thread(boost::bind(&BEmuTimer::pStart, this));
 	}
 
@@ -121,7 +119,6 @@ namespace BEmu
 			this->_useRunTypeRestart = false;
 		this->_syncroot.unlock();
 
-		//boost::thread(&BEmuTimer::pStart, this); //start new thread
 		this->_threadGroup.create_thread(boost::bind(&BEmuTimer::pStart, this));
 	}
 
@@ -145,7 +142,6 @@ namespace BEmu
 		this->_syncroot.unlock();
 
 		if(shouldStartNewThread)
-			//boost::thread(&BEmuTimer::pStart, this); //start new thread
 			this->_threadGroup.create_thread(boost::bind(&BEmuTimer::pStart, this));
 	}
 

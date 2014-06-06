@@ -34,12 +34,6 @@ namespace BEmu
 				boost::shared_ptr<HistoricElementFieldExceptionsArray> _elmFieldExceptions;
 				boost::shared_ptr<HistoricElementSecurityError> _elmSecError;
 
-				//HistoricElementString * _elmSecurityName;
-				//HistoricElementFieldDataArray * _elmFieldDataArray;
-				//HistoricElementInt * _elmSequenceNumber;
-				//HistoricElementFieldExceptionsArray * _elmFieldExceptions;
-				//HistoricElementSecurityError * _elmSecError;
-
 				bool _isSecurityError;
 				bool _isNull_elmFieldExceptions;
 
@@ -47,7 +41,7 @@ namespace BEmu
 				HistoricElementSecurityData(
 					const std::string& securityName, 
 					const std::vector<std::string>& badFields, 
-					const std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData, 
+					const std::map<Datetime, std::map<std::string, ObjectType>>& fieldData, 
 					int sequenceNumber);
 
 				~HistoricElementSecurityData();
@@ -61,7 +55,6 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;

@@ -9,9 +9,8 @@
 
 #pragma once
 
-#include <boost/cstdint.hpp>
+#include <boost/shared_ptr.hpp>
 #include <string>
-//#include <iostream>
 #include <iosfwd>
 
 #include <boost/date_time/gregorian/gregorian.hpp>

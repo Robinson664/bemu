@@ -21,6 +21,11 @@ namespace BEmu
 		{
 			private:
 				std::string _elementName, _value;
+				std::stringstream _ss; //used for int and datetime constructors
+
+			protected:
+				IntradayTickRequestElementString(const std::string& elementName, int value);
+				IntradayTickRequestElementString(const std::string& elementName, const Datetime& value);
 				
 			public:
 				IntradayTickRequestElementString(const std::string& elementName, const std::string& value);

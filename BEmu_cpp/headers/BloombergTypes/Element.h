@@ -12,7 +12,6 @@
 #include "bemu_headers.h"
 #include <exception>
 #include "BloombergTypes/SchemaElementDefinition.h"
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -21,16 +20,12 @@ namespace BEmu
 	class Datetime;
 	
 	//See my explanation of the RequetPtr class in Request.h for an explanation of this class
-	//I've found that the BB API de-allocates Element memory in the ~MessageIterator() destructor.
-	//  I don't do that in the BEmu.  Maybe I'll do that in the future.  I consider it a low priority issue.
 	class Element
 	{
 		private:
-			//ElementPtr * _ptr;
 			boost::shared_ptr<ElementPtr> _ptr;
 
 		public:
-			//Element(ElementPtr * arg);
 			Element(boost::shared_ptr<ElementPtr> arg);
 
 			DLL_EXPORT Element();

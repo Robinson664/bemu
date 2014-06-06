@@ -20,16 +20,13 @@ namespace BEmu
 	namespace IntradayTickRequest
 	{
 		//makes copies of the arguments
-		IntradayTickElementDataParent::IntradayTickElementDataParent(std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >* ticks, bool includeConditionCodes) :
+		IntradayTickElementDataParent::IntradayTickElementDataParent(const std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >& ticks, bool includeConditionCodes) :
 			_array(new IntradayTickElementDataArray(ticks, includeConditionCodes))
 		{
-			//this->_array = new IntradayTickElementDataArray(ticks, includeConditionCodes); //deleted in destructor
 		}
 
 		IntradayTickElementDataParent::~IntradayTickElementDataParent()
 		{
-			//delete this->_array;
-			//this->_array = 0;
 		}
 
 		Name IntradayTickElementDataParent::name() const
@@ -45,7 +42,6 @@ namespace BEmu
 			return result;
 		}
 
-		//ElementPtr * IntradayTickElementDataParent::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> IntradayTickElementDataParent::getElement(const char* name) const
 		{
 			if(this->_array->name() == name)

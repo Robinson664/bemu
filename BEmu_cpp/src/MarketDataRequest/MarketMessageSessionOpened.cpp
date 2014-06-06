@@ -21,21 +21,5 @@ namespace BEmu
 		{
 			return "";
 		}
-
-		//std::stack<ElementPtr*> MarketMessageSessionOpened::getRootElements() const
-		std::stack< boost::shared_ptr<ElementPtr> > MarketMessageSessionOpened::getRootElements() const
-		{
-			std::stack< boost::shared_ptr<ElementPtr> > result;
-			return result;
-
-			//std::stack<ElementPtr*> result; //no contents
-			//return result;
-		}
-
-		void MarketMessageSessionOpened::markRootElementsDeleted()
-		{
-			//do nothing
-		}
-
 	}
 }

@@ -13,7 +13,8 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricRequestElementInt::HistoricRequestElementInt(const std::string& elementName, int value) : HistoricRequestElementString(elementName, ElementPtr::toString(value))
+		HistoricRequestElementInt::HistoricRequestElementInt(const std::string& elementName, int value) : 
+			HistoricRequestElementString(elementName, value)
 		{
 			this->_ivalue = value;
 		}

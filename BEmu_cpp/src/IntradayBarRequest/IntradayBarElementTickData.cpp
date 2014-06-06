@@ -32,45 +32,10 @@ namespace BEmu
 			_volume(new IntradayBarElementLong("volume", arg.getVolume())),
 			_numEvents(new IntradayBarElementInt("numEvents", arg.getNumevents()))
 		{
-			////all deleted in destructor
-
-			//Datetime dtTime = arg.getDatetime();
-			//this->_time = new IntradayBarElementDateTime("time", dtTime);
-			//
-			//this->_open = new IntradayBarElementDouble("open", arg.getOpen());
-			//this->_high = new IntradayBarElementDouble("high", arg.getHigh());
-			//this->_low = new IntradayBarElementDouble("low", arg.getLow());
-			//this->_close = new IntradayBarElementDouble("close", arg.getClose());
-			//this->_value = new IntradayBarElementDouble("value", arg.getValue());
-			//this->_volume = new IntradayBarElementLong("volume", arg.getVolume());
-			//this->_numEvents = new IntradayBarElementInt("numEvents", arg.getNumevents());
 		}
 
 		IntradayBarElementTickData::~IntradayBarElementTickData()
 		{
-			//delete this->_time;
-			//this->_time = 0;
-			//
-			//delete this->_open;
-			//this->_open = 0;
-			//
-			//delete this->_high;
-			//this->_high = 0;
-			//
-			//delete this->_low;
-			//this->_low = 0;
-			//
-			//delete this->_close;
-			//this->_close = 0;
-			//
-			//delete this->_value;
-			//this->_value = 0;
-			//
-			//delete this->_volume;
-			//this->_volume = 0;
-			//
-			//delete this->_numEvents;
-			//this->_numEvents = 0;
 		}
 
 		Name IntradayBarElementTickData::name() const
@@ -106,7 +71,6 @@ namespace BEmu
 			return true;
 		}
 
-		//ElementPtr * IntradayBarElementTickData::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> IntradayBarElementTickData::getElement(const char* name) const
 		{
 			if(strncmp(name, "time", 5) == 0)

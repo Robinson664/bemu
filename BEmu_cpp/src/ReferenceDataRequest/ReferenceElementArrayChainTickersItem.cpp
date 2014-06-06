@@ -17,7 +17,8 @@ namespace BEmu
 {
 	namespace ReferenceDataRequest
 	{
-		ReferenceElementArrayChainTickersItem::ReferenceElementArrayChainTickersItem(std::string ticker, Datetime dtExp, ReferenceDataRequest::OptionalityEnum::EnumType optionality, int strike)
+		ReferenceElementArrayChainTickersItem::ReferenceElementArrayChainTickersItem
+			(const std::string& ticker, const Datetime& dtExp, ReferenceDataRequest::OptionalityEnum::EnumType optionality, int strike)
 		{
 			std::stringstream ss;
 			ss << ticker << " US ";
@@ -28,14 +29,11 @@ namespace BEmu
 
 			ss << strike;
 			
-			//this->_element = new ReferenceElementString("Ticker", ss.str()); //deleted in destructor
 			this->_element = boost::shared_ptr<ReferenceElementString>(new ReferenceElementString("Ticker", ss.str()));
 		}
 
 		ReferenceElementArrayChainTickersItem::~ReferenceElementArrayChainTickersItem()
 		{
-			//delete this->_element;
-			//this->_element = 0;
 		}		
 
 		Name ReferenceElementArrayChainTickersItem::name() const { return Name("Ticker"); }
@@ -58,7 +56,6 @@ namespace BEmu
 			return this->getElement(name)->getValueAsString(0);
 		}
 
-		//ElementPtr * ReferenceElementArrayChainTickersItem::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> ReferenceElementArrayChainTickersItem::getElement(const char* name) const
 		{
 			if(strncmp(name, "Ticker", 7) == 0)

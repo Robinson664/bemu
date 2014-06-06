@@ -23,7 +23,6 @@ namespace BEmu
 		class MarketMessageSubscriptionData : public MessagePtr
 		{
 			private:
-				//std::map<std::string, ElementPtr*> _fields;
 				std::map<std::string, boost::shared_ptr<ElementPtr> > _fields;
 
 				std::string _security;
@@ -32,17 +31,11 @@ namespace BEmu
 				MarketMessageSubscriptionData(const Subscription& sub, const std::map<std::string, ObjectType>& fields);
 				~MarketMessageSubscriptionData();
 
-				//virtual std::stack<ElementPtr*> getRootElements() const;
-				virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const;
-
-				virtual void markRootElementsDeleted();
-
 				virtual const char* topicName() const;
 				virtual size_t numElements() const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

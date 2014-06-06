@@ -13,28 +13,21 @@ namespace BEmu
 {
 	CanConvertToStringType::CanConvertToStringType(double arg)
 	{
-		//this->_ss << arg;
-		//this->_valueAsString = this->_ss.str();
 		this->ResetStringConversion(arg);
 	}
 	
 	CanConvertToStringType::CanConvertToStringType(int arg)
 	{
-		//this->_ss << arg;
-		//this->_valueAsString = this->_ss.str();
 		this->ResetStringConversion(arg);
 	}
 	
 	CanConvertToStringType::CanConvertToStringType(const std::string& arg)
 	{
-		//this->_valueAsString = arg;
 		this->ResetStringConversion(arg);
 	}
 
 	CanConvertToStringType::CanConvertToStringType(const Datetime& arg)
 	{
-		//this->_ss << arg;
-		//this->_valueAsString = this->_ss.str();
 		this->ResetStringConversion(arg);
 	}
 

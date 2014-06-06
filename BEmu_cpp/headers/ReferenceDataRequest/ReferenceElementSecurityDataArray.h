@@ -23,11 +23,10 @@ namespace BEmu
 		class ReferenceElementSecurityDataArray : public ElementPtr
 		{
 			private:
-				//std::vector<ElementPtr*> _securities;
 				std::vector< boost::shared_ptr<ElementPtr> > _securities;
 
 			public:
-				ReferenceElementSecurityDataArray(const std::map<std::string, std::map<std::string, ObjectType>*>& securities);
+				ReferenceElementSecurityDataArray(const std::map<std::string, std::map<std::string, ObjectType>>& securities);
 				ReferenceElementSecurityDataArray(const ReferenceElementSecurityDataArray& arg);
 				~ReferenceElementSecurityDataArray();
 
@@ -36,12 +35,10 @@ namespace BEmu
 				virtual size_t numElements() const;
 				virtual SchemaElementDefinition elementDefinition() const;
 
-				//virtual ElementPtr * getValueAsElement(int index) const;
 				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 				
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

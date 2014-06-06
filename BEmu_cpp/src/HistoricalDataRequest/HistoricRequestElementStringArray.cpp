@@ -22,6 +22,7 @@ namespace BEmu
 
 		HistoricRequestElementStringArray::~HistoricRequestElementStringArray()
 		{
+			this->_values.clear();
 		}
 
 

@@ -22,23 +22,19 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketEvent::MarketEvent(Event::EventType evtType, const CorrelationId& corr, const SubscriptionList& subs) : EventPtr(boost::shared_ptr<RequestPtr>())
-			//(0)
+		MarketEvent::MarketEvent(Event::EventType evtType, const CorrelationId& corr, const SubscriptionList& subs) : 
+			EventPtr(boost::shared_ptr<RequestPtr>())
 		{
-			//this->_messages = new std::vector<MessagePtr*>(); //deleted in destructor
-			this->_messages = new std::vector< boost::shared_ptr<MessagePtr> >();
-
 			switch(evtType)
 			{
 				case Event::SESSION_STATUS:
 				{
 					this->_type = evtType;
 					
-					//MarketMessageSessionOpened * msgSessionOpened = new MarketMessageSessionOpened(); //deleted in destructor
 					boost::shared_ptr<MarketMessageSessionOpened> msgSessionOpenedP(new MarketMessageSessionOpened());
 					boost::shared_ptr<MessagePtr> msgSessionOpened(boost::dynamic_pointer_cast<MessagePtr>(msgSessionOpenedP));
 
-					this->_messages->push_back(msgSessionOpened);
+					this->_messages.push_back(msgSessionOpened);
 					break;
 				}
 
@@ -46,37 +42,34 @@ namespace BEmu
 				{
 					this->_type = evtType;
 
-					//MarketMessageServiceStatus * msgServiceStatus = new MarketMessageServiceStatus(corr); //deleted in destructor
 					boost::shared_ptr<MarketMessageServiceStatus> msgServiceStatusP(new MarketMessageServiceStatus(corr));
 					boost::shared_ptr<MessagePtr> msgServiceStatus(boost::dynamic_pointer_cast<MessagePtr>(msgServiceStatusP));
 
-					this->_messages->push_back(msgServiceStatus);
+					this->_messages.push_back(msgServiceStatus);
 					break;
 				}
 
 				case Event::SUBSCRIPTION_STATUS:
 				{
 					this->_type = evtType;
-					std::vector<Subscription> * list = subs.list();
-					for(std::vector<Subscription>::const_iterator iter = list->begin(); iter != list->end(); ++iter)
+					std::vector<Subscription> list = subs.list();
+					for(std::vector<Subscription>::const_iterator iter = list.begin(); iter != list.end(); ++iter)
 					{
 						Subscription sub = *iter;
 						bool securityError = Rules::IsSecurityError(sub.security());
 						if(securityError)
 						{
-							//MarketMessageSubscriptionFailure * msgError = new MarketMessageSubscriptionFailure(sub); //deleted in destructor
 							boost::shared_ptr<MarketMessageSubscriptionFailure> msgErrorP(new MarketMessageSubscriptionFailure(sub));
 							boost::shared_ptr<MessagePtr> msgError(boost::dynamic_pointer_cast<MessagePtr>(msgErrorP));
 
-							this->_messages->push_back(msgError);
+							this->_messages.push_back(msgError);
 						}
 						else
 						{
-							//MarketMessageSubscriptionStarted * msgSubStatus = new MarketMessageSubscriptionStarted(sub); //deleted in destructor
 							boost::shared_ptr<MarketMessageSubscriptionStarted> msgSubStatusP(new MarketMessageSubscriptionStarted(sub));
 							boost::shared_ptr<MessagePtr> msgSubStatus(boost::dynamic_pointer_cast<MessagePtr>(msgSubStatusP));
 
-							this->_messages->push_back(msgSubStatus);
+							this->_messages.push_back(msgSubStatus);
 						}
 					}
 					break;
@@ -85,17 +78,18 @@ namespace BEmu
 				case Event::SUBSCRIPTION_DATA:
 				{
 					this->_type = evtType;
-					for(std::vector<Subscription>::const_iterator iter = subs.list()->begin(); iter != subs.list()->end(); ++iter)
+					std::vector<Subscription> list(subs.list());
+
+					for(std::vector<Subscription>::const_iterator iter = list.begin(); iter != list.end(); ++iter)
 					{
 						Subscription sub = *iter;
 						bool securityError = Rules::IsSecurityError(sub.security());
 						if (!securityError)
 						{
-							//MarketMessageSubscriptionData * msgSubData = new MarketMessageSubscriptionData(sub, MarketEvent::generateFakeMessageData(sub)); //deleted in destructor
 							boost::shared_ptr<MarketMessageSubscriptionData> msgSubDataP(new MarketMessageSubscriptionData(sub, MarketEvent::generateFakeMessageData(sub)));
 							boost::shared_ptr<MessagePtr> msgSubData(boost::dynamic_pointer_cast<MessagePtr>(msgSubDataP));
 
-							this->_messages->push_back(msgSubData);
+							this->_messages.push_back(msgSubData);
 						}
 					}
 					break;
@@ -106,23 +100,19 @@ namespace BEmu
 			}
 		}
 
-		MarketEvent::MarketEvent(Event::EventType evtType, const Subscription& sub) : EventPtr(boost::shared_ptr<RequestPtr>())
-			//(0)
+		MarketEvent::MarketEvent(Event::EventType evtType, const Subscription& sub) : 
+			EventPtr(boost::shared_ptr<RequestPtr>())
 		{
-			//this->_messages = new std::vector<MessagePtr*>(); //deleted in destructor
-			this->_messages = new std::vector< boost::shared_ptr<MessagePtr> >();
-
 			switch(evtType)
 			{
 				case Event::SUBSCRIPTION_STATUS:
 				{
 					this->_type = evtType;
 					
-					//MarketMessageSubscriptionCanceled * msgCancel = new MarketMessageSubscriptionCanceled(sub); //deleted in destructor
 					boost::shared_ptr<MarketMessageSubscriptionCanceled> msgCancelMP(new MarketMessageSubscriptionCanceled(sub));
 					boost::shared_ptr<MessagePtr> msgCancelP(boost::dynamic_pointer_cast<MessagePtr>(msgCancelMP));
 
-					this->_messages->push_back(msgCancelMP);
+					this->_messages.push_back(msgCancelMP);
 				}
 				break;
 			}
@@ -130,22 +120,12 @@ namespace BEmu
 
 		MarketEvent::~MarketEvent()
 		{
-			//for(std::vector<MessagePtr*>::const_iterator iter = this->_messages->begin(); iter != this->_messages->end(); ++iter)
-			//{
-			//	MessagePtr* current = *iter;
-			//	delete current;
-			//}
-
-			this->_messages->clear();
-
-			delete this->_messages;
-			this->_messages = 0;
+			this->_messages.clear();
 		}
 
-		//std::vector<MessagePtr*> * MarketEvent::getMessages() const
 		std::vector< boost::shared_ptr<MessagePtr> > MarketEvent::getMessages() const
 		{
-			return *(this->_messages);
+			return this->_messages;
 		}
 
 		std::map<std::string, ObjectType> MarketEvent::generateFakeMessageData(const Subscription& sub)

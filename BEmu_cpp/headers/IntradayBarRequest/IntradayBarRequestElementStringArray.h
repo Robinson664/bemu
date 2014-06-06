@@ -21,7 +21,7 @@ namespace BEmu
 		class IntradayBarRequestElementStringArray : public ElementPtr
 		{
 			private:
-				std::vector<std::string*> _values;
+				std::vector<std::string> _values;
 				std::string _name;
 				
 				bool isEventTypeAllowed(const std::string& value);
@@ -31,7 +31,7 @@ namespace BEmu
 				~IntradayBarRequestElementStringArray();
 				
 				void addValue(const std::string& value);
-				std::vector<std::string*> values();
+				std::vector<std::string> values();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

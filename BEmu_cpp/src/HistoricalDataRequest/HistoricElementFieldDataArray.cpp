@@ -18,14 +18,12 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricElementFieldDataArray::HistoricElementFieldDataArray(const std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData)
+		HistoricElementFieldDataArray::HistoricElementFieldDataArray(const std::map<Datetime, std::map<std::string, ObjectType>>& fieldData)
 		{
-			for(std::map<Datetime, std::map<std::string, ObjectType>*>::const_iterator iter = fieldData->begin(); iter != fieldData->end(); ++iter)
+			for(std::map<Datetime, std::map<std::string, ObjectType>>::const_iterator iter = fieldData.begin(); iter != fieldData.end(); ++iter)
 			{
-				const std::map<std::string, ObjectType> * mm = iter->second;
-
-				//HistoricElementFieldData * elmFieldData = new HistoricElementFieldData(iter->first, *mm); //deleted in destructor
-				boost::shared_ptr<HistoricElementFieldData> elmFieldDataP(new HistoricElementFieldData(iter->first, *mm));
+				std::map<std::string, ObjectType> mm(iter->second);
+				boost::shared_ptr<HistoricElementFieldData> elmFieldDataP(new HistoricElementFieldData(iter->first, mm));
 
 				this->_fieldData.push_back(elmFieldDataP);
 			}
@@ -33,17 +31,10 @@ namespace BEmu
 
 		HistoricElementFieldDataArray::~HistoricElementFieldDataArray()
 		{
-			//for(std::vector<HistoricElementFieldData*>::const_iterator iter = this->_fieldData.begin(); iter != this->_fieldData.end(); ++iter)
-			//{
-			//	HistoricElementFieldData * elm = *iter;
-			//	delete elm;
-			//}
-
 			this->_fieldData.clear();
 		}
 
 
-		//ElementPtr * HistoricElementFieldDataArray::getValueAsElement(int index) const
 		boost::shared_ptr<ElementPtr> HistoricElementFieldDataArray::getValueAsElement(int index) const
 		{
 			return boost::dynamic_pointer_cast<ElementPtr>(this->_fieldData.at(index));
@@ -95,7 +86,6 @@ namespace BEmu
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 
 			stream << tabs << "fieldData[] = {" << std::endl;
-			//for(std::vector<HistoricElementFieldData*>::const_iterator iter = this->_fieldData.begin(); iter != this->_fieldData.end(); ++iter)
 			for(std::vector< boost::shared_ptr<HistoricElementFieldData> >::const_iterator iter = this->_fieldData.begin(); iter != this->_fieldData.end(); ++iter)
 			{
 				boost::shared_ptr<HistoricElementFieldData> elm = *iter;

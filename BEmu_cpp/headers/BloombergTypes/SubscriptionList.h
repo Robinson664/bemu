@@ -19,7 +19,7 @@ namespace BEmu
 	class SubscriptionList
 	{
 		private:
-			std::vector<Subscription> * _subs;
+			std::vector<Subscription> _subs;
 
 		public:
 			DLL_EXPORT SubscriptionList();
@@ -34,15 +34,12 @@ namespace BEmu
 			DLL_EXPORT void clear();
 
 			DLL_EXPORT size_t size() const;
-			//int add(const char* topic);
-			//int add(const char* topic, const CorrelationId& correlationID);
-			//int add(const CorrelationId& correlationID);
 			DLL_EXPORT CorrelationId correlationIdAt(size_t index) const;
 			DLL_EXPORT const char* topicStringAt(size_t index) const;
 
 			void add(const Subscription& sub);
 			Subscription remove(const CorrelationId& corr);
 
-			std::vector<Subscription> * list() const;
+			std::vector<Subscription> list() const;
 	};
 }

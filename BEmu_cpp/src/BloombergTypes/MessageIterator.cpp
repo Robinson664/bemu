@@ -22,11 +22,9 @@ namespace BEmu
 		this->_position = -1;
 
 		boost::shared_ptr<EventPtr> evtP(evt.getEventPtr());
-		//EventPtr * evtPtr = evt.getEventPtr();
 
 		std::vector< boost::shared_ptr<MessagePtr> > list = evtP->getMessages();
 		
-		//for(std::vector<MessagePtr*>::const_iterator iter = list->begin(); iter != list->end(); ++iter)
 		for(std::vector< boost::shared_ptr<MessagePtr> >::const_iterator iter = list.begin(); iter != list.end(); ++iter)
 		{
 			boost::shared_ptr<MessagePtr> msg = *iter;
@@ -35,30 +33,8 @@ namespace BEmu
 		}
 	}
 
-	MessageIterator::~MessageIterator() //this should delete all Elements and Messages within it
+	MessageIterator::~MessageIterator()
 	{
-		////I can't put the Element deletion code in the MessagePtr destructor because that gets called before the MessageIterator destructor
-		////for(std::vector<MessagePtr*>::iterator iter = this->_listP.begin(); iter != this->_listP.end(); ++iter)
-		//for(std::vector< boost::shared_ptr<MessagePtr> >::iterator iter = this->_listP.begin(); iter != this->_listP.end(); ++iter)
-		//{
-		//	boost::shared_ptr<MessagePtr> msg = *iter;
-
-		//	//Delete all of the elements within the current Message.
-		//	std::stack<ElementPtr> rootElements = msg->getRootElements();
-
-		//	while(!rootElements.empty())
-		//	{
-		//		ElementPtr * root = rootElements.top();
-		//		rootElements.pop();
-
-		//		delete root;
-		//	}
-		//	msg->markRootElementsDeleted();
-
-		//	//delete msg;
-		//	//msg = 0;
-		//}
-
 		this->_listP.clear();
 	}
 

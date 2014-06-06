@@ -23,7 +23,7 @@ namespace BEmu
 				Datetime _datetime;
 
 			public:
-				MarketElementDatetime(const std::string& name, Datetime datetime);
+				MarketElementDatetime(const std::string& name, const Datetime& datetime);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

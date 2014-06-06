@@ -11,7 +11,6 @@
 
 #include "BloombergTypes/EventPtr.h"
 #include <vector>
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -24,21 +23,14 @@ namespace BEmu
 		class HistoricEvent : public EventPtr
 		{
 			private:
-				//std::vector<MessagePtr*> * _messages;
-				std::vector< boost::shared_ptr<MessagePtr> > * _messages;
-
-				//std::vector<MessagePtr*> * GenerateMessages() const;
-				std::vector< boost::shared_ptr<MessagePtr> > * GenerateMessages() const;
-				
-				//HistoricRequest * _internal;
+				std::vector< boost::shared_ptr<MessagePtr> > _messages;
+				std::vector< boost::shared_ptr<MessagePtr> > GenerateMessages() const;
 				boost::shared_ptr<HistoricRequest> _internalP;
 
 			public:
-				//HistoricEvent(HistoricRequest * request);
 				HistoricEvent(boost::shared_ptr<HistoricRequest> request);
 				~HistoricEvent();
 
-				//virtual std::vector<MessagePtr*> * getMessages() const;
 				virtual std::vector< boost::shared_ptr<MessagePtr> > getMessages() const;
 		};
 	}

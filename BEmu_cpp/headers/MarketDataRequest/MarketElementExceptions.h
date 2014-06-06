@@ -24,9 +24,6 @@ namespace BEmu
 				boost::shared_ptr<MarketElementString> _fieldId;
 				boost::shared_ptr<MarketElementReason> _reason;
 
-				//MarketElementString * _fieldId;
-				//MarketElementReason * _reason;
-
 			public:
 				MarketElementExceptions(const std::string& badField);
 				~MarketElementExceptions();
@@ -40,7 +37,6 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual const char* getElementAsString(const char* name) const;

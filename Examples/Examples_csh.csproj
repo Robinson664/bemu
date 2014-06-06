@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bloomberglp.Blpapi">
-      <HintPath>..\BEmu\Bloomberglp.Blpapi.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -59,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Ms-PL.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BEmu\BEmu_csh.csproj">
+      <Project>{0DD8974E-DA15-4131-8805-B44815053F61}</Project>
+      <Name>BEmu_csh</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

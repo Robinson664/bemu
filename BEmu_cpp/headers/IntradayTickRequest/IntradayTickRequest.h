@@ -34,13 +34,6 @@ namespace BEmu
 				boost::shared_ptr<IntradayTickRequestElementBool> _includeConditionCodes, _includeNonPlottableEvents, _includeExchangeCodes, _returnEids,
 					_includeBrokerCodes, _includeRpsCodes, _includeBicMicCodes;
 
-				//IntradayTickRequestElementString *_security;
-				//IntradayTickRequestElementStringArray *_eventTypes;
-				//IntradayTickRequestElementTime *_timeStart, *_timeEnd;
-				//
-				//IntradayTickRequestElementBool *_includeConditionCodes, *_includeNonPlottableEvents, *_includeExchangeCodes, *_returnEids,
-				//	*_includeBrokerCodes, *_includeRpsCodes, *_includeBicMicCodes;
-
 				Service _service;
 				
 				const Datetime getStartDate() const; //used only as a helper for getDates()
@@ -52,7 +45,7 @@ namespace BEmu
 				const Service getService();
 				std::vector<Datetime> getDates();
 				bool includeConditionCodes();
-				const std::string& security();
+				std::string security();
 				bool hasStartDate() const;
 				bool hasEndDate() const;
 

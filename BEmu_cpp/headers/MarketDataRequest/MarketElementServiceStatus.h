@@ -24,7 +24,8 @@ namespace BEmu
 				boost::shared_ptr<MarketElementString> _serviceName;
 
 			public:
-				MarketElementServiceStatus(MarketMessageServiceStatus * arg);
+				//MarketElementServiceStatus(MarketMessageServiceStatus * arg);
+				MarketElementServiceStatus(const MarketMessageServiceStatus& arg);
 
 				virtual Name name() const;
 				virtual size_t numValues() const;
@@ -34,7 +35,6 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				//virtual ElementPtr * getElement(int position) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(int position) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

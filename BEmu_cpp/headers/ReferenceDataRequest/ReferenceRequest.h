@@ -25,9 +25,6 @@ namespace BEmu
 				boost::shared_ptr<ReferenceRequestElementStringArray> _securities, _fields;
 				boost::shared_ptr<ReferenceRequestElementOverrideArray> _overrides;
 
-				//ReferenceRequestElementStringArray * _securities, * _fields;
-				//ReferenceRequestElementOverrideArray * _overrides;
-
 			public:
 				ReferenceRequest();
 				~ReferenceRequest();

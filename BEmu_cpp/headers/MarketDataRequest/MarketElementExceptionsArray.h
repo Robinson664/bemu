@@ -36,7 +36,6 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				//virtual ElementPtr * getValueAsElement(int index) const;
 				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

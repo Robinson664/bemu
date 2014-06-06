@@ -43,78 +43,6 @@ namespace BEmu
 		stream << tabs << this->name().string() << " = " << value << std::endl;
 	}
 
-	//this is probably a memory leak. Even if the caller deletes the const char *, what happens to the str pointer?
-	const char * ElementPtr::toCharPointer(std::string& arg)
-	{
-		char * result = new char[arg.length() + 1];
-		strncpy(result, arg.c_str(), arg.length() + 1);
-		
-		return result;
-	}
-
-	//this is probably a memory leak. Even if the caller deletes the const char *, what happens to the str pointer?
-	const char * ElementPtr::toCharPointer(const std::string& arg)
-	{
-		char * result = new char[arg.length() + 1];
-		strncpy(result, arg.c_str(), arg.length() + 1);
-		
-		return result;
-	}
-	
-	const char * ElementPtr::toCharPointer(std::stringstream& arg)
-	{
-		std::string * str = new std::string(arg.str());
-		const char * result = ElementPtr::toCharPointer(*str);
-		return result;
-	}
-
-	const char * ElementPtr::toCharPointer(int arg)
-	{
-		std::stringstream ss;
-		ss << arg;
-		const char * result = ElementPtr::toCharPointer(ss);
-		return result;
-	}
-
-	const char * ElementPtr::toCharPointer(double arg)
-	{
-		std::stringstream ss;
-		ss << arg;
-		const char * result = ElementPtr::toCharPointer(ss);
-		return result;
-	}
-
-	const char * ElementPtr::toCharPointer(const Datetime& arg)
-	{
-		std::stringstream ss;
-		ss << arg;
-		const char * result = ElementPtr::toCharPointer(ss);
-		return result;
-	}
-
-	std::string ElementPtr::toString(int arg)
-	{
-		std::stringstream ss;
-		ss << arg;
-		std::string result(ss.str());
-		return result;
-	}
-
-	std::string ElementPtr::toString(double arg, std::stringstream& ss)
-	{
-		ss << arg;
-		std::string result(ss.str());
-		return result;
-	}
-
-	std::string ElementPtr::toString(const Datetime& arg)
-	{
-		std::stringstream ss;
-		ss << arg;
-		std::string result(ss.str());
-		return result;
-	}
-
 	std::ostream& ElementPtr::print(std::ostream& stream, int level, int spacesPerLevel) const
 	{
 		throw elementPtrEx;
@@ -143,16 +71,10 @@ namespace BEmu
 	Datetime ElementPtr::getValueAsDatetime(int index) const { throw elementPtrEx; }
 	const char * ElementPtr::getValueAsString(int index) const { throw elementPtrEx; }
 	
-	//ElementPtr * ElementPtr::getValueAsElement(int index) const { throw elementPtrEx; }
 	boost::shared_ptr<ElementPtr> ElementPtr::getValueAsElement(int index) const { throw elementPtrEx; }
-
-	//ElementPtr * ElementPtr::getElement(int position) const { throw elementPtrEx; }
 	boost::shared_ptr<ElementPtr> ElementPtr::getElement(int position) const { throw elementPtrEx; }
-
-	//ElementPtr * ElementPtr::getElement(const char* name) const { throw elementPtrEx; }
 	boost::shared_ptr<ElementPtr> ElementPtr::getElement(const char* name) const { throw elementPtrEx; }
-	
-	//ElementPtr * ElementPtr::getElement(const Name& name) const
+
 	boost::shared_ptr<ElementPtr> ElementPtr::getElement(const Name& name) const
 	{
 		return this->getElement(name.string());
@@ -256,8 +178,6 @@ namespace BEmu
 	}
 
 
-
-	//ElementPtr * ElementPtr::appendElement()
 	boost::shared_ptr<ElementPtr> ElementPtr::appendElement()
 	{
 		throw elementPtrEx;

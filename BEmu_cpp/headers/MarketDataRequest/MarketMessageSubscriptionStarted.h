@@ -31,31 +31,20 @@ namespace BEmu
 				bool _isNull_exceptionsNull;
 				bool _isNull_exceptionsBadFields;
 
-				//MarketElementNull * _exceptionsNull;
-				//MarketElementExceptionsArray * _exceptionsBadFields;
-
 			public:
 				MarketMessageSubscriptionStarted(const Subscription& sub);
 				~MarketMessageSubscriptionStarted();
 
-				//virtual std::stack<ElementPtr*> getRootElements() const;
-				virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const;
-
-				virtual void markRootElementsDeleted();
-
-				//ElementPtr * firstElement() const;
 				boost::shared_ptr<ElementPtr> firstElement() const;
 
 				virtual size_t numElements() const;
 				
-				//virtual ElementPtr * asElement() const;
 				virtual boost::shared_ptr<ElementPtr> asElement() const;
 
 				virtual const char* topicName() const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;
 
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

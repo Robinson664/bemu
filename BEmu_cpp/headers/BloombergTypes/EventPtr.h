@@ -12,7 +12,6 @@
 #include "BloombergTypes/Event.h"
 #include <exception>
 #include <vector>
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -25,14 +24,12 @@ namespace BEmu
 
 	class EventPtr
 	{
-		protected:
-			//RequestPtr *_request;
+		protected: //can I make these private?
 			boost::shared_ptr<RequestPtr> _requestP;
 
 			Event::EventType _type;
 
 		public:
-			//EventPtr(RequestPtr * request);
 			EventPtr(boost::shared_ptr<RequestPtr> request);
 
 			EventPtr(const EventPtr &src);
@@ -41,10 +38,8 @@ namespace BEmu
 			Event::EventType getEventType() const;
 			void setEventType(Event::EventType evtType);
 
-			//virtual std::vector<MessagePtr*> * getMessages() const;
 			virtual std::vector< boost::shared_ptr<MessagePtr> > getMessages() const;
 			
-			//static EventPtr * EventFactory(RequestPtr *request, bool isLastRequest);
 			static boost::shared_ptr<EventPtr> EventFactory(boost::shared_ptr<RequestPtr> request, bool isLastRequest);
 
 			class EventPtrException: public std::exception

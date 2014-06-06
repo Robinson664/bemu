@@ -23,21 +23,14 @@ namespace BEmu
 		return "//blp/refdata";
 	}
 
-	//Request ServiceRefData::createRequest(const char* operation) const
-	//{
-	//	RequestPtr* reqP = this->createRequestPtr(operation);
-	//	Request result(reqP);
-	//	return result;
-	//}
-
-	Request ServiceRefData::createRequest2(const char* operation) const
+	Request ServiceRefData::createRequest(const char* operation) const
 	{
-		boost::shared_ptr<RequestPtr> reqp(this->createRequestPtr2(operation));
+		boost::shared_ptr<RequestPtr> reqp(this->createRequestPtr(operation));
 		Request result(reqp);
 		return result;
 	}
 
-	boost::shared_ptr<RequestPtr> ServiceRefData::createRequestPtr2(const char* operation) const
+	boost::shared_ptr<RequestPtr> ServiceRefData::createRequestPtr(const char* operation) const
 	{
 		if(strncmp(operation, "HistoricalDataRequest", 21) == 0)
 		{
@@ -57,34 +50,6 @@ namespace BEmu
 		else if(strncmp(operation, "IntradayBarRequest", 19) == 0)
 		{
 			boost::shared_ptr<RequestPtr> result(new IntradayBarRequest::IntradayBarRequest(*this));
-			return result;
-		}
-		else
-		{
-			throw serviceRefDataEx;
-		}
-	}
-
-	RequestPtr* ServiceRefData::createRequestPtr(const char* operation) const
-	{
-		if(strncmp(operation, "HistoricalDataRequest", 21) == 0)
-		{
-			HistoricalDataRequest::HistoricRequest * result = new HistoricalDataRequest::HistoricRequest();
-			return result;
-		}
-		else if(strncmp(operation, "ReferenceDataRequest", 21) == 0)
-		{
-			ReferenceDataRequest::ReferenceRequest * result = new ReferenceDataRequest::ReferenceRequest();
-			return result;
-		}
-		else if(strncmp(operation, "IntradayTickRequest", 20) == 0)
-		{
-			IntradayTickRequest::IntradayTickRequest * result = new IntradayTickRequest::IntradayTickRequest(*this);
-			return result;
-		}
-		else if(strncmp(operation, "IntradayBarRequest", 19) == 0)
-		{
-			IntradayBarRequest::IntradayBarRequest * result = new IntradayBarRequest::IntradayBarRequest(*this);
 			return result;
 		}
 		else

@@ -17,11 +17,13 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		IntradayTickRequestElementTime::IntradayTickRequestElementTime(const std::string& elementName) : IntradayTickRequestElementString(elementName, "")
+		IntradayTickRequestElementTime::IntradayTickRequestElementTime(const std::string& elementName) : 
+			IntradayTickRequestElementString(elementName, "")
 		{
 		}
 
-		IntradayTickRequestElementTime::IntradayTickRequestElementTime(const std::string& elementName, const Datetime& date) : IntradayTickRequestElementString(elementName, ElementPtr::toCharPointer(date))
+		IntradayTickRequestElementTime::IntradayTickRequestElementTime(const std::string& elementName, const Datetime& date) : 
+			IntradayTickRequestElementString(elementName, date)
 		{
 			this->_instance = date;
 		}

@@ -32,11 +32,6 @@ namespace BEmu
 		{
 			this->_includeConditionCodes = includeConditionCodes;
 
-			//this->_time = new IntradayTickElementDateTime("time", datetime);
-			//this->_type = new IntradayTickElementString("type", arg.item1());
-			//this->_value = new IntradayTickElementDouble("value", arg.item2());
-			//this->_size = new IntradayTickElementInt("size", arg.item3());
-
 			if(includeConditionCodes)
 				this->_conditionCodes = boost::shared_ptr<IntradayTickElementString>(new IntradayTickElementString("conditionCodes", "R6,IS"));
 			else
@@ -45,23 +40,6 @@ namespace BEmu
 
 		IntradayTickElementData::~IntradayTickElementData()
 		{
-			//delete this->_time;
-			//this->_time = 0;
-
-			//delete this->_type;
-			//this->_type = 0;
-
-			//delete this->_value;
-			//this->_value = 0;
-
-			//delete this->_size;
-			//this->_size = 0;
-
-			//if(this->_includeConditionCodes)
-			//{
-			//	delete this->_conditionCodes;
-			//	this->_conditionCodes = 0;
-			//}
 		}
 
 		Name IntradayTickElementData::name() const
@@ -87,54 +65,42 @@ namespace BEmu
 				(this->_includeConditionCodes && strncmp("conditionCodes", name, 15) == 0);
 		}
 
-		//ElementPtr * IntradayTickElementData::getElement(int position) const
 		boost::shared_ptr<ElementPtr> IntradayTickElementData::getElement(int position) const
 		{
 			switch(position)
 			{
 				case 0:
 					return boost::dynamic_pointer_cast<ElementPtr>(this->_time);
-					//result = this->_time;
 				case 1:
 					return boost::dynamic_pointer_cast<ElementPtr>(this->_type);
-					//result = this->_type;
 				case 2:
 					return boost::dynamic_pointer_cast<ElementPtr>(this->_value);
-					//result = this->_value;
 				case 3:
 					return boost::dynamic_pointer_cast<ElementPtr>(this->_size);
-					//result = this->_size;
 				case 4:
 					if(this->_includeConditionCodes)
 						return boost::dynamic_pointer_cast<ElementPtr>(this->_conditionCodes);
-						//result = this->_conditionCodes;
 			}
 
 			throw elementPtrEx;
 		}
 
-		//ElementPtr * IntradayTickElementData::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> IntradayTickElementData::getElement(const char* name) const
 		{
 			if(strncmp("time", name, 5) == 0)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_time);
-				//result = this->_time;
 
 			else if(strncmp("type", name, 5) == 0)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_type);
-				//result = this->_type;
 
 			else if(strncmp("value", name, 6) == 0)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_value);
-				//result = this->_value;
 
 			else if(strncmp("size", name, 5) == 0)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_size);
-				//result = this->_size;
 
 			else if(this->_includeConditionCodes && strncmp("conditionCodes", name, 15) == 0)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_conditionCodes);
-				//result = this->_conditionCodes;
 
 			throw elementPtrEx;
 		}

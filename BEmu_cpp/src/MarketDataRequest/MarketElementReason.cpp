@@ -20,8 +20,6 @@ namespace BEmu
 	{
 		MarketElementReason::MarketElementReason(ReasonType::ReasonTypeEnum reasonType)
 		{
-			//all deleted in destructor
-
 			if(reasonType == ReasonType::badSecurity)
 			{
 				std::string source = RandomDataGenerator::RandomString(5);
@@ -54,17 +52,6 @@ namespace BEmu
 
 		MarketElementReason::~MarketElementReason()
 		{
-			//delete this->_source;
-			//this->_source = 0;
-			//
-			//delete this->_errorCode;
-			//this->_errorCode = 0;
-			//
-			//delete this->_category;
-			//this->_category = 0;
-			//
-			//delete this->_description;
-			//this->_description = 0;
 		}
 
 		Name MarketElementReason::name() const
@@ -104,7 +91,6 @@ namespace BEmu
 			return true;
 		}
 
-		//ElementPtr * MarketElementReason::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> MarketElementReason::getElement(const char* name) const
 		{
 			if(strncmp(name, "source", 7) == 0)

@@ -21,30 +21,10 @@ namespace BEmu
 			_reason(new MarketElementSubscriptionCancelReason())
 		{
 			this->_topicName = sub.security();
-            //this->_reason = new MarketElementSubscriptionCancelReason(); //deleted in destructor
 		}
 
 		MarketMessageSubscriptionCanceled::~MarketMessageSubscriptionCanceled()
 		{
-			//delete this->_reason;
-			//this->_reason = 0;
-		}
-
-		//std::stack<ElementPtr*> MarketMessageSubscriptionCanceled::getRootElements() const
-		std::stack< boost::shared_ptr<ElementPtr> > MarketMessageSubscriptionCanceled::getRootElements() const
-		{
-			//std::stack<ElementPtr*> result;
-			std::stack< boost::shared_ptr<ElementPtr> > result;
-
-			//if(this->_reason != 0)
-			result.push( boost::dynamic_pointer_cast<ElementPtr>(this->_reason) );
-
-			return result;
-		}
-
-		void MarketMessageSubscriptionCanceled::markRootElementsDeleted()
-		{
-			//this->_reason = 0;
 		}
 
 		size_t MarketMessageSubscriptionCanceled::numElements() const
@@ -57,7 +37,6 @@ namespace BEmu
 			return this->ValueAsString().c_str();
 		}
 
-		//ElementPtr * MarketMessageSubscriptionCanceled::asElement() const
 		boost::shared_ptr<ElementPtr> MarketMessageSubscriptionCanceled::asElement() const
 		{
 			throw messageEx;

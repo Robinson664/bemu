@@ -21,13 +21,11 @@ namespace BEmu
 		class ReferenceElementArray : public ElementPtr
 		{
 			protected:
-				//std::vector<ElementPtr*> _values;
 				std::vector< boost::shared_ptr<ElementPtr> > _values;
 
 				std::string _name;
 
 			public:
-				//ReferenceElementArray(const std::string& name, const std::vector< ElementPtr* >& elements);
 				ReferenceElementArray(const std::string& name, const std::vector< boost::shared_ptr<ElementPtr> >& elements);
 
 				virtual ~ReferenceElementArray();
@@ -40,7 +38,6 @@ namespace BEmu
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 
-				//virtual ElementPtr * getValueAsElement(int index) const;
 				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

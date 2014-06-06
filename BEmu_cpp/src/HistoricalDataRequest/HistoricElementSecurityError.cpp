@@ -29,44 +29,19 @@ namespace BEmu
 			std::string sourceGibberish = RandomDataGenerator::RandomString(5);
 			std::transform(sourceGibberish.begin(), sourceGibberish.end(), sourceGibberish.begin(), ::tolower);
 
-			//all deleted in destructor
-
 			//source
 			std::stringstream sourceValue;
 			sourceValue << nid << "::" << sourceGibberish.substr(0, sourceGibberish.length() - 2) << RandomDataGenerator::RandomInt(99);
 			this->_source = boost::shared_ptr<HistoricElementString>(new HistoricElementString("source", sourceValue.str()));
 
-			//code
-			//this->_code = new HistoricElementInt("code", RandomDataGenerator::RandomInt(99));
-
-			//category
-			//this->_category = new HistoricElementString("category", "BAD_SEC");
-
 			//message
 			std::stringstream messageValue;
 			messageValue << "Unknown/Invalid security [nid:" << nid << "]";
 			this->_message = boost::shared_ptr<HistoricElementString>(new HistoricElementString("message", messageValue.str()));
-
-			//sub-category
-			//this->_subCategory = new HistoricElementString("subcategory", "INVALID_SECURITY");
 		}
 
 		HistoricElementSecurityError::~HistoricElementSecurityError()
 		{
-			//delete this->_source;
-			//this->_source = 0;
-			//
-			//delete this->_code;
-			//this->_code = 0;
-			//
-			//delete this->_category;
-			//this->_category = 0;
-			//
-			//delete this->_message;
-			//this->_message = 0;
-			//
-			//delete this->_subCategory;
-			//this->_subCategory = 0;
 		}
 
 
@@ -110,7 +85,6 @@ namespace BEmu
 		}
 
 
-		//ElementPtr * HistoricElementSecurityError::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> HistoricElementSecurityError::getElement(const char* name) const
 		{
 			if(strncmp(name, "source", 7) == 0)

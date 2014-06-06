@@ -17,22 +17,18 @@
 
 namespace BEmu
 {
-	Message::Message()
-		: _ptr()
+	Message::Message() : _ptr()
 	{
-		//this->_ptr = 0;
 	}
 
 	Message::Message(boost::shared_ptr<MessagePtr> ptr)
 		: _ptr(ptr)
 	{
-		//this->_ptr = ptr;
 	}
 
 	Message::Message(const Message& arg)
 		: _ptr(arg._ptr)
 	{
-		//this->_ptr = arg._ptr;
 	}
 
 	Message& Message::operator=(const Message &rhs)
@@ -68,20 +64,12 @@ namespace BEmu
 	{
 		boost::shared_ptr<ElementPtr> elmP(this->_ptr->asElement());
 		return Element(elmP);
-
-		//ElementPtr * elementP = this->_ptr->asElement();
-		//Element result(elementP);
-		//return result;
 	}
 
 	const Element Message::getElement(const char* name) const
 	{
 		boost::shared_ptr<ElementPtr> elmP(this->_ptr->getElement(name));
 		return Element(elmP);
-
-		//ElementPtr * elementP = this->_ptr->getElement(name);
-		//Element result(elementP);
-		//return result;
 	}
 	const Element Message::getElement(const Name& name) const
 	{

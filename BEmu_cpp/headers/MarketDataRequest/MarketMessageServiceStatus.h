@@ -21,26 +21,17 @@ namespace BEmu
 		{
 			private:
 				boost::shared_ptr<MarketElementString> _serviceName;
-				//MarketElementString * _serviceName;
-
 				MarketMessageServiceStatus(const MarketMessageServiceStatus& arg);
 
 			public:
 				MarketMessageServiceStatus(const CorrelationId& corr);
 				~MarketMessageServiceStatus();
 
-				//virtual std::stack<ElementPtr*> getRootElements() const;
-				virtual std::stack< boost::shared_ptr<ElementPtr> > getRootElements() const;
-
-				virtual void markRootElementsDeleted();
-
-				//ElementPtr * firstElement() const;
 				boost::shared_ptr<ElementPtr> firstElement() const;
 
 				virtual size_t numElements() const;
 				virtual const char* topicName() const;
 
-				//virtual ElementPtr * asElement() const;
 				virtual boost::shared_ptr<ElementPtr> asElement() const;
 
 				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;

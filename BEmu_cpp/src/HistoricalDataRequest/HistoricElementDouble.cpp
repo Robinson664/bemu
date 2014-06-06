@@ -66,8 +66,6 @@ namespace BEmu
 		{
 			if(index == 0)
 			{
-				/*const char * result = this->_valueAsString.c_str();
-				return result;*/
 				return this->ValueAsString().c_str();
 			}
 			else

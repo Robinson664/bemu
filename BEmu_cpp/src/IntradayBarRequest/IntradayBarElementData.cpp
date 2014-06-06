@@ -18,20 +18,13 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarElementData::IntradayBarElementData(std::vector< boost::shared_ptr<IntradayBarTickDataType> > bars) :
+		IntradayBarElementData::IntradayBarElementData(const std::vector< boost::shared_ptr<IntradayBarTickDataType> >& bars) :
 			_array(new IntradayBarElementTickDataArray(bars))
 		{
-			////std::vector< boost::shared_ptr<IntradayBarElementTickData> > bars2 = bars;
-
-			//this->_array = boost::shared_ptr<IntradayBarElementTickDataArray>( new IntradayBarElementTickDataArray(bars) );
-
-			////this->_array = new IntradayBarElementTickDataArray(bars); //deleted in destructor
 		}
 
 		IntradayBarElementData::~IntradayBarElementData()
 		{
-			//delete this->_array;
-			//this->_array = 0;
 		}
 
 		Name IntradayBarElementData::name() const
@@ -67,7 +60,6 @@ namespace BEmu
 			return true;
 		}
 
-		//ElementPtr * IntradayBarElementData::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> IntradayBarElementData::getElement(const char* name) const
 		{
 			int length = strlen(name);

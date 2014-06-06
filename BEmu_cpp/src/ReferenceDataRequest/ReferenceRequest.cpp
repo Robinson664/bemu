@@ -20,24 +20,12 @@ namespace BEmu
 			_securities(new ReferenceRequestElementStringArray("securities")),
 			_fields(new ReferenceRequestElementStringArray("fields")),
 			_overrides(new ReferenceRequestElementOverrideArray())
-		{
-            //this->_securities = new ReferenceRequestElementStringArray("securities"); //deleted in destructor
-            //this->_fields = new ReferenceRequestElementStringArray("fields"); //deleted in destructor
-            //this->_overrides = new ReferenceRequestElementOverrideArray(); //deleted in destructor
-			
+		{			
 			this->_requestType = RequestPtr::reference;
 		}
 
 		ReferenceRequest::~ReferenceRequest()
 		{
-			//delete this->_securities;
-			//this->_securities = 0;
-			//
-			//delete this->_fields;
-			//this->_fields = 0;
-			//
-			//delete this->_overrides;
-			//this->_overrides = 0;
 		}
 
 		std::vector<std::string> ReferenceRequest::getSecurities() const

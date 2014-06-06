@@ -42,12 +42,6 @@ namespace BEmu
 				bool _isNull_intervalInMinutes;
 				bool _isNull_gapFillInitialBar, _isNull_returnEids, _isNull_adjustmentNormalElement, _isNull_adjustmentAbnormalElement, _isNull_adjustmentSplitElement, _isNull_adjustmentFollowDPDF;
 
-				//IntradayBarRequestElementString * _security;
-				//IntradayBarRequestElementStringArray * _eventTypes;
-				//IntradayBarRequestElementTime * _dtStart, * _dtEnd;
-				//IntradayBarRequestElementInt * _intervalInMinutes;
-				//IntradayBarRequestElementBool * _gapFillInitialBar, * _returnEids, * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement, * _adjustmentFollowDPDF;
-
 			public:
 				IntradayBarRequest(const Service& svc);
 				~IntradayBarRequest();

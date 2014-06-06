@@ -21,17 +21,10 @@ namespace BEmu
 			_fieldId(new MarketElementString("fieldId", badField)),
 			_reason(new MarketElementReason(MarketDataRequest::ReasonType::badField))
 		{
-            //this->_fieldId = new MarketElementString("fieldId", badField); //deleted in destructor
-            //this->_reason = new MarketElementReason(MarketDataRequest::ReasonType::badField); //deleted in destructor
 		}
 
 		MarketElementExceptions::~MarketElementExceptions()
 		{
-			//delete this->_fieldId;
-			//this->_fieldId = 0;
-
-			//delete this->_reason;
-			//this->_reason = 0;
 		}
 
 		Name MarketElementExceptions::name() const
@@ -71,7 +64,6 @@ namespace BEmu
 			return true;
 		}
 
-		//ElementPtr * MarketElementExceptions::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> MarketElementExceptions::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldId", 8) == 0)

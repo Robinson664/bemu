@@ -20,8 +20,6 @@ namespace BEmu
 		: _chainTickers(boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers>())
 	{
 		this->_otype = eNothing;
-
-		//this->_chainTickers = 0;
 	}
 
 	ObjectType::ObjectType(double arg)
@@ -29,8 +27,6 @@ namespace BEmu
 	{
 		this->_dbl = arg;
 		this->_otype = eDouble;
-		
-		//this->_chainTickers = 0;
 	}
 
 	ObjectType::ObjectType(int arg)
@@ -38,8 +34,6 @@ namespace BEmu
 	{
 		this->_int = arg;
 		this->_otype = eInt;
-		
-		//this->_chainTickers = 0;
 	}
 
 	ObjectType::ObjectType(bool arg)
@@ -47,8 +41,6 @@ namespace BEmu
 	{
 		this->_bool = arg;
 		this->_otype = eBool;
-		
-		//this->_chainTickers = 0;
 	}
 
 	ObjectType::ObjectType(const std::string& arg)
@@ -56,8 +48,6 @@ namespace BEmu
 	{
 		this->_str = arg;
 		this->_otype = eString;
-		
-		//this->_chainTickers = 0;
 	}
 
 	ObjectType::ObjectType(const char * arg)
@@ -65,8 +55,6 @@ namespace BEmu
 	{
 		this->_str = std::string(arg);
 		this->_otype = eString;
-		
-		//this->_chainTickers = 0;
 	}
 
 	ObjectType::ObjectType(const Datetime& arg)
@@ -74,33 +62,16 @@ namespace BEmu
 	{
 		this->_datetime = arg;
 		this->_otype = eDatetime;
-
-		//this->_chainTickers = 0;
 	}
 
 	ObjectType::ObjectType(boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> arg)
 		: _chainTickers(arg)
 	{
-		//this->_chainTickers = arg;
 		this->_otype = eChainTickers;
 	}
 
 	ObjectType::~ObjectType()
 	{
-		//if(this->_otype == eChainTickers)
-		//{
-		//	this->deleteMemory();
-		//}
-	}
-
-	void ObjectType::deleteMemory()
-	{
-		//if(this->_chainTickers != 0)
-		//{
-		//	//TODO: this could be a problem if more than one ObjectType points to the same _chainTickers
-		//	delete this->_chainTickers;
-		//	this->_chainTickers = 0;
-		//}
 	}
 
 	bool ObjectType::IsNull() const
@@ -120,7 +91,6 @@ namespace BEmu
 			this->_str = rhs._str;
 
 			this->_chainTickers = rhs._chainTickers;
-			//this->_chainTickers.reset<ReferenceDataRequest::ReferenceElementArrayChainTickers>(rhs._chainTickers);
 		}
 		return *this;
 	}
@@ -134,7 +104,6 @@ namespace BEmu
 		this->_int = arg._int;
 		this->_otype = arg._otype;
 		this->_str = arg._str;
-		//this->_chainTickers = arg._chainTickers;
 	}
 
 	ObjectType::ObjectTypeEnum ObjectType::GetType() const
@@ -172,19 +141,11 @@ namespace BEmu
 		return this->_otype == eDatetime;
 	}
 
-	bool ObjectType::TryGetChainTickers(boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> arg) const
+	bool ObjectType::TryGetChainTickers(boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers>& arg) const
 	{
-		arg = this->_chainTickers;
-		//arg.reset<ReferenceDataRequest::ReferenceElementArrayChainTickers>(this->_chainTickers);
-
+		arg = boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers>(this->_chainTickers);
 		return this->_otype == eChainTickers;
 	}
-
-	//bool ObjectType::TryGetChainTickers(ReferenceDataRequest::ReferenceElementArrayChainTickers * arg) const
-	//{
-	//	arg = this->_chainTickers;
-	//	return this->_otype == eChainTickers;
-	//}
 
 
 	double ObjectType::ValueAsDouble() const
@@ -216,12 +177,6 @@ namespace BEmu
 	{
 		return this->_chainTickers;
 	}
-
-	//ReferenceDataRequest::ReferenceElementArrayChainTickers * ObjectType::ValueAsChainTickers() const
-	//{
-	//	return this->_chainTickers;
-	//}
-
 
 	std::string ObjectType::ToString() const
 	{

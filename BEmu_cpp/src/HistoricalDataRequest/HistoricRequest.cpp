@@ -38,20 +38,6 @@ namespace BEmu
 			this->_isNull_overrideOptionsElement = true;
 			this->_isNull_pricingOptionElement = true;
 
-			//this->_dtStart = 0;
-			//this->_dtEnd = 0;
-			//this->_adjustmentNormalElement = 0;
-			//this->_adjustmentAbnormalElement = 0;
-			//this->_adjustmentSplitElement = 0;
-			//this->_maxDataPointElement = 0;
-			//this->_periodicityAdjustmentElement = 0;
-			//this->_periodicityElement = 0;
-			//this->_overrideOptionsElement = 0;
-			//this->_pricingOptionElement = 0;
-
-            //this->_securities = new HistoricRequestElementStringArray("securities"); //deleted in destructor
-            //this->_fields = new HistoricRequestElementStringArray("fields"); //deleted in destructor
-
 			this->_periodicityAdjustment = HistDataPeriodicityAdjustmentEnum::actual;
 			this->_periodicity = HistDataPeriodicityEnum::daily;
 			this->_pricingOption = PricingOptionEnum::price;
@@ -62,53 +48,6 @@ namespace BEmu
 
 		HistoricRequest::~HistoricRequest()
 		{
-			//if(this->_dtStart != 0)
-			//{
-			//	delete this->_dtStart;
-			//	this->_dtStart = 0;
-			//}
-
-			//if(this->_dtEnd != 0)
-			//{
-			//	delete this->_dtEnd;
-			//	this->_dtEnd = 0;
-			//}
-
-			//if(this->_securities != 0)
-			//{
-			//	delete this->_securities;
-			//	this->_securities = 0;
-			//}
-
-			//if(this->_fields != 0)
-			//{
-			//	delete this->_fields;
-			//	this->_fields = 0;
-			//}
-
-			//if(this->_adjustmentNormalElement != 0)
-			//{
-			//	delete this->_adjustmentNormalElement;
-			//	this->_adjustmentNormalElement = 0;
-			//}
-
-			//if(this->_adjustmentAbnormalElement != 0)
-			//{
-			//	delete this->_adjustmentAbnormalElement;
-			//	this->_adjustmentAbnormalElement = 0;
-			//}
-
-			//if(this->_adjustmentSplitElement != 0)
-			//{
-			//	delete this->_adjustmentSplitElement;
-			//	this->_adjustmentSplitElement = 0;
-			//}
-
-			//if(this->_maxDataPointElement != 0)
-			//{
-			//	delete this->_maxDataPointElement;
-			//	this->_maxDataPointElement = 0;
-			//}
 		}
 
 
@@ -125,13 +64,11 @@ namespace BEmu
 		bool HistoricRequest::hasStartDate() const
 		{
 			return !this->_isNull_dtStart;
-			//return this->_dtStart != 0;
 		}
 
 		bool HistoricRequest::hasEndDate() const
 		{
 			return !this->_isNull_dtEnd;
-			//return this->_dtEnd != 0;
 		}
 
 		Datetime HistoricRequest::dtStart() const
@@ -149,7 +86,6 @@ namespace BEmu
 		{
 			std::vector<Datetime> dates = this->getDatesBeforeMaxPoints();
 
-			//if(this->_maxDataPointElement == 0)
 			if(this->_isNull_maxDataPointElement)
 				return dates;
 			else
@@ -267,11 +203,6 @@ namespace BEmu
 				Datetime dt;
 				if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(value, dt))
 				{
-					//if(this->_dtStart != 0)
-					//	delete this->_dtStart;
-
-					//this->_dtStart = new HistoricRequestElementDate("startDate", dt); //deleted in destructor
-
 					this->_dtStart = boost::shared_ptr<HistoricRequestElementDate>(new HistoricRequestElementDate("startDate", dt));
 					this->_isNull_dtStart = false;
 				}
@@ -283,11 +214,6 @@ namespace BEmu
 				Datetime dt;
 				if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(value, dt))
 				{
-					//if(this->_dtEnd != 0)
-					//	delete this->_dtEnd;
-
-					//this->_dtEnd = new HistoricRequestElementDate("endDate", dt); //deleted in destructor
-
 					this->_dtEnd = boost::shared_ptr<HistoricRequestElementDate>(new HistoricRequestElementDate("endDate", dt));
 					this->_isNull_dtEnd = false;
 				}
@@ -374,33 +300,18 @@ namespace BEmu
 		{
 			if(strncmp(name, "adjustmentNormal", 17) == 0)
 			{
-				//if(this->_adjustmentNormalElement != 0)
-				//	delete this->_adjustmentNormalElement;
-
-				//this->_adjustmentNormalElement = new HistoricRequestElementBool("adjustmentNormal", value); //deleted in destructor
-
 				this->_adjustmentNormalElement = boost::shared_ptr<HistoricRequestElementBool>(new HistoricRequestElementBool("adjustmentNormal", value));
 				this->_isNull_adjustmentNormalElement = false;
 			}
 
 			else if(strncmp(name, "adjustmentAbnormal", 19) == 0)
 			{
-				//if(this->_adjustmentAbnormalElement != 0)
-				//	delete this->_adjustmentAbnormalElement;
-
-				//this->_adjustmentAbnormalElement = new HistoricRequestElementBool("adjustmentAbnormal", value); //deleted in destructor
-
 				this->_adjustmentAbnormalElement = boost::shared_ptr<HistoricRequestElementBool>(new HistoricRequestElementBool("adjustmentAbnormal", value));
 				this->_isNull_adjustmentAbnormalElement = false;
 			}
 			
 			else if(strncmp(name, "adjustmentSplit", 16) == 0)
 			{
-				//if(this->_adjustmentSplitElement != 0)
-				//	delete this->_adjustmentSplitElement;
-
-				//this->_adjustmentSplitElement = new HistoricRequestElementBool("adjustmentSplit", value); //deleted in destructor
-
 				this->_adjustmentSplitElement = boost::shared_ptr<HistoricRequestElementBool>(new HistoricRequestElementBool("adjustmentSplit", value));
 				this->_isNull_adjustmentSplitElement = false;
 			}
@@ -413,11 +324,6 @@ namespace BEmu
 		{
 			if(strncmp(name, "maxDataPoints", 14) == 0)
 			{
-				//if(this->_maxDataPointElement != 0)
-				//	delete this->_maxDataPointElement;
-
-				//this->_maxDataPointElement = new HistoricRequestElementInt("maxDataPoints", value); //deleted in destructor
-
 				this->_maxDataPointElement = boost::shared_ptr<HistoricRequestElementInt>(new HistoricRequestElementInt("maxDataPoints", value));
 				this->_isNull_maxDataPointElement = false;
 			}

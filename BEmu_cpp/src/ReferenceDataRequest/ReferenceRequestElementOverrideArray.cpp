@@ -22,6 +22,7 @@ namespace BEmu
 
 		ReferenceRequestElementOverrideArray::~ReferenceRequestElementOverrideArray()
 		{
+			this->_overrides.clear();
 		}
 
 		Name ReferenceRequestElementOverrideArray::name() const { return Name("overrides"); }
@@ -32,18 +33,14 @@ namespace BEmu
 		bool ReferenceRequestElementOverrideArray::isArray() const { return true; }
 		bool ReferenceRequestElementOverrideArray::isComplexType() const { return false; }
 
-		//ElementPtr * ReferenceRequestElementOverrideArray::getValueAsElement(int index) const
 		boost::shared_ptr<ElementPtr> ReferenceRequestElementOverrideArray::getValueAsElement(int index) const
 		{
 			return boost::dynamic_pointer_cast<ElementPtr>(this->_overrides[index]);
 		}
 
-		//ElementPtr * ReferenceRequestElementOverrideArray::appendElement()
 		boost::shared_ptr<ElementPtr> ReferenceRequestElementOverrideArray::appendElement()
 		{
 			boost::shared_ptr<ReferenceRequestElementOverride> elmP(new ReferenceRequestElementOverride());
-
-            //ReferenceRequestElementOverride * result = new ReferenceRequestElementOverride(); //TODO: delete
 
 			this->_overrides.push_back(elmP);
 			return boost::dynamic_pointer_cast<ElementPtr>(elmP);
@@ -55,7 +52,6 @@ namespace BEmu
 
 			stream << tabs << "overrides[] = {" << std::endl;
 
-			//for(std::vector<ReferenceRequestElementOverride*>::const_iterator iter = this->_overrides.begin(); iter != this->_overrides.end(); iter++)
 			for(std::vector< boost::shared_ptr<ReferenceRequestElementOverride> >::const_iterator iter = this->_overrides.begin(); iter != this->_overrides.end(); iter++)
 			{
 				boost::shared_ptr<ReferenceRequestElementOverride> req = *iter;

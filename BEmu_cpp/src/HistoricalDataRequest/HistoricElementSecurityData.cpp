@@ -25,83 +25,39 @@ namespace BEmu
 		HistoricElementSecurityData::HistoricElementSecurityData(
 			const std::string& securityName, 
 			const std::vector<std::string>& badFields, 
-			const std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData,
+			const std::map<Datetime, std::map<std::string, ObjectType>>& fieldData,
 			int sequenceNumber) :
 				_elmSecurityName(new HistoricElementString("security", securityName)),
 				_elmSequenceNumber(new HistoricElementInt("sequenceNumber", sequenceNumber))
-
-
 		{
 			this->_isSecurityError = Rules::IsSecurityError(securityName);
 			
             //remove bad field names from the dictionary			
             if (badFields.size() == 0)
 			{
-                //this->_elmFieldExceptions = 0;
 				this->_elmFieldExceptions = boost::shared_ptr<HistoricElementFieldExceptionsArray>();
 				this->_isNull_elmFieldExceptions = true;
 			}
             else
 			{
-                //this->_elmFieldExceptions = new HistoricElementFieldExceptionsArray(badFields);
 				this->_elmFieldExceptions = boost::shared_ptr<HistoricElementFieldExceptionsArray>(new HistoricElementFieldExceptionsArray(badFields));
 				this->_isNull_elmFieldExceptions = false;
 			}
-
-			//this->_elmSecurityName = new HistoricElementString("security", securityName);
-
-			//this->_elmSequenceNumber = new HistoricElementInt("sequenceNumber", sequenceNumber);
 
 			if (this->_isSecurityError)
             {
 				this->_elmSecError = boost::shared_ptr<HistoricElementSecurityError>(new HistoricElementSecurityError(securityName));
 				this->_elmFieldDataArray = boost::shared_ptr<HistoricElementFieldDataArray>();
-
-                //this->_elmSecError = new HistoricElementSecurityError(securityName);
-                //this->_elmFieldDataArray = 0;
             }
             else
             {
 				this->_elmSecError = boost::shared_ptr<HistoricElementSecurityError>();
 				this->_elmFieldDataArray = boost::shared_ptr<HistoricElementFieldDataArray>(new HistoricElementFieldDataArray(fieldData));
-
-                //this->_elmSecError = 0;
-                //this->_elmFieldDataArray = new HistoricElementFieldDataArray(fieldData);
             }
 		}
 
-
 		HistoricElementSecurityData::~HistoricElementSecurityData()
 		{
-			//if(this->_elmFieldExceptions != 0)
-			//{
-			//	delete this->_elmFieldExceptions;
-			//	this->_elmFieldExceptions = 0;
-			//}
-
-			//if(this->_elmSecurityName != 0)
-			//{
-			//	delete this->_elmSecurityName;
-			//	this->_elmSecurityName = 0;
-			//}
-
-			//if(this->_elmSequenceNumber != 0)
-			//{
-			//	delete this->_elmSequenceNumber;
-			//	this->_elmSequenceNumber = 0;
-			//}
-
-			//if(this->_elmSecError != 0)
-			//{
-			//	delete this->_elmSecError;
-			//	this->_elmSecError = 0;
-			//}
-
-			//if(this->_elmFieldDataArray != 0)
-			//{
-			//	delete this->_elmFieldDataArray;
-			//	this->_elmFieldDataArray = 0;
-			//}
 		}
 
 
@@ -119,8 +75,6 @@ namespace BEmu
 		size_t HistoricElementSecurityData::numElements() const
 		{
 			return 3 + (this->_isNull_elmFieldExceptions ? 0 : 1);
-
-			//return 3 + (this->_elmFieldExceptions == 0 ? 0 : 1);
 		}
 
 		SchemaElementDefinition HistoricElementSecurityData::elementDefinition() const
@@ -147,7 +101,6 @@ namespace BEmu
 		}
 
 
-		//ElementPtr * HistoricElementSecurityData::getElement(const char* name) const
 		boost::shared_ptr<ElementPtr> HistoricElementSecurityData::getElement(const char* name) const
 		{
 			if(strncmp(name, "fieldData", 10) == 0)

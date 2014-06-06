@@ -17,8 +17,8 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
-		IntradayTickRequestElementInt::IntradayTickRequestElementInt(const std::string& elementName, int ivalue)
-			: IntradayTickRequestElementString(elementName, ElementPtr::toCharPointer(ivalue))
+		IntradayTickRequestElementInt::IntradayTickRequestElementInt(const std::string& elementName, int ivalue) :
+			IntradayTickRequestElementString(elementName, ivalue)
 		{
 			this->_ivalue = ivalue;
 		}

@@ -20,9 +20,7 @@ namespace BEmu
 		{
 			for(std::vector<std::string>::const_iterator iter = badFields.begin(); iter != badFields.end(); ++iter)
 			{
-				std::string str = *iter;
-				
-				//ReferenceElementFieldExceptions * elm = new	ReferenceElementFieldExceptions(str); //deleted in destructor
+				std::string str = *iter;				
 				boost::shared_ptr<ReferenceElementFieldExceptions> elmP(new ReferenceElementFieldExceptions(str));
 
 				this->_exceptions.push_back(elmP);
@@ -31,11 +29,7 @@ namespace BEmu
 
 		ReferenceElementFieldExceptionsArray::~ReferenceElementFieldExceptionsArray()
 		{
-			//for(std::vector<ReferenceElementFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
-			//{
-			//	ReferenceElementFieldExceptions * elm = *iter;
-			//	delete elm;
-			//}
+			this->_exceptions.clear();
 		}
 
 		Name ReferenceElementFieldExceptionsArray::name() const { return Name("fieldExceptions"); }
@@ -53,7 +47,6 @@ namespace BEmu
 		bool ReferenceElementFieldExceptionsArray::isArray() const { return true; }
 		bool ReferenceElementFieldExceptionsArray::isComplexType() const { return false; }
 
-		//ElementPtr * ReferenceElementFieldExceptionsArray::getValueAsElement(int index) const
 		boost::shared_ptr<ElementPtr> ReferenceElementFieldExceptionsArray::getValueAsElement(int index) const
 		{
 			return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptions[index]);
@@ -65,7 +58,6 @@ namespace BEmu
 
 			stream << tabs << "fieldExceptions[] = {" << std::endl;
 			
-			//for(std::vector<ReferenceElementFieldExceptions*>::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
 			for(std::vector< boost::shared_ptr<ReferenceElementFieldExceptions> >::const_iterator iter = this->_exceptions.begin(); iter != this->_exceptions.end(); ++iter)
 			{
 				boost::shared_ptr<ReferenceElementFieldExceptions> elm = *iter;

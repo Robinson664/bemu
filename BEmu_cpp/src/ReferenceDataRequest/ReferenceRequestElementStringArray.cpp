@@ -23,6 +23,7 @@ namespace BEmu
 
 		ReferenceRequestElementStringArray::~ReferenceRequestElementStringArray()
 		{
+			this->_values.clear();
 		}
 
 		Name ReferenceRequestElementStringArray::name() const { return Name(this->_elementName.c_str()); }

@@ -24,14 +24,12 @@ namespace BEmu
 		class HistoricElementFieldDataArray : public ElementPtr
 		{
 			private:
-				//std::vector<HistoricElementFieldData*> _fieldData;
 				std::vector< boost::shared_ptr<HistoricElementFieldData> > _fieldData;
 
 			public:
-				HistoricElementFieldDataArray(const std::map<Datetime, std::map<std::string, ObjectType>*> * fieldData);
+				HistoricElementFieldDataArray(const std::map<Datetime, std::map<std::string, ObjectType>>& fieldData);
 				~HistoricElementFieldDataArray();
 
-				//virtual ElementPtr * getValueAsElement(int index) const;
 				virtual boost::shared_ptr<ElementPtr> getValueAsElement(int index) const;
 
 				virtual Name name() const;

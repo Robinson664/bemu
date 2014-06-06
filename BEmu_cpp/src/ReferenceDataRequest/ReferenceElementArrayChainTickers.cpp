@@ -61,8 +61,6 @@ namespace BEmu
 			int strike = RandomDataGenerator::Strike();
 			for (unsigned count = 0; count < numPoints; count++, strike += 5)
 			{
-				//ElementPtr * elm = new ReferenceElementArrayChainTickersItem(ticker, dtExp, optionality, strike); //deleted in destructor
-				
 				boost::shared_ptr<ReferenceElementArrayChainTickersItem> elm(new ReferenceElementArrayChainTickersItem(ticker, dtExp, optionality, strike));
 				boost::shared_ptr<ElementPtr> elmP( boost::dynamic_pointer_cast<ElementPtr>(elm) );
 
@@ -72,11 +70,6 @@ namespace BEmu
 
 		ReferenceElementArrayChainTickers::~ReferenceElementArrayChainTickers()
 		{
-			//for(std::vector<ElementPtr*>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter)
-			//{
-			//	boost::shared_ptr<ElementPtr> current = *iter;
-			//	delete current;
-			//}
 		}
 
 		SchemaElementDefinition ReferenceElementArrayChainTickers::elementDefinition() const

@@ -10,7 +10,6 @@
 #pragma once
 
 #include "BloombergTypes/Datetime.h"
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -32,7 +31,6 @@ namespace BEmu
 			ObjectType(const char * arg);
 			ObjectType(const Datetime& arg);
 
-			//ObjectType(ReferenceDataRequest::ReferenceElementArrayChainTickers * arg);
 			ObjectType(boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> arg);
 
 			~ObjectType();
@@ -46,24 +44,17 @@ namespace BEmu
 			bool TryGetBool(bool &arg) const;
 			bool TryGetString(std::string& arg) const;
 			bool TryGetDatetime(Datetime& arg) const;
-
-			//bool TryGetChainTickers(ReferenceDataRequest::ReferenceElementArrayChainTickers * arg) const;
-			bool TryGetChainTickers(boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> arg) const;
+			bool TryGetChainTickers(boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers>& arg) const;
 
 			double ValueAsDouble() const;
 			int ValueAsInt() const;
 			bool ValueAsBool() const;
 			std::string ValueAsString() const;
 			Datetime ValueAsDatetime() const;
-
-			//ReferenceDataRequest::ReferenceElementArrayChainTickers * ValueAsChainTickers() const;
 			boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> ValueAsChainTickers() const;
 			
 			bool IsNull() const;
 			std::string ToString() const;
-			
-			//I pass around ObjectTypes mostly by value. But the values may all point to the same _chainTickers instance.  Use DeleteMemory to delete _chainTickers.
-			void deleteMemory();
 
 			class ObjectTypeException: public std::exception
 			{
@@ -81,8 +72,6 @@ namespace BEmu
 			bool _bool;
 			std::string _str;
 			Datetime _datetime;
-
-			//ReferenceDataRequest::ReferenceElementArrayChainTickers * _chainTickers;
 			boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> _chainTickers;
 	};
 }

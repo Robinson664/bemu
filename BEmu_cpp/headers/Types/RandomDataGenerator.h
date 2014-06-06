@@ -15,7 +15,6 @@
 #include "Types/ObjectType.h"
 #include "IntradayBarRequest/IntradayBarTickDataType.h"
 #include "BloombergTypes/Datetime.h"
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -46,11 +45,10 @@ namespace BEmu
 			static std::map<std::string, ObjectType> GetMarketDataFields(const std::vector<std::string>& arg);
 			static ObjectType MarketDataFromFieldName(const std::string& arg);
 
-			static IntradayBarRequest::IntradayBarTickDataType * GenerateBarData(const Datetime& date);
+			static boost::shared_ptr<IntradayBarRequest::IntradayBarTickDataType> GenerateBarData(const Datetime& date);
 
 			static int IntradayTickIntervalInMinutes();
 
-			//static ObjectType ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, ReferenceDataRequest::ReferenceRequest * rreq);
 			static ObjectType ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, boost::shared_ptr<ReferenceDataRequest::ReferenceRequest> rreq);
 	};
 }

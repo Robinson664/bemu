@@ -15,10 +15,9 @@ namespace BEmu
 {
 	namespace MarketDataRequest
 	{
-		MarketElementSubscriptionStarted::MarketElementSubscriptionStarted(MarketMessageSubscriptionStarted * arg) :
-			_exceptions( boost::dynamic_pointer_cast<MarketElementNull>(arg->firstElement()) )
+		MarketElementSubscriptionStarted::MarketElementSubscriptionStarted(const MarketMessageSubscriptionStarted& arg) :
+			_exceptions( boost::dynamic_pointer_cast<MarketElementNull>(arg.firstElement()) )
 		{
-			//this->_exceptions = (MarketElementNull*)arg->firstElement();
 		}
 
 		Name MarketElementSubscriptionStarted::name() const

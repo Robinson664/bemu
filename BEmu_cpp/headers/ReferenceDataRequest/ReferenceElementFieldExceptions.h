@@ -26,9 +26,6 @@ namespace BEmu
 				boost::shared_ptr<ReferenceElementString> _fieldId;
 				boost::shared_ptr<ReferenceElementErrorInfo> _errorInfo;
 
-				//ReferenceElementString * _fieldId;
-				//ReferenceElementErrorInfo * _errorInfo;
-
 			public:
 				ReferenceElementFieldExceptions(const std::string& badField);
 				~ReferenceElementFieldExceptions();
@@ -45,7 +42,6 @@ namespace BEmu
 				virtual const char* getElementAsString(const char* name) const;
 				virtual int getElementAsInt32(const char* name) const;
 
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;

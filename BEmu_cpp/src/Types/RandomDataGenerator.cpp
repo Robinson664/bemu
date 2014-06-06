@@ -61,8 +61,8 @@ namespace BEmu
 					}
 				}
 
-				boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> chainP(new ReferenceDataRequest::ReferenceElementArrayChainTickers(security, numPoints, dtExp, optionality));
-				//ReferenceDataRequest::ReferenceElementArrayChainTickers * chain = new ReferenceDataRequest::ReferenceElementArrayChainTickers(security, numPoints, dtExp, optionality);
+				boost::shared_ptr<ReferenceDataRequest::ReferenceElementArrayChainTickers> chainP(
+					new ReferenceDataRequest::ReferenceElementArrayChainTickers(security, numPoints, dtExp, optionality));
 				
 				return ObjectType(chainP);
 			}
@@ -107,11 +107,7 @@ namespace BEmu
 		}
 	}
 
-	//ObjectType RandomDataGenerator::ReferenceDataFromFieldName(const std::string& fieldName, const std::string& security, bool isOption, ReferenceDataRequest::ReferenceRequest * rreq)
-	//{
-	//}
-
-	IntradayBarRequest::IntradayBarTickDataType * RandomDataGenerator::GenerateBarData(const Datetime& date)
+	boost::shared_ptr<IntradayBarRequest::IntradayBarTickDataType> RandomDataGenerator::GenerateBarData(const Datetime& date)
 	{
         double first = RandomDataGenerator::RandomDouble();
         double second = RandomDataGenerator::RandomDouble();
@@ -125,7 +121,7 @@ namespace BEmu
 		double value = RandomDataGenerator::RandomDouble(1, 10000);
 		int numEvents = RandomDataGenerator::RandomInt(10000);
 
-		IntradayBarRequest::IntradayBarTickDataType * result = new IntradayBarRequest::IntradayBarTickDataType(date, open, high, low, close, value, volume, numEvents);
+		boost::shared_ptr<IntradayBarRequest::IntradayBarTickDataType> result(new IntradayBarRequest::IntradayBarTickDataType(date, open, high, low, close, value, volume, numEvents));
 		return result;
 	}
 
@@ -149,8 +145,7 @@ namespace BEmu
 		}
 	
 		//Market data responses contain extraneous data fields.  The user will not have requested them.
-		//  To make this emulator more realistic, I'll add some extraneous fields of different types below.
-	
+		//  To make this emulator more realistic, I'll add some extraneous fields of different types below.	
 		{
 			std::string extraDoubleFields[] = { "PREV_SES_LAST_PRICE", "PREV_CLOSE_VALUE_REALTIME", "PRICE_PREVIOUS_CLOSE_RT", "LOW", "LOW_TDY", "PRICE_LOW_RT" };
 			const int length = 6;

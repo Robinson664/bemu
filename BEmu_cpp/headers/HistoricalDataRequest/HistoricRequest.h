@@ -57,12 +57,6 @@ namespace BEmu
 				bool _isNull_maxDataPointElement;
 				bool _isNull_periodicityAdjustmentElement, _isNull_periodicityElement, _isNull_overrideOptionsElement, _isNull_pricingOptionElement;
 
-				//HistoricRequestElementStringArray * _securities, * _fields;
-				//HistoricRequestElementDate * _dtStart, * _dtEnd;
-				//HistoricRequestElementBool * _adjustmentNormalElement, * _adjustmentAbnormalElement, * _adjustmentSplitElement;
-				//HistoricRequestElementInt * _maxDataPointElement;
-				//HistoricRequestElementString * _periodicityAdjustmentElement, * _periodicityElement, * _overrideOptionsElement, * _pricingOptionElement;
-
 				HistDataPeriodicityAdjustmentEnum::EnumType _periodicityAdjustment;
 				HistDataPeriodicityEnum::EnumType _periodicity;
 				PricingOptionEnum::EnumType _pricingOption;

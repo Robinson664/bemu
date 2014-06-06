@@ -12,7 +12,6 @@
 #include "bemu_headers.h"
 #include <exception>
 #include <vector>
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -25,8 +24,6 @@ namespace BEmu
 	{
 		private:
 			std::vector< boost::shared_ptr<MessagePtr> > _listP;
-			//std::vector<MessagePtr*> _list;
-
 			int _position;
 
 		public:

@@ -22,6 +22,22 @@ namespace BEmu
 			this->_value = value;
 		}
 
+		IntradayTickRequestElementString::IntradayTickRequestElementString(const std::string& elementName, int value)
+		{
+			this->_elementName = elementName;
+
+			this->_ss << value;
+			this->_value = this->_ss.str();
+		}
+
+		IntradayTickRequestElementString::IntradayTickRequestElementString(const std::string& elementName, Datetime value)
+		{
+			this->_elementName = elementName;
+
+			this->_ss << value;
+			this->_value = this->_ss.str();
+		}
+
 		IntradayTickRequestElementString::~IntradayTickRequestElementString()
 		{
 		}

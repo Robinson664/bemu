@@ -26,9 +26,6 @@ namespace BEmu
 				boost::shared_ptr<ReferenceElementString> _source, _category, _message, _subCategory;
 				boost::shared_ptr<ReferenceElementInt> _code;
 
-				//ReferenceElementString * _source, * _category, * _message, * _subCategory;
-				//ReferenceElementInt * _code;
-
 			public:
 				ReferenceElementErrorInfo();
 				~ReferenceElementErrorInfo();
@@ -45,7 +42,6 @@ namespace BEmu
 				virtual const char* getElementAsString(const char* name) const;
 				virtual int getElementAsInt32(const char* name) const;
 				
-				//virtual ElementPtr * getElement(const char* name) const;
 				virtual boost::shared_ptr<ElementPtr> getElement(const char* name) const;
 
 				virtual bool hasElement(const char* name, bool excludeNullElements = false) const;

@@ -11,7 +11,6 @@
 
 #include "bemu_headers.h"
 #include "BloombergTypes/RequestPtr.h"
-#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {
@@ -23,21 +22,14 @@ namespace BEmu
 			//  Because I use several derived Request classes to emulate the behavior of the API's *one* Request object, I have some work to do to ensure the caller is calling the right functions.
 			//  When casting from a derived-Request to this parent-Request, I internally keep a pointer to the derived-Request so that I know how to pass around function calls.
 			//  If each Request object keeps a pointer to some internal RequestPtr object, the user doesn't have to know that I've implemented the Request type as a collection of derived classes.
-			//One downside is that I don't know when to delete this->_ptr.  I can't do it in a ~Request() because that gets called often and at the wrong times.
-			//  I could possibly delete this pointer in a ~Session() because once a caller closes a session, why not delete all related Requests.
-			//  I'm not going to do that though because it is probably not how the actual Bloomberg API handles this.
-			//  I'll leave this pointer allocated, meaning this is a memory leak.  As this emulator is not built for performance, it's probably ok.
-			//RequestPtr *_ptr;
-			
-			const boost::shared_ptr<RequestPtr> _shptr;
+			/*const */boost::shared_ptr<RequestPtr> _shptr;
 
 		public:
 			boost::shared_ptr<RequestPtr> getRequestPtr() const;
 
 			DLL_EXPORT Request();
 
-			/*DLL_EXPORT*/ Request(boost::shared_ptr<RequestPtr> ptr);
-			// /*DLL_EXPORT*/ Request(RequestPtr *ptr);
+			Request(boost::shared_ptr<RequestPtr> ptr);
 
 			DLL_EXPORT Request(const Request& arg);
 			DLL_EXPORT Request& operator=(const Request &rhs);

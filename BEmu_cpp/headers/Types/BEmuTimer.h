@@ -28,7 +28,7 @@ namespace BEmu
 	class BEmuTimer
 	{
 		private:
-			BEmuTimerFunction * _toRun;
+			boost::shared_ptr<BEmuTimerFunction> _toRun;
 			bool _isRunning;
 			boost::mutex _syncroot;
 
@@ -41,7 +41,7 @@ namespace BEmu
 			void pStart(); //called internally.  This is run on a new thread.  Most of the work of this class happens here.
 
 		public:
-			BEmuTimer(BEmuTimerFunction * toRun); //toRun is an object with a Run() function.  The timer calls this Run() function.
+			BEmuTimer(boost::shared_ptr<BEmuTimerFunction> toRun); //toRun is an object with a Run() function.  The timer calls this Run() function.
 		
 			//All times are in milleseconds (1000 milleseconds = 1 second)
 			void start(int msecsToStart, int msecsToRestart); //starts the timer after msecsToStart milleseconds, and reruns it every msecsToRestart milleseconds

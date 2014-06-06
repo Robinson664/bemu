@@ -21,6 +21,14 @@ namespace BEmu
 			this->_value = value;
 		}
 
+		HistoricRequestElementString::HistoricRequestElementString(const std::string& elementName, int value)
+		{
+			this->_elementName = elementName;
+
+			this->_ss << value;
+			this->_value = this->_ss.str();
+		}
+
 		HistoricRequestElementString::~HistoricRequestElementString()
 		{
 		}

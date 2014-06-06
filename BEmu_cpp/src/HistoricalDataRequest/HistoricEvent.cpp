@@ -19,35 +19,26 @@ namespace BEmu
 {
 	namespace HistoricalDataRequest
 	{
-		HistoricEvent::HistoricEvent(boost::shared_ptr<HistoricRequest> request) : EventPtr(request)
+		HistoricEvent::HistoricEvent(boost::shared_ptr<HistoricRequest> request) : 
+			EventPtr(boost::dynamic_pointer_cast<RequestPtr>(request)),
+			_internalP(request)
 		{
-			this->_requestP = request;
-
-			//this->_request = request;
-			this->_internalP = request;
 			this->_messages = this->GenerateMessages();
 		}
 
 		HistoricEvent::~HistoricEvent()
 		{
-			this->_messages->clear();
-
-			delete this->_messages;
-			this->_messages = 0;
+			this->_messages.clear();
 		}
 
-				
-		//std::vector<MessagePtr*> * HistoricEvent::getMessages() const
 		std::vector< boost::shared_ptr<MessagePtr> > HistoricEvent::getMessages() const
 		{
-			return *(this->_messages);
+			return this->_messages;
 		}
 
-		//std::vector<MessagePtr*> * HistoricEvent::GenerateMessages() const
-		std::vector< boost::shared_ptr<MessagePtr> > * HistoricEvent::GenerateMessages() const
+		std::vector< boost::shared_ptr<MessagePtr> > HistoricEvent::GenerateMessages() const
 		{
-			//std::vector<MessagePtr*> * result = new std::vector<MessagePtr*>();
-			std::vector< boost::shared_ptr<MessagePtr> > * result = new std::vector< boost::shared_ptr<MessagePtr> >();
+			std::vector< boost::shared_ptr<MessagePtr> > result;
 
 			std::vector<std::string> badFields;
 			std::vector<std::string> rfields(this->_internalP->fields());
@@ -64,7 +55,7 @@ namespace BEmu
 			{
 				std::string sec = *iterSec;
 
-				std::map<Datetime, std::map<std::string, ObjectType> *> * fieldData = new std::map<Datetime, std::map<std::string, ObjectType> *>();
+				std::map<Datetime, std::map<std::string, ObjectType>> fieldData;
 
 				if(this->_internalP->hasStartDate())
 				{
@@ -76,26 +67,22 @@ namespace BEmu
 						Datetime date = *iterDate;
 						if(date.getWeekDay() != Datetime::Saturday && date.getWeekDay() != Datetime::Sunday)
 						{
-							std::map<std::string, ObjectType> * fields = new std::map<std::string, ObjectType>();
-
-							(*fieldData)[date] = fields;
-
+							std::map<std::string, ObjectType> fields;
 							for(std::vector<std::string>::const_iterator iterField2 = rfields.begin(); iterField2 != rfields.end(); ++iterField2)
 							{
 								std::string field2 = *iterField2;
 
 								if(!Rules::IsBadField(field2))
-									fields->operator[](field2) = ObjectType(RandomDataGenerator::RandomDouble());
+									fields[field2] = ObjectType(RandomDataGenerator::RandomDouble());
 							}
+
+							fieldData[date] = fields;
 						}
 					}
 
-					//HistoricMessage * msg = new HistoricMessage(this->_internalP->getCorrelationId(), sec, badFields, fieldData, result->size());
-					//result->push_back(msg);
-
-					boost::shared_ptr<HistoricMessage> msgHP(new HistoricMessage(this->_internalP->getCorrelationId(), sec, badFields, fieldData, result->size()));
+					boost::shared_ptr<HistoricMessage> msgHP(new HistoricMessage(this->_internalP->getCorrelationId(), sec, badFields, fieldData, result.size()));
 					boost::shared_ptr<MessagePtr> msg(boost::dynamic_pointer_cast<MessagePtr>(msgHP));
-					result->push_back(msg);
+					result.push_back(msg);
 				}
 			}
 
