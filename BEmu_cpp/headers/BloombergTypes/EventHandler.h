@@ -18,6 +18,6 @@ namespace BEmu
 	class EventHandler
 	{
 		public:
-			virtual bool processEvent(const Event& event, Session * session) = 0;
+			DLL_EXPORT virtual bool processEvent(const Event& event, Session * session) = 0;
 	};
 }

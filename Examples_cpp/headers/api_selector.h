@@ -14,19 +14,19 @@
 
 #ifdef USE_BEMU_API
 
-	#include "BloombergTypes\Name.h"
-	#include "BloombergTypes\CorrelationID.h"
-	#include "BloombergTypes\Session.h"
-	#include "BloombergTypes\MessageIterator.h"
-	#include "BloombergTypes\Event.h"
-	#include "BloombergTypes\SessionOptions.h"
-	#include "BloombergTypes\Request.h"
-	#include "BloombergTypes\Datetime.h"
-	#include "BloombergTypes\Element.h"
-	#include "BloombergTypes\Message.h"
-	#include "BloombergTypes\Service.h"
-	#include "BloombergTypes\SubscriptionList.h"
-	#include "BloombergTypes\EventHandler.h"
+	#include "BloombergTypes/Name.h"
+	#include "BloombergTypes/CorrelationID.h"
+	#include "BloombergTypes/Session.h"
+	#include "BloombergTypes/MessageIterator.h"
+	#include "BloombergTypes/Event.h"
+	#include "BloombergTypes/SessionOptions.h"
+	#include "BloombergTypes/Request.h"
+	#include "BloombergTypes/Datetime.h"
+	#include "BloombergTypes/Element.h"
+	#include "BloombergTypes/Message.h"
+	#include "BloombergTypes/Service.h"
+	#include "BloombergTypes/SubscriptionList.h"
+	#include "BloombergTypes/EventHandler.h"
 
 	using namespace BEmu;
 

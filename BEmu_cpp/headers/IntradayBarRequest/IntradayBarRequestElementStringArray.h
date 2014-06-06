@@ -31,7 +31,7 @@ namespace BEmu
 				~IntradayBarRequestElementStringArray();
 				
 				void addValue(const std::string& value);
-				std::vector<std::string> values();
+				std::vector<std::string> values() const;
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

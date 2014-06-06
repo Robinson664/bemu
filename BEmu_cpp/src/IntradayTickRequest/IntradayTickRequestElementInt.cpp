@@ -27,7 +27,7 @@ namespace BEmu
 		{
 		}
 
-		int IntradayTickRequestElementInt::getInt()
+		int IntradayTickRequestElementInt::getInt() const
 		{
 			return this->_ivalue;
 		}

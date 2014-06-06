@@ -22,7 +22,7 @@ namespace BEmu
 	namespace IntradayTickRequest
 	{
 		//makes copies of the arguments
-		IntradayTickMessage::IntradayTickMessage(const CorrelationId& corr, const Service& service, std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >& ticks, bool includeConditionCodes) :
+		IntradayTickMessage::IntradayTickMessage(const CorrelationId& corr, const Service& service, std::map<Datetime, IntradayTickElementTuple3>& ticks, bool includeConditionCodes) :
 			MessagePtr(Name("IntradayTickResponse"), corr),
 			_parent(new IntradayTickElementDataParent(ticks, includeConditionCodes)),
 			_responseError()

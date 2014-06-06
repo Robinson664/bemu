@@ -117,7 +117,7 @@ namespace BEmu
 			DLL_EXPORT void setElement(const Name& name, int value);
 	};
 
-	inline std::ostream& operator<< (std::ostream& out, const Element& mc)
+	DLL_EXPORT inline std::ostream& operator<< (std::ostream& out, const Element& mc)
 	{
 		mc.print(out);
 		return out;

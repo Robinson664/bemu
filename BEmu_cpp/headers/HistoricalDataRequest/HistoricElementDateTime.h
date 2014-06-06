@@ -29,6 +29,7 @@ namespace BEmu
 				virtual size_t numValues() const { return 1; }
 				virtual size_t numElements() const { return 0; }
 		
+				virtual bool isNull() const { return false; }
 				virtual bool isArray() const { return false; }
 				virtual bool isComplexType() const { return false; }
 				

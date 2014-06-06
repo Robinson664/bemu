@@ -52,7 +52,7 @@ namespace BEmu
 			return false;
 		}
 
-		std::vector<std::string> IntradayBarRequestElementStringArray::values()
+		std::vector<std::string> IntradayBarRequestElementStringArray::values() const
 		{
 			return this->_values;
 		}

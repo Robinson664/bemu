@@ -42,15 +42,15 @@ namespace BEmu
 			public:
 				IntradayTickRequest(const Service& svc);
 				~IntradayTickRequest();
-				const Service getService();
-				std::vector<Datetime> getDates();
-				bool includeConditionCodes();
-				std::string security();
+				const Service getService() const;
+				std::vector<Datetime> getDates() const;
+				bool includeConditionCodes() const;
+				std::string security() const;
 				bool hasStartDate() const;
 				bool hasEndDate() const;
 
-				Datetime dtStart();
-				Datetime dtEnd();
+				Datetime dtStart() const;
+				Datetime dtEnd() const;
 
 				virtual Element getElement(const char* name);
 				virtual void append(const char* name, const char* value);

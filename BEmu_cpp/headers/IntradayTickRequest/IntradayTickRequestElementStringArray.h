@@ -28,7 +28,7 @@ namespace BEmu
 				IntradayTickRequestElementStringArray(const std::string& elementName);
 				~IntradayTickRequestElementStringArray();
 				void addValue(const std::string& value);
-				std::vector<std::string> getValues();
+				std::vector<std::string> getValues() const;
 
 				virtual Name name() const;
 				virtual size_t numValues() const { return 0; }

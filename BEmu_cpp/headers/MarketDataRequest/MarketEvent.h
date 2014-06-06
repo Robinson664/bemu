@@ -29,7 +29,7 @@ namespace BEmu
 			private:
 				std::vector< boost::shared_ptr<MessagePtr> > _messages;
 
-				std::map<std::string, ObjectType> generateFakeMessageData(const Subscription& sub);
+				std::map<std::string, ObjectType> generateFakeMessageData(const Subscription& sub) const;
 
 				virtual std::vector< boost::shared_ptr<MessagePtr> > getMessages() const;
 

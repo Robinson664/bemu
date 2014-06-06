@@ -52,7 +52,7 @@ namespace Examples
 
             //Historical requests allow a few overrides.  See the developer's guide A.2.4 for more information.
 			
-			//30 days ago
+			//30 days in the past
 			time_t tStart = time(NULL) - (30 * 24 * 60 * 60); //days * hours * minutes * seconds
 			struct tm *aTimeStart = localtime(&tStart); //Visual Studio complains about this call, but the localtime_s replacement is not portable.
 			int day = aTimeStart->tm_mday;
@@ -64,7 +64,7 @@ namespace Examples
 			delete strDtStart;
 			strDtStart = 0;
 
-			//10 days ago
+			//10 days in the future
 			time_t tEnd = time(NULL) + (10 * 24 * 60 * 60); //days * hours * minutes * seconds
 			struct tm *aTimeEnd = localtime(&tEnd); //Visual Studio complains about this call, but the localtime_s replacement is not portable.
 			day = aTimeEnd->tm_mday;

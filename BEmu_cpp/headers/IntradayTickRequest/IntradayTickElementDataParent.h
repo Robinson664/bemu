@@ -29,7 +29,7 @@ namespace BEmu
 				boost::shared_ptr<IntradayTickElementDataArray> _array;
 
 			public:
-				IntradayTickElementDataParent(const std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >& ticks, bool includeConditionCodes);
+				IntradayTickElementDataParent(const std::map<Datetime, IntradayTickElementTuple3>& ticks, bool includeConditionCodes);
 				~IntradayTickElementDataParent();
 
 				virtual Name name() const;

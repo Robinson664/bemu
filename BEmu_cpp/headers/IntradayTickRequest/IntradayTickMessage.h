@@ -34,7 +34,7 @@ namespace BEmu
 				bool _isResponseError;
 
 			public:
-				IntradayTickMessage(const CorrelationId& corr, const Service& service, std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3>>& ticks, bool includeConditionCodes);
+				IntradayTickMessage(const CorrelationId& corr, const Service& service, std::map<Datetime, IntradayTickElementTuple3>& ticks, bool includeConditionCodes);
 
 				IntradayTickMessage(const CorrelationId& corr, const Service& service);
 				~IntradayTickMessage();

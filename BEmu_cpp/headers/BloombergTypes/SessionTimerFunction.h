@@ -9,7 +9,8 @@
 
 #pragma once
 
-#include "Types\BEmuTimerFunction.h"
+#include "Types/BEmuTimerFunction.h"
+#include <boost/shared_ptr.hpp>
 
 namespace BEmu
 {

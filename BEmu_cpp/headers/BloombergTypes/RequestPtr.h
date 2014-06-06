@@ -39,8 +39,6 @@ namespace BEmu
 			
 			virtual ~RequestPtr();
 
-			int referenceCount;
-
 			class RequestException: public std::exception
 			{
 				virtual const char* what() const throw()

@@ -24,7 +24,6 @@ namespace BEmu
 				boost::shared_ptr<MarketElementSubscriptionCancelReason> _reason;
 
 			public:
-				//MarketElementSubscriptionCanceled(MarketMessageSubscriptionCanceled * arg);
 				MarketElementSubscriptionCanceled(const MarketMessageSubscriptionCanceled& arg);
 
 				virtual Name name() const;

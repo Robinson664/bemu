@@ -26,7 +26,7 @@ namespace BEmu
 
 			public:
 				HistoricRequestElementString(const std::string& elementName, const std::string& value);
-				~HistoricRequestElementString();
+				virtual ~HistoricRequestElementString();
 
 				virtual Name name() const;
 				virtual size_t numValues() const;

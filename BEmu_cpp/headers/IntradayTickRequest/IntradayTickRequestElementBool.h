@@ -24,7 +24,7 @@ namespace BEmu
 				IntradayTickRequestElementBool(const std::string& elementName, bool bvalue);
 				~IntradayTickRequestElementBool();
 
-				bool getBool();
+				bool getBool() const;
 		};
 	}
 }

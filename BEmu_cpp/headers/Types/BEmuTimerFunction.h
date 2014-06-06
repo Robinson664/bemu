@@ -17,5 +17,6 @@ namespace BEmu
 	{
 		public:
 			virtual void Run(BEmuTimer * timer) = 0;
+			virtual ~BEmuTimerFunction() { }
 	};
 }

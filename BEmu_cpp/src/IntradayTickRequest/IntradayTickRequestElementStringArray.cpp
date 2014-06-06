@@ -48,7 +48,7 @@ namespace BEmu
 			}
 		}
 
-		std::vector<std::string> IntradayTickRequestElementStringArray::getValues()
+		std::vector<std::string> IntradayTickRequestElementStringArray::getValues() const
 		{
 			return this->_values;
 		}

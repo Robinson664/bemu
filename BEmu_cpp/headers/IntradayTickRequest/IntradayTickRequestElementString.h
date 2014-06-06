@@ -29,8 +29,8 @@ namespace BEmu
 				
 			public:
 				IntradayTickRequestElementString(const std::string& elementName, const std::string& value);
-				~IntradayTickRequestElementString();
-				const std::string& security();
+				virtual ~IntradayTickRequestElementString();
+				const std::string& security() const;
 
 				virtual Name name() const;
 				virtual size_t numValues() const { return 1; }

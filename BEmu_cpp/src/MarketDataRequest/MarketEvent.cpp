@@ -29,7 +29,8 @@ namespace BEmu
 			{
 				case Event::SESSION_STATUS:
 				{
-					this->_type = evtType;
+					//this->_type = evtType;
+					this->setEventType(evtType);
 					
 					boost::shared_ptr<MarketMessageSessionOpened> msgSessionOpenedP(new MarketMessageSessionOpened());
 					boost::shared_ptr<MessagePtr> msgSessionOpened(boost::dynamic_pointer_cast<MessagePtr>(msgSessionOpenedP));
@@ -40,7 +41,8 @@ namespace BEmu
 
 				case Event::SERVICE_STATUS:
 				{
-					this->_type = evtType;
+					//this->_type = evtType;
+					this->setEventType(evtType);
 
 					boost::shared_ptr<MarketMessageServiceStatus> msgServiceStatusP(new MarketMessageServiceStatus(corr));
 					boost::shared_ptr<MessagePtr> msgServiceStatus(boost::dynamic_pointer_cast<MessagePtr>(msgServiceStatusP));
@@ -51,7 +53,9 @@ namespace BEmu
 
 				case Event::SUBSCRIPTION_STATUS:
 				{
-					this->_type = evtType;
+					//this->_type = evtType;
+					this->setEventType(evtType);
+
 					std::vector<Subscription> list = subs.list();
 					for(std::vector<Subscription>::const_iterator iter = list.begin(); iter != list.end(); ++iter)
 					{
@@ -77,7 +81,9 @@ namespace BEmu
 
 				case Event::SUBSCRIPTION_DATA:
 				{
-					this->_type = evtType;
+					//this->_type = evtType;
+					this->setEventType(evtType);
+
 					std::vector<Subscription> list(subs.list());
 
 					for(std::vector<Subscription>::const_iterator iter = list.begin(); iter != list.end(); ++iter)
@@ -107,7 +113,8 @@ namespace BEmu
 			{
 				case Event::SUBSCRIPTION_STATUS:
 				{
-					this->_type = evtType;
+					//this->_type = evtType;
+					this->setEventType(evtType);
 					
 					boost::shared_ptr<MarketMessageSubscriptionCanceled> msgCancelMP(new MarketMessageSubscriptionCanceled(sub));
 					boost::shared_ptr<MessagePtr> msgCancelP(boost::dynamic_pointer_cast<MessagePtr>(msgCancelMP));
@@ -128,7 +135,7 @@ namespace BEmu
 			return this->_messages;
 		}
 
-		std::map<std::string, ObjectType> MarketEvent::generateFakeMessageData(const Subscription& sub)
+		std::map<std::string, ObjectType> MarketEvent::generateFakeMessageData(const Subscription& sub) const
 		{
 			return RandomDataGenerator::GetMarketDataFields(sub.fieldList());
 		}

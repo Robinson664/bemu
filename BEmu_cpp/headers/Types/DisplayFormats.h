@@ -11,7 +11,7 @@
 
 #include <iosfwd>
 #include <string>
-#include "BloombergTypes\Datetime.h"
+#include "BloombergTypes/Datetime.h"
 
 using namespace std;
 

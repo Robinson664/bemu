@@ -24,7 +24,7 @@ namespace BEmu
 				IntradayTickRequestElementInt(const std::string& elementName, int ivalue);
 				~IntradayTickRequestElementInt();
 
-				int getInt();
+				int getInt() const;
 		};
 	}
 }

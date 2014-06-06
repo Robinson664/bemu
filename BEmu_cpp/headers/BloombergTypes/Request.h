@@ -22,7 +22,7 @@ namespace BEmu
 			//  Because I use several derived Request classes to emulate the behavior of the API's *one* Request object, I have some work to do to ensure the caller is calling the right functions.
 			//  When casting from a derived-Request to this parent-Request, I internally keep a pointer to the derived-Request so that I know how to pass around function calls.
 			//  If each Request object keeps a pointer to some internal RequestPtr object, the user doesn't have to know that I've implemented the Request type as a collection of derived classes.
-			/*const */boost::shared_ptr<RequestPtr> _shptr;
+			boost::shared_ptr<RequestPtr> _shptr;
 
 		public:
 			boost::shared_ptr<RequestPtr> getRequestPtr() const;

@@ -24,7 +24,7 @@ namespace BEmu
 		{
 			private:
 				std::vector< boost::shared_ptr<MessagePtr> > _messages;
-				std::vector< boost::shared_ptr<MessagePtr> > GenerateMessages();
+				std::vector< boost::shared_ptr<MessagePtr> > GenerateMessages() const;
 				boost::shared_ptr<IntradayTickRequest> _internalP;
 
 			public:

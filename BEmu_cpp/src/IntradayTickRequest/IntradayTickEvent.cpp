@@ -41,7 +41,7 @@ namespace BEmu
 			return this->_messages;
 		}
 
-		std::vector< boost::shared_ptr<MessagePtr> > IntradayTickEvent::GenerateMessages()
+		std::vector< boost::shared_ptr<MessagePtr> > IntradayTickEvent::GenerateMessages() const
 		{
 			std::vector< boost::shared_ptr<MessagePtr> > result;
 
@@ -57,7 +57,7 @@ namespace BEmu
             }
 			else
 			{
-				std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> > tickData;
+				std::map<Datetime, IntradayTickElementTuple3> tickData;
 
 				if(this->_internalP->hasStartDate())
 				{
@@ -70,7 +70,7 @@ namespace BEmu
 
 						if( (wd != Datetime::Sunday) && (wd != Datetime::Saturday) )
 						{
-							boost::shared_ptr<IntradayTickElementTuple3> t3(new IntradayTickElementTuple3("TRADE", RandomDataGenerator::RandomDouble(), RandomDataGenerator::IntradayTickTradeSize()));
+							IntradayTickElementTuple3 t3("TRADE", RandomDataGenerator::RandomDouble(), RandomDataGenerator::IntradayTickTradeSize());
 							tickData[dt] = t3;
 						}
 					}

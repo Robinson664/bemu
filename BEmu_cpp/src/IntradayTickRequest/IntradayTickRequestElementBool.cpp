@@ -27,7 +27,7 @@ namespace BEmu
 		{
 		}
 
-		bool IntradayTickRequestElementBool::getBool()
+		bool IntradayTickRequestElementBool::getBool() const
 		{
 			return this->_bvalue;
 		}

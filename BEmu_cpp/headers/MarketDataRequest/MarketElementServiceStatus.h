@@ -24,7 +24,6 @@ namespace BEmu
 				boost::shared_ptr<MarketElementString> _serviceName;
 
 			public:
-				//MarketElementServiceStatus(MarketMessageServiceStatus * arg);
 				MarketElementServiceStatus(const MarketMessageServiceStatus& arg);
 
 				virtual Name name() const;

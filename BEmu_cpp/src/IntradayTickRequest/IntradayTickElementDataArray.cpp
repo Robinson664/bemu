@@ -21,11 +21,11 @@ namespace BEmu
 	namespace IntradayTickRequest
 	{
 		//makes copies of the arguments
-		IntradayTickElementDataArray::IntradayTickElementDataArray(const std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> > ticks, bool includeConditionCodes)
+		IntradayTickElementDataArray::IntradayTickElementDataArray(const std::map<Datetime, IntradayTickElementTuple3> ticks, bool includeConditionCodes)
 		{
-			for(std::map<Datetime, boost::shared_ptr<IntradayTickElementTuple3> >::const_iterator iter = ticks.begin(); iter != ticks.end(); ++iter)
+			for(std::map<Datetime, IntradayTickElementTuple3 >::const_iterator iter = ticks.begin(); iter != ticks.end(); ++iter)
 			{
-				IntradayTickElementTuple3 tuple(iter->second->item1(), iter->second->item2(), iter->second->item3());
+				IntradayTickElementTuple3 tuple(iter->second.item1(), iter->second.item2(), iter->second.item3());
 				boost::shared_ptr<IntradayTickElementData> elmFieldDataP(new IntradayTickElementData(iter->first, tuple, includeConditionCodes));
 
 				this->_tickData.push_back(elmFieldDataP);
@@ -39,7 +39,8 @@ namespace BEmu
 
 		boost::shared_ptr<ElementPtr> IntradayTickElementDataArray::getValueAsElement(int index) const
 		{
-			return boost::dynamic_pointer_cast<ElementPtr>(this->_tickData.operator[](index));
+			//return boost::dynamic_pointer_cast<ElementPtr>(this->_tickData.operator[](index));
+			return boost::dynamic_pointer_cast<ElementPtr>(this->_tickData[index]);
 		}
 
 		Name IntradayTickElementDataArray::name() const

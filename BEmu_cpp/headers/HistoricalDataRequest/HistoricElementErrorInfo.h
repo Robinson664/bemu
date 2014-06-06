@@ -33,7 +33,7 @@ namespace BEmu
 				virtual size_t numElements() const;
 				virtual SchemaElementDefinition elementDefinition() const;
 
-				bool isNull() const;
+				virtual bool isNull() const;
 				virtual bool isArray() const;
 				virtual bool isComplexType() const;
 				

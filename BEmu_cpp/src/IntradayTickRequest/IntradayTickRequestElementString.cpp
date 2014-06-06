@@ -30,7 +30,7 @@ namespace BEmu
 			this->_value = this->_ss.str();
 		}
 
-		IntradayTickRequestElementString::IntradayTickRequestElementString(const std::string& elementName, Datetime value)
+		IntradayTickRequestElementString::IntradayTickRequestElementString(const std::string& elementName, const Datetime& value)
 		{
 			this->_elementName = elementName;
 
@@ -42,7 +42,7 @@ namespace BEmu
 		{
 		}
 
-		const std::string& IntradayTickRequestElementString::security()
+		const std::string& IntradayTickRequestElementString::security() const
 		{
 			return this->_value;
 		}

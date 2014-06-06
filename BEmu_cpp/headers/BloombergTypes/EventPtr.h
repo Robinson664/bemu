@@ -24,9 +24,8 @@ namespace BEmu
 
 	class EventPtr
 	{
-		protected: //can I make these private?
+		private: //can I make these private?
 			boost::shared_ptr<RequestPtr> _requestP;
-
 			Event::EventType _type;
 
 		public:

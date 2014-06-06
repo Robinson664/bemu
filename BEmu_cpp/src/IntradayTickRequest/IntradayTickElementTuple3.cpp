@@ -14,11 +14,33 @@ namespace BEmu
 {
 	namespace IntradayTickRequest
 	{
+		IntradayTickElementTuple3::IntradayTickElementTuple3()
+		{
+		}
+
 		IntradayTickElementTuple3::IntradayTickElementTuple3(const std::string& item1, double item2, int item3)
 		{
 			this->_item1 = item1;
 			this->_item2 = item2;
 			this->_item3 = item3;
+		}
+
+		IntradayTickElementTuple3::IntradayTickElementTuple3(const IntradayTickElementTuple3& arg)
+		{
+			this->_item1 = arg._item1;
+			this->_item2 = arg._item2;
+			this->_item3 = arg._item3;
+		}
+
+		IntradayTickElementTuple3& IntradayTickElementTuple3::operator=(const IntradayTickElementTuple3 &rhs)
+		{
+			if (this != &rhs)
+			{
+				this->_item1 = rhs._item1;
+				this->_item2 = rhs._item2;
+				this->_item3 = rhs._item3;
+			}
+			return *this;
 		}
 
 		IntradayTickElementTuple3::~IntradayTickElementTuple3()

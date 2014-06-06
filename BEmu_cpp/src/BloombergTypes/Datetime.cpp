@@ -114,7 +114,11 @@ namespace BEmu
 		}
 	}
 
-	void Datetime::setDateTimeType(DateTimeTypeEnum dateTimeType)	{		this->_dateTimeType = dateTimeType;		this->_parts = (int)dateTimeType;	}
+	void Datetime::setDateTimeType(DateTimeTypeEnum dateTimeType)
+	{
+		this->_dateTimeType = dateTimeType;
+		this->_parts = (int)dateTimeType;
+	}
 
 	Datetime::WeekDayEnum Datetime::getWeekDay() const
 	{

@@ -15,18 +15,15 @@ namespace BEmu
 	SubscriptionList::SubscriptionList() :
 		_subs()
 	{
-		//this->_subs = new std::vector<Subscription>();
 	}
 	
 	SubscriptionList::~SubscriptionList()
 	{
-		//delete this->_subs;
 	}
 	
 	SubscriptionList::SubscriptionList(const SubscriptionList& original) :
 		_subs(original._subs.begin(), original._subs.end())
 	{
-		//this->_subs = new std::vector<Subscription>(original._subs->begin(), original._subs->end());
 	}
 
 	int SubscriptionList::add(const char* topic, const char* fields, const char* options, const CorrelationId& correlationId)
@@ -47,7 +44,6 @@ namespace BEmu
 	{
 		for(size_t i = 0; i < other._subs.size(); i++)
 		{
-			//this->_subs->push_back(other._subs->operator[](i));
 			this->_subs.push_back(other._subs[i]);
 		}
 		return 1; //I'm not sure what the append function returns
@@ -93,7 +89,6 @@ namespace BEmu
 		Subscription removed;
 		for(size_t i = 0; i < this->_subs.size(); i++)
 		{
-			//Subscription * current = &(this->_subs->operator[](i));
 			Subscription current(this->_subs[i]);
 
 			if(current.correlationId() == corr) //find the subscription by corrId

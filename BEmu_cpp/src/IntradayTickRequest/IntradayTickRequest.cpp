@@ -32,7 +32,7 @@ namespace BEmu
 		{
 		}
 
-		const Service IntradayTickRequest::getService()
+		const Service IntradayTickRequest::getService() const
 		{
 			return this->_service;
 		}
@@ -82,7 +82,7 @@ namespace BEmu
 			return dtEnd;
 		}
 
-		std::vector<Datetime> IntradayTickRequest::getDates()
+		std::vector<Datetime> IntradayTickRequest::getDates() const
 		{
 			std::vector<Datetime> result;
 
@@ -99,22 +99,22 @@ namespace BEmu
 			return result;
 		}
 
-		bool IntradayTickRequest::includeConditionCodes()
+		bool IntradayTickRequest::includeConditionCodes() const
 		{
 			return this->_includeConditionCodes->getBool();
 		}
 
-		std::string IntradayTickRequest::security()
+		std::string IntradayTickRequest::security() const
 		{
 			return this->_security->security();
 		}
 
-		Datetime IntradayTickRequest::dtStart()
+		Datetime IntradayTickRequest::dtStart() const
 		{
 			return this->_timeStart->getDate();
 		}
 
-		Datetime IntradayTickRequest::dtEnd()
+		Datetime IntradayTickRequest::dtEnd() const
 		{
 			return this->_timeEnd->getDate();
 		}

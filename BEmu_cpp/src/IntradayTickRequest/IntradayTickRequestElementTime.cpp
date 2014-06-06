@@ -32,7 +32,7 @@ namespace BEmu
 		{
 		}
 
-		Datetime IntradayTickRequestElementTime::getDate()
+		Datetime IntradayTickRequestElementTime::getDate() const
 		{
 			return this->_instance;
 		}

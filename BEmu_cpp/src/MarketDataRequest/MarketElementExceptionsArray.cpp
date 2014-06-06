@@ -21,7 +21,7 @@ namespace BEmu
 			for(std::vector<std::string>::const_iterator iter = badFields.begin(); iter != badFields.end(); ++iter)
 			{
 				std::string badField = *iter;
-				this->_exceptions.push_back( boost::shared_ptr<MarketElementExceptions>(new MarketElementExceptions(badField))); //deleted in destructor
+				this->_exceptions.push_back( boost::shared_ptr<MarketElementExceptions>(new MarketElementExceptions(badField)));
 			}
 		}
 

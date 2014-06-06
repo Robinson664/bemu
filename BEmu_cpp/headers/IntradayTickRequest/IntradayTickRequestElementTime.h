@@ -26,7 +26,7 @@ namespace BEmu
 				IntradayTickRequestElementTime(const std::string& elementName);
 				IntradayTickRequestElementTime(const std::string& elementName, const Datetime& date);
 				~IntradayTickRequestElementTime();
-				Datetime getDate();
+				Datetime getDate() const;
 		};
 	}
 }

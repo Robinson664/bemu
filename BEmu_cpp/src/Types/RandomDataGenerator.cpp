@@ -13,7 +13,7 @@
 #include <iostream>
 #include "ReferenceDataRequest/ReferenceRequest.h"
 #include "ReferenceDataRequest/ReferenceElementArrayChainTickers.h"
-#include <boost\algorithm\string\predicate.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 
 namespace BEmu
 {
