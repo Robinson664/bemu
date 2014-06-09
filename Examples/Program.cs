@@ -22,11 +22,12 @@ namespace Examples
             Console.WriteLine("http://bemu.codeplex.com/");
             Console.WriteLine("By: Robinson664");
             Console.WriteLine();
-            Console.WriteLine("To send a reference data request, push 1");
-            Console.WriteLine("To send a market data request, push 2");
+
+            Console.WriteLine("To send a intraday bar data request, push 1");
+            Console.WriteLine("To send a intraday tick data request, push 2");
             Console.WriteLine("To send a historical data request, push 3");
-            Console.WriteLine("To send a intraday tick data request, push 4");
-            Console.WriteLine("To send a intraday bar data request, push 5");
+            Console.WriteLine("To send a market data request, push 4");
+            Console.WriteLine("To send a reference data request, push 5");
 
             string input = Console.ReadLine();
             Console.WriteLine();
@@ -36,19 +37,19 @@ namespace Examples
             switch (input)
             {
                 case "1":
-                    ReferenceDataRequest.RunExample();
+                    IntradayBarDataRequest.RunExample();
                     break;
                 case "2":
-                    MarketDataRequest.RunExample();
+                    IntradayTickDataRequest.RunExample();
                     break;
                 case "3":
                     HistoricalDataRequest.RunExample();
                     break;
                 case "4":
-                    IntradayTickDataRequest.RunExample();
+                    MarketDataRequest.RunExample();
                     break;
                 case "5":
-                    IntradayBarDataRequest.RunExample();
+                    ReferenceDataRequest.RunExample();
                     break;
                 default:
                     informationReturned = false;

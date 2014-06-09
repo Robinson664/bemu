@@ -56,6 +56,27 @@ namespace BEmu
 		this->_isNull_marketSimulatorTimer = false;
 	}
 
+	Session::~Session()
+	{
+		if(!this->_isNull_marketSimulatorTimer)
+			this->_marketSimulatorTimer->stop();
+
+		while(!this->_sentRequests.empty())
+		{
+			boost::shared_ptr<RequestPtr> request(this->_sentRequests.front());
+
+			this->_sentRequests.pop();
+		}
+
+		//Clear the global name table when a Session is de-allocated.
+		//  This prevents a _CRTDBG_MAP_ALLOC memory leak message.
+		//  For performance, it doesn't matter if I clear out this table or not,
+		//    but I was hunting down memory leaks and removing memory leaks related to this table clears out a lot of messages.
+		//Note: The actual BB API appears to never clear out its global name table.
+		//  The caller will notice no difference whether or not I call clearGlobalNameTable here.
+		Name::clearGlobalNameTable();
+	}
+
 	void Session::subscribe(const SubscriptionList& subscriptionList)
 	{
 		std::vector<Subscription> subs = subscriptionList.list();
@@ -155,19 +176,6 @@ namespace BEmu
         }
 		
 		return true;
-	}
-
-	Session::~Session()
-	{
-		if(!this->_isNull_marketSimulatorTimer)
-			this->_marketSimulatorTimer->stop();
-
-		while(!this->_sentRequests.empty())
-		{
-			boost::shared_ptr<RequestPtr> request(this->_sentRequests.front());
-
-			this->_sentRequests.pop();
-		}
 	}
 
 	bool Session::start()

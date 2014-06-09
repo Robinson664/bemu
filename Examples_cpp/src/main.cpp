@@ -18,11 +18,11 @@ void main()
     cout << "http://bemu.codeplex.com/" << endl;
     cout << "By: Robinson664" << endl;
     cout << endl;
-    cout << "To send a reference data request, push 1" << endl;
-    cout << "To send a market data request, push 2" << endl;
+    cout << "To send a intraday bar data request, push 1" << endl;
+    cout << "To send a intraday tick data request, push 2" << endl;
     cout << "To send a historical data request, push 3" << endl;
-    cout << "To send a intraday tick data request, push 4" << endl;
-    cout << "To send a intraday bar data request, push 5" << endl;
+    cout << "To send a market data request, push 4" << endl;
+    cout << "To send a reference data request, push 5" << endl;
 
 	int input = readInteger();
 	cout << endl << endl;
@@ -31,19 +31,19 @@ void main()
 	switch(input)
 	{
 		case 1:
-			Examples::RunReferenceDataExample();
+			Examples::RunIntradayBarExample();
 			break;
 		case 2:
-			Examples::RunMarketDataExample();
+			Examples::RunIntradayTickExample();
 			break;
 		case 3:
 			Examples::RunHistoricalDataExample();
 			break;
 		case 4:
-			Examples::RunIntradayTickExample();
-			break;
+			Examples::RunMarketDataExample();
+			break;			
 		case 5:
-			Examples::RunIntradayBarExample();
+			Examples::RunReferenceDataExample();
 			break;
 		default:
 			informationReturned = false;

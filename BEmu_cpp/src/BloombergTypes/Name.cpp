@@ -12,6 +12,7 @@
 
 namespace BEmu
 {
+	// _CRTDBG_MAP_ALLOC reports a memory leak when using this map.  I'll ignore it.
 	std::map<std::string, Name> Name::_globalNameTable;
 
 	Name::Name()
@@ -48,6 +49,11 @@ namespace BEmu
 			this->_length = rhs._length;
 		}
 		return *this;
+	}
+
+	void Name::clearGlobalNameTable()
+	{
+		Name::_globalNameTable.clear();
 	}
 
 	size_t Name::length() const

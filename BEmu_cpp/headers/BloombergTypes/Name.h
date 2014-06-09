@@ -40,6 +40,8 @@ namespace BEmu
 
 			DLL_EXPORT static Name findName(const char *nameString);
 			DLL_EXPORT static bool hasName(const char *nameString);
+
+			static void clearGlobalNameTable();
 	};
 
 	DLL_EXPORT std::ostream& operator<<(std::ostream& stream, const Name& name);

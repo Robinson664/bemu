@@ -38,6 +38,7 @@ namespace BEmu
 
 		std::vector< boost::shared_ptr<MessagePtr> > ReferenceEvent::generateMessages() const
 		{
+			// _CRTDBG_MAP_ALLOC reports a memory leak here.  I'll ignore it.
 			const boost::regex exIsOption("[A-Z]{1,4}\\s+\\d{6}[CP]\\d{8} EQUITY");
 
 			std::vector< boost::shared_ptr<MessagePtr> > result;
@@ -50,6 +51,7 @@ namespace BEmu
 				std::string security = *iterSec;
 				if(securities.find(security) == securities.end()) //if the map doesn't contain the security
 				{
+					// _CRTDBG_MAP_ALLOC reports a memory leak here.  I'll ignore it.
 					bool isOption = boost::regex_match(security, exIsOption);
 
 					std::map<std::string, ObjectType> fieldData;
