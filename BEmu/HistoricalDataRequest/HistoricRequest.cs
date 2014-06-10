@@ -23,7 +23,7 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
 
         private HistoricRequestElementInt _maxDataPointElement;
 
-        #pragma warning disable 0414 //disables the "is assigned but its value is never used" warning
+#pragma warning disable 0414 //disables the "is assigned but its value is never used" warning
         private HistoricRequestElementString _periodicityAdjustmentElement, _periodicityElement, _overrideOptionsElement, _pricingOptionElement;
 
         private enum HistDataPeriodicityAdjustment { actual, calendar, fiscal }
@@ -37,7 +37,7 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
 
         public enum OverrideOptions { closingPrice, averagePrice }
         private OverrideOptions _overrideOptions = OverrideOptions.closingPrice;
-        #pragma warning restore 0414
+#pragma warning restore 0414
 
         internal HistoricRequest()
         {
@@ -71,7 +71,7 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
                 if (this._pricingOptionElement != null) yield return this._pricingOptionElement;
             }
         }
-        
+
         public override Element this[string elementName]
         {
             get
@@ -157,35 +157,19 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
             if (this._fields.NumValues > 0)
                 result.Append(this._fields.PrettyPrint(1));
 
-            result.Append(this._dtStart.PrettyPrint(1));
-            result.Append(this._dtEnd.PrettyPrint(1));
+            Element[] elms = { this._dtStart, this._dtEnd, this._periodicityAdjustmentElement, this._periodicityElement, this._overrideOptionsElement, 
+                                 this._pricingOptionElement, this._maxDataPointElement, this._adjustmentNormalElement, this._adjustmentAbnormalElement, 
+                                 this._adjustmentSplitElement };
 
-            if (this._periodicityAdjustmentElement != null)
-                result.Append(this._periodicityAdjustmentElement.PrettyPrint(1));
+            for (int i = 0; i < elms.Length; i++)
+            {
+                Element current = elms[i];
 
-            if (this._periodicityElement != null)
-                result.Append(this._periodicityElement.PrettyPrint(1));
+                if (current != null)
+                    result.Append(current.PrettyPrint(1));
+            }
 
-            if (this._overrideOptionsElement != null)
-                result.Append(this._overrideOptionsElement.PrettyPrint(1));
-
-            if (this._pricingOptionElement != null)
-                result.Append(this._pricingOptionElement.PrettyPrint(1));
-
-            if (this._maxDataPointElement != null)
-                result.Append(this._maxDataPointElement.PrettyPrint(1));
-
-            if (this._adjustmentNormalElement != null)
-                result.Append(this._adjustmentNormalElement.PrettyPrint(1));
-
-            if (this._adjustmentAbnormalElement != null)
-                result.Append(this._adjustmentAbnormalElement.PrettyPrint(1));
-
-            if (this._adjustmentSplitElement != null)
-                result.Append(this._adjustmentSplitElement.PrettyPrint(1));
-            
-            result.Append("}");
-
+            result.AppendLine("}");
             return result.ToString();
         }
 

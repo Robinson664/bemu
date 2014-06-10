@@ -20,7 +20,7 @@ namespace BEmu
 		}
 
 		HistoricRequestElementDate::HistoricRequestElementDate(const std::string& elementName, const Datetime& datetime) 
-			: HistoricRequestElementString(elementName, DisplayFormats::ToYYYYMMDDWithDashes(datetime))
+			: HistoricRequestElementString(elementName, DisplayFormats::ToYYYYMMddNoSeparatorsWithQuotes(datetime))
 		{
 			this->_instance = datetime;
 		}

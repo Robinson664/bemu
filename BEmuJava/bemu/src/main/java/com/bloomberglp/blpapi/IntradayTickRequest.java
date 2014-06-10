@@ -111,41 +111,22 @@ public class IntradayTickRequest extends Request
     	StringBuilder result = new StringBuilder();
     	result.append("IntradayTickRequest = {" + System.getProperty("line.separator"));
 
-        if (this._security != null)
-            result.append(this._security.prettyPrint(1));
-
-        if (this._eventTypes != null)
-            result.append(this._eventTypes.prettyPrint(1));
-
-        if (this._timeStart != null)
-            result.append(this._timeStart.prettyPrint(1));
-
-        if (this._timeEnd != null)
-            result.append(this._timeEnd.prettyPrint(1));
-
-        if (this._includeConditionCodes != null)
-            result.append(this._includeConditionCodes.prettyPrint(1));
-
-        if (this._includeNonPlottableEvents != null)
-            result.append(this._includeNonPlottableEvents.prettyPrint(1));
-
-        if (this._includeExchangeCodes != null)
-            result.append(this._includeExchangeCodes.prettyPrint(1));
-
-        if (this._returnEids != null)
-            result.append(this._returnEids.prettyPrint(1));
-
-        if (this._includeBrokerCodes != null)
-            result.append(this._includeBrokerCodes.prettyPrint(1));
-
-        if (this._includeRpsCodes != null)
-            result.append(this._includeRpsCodes.prettyPrint(1));
-
-        if (this._includeBicMicCodes != null)
-            result.append(this._includeBicMicCodes.prettyPrint(1));
+        Element[] elms = { this._security, this._eventTypes, this._timeStart, this._timeEnd, this._includeConditionCodes, 
+        		this._includeNonPlottableEvents, this._includeExchangeCodes, this._returnEids, this._includeBrokerCodes, 
+        		this._includeRpsCodes, this._includeBicMicCodes};
         
-        result.append("}");
+    	for(int i = 0; i < elms.length; i++)
+    	{
+    		Element current = elms[i];
+    		
+    		if(current != null)
+    		{
+				try { result.append(current.prettyPrint(1)); }
+				catch (Exception e) { }
+    		}
+    	}
         
+        result.append("}" + System.getProperty("line.separator"));        
         return result.toString();
     }
     

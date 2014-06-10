@@ -15,7 +15,8 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarRequestElementString::IntradayBarRequestElementString(const std::string& elementName, const std::string& value) : CanConvertToStringType(value)
+		IntradayBarRequestElementString::IntradayBarRequestElementString(const std::string& elementName, const std::string& value, bool surroundWithQuotes) : 
+			CanConvertToStringType(value, surroundWithQuotes)
 		{
 			this->_elementName = elementName;
 			this->_value = value;
@@ -66,7 +67,7 @@ namespace BEmu
 
 		std::ostream& IntradayBarRequestElementString::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value);
+			this->prettyPrintHelper(stream, level, spacesPerLevel, this->ValueAsString());
 			return stream;
 		}
 	}

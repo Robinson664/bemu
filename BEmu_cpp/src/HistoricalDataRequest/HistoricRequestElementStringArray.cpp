@@ -82,7 +82,7 @@ namespace BEmu
 			{
 				std::string str = *iter;
 
-				stream << str;
+				stream << "\"" << str << "\"";
 				if(count < size - 1)
 					stream << ", ";
 

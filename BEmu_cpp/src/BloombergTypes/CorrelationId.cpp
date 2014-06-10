@@ -87,44 +87,59 @@ namespace BEmu
 		return this->_valueType;
 	}
 
-	std::ostream& operator<<(std::ostream& os, const CorrelationId& correlator)
+	std::ostream& operator<<(std::ostream& os, const CorrelationId& correlator) //code taken from blpapi_correlationid.h
 	{
-		os << "[ valueType=";
+		const char *valueType = 0;
 
-		switch(correlator.valueType())
+		switch (correlator.valueType())
 		{
-			case CorrelationId::AUTOGEN_VALUE:
-				os << "AUTOGEN";
+			case CorrelationId::UNSET_VALUE:
+				valueType = "UNSET";
 				break;
 			case CorrelationId::INT_VALUE:
-				os << "INT";
+				valueType = "INT";
 				break;
 			case CorrelationId::POINTER_VALUE:
-				os << "POINTER";
+				valueType = "POINTER";
 				break;
-			case CorrelationId::UNSET_VALUE:
-				os << "UNSET";
+			case CorrelationId::AUTOGEN_VALUE:
+				valueType = "AUTOGEN";
 				break;
+			default:
+				valueType = "UNKNOWN";
 		}
 
-		os << " classId=" << correlator.classId() << " value=" << correlator.asInteger() << " ]";
+		os << "[ valueType=" << valueType << " classId=" << correlator.classId() << " value=";
+
+		if (correlator.valueType() == CorrelationId::POINTER_VALUE)
+			os << correlator.asPointer();
+		else
+			os << correlator.asInteger();
+
+		os << " ]";
+
 		return os;
 	}
 
-	bool operator==(const CorrelationId& lhs, const CorrelationId& rhs)
+	bool operator==(const CorrelationId& lhs, const CorrelationId& rhs) //code taken from blpapi_correlationid.h
 	{
-		if(lhs.valueType() == CorrelationId::POINTER_VALUE)
-		{
-			return rhs.valueType() == CorrelationId::POINTER_VALUE && lhs.asPointer() == rhs.asPointer();
+		if (lhs.valueType() != rhs.valueType()) {
+			return false;
 		}
-		else if(lhs.valueType() == CorrelationId::AUTOGEN_VALUE || lhs.valueType() == CorrelationId::INT_VALUE)
-		{
-			return 
-				(rhs.valueType() == CorrelationId::AUTOGEN_VALUE || rhs.valueType() == CorrelationId::INT_VALUE) &&				
-				lhs.asInteger() == rhs.asInteger();
+		if (lhs.classId() != rhs.classId()) {
+			return false;
 		}
-		else
-			return lhs.valueType() == CorrelationId::UNSET_VALUE && rhs.valueType() == CorrelationId::UNSET_VALUE;
+
+		if (lhs.valueType() == CorrelationId::POINTER_VALUE) {
+			if (lhs.asPointer() != rhs.asPointer()) {
+				return false;
+			}
+		}
+		else if (lhs.asInteger() != rhs.asInteger()) {
+			return false;
+		}
+
+		return true;
 	}
 
 	bool operator!=(const CorrelationId& lhs, const CorrelationId& rhs)

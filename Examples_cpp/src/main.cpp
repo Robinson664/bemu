@@ -18,9 +18,9 @@ void main()
     cout << "http://bemu.codeplex.com/" << endl;
     cout << "By: Robinson664" << endl;
     cout << endl;
-    cout << "To send a intraday bar data request, push 1" << endl;
-    cout << "To send a intraday tick data request, push 2" << endl;
-    cout << "To send a historical data request, push 3" << endl;
+    cout << "To send a historical data request, push 1" << endl;
+    cout << "To send a intraday bar data request, push 2" << endl;
+    cout << "To send a intraday tick data request, push 3" << endl;
     cout << "To send a market data request, push 4" << endl;
     cout << "To send a reference data request, push 5" << endl;
 
@@ -31,13 +31,13 @@ void main()
 	switch(input)
 	{
 		case 1:
-			Examples::RunIntradayBarExample();
+			Examples::RunHistoricalDataExample();
 			break;
 		case 2:
-			Examples::RunIntradayTickExample();
+			Examples::RunIntradayBarExample();
 			break;
 		case 3:
-			Examples::RunHistoricalDataExample();
+			Examples::RunIntradayTickExample();
 			break;
 		case 4:
 			Examples::RunMarketDataExample();

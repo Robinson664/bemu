@@ -74,22 +74,27 @@ namespace Bloomberglp.Blpapi
 
         public virtual object this[int index]
         {
-            get { throw new NotImplementedException("Element doesn't support this[int index]"); }
+            get { return this.GetValue(index); }
         }
 
         public virtual Element this[string name]
         {
-            get { throw new NotImplementedException("Element doesn't support this[string name] or 'name' didn't match.  'name' is case-sensitive."); }
+            get { return this.GetElement(name); }
         }
 
         public Element this[Name name]
         {
-            get { return this[name.ToString()]; }
+            get { return this.GetElement(name); }
         }
 
         public virtual object this[string name, int index]
         {
-            get { throw new NotImplementedException("Element doesn't support this[string name, int index] or 'name' didn't match.  'name' is case-sensitive."); }
+            get { return this.GetElement(name).GetValue(index); }
+        }
+
+        public object this[Name name, int index]
+        {
+            get { return this.GetElement(name).GetValue(index); }
         }
 
         public bool HasElement(Name name, bool excludeNullElements = false)

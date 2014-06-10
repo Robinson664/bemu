@@ -47,13 +47,14 @@ namespace BEmu
 		std::ostream& ReferenceRequestElementStringArray::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
+			std::string tabsOne = IndentType::Indent(1, spacesPerLevel);
 
 			stream << tabs << this->_elementName << "[] = {" << std::endl;
 
-			stream << tabs;
+			stream << tabs << tabsOne;
 			for(size_t i = 0; i < this->_values.size(); i++)
 			{
-				stream << this->_values[i];
+				stream << "\"" << this->_values[i] << "\"";
 
 				if(i + 1 < this->_values.size())
 					stream << ", ";

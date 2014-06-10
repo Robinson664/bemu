@@ -64,6 +64,8 @@ namespace Examples
             ovrdDtExps.setElement("fieldId", "CHAIN_EXP_DT_OVRD");
             ovrdDtExps.setElement("value", "20141220"); //accepts dates in the format yyyyMMdd (this is Dec. 20, 2014)
 			
+			request.print(cout, 0, 4);
+
             session.sendRequest(request, requestID);
 
             bool continueToLoop = true;

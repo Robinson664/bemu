@@ -285,7 +285,7 @@ namespace BEmu
 			if(this->_includeBicMicCodes != 0)
 				this->_includeBicMicCodes->print(stream, level + 1, spacesPerLevel);
 
-			stream << '}';
+			stream << "}" << std::endl;
 			return stream;
 		}
 

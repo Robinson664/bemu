@@ -73,5 +73,22 @@ namespace BEmu
 				throw requestEx;
 		}
 
+		std::ostream& ReferenceRequest::print(std::ostream& stream, int level, int spacesPerLevel) const
+		{
+			stream << "ReferenceDataRequest = {" << std::endl;
+
+			if(this->_securities->numValues() > 0)
+				this->_securities->print(stream, level + 1, spacesPerLevel);
+
+			if(this->_fields->numValues() > 0)
+				this->_fields->print(stream, level + 1, spacesPerLevel);
+
+			if(this->_overrides->numValues() > 0)
+				this->_overrides->print(stream, level + 1, spacesPerLevel);
+			
+			stream << "}" << std::endl;
+			return stream;
+		}
+
 	}
 }

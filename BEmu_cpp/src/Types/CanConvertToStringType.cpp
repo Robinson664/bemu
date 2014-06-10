@@ -11,24 +11,29 @@
 
 namespace BEmu
 {
-	CanConvertToStringType::CanConvertToStringType(double arg)
+	CanConvertToStringType::CanConvertToStringType(bool arg, bool surroundWithQuotes)
 	{
-		this->ResetStringConversion(arg);
-	}
-	
-	CanConvertToStringType::CanConvertToStringType(int arg)
-	{
-		this->ResetStringConversion(arg);
-	}
-	
-	CanConvertToStringType::CanConvertToStringType(const std::string& arg)
-	{
-		this->ResetStringConversion(arg);
+		this->ResetStringConversion(arg, surroundWithQuotes);
 	}
 
-	CanConvertToStringType::CanConvertToStringType(const Datetime& arg)
+	CanConvertToStringType::CanConvertToStringType(double arg, bool surroundWithQuotes)
 	{
-		this->ResetStringConversion(arg);
+		this->ResetStringConversion(arg, surroundWithQuotes);
+	}
+	
+	CanConvertToStringType::CanConvertToStringType(int arg, bool surroundWithQuotes)
+	{
+		this->ResetStringConversion(arg, surroundWithQuotes);
+	}
+	
+	CanConvertToStringType::CanConvertToStringType(const std::string& arg, bool surroundWithQuotes)
+	{
+		this->ResetStringConversion(arg, surroundWithQuotes);
+	}
+
+	CanConvertToStringType::CanConvertToStringType(const Datetime& arg, bool surroundWithQuotes)
+	{
+		this->ResetStringConversion(arg, surroundWithQuotes);
 	}
 
 	const std::string& CanConvertToStringType::ValueAsString() const
@@ -41,30 +46,63 @@ namespace BEmu
 		this->_ss.str(std::string()); //clears out the stringstream
 	}
 	
-	void CanConvertToStringType::ResetStringConversion(int arg)
+	void CanConvertToStringType::ResetStringConversion(bool arg, bool surroundWithQuotes)
 	{
 		this->ClearStream();
-		this->_ss << arg;
+
+		if(surroundWithQuotes)
+			this->_ss << "\"" << arg << "\"";
+		else
+			this->_ss << (arg ? "true" : "false");
+
 		this->_valueAsString = this->_ss.str();
 	}
 
-	void CanConvertToStringType::ResetStringConversion(double arg)
+	void CanConvertToStringType::ResetStringConversion(int arg, bool surroundWithQuotes)
 	{
 		this->ClearStream();
-		this->_ss << arg;
+
+		if(surroundWithQuotes)
+			this->_ss << "\"" << arg << "\"";
+		else
+			this->_ss << arg;
+
 		this->_valueAsString = this->_ss.str();
 	}
 
-	void CanConvertToStringType::ResetStringConversion(const std::string& arg)
+	void CanConvertToStringType::ResetStringConversion(double arg, bool surroundWithQuotes)
 	{
 		this->ClearStream();
-		this->_valueAsString = arg;
+
+		if(surroundWithQuotes)
+			this->_ss << "\"" << arg << "\"";
+		else
+			this->_ss << arg;
+
+		this->_valueAsString = this->_ss.str();
 	}
 
-	void CanConvertToStringType::ResetStringConversion(const Datetime& arg)
+	void CanConvertToStringType::ResetStringConversion(const std::string& arg, bool surroundWithQuotes)
 	{
 		this->ClearStream();
-		this->_ss << arg;
+
+		if(surroundWithQuotes)
+			this->_ss << "\"" << arg << "\"";
+		else
+			this->_ss << arg;
+		
+		this->_valueAsString = this->_ss.str();
+	}
+
+	void CanConvertToStringType::ResetStringConversion(const Datetime& arg, bool surroundWithQuotes)
+	{
+		this->ClearStream();
+
+		if(surroundWithQuotes)
+			this->_ss << "\"" << arg << "\"";
+		else
+			this->_ss << arg;
+		
 		this->_valueAsString = this->_ss.str();
 	}
 }

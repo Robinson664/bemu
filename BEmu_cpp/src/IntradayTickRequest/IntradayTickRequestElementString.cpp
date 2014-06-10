@@ -56,7 +56,7 @@ namespace BEmu
 		std::ostream& IntradayTickRequestElementString::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);
-			stream << tabs << this->_elementName << " = " << std::endl;
+			stream << tabs << this->_elementName << " = \"" << this->_value << "\"" << std::endl;
 			return stream;
 		}
 

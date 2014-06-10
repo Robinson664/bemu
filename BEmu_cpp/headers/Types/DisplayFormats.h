@@ -23,6 +23,7 @@ namespace BEmu
 			static string Format(const Datetime& dt, const char * format);
 
 		public:
+			static string ToYYYYMMddNoSeparatorsWithQuotes(const Datetime& date);
 			static string ToMMddYYWithSlashes(const Datetime& date);
 			static string ToYYYYMMDDWithDashes(const Datetime& date);
 
@@ -37,5 +38,6 @@ namespace BEmu
 			static bool HistoricalOrReferenceRequests_TryParseInput(const string& str, Datetime & dt);
 
 			static string IntradayRequests_FormatDatetime(const Datetime& date);
+			static string IntradayRequests_FormatDatetime_SecondsLast(const Datetime& datetime);
 	};
 }

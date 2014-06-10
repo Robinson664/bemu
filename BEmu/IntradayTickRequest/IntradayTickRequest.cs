@@ -87,41 +87,18 @@ namespace Bloomberglp.Blpapi.IntradayTickRequest
             StringBuilder result = new StringBuilder();
             result.AppendFormat("IntradayTickRequest = {{{0}", Environment.NewLine);
 
-            if (this._security != null)
-                result.Append(this._security.PrettyPrint(1));
+            Element[] elms = { this._security, this._eventTypes, this._timeStart, this._timeEnd, this._includeConditionCodes, this._includeNonPlottableEvents,
+                                 this._includeExchangeCodes, this._returnEids, this._includeBrokerCodes, this._includeRpsCodes, this._includeBicMicCodes};
 
-            if (this._eventTypes != null)
-                result.Append(this._eventTypes.PrettyPrint(1));
+            for (int i = 0; i < elms.Length; i++)
+            {
+                Element current = elms[i];
 
-            if (this._timeStart != null)
-                result.Append(this._timeStart.PrettyPrint(1));
+                if (current != null)
+                    result.Append(current.PrettyPrint(1));
+            }
 
-            if (this._timeEnd != null)
-                result.Append(this._timeEnd.PrettyPrint(1));
-
-            if (this._includeConditionCodes != null)
-                result.Append(this._includeConditionCodes.PrettyPrint(1));
-
-            if (this._includeNonPlottableEvents != null)
-                result.Append(this._includeNonPlottableEvents.PrettyPrint(1));
-
-            if (this._includeExchangeCodes != null)
-                result.Append(this._includeExchangeCodes.PrettyPrint(1));
-
-            if (this._returnEids != null)
-                result.Append(this._returnEids.PrettyPrint(1));
-
-            if (this._includeBrokerCodes != null)
-                result.Append(this._includeBrokerCodes.PrettyPrint(1));
-
-            if (this._includeRpsCodes != null)
-                result.Append(this._includeRpsCodes.PrettyPrint(1));
-
-            if (this._includeBicMicCodes != null)
-                result.Append(this._includeBicMicCodes.PrettyPrint(1));
-
-            result.Append("}");
-
+            result.AppendLine("}");
             return result.ToString();
         }
 

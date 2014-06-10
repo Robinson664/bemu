@@ -22,14 +22,16 @@ public class IntradayBarRequest extends Request
 	public IntradayBarRequest(Service service)
 	{
 		this._service = service;
-        this._eventTypes = new IntradayBarRequestElementStringArray("TBD");
+        //this._eventTypes = new IntradayBarRequestElementStringArray("TBD");
 	}
 	
 	private IntradayBarRequestElementString _security;
-    private final IntradayBarRequestElementStringArray _eventTypes;
+    
+	//private final IntradayBarRequestElementStringArray _eventTypes;
+	private IntradayBarRequestElementString _eventType;
+    
     private IntradayBarRequestElementTime _dtStart, _dtEnd;
     private IntradayBarRequestElementInt _intervalInMinutes;
-    @SuppressWarnings("unused")
 	private IntradayBarRequestElementBool _gapFillInitialBar, _returnEids, _adjustmentNormalElement, _adjustmentAbnormalElement, _adjustmentSplitElement, _adjustmentFollowDPDF;
 	
 	private final Service _service;
@@ -93,7 +95,8 @@ public class IntradayBarRequest extends Request
         	this._security = new IntradayBarRequestElementString(name, elementValue);
         
         else if (name.equals("eventType"))
-        	this._eventTypes.addValue(elementValue);
+        	//this._eventTypes.addValue(elementValue);
+        	this._eventType = new IntradayBarRequestElementString(name, elementValue);
         
         else
         	throw new Exception("name not recognized.  case-sensitive.");
@@ -145,7 +148,28 @@ public class IntradayBarRequest extends Request
         else
         	throw new Exception("name not recognized.  case-sensitive.");
     }
-    
-    
-    
+
+    public String toString()
+    {
+    	StringBuilder result = new StringBuilder();
+    	result.append("IntradayBarRequest = {" + System.getProperty("line.separator"));
+    	
+    	Element[] elms = { this._security, this._eventType, this._dtStart, this._dtEnd, this._intervalInMinutes, 
+    			this._gapFillInitialBar, this._returnEids, this._adjustmentNormalElement,  this._adjustmentAbnormalElement, 
+    			this._adjustmentSplitElement, this._adjustmentFollowDPDF };
+    	
+    	for(int i = 0; i < elms.length; i++)
+    	{
+    		Element current = elms[i];
+    		
+    		if(current != null)
+    		{
+				try { result.append(current.prettyPrint(1)); }
+				catch (Exception e) { }
+    		}
+    	}
+        
+        result.append("}" + System.getProperty("line.separator"));
+        return result.toString();
+    }
 }

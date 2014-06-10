@@ -35,6 +35,12 @@ namespace BEmu
 		return result;
 	}
 
+	string DisplayFormats::ToYYYYMMddNoSeparatorsWithQuotes(const Datetime& date)
+	{
+		string result(DisplayFormats::Format(date, "\"%Y%m%d\"")); // "20130514"
+		return result;
+	}
+
 	string DisplayFormats::ToMMddYYWithSlashes(const Datetime& date)
 	{
 		string result(DisplayFormats::Format(date, "%m/%d/%y")); //obviously US format
@@ -94,6 +100,12 @@ namespace BEmu
 	string DisplayFormats::IntradayRequests_FormatDatetime(const Datetime& datetime)
 	{
 		string result(DisplayFormats::Format(datetime, "%Y-%m-%dT%H:%M:%S.%f"));
+		return result;
+	}
+
+	string DisplayFormats::IntradayRequests_FormatDatetime_SecondsLast(const Datetime& datetime)
+	{
+		string result(DisplayFormats::Format(datetime, "%Y-%m-%dT%H:%M:%S"));
 		return result;
 	}
 }

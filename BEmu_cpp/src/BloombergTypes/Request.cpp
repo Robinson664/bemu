@@ -105,4 +105,16 @@ namespace BEmu
 		return this->_shptr->getElement(name);
 	}
 
+	std::ostream& Request::print(std::ostream& stream, int level, int spacesPerLevel) const
+	{
+		this->_shptr->print(stream, level, spacesPerLevel);
+		return stream;
+	}
+
+	std::ostream& operator<<(std::ostream& stream, const Request &request)
+	{
+		request.print(stream);
+		return stream;
+	}
+
 }

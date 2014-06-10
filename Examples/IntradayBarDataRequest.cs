@@ -41,7 +41,7 @@ namespace Examples
                     request.Set("security", security); //required
 
                     request.Set("eventType", "TRADE"); //optional: TRADE(default), BID, ASK, BID_BEST, ASK_BEST, BEST_BID, BEST_ASK, BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, SETTLE
-                    request.Set("eventType", "BID"); //A request can have multiple eventTypes
+                    request.Set("eventType", "BID"); //A request cannot have multiple eventTypes.  This "BID" setter overwrites the "TRADE" setter above
                     //Note 1) BID_YIELD, ASK_YIELD, MID_PRICE, AT_TRADE, and SETTLE don't appear in the API documentation, but you will see them if you call "service.ToString()" using the actual Bloomberg API
                     //Note 2) If you request an eventType that isn't supported, the API will throw a KeyNotSupportedException at the "request.Set("eventType", "XXX")" line
                     //Note 3) eventType values are case-sensitive.  Requesting "bid" instead of "BID" will throw a KeyNotSupportedException at the "request.Set("eventType", "bid")" line

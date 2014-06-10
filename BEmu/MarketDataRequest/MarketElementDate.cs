@@ -22,7 +22,8 @@ namespace Bloomberglp.Blpapi.MarketDataRequest
         internal MarketElementDate(string name, DateTime date)
         {
             this._name = name;
-            this._date = new Datetime(date, Datetime.DateTimeTypeEnum.date);
+            //this._date = new Datetime(date, Datetime.DateTimeTypeEnum.date);
+            this._date = new Datetime(date);
         }
 
         public override Name Name { get { return new Name(this._name); } }

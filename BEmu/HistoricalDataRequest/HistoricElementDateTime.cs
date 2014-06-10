@@ -20,7 +20,8 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
 
         internal HistoricElementDateTime(DateTime date)
         {
-            this._date = new Datetime(date, Datetime.DateTimeTypeEnum.date);
+            //this._date = new Datetime(date, Datetime.DateTimeTypeEnum.date);
+            this._date = new Datetime(date);
         }
 
         public override Name  Name { get { return new Name("date"); } }

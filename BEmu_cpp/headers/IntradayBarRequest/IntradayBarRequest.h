@@ -31,7 +31,7 @@ namespace BEmu
 				Service _service;
 
 				boost::shared_ptr<IntradayBarRequestElementString> _security;
-				boost::shared_ptr<IntradayBarRequestElementStringArray> _eventTypes;
+				boost::shared_ptr<IntradayBarRequestElementString> _eventTypes;
 				boost::shared_ptr<IntradayBarRequestElementTime> _dtStart, _dtEnd;
 				boost::shared_ptr<IntradayBarRequestElementInt> _intervalInMinutes;
 				boost::shared_ptr<IntradayBarRequestElementBool> _gapFillInitialBar, _returnEids, _adjustmentNormalElement, _adjustmentAbnormalElement, _adjustmentSplitElement, _adjustmentFollowDPDF;
@@ -58,6 +58,8 @@ namespace BEmu
 				virtual void set(const char* name, const Datetime& value);
 				virtual void set(const char* name, int value);
 				virtual void set(const char* name, bool value);
+
+				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};
 	}
 }

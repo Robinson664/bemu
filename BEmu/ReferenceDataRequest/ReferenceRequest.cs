@@ -97,8 +97,7 @@ namespace Bloomberglp.Blpapi.ReferenceDataRequest
             if (this._overrides.NumValues > 0)
                 result.Append(this._overrides.PrettyPrint(1));
 
-            result.Append("}");
-
+            result.AppendLine("}");
             return result.ToString();
         }
 

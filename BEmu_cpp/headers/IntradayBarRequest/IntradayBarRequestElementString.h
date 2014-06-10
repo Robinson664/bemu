@@ -24,7 +24,7 @@ namespace BEmu
 				std::string _elementName, _value;
 
 			public:
-				IntradayBarRequestElementString(const std::string& elementName, const std::string& value);
+				IntradayBarRequestElementString(const std::string& elementName, const std::string& value, bool surroundWithQuotes);
 				virtual ~IntradayBarRequestElementString();
 				const std::string& security() const;
 

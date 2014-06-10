@@ -9,7 +9,8 @@
 
 #pragma once
 
-#include "IntradayTickRequest/IntradayTickRequestElementString.h"
+#include "BloombergTypes/ElementPtr.h"
+#include "Types/CanConvertToStringType.h"
 
 namespace BEmu
 {
@@ -17,16 +18,23 @@ namespace BEmu
 
 	namespace IntradayTickRequest
 	{
-		class IntradayTickRequestElementTime : public IntradayTickRequestElementString
+		class IntradayTickRequestElementTime : public ElementPtr, public CanConvertToStringType
 		{
 			private:
 				Datetime _instance;
+				std::string _elementName;
 
 			public:
-				IntradayTickRequestElementTime(const std::string& elementName);
 				IntradayTickRequestElementTime(const std::string& elementName, const Datetime& date);
 				~IntradayTickRequestElementTime();
+
 				Datetime getDate() const;
+
+				virtual Name name() const;
+				virtual size_t numValues() const { return 1; }
+				virtual size_t numElements() const { return 0; }
+
+				virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
 		};
 	}
 }

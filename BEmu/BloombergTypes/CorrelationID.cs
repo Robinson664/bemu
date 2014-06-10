@@ -16,14 +16,17 @@ namespace Bloomberglp.Blpapi
 
     public class CorrelationID
     {
-        private readonly bool _isInternal;
-        public bool IsInternal { get { return this._isInternal; } }
+        //                                            IsInternal | IsObject | IsValue
+        private const int CONSTRUCTED_OBJECT = 7; //      false  |  true    |  false
+        private const int CONSTRUCTED_VALUE = 3;  //      false  |  false   |  true
+        private const int INTERNAL_VALUE = 1;     //      true   |  false   |  true
+        private const int UNINITIALIZED = 0;      //      true   |  false   |  true
 
-        private readonly bool _isObject;
-        public bool IsObject { get { return this._isObject; } }
+        private readonly int _corrType;
 
-        private readonly bool _isValue;
-        public bool IsValue { get { return this._isValue; } }
+        public bool IsInternal { get { return (this._corrType & 2) == 0; } }
+        public bool IsObject { get { return (this._corrType & 4) != 0; } }
+        public bool IsValue { get { return (this._corrType & 4) == 0; } }
 
         private readonly long _value;
         public long Value { get { return this._value; } }
@@ -38,76 +41,72 @@ namespace Bloomberglp.Blpapi
             if (value == null)
                 throw new NullReferenceException(); //[sic]
 
-            this._isValue = false;
-            this._isObject = true;
-            this._isInternal = false;
+            this._corrType = CorrelationID.CONSTRUCTED_OBJECT;
+            this._value = 0L;
             this._object = value;
         }
 
         public CorrelationID(long value)
         {
-            this._isValue = true;
-            this._isObject = false;
-            this._isInternal = false;
+            this._corrType = CorrelationID.CONSTRUCTED_VALUE;
             this._value = value;
+            this._object = null;
         }
 
         public CorrelationID(CorrelationID value)
         {
-            this._isValue = value._isValue;
-            this._isObject = value._isObject;
-            this._isInternal = value._isInternal;
+            this._corrType = value._corrType;
             this._value = value._value;
+            this._object = value._object;
         }
 
         internal CorrelationID()
         {
-            this._isValue = true;
-            this._isObject = false;
-            this._isInternal = true;
+            this._corrType = CorrelationID.INTERNAL_VALUE;
             this._value = CorrelationID._nextInternalCorrelationId++;
+            this._object = null;
         }
 
         public override bool Equals(object obj)
         {
-            var corr = obj as CorrelationID;
-
-            if (corr == null) //either obj is null, or obj is not a CorrelationID
+            if (this == obj)
+            {
+                return true;
+            }
+            if (!(obj is CorrelationID))
+            {
                 return false;
+            }
+            CorrelationID correlationID = (CorrelationID)obj;
 
-            else if (this._isObject != corr._isObject)
+            if (this._corrType != correlationID._corrType)
+            {
                 return false;
-
-            else if (this._isObject)
-                return object.ReferenceEquals(this._object, corr._object);
-
-            else //value
-                return this._value == corr._value;
+            }
+            if (this.IsValue)
+            {
+                return this._corrType == correlationID._corrType;
+            }
+            return this._object.Equals(correlationID._object);
         }
 
         public override int GetHashCode()
         {
-            if (this._isObject)
+            if (!this.IsValue)
                 return this._object.GetHashCode();
-
-            else if (this._isValue)
-                return this._value.GetHashCode();
-
             else
-                throw new NotImplementedException();
+                return (int)(this._value ^ this._value >> 32);
         }
 
         public override string ToString()
         {
-            if (this._isValue)
-                return string.Format("{0}: {1}",
-                    this._isInternal ? "Internal" : "User",
-                    this._value);
-
-            else //object
-                return string.Format("{0}: {1}",
-                    this._isInternal ? "Internal" : "User",
-                    this._object.ToString());
+            switch (this._corrType)
+            {
+                case 0: return "Uninitialized";
+                case 1: return "Internal: " + this._value;
+                case 3: return "User: " + this._value;
+            }
+            return "User: " + this._object.ToString();
         }
     }
 }

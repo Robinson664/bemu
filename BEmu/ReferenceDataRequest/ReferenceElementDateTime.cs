@@ -22,7 +22,8 @@ namespace Bloomberglp.Blpapi.ReferenceDataRequest
         internal ReferenceElementDateTime(string name, DateTime value)
         {
             this._name = name;
-            this._value = new Datetime(value, Datetime.DateTimeTypeEnum.date);
+            //this._value = new Datetime(value, Datetime.DateTimeTypeEnum.date);
+            this._value = new Datetime(value);
         }
 
         public override Name Name { get { return new Name(this._name); } }

@@ -23,9 +23,9 @@ namespace Examples
             Console.WriteLine("By: Robinson664");
             Console.WriteLine();
 
-            Console.WriteLine("To send a intraday bar data request, push 1");
-            Console.WriteLine("To send a intraday tick data request, push 2");
-            Console.WriteLine("To send a historical data request, push 3");
+            Console.WriteLine("To send a historical data request, push 1");
+            Console.WriteLine("To send a intraday bar data request, push 2");
+            Console.WriteLine("To send a intraday tick data request, push 3");
             Console.WriteLine("To send a market data request, push 4");
             Console.WriteLine("To send a reference data request, push 5");
 
@@ -37,13 +37,13 @@ namespace Examples
             switch (input)
             {
                 case "1":
-                    IntradayBarDataRequest.RunExample();
+                    HistoricalDataRequest.RunExample();
                     break;
                 case "2":
-                    IntradayTickDataRequest.RunExample();
+                    IntradayBarDataRequest.RunExample();
                     break;
                 case "3":
-                    HistoricalDataRequest.RunExample();
+                    IntradayTickDataRequest.RunExample();
                     break;
                 case "4":
                     MarketDataRequest.RunExample();

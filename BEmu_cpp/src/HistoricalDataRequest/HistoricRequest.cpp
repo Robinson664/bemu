@@ -332,5 +332,46 @@ namespace BEmu
 				throw requestEx;
 		}
 
+		std::ostream& HistoricRequest::print(std::ostream& stream, int level, int spacesPerLevel) const
+		{
+			stream << "HistoricalDataRequest = {" << std::endl;
+			
+			if(this->_securities->numValues() > 0)
+				this->_securities->print(stream, level + 1, spacesPerLevel);
+
+			if(this->_fields->numValues() > 0)
+				this->_fields->print(stream, level + 1, spacesPerLevel);
+
+			this->_dtStart->print(stream, level + 1, spacesPerLevel);
+			this->_dtEnd->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_periodicityAdjustmentElement)
+				this->_periodicityAdjustmentElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_periodicityElement)
+				this->_periodicityElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_pricingOptionElement)
+				this->_pricingOptionElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_maxDataPointElement)
+				this->_maxDataPointElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_adjustmentNormalElement)
+				this->_adjustmentNormalElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_adjustmentAbnormalElement)
+				this->_adjustmentAbnormalElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_adjustmentSplitElement)
+				this->_adjustmentSplitElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_overrideOptionsElement)
+				this->_overrideOptionsElement->print(stream, level + 1, spacesPerLevel);
+			
+			stream << '}' << std::endl;
+			return stream;
+		}
+
 	}
 }

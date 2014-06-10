@@ -67,9 +67,10 @@ namespace BEmu
 		std::ostream& IntradayTickRequestElementStringArray::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
 			std::string tabs = IndentType::Indent(level, spacesPerLevel);
-			std::string tab = IndentType::Indent(level, 1);
+			std::string tabsOne = IndentType::Indent(1, spacesPerLevel);
+
 			stream << tabs << this->_elementName << "[] = {" << std::endl;
-			stream << tabs << tab;
+			stream << tabs << tabsOne;
 
 			unsigned count = 1;
 			for(std::vector<std::string>::const_iterator iter = this->_values.begin(); iter != this->_values.end(); ++iter, ++count)
@@ -81,7 +82,7 @@ namespace BEmu
 					stream << ", ";
 			}
 
-			stream << tabs << '}' << std::endl;
+			stream << std::endl << tabs << '}' << std::endl;
 			return stream;
 		}
 

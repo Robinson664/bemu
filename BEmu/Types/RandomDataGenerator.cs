@@ -101,9 +101,11 @@ namespace Bloomberglp.Blpapi.Types
             string upper = fieldName.ToUpper();
 
             if (upper.Contains("TIME"))
-                result = new Datetime(DateTime.Now.AddMinutes(-1d * RandomDataGenerator._random.NextDouble() * 100d), Datetime.DateTimeTypeEnum.time);
+                //result = new Datetime(DateTime.Now.AddMinutes(-1d * RandomDataGenerator._random.NextDouble() * 100d), Datetime.DateTimeTypeEnum.time);
+                result = new Datetime(DateTime.Now.AddMinutes(-1d * RandomDataGenerator._random.NextDouble() * 100d));
             else if (upper.Contains("DATE"))
-                result = new Datetime(DateTime.Now.AddDays(-1d * RandomDataGenerator._random.NextDouble() * 100d), Datetime.DateTimeTypeEnum.date);
+                //result = new Datetime(DateTime.Now.AddDays(-1d * RandomDataGenerator._random.NextDouble() * 100d), Datetime.DateTimeTypeEnum.date);
+                result = new Datetime(DateTime.Now.AddDays(-1d * RandomDataGenerator._random.NextDouble() * 100d));
             else
                 result = RandomDataGenerator.RandomDouble();
 
@@ -252,17 +254,20 @@ namespace Bloomberglp.Blpapi.Types
 
         private static Datetime RandomTime()
         {
-            return new Datetime(DateTime.Today.AddSeconds(RandomDataGenerator.RandomInt(1000)), Datetime.DateTimeTypeEnum.time);
+            //return new Datetime(DateTime.Today.AddSeconds(RandomDataGenerator.RandomInt(1000)), Datetime.DateTimeTypeEnum.time);
+            return new Datetime(DateTime.Today.AddSeconds(RandomDataGenerator.RandomInt(1000)));
         }
 
         private static Datetime RandomDate()
         {
-            return new Datetime(DateTime.Today.AddDays(RandomDataGenerator.RandomInt(100)), Datetime.DateTimeTypeEnum.date);
+            //return new Datetime(DateTime.Today.AddDays(RandomDataGenerator.RandomInt(100)), Datetime.DateTimeTypeEnum.date);
+            return new Datetime(DateTime.Today.AddDays(RandomDataGenerator.RandomInt(100)));
         }
 
         private static Datetime RandomDatetime()
         {
-            return new Datetime(DateTime.Today.AddDays(RandomDataGenerator.RandomInt(100)).AddSeconds(RandomDataGenerator.RandomInt(1000)), Datetime.DateTimeTypeEnum.both);
+            //return new Datetime(DateTime.Today.AddDays(RandomDataGenerator.RandomInt(100)).AddSeconds(RandomDataGenerator.RandomInt(1000)), Datetime.DateTimeTypeEnum.both);
+            return new Datetime(DateTime.Today.AddDays(RandomDataGenerator.RandomInt(100)).AddSeconds(RandomDataGenerator.RandomInt(1000)));
         }
 
         private static bool RandomBool()

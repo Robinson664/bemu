@@ -62,7 +62,7 @@ namespace Bloomberglp.Blpapi
 
         public virtual object this[string name, int index]
         {
-            get { throw new NotImplementedException("BEmu.Message.this[string, int]: is not implemented"); }
+            get { return this.GetElement(name).GetValue(index); }
         }
 
         public bool HasElement(Name name, bool excludeNullElements = false)

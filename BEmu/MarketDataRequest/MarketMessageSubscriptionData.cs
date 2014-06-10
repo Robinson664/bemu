@@ -31,18 +31,17 @@ namespace Bloomberglp.Blpapi.MarketDataRequest
                 else if (item.Value is Datetime)
                 {
                     Datetime temp = (Datetime)item.Value;
-                    switch (temp.DateTimeType)
-                    {
-                        case Datetime.DateTimeTypeEnum.date:
-                            elm = new MarketElementDate(item.Key, temp.ToSystemDateTime());
-                            break;
-                        case Datetime.DateTimeTypeEnum.time:
-                            elm = new MarketElementTime(item.Key, temp.ToSystemDateTime());
-                            break;
-                        case Datetime.DateTimeTypeEnum.both:
-                            elm = new MarketElementDatetime(item.Key, temp.ToSystemDateTime());
-                            break;
-                    }
+
+                    bool isDate = temp.HasParts(Datetime.DATE);
+                    bool isTime = temp.HasParts(Datetime.TIME);
+                    bool isDatetime = isDate && isTime;
+
+                    if (isDatetime)
+                        elm = new MarketElementDatetime(item.Key, temp.ToSystemDateTime());
+                    else if(isDate)
+                        elm = new MarketElementDate(item.Key, temp.ToSystemDateTime());
+                    else if(isTime)
+                        elm = new MarketElementTime(item.Key, temp.ToSystemDateTime());
                 }
 
                 else if (item.Value is int)

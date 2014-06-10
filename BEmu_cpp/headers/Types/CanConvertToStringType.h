@@ -24,16 +24,18 @@ namespace BEmu
 			void ClearStream();
 
 		protected:
-			CanConvertToStringType(int arg);
-			CanConvertToStringType(double arg);
-			CanConvertToStringType(const std::string& arg);
-			CanConvertToStringType(const Datetime& arg);
+			CanConvertToStringType(int arg, bool surroundWithQuotes = false);
+			CanConvertToStringType(bool arg, bool surroundWithQuotes = false);
+			CanConvertToStringType(double arg, bool surroundWithQuotes = false);
+			CanConvertToStringType(const std::string& arg, bool surroundWithQuotes = false);
+			CanConvertToStringType(const Datetime& arg, bool surroundWithQuotes = false);
 			
 			//Use these to change the _valueAsString argument
-			void ResetStringConversion(int arg);
-			void ResetStringConversion(double arg);
-			void ResetStringConversion(const std::string& arg);
-			void ResetStringConversion(const Datetime& arg);
+			void ResetStringConversion(int arg, bool surroundWithQuotes = false);
+			void ResetStringConversion(bool arg, bool surroundWithQuotes = false);
+			void ResetStringConversion(double arg, bool surroundWithQuotes = false);
+			void ResetStringConversion(const std::string& arg, bool surroundWithQuotes = false);
+			void ResetStringConversion(const Datetime& arg, bool surroundWithQuotes = false);
 			
 			const std::string& ValueAsString() const;
 	};

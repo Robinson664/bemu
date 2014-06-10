@@ -1,105 +1,143 @@
 ﻿//------------------------------------------------------------------------------
-// <copyright project="BEmu_csh" file="BloombergTypes/Name.cs" company="Jordan Robinson">
-//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
-//
-//     The use of this software is governed by the Microsoft Public License
-//     which is included with this distribution.
-// </copyright>
+//  This code comes from Bloomberg.Blpapi.dll
 //------------------------------------------------------------------------------
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using System.Collections;
+using System.Threading;
 
 namespace Bloomberglp.Blpapi
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-
     public class Name
     {
-        private readonly bool _isNull;
-        private readonly string _name;
-        private readonly static Dictionary<string, Name> _globalNameTable = new Dictionary<string, Name>();
-        
-        //Note that as implemented in the actual BB API, a user *can* overwrite Name.NullName.
-        //  They should have made Name.NullName a static property with a private setter.
-        public static Name NullName = new Name();
+        private static Hashtable s_globalNameTable = new Hashtable();
+		private static readonly object s_globalNameTableLock = new object();
+		private static Random d_hashGenerator = new Random();
+		private string d_name;
+		private Name d_impl;
+		private int d_hash;
+		public static Name NullName = new Name(0);
 
-        public Name()
+		public Name()
+		{
+			this.d_name = Name.NullName.d_name;
+			this.d_impl = Name.NullName.d_impl;
+			this.d_hash = Name.NullName.d_hash;
+		}
+		private Name(int zero)
+		{
+			this.d_name = null;
+			this.d_impl = this;
+			this.d_hash = Name.d_hashGenerator.Next();
+		}
+		public Name(string nameString)
         {
-            this._name = null;
-            this._isNull = true;
-        }
-
-        public Name(string nameString)
-        {
-            if (nameString == null)
-                throw new ArgumentNullException("nameString");
-
-            this._name = nameString;
-            this._isNull = false;
-
-            Name existing;
-            if (!Name._globalNameTable.TryGetValue(nameString, out existing))
-                Name._globalNameTable.Add(nameString, this);
-        }
-
-        /// <summary>
-        /// Finds the Name in the Global Name Table and returns it or  returns null if the Name doesn't exist.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns>The Name if it already exists, or null otherwise</returns>
-        public static Name FindName(string nameString)
-        {
-            Name result;
-            if (Name._globalNameTable.TryGetValue(nameString, out result))
-                return result;
-            else
-                return null;
-        }
-
-        /// <summary>
-        /// Finds the Name in the Global Name Table, and returns it.
-        /// Creates a new Name in the Global Name Table if the Name doesn't always exist.
-        /// This works almost the same as the string contructor if the Name doesn't already exist (the hashcodes will be different)
-        /// </summary>
-        /// <param name="nameString"></param>
-        /// <returns>The Name</returns>
+            Name name = Name.GetName(nameString);
+            this.d_impl = name;
+            this.d_name = this.d_impl.d_name;
+            this.d_hash = this.d_impl.d_hash;
+		}
+        private Name(string nameString, bool unUsed)
+		{
+			this.d_name = nameString;
+			this.d_impl = this;
+            Name.s_globalNameTable[nameString] = this;
+            this.d_hash = Name.d_hashGenerator.Next();
+		}
         public static Name GetName(string nameString)
-        {
+		{
+			if (nameString == null)
+			{
+                return Name.NullName;
+			}
+			object obj;
+            Monitor.Enter(obj = Name.s_globalNameTableLock);
+			Name result;
+			try
+			{
+                Name name = (Name)Name.s_globalNameTable[nameString];
+				if (name == null)
+				{
+                    name = new Name(nameString, true);
+				}
+				result = name;
+			}
+			finally
+			{
+				Monitor.Exit(obj);
+			}
+			return result;
+		}
+        public static Name FindName(string nameString)
+		{
+			if (nameString == null)
+			{
+                return Name.NullName;
+			}
+			object obj;
+            Monitor.Enter(obj = Name.s_globalNameTableLock);
             Name result;
-            if (!Name._globalNameTable.TryGetValue(nameString, out result))
-                result = new Name(nameString); //adds the Name to the Global Name Table
-            return result;
-        }
-
-        public static bool HasName(string nameString)
-        {
-            return Name._globalNameTable.ContainsKey(nameString);
-        }
-
-        public static void FreeGlobalNameTable()
-        {
-            Name._globalNameTable.Clear();
-        }
-
-        public override string ToString()
-        {
-            return this._name;
-        }
-
-        public override bool Equals(object obj)
-        {
-            return obj.ToString() == this._name;
-        }
-
-        // name.GetHashCode() != name.ToString().GetHashCode()
-        public override int GetHashCode()
-        {
-            if (this._isNull)
-                throw new NullReferenceException();
-            else
-                return base.GetHashCode();
-        }
-
+			try
+			{
+                result = (Name)Name.s_globalNameTable[nameString];
+			}
+			finally
+			{
+				Monitor.Exit(obj);
+			}
+			return result;
+		}
+		public static bool HasName(string nameString)
+		{
+			if (nameString == null)
+			{
+				return true;
+			}
+			object obj;
+            Monitor.Enter(obj = Name.s_globalNameTableLock);
+			bool result;
+			try
+			{
+                result = Name.s_globalNameTable.ContainsKey(nameString);
+			}
+			finally
+			{
+				Monitor.Exit(obj);
+			}
+			return result;
+		}
+		public override bool Equals(object other)
+		{
+			if (other is string)
+			{
+				return this.d_name.Equals(other);
+			}
+            return other is Name && ((Name)other).d_impl == this.d_impl;
+		}
+		public override int GetHashCode()
+		{
+			return this.d_hash;
+		}
+		public override string ToString()
+		{
+			return this.d_name;
+		}
+		public static void FreeGlobalNameTable()
+		{
+			object obj;
+            Monitor.Enter(obj = Name.s_globalNameTableLock);
+			try
+			{
+                Name.s_globalNameTable.Clear();
+			}
+			finally
+			{
+				Monitor.Exit(obj);
+			}
+		}
     }
 }

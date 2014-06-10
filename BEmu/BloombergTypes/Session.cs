@@ -18,6 +18,15 @@ namespace Bloomberglp.Blpapi
 
     public class Session
     {
+        public enum SubscriptionStatus
+        {
+            SUBSCRIBING,
+            WAITING_FOR_MESSAGES,
+            RECEIVING_MESSAGES,
+            UNSUBSCRIBED,
+            RESUBSCRIBING
+        }
+
         private SessionOptions _sessionOptions;
 
         #pragma warning disable 0414 //disables the "is assigned but its value is never used" warning

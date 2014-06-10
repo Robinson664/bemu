@@ -9,7 +9,8 @@
 
 #pragma once
 
-#include "IntradayBarRequest/IntradayBarRequestElementString.h"
+#include "BloombergTypes/ElementPtr.h"
+#include "Types/CanConvertToStringType.h"
 
 namespace BEmu
 {
@@ -17,16 +18,28 @@ namespace BEmu
 
 	namespace IntradayBarRequest
 	{
-		class IntradayBarRequestElementTime : public IntradayBarRequestElementString
+		class IntradayBarRequestElementTime : public ElementPtr, public CanConvertToStringType
 		{
 			private:
 				Datetime _dtvalue;
+				std::string _elementName;
 
 			public:
-				IntradayBarRequestElementTime(const std::string& elementName);
+				//IntradayBarRequestElementTime(const std::string& elementName);
 				IntradayBarRequestElementTime(const std::string& elementName, const Datetime& dtvalue);
 				~IntradayBarRequestElementTime();
 				Datetime getDatetime() const;
+
+				virtual Name name() const;
+				virtual size_t numValues() const;
+				virtual size_t numElements() const;
+		
+				virtual bool isArray() const;
+				virtual bool isComplexType() const;
+
+				virtual const char * getValueAsString(int index) const;
+
+				virtual std::ostream& print(std::ostream& stream, int level, int spacesPerLevel) const;
 		};
 	}
 }

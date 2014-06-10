@@ -19,11 +19,12 @@ public class App
         System.out.println("http://bemu.codeplex.com/");
         System.out.println("By: Robinson664");
         System.out.println();
-        System.out.println("To send a reference data request, push 1");
-        System.out.println("To send a market data request, push 2");
-        System.out.println("To send a historical data request, push 3");
-        System.out.println("To send a intraday tick data request, push 4");
-        System.out.println("To send a intraday bar data request, push 5");
+
+        System.out.println("To send a historical data request, push 1");
+        System.out.println("To send a intraday bar data request, push 2");
+        System.out.println("To send a intraday tick data request, push 3");
+        System.out.println("To send a market data request, push 4");
+        System.out.println("To send a reference data request, push 5");
         
         Scanner scan = new Scanner(System.in);
         int input = scan.nextInt();
@@ -35,19 +36,19 @@ public class App
         switch(input)
         {
         	case 1:
-        		RunReferenceDataRequest.RunExample();
-        		break;
-        	case 2:
-        		RunMarketDataSubscription.RunExample();
-        		break;
-        	case 3:
         		RunHistoricalDataRequest.RunExample();
         		break;
-        	case 4:
+        	case 2:
+        		RunIntradayBarDataRequest.RunExample();
+        		break;
+        	case 3:
         		RunIntradayTickDataRequest.RunExample();
         		break;
+        	case 4:
+        		RunMarketDataSubscription.RunExample();
+        		break;
         	case 5:
-        		RunIntradayBarDataRequest.RunExample();
+        		RunReferenceDataRequest.RunExample();
         		break;
         	default:
         		informationReturned = false;

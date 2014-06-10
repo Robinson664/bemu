@@ -18,9 +18,10 @@ namespace BEmu
 	namespace IntradayTickRequest
 	{
 		IntradayTickRequestElementBool::IntradayTickRequestElementBool(const std::string& elementName, bool bvalue)
-			: IntradayTickRequestElementString(elementName, bvalue ? "True" : "False")
+			: CanConvertToStringType(bvalue, false)
 		{
 			this->_bvalue = bvalue;
+			this->_elementName = elementName;
 		}
 
 		IntradayTickRequestElementBool::~IntradayTickRequestElementBool()
@@ -31,5 +32,19 @@ namespace BEmu
 		{
 			return this->_bvalue;
 		}
+
+		Name IntradayTickRequestElementBool::name() const
+		{
+			Name result(this->_elementName.c_str());
+			return result;
+		}
+
+		std::ostream& IntradayTickRequestElementBool::print(std::ostream& stream, int level, int spacesPerLevel) const
+		{
+			std::string tabs = IndentType::Indent(level, spacesPerLevel);
+			stream << tabs << this->_elementName << " = " << this->ValueAsString() << std::endl;
+			return stream;
+		}
+
 	}
 }

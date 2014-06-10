@@ -22,11 +22,9 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		IntradayBarRequest::IntradayBarRequest(const Service& svc) :
-			_eventTypes(new IntradayBarRequestElementStringArray("TBD"))
+		IntradayBarRequest::IntradayBarRequest(const Service& svc)
 		{
-			this->_isNull_eventTypes = false;
-
+			this->_isNull_eventTypes = true;
 			this->_isNull_security = true;
 			this->_isNull_dtStart = true;
 			this->_isNull_dtEnd = true;
@@ -109,12 +107,13 @@ namespace BEmu
 		{
 			if(strncmp(name, "security", 9) == 0)
 			{
-				this->_security = boost::shared_ptr<IntradayBarRequestElementString>(new IntradayBarRequestElementString(name, value));
+				this->_security = boost::shared_ptr<IntradayBarRequestElementString>(new IntradayBarRequestElementString(name, value, true));
 				this->_isNull_security = false;
 			}
 			else if(strncmp(name, "eventType", 10) == 0)
 			{
-				this->_eventTypes->addValue(value);
+				this->_eventTypes = boost::shared_ptr<IntradayBarRequestElementString>(new IntradayBarRequestElementString(name, value, false));
+				this->_isNull_eventTypes = false; //only one eventType allowed per request
 			}
 			else
 				throw requestEx;
@@ -182,5 +181,47 @@ namespace BEmu
 			else
 				throw requestEx;
 		}
+
+		std::ostream& IntradayBarRequest::print(std::ostream& stream, int level, int spacesPerLevel) const
+		{
+			stream << "IntradayBarRequest = {" << std::endl;
+			
+			if(!this->_isNull_security)
+				this->_security->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_eventTypes)
+				this->_eventTypes->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_dtEnd)
+				this->_dtEnd->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_dtStart)
+				this->_dtStart->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_intervalInMinutes)
+				this->_intervalInMinutes->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_gapFillInitialBar)
+				this->_gapFillInitialBar->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_returnEids)
+				this->_returnEids->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_adjustmentNormalElement)
+				this->_adjustmentNormalElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_adjustmentAbnormalElement)
+				this->_adjustmentAbnormalElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_adjustmentSplitElement)
+				this->_adjustmentSplitElement->print(stream, level + 1, spacesPerLevel);
+
+			if(!this->_isNull_adjustmentFollowDPDF)
+				this->_adjustmentFollowDPDF->print(stream, level + 1, spacesPerLevel);
+			
+			stream << '}' << std::endl;
+			return stream;
+		}
+
 	}
 }

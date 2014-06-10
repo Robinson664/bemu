@@ -19,11 +19,14 @@ namespace Bloomberglp.Blpapi.IntradayBarRequest
         internal IntradayBarRequest(Service service)
         {
             this._service = service;
-            this._eventTypes = new IntradayBarRequestElementStringArray("TBD");
+            //this._eventTypes = new IntradayBarRequestElementStringArray("TBD");
         }
 
         private IntradayBarRequestElementString _security;
-        private readonly IntradayBarRequestElementStringArray _eventTypes;
+        
+        //private readonly IntradayBarRequestElementStringArray _eventTypes;
+        private IntradayBarRequestElementString _eventType;
+        
         private IntradayBarRequestElementTime _dtStart, _dtEnd;
         private IntradayBarRequestElementInt _intervalInMinutes;
         private IntradayBarRequestElementBool _gapFillInitialBar, _returnEids, _adjustmentNormalElement, _adjustmentAbnormalElement, _adjustmentSplitElement, _adjustmentFollowDPDF;
@@ -63,7 +66,8 @@ namespace Bloomberglp.Blpapi.IntradayBarRequest
                     this._security = new IntradayBarRequestElementString(name, elementValue);
                     break;
                 case "eventType":
-                    this._eventTypes.AddValue(elementValue);
+                    //this._eventTypes.AddValue(elementValue);
+                    this._eventType = new IntradayBarRequestElementString(name, elementValue);
                     break;
                 default:
                     throw new ArgumentException("name not recognized.  case-sensitive.");
@@ -122,6 +126,26 @@ namespace Bloomberglp.Blpapi.IntradayBarRequest
                 default:
                     throw new ArgumentException("name not recognized.  case-sensitive.");
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder result = new StringBuilder();
+            result.AppendFormat("IntradayBarRequest = {{{0}", Environment.NewLine); //TODO: check this code (and also the c++ version) against the actual BB API
+
+            Element[] elms = { this._security, this._eventType, this._dtStart, this._dtEnd, this._intervalInMinutes, this._gapFillInitialBar, 
+                                 this._returnEids, this._adjustmentNormalElement,  this._adjustmentAbnormalElement, this._adjustmentSplitElement, this._adjustmentFollowDPDF };
+
+            for (int i = 0; i < elms.Length; i++)
+            {
+                Element current = elms[i];
+
+                if (current != null)
+                    result.Append(current.PrettyPrint(1));
+            }
+
+            result.AppendLine("}");
+            return result.ToString();
         }
 
     }

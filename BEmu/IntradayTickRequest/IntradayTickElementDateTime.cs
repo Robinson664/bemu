@@ -20,7 +20,8 @@ namespace Bloomberglp.Blpapi.IntradayTickRequest
 
         internal IntradayTickElementDateTime(DateTime date)
         {
-            this._date = new Datetime(date, Datetime.DateTimeTypeEnum.both);
+            //this._date = new Datetime(date, Datetime.DateTimeTypeEnum.both);
+            this._date = new Datetime(date);
         }
 
         public override Name  Name { get { return new Name("time"); } }

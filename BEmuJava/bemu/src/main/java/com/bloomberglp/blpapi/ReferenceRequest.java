@@ -80,7 +80,7 @@ public class ReferenceRequest extends Request
     public String toString()
     {
         StringBuilder result = new StringBuilder();
-        result.append(String.format("ReferenceDataRequest = {%s", System.getProperty("line.separator")));
+        result.append("ReferenceDataRequest = {" + System.getProperty("line.separator"));
 
         if (this._securities.numValues() > 0)
             result.append(this._securities.prettyPrint(1));
@@ -95,7 +95,7 @@ public class ReferenceRequest extends Request
 		}
         catch (Exception e) { }
 
-        result.append("}");
+        result.append("}" + System.getProperty("line.separator"));
 
         return result.toString();
     }

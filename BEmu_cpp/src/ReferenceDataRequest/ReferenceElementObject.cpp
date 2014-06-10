@@ -9,6 +9,7 @@
 
 #include "ReferenceDataRequest/ReferenceElementObject.h"
 #include "BloombergTypes/Name.h"
+#include "Types/IndentType.h"
 
 namespace BEmu
 {
@@ -49,8 +50,12 @@ namespace BEmu
 
 		std::ostream& ReferenceElementObject::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value.ToString());
+			std::string tabs(IndentType::Indent(level, spacesPerLevel));
+			stream << tabs << this->_name << " = \"" << this->_value.ToString() << "\"" << std::endl;
 			return stream;
+
+			//this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value.ToString());
+			//return stream;
 		}
 
 	}

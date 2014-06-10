@@ -69,10 +69,14 @@ namespace BEmu
 			virtual Element getElement(const char* name);
 			Element getElement(const Name& name);
 
+			virtual std::ostream& print(std::ostream& stream, int level = 0, int spacesPerLevel = 4) const;
+
 			// The C# version of the code has a "HasElement(string)" method in the Request class.  The C++ version of the code doesn't.
 			//    In the C++ version, an equivalent call would be "request.asElement().hasElement(string)".
 			//    Given that the caller creates a request object, the caller should be aware of whether or not a Request object has some given Element,
 			//      I find the Request.hasElement(...) methods unnecessary.  (Maybe the API developers thought the same way)
 			//    Note that I haven't implemented all of the asElement()s for the Requests.  I can't think of a use-case for asElements()s.
 	};
+
+	std::ostream& operator<<(std::ostream& stream, const RequestPtr &request);
 }

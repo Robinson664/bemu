@@ -170,35 +170,22 @@ public class HistoricRequest extends Request
         if (this._fields.numValues() > 0)
             result.append(this._fields.prettyPrint(1));
 
-        result.append(this._dtStart.prettyPrint(1));
-        result.append(this._dtEnd.prettyPrint(1));
-    	
-        if (this._periodicityAdjustmentElement != null)
-            result.append(this._periodicityAdjustmentElement.prettyPrint(1));
-
-        if (this._periodicityElement != null)
-            result.append(this._periodicityElement.prettyPrint(1));
-
-        if (this._overrideOptionsElement != null)
-            result.append(this._overrideOptionsElement.prettyPrint(1));
-
-        if (this._pricingOptionElement != null)
-            result.append(this._pricingOptionElement.prettyPrint(1));
-
-        if (this._maxDataPointElement != null)
-            result.append(this._maxDataPointElement.prettyPrint(1));
-
-        if (this._adjustmentNormalElement != null)
-            result.append(this._adjustmentNormalElement.prettyPrint(1));
-
-        if (this._adjustmentAbnormalElement != null)
-            result.append(this._adjustmentAbnormalElement.prettyPrint(1));
-
-        if (this._adjustmentSplitElement != null)
-            result.append(this._adjustmentSplitElement.prettyPrint(1));
+        Element[] elms = { this._dtStart, this._dtEnd, this._periodicityAdjustmentElement, this._periodicityElement, 
+        		this._overrideOptionsElement, this._pricingOptionElement, this._maxDataPointElement, this._adjustmentNormalElement, 
+        		this._adjustmentAbnormalElement, this._adjustmentSplitElement };
         
-        result.append("}");
+        for (int i = 0; i < elms.length; i++)
+        {
+            Element current = elms[i];
+
+            if (current != null)
+            {
+				try { result.append(current.prettyPrint(1)); }
+            	catch (Exception e) { }
+            }
+        }
         
+        result.append("}" + System.getProperty("line.separator"));
         return result.toString();
     }
 

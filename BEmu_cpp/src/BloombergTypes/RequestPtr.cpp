@@ -64,4 +64,16 @@ namespace BEmu
 
 	Element RequestPtr::getElement(const char* name) { throw requestEx; }
 	Element RequestPtr::getElement(const Name& name) { return this->getElement(name.string()); }
+
+	std::ostream& RequestPtr::print(std::ostream& stream, int level, int spacesPerLevel) const
+	{
+		throw requestEx;
+	}
+
+	std::ostream& operator<<(std::ostream& stream, const RequestPtr &request)
+	{
+		request.print(stream);
+		return stream;
+	}
+
 }
