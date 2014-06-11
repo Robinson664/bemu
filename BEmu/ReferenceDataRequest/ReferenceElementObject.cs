@@ -31,9 +31,10 @@ namespace Bloomberglp.Blpapi.ReferenceDataRequest
         public override bool IsArray { get { return false; } }
         public override bool IsComplexType { get { return base.IsComplexType; } }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
-            return base.PrettyPrintHelper(tabIndent, this._value.ToString());
+            string valueToUse = surroundValueWithQuotes ? string.Format("\"{0}\"", this._value.ToString()) : this._value.ToString();
+            return base.PrettyPrintHelper(tabIndent, valueToUse);
         }
 
         public override object GetValue()

@@ -19,7 +19,7 @@ namespace Bloomberglp.Blpapi.IntradayTickRequest
         private readonly bool _value;
 
         internal IntradayTickRequestElementBool(string elementName, bool value)
-            : base(elementName, value.ToString())
+            : base(elementName, value ? "true" : "false")
         {
             this._value = value;
         }

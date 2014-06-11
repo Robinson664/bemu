@@ -23,7 +23,6 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
 
         private HistoricRequestElementInt _maxDataPointElement;
 
-#pragma warning disable 0414 //disables the "is assigned but its value is never used" warning
         private HistoricRequestElementString _periodicityAdjustmentElement, _periodicityElement, _overrideOptionsElement, _pricingOptionElement;
 
         private enum HistDataPeriodicityAdjustment { actual, calendar, fiscal }
@@ -32,6 +31,7 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
         public enum HistDataPeriodicity { daily, weekly, monthly, quarterly, semi_annually, yearly }
         private HistDataPeriodicity _periodicity = HistDataPeriodicity.daily;
 
+#pragma warning disable 0414 //disables the "is assigned but its value is never used" warning
         public enum PricingOption { price, yield }
         private PricingOption _pricingOption = PricingOption.price;
 

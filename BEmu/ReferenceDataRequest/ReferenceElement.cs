@@ -66,7 +66,7 @@ namespace Bloomberglp.Blpapi.ReferenceDataRequest
             return this[name];
         }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             StringBuilder result = new StringBuilder();
             result.AppendFormat("ReferenceDataResponse (choice) = {{{0}", Environment.NewLine);

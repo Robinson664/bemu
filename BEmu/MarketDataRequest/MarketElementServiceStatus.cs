@@ -42,7 +42,7 @@ namespace Bloomberglp.Blpapi.MarketDataRequest
                 return base.GetElement(index);
         }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             StringBuilder result = new StringBuilder();
             result.AppendFormat("{0} = {{{1}", this.Name.ToString(), Environment.NewLine);

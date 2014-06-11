@@ -140,7 +140,7 @@ namespace Bloomberglp.Blpapi.IntradayBarRequest
             return false;
         }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             string tabs = Types.IndentType.Indent(tabIndent);
             StringBuilder result = new StringBuilder();

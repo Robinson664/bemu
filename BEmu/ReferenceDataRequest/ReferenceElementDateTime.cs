@@ -33,7 +33,7 @@ namespace Bloomberglp.Blpapi.ReferenceDataRequest
         public override bool IsComplexType { get { return false; } }
         public override Schema.Datatype Datatype { get { return Schema.Datatype.DATE; } }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             return base.PrettyPrintHelper(tabIndent, this._value.ToString());
         }

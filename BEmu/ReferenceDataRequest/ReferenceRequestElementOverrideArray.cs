@@ -58,7 +58,7 @@ namespace Bloomberglp.Blpapi.ReferenceDataRequest
             return result;
         }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             string tabs = Types.IndentType.Indent(tabIndent);
             StringBuilder result = new StringBuilder();
@@ -66,7 +66,7 @@ namespace Bloomberglp.Blpapi.ReferenceDataRequest
             result.AppendFormat("{0}{1}[] = {{{2}", tabs, this.Name, Environment.NewLine);
             foreach (var item in this._overrides)
             {
-                result.Append(item.PrettyPrint(tabIndent + 1));
+                result.Append(item.PrettyPrint(tabIndent + 1, true));
             }
             result.AppendFormat("{0}}}{1}", tabs, Environment.NewLine);
 

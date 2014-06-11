@@ -45,14 +45,14 @@ namespace Bloomberglp.Blpapi.ReferenceDataRequest
         public override int NumElements { get { return 2; } }
         public override object this[int index] { get { return null; } }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             string tabs = Types.IndentType.Indent(tabIndent);
             StringBuilder result = new StringBuilder();
 
             result.AppendFormat("{0}{1} = {{{2}", tabs, this.Name, Environment.NewLine);
-            result.Append(this._fieldId.PrettyPrint(tabIndent + 1));
-            result.Append(this._value.PrettyPrint(tabIndent + 1));
+            result.Append(this._fieldId.PrettyPrint(tabIndent + 1, surroundValueWithQuotes));
+            result.Append(this._value.PrettyPrint(tabIndent + 1, surroundValueWithQuotes));
             result.AppendFormat("{0}}}{1}", tabs, Environment.NewLine);
 
             return result;

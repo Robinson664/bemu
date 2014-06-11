@@ -85,7 +85,6 @@ namespace Examples
                     request.Set("includeBicMicCodes", false); //Optional bool. Valid values are true and false (default = false)
 
                     CorrelationID corr = new CorrelationID(17);
-
                     session.SendRequest(request, corr);
 
                     bool continueToLoop = true;

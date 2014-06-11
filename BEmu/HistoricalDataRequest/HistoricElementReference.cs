@@ -45,7 +45,7 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
             }
         }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             StringBuilder result = new StringBuilder();
             result.AppendFormat("HistoricalDataResponse (choice) = {{{0}", Environment.NewLine);

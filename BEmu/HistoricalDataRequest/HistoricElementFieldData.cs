@@ -110,7 +110,7 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
             return this._fields.ContainsKey(name.ToUpper());
         }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             string tabs = Types.IndentType.Indent(tabIndent);
             StringBuilder result = new StringBuilder();

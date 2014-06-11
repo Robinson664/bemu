@@ -87,7 +87,7 @@ namespace Bloomberglp.Blpapi.IntradayTickRequest
             StringBuilder result = new StringBuilder();
             result.AppendFormat("IntradayTickRequest = {{{0}", Environment.NewLine);
 
-            Element[] elms = { this._security, this._eventTypes, this._timeStart, this._timeEnd, this._includeConditionCodes, this._includeNonPlottableEvents,
+            Element[] elms = { this._security, this._timeStart, this._timeEnd, this._eventTypes, this._includeConditionCodes, this._includeNonPlottableEvents,
                                  this._includeExchangeCodes, this._returnEids, this._includeBrokerCodes, this._includeRpsCodes, this._includeBicMicCodes};
 
             for (int i = 0; i < elms.Length; i++)
@@ -95,7 +95,10 @@ namespace Bloomberglp.Blpapi.IntradayTickRequest
                 Element current = elms[i];
 
                 if (current != null)
-                    result.Append(current.PrettyPrint(1));
+                {
+                    bool quotes = current == this._security;
+                    result.Append(current.PrettyPrint(1, quotes));
+                }
             }
 
             result.AppendLine("}");

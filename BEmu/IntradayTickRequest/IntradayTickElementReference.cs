@@ -51,7 +51,7 @@ namespace Bloomberglp.Blpapi.IntradayTickRequest
 
         public override object this[string name, int index] { get { return null; } }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             StringBuilder result = new StringBuilder();
             result.AppendFormat("IntradayTickRequest (choice) = {{{0}", Environment.NewLine);

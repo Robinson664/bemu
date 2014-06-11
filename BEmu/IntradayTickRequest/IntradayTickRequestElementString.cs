@@ -31,12 +31,14 @@ namespace Bloomberglp.Blpapi.IntradayTickRequest
 
         internal string Security { get { return this._value; } }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
-            string tabs = Types.IndentType.Indent(tabIndent);
             StringBuilder result = new StringBuilder();
 
-            result.AppendFormat("{0}{1} = {2}{3}", tabs, this._elementName, this._value, Environment.NewLine);
+            string tabs = Types.IndentType.Indent(tabIndent);
+            string valueToUse = surroundValueWithQuotes ? string.Format("\"{0}\"", this._value) : this._value;
+
+            result.AppendFormat("{0}{1} = {2}{3}", tabs, this._elementName, valueToUse, Environment.NewLine);
 
             return result;
         }

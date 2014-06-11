@@ -16,7 +16,7 @@ namespace Bloomberglp.Blpapi
 
     public abstract class Element
     {
-        internal abstract StringBuilder PrettyPrint(int tabIndent);
+        internal abstract StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false);
         public abstract Name Name { get; }
         public abstract int NumValues { get; }
         public abstract int NumElements { get; }
@@ -29,10 +29,13 @@ namespace Bloomberglp.Blpapi
             return this.PrettyPrint(0).ToString();
         }
 
-        protected StringBuilder PrettyPrintHelper(int tabIndent, string value)
+        protected StringBuilder PrettyPrintHelper(int tabIndent, string value, bool surroundValueWithQuotes = false)
         {
             string tabs = Types.IndentType.Indent(tabIndent);
-            StringBuilder result = new StringBuilder(string.Format("{0}{1} = {2}{3}", tabs, this.Name, value, Environment.NewLine));
+            string valueToUse = surroundValueWithQuotes ? string.Format("\"{0}\"", value) : value;
+
+            StringBuilder result = new StringBuilder(string.Format("{0}{1} = {2}{3}", tabs, this.Name, valueToUse, Environment.NewLine));
+
             return result;
         }
 

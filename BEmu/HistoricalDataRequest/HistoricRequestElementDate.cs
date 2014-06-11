@@ -14,27 +14,47 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
     using System.Linq;
     using System.Text;
 
-    internal class HistoricRequestElementDate : HistoricRequestElementString
+    internal class HistoricRequestElementDate : Element
     {
         private readonly DateTime? _instance;
+        private readonly string _elementName;
 
-        internal HistoricRequestElementDate(string elementName) : base(elementName, "")
+        internal HistoricRequestElementDate(string elementName)
         {
             this._instance = null;
+            this._elementName = elementName;
         }
 
-        internal HistoricRequestElementDate(string elementName, DateTime date) : base(elementName, date.ToString("yyyyMMdd"))
+        internal HistoricRequestElementDate(string elementName, DateTime date)
         {
             this._instance = date;
+            this._elementName = elementName;
         }
 
-        internal HistoricRequestElementDate(string elementName, Datetime date) : this(elementName, date.ToSystemDateTime())
+        internal HistoricRequestElementDate(string elementName, Datetime date)
         {
             this._instance = date.ToSystemDateTime();
+            this._elementName = elementName;
         }
+
+        public override int NumElements { get { return 0; } }
+        public override int NumValues { get { return 1; } }
+        public override Name Name { get { return new Name(this._elementName); } }
+        public override Schema.Datatype Datatype { get { return Schema.Datatype.STRING; } }
 
         //I can't override GetElementAsDatetime here because the Bloomberg Request object stores dates as strings, not Datetimes.  You can't convert the string to a Datetime
         internal DateTime? GetDate { get { return this._instance; } }
-        public override Schema.Datatype Datatype { get { return Schema.Datatype.DATE; } }  
+
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
+        {
+            string tabs = Types.IndentType.Indent(tabIndent);
+            StringBuilder result = new StringBuilder();
+
+            if (this._instance.HasValue)
+                result.AppendFormat("{0}{1} = \"{2}\"{3}", tabs, this._elementName, this._instance.Value.ToString("yyyyMMdd"), Environment.NewLine);
+
+            return result;
+        }
+
     }
 }

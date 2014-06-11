@@ -23,7 +23,7 @@ namespace Bloomberglp.Blpapi.IntradayBarRequest
             this._instance = null;
         }
 
-        internal IntradayBarRequestElementTime(string elementName, DateTime date) : base(elementName, date.ToString("yyyyMMdd"))
+        internal IntradayBarRequestElementTime(string elementName, DateTime date) : base(elementName, date.ToString("yyyy-MM-ddTHH:mm:ss.fff"))
         {
             this._instance = date;
         }

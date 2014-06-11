@@ -141,7 +141,10 @@ namespace Bloomberglp.Blpapi.IntradayBarRequest
                 Element current = elms[i];
 
                 if (current != null)
-                    result.Append(current.PrettyPrint(1));
+                {
+                    bool quotes = current == this._security;
+                    result.Append(current.PrettyPrint(1, quotes));
+                }
             }
 
             result.AppendLine("}");

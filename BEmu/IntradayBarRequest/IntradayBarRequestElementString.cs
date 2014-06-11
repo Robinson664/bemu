@@ -33,9 +33,9 @@ namespace Bloomberglp.Blpapi.IntradayBarRequest
 
         internal string Security { get { return this._value; } }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
-            return base.PrettyPrintHelper(tabIndent, this._value.ToString());
+            return base.PrettyPrintHelper(tabIndent, this._value.ToString(), surroundValueWithQuotes);
         }
 
         public override object GetValue()

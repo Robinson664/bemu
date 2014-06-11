@@ -58,7 +58,7 @@ namespace Bloomberglp.Blpapi.IntradayTickRequest
                 return base.GetValue(index);
         }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             return base.PrettyPrintHelper(tabIndent, Types.DisplayFormats.IntradayRequests.FormatDatetime(this._date));
         }

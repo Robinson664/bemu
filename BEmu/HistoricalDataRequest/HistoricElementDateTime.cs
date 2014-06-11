@@ -47,7 +47,7 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
             return this._date;
         }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             return base.PrettyPrintHelper(tabIndent, Types.DisplayFormats.HistoricalOrReferenceRequests.FormatDate(this._date));
         }

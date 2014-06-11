@@ -29,7 +29,7 @@ namespace Bloomberglp.Blpapi.HistoricalDataRequest
         public override Name Name { get { return new Name(this._elementName); } }
         public override Schema.Datatype Datatype { get { return Schema.Datatype.STRING; } }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             string tabs = Types.IndentType.Indent(tabIndent);
             StringBuilder result = new StringBuilder();

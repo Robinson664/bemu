@@ -30,7 +30,7 @@ namespace Bloomberglp.Blpapi.MarketDataRequest
         public override bool IsComplexType { get { return false; } }
         public override bool IsNull { get { return true; } }
 
-        internal override StringBuilder PrettyPrint(int tabIndent)
+        internal override StringBuilder PrettyPrint(int tabIndent, bool surroundValueWithQuotes = false)
         {
             return new StringBuilder();
         }
