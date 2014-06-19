@@ -57,123 +57,123 @@ namespace Bloomberglp.Blpapi
         {
             get
             {
-                return (int)this.d_datetimeFieldValues[0];
+                return (int)this.d_datetimeFieldValues[IDX_YEAR];
             }
             set
             {
-                this.d_datetimeFieldValues[0] = (short)value;
-                this.d_parts |= 128;
+                this.d_datetimeFieldValues[IDX_YEAR] = (short)value;
+                this.d_parts |= YEAR_PART;
             }
         }
         public int Month
         {
             get
             {
-                return (int)this.d_datetimeFieldValues[1];
+                return (int)this.d_datetimeFieldValues[IDX_MONTH];
             }
             set
             {
-                this.d_datetimeFieldValues[1] = (short)((byte)value);
-                this.d_parts |= 64;
+                this.d_datetimeFieldValues[IDX_MONTH] = (short)((byte)value);
+                this.d_parts |= MONTH_PART;
             }
         }
         public int DayOfMonth
         {
             get
             {
-                return (int)this.d_datetimeFieldValues[2];
+                return (int)this.d_datetimeFieldValues[IDX_DAY_OF_MONTH];
             }
             set
             {
-                this.d_datetimeFieldValues[2] = (short)((byte)value);
-                this.d_parts |= 32;
+                this.d_datetimeFieldValues[IDX_DAY_OF_MONTH] = (short)((byte)value);
+                this.d_parts |= DAY_OF_MONTH_PART;
             }
         }
         public int Hour
         {
             get
             {
-                return (int)this.d_datetimeFieldValues[3];
+                return (int)this.d_datetimeFieldValues[IDX_HOUR];
             }
             set
             {
-                this.d_datetimeFieldValues[3] = (short)((byte)value);
-                this.d_parts |= 16;
+                this.d_datetimeFieldValues[IDX_HOUR] = (short)((byte)value);
+                this.d_parts |= HOUR_PART;
             }
         }
         public int Minute
         {
             get
             {
-                return (int)this.d_datetimeFieldValues[4];
+                return (int)this.d_datetimeFieldValues[IDX_MINUTE];
             }
             set
             {
-                this.d_datetimeFieldValues[4] = (short)((byte)value);
-                this.d_parts |= 8;
+                this.d_datetimeFieldValues[IDX_MINUTE] = (short)((byte)value);
+                this.d_parts |= MINUTE_PART;
             }
         }
         public int Second
         {
             get
             {
-                return (int)this.d_datetimeFieldValues[5];
+                return (int)this.d_datetimeFieldValues[IDX_SECOND];
             }
             set
             {
-                this.d_datetimeFieldValues[5] = (short)((byte)value);
-                this.d_parts |= 4;
+                this.d_datetimeFieldValues[IDX_SECOND] = (short)((byte)value);
+                this.d_parts |= SECOND_PART;
             }
         }
         public int MilliSecond
         {
             get
             {
-                return (int)this.d_datetimeFieldValues[6];
+                return (int)this.d_datetimeFieldValues[IDX_MILLISECOND];
             }
             set
             {
-                this.d_datetimeFieldValues[6] = (short)value;
-                this.d_parts |= 2;
+                this.d_datetimeFieldValues[IDX_MILLISECOND] = (short)value;
+                this.d_parts |= MILLISECOND_PART;
             }
         }
         public int MicroSecond
         {
             get
             {
-                return (int)((this.d_picoSeconds + (long)this.MilliSecond * 1000000000L) / 1000000L);
+                return (int)((this.d_picoSeconds + (long)this.MilliSecond * PICOPERMILLISEC) / PICOPERMICROSEC);
             }
             set
             {
-                this.MilliSecond = (int)((long)value / 1000L % 1000L);
-                this.d_picoSeconds = (long)value % 1000L * 1000000L;
-                this.d_parts |= 258;
+                this.MilliSecond = (int)((long)value / MICROPERMILLISEC % MICROPERMILLISEC);
+                this.d_picoSeconds = (long)value % MICROPERMILLISEC * NANOPERMILLISEC;
+                this.d_parts |= MICROSECOND_PART;
             }
         }
         public int NanoSecond
         {
             get
             {
-                return (int)((this.d_picoSeconds + (long)this.MilliSecond * 1000000000L) / 1000L);
+                return (int)((this.d_picoSeconds + (long)this.MilliSecond * NANOPERSEC) / PICOPERNANOSEC);
             }
             set
             {
-                this.MilliSecond = (int)((long)value / 1000000L % 1000L);
-                this.d_picoSeconds = (long)value % 1000000L * 1000L;
-                this.d_parts |= 770;
+                this.MilliSecond = (int)((long)value / PICOPERMICROSEC % PICOPERNANOSEC);
+                this.d_picoSeconds = (long)value % PICOPERMICROSEC * PICOPERNANOSEC;
+                this.d_parts |= NANOSECOND_PART;
             }
         }
         public long PicoSecond
         {
             get
             {
-                return this.d_picoSeconds + (long)this.MilliSecond * 1000000000L;
+                return this.d_picoSeconds + (long)this.MilliSecond * NANOPERSEC;
             }
             set
             {
-                this.MilliSecond = (int)(value / 1000000000L % 1000L);
-                this.d_picoSeconds = value % 1000000000L;
-                this.d_parts |= 1794;
+                this.MilliSecond = (int)(value / NANOPERSEC % PICOPERNANOSEC);
+                this.d_picoSeconds = value % NANOPERSEC;
+                this.d_parts |= PICOSECOND_PART;
             }
         }
         public int Parts
@@ -187,12 +187,12 @@ namespace Bloomberglp.Blpapi
         {
             get
             {
-                return (int)this.d_datetimeFieldValues[7];
+                return (int)this.d_datetimeFieldValues[IDX_TIME_ZONE_OFFSET];
             }
             set
             {
-                this.d_datetimeFieldValues[7] = (short)value;
-                this.d_parts |= 1;
+                this.d_datetimeFieldValues[IDX_TIME_ZONE_OFFSET] = (short)value;
+                this.d_parts |= TIME_ZONE_OFFSET;
             }
         }
         #endregion
@@ -244,7 +244,7 @@ namespace Bloomberglp.Blpapi
 
         private void init()
         {
-            this.d_datetimeFieldValues = new short[8];
+            this.d_datetimeFieldValues = new short[NUM_FIELDS];
             this.Clear();
         }
 
@@ -303,14 +303,14 @@ namespace Bloomberglp.Blpapi
         public void Clear()
         {
             this.d_parts = 0;
-            this.d_datetimeFieldValues[0] = 1;
-            this.d_datetimeFieldValues[1] = 1;
-            this.d_datetimeFieldValues[2] = 1;
-            this.d_datetimeFieldValues[3] = 24;
-            this.d_datetimeFieldValues[4] = 0;
-            this.d_datetimeFieldValues[5] = 0;
-            this.d_datetimeFieldValues[6] = 0;
-            this.d_datetimeFieldValues[7] = 0;
+            this.d_datetimeFieldValues[IDX_YEAR] = 1;
+            this.d_datetimeFieldValues[IDX_MONTH] = 1;
+            this.d_datetimeFieldValues[IDX_DAY_OF_MONTH] = 1;
+            this.d_datetimeFieldValues[IDX_HOUR] = 24;
+            this.d_datetimeFieldValues[IDX_MINUTE] = 0;
+            this.d_datetimeFieldValues[IDX_SECOND] = 0;
+            this.d_datetimeFieldValues[IDX_MILLISECOND] = 0;
+            this.d_datetimeFieldValues[IDX_TIME_ZONE_OFFSET] = 0;
             this.d_picoSeconds = 0L;
         }
         public override bool Equals(object obj)
@@ -322,7 +322,7 @@ namespace Bloomberglp.Blpapi
             if (obj is Datetime)
             {
                 Datetime datetime = (Datetime)obj;
-                if ((this.d_parts & 255) == (datetime.d_parts & 255) && this.d_picoSeconds == datetime.d_picoSeconds)
+                if ((this.d_parts & PART_MASK) == (datetime.d_parts & PART_MASK) && this.d_picoSeconds == datetime.d_picoSeconds)
                 {
                     for (int i = 0; i < this.d_datetimeFieldValues.Length; i++)
                     {
@@ -338,7 +338,15 @@ namespace Bloomberglp.Blpapi
         }
         public bool IsValid()
         {
-            return ((!this.HasParts(128) && !this.HasParts(64) && !this.HasParts(this.DayOfMonth)) || this.isValidDate(this.Year, this.Month, this.DayOfMonth)) && ((!this.HasParts(16) && !this.HasParts(8) && !this.HasParts(4) && !this.HasParts(2)) || this.isValidTime(this.Hour, this.Minute, this.Second, this.MilliSecond));
+            return 
+                (
+                    (!this.HasParts(YEAR_PART) && !this.HasParts(MONTH_PART) && !this.HasParts(this.DayOfMonth)) ||
+                    this.isValidDate(this.Year, this.Month, this.DayOfMonth)
+                ) && 
+                (
+                    (!this.HasParts(HOUR_PART) && !this.HasParts(MINUTE_PART) && !this.HasParts(SECOND_PART) && !this.HasParts(MILLISECOND_PART)) || 
+                    this.isValidTime(this.Hour, this.Minute, this.Second, this.MilliSecond)
+                );
         }
         [Obsolete("Please use HasParts(int parts) instead")]
         public bool IsValidField(int fieldId)
@@ -363,12 +371,12 @@ namespace Bloomberglp.Blpapi
         {
             StringBuilder stringBuilder = new StringBuilder(10);
             char c = '\0';
-            if (this.HasParts(128) || this.HasParts(64) || this.HasParts(32))
+            if (this.HasParts(YEAR_PART) || this.HasParts(MONTH_PART) || this.HasParts(DAY_OF_MONTH_PART))
             {
                 stringBuilder.Append(DatetimeIso8601Util.generateDate(this));
                 c = 'T';
             }
-            if (this.HasParts(16) || this.HasParts(8) || this.HasParts(4) || this.HasParts(2))
+            if (this.HasParts(HOUR_PART) || this.HasParts(MINUTE_PART) || this.HasParts(SECOND_PART) || this.HasParts(MILLISECOND_PART))
             {
                 if (c != '\0')
                 {
@@ -376,7 +384,7 @@ namespace Bloomberglp.Blpapi
                 }
                 stringBuilder.Append(DatetimeIso8601Util.generateTime(this));
             }
-            if (this.HasParts(1))
+            if (this.HasParts(TIME_ZONE_OFFSET))
             {
                 DatetimeIso8601Util.generateTimezoneOffset(stringBuilder, this);
             }
@@ -385,7 +393,7 @@ namespace Bloomberglp.Blpapi
         public DateTime ToSystemDateTime()
         {
             DateTimeKind kind;
-            if (this.HasParts(1))
+            if (this.HasParts(TIME_ZONE_OFFSET))
             {
                 if (this.TimezoneOffsetMinutes == 0)
                 {
@@ -407,16 +415,26 @@ namespace Bloomberglp.Blpapi
             {
                 kind = DateTimeKind.Unspecified;
             }
-            if (this.HasParts(128) || this.HasParts(64) || this.HasParts(32))
+            if (this.HasParts(YEAR_PART) || this.HasParts(MONTH_PART) || this.HasParts(DAY_OF_MONTH_PART))
             {
-                return new DateTime(this.Year, this.Month, this.DayOfMonth, this.HasParts(16) ? this.Hour : 0, this.Minute, this.Second, this.MilliSecond, kind);
+                return new DateTime(this.Year, this.Month, this.DayOfMonth, this.HasParts(HOUR_PART) ? this.Hour : 0, this.Minute, this.Second, this.MilliSecond, kind);
             }
             DateTime now = DateTime.Now;
-            return new DateTime(now.Year, now.Month, now.Day, this.HasParts(16) ? this.Hour : 0, this.Minute, this.Second, this.MilliSecond, kind);
+            return new DateTime(now.Year, now.Month, now.Day, this.HasParts(HOUR_PART) ? this.Hour : 0, this.Minute, this.Second, this.MilliSecond, kind);
         }
         public override int GetHashCode()
         {
-            return ((long)this.d_datetimeFieldValues[0] + (long)this.d_datetimeFieldValues[1] + (long)this.d_datetimeFieldValues[2] * 3600000L + (long)this.d_datetimeFieldValues[3] * 3600000L + (long)this.d_datetimeFieldValues[4] * 60000L + (long)(this.d_datetimeFieldValues[5] * 1000) + (long)this.d_datetimeFieldValues[6] + (long)this.d_datetimeFieldValues[7] + this.d_picoSeconds).GetHashCode();
+            return (
+                (long)this.d_datetimeFieldValues[IDX_YEAR] +
+                (long)this.d_datetimeFieldValues[IDX_MONTH] +
+                (long)this.d_datetimeFieldValues[IDX_DAY_OF_MONTH] * 3600000L +
+                (long)this.d_datetimeFieldValues[IDX_HOUR] * 3600000L +
+                (long)this.d_datetimeFieldValues[IDX_MINUTE] * 60000L +
+                (long)(this.d_datetimeFieldValues[IDX_SECOND] * 1000) +
+                (long)this.d_datetimeFieldValues[IDX_MILLISECOND] +
+                (long)this.d_datetimeFieldValues[IDX_TIME_ZONE_OFFSET] + 
+                this.d_picoSeconds
+                ).GetHashCode();
         }
         private bool isLeapYear(int y)
         {

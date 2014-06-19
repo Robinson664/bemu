@@ -39,7 +39,6 @@ namespace BEmu
 
 		boost::shared_ptr<ElementPtr> IntradayTickElementDataArray::getValueAsElement(int index) const
 		{
-			//return boost::dynamic_pointer_cast<ElementPtr>(this->_tickData.operator[](index));
 			return boost::dynamic_pointer_cast<ElementPtr>(this->_tickData[index]);
 		}
 

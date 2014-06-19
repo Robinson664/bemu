@@ -17,11 +17,6 @@ namespace BEmu
 {
 	namespace IntradayBarRequest
 	{
-		//IntradayBarRequestElementTime::IntradayBarRequestElementTime(const std::string& elementName) : IntradayBarRequestElementString(elementName, "", false)
-		//{
-		//	this->_value = "";
-		//}
-		
 		IntradayBarRequestElementTime::IntradayBarRequestElementTime(const std::string& elementName, const Datetime& dtvalue) : 
 			CanConvertToStringType(DisplayFormats::ToYYYYMMDDWithDashes(dtvalue), false)
 		{

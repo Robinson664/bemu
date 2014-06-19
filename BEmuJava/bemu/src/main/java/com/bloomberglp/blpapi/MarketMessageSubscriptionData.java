@@ -40,20 +40,17 @@ public class MarketMessageSubscriptionData extends Message
             else if (item.getValue().getClass() == Datetime.class)
             {
                 Datetime temp = (Datetime)item.getValue();
-                switch (temp.DateTimeType())
-                {
-                    case date:
-                        elm = new MarketElementDate(item.getKey(), temp);
-                        break;
-                    case time:
-                        elm = new MarketElementTime(item.getKey(), temp);
-                        break;
-                    case both:
-                        elm = new MarketElementDatetime(item.getKey(), temp);
-                        break;
-                    default:
-                    	break;
-                }
+                
+                boolean isDate = temp.hasParts(Datetime.DATE);
+                boolean isTime = temp.hasParts(Datetime.TIME);
+                boolean isBoth = isDate && isTime;
+                
+                if(isBoth)
+                	elm = new MarketElementDatetime(item.getKey(), temp);
+                else if(isDate)
+                	elm = new MarketElementDate(item.getKey(), temp);
+                else if(isTime)
+                	elm = new MarketElementTime(item.getKey(), temp);
             }
 
             else if (item.getValue().getClass() == int.class ||item.getValue().getClass() == Integer.class)

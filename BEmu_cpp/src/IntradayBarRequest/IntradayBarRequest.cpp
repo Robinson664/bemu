@@ -47,7 +47,6 @@ namespace BEmu
 		std::vector<Datetime> IntradayBarRequest::getDateTimes() const
 		{
 			//dtStart, dtEnd, and interval are required
-			//if(this->_dtStart == 0 || this->_dtEnd == 0 || this->_intervalInMinutes == 0)
 			if(this->_isNull_dtStart || this->_isNull_dtEnd || this->_isNull_intervalInMinutes)
 				throw requestEx;
 

@@ -12,7 +12,6 @@
 
 namespace BEmu
 {
-	// _CRTDBG_MAP_ALLOC reports a memory leak when using this map.  I'll ignore it.
 	std::map<std::string, Name> Name::_globalNameTable;
 
 	Name::Name()
@@ -94,37 +93,46 @@ namespace BEmu
 		return Name::_globalNameTable.find(nameString) != Name::_globalNameTable.end();
 	}
 
+	bool Name::isNull() const
+	{
+		return this->_isNull;
+	}
+
 
 	const char* Name::string() const
 	{
 		return this->_cname;
 	}
 
-	bool Name::operator==(const char *rhs) const
-	{
-		return strncmp(this->_cname, rhs, this->_length + 1) == 0;
-	}
-
-	bool Name::operator==(const Name rhs) const
-	{
-		return strncmp(this->_cname, rhs._cname, this->_length + 1) == 0;
-	}
-
-	bool Name::operator!=(const char *rhs) const
-	{
-		return !(*this == rhs);
-	}
-
-	bool Name::operator!=(const Name rhs) const
-	{
-		return !(*this == rhs);
-	}
-
-
-
 	std::ostream& operator<<(std::ostream& stream, const Name& name)
 	{
 		return stream << name.string();
+	}
+
+	bool operator==(const Name& lhs, const char *rhs)
+	{
+		bool lhsIsNull = lhs.isNull();
+		bool rhsIsNull = rhs == "";
+
+		if(lhsIsNull)
+			return rhsIsNull;
+		else if(rhsIsNull)
+			return false;
+		else
+			return strncmp(lhs.string(), rhs, lhs.length() + 1) == 0;
+	}
+
+	bool operator==(const Name& lhs, const Name rhs)
+	{
+		bool lhsIsNull = lhs.isNull();
+		bool rhsIsNull = rhs.isNull();
+
+		if(lhsIsNull)
+			return rhsIsNull;
+		else if(rhsIsNull)
+			return false;
+		else
+			return strncmp(lhs.string(), rhs.string(), lhs.length() + 1) == 0;
 	}
 
 	bool operator==(const char *lhs, const Name& rhs)
@@ -132,8 +140,51 @@ namespace BEmu
 		return rhs == lhs;
 	}
 
+	bool operator!=(const Name& lhs, const char *rhs)
+	{
+		return !(lhs == rhs);
+	}
+
+	bool operator!=(const Name& lhs, const Name rhs)
+	{
+		return !(lhs == rhs);
+	}
+
 	bool operator!=(const char *lhs, const Name& rhs)
 	{
 		return rhs == lhs;
 	}
+
+	//Note that while the order of this operation is consistent, it's not guaranteed to be lexical (this is the same in the BB API)
+	//I made null Names less than Names with any value.  I haven't checked this against what the BB API returns.
+	bool operator<(const Name& lhs, const Name& rhs)
+	{
+		bool lhsIsNull = lhs.isNull();
+		bool rhsIsNull = rhs.isNull();
+
+		if(lhsIsNull && rhsIsNull)
+			return false;
+		else if(lhsIsNull)
+			return true;
+		else if(rhsIsNull)
+			return false;
+		else
+			return lhs.hash() < rhs.hash();
+	}
+
+	bool operator<=(const Name& lhs, const Name& rhs)
+	{
+		return (lhs < rhs) || (lhs == rhs);
+	}
+
+	bool operator>(const Name& lhs, const Name& rhs)
+	{
+		return !(lhs <= rhs);
+	}
+
+	bool operator>=(const Name& lhs, const Name& rhs)
+	{
+		return !(lhs < rhs);
+	}
+
 }

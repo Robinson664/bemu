@@ -1,113 +1,114 @@
 //------------------------------------------------------------------------------
-// <copyright project="BEmu_maven" file="/BEmu_maven/bemu/src/main/java/com/bloomberglp/blpapi/CorrelationID.java" company="Jordan Robinson">
-//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
-//
-//     The use of this software is governed by the Microsoft Public License
-//     which is included with this distribution.
-// </copyright>
+//  This code comes from blpapi-3.6.1-0.jar
 //------------------------------------------------------------------------------
 
 package com.bloomberglp.blpapi;
 
-public class CorrelationID
+import java.util.concurrent.atomic.AtomicLong;
+
+public final class CorrelationID
 {
-	private final boolean _isInternal;
-	public boolean isInternal()
+	private long bg;
+	private Object bh;
+	private static final AtomicLong bi = new AtomicLong(0L);
+	private int bj;
+	
+	public CorrelationID(long paramLong)
 	{
-		return this._isInternal;
+		this.bj = 3;
+		this.bg = paramLong;
+		this.bh = null;
 	}
 	
-	private final boolean _isObject;
-	public boolean isObject()
+	public CorrelationID(Object paramObject)
 	{
-		return this._isObject;
+		if (paramObject == null)
+		{
+			throw new IllegalArgumentException("Null value");
+		}
+		this.bj = 7;
+		this.bg = 0L;
+		this.bh = paramObject;
 	}
-	
-	private final boolean _isValue;
-	public boolean isValue()
-	{
-		return this._isValue;
-	}
-	
-	private final long _value;
-	public long value()
-	{
-		return this._value;
-	}
-	
-	private final Object _object;
-	public Object object()
-	{
-		return this._object;
-	}
-	
-	private static long _nextInternalCorrelationId = 1;
-	
-	public CorrelationID(long value)
-	{
-		this._isValue = true;
-		this._isObject = false;
-		this._isInternal = false;
-		this._value = value;
-		this._object = null;
-	}
-	
-    public CorrelationID(CorrelationID value)
-    {
-		this._isValue = value._isValue;
-		this._isObject = value._isObject;
-		this._isInternal = value._isInternal;
-		this._value = value._value;
-		this._object = value._object;
-    }
 	
 	public CorrelationID()
 	{
-		this._isValue = true;
-		this._isObject = false;
-		this._isInternal = true;
-		this._value = CorrelationID._nextInternalCorrelationId++;
-		this._object = null;
+		this.bj = 1;
+		this.bg = bi.incrementAndGet();
+		this.bh = null;
 	}
 	
-	public boolean equals(Object arg0)
+	public CorrelationID(CorrelationID paramCorrelationID)
 	{
-		if(arg0 != null && arg0.getClass() == CorrelationID.class)
+		this.bj = paramCorrelationID.bj;
+		this.bg = paramCorrelationID.bg;
+		this.bh = paramCorrelationID.bh;
+	}
+	
+	public long value()
+	{
+		if ((this.bj & 0x4) == 0)
 		{
-			CorrelationID corr = (CorrelationID)arg0;
-			
-			if (this._isObject != corr._isObject)
-			    return false;
-			
-			else if (this._isObject)
-				return this._object.equals(corr._object);
-			
-			else //value
-			    return this._value == corr._value;
+			return this.bg;
 		}
-		else
-			return false;
+		throw new IllegalStateException();
+	}
+	
+	public Object object()
+	{
+		if ((this.bj & 0x4) != 0)
+		{
+			return this.bh;
+		}
+		throw new IllegalStateException();
+	}
+	
+	public boolean isInternal()
+	{
+		return (this.bj & 0x2) == 0;
+	}
+	
+	public boolean isObject()
+	{
+		return (this.bj & 0x4) != 0;
+	}
+	
+	public boolean isValue()
+	{
+		return (this.bj & 0x4) == 0;
+	}
+	
+	public boolean equals(Object paramObject)
+	{
+		if (this == paramObject)
+		{
+			return true;
+		}
+		if ((paramObject instanceof CorrelationID))
+		{
+			CorrelationID localCorrelationID = (CorrelationID)paramObject;
+			if (this.bj != localCorrelationID.bj)
+			{
+				return false;
+			}
+			return this.bg == localCorrelationID.bg ? true : isObject() ? this.bh.equals(localCorrelationID.bh) : false;
+		}
+		return false;
 	}
 	
 	public int hashCode()
 	{
-		if (this._isObject)
-		    return this._object.hashCode();
-		
-		else
-		    return (int)this._value;
+		return isValue() ? (int)(this.bg ^ this.bg >>> 32) : this.bh.hashCode();
 	}
 	
 	public String toString()
 	{
-		if (this._isValue)
-		        return String.format("%s: %d",
-			        this._isInternal ? "Internal" : "User",
-			        this._value);
-		
-		else //object
-		    return String.format("%s: %s",
-		        this._isInternal ? "Internal" : "User",
-		        this._object.toString());
+		switch (this.bj)
+		{
+			case 0: return "Uninitialized";
+			case 1: return "Internal: " + this.bg;
+			case 3: return "User: " + this.bg;
+		}
+		return "User: " + this.bh.toString();
 	}
 }

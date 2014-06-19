@@ -29,7 +29,6 @@ namespace BEmu
 			{
 				case Event::SESSION_STATUS:
 				{
-					//this->_type = evtType;
 					this->setEventType(evtType);
 					
 					boost::shared_ptr<MarketMessageSessionOpened> msgSessionOpenedP(new MarketMessageSessionOpened());
@@ -41,7 +40,6 @@ namespace BEmu
 
 				case Event::SERVICE_STATUS:
 				{
-					//this->_type = evtType;
 					this->setEventType(evtType);
 
 					boost::shared_ptr<MarketMessageServiceStatus> msgServiceStatusP(new MarketMessageServiceStatus(corr));
@@ -53,7 +51,6 @@ namespace BEmu
 
 				case Event::SUBSCRIPTION_STATUS:
 				{
-					//this->_type = evtType;
 					this->setEventType(evtType);
 
 					std::vector<Subscription> list = subs.list();
@@ -81,7 +78,6 @@ namespace BEmu
 
 				case Event::SUBSCRIPTION_DATA:
 				{
-					//this->_type = evtType;
 					this->setEventType(evtType);
 
 					std::vector<Subscription> list(subs.list());
@@ -113,7 +109,6 @@ namespace BEmu
 			{
 				case Event::SUBSCRIPTION_STATUS:
 				{
-					//this->_type = evtType;
 					this->setEventType(evtType);
 					
 					boost::shared_ptr<MarketMessageSubscriptionCanceled> msgCancelMP(new MarketMessageSubscriptionCanceled(sub));

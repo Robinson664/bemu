@@ -1,75 +1,106 @@
 //------------------------------------------------------------------------------
-// <copyright project="BEmu_maven" file="/BEmu_maven/bemu/src/main/java/com/bloomberglp/blpapi/Name.java" company="Jordan Robinson">
-//     Copyright (c) 2013 Jordan Robinson. All rights reserved.
-//
-//     The use of this software is governed by the Microsoft Public License
-//     which is included with this distribution.
-// </copyright>
+//	This code comes from blpapi-3.6.1-0.jar
 //------------------------------------------------------------------------------
 
 package com.bloomberglp.blpapi;
-import java.util.HashMap;
-import java.util.Map;
 
-public class Name
-{	
-	//private final boolean _isNull;
-	private final String _name;
-	private final static Map<String, Name> _globalNameTable = new HashMap<String, Name>();
-	
-	public static final Name NullName = new Name();
+import java.util.HashMap;
+
+public final class Name
+{
+	private static HashMap<String, Name> s_globalNameTable = new HashMap<String, Name>();
+	private static final Object s_globalNameTableLock = new Object();
+	private final String d_name;
+	private final Name d_impl;
+
+	public static final Name NullName = new Name(0);
 	
 	public Name()
 	{
-	    this._name = null;
-	    //this._isNull = true;
+		this.d_name = NullName.d_name;
+		this.d_impl = NullName.d_impl;
 	}
 	
-	public Name(String nameString) throws Exception
+	private Name(int zero)
 	{
-		if(nameString == null)
-			throw new Exception("nameString can't be null");
-		
-		this._name = nameString;
-		//this._isNull = false;
-		
-		if(!Name._globalNameTable.containsKey(nameString))
-			Name._globalNameTable.put(nameString, this);
+		assert (zero == 0);
+		this.d_name = null;
+		this.d_impl = this;
+	}
+	
+	public Name(String nameString)
+	{
+		Name localName = getName(nameString);
+		this.d_impl = localName;
+		this.d_name = this.d_impl.d_name;
+	}
+	
+	private Name(String nameString, boolean unUsed)
+	{
+		this.d_name = nameString;
+		this.d_impl = this;
+		s_globalNameTable.put(nameString, this);
+	}
+	
+	public static Name getName(String nameString)
+	{
+		if (nameString == null) {
+			return NullName;
+		}
+		synchronized (s_globalNameTableLock)
+		{
+			Name localName = (Name)s_globalNameTable.get(nameString);
+			if (localName == null) {
+				localName = new Name(nameString, true);
+			}
+			return localName;
+		}
 	}
 	
 	public static Name findName(String nameString)
 	{
-	    if(Name._globalNameTable.containsKey(nameString))
-	    	return Name._globalNameTable.get(nameString);
-	    else
-	    	return null;
+		if (nameString == null) {
+			return NullName;
+		}
+		synchronized (s_globalNameTableLock)
+		{
+			return (Name)s_globalNameTable.get(nameString);
+		}
 	}
 	
-	public static Name getName(String nameString) throws Exception
+	public static boolean hasName(String nameString)
 	{
-	    if(Name._globalNameTable.containsKey(nameString))
-	    	return Name._globalNameTable.get(nameString);
-	    else
-	    	return new Name(nameString);
+		if (nameString == null) {
+			return true;
+		}
+		synchronized (s_globalNameTableLock)
+		{
+			return s_globalNameTable.containsKey(nameString);
+		}
 	}
 	
-    public static boolean hasName(String nameString)
-    {
-        return Name._globalNameTable.containsKey(nameString);
-    }
-    
+	public boolean equals(Object other)
+	{
+		if ((other instanceof String)) {
+			return this.d_name.equals(other);
+		}
+		if ((other instanceof Name)) {
+			return ((Name)other).d_impl == this.d_impl;
+		}
+		return false;
+	}
+	
+	public int hashCode()
+	{
+		if (this == this.d_impl) {
+			return super.hashCode();
+		}
+		return this.d_impl.hashCode();
+	}
+	
 	public String toString()
 	{
-		return this._name;
+		return this.d_name;
 	}
 	
-	public boolean equals(Object obj)
-	{
-		if(obj.getClass() == this.getClass())
-			return ((Name)obj)._name.equals(this._name);
-		else if(obj.getClass() == String.class)
-			return this._name.equals((String)obj);
-		else
-			return false;
-	}
 }

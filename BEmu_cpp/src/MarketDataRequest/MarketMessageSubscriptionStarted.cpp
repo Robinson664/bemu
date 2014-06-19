@@ -74,10 +74,10 @@ namespace BEmu
 
 		bool MarketMessageSubscriptionStarted::hasElement(const char* name, bool excludeNullElements) const
 		{
-			if(!this->_isNull_exceptionsNull && this->_exceptionsNull->name() == name /*&& (!this->_exceptionsNull->isNull() || !excludeNullElements)*/ )
+			if(!this->_isNull_exceptionsNull && this->_exceptionsNull->name() == name)
 				return true;
 
-			else if(!this->_isNull_exceptionsBadFields && this->_exceptionsBadFields->name() == name /*&& (!this->_exceptionsBadFields->isNull() || !excludeNullElements)*/ )
+			else if(!this->_isNull_exceptionsBadFields && this->_exceptionsBadFields->name() == name)
 				return true;
 
 			return false;
@@ -85,10 +85,10 @@ namespace BEmu
 
 		boost::shared_ptr<ElementPtr> MarketMessageSubscriptionStarted::getElement(const char* name) const
 		{
-			if(!this->_isNull_exceptionsNull && this->_exceptionsNull->name() == name /*&& !this->_exceptionsNull->isNull()*/ )
+			if(!this->_isNull_exceptionsNull && this->_exceptionsNull->name() == name)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptionsNull);
 
-			else if(!this->_isNull_exceptionsBadFields && this->_exceptionsBadFields->name() == name /*&& !this->_exceptionsBadFields->isNull()*/ )
+			else if(!this->_isNull_exceptionsBadFields && this->_exceptionsBadFields->name() == name)
 				return boost::dynamic_pointer_cast<ElementPtr>(this->_exceptionsBadFields);
 
 			else
@@ -112,11 +112,11 @@ namespace BEmu
 
 		std::ostream& MarketMessageSubscriptionStarted::print(std::ostream& stream, int level, int spacesPerLevel) const
 		{
-			if(!this->_isNull_exceptionsNull /*&& !this->_exceptionsNull->isNull()*/ )
+			if(!this->_isNull_exceptionsNull)
 			{
 				stream << "SubscriptionStarted = {" << std::endl << "}" << std::endl;
 			}
-			else if(!this->_isNull_exceptionsBadFields /*&& !this->_exceptionsBadFields->isNull()*/ )
+			else if(!this->_isNull_exceptionsBadFields)
 			{
 				stream << "SubscriptionStarted = {" << std::endl;
 				this->_exceptionsBadFields->print(stream, level + 1, spacesPerLevel);

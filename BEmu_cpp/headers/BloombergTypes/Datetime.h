@@ -54,6 +54,9 @@ namespace BEmu
 			unsigned _parts;
 			void setDateTimeType(DateTimeTypeEnum dateTimeType);
 
+			//I'm surprised the BB API doens't have this call (this doesn't call setDateTimeType)
+			void setDatetime(unsigned year, unsigned month, unsigned day, unsigned hours, unsigned minutes, unsigned seconds, unsigned milliseconds);
+
 		public:
 			enum WeekDayEnum
 			{
@@ -77,10 +80,15 @@ namespace BEmu
 			WeekDayEnum getWeekDay() const;
 
 			DLL_EXPORT Datetime();
-			DLL_EXPORT Datetime(int year, int month, int day);
-			DLL_EXPORT Datetime(int year, int month, int day, int hours, int minutes, int seconds);
-			DLL_EXPORT Datetime(int hours, int minutes, int seconds, int milleseconds);
-			DLL_EXPORT Datetime(int year, int month, int day, int hours, int minutes, int seconds, int milleseconds);
+			DLL_EXPORT Datetime(unsigned year, unsigned month, unsigned day);
+			DLL_EXPORT Datetime(unsigned year, unsigned month, unsigned day, unsigned hours, unsigned minutes, unsigned seconds);
+			DLL_EXPORT Datetime(unsigned hours, unsigned minutes, unsigned seconds, unsigned milleseconds);
+			DLL_EXPORT Datetime(unsigned year, unsigned month, unsigned day, unsigned hours, unsigned minutes, unsigned seconds, unsigned milleseconds);
+
+			DLL_EXPORT static Datetime createDatetime(unsigned year, unsigned month, unsigned day, unsigned hours, unsigned minutes, unsigned seconds);
+			DLL_EXPORT static Datetime createDate(unsigned year, unsigned month, unsigned day);
+			DLL_EXPORT static Datetime createTime(unsigned hours, unsigned minutes, unsigned seconds);
+			DLL_EXPORT static Datetime createTime(unsigned hours, unsigned minutes, unsigned seconds, unsigned milliseconds);
 			
 			DLL_EXPORT Datetime& operator=(const Datetime &rhs);
 			DLL_EXPORT Datetime(const Datetime& arg);
@@ -98,6 +106,18 @@ namespace BEmu
 			DLL_EXPORT unsigned minutes() const;
 			DLL_EXPORT unsigned seconds() const;
 			DLL_EXPORT unsigned milliseconds() const;
+
+			DLL_EXPORT void setYear(unsigned value);
+			DLL_EXPORT void setMonth(unsigned value);
+			DLL_EXPORT void setDay(unsigned value);
+			DLL_EXPORT void setHours(unsigned value);
+			DLL_EXPORT void setMinutes(unsigned value);
+			DLL_EXPORT void setSeconds(unsigned value);
+			DLL_EXPORT void setMilliseconds(unsigned milliseconds);
+
+			DLL_EXPORT void setDate(unsigned year, unsigned month, unsigned day);
+			DLL_EXPORT void setTime(unsigned hours, unsigned minutes, unsigned seconds);
+			DLL_EXPORT void setTime(unsigned hours, unsigned minutes, unsigned seconds, unsigned milliseconds);
 
 			//These are not exported to the DLL.  The actual Bloomberg API doesn't have these functions.
 			void addYears(int years);

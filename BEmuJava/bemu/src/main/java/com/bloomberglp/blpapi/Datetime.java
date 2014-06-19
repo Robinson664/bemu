@@ -16,6 +16,21 @@ public class Datetime implements Comparable<Datetime>
 	private Calendar _instance;
 	private DateTimeTypeEnum _dateTimeType;
 	
+	public static final short YEAR = 128;
+	public static final byte MONTH = 64;
+	public static final byte DAY_OF_MONTH = 32;
+	public static final byte HOUR = 16;
+	public static final byte MINUTE = 8;
+	public static final byte SECOND = 4;
+	public static final byte MILLISECOND = 2;
+	public static final byte TIME_ZONE_OFFSET = 1;
+	public static final short DATE = 224;
+	public static final short TIME = 28;
+	public static final short TIMEMILLI = 30;
+	public static final short MICROSECOND = 258;
+	public static final short NANOSECOND = 770;
+	public static final short PICOSECOND = 1794;
+	
 	public Datetime()
 	{
 		this._instance = Calendar.getInstance();
@@ -68,6 +83,18 @@ public class Datetime implements Comparable<Datetime>
 	public Datetime(int year, int month, int dayOfMonth, int hour, int minute, int second, int milliSecond)
 	{
 		this.setDatetime(year, month, dayOfMonth, hour, minute, second, milliSecond);
+	}
+	
+	public boolean hasParts(int parts)
+	{
+		if(parts == Datetime.DATE)
+			return this._dateTimeType == DateTimeTypeEnum.date || this._dateTimeType == DateTimeTypeEnum.both;
+
+		if(parts == Datetime.TIME)
+			return this._dateTimeType == DateTimeTypeEnum.time || this._dateTimeType == DateTimeTypeEnum.both;
+		
+		return false;
+		//return parts == (this.d_parts & parts);
 	}
 	
 	//Don't use this.  It's not in the actual Bloomberg code.

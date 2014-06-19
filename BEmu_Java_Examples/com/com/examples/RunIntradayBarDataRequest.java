@@ -88,9 +88,7 @@ public class RunIntradayBarDataRequest
 
             //Setting to true will follow the DPDF<GO> BLOOMBERG PROFESSIONAL service function. True is the default setting for this option.
             request.set("adjustmentFollowDPDF", false); //Optional bool. Valid values are true and false (default = true)
-			
-            
-			
+						
 			session.sendRequest(request, new CorrelationID(-999));
 			boolean continueLoop = true;
 			while(continueLoop)

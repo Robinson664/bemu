@@ -19,14 +19,12 @@ namespace BEmu
 	{
 	}
 
-	Datetime::Datetime(int year, int month, int day)
+	Datetime::Datetime(unsigned year, unsigned month, unsigned day)
 	{
-		this->_instance = boost::posix_time::ptime(boost::gregorian::date(year, month, day));
-
-		this->setDateTimeType(date);
+		this->setDate(year, month, day);
 	}
 
-	Datetime::Datetime(int year, int month, int day, int hours, int minutes, int seconds)
+	Datetime::Datetime(unsigned year, unsigned month, unsigned day, unsigned hours, unsigned minutes, unsigned seconds)
 	{
 		this->_instance = boost::posix_time::ptime(
 			boost::gregorian::date(year, month, day),
@@ -35,16 +33,7 @@ namespace BEmu
 		this->setDateTimeType(both);
 	}
 
-	Datetime::Datetime(int hours, int minutes, int seconds, int milleseconds)
-	{
-		this->_instance = boost::posix_time::ptime(
-			boost::posix_time::second_clock::local_time().date(),
-			boost::posix_time::time_duration(hours, minutes, seconds, milleseconds));
-
-		this->setDateTimeType(time);
-	}
-
-	Datetime::Datetime(int year, int month, int day, int hours, int minutes, int seconds, int milleseconds)
+	Datetime::Datetime(unsigned year, unsigned month, unsigned day, unsigned hours, unsigned minutes, unsigned seconds, unsigned milleseconds)
 	{
 		this->_instance = boost::posix_time::ptime(
 			boost::gregorian::date(year, month, day),
@@ -53,11 +42,109 @@ namespace BEmu
 		this->setDateTimeType(both);
 	}
 
+	Datetime::Datetime(unsigned hours, unsigned minutes, unsigned seconds, unsigned milleseconds)
+	{
+		this->setTime(hours, minutes, seconds, milleseconds);
+	}
+
 	Datetime::Datetime(const Datetime& arg)
 	{
 		this->_instance = boost::posix_time::ptime(arg._instance);
 		this->_dateTimeType = arg._dateTimeType;
 		this->_parts = arg._parts;
+	}
+
+	Datetime Datetime::createDatetime(unsigned year, unsigned month, unsigned day, unsigned hours, unsigned minutes, unsigned seconds)
+	{
+		return Datetime(year, month, day, hours, minutes, seconds);
+	}
+
+	Datetime Datetime::createDate(unsigned year, unsigned month, unsigned day)
+	{
+		return Datetime(year, month, day);
+	}
+
+	Datetime Datetime::createTime(unsigned hours, unsigned minutes, unsigned seconds)
+	{
+		return Datetime(hours, minutes, seconds, 0);
+	}
+
+	Datetime Datetime::createTime(unsigned hours, unsigned minutes, unsigned seconds, unsigned milliseconds)
+	{
+		return Datetime(hours, minutes, seconds, milliseconds);
+	}
+
+	void Datetime::setDate(unsigned year, unsigned month, unsigned day)
+	{
+		this->_instance = boost::posix_time::ptime(boost::gregorian::date(year, month, day));
+		this->setDateTimeType(date);
+	}
+
+	void Datetime::setTime(unsigned hours, unsigned minutes, unsigned seconds)
+	{
+		this->_instance = boost::posix_time::ptime(
+			boost::posix_time::second_clock::local_time().date(),
+			boost::posix_time::time_duration(hours, minutes, seconds, 0));
+
+		this->setDateTimeType(time);
+	}
+
+	void Datetime::setTime(unsigned hours, unsigned minutes, unsigned seconds, unsigned milliseconds)
+	{
+		this->_instance = boost::posix_time::ptime(
+			boost::posix_time::second_clock::local_time().date(),
+			boost::posix_time::time_duration(hours, minutes, seconds, milliseconds));
+
+		this->setDateTimeType(time);
+	}
+
+	void Datetime::setDatetime(unsigned year, unsigned month, unsigned day, unsigned hours, unsigned minutes, unsigned seconds, unsigned milliseconds)
+	{
+		this->_instance = boost::posix_time::ptime(
+			boost::gregorian::date(year, month, day),
+			boost::posix_time::time_duration(hours, minutes, seconds, milliseconds));
+	}
+
+	void Datetime::setYear(unsigned value)
+	{
+		this->setDatetime(value, this->month(), this->day(), this->hours(), this->minutes(), this->seconds(), this->milliseconds());
+		this->_parts |= DatetimeParts::YEAR;
+	}
+
+	void Datetime::setMonth(unsigned value)
+	{
+		this->setDatetime(this->year(), value, this->day(), this->hours(), this->minutes(), this->seconds(), this->milliseconds());
+		this->_parts |= DatetimeParts::MONTH;
+	}
+
+	void Datetime::setDay(unsigned value)
+	{
+		this->setDatetime(this->year(), this->month(), value, this->hours(), this->minutes(), this->seconds(), this->milliseconds());
+		this->_parts |= DatetimeParts::DAY;
+	}
+
+	void Datetime::setHours(unsigned value)
+	{
+		this->setDatetime(this->year(), this->month(), this->day(), value, this->minutes(), this->seconds(), this->milliseconds());
+		this->_parts |= DatetimeParts::HOURS;
+	}
+
+	void Datetime::setMinutes(unsigned value)
+	{
+		this->setDatetime(this->year(), this->month(), this->day(), this->hours(), value, this->seconds(), this->milliseconds());
+		this->_parts |= DatetimeParts::MINUTES;
+	}
+
+	void Datetime::setSeconds(unsigned value)
+	{
+		this->setDatetime(this->year(), this->month(), this->day(), this->hours(), this->minutes(), value, this->milliseconds());
+		this->_parts |= DatetimeParts::SECONDS;
+	}
+
+	void Datetime::setMilliseconds(unsigned milliseconds)
+	{
+		this->setDatetime(this->year(), this->month(), this->day(), this->hours(), this->minutes(), this->seconds(), milliseconds);
+		this->_parts |= DatetimeParts::MILLISECONDS;
 	}
 
 	Datetime& Datetime::operator=(const Datetime &rhs)
@@ -105,13 +192,9 @@ namespace BEmu
 		Datetime result;
 
 		if(DisplayFormats::HistoricalOrReferenceRequests_TryParseInput(str, result))
-		{
 			return result;
-		}
 		else
-		{
-			throw result.datetimeEx; //I don't know how to throw a static exception, so I simply declare an instance
-		}
+			throw result.datetimeEx;
 	}
 
 	void Datetime::setDateTimeType(DateTimeTypeEnum dateTimeType)

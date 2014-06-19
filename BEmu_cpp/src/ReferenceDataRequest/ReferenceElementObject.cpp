@@ -53,9 +53,6 @@ namespace BEmu
 			std::string tabs(IndentType::Indent(level, spacesPerLevel));
 			stream << tabs << this->_name << " = \"" << this->_value.ToString() << "\"" << std::endl;
 			return stream;
-
-			//this->prettyPrintHelper(stream, level, spacesPerLevel, this->_value.ToString());
-			//return stream;
 		}
 
 	}

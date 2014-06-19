@@ -9,8 +9,8 @@
 
 package com.bloomberglp.blpapi;
 
-import com.bloomberglp.blpapi.DateTimeTypeEnum;
 import com.bloomberglp.blpapi.Datetime;
+import com.bloomberglp.blpapi.DateTimeTypeEnum;
 import com.bloomberglp.blpapi.Name;
 import com.bloomberglp.blpapi.Schema;
 
@@ -21,7 +21,7 @@ public class MarketElementDatetime extends Element
 	
 	MarketElementDatetime(String name, Datetime date)
     {
-        this._date = new Datetime(date, DateTimeTypeEnum.both);
+		this._date = new Datetime(date, DateTimeTypeEnum.both);		
         this._name = name;
     }
 	

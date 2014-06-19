@@ -16,8 +16,8 @@ import java.util.Random;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 
-import com.bloomberglp.blpapi.DateTimeTypeEnum;
 import com.bloomberglp.blpapi.Datetime;
+import com.bloomberglp.blpapi.DateTimeTypeEnum;
 import com.bloomberglp.blpapi.Element;
 
 public class RandomDataGenerator
@@ -252,7 +252,6 @@ public class RandomDataGenerator
 	
     public static double randomDouble()
     {
-        //return RandomDataGenerator.randomDouble(0, 1) * 100d;
     	return RandomDataGenerator._rand.nextDouble() * 100d;
     }
 	
@@ -272,7 +271,7 @@ public class RandomDataGenerator
     {
     	Calendar calendar = Calendar.getInstance();
     	calendar.add(Calendar.SECOND, RandomDataGenerator._rand.nextInt(100));
-    	Datetime result = new Datetime(calendar, DateTimeTypeEnum.date);
+    	Datetime result = new Datetime(calendar, DateTimeTypeEnum.time);
     	return result;
     }
 	

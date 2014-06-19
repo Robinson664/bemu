@@ -22,11 +22,16 @@ namespace Bloomberglp.Blpapi
         private const int INTERNAL_VALUE = 1;     //      true   |  false   |  true
         private const int UNINITIALIZED = 0;      //      true   |  false   |  true
 
+        #region NOT PART OF DLL
+        private const int IS_NOT_INTERNAL = 2;
+        private const int IS_OBJECT = 4;
+        #endregion
+
         private readonly int _corrType;
 
-        public bool IsInternal { get { return (this._corrType & 2) == 0; } }
-        public bool IsObject { get { return (this._corrType & 4) != 0; } }
-        public bool IsValue { get { return (this._corrType & 4) == 0; } }
+        public bool IsInternal { get { return (this._corrType & IS_NOT_INTERNAL) == 0; } }
+        public bool IsObject { get { return (this._corrType & IS_OBJECT) != 0; } }
+        public bool IsValue { get { return (this._corrType & IS_OBJECT) == 0; } }
 
         private readonly long _value;
         public long Value { get { return this._value; } }
@@ -102,9 +107,9 @@ namespace Bloomberglp.Blpapi
         {
             switch (this._corrType)
             {
-                case 0: return "Uninitialized";
-                case 1: return "Internal: " + this._value;
-                case 3: return "User: " + this._value;
+                case UNINITIALIZED: return "Uninitialized";
+                case INTERNAL_VALUE: return "Internal: " + this._value;
+                case CONSTRUCTED_VALUE: return "User: " + this._value;
             }
             return "User: " + this._object.ToString();
         }

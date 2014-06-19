@@ -15,7 +15,10 @@ namespace Bloomberglp.Blpapi
         public static bool parseDatetimeTz(string strDatetime, Datetime datetime)
         {
             int num = strDatetime.IndexOf('T');
-            return num >= 0 && DatetimeIso8601Util.parseDate(new StringCharacterIterator(strDatetime, 0, num, 0), datetime) && DatetimeIso8601Util.parseTimeTz(new StringCharacterIterator(strDatetime, num + 1, strDatetime.Length, num + 1), datetime);
+            return 
+                num >= 0 && 
+                DatetimeIso8601Util.parseDate(new StringCharacterIterator(strDatetime, 0, num, 0), datetime) && 
+                DatetimeIso8601Util.parseTimeTz(new StringCharacterIterator(strDatetime, num + 1, strDatetime.Length, num + 1), datetime);
         }
         public static bool parseDatetime(string strDatetime, Datetime datetime)
         {
@@ -134,7 +137,7 @@ namespace Bloomberglp.Blpapi
         }
         public static void generateTimezoneOffset(StringBuilder sb, Datetime datetime)
         {
-            if (datetime.HasParts(1))
+            if (datetime.HasParts(Datetime.TIME_ZONE_OFFSET))
             {
                 int num = datetime.TimezoneOffsetMinutes;
                 if (num < 0)
@@ -180,7 +183,9 @@ namespace Bloomberglp.Blpapi
         }
         private static bool parseTimeTz(StringCharacterIterator iter, Datetime timeTz)
         {
-            return DatetimeIso8601Util.parseTime(iter, timeTz) && (iter.current() == '￿' || DatetimeIso8601Util.parseTimezoneOffset(iter, timeTz));
+            return 
+                DatetimeIso8601Util.parseTime(iter, timeTz) && 
+                (iter.current() == '￿' || DatetimeIso8601Util.parseTimezoneOffset(iter, timeTz));
         }
         private static bool parseTime(StringCharacterIterator iter, Datetime time)
         {

@@ -25,26 +25,34 @@ namespace BEmu
 
 		public:
 			DLL_EXPORT Name();
-			DLL_EXPORT Name(const char* nameString);
+			DLL_EXPORT explicit Name(const char* nameString);
 			DLL_EXPORT Name(const Name& original);
 			DLL_EXPORT const char *string() const;
 			DLL_EXPORT Name& operator=(const Name &rhs);
 
 			DLL_EXPORT size_t length() const;
 			DLL_EXPORT size_t hash() const;
-			
-			DLL_EXPORT bool operator==(const char *rhs) const;
-			DLL_EXPORT bool operator==(const Name rhs) const;
-			DLL_EXPORT bool operator!=(const char *rhs) const;
-			DLL_EXPORT bool operator!=(const Name rhs) const;
 
 			DLL_EXPORT static Name findName(const char *nameString);
 			DLL_EXPORT static bool hasName(const char *nameString);
 
 			static void clearGlobalNameTable();
+			bool isNull() const;
 	};
 
 	DLL_EXPORT std::ostream& operator<<(std::ostream& stream, const Name& name);
+				
+	DLL_EXPORT bool operator==(const Name& lhs, const char *rhs);
+	DLL_EXPORT bool operator==(const Name& lhs, const Name rhs);
+	DLL_EXPORT bool operator!=(const Name& lhs, const char *rhs);
+	DLL_EXPORT bool operator!=(const Name& lhs, const Name rhs);
+
 	DLL_EXPORT bool operator==(const char *lhs, const Name& rhs);
 	DLL_EXPORT bool operator!=(const char *lhs, const Name& rhs);
+
+	//Note that while the order of these operations are consistent, they are not guaranteed to be lexical (this is the same in the BB API)
+	DLL_EXPORT bool operator<(const Name& lhs, const Name& rhs);
+	DLL_EXPORT bool operator<=(const Name& lhs, const Name& rhs);
+	DLL_EXPORT bool operator>(const Name& lhs, const Name& rhs);
+	DLL_EXPORT bool operator>=(const Name& lhs, const Name& rhs);
 }

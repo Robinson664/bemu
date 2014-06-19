@@ -23,6 +23,50 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Session
 {
+	public static final class SubscriptionStatus
+	{
+		private int be;
+		private String _strValue;
+		public static final SubscriptionStatus SUBSCRIBING = new SubscriptionStatus(0, "SUBSCRIBING");
+		public static final SubscriptionStatus WAITING_FOR_MESSAGES = new SubscriptionStatus(1, "WAITING_FOR_MESSAGES");
+		public static final SubscriptionStatus RECEIVING_MESSAGES = new SubscriptionStatus(2, "RECEIVING_MESSAGES");
+		public static final SubscriptionStatus UNSUBSCRIBED = new SubscriptionStatus(3, "UNSUBSCRIBED");
+		private static SubscriptionStatus[] Cm;
+		
+		private SubscriptionStatus(int value, String strValue)
+		{
+			Cm = new SubscriptionStatus[] { SUBSCRIBING, WAITING_FOR_MESSAGES, RECEIVING_MESSAGES, UNSUBSCRIBED };
+			this.be = value;
+			this._strValue = strValue;
+		}
+		
+		public int intValue()
+		{
+			return this.be;
+		}
+		
+		public String toString()
+		{
+			return this._strValue;
+		}
+		
+		static SubscriptionStatus bj(int paramInt)
+		{
+			if ((paramInt >= 0) && (paramInt < Cm.length)) {
+				return Cm[paramInt];
+			}
+			return null;
+		}
+		
+		public static class Constants
+		{
+			public static final int SUBSCRIBING = 0;
+			public static final int WAITING_FOR_MESSAGES = 1;
+			public static final int RECEIVING_MESSAGES = 2;
+			public static final int UNSUBSCRIBED = 3;
+		}
+	}
+	
 	@SuppressWarnings("unused")
 	private SessionOptions _sessionOptions;
 	

@@ -32,12 +32,6 @@ namespace BEmu
 	{
 	}
 
-	//EventPtr::EventPtr(boost::shared_ptr<RequestPtr> request, Event::EventType type) : 
-	//	_requestP(request), 
-	//	_type(type)
-	//{
-	//}
-
 	EventPtr::EventPtr(const EventPtr &src) : 
 		_requestP(src._requestP), 
 		_type(src._type)

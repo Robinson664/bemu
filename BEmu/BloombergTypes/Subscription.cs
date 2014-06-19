@@ -22,14 +22,14 @@ namespace Bloomberglp.Blpapi
 
         private static string CheckSecurity(string security)
         {
-            if (security.Contains('?'))
+            if (security.Contains(TOPIC_OPTIONS_SEPARATOR))
                 throw new ArgumentNullException(security);
             return security;
         }
 
         private static string CheckField(string field)
         {
-            if (field.Contains('&'))
+            if (field.Contains(OPTIONS_SEPARATOR))
                 throw new ArgumentException(field);
             return field;
         }
@@ -154,7 +154,7 @@ namespace Bloomberglp.Blpapi
 		}
 		public Subscription(string security, string fields, string options, CorrelationID correlationID)
 		{
-			if (security == null || security.Length <= 0 || security.IndexOf('?') >= 0)
+            if (security == null || security.Length <= 0 || security.IndexOf(TOPIC_OPTIONS_SEPARATOR) >= 0)
 			{
 				throw new ArgumentNullException("Invalid security: " + security);
 			}
@@ -166,7 +166,7 @@ namespace Bloomberglp.Blpapi
 			{
 				fields = "";
 			}
-			if (fields.IndexOf('&') >= 0)
+            if (fields.IndexOf(OPTIONS_SEPARATOR) >= 0)
 			{
 				throw new ArgumentException("Invalid fields: " + fields);
 			}
@@ -180,15 +180,15 @@ namespace Bloomberglp.Blpapi
 			bool flag2 = options.Length > 0;
 			if (flag || flag2)
 			{
-				stringBuilder.Append('?');
+                stringBuilder.Append(TOPIC_OPTIONS_SEPARATOR);
 				if (flag)
 				{
-					stringBuilder.Append("fields=");
+                    stringBuilder.Append(FIELDS_OPTION);
 					stringBuilder.Append(fields);
 				}
 				if (flag && flag2)
 				{
-					stringBuilder.Append('&');
+                    stringBuilder.Append(OPTIONS_SEPARATOR);
 				}
 				if (flag2)
 				{
@@ -201,8 +201,8 @@ namespace Bloomberglp.Blpapi
 
 
             this._security = security;
-            this._fields = new List<string>(fields.Split(',').Select(s => Subscription.CheckField(s)));
-            this._conflationInterval = this.ReadConflationInterval(new List<string>(options.Split(',')));
+            this._fields = new List<string>(fields.Split(FIELDS_SEPARATOR).Select(s => Subscription.CheckField(s)));
+            this._conflationInterval = this.ReadConflationInterval(new List<string>(options.Split(FIELDS_SEPARATOR)));
 		}
 		public Subscription(string security, IList<string> fields) : this(security, fields, null, new CorrelationID())
 		{
@@ -215,7 +215,7 @@ namespace Bloomberglp.Blpapi
 		}
         public Subscription(string security, IList<string> fields, IList<string> options, CorrelationID correlationID)
 		{
-			if (security == null || security.Length <= 0 || security.IndexOf('?') >= 0)
+            if (security == null || security.Length <= 0 || security.IndexOf(TOPIC_OPTIONS_SEPARATOR) >= 0)
 			{
 				throw new ArgumentNullException("Invalid security: " + security);
 			}
@@ -225,43 +225,43 @@ namespace Bloomberglp.Blpapi
 			}
 			StringBuilder stringBuilder = new StringBuilder(64);
 			stringBuilder.Append(security);
-			bool flag = fields != null && fields.Count != 0;
-			bool flag2 = options != null && options.Count != 0;
-			bool flag3 = false;
-			if (flag)
+			bool hasFields = fields != null && fields.Count != 0;
+			bool hasOptions = options != null && options.Count != 0;
+			bool separatorsAppended = false;
+			if (hasFields)
 			{
 				foreach (string current in fields)
 				{
 					if (current != null && current.Length > 0)
 					{
-						if (!flag3)
+						if (!separatorsAppended)
 						{
-							stringBuilder.Append('?');
-							stringBuilder.Append("fields=");
-							flag3 = true;
+                            stringBuilder.Append(TOPIC_OPTIONS_SEPARATOR);
+                            stringBuilder.Append(FIELDS_OPTION);
+							separatorsAppended = true;
 						}
 						else
 						{
-							stringBuilder.Append(',');
+                            stringBuilder.Append(FIELDS_SEPARATOR);
 						}
 						stringBuilder.Append(current);
 					}
 				}
 			}
-			if (flag2)
+			if (hasOptions)
 			{
 				foreach (string current2 in options)
 				{
 					if (current2 != null && current2.Length > 0)
 					{
-						if (!flag3)
+						if (!separatorsAppended)
 						{
-							stringBuilder.Append('?');
-							flag3 = true;
+                            stringBuilder.Append(TOPIC_OPTIONS_SEPARATOR);
+							separatorsAppended = true;
 						}
 						else
 						{
-							stringBuilder.Append('&');
+                            stringBuilder.Append(OPTIONS_SEPARATOR);
 						}
 						stringBuilder.Append(current2);
 					}
@@ -269,9 +269,6 @@ namespace Bloomberglp.Blpapi
 			}
 			this.d_subscriptionString = stringBuilder.ToString();
 			this.d_correlationId = correlationID;
-
-
-
             this._security = Subscription.CheckSecurity(security);
 
             if (fields != null)
