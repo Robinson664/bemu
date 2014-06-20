@@ -17,7 +17,10 @@ using namespace std;
 
 namespace Examples
 {
-	//Most of the functionality for this example is in SubscriptionEventHandler.cpp
+	//Most of the functionality for this Market Data example is in SubscriptionEventHandler.cpp
+	//Please note that there can be several ways to work with MarketDataEvents.
+	//  The most important requirement is that the Session constructor requires an object of a class that implements EventHandler
+	//    * EventHandler is defined in blpapi_session.h for the BB API and in BEmu_cpp/headers/BloombergTypes/EventHandler.h for BEmu
 	int RunMarketDataExample()
 	{
 		int securityId = 1;

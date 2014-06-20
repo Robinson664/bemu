@@ -28,7 +28,7 @@ namespace Examples
 		{
 			Service refDataSvc = session.getService("//blp/refdata");
 
-            CorrelationId requestID(1);
+            CorrelationId requestID(1); //1 is just some number I picked
             Request request = refDataSvc.createRequest("ReferenceDataRequest");
 
             //request information for the following securities
@@ -63,8 +63,6 @@ namespace Examples
             Element ovrdDtExps = overrides.appendElement();
             ovrdDtExps.setElement("fieldId", "CHAIN_EXP_DT_OVRD");
             ovrdDtExps.setElement("value", "20141220"); //accepts dates in the format yyyyMMdd (this is Dec. 20, 2014)
-			
-			request.print(cout, 0, 4);
 
             session.sendRequest(request, requestID);
 

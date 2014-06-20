@@ -19,7 +19,7 @@ using namespace std;
 
 namespace Examples
 {
-	//You must provide a class that inherits EventHandler in order to handle Market Data Events, defined in
+	//You must provide a class that inherits EventHandler in order to handle Market Data Events, EventHandler is defined in
 	//  #include "BloombergTypes/EventHandler.h" (BEmu), or
 	//  #include "blpapi_session.h" (BB API)
 	class SubscriptionEventHandler : public EventHandler

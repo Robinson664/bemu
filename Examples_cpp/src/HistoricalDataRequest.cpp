@@ -101,7 +101,7 @@ namespace Examples
             //Indicates whether to use the average or the closing price in quote calculation.
             request.set("overrideOption", "OVERRIDE_OPTION_CLOSE"); //Optional string.  Valid values are OVERRIDE_OPTION_GPA for an average and OVERRIDE_OPTION_CLOSE (default) for the closing price
 			
-			CorrelationId requestId(17);
+			CorrelationId requestId(17); //17 is just some number I picked
 			session.sendRequest(request, requestId);
 
 			bool continueToLoop = true;
