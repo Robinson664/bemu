@@ -1,1 +1,1 @@
-java -cp BEmu_Java_Examples.jar;BEmu.jar com.examples.App
+java -cp ..\BEmu_Java_Examples\output\BEmu_Java_Examples.jar;..\BEmu_Java_Examples\output\BEmu_Java_Examples_lib\BEmu.jar com.examples.App
