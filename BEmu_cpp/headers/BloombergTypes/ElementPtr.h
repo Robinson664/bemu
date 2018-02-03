@@ -23,6 +23,7 @@ namespace BEmu
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string& value) const;
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const int value) const;
 			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const double value) const;
+			void prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const long value) const;
 
 		public:
 

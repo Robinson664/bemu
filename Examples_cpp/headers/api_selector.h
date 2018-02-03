@@ -15,7 +15,7 @@
 #ifdef USE_BEMU_API
 
 	#include "BloombergTypes/Name.h"
-	#include "BloombergTypes/CorrelationID.h"
+	#include "BloombergTypes/CorrelationId.h"
 	#include "BloombergTypes/Session.h"
 	#include "BloombergTypes/MessageIterator.h"
 	#include "BloombergTypes/Event.h"
