@@ -1,11 +1,7 @@
 cmake_minimum_required (VERSION 2.8)
 project (BEmu_cpp)
 
-find_package(Boost COMPONENTS date_time thread regex)
-if(NOT Boost_FOUND)
-    message(FATAL_ERROR "Boost not found")
-endif()
-
+find_package(Boost REQUIRED COMPONENTS system date_time thread regex)
 include_directories(${Boost_INCLUDE_DIRS})
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)

@@ -1,6 +1,7 @@
 cmake_minimum_required (VERSION 2.8)
 project (Examples_cpp)
 
+find_package(Threads REQUIRED)
 get_target_property(BEMU_INCLUDES BEmu_cpp INCLUDE_DIRECTORIES)
 
 include_directories(headers)
