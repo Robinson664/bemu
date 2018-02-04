@@ -3,6 +3,7 @@ project (BEmu_cpp)
 
 find_package(Boost REQUIRED COMPONENTS system date_time thread regex)
 include_directories(${Boost_INCLUDE_DIRS})
+add_definitions("-DBOOST_ALL_NO_LIB")
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 if (CMAKE_VERSION VERSION_LESS "3.1")
