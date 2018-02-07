@@ -12,7 +12,7 @@
 #include "api_selector.h"
 #include "examples.h"
 
-void main()
+int main()
 {
 	cout << "Bloomberg API Emulator Examples" << endl;
     cout << "http://bemu.codeplex.com/" << endl;
@@ -58,7 +58,9 @@ void main()
 		cout << endl;
     }
 
-	pressEnterToQuit();
+    pressEnterToQuit();
+
+    return 0;
 }
 
 int readInteger()

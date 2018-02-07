@@ -25,19 +25,29 @@ namespace BEmu
 		return ::BLPAPI_DATATYPE_SEQUENCE;
 	}
 
-	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string& value) const
+	template<typename T>
+	static void prettyPrintHelperImpl(std::ostream& stream, int tabIndent, int spacesPerTab, const char* name, const T value)
 	{
 		std::string tabs = IndentType::Indent(tabIndent, spacesPerTab);
-		stream << tabs << this->name().string() << " = " << value << std::endl;
+		stream << tabs << name << " = " << value << std::endl;
+	}
+
+	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const std::string& value) const
+	{
+		prettyPrintHelperImpl(stream, tabIndent, spacesPerTab, this->name().string(), value);
 	}
 	
 	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const int value) const
 	{
-		std::string tabs = IndentType::Indent(tabIndent, spacesPerTab);
-		stream << tabs << this->name().string() << " = " << value << std::endl;
+		prettyPrintHelperImpl(stream, tabIndent, spacesPerTab, this->name().string(), value);
 	}
 	
 	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const double value) const
+	{
+		prettyPrintHelperImpl(stream, tabIndent, spacesPerTab, this->name().string(), value);
+	}
+
+	void ElementPtr::prettyPrintHelper(std::ostream& stream, int tabIndent, int spacesPerTab, const long value) const
 	{
 		std::string tabs = IndentType::Indent(tabIndent, spacesPerTab);
 		stream << tabs << this->name().string() << " = " << value << std::endl;
